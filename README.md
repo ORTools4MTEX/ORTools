@@ -89,7 +89,7 @@ The function plots the inverse polefigure maps of the parent and child phases an
 </p>
 
 ### [plotMap_phases](./src/plotMap_phases.m)
-The function plots a phase map of the grains within "job" and adds the high-angle boundaries (*job.grains.boundary*) and low-angle boundaries (*jobgrains.innerBoundary*).
+The function plots a phase map of the grains within *job* and adds the high-angle boundaries (*job.grains.boundary*) and low-angle boundaries (*jobgrains.innerBoundary*).
 
 - Syntax
   -  p2c = plotMap_phases(job)
