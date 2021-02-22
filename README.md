@@ -19,4 +19,4 @@ The function plots a phase map of the grains within "job" and adds the high-angl
 
 <center>
   <img src="./doc/images/plotMap_phases.png" width="500">
-<\center>
+</center>
