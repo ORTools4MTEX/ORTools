@@ -9,7 +9,7 @@ While the library mostly consists of plotting functionalities, it also includes 
 
 All functions should be well-documented by comments within the functions. Here is a brief overview of all functions:
 
-### plotMap_phases
+### [plotMap_phases](./src/plotMap_phases.m)
 - Syntax
   -  p2c = plotMap_phases(job)
 - Input
