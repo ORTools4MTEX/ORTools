@@ -46,7 +46,7 @@ function ORPlotter_example1()
     job.calcParent2Child;
     % get information about the determined OR
     ORinfo(job.p2c);
-    %% Plotting (witch ORPlotter functions)
+    %% Plotting (with ORPlotter functions)
     screenPrint('SegmentStart','Plotting some ORPlotter maps');
     % Phase map
     plotMap_phases(job,10*degree);
@@ -54,12 +54,12 @@ function ORPlotter_example1()
     plotMap_gB_p2c(job,'linewidth',2);
     % Child-child grain boundary misorientation map
     plotMap_gB_c2c(job,'linewidth',2);
-%     % Parent and child IPF maps
-%     plotMap_IPF_p2c(job);
-%     % Plot parent-child and child-child OR boundary disorientation map
-%     plotMap_gB_Misfit(job);
-%     % Plot parent-child and child-child OR boundary probability map
-%     plotMap_gB_Prob(job,param);
+    % Parent and child IPF maps
+    plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2);
+    % Plot parent-child and child-child OR boundary disorientation map
+    plotMap_gB_Misfit(job,'linewidth',2);
+    % Plot parent-child and child-child OR boundary probability map
+    plotMap_gB_Prob(job,'linewidth',2);
 %     % Plot inverse pole figures for parent-child and child-child boundary
 %     % disorientations
 %     plotIPDF_gB_Misfit(job);
