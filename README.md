@@ -29,6 +29,6 @@ The function plots a phase map of the grains within "job" and adds the high-angl
   - phaseStrings     - cell array of strings with possible phase names
 - Output
   - ebsd             - @EBSD
-  - 
+ 
 The function opens an interactive list with the possible phasenames in *phaseStrings* and renames the phases in *ebsd* according to the selection.
 
