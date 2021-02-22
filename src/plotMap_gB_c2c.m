@@ -7,6 +7,11 @@ function plotMap_gB_c2c(job,varargin)
 %
 % Input
 %  job  - @parentGrainreconstructor
+%
+% Options
+%  colormap - colormap string
+
+cmap = get_option(varargin,'colormap','jet');
 
 gB_c2c = job.grains.boundary(job.csChild.mineral,job.csChild.mineral);
 if ~isempty(gB_c2c)
@@ -29,7 +34,7 @@ if ~isempty(gB_c2c)
     % Round-off the maximum number of color levels to the nearest 5 degrees
     fR = fundamentalRegion(job.csParent,job.csChild);
     maxColors = ceil((fR.maxAngle/degree)/5)*5;
-    colormap(jet(maxColors))
+    colormap(cmap);
     caxis([0 maxColors]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'YTick', [0:5:maxColors],...

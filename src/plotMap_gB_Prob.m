@@ -11,10 +11,12 @@ function plotMap_gB_Prob(job,varargin)
 % Options
 %  threshold - the misfit at which the probability is exactly 50 percent ... 
 %  tolerance - ... and the standard deviation in a cumulative Gaussian distribution
+%  colormap - colormap string
 %
 %See also:
 %https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html 
 
+cmap = get_option(varargin,'colormap','hot');
 threshold = get_option(varargin,'threshold',2.5);
 tolerance = get_option(varargin,'tolerance',2.5);
 
@@ -81,7 +83,7 @@ if ~isempty(gB)
     hold off
     
     % Define the maximum number of color levels and plot the colorbar
-    colormap(hot);
+    colormap(cmap);
     caxis([0 1]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'YTick', [0:0.1:1],...

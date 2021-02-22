@@ -7,6 +7,11 @@ function plotMap_gB_Misfit(job,varargin)
 %
 % Input
 %  job          - @parentGrainreconstructor
+%
+% Options
+%  colormap - colormap string
+
+cmap = get_option(varargin,'colormap','jet');
 
 %% Compute the p2c and c2c boundary disorientation (misfits)
 gB = job.grains.boundary;
@@ -57,7 +62,7 @@ if ~isempty(gB_p2c)
 
         % Define the maximum number of color levels and plot the colorbar
         maxColors = ceil(max(max(misfit_p2c),max(misfit_c2c))./degree/5)*5;
-        colormap(jet(maxColors));
+        colormap(cmap);
         caxis([0 maxColors]);
         colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
             'YTick', [0:5:maxColors],...
