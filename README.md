@@ -18,7 +18,6 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ---
 
 ##  Function reference
-All functions should be well-documented by comments within the functions and are most easily accessible by running through the [example scripts](./scripts). Here is a brief overview of all functions contained in *ORPlotter*:
 
 ### [ORinfo](./src/ORinfo.m)
 The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
