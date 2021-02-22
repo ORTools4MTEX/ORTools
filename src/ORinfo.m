@@ -1,11 +1,11 @@
-function OR = ORinfo(mori,varargin)
+function OR = ORinfo(p2c,varargin)
 % Extract OR information in a structure variable
 %
 % Syntax
-% OR = ORinfo(mori,varargin)
+% OR = ORinfo(p2c)
 %
 % Input
-%  mori     - parent to child misorientation
+%  p2c     - parent to child misorientation
 %
 % Output
 %  OR       - structure containing OR information
@@ -14,7 +14,7 @@ function OR = ORinfo(mori,varargin)
 %  silent - suppress command window output
 
 %Misorientation
-OR.misorientation = mori;
+OR.misorientation = p2c;
 
 %CrystalSymmetries
 OR.CS.parent = OR.misorientation.CS;
