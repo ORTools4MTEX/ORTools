@@ -9,7 +9,7 @@ While the library mostly consists of plotting functionalities, it also includes 
 
 All functions should be well-documented by comments within the functions. Here is a brief overview of all functions:
 
-## plotMap_phases
+### plotMap_phases
 - Syntax
   -  p2c = plotMap_phases(job)
 - Input
@@ -21,4 +21,12 @@ The function plots a phase map of the grains within "job" and adds the high-angl
   <img src="./doc/images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
 </p>
 
+### renamePhases
+- Syntax
+  - ebsd = renamePhases(ebsd,phStr)
+- Input
+  - ebsd             - @EBSD
+  - phaseStrings     - cell array of strings with possible phase names
+
+The function opens an interactive list with the possible phasenames in *phaseStrings* and renames the phases in *ebsd* according to the selection.
 
