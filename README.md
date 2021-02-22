@@ -21,6 +21,8 @@ This script follows the same dataset and steps that are used to demonstrate the 
 All functions should be well-documented by comments within the functions and are most easily accessible by running through the [example scripts](./scripts). Here is a brief overview of all functions contained in *ORPlotter*:
 
 ### [ORinfo](./src/ORinfo.m)
+The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
+
 - Syntax
   -  ORinfo(p2c)
 - Input
@@ -30,49 +32,50 @@ All functions should be well-documented by comments within the functions and are
 - Options
   - silent    - suppress command window output
 
-The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
-
 <p align="center">
   <img src="./doc/images/ORinfo.png" alt="Command window output example from ORinfo" width="500"/>
 </p>
 
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
+The function colorizes the child-child boundaries in *job*
+
 - Syntax
   -  plotMap_gB_c2c(job)
 - Input
   - job  - @parentGrainReconstructor
 
-The function colorizes the child-child boundaries in *job*
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
 </p>
 
 ### [plotMap_gB_Misfit](./src/plotMap_gB_Misfit.m)
+The function colorizes the misfit, or the disorientation, between the parent-child and child-child boundaries with the orientation relationship *job.p2c*
+
 - Syntax
   - plotMap_gB_Misfit(job)
 - Input
   - job  - @parentGrainReconstructor
-
-The function colorizes the misfit, or the disorientation, between the parent-child and child-child boundaries with the orientation relationship *job.p2c*
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_Misfit.png" alt="Plot example from plotMap_gB_Misfit" width="500"/>
 </p>
 
 ### [plotMap_gB_p2c](./src/plotMap_gB_p2c.m)
+The function colorizes the parent-child boundaries in *job* according to their misorientation angle.
+
 - Syntax
   -  plotMap_gB_p2c(job)
 - Input
   - job  - @parentGrainReconstructor
-
-The function colorizes the parent-child boundaries in *job* according to their misorientation angle.
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
 </p>
 
 ### [plotMap_IPF_p2c](./src/plotMap_IPF_p2c.m)
+The function plots the inverse polefigure maps of the parent and child phases and returns the ipfHSV color key.
+
 - Syntax
   -  plotMap_IPF_p2c(job)
   -  plotMap_IPF_p2c(job, direction)
@@ -81,25 +84,25 @@ The function colorizes the parent-child boundaries in *job* according to their m
 - Output
   - ipfKey - @ipfHSVKey 
 
-The function plots the inverse polefigure maps of the parent and child phases and returns the ipfHSV color key.
-
 <p align="center">
   <img src="./doc/images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="800"/>
 </p>
 
 ### [plotMap_phases](./src/plotMap_phases.m)
+The function plots a phase map of the grains within "job" and adds the high-angle boundaries (*job.grains.boundary*) and low-angle boundaries (*jobgrains.innerBoundary*).
+
 - Syntax
   -  p2c = plotMap_phases(job)
 - Input
   - job  - @parentGrainReconstructor
-
-The function plots a phase map of the grains within "job" and adds the high-angle boundaries (*job.grains.boundary*) and low-angle boundaries (*jobgrains.innerBoundary*).
 
 <p align="center">
   <img src="./doc/images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
 </p>
 
 ### [recolorPhases](./src/recolorPhases.m)
+The function opens an interactive colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
+
 - Syntax
   - [ebsd,grains] = recolorPhases(ebsd,grains)
 - Input
@@ -108,10 +111,10 @@ The function plots a phase map of the grains within "job" and adds the high-angl
 - Output
   - ebsd             - @EBSD
   - grains           - @grain2d
- 
-The function opens an interactive colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
 
 ### [renamePhases](./src/renamePhases.m)
+The function opens an interactive list with the possible phasenames in *phaseStrings* and renames the phases in *ebsd* according to the selection.
+
 - Syntax
   - ebsd = renamePhases(ebsd,phStr)
 - Input
@@ -119,6 +122,3 @@ The function opens an interactive colorpicker tool to redefine the phase colors 
   - phaseStrings     - cell array of strings with possible phase names
 - Output
   - ebsd             - @EBSD
- 
-The function opens an interactive list with the possible phasenames in *phaseStrings* and renames the phases in *ebsd* according to the selection.
-
