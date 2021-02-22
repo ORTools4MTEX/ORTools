@@ -20,10 +20,10 @@ if ~isempty(intersect(ebsd.mineralList(2:numel(ebsd.mineralList)),phaseStrings))
         all(contains(intersect(ebsd.mineralList,phaseStrings),phaseStrings))
     [~,~,ind] = intersect(ebsd.mineralList,phaseStrings);
     ind = sort(ind);
-    screenPrint('Step',sprintf('%s phase(s) automatically identified',...
-        sprintf('''%s'', ',phaseStrings{ind})));
+    fprintf(' -> %s phase(s) automatically identified ''%s''\n',phaseStrings{ind});
+
 else
-    screenPrint('Step','Identifying phases to rename');
+    fprintf(' -> Identifying phases to rename');
     try
         for ii = 2:phaseNum
             fprintf(['    - ''',phaseNames(ii,:),'''']);
