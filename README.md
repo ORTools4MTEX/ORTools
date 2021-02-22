@@ -16,4 +16,4 @@ All functions should be well-documented by comments within the functions. Here i
   - job  - @parentGrainReconstructor
 
 The function plots a phase map of the grains within "job" and adds the high-angle boundaries (*job.grains.boundary*) and low-angle boundaries (*jobgrains.innerBoundary*).
-![alt text](./doc/images/plotMap_phases.png&s=200)
+<img src="./doc/images/plotMap_phases" width="400" height="790">
