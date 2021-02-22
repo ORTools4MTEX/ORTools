@@ -5,15 +5,15 @@
 
 MTEX has a vast functionality to analyse phase-transitions. It's major advantage compared to competing programs is its versatility, both in terms of functionality and data compatibility. The current library aims at being an add-on to MTEX for creating stunning and informative plots on martensitic microstructures that are too individual to be included in the main MTEX program. 
 
-While the library mostly consists of plotting functionalities, it also includes some utility functions and advanced analysis capabilities. These are highlighted in an example script **"TBA"** that follows the analysis shown in the [MTEX documentation](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) and extends it by using the present library.
+While the library mostly consists of plotting functionalities, it also includes some utility functions and advanced analysis capabilities. These are highlighted together with the plotting functions in a series of [example scripts](./scripts) to immediately show you how the functions work and what they do.
 
 ---
 
 ##  Example scripts
-We know that the world of martensitic transformation analysis can be difficult to navigate, which is why we made this library of plug-and-play functions. To make things even more accessible, we have written some example scripts to demonstrate these functions *in action*.
+The world of martensitic transformation analysis can be difficult to navigate, which is this library consists of plug-and-play functions to make your life easier. To make things even more accessible, some example scripts are provided to demonstrate these functions *in action*.
 
 ### [Example 1](./scripts/ORPlotter_example1.m)
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here we introduce some of ORplotter's functionalities to demonstrate which functions can be used in which steps of the process to generate publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here some of ORplotter's functionalities are introduced to demonstrate which functions can be used in which steps of the process to generate publication-ready plots.
 
 ---
 
