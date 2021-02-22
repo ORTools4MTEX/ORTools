@@ -10,6 +10,19 @@ While the library mostly consists of plotting functionalities, it also includes 
 All functions should be well-documented by comments within the functions. Here is a brief overview of all functions:
 
 ---
+### [plotMap_gB_p2c](./src/plotMap_gB_p2c.m)
+- Syntax
+  -  plotMap_gB_p2c(job,varargin)
+- Input
+  - job  - @parentGrainReconstructor
+
+The function plots colorizes the parent-to-child grain boundaries in *job* according to their misorientation angle.
+
+<p align="center">
+  <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_phases" width="500"/>
+</p>
+
+---
 
 ### [plotMap_phases](./src/plotMap_phases.m)
 - Syntax
