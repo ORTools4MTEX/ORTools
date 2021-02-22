@@ -42,10 +42,22 @@ The function outputs information about the orientation relationship in the comma
 - Input
   - job  - @parentGrainReconstructor
 
-The function colorizes the child-to-child grain boundaries in *job* according to their misorientation angle on top of a greyscale phase map.
+The function colorizes the child-child boundaries in *job*
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
+</p>
+
+### [plotMap_gB_Misfit](./src/plotMap_gB_Misfit.m)
+- Syntax
+  - plotMap_gB_Misfit(job)
+- Input
+  - job  - @parentGrainReconstructor
+
+The function colorizes the misfit, or the disorientation, between the parent-child and child-child boundaries with the orientation relationship *job.p2c*
+
+<p align="center">
+  <img src="./doc/images/plotMap_gB_Misfit.png" alt="Plot example from plotMap_gB_Misfit" width="500"/>
 </p>
 
 ### [plotMap_gB_p2c](./src/plotMap_gB_p2c.m)
@@ -54,7 +66,7 @@ The function colorizes the child-to-child grain boundaries in *job* according to
 - Input
   - job  - @parentGrainReconstructor
 
-The function colorizes the parent-to-child grain boundaries in *job* according to their misorientation angle on top of a greyscale phase map.
+The function colorizes the parent-child boundaries in *job* according to their misorientation angle.
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
