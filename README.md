@@ -72,7 +72,7 @@ The function colorizes the parent-to-child grain boundaries in *job* according t
 The function plots the inverse polefigure maps of the parent and child phases and returns the ipfHSV color key.
 
 <p align="center">
-  <img src="./doc/images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="500"/>
+  <img src="./doc/images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="800"/>
 </p>
 
 ### [plotMap_phases](./src/plotMap_phases.m)
