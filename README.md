@@ -38,7 +38,7 @@ The function outputs information about the orientation relationship in the comma
 
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
 - Syntax
-  -  plotMap_gB_c2c(job,varargin)
+  -  plotMap_gB_c2c(job)
 - Input
   - job  - @parentGrainReconstructor
 
@@ -50,7 +50,7 @@ The function colorizes the child-to-child grain boundaries in *job* according to
 
 ### [plotMap_gB_p2c](./src/plotMap_gB_p2c.m)
 - Syntax
-  -  plotMap_gB_p2c(job,varargin)
+  -  plotMap_gB_p2c(job)
 - Input
   - job  - @parentGrainReconstructor
 
@@ -58,6 +58,21 @@ The function colorizes the parent-to-child grain boundaries in *job* according t
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
+</p>
+
+### [plotMap_IPF_p2c](./src/plotMap_IPF_p2c.m)
+- Syntax
+  -  plotMap_IPF_p2c(job)
+  -  plotMap_IPF_p2c(job, direction)
+- Input
+  - job  - @parentGrainReconstructor
+- Output
+  - ipfKey - @ipfHSVKey 
+
+The function plots the inverse polefigure maps of the parent and child phases and returns the ipfHSV color key.
+
+<p align="center">
+  <img src="./doc/images/plotMap_gB_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="500"/>
 </p>
 
 ### [plotMap_phases](./src/plotMap_phases.m)
