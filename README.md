@@ -21,6 +21,18 @@ The function plots a phase map of the grains within "job" and adds the high-angl
   <img src="./doc/images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
 </p>
 
+### [recolorPhases](./src/recolorPhases.m)
+- Syntax
+- [ebsd,grains] = recolorPhases(ebsd,grains)
+- Input
+  - ebsd             - @EBSD
+  - grains           - @grain2d
+- Output
+  - ebsd             - @EBSD
+  - grains           - @grain2d
+ 
+The function opens an interactive colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
+
 ### [renamePhases](./src/renamePhases.m)
 - Syntax
   - ebsd = renamePhases(ebsd,phStr)
