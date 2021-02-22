@@ -7,6 +7,9 @@ function ebsd = renamePhases(ebsd,phaseStrings)
 % Input
 %  ebsd             - @EBSD
 %  phaseStrings     - cell array of strings with possible phase names
+%
+% Output
+%  ebsd             - @EBSD
 
 %% Rename the phases (minerals)
 phaseNum = length(ebsd.CSList);
