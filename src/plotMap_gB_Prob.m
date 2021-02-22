@@ -13,7 +13,7 @@ function plotMap_gB_Prob(job,varargin)
 %  tolerance - ... and the standard deviation in a cumulative Gaussian distribution
 %
 %See also:
-%https://mtex-toolbox.github.io/MaParentGrainReconstruction.html#8 
+%https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html 
 
 threshold = get_option(varargin,'threshold',2.5);
 tolerance = get_option(varargin,'tolerance',2.5);
