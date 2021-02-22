@@ -23,7 +23,7 @@ The function plots a phase map of the grains within "job" and adds the high-angl
 
 ### [recolorPhases](./src/recolorPhases.m)
 - Syntax
-- [ebsd,grains] = recolorPhases(ebsd,grains)
+  - [ebsd,grains] = recolorPhases(ebsd,grains)
 - Input
   - ebsd             - @EBSD
   - grains           - @grain2d
