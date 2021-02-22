@@ -1,4 +1,5 @@
 function [ebsd,grains] = recolorPhases(ebsd,grains)
+% recolor phases in ebsd and grains interactively
 %
 % Syntax
 %

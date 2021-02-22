@@ -1,4 +1,5 @@
 function plotMap_gB_c2c(job,varargin)
+% plot child-child boundary misorientation map
 %
 % Syntax
 %

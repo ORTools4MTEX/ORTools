@@ -1,4 +1,5 @@
 function plotMap_gB_p2c(job,varargin)
+% plot parent-child boundary misorientation map
 %
 % Syntax
 %

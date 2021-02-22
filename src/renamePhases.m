@@ -1,4 +1,5 @@
 function ebsd = renamePhases(ebsd,phaseStrings)
+% rename phases in ebsd interactively
 %
 % Syntax
 %
