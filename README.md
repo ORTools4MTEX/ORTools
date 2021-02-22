@@ -49,6 +49,19 @@ This function plots the misfit, or the disorientation, between the parent-child 
   <img src="./doc/images/plotIPDF_gB_Misfit.png" alt="Plot example from plotIPDF_gB_Misfit" width="1000"/>
 </p>
 
+### [plotIPDF_gB_Prob](./src/plotIPDF_gB_Prob.m)
+This function calculates and plots the probability distribution between 0 and 1, that a boundary belongs to the orientation relationship in an inverse polefigure showing the misorientation axes
+
+- Syntax
+  -  plotIPDF_gB_Prob(job)
+- Input
+  - job  - @parentGrainReconstructor
+- Options
+  - colormap  - colormap string  
+
+<p align="center">
+  <img src="./doc/images/plotIPDF_gB_Prob.png" alt="Plot example from plotIPDF_gB_Prob" width="1000"/>
+</p>
 
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
 The function colorizes the child-child boundaries in *job*
