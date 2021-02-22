@@ -60,12 +60,12 @@ function ORPlotter_example1()
     plotMap_gB_Misfit(job,'linewidth',2);
     % Plot parent-child and child-child OR boundary probability map
     plotMap_gB_Prob(job,'linewidth',2);
-%     % Plot inverse pole figures for parent-child and child-child boundary
-%     % disorientations
-%     plotIPDF_gB_Misfit(job);
-%     % Plot inverse pole figures for parent-child and child-child boundary 
-%     % probabilities
-%     plotIPDF_gB_Prob(job,param);
+    % Plot inverse pole figures for parent-child and child-child boundary
+    % disorientations
+    plotIPDF_gB_Misfit(job);
+    % Plot inverse pole figures for parent-child and child-child boundary 
+    % probabilities
+    plotIPDF_gB_Prob(job);
   
 end
 
