@@ -10,6 +10,23 @@ While the library mostly consists of plotting functionalities, it also includes 
 All functions should be well-documented by comments within the functions. Here is a brief overview of all functions:
 
 ---
+### [ORinfo](./src/ORinfo.m)
+- Syntax
+  -  ORinfo(p2c)
+- Input
+  - p2c       - parent to child misorientation
+- Output
+  - OR        - structure containing OR information
+- Options
+  - silent    - suppress command window output
+
+The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
+
+<p align="center">
+  <img src="./doc/images/ORinfo.png" alt="Command window output example from ORinfo" width="500"/>
+</p>
+
+---
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
 - Syntax
   -  plotMap_gB_c2c(job,varargin)
