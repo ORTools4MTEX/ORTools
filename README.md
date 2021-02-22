@@ -72,6 +72,23 @@ The function colorizes the parent-child boundaries in *job* according to their m
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
 </p>
 
+### [plotMap_gB_Prob](./src/plotMap_gB_Prob.m)
+The function calculates and plots the probability distribution between 0 and 1, that a 
+boundary belongs to the orientation relationship (see more [here](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html))
+
+- Syntax
+  -  plotMap_gB_Prob(job)
+- Input
+  - job  - @parentGrainReconstructor
+- Options
+  - threshold - the misfit at which the probability is exactly 50 percent ... 
+  - tolerance - ... and the standard deviation in a cumulative Gaussian distribution
+
+<p align="center">
+  <img src="./doc/images/plotMap_gB_Prob.png" alt="Plot example from plotMap_gB_Prob" width="500"/>
+</p>
+
+
 ### [plotMap_IPF_p2c](./src/plotMap_IPF_p2c.m)
 The function plots the inverse polefigure maps of the parent and child phases and returns the ipfHSV color key.
 
