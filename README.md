@@ -16,7 +16,7 @@ All functions should be well-documented by comments within the functions. Here i
 - Input
   - job  - @parentGrainReconstructor
 
-The function plots colorizes the parent-to-child grain boundaries in *job* according to their misorientation angle.
+The function colorizes the parent-to-child grain boundaries in *job* according to their misorientation angle on top of a greyscale phase map.
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_phases" width="500"/>
