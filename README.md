@@ -12,8 +12,6 @@ While the library mostly consists of plotting functionalities, it also includes 
 ##  Example scripts
 We know that the world of martensitic transformation analysis can be difficult to navigate, which is why we made this library of plug-and-play functions. To make things even more accessible, we have written some example scripts to demonstrate these functions *in action*.
 
-___
-
 ### [Example 1](./scripts/ORPlotter_example1.m)
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here we introduce some of ORplotter's functionalities to demonstrate which functions can be used in which steps of the process to generate publication-ready plots.
 
@@ -21,8 +19,6 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ##  Function reference
 All functions should be well-documented by comments within the functions and are most easily accessible by running through the [example scripts](./scripts). Here is a brief overview of all functions contained in *ORPlotter*:
-
-___
 
 ### [ORinfo](./src/ORinfo.m)
 - Syntax
@@ -40,8 +36,6 @@ The function outputs information about the orientation relationship in the comma
   <img src="./doc/images/ORinfo.png" alt="Command window output example from ORinfo" width="500"/>
 </p>
 
-___
-
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
 - Syntax
   -  plotMap_gB_c2c(job,varargin)
@@ -53,8 +47,6 @@ The function colorizes the child-to-child grain boundaries in *job* according to
 <p align="center">
   <img src="./doc/images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
 </p>
-
-___
 
 ### [plotMap_gB_p2c](./src/plotMap_gB_p2c.m)
 - Syntax
@@ -68,8 +60,6 @@ The function colorizes the parent-to-child grain boundaries in *job* according t
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
 </p>
 
-___
-
 ### [plotMap_phases](./src/plotMap_phases.m)
 - Syntax
   -  p2c = plotMap_phases(job)
@@ -82,8 +72,6 @@ The function plots a phase map of the grains within "job" and adds the high-angl
   <img src="./doc/images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
 </p>
 
-___
-
 ### [recolorPhases](./src/recolorPhases.m)
 - Syntax
   - [ebsd,grains] = recolorPhases(ebsd,grains)
@@ -95,8 +83,6 @@ ___
   - grains           - @grain2d
  
 The function opens an interactive colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
-
-___
 
 ### [renamePhases](./src/renamePhases.m)
 - Syntax
