@@ -8,7 +8,9 @@ MTEX has a vast functionality to analyse phase-transitions. It's major advantage
 While the library mostly consists of plotting functionalities, it also includes some utility functions and advanced analysis capabilities. These are highlighted in an example script **"TBA"** that follows the analysis shown in the [MTEX documentation](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) and extends it by using the present library.
 
 All functions should be well-documented by comments within the functions. Here is a brief overview of all functions:
+
 ---
+
 ### [plotMap_phases](./src/plotMap_phases.m)
 - Syntax
   -  p2c = plotMap_phases(job)
@@ -20,7 +22,9 @@ The function plots a phase map of the grains within "job" and adds the high-angl
 <p align="center">
   <img src="./doc/images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
 </p>
+
 ---
+
 ### [recolorPhases](./src/recolorPhases.m)
 - Syntax
   - [ebsd,grains] = recolorPhases(ebsd,grains)
@@ -32,7 +36,9 @@ The function plots a phase map of the grains within "job" and adds the high-angl
   - grains           - @grain2d
  
 The function opens an interactive colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
+
 ---
+
 ### [renamePhases](./src/renamePhases.m)
 - Syntax
   - ebsd = renamePhases(ebsd,phStr)
