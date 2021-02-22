@@ -35,6 +35,21 @@ The function outputs information about the orientation relationship in the comma
   <img src="./doc/images/ORinfo.png" alt="Command window output example from ORinfo" width="500"/>
 </p>
 
+### [plotIPDF_gB_Misfit](./src/plotIPDF_gB_Misfit.m)
+This function plots the misfit, or the disorientation, between the parent-child and child-child boundaries with the orientation relationship in an inverse polefigure showing the misorientation axes
+
+- Syntax
+  -  plotIPDF_gB_Misfit(job)
+- Input
+  - job  - @parentGrainReconstructor
+- Options
+  - colormap  - colormap string  
+
+<p align="center">
+  <img src="./doc/images/plotIPDF_gB_Misfit.png" alt="Plot example from plotIPDF_gB_Misfit" width="500"/>
+</p>
+
+
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
 The function colorizes the child-child boundaries in *job*
 
@@ -42,7 +57,8 @@ The function colorizes the child-child boundaries in *job*
   -  plotMap_gB_c2c(job)
 - Input
   - job  - @parentGrainReconstructor
-
+- Options
+  - colormap  - colormap string 
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
@@ -55,6 +71,8 @@ The function colorizes the misfit, or the disorientation, between the parent-chi
   - plotMap_gB_Misfit(job)
 - Input
   - job  - @parentGrainReconstructor
+- Options
+  - colormap  - colormap string 
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_Misfit.png" alt="Plot example from plotMap_gB_Misfit" width="500"/>
@@ -67,7 +85,9 @@ The function colorizes the parent-child boundaries in *job* according to their m
   -  plotMap_gB_p2c(job)
 - Input
   - job  - @parentGrainReconstructor
-
+- Options
+  - colormap  - colormap string 
+ 
 <p align="center">
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
 </p>
@@ -83,7 +103,8 @@ boundary belongs to the orientation relationship (see more [here](https://mtex-t
 - Options
   - threshold - the misfit at which the probability is exactly 50 percent ... 
   - tolerance - ... and the standard deviation in a cumulative Gaussian distribution
-
+  - colormap  - colormap string 
+ 
 <p align="center">
   <img src="./doc/images/plotMap_gB_Prob.png" alt="Plot example from plotMap_gB_Prob" width="500"/>
 </p>
