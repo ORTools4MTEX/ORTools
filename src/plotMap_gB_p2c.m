@@ -2,16 +2,15 @@ function plotMap_gB_p2c(job,varargin)
 %
 % Syntax
 %
-%  ebsd = renamePhases(ebsd,phStr)
+%  plotMap_gB_p2c(job,varargin)
 %
 % Input
 %  job  - @parentGrainreconstructor
 
-
 gB_p2c = job.grains.boundary(job.csParent.mineral,job.csChild.mineral);
 if ~isempty(gB_p2c)
     %% Plot the parent-child misorientation distribution map
-    screenPrint('Step',sprintf('Plotting the parent-child misorientation distribution map'));
+    fprintf(' -> Plotting the parent-child misorientation distribution map');
     
     f = figure;
     job.ebsd = swapColors(job.ebsd,'gray');
