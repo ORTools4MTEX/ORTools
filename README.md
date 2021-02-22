@@ -17,4 +17,6 @@ All functions should be well-documented by comments within the functions. Here i
 
 The function plots a phase map of the grains within "job" and adds the high-angle boundaries (*job.grains.boundary*) and low-angle boundaries (*jobgrains.innerBoundary*).
 
-<img src="./doc/images/plotMap_phases.png" width="600">
+<center>
+  <img src="./doc/images/plotMap_phases.png" width="500">
+<\center>
