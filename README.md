@@ -1,7 +1,7 @@
 # ***** REPO CURRENTLY UNDER CONSTRUCTION *****
 
 # ORPlotter
-**ORPlotter** is a function library for plotting publication-ready figures for martensite transformation analysis. The function library is written in **MATLAB** and can be used as an add-on to the basic phase-transition functionalities within the crystallographic **MATLAB** toolbox **MTEX** (found [here](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html)).
+**ORPlotter** is a function library for advanced orientation relationship analysis and plotting publication-ready figures for martensite transformation analysis. The function library is written in **MATLAB** and can be used as an add-on to the basic phase-transition functionalities within the crystallographic **MATLAB** toolbox **MTEX** (found [here](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html)).
 
 MTEX has the functionality to analyse phase-transitions. Its major advantage compared to competing programs is its versatility, both in terms of functionality and data compatibility. The ORPlotter library is an add-on to MTEX for more advanced analysis and for creating visually stunning and informative plots particular to martensitic microstructures such that they cannot be included in the main MTEX program. 
 
