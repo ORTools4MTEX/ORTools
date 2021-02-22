@@ -10,15 +10,15 @@ function ipfKey = plotMap_IPF_p2c(job, varargin)
 %  direction    - @vector3d
 %
 % Output
-%  ipfKey       - @ipfKey
+%  ipfKey       - @ipfHSVKey
 
 vector = getClass(varargin,'vector3d',vector3d.X);
 
 if ~isempty(job.ebsd(job.csParent))
     f = figure;
-    ipfKey = ipfHSVKey(job.ebsd(job.csParent));
-    ipfKey.inversePoleFigureDirection = vector;
-    colors = ipfKey.orientation2color(job.ebsd(job.csParent).orientations);
+    ipfKey1 = ipfHSVKey(job.ebsd(job.csParent));
+    ipfKey1.inversePoleFigureDirection = vector;
+    colors = ipfKey1.orientation2color(job.ebsd(job.csParent).orientations);
     plot(job.ebsd(job.csParent),colors);
     hold all
     plot(job.grains.boundary,varargin{:});
@@ -33,9 +33,9 @@ end
 
 if ~isempty(job.ebsd(job.csChild))
     f = figure;
-    ipfKey = ipfHSVKey(job.ebsd(job.csChild));
-    ipfKey.inversePoleFigureDirection = vector;
-    colors = ipfKey.orientation2color(job.ebsd(job.csChild).orientations);
+    ipfKey2 = ipfHSVKey(job.ebsd(job.csChild));
+    ipfKey2.inversePoleFigureDirection = vector;
+    colors = ipfKey2.orientation2color(job.ebsd(job.csChild).orientations);
     plot(job.ebsd(job.csChild),colors);
     hold all  
     plot(job.grains.boundary,varargin{:});
@@ -46,4 +46,5 @@ if ~isempty(job.ebsd(job.csChild))
 else
     warning('Child IPFx map empty');
 end
+ipfKey = [ipfKey1, ipfKey2];
 end
