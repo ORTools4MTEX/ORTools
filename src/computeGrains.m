@@ -1,5 +1,5 @@
 function [ebsd,grains,gB] = computeGrains(ebsd,varargin)
-% calculating grains from ebsd data
+% Small GUI to compute grains from EBSD data and optionally filter them
 %
 % Syntax
 %
@@ -12,9 +12,7 @@ function [ebsd,grains,gB] = computeGrains(ebsd,varargin)
 %  ebsd     - @EBSD
 %  grains   - @grains2d 
 %  gB       - @grainBoundary
-%
-% Options
-%  colormap - colormap string
+
 
 %% Get min GB angle and min grain size
 [criticalAngle,minGrainSize] = setGrainParameters;
