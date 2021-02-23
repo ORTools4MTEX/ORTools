@@ -207,7 +207,8 @@ The function plots the inverse polefigure maps of the parent and child phases an
   -  plotMap_IPF_p2c(job)
   -  plotMap_IPF_p2c(job, direction)
 - Input
-  - job  - @parentGrainReconstructor
+  - job       - @parentGrainReconstructor
+  - direction - @vector3d 
 - Output
   - ipfKey - @ipfHSVKey 
 
