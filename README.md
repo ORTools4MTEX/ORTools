@@ -7,7 +7,7 @@ MTEX has the functionality to analyse phase-transitions. Its major advantage com
 
 While the **ORPlotter** library mostly consists of plotting functionalities, it also includes utilities that enable advanced OR analysis. These are highlighted together with the plotting functions in a series of [example scripts](./scripts) to showcase how the functions work and what their output comprises.
 
-ORPlotter has been created by Dr Azdiar Gazder and Dr Frank Niessen.
+ORPlotter has been created by Dr Azdiar Gazder and Dr Frank Niessen. Please report any bugs that you encounter to us so that we can keep this library maintained.
 
 ---
 
