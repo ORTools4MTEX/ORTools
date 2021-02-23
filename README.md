@@ -36,7 +36,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ### Function Index
 
 - [defineORs](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#defineors)
-- [fibreMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibremaker)
+- [fibreMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibreMaker)
 - [guiOR](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#guiOR)
 - [orientationMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#orientationMaker)
 - [ORinfo](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#ORinfo)
@@ -123,7 +123,7 @@ The function outputs information about the orientation relationship in the comma
 
 ### [peakFitORs](./src/peakFitORs.m)
 The function peak fits parent-child misorientation angle ranges for determination of one or several orientation relationships.
-The function is called by [defineORs](./src/defineORs.m).
+The function is called by [defineORs](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#defineors).
 
 - Syntax
   -  p2c = peakFitORs(job,misoRange)
@@ -256,7 +256,7 @@ The function plots the map of child grains colored according to their packet ID.
 </p>
 
 ### [plotMap_phases](./src/plotMap_phases.m)
-The function plots a phase map of the grains within *job* and adds the high-angle boundaries (*job.grains.boundary*) and low-angle boundaries (*jobgrains.innerBoundary*).
+The function plots a phase map of the grains within *job* and the grain boundaries (*job.grains.boundary*).
 
 - Syntax
   -  p2c = plotMap_phases(job)
@@ -300,7 +300,7 @@ The function plots a pole figure of the martensitic variants associated with the
 </p>
 
 ### [plotPODF_transformation](./src/plotPODF_transformation.m)
-The function calculates and plots the transformation texture based on a parent texture in inputVPSC.Tex, created with [fibreMaker](./src/fibreMaker.m) or [orientationMaker](./src/orientationMaker.m)
+The function calculates and plots the transformation texture based on a parent texture in inputVPSC.Tex, created with [fibreMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibreMaker) or [orientationMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#orientationMaker)
 
 - Syntax
   -  plotPODF_transformation(job,hParent,hChild)
