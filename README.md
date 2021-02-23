@@ -10,7 +10,7 @@ While the **ORPlotter** library mostly consists of plotting functionalities, it 
 ---
 
 ##  Example scripts
-The world of martensitic transformation analysis can be difficult to navigate, which is this library consists of plug-and-play functions to make life easier. To make things even more accessible, some example scripts are provided to demonstrate these functions *in action*.
+The world of martensitic transformation analysis can be difficult to navigate, which is the **ORPlotter** library consists of plug-and-play functions to make life easier. To make things even more accessible, some example scripts are provided to demonstrate these functions *in action*.
 
 ### [Example 1](./scripts/ORPlotter_example1.m)
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here some of ORplotter's functionalities are introduced to demonstrate which functions can be used in which steps of the process to generate publication-ready plots.
