@@ -28,6 +28,7 @@ This script follows the same dataset and steps that are used to demonstrate  the
 ### [Example 2](./scripts/ORPlotter_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here ORplotter's misorientation peak-fitter is used to determine the orientation relationship and advanced plotting functions are employed to produce publication-ready plots.
+
 ---
 
 ##  Function reference
