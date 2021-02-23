@@ -28,7 +28,7 @@ setMTEXpref('FontSize',14);
 Ini.dataPath = [fileparts(mfilename('fullpath')),'\data\'];
 Ini.cifPath = [Ini.dataPath,'input\cif\'];
 Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
-Ini.texturePath = [Ini.dataPath,'output\transformationTexture\'];
+Ini.texturePath = [Ini.dataPath,'output\texture\'];
 %% Load data
 mtexDataset = 'alphaBetaTitanium';
 screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));
@@ -45,6 +45,7 @@ ebsd = renamePhases(ebsd,phaseNames);
 %% Finding the orientation relationship
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
+% Use the peak fitter in the pop-up menu
 job = defineORs(job);
 %% Plotting (with ORPlotter functions)
 screenPrint('SegmentStart','Plotting some ORPlotter maps');
@@ -86,13 +87,15 @@ job.mergeInclusions('maxSize',50);
 % Plot the cleaned reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation)
-%% Variant analysis
+%% Variant analysis                                
+% Calculate variants and packets
 job.calcVariants;
 % Plot variant pole figure
 plotPDF_variants(job);
-% Variant(s) map (ORPlotter function)
+% Variant map (ORPlotter function)
 plotMap_variants(job,'linewidth',3);
-
+% Packet map (ORPlotter function)
+plotMap_packets(job,'linewidth',3);
 %% Reconstruct parent EBSD 
 parentEBSD = job.calcParentEBSD;
 figure;

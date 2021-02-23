@@ -27,7 +27,7 @@ setMTEXpref('FontSize',14);
 Ini.dataPath = [fileparts(mfilename('fullpath')),'\data\'];
 Ini.cifPath = [Ini.dataPath,'input\cif\'];
 Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
-Ini.texturePath = [Ini.dataPath,'output\transformationTexture\'];
+Ini.texturePath = [Ini.dataPath,'output\texture\'];
 %% Load data
 mtexDataset = 'martensite';
 screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));
