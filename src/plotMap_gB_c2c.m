@@ -16,7 +16,6 @@ cmap = get_option(varargin,'colormap','jet');
 gB_c2c = job.grains.boundary(job.csChild.mineral,job.csChild.mineral);
 if ~isempty(gB_c2c)
     %% Plot the parent-child misorientation distribution map
-    fprintf(' -> Plotting the child-child misorientation distribution map');
     f = figure;
     plot(job.grains,'grayscale');
     hold on

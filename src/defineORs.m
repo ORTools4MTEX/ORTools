@@ -37,6 +37,9 @@ else
         
     elseif strcmp(loadMode,'Peak-fit') || strcmp(loadMode,methodTypes{2})
         % Compute the parent-child misorientation distribution histogram
+        f = msgbox(["Use LEFT and RIGHT arrows to define threshold for peak",...
+                   'fitting and push enter to continue!']);
+        uiwait(f);
         [classRange,classInterval,counts] = computePCHistogram(job);
         % Fit the parent-child misorientation distribution histogram
         [misoRange] = gaussFit(classRange,classInterval,counts);
