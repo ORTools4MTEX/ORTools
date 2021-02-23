@@ -3,14 +3,14 @@
 # ORPlotter
 **ORPlotter** is a function library created by Dr Azdiar Gazder and Dr Frank Niessen for advanced orientation relationship analysis and the plotting of publication-ready figures when working on martensite transformation. The function library is written in **MATLAB** and can be used as an add-on to the basic phase-transition functionalities within the crystallographic **MATLAB** toolbox **MTEX** (found [here](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html)).
 
-MTEX has the functionality to analyse phase-transitions. Its major advantage compared to competing programs is its versatility, both in terms of functionality and data compatibility. The ORPlotter library is an add-on to MTEX for more advanced analysis and for creating visually stunning and informative plots particular to martensitic microstructures such that they cannot be included in the main MTEX program. 
+MTEX has the functionality to analyse phase-transitions. Its major advantage compared to competing programs is its versatility, both in terms of functionality and data compatibility. The **ORPlotter** library is an add-on to MTEX for advanced analysis and creating visually stunning and informative plots particular to martensitic microstructures. Due to their specific nature, the codes contained in this library have not been included in the main MTEX program. 
 
-While the library mostly consists of plotting functionalities, it also includes utility functions and advanced analysis capabilities. These are highlighted together with the plotting functions in a series of [example scripts](./scripts) to immediately show you how the functions work and what they do.
+While the **ORPlotter** library mostly consists of plotting functionalities, it also includes utilities that enable advanced OR analysis. These are highlighted together with the plotting functions in a series of [example scripts](./scripts) to showcase how the functions work and what their output comprises.
 
 ---
 
 ##  Example scripts
-The world of martensitic transformation analysis can be difficult to navigate, which is this library consists of plug-and-play functions to make your life easier. To make things even more accessible, some example scripts are provided to demonstrate these functions *in action*.
+The world of martensitic transformation analysis can be difficult to navigate, which is this library consists of plug-and-play functions to make life easier. To make things even more accessible, some example scripts are provided to demonstrate these functions *in action*.
 
 ### [Example 1](./scripts/ORPlotter_example1.m)
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here some of ORplotter's functionalities are introduced to demonstrate which functions can be used in which steps of the process to generate publication-ready plots.
