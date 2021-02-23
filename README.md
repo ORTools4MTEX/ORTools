@@ -193,6 +193,26 @@ The function plots a pole figure of the martensitic variants associated with the
   <img src="./doc/images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="300"/>
 </p>
 
+### [plotPODF_transformation](./src/plotPODF_transformation.m)
+The function calculates and plots the transformation texture based on a parent texture in inputVPSC.Tex, created with [fibreMaker](./src/fibreMaker.m) or [orientationMaker](./src/orientationMaker.m)
+
+- Syntax
+  -  plotPODF_transformation(job,hParent,hChild)
+- Input
+  - hParent     - @Miller
+  - hChild      - @Miller
+- Options
+  - odfSecP      - array with angles of parent ODF section to display
+  - odfSecC      - array with angles of child ODF section to display
+  - variantId    - list with specific variant Ids to plot
+  - halfwidth    - halfwidth for ODF calculation
+  - nrPoints     - Nr of points to be written into the VPSC file
+  - colormap     - colormap string
+
+<p align="center">
+  <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transformation" width="1000"/>
+</p>
+
 ### [recolorPhases](./src/recolorPhases.m)
 The function opens an interactive colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
 
