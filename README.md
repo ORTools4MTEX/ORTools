@@ -181,6 +181,10 @@ The function opens an interactive colorpicker tool to redefine the phase colors 
 - Output
   - ebsd             - @EBSD
   - grains           - @grain2d
+  
+<p align="center">
+  <img src="./doc/images/recolorPhases.png" alt="GUI of recolorPhases" width="250"/>
+</p>
 
 ### [renamePhases](./src/renamePhases.m)
 The function opens an interactive list with the possible phasenames in *phaseStrings* and renames the phases in *ebsd* according to the selection.
