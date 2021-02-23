@@ -33,6 +33,17 @@ The function creates a VPSC file with orientations following the distribution of
   - halfwidth   - Halfwidth for ODF calculation
   - nrPoints    - Nr of points in the VPSC file
 
+### [orientationMaker](./src/orientationMaker.m)
+The function creates a VPSC file with orientations following the distribution of a unimodal ODF
+
+- Syntax
+  -  orientationMaker(ori)
+- Input
+  - ori   - @orientation
+- Options
+  - halfwidth   - Halfwidth for ODF calculation
+  - nrPoints    - Nr of points in the VPSC file
+
 ### [ORinfo](./src/ORinfo.m)
 The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
 
