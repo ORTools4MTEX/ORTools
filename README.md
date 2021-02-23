@@ -33,6 +33,18 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ##  Function reference
 
+### [defineORs](./src/defineORs.m)
+Auxiliary function to define orientation relationships for a parent and child phase given in *job* by:
+- Parallel Planes Directions in a GUI
+- Peakfit of the parent-child boundary misorientation angle distribution
+
+- Syntax
+  - job = defineORs(job)
+- Input
+  - job  - @parentGrainReconstructor
+- Output
+  - job  - @parentGrainReconstructor
+
 ### [fibreMaker](./src/fibreMaker.m)
 The function creates a VPSC file with orientations following the distribution of a fibre ODF
 
@@ -44,6 +56,20 @@ The function creates a VPSC file with orientations following the distribution of
 - Options
   - halfwidth   - Halfwidth for ODF calculation
   - nrPoints    - Nr of points in the VPSC file
+
+### [guiOR](./src/guiOR.m)
+Graphical user interface for definition of an orientation relationship by parallel planes and directions
+
+- Syntax
+  - p2c = guiOR(job)
+- Input
+  - job  - @parentGrainReconstructor
+- Output
+  - p2c  - parent to child misorientation
+
+<p align="center">
+  <img src="./doc/images/guiOR.png" alt="UI of guiOR" width="400"/>
+</p>
 
 ### [orientationMaker](./src/orientationMaker.m)
 The function creates a VPSC file with orientations following the distribution of a unimodal ODF
