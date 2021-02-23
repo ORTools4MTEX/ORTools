@@ -5,7 +5,7 @@
 
 MTEX has the functionality to analyse phase-transitions. Its major advantage compared to competing programs is its versatility, both in terms of functionality and data compatibility. The **ORPlotter** library is an add-on to MTEX for advanced analysis and creating visually stunning and informative plots particular to martensitic microstructures. Due to their specific nature, the codes contained in this library have not been included in the main MTEX program. 
 
-While the **ORPlotter** library mostly consists of plotting functionalities, it also includes utilities that enable advanced OR analysis. These are highlighted together with the plotting functions in a series of [example scripts](./scripts) to showcase how the functions work and what their output comprises.
+While the **ORPlotter** library mostly consists of plotting functionalities, it also includes utilities that enable advanced OR analysis. These are highlighted together with the plotting functions in a series of [example scripts](https://github.com/frankNiessen/ORPlotter#example-scripts) to showcase how the functions work and what their output comprises.
 
 ORPlotter has been created by Dr Azdiar Gazder and Dr Frank Niessen. Please report any bugs that you encounter to us so that we can keep this library maintained.
 
