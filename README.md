@@ -163,6 +163,8 @@ The function plots a pole figure of the martensitic variants associated with the
   - job       - @parentGrainReconstructor
   - oriParent - @orientation
   - pdf       - @Miller
+- Options
+  - colormap  - colormap string 
 
 <p align="center">
   <img src="./doc/images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="300"/>
