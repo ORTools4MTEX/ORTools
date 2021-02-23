@@ -17,6 +17,11 @@ function plotMap_gB_prob(job,varargin)
 
 threshold = get_option(varargin,'threshold',2.5);
 tolerance = get_option(varargin,'tolerance',2.5);
+
+if job.p2c == orientation.id(job.csParent,job.csChild)
+    warning("Orientation relationship is (0,0,0). Initialize ""job.p2c""!");
+    return
+end
 %% Compute the p2c and c2c boundary probabilities
 % Find all grain pairs
 grainPairs = neighbors(job.grains);
@@ -50,14 +55,10 @@ v_c2c = v(idx_c2c==1);
 if ~isempty(gB)
     %% Plot the OR boundary probability distribution map
     f = figure;
-    job.ebsd = swapColors(job.ebsd,'gray');
-    plot(job.grains);
+    plot(job.grains,'grayscale');
     hold on
     % Plot the HABs in black
-    plot(job.grains.boundary,'LineColor','k','displayName','HABs',varargin{:});
-    hold on
-    % Plot the LABs boundaries in navajowhite
-    plot(job.grains.innerBoundary,'LineColor',[255/255 222/255 173/255],'displayName','LABs',varargin{:});
+    plot(job.grains.boundary,'LineColor','k','displayName','GBs',varargin{:});
     hold on
     % Plot the p2c and c2c boundary probabilities
     if ~isempty(gB_p2c)
@@ -86,5 +87,4 @@ else
     uiwait(errordlg(message));
     error('p2c and c2c boundary probability distribution map empty');
 end
-job.ebsd = swapColors(job.ebsd,'RGB');
 end

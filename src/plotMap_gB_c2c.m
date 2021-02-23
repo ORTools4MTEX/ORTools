@@ -18,14 +18,10 @@ if ~isempty(gB_c2c)
     %% Plot the parent-child misorientation distribution map
     fprintf(' -> Plotting the child-child misorientation distribution map');
     f = figure;
-    job.ebsd = swapColors(job.ebsd,'gray');
-    plot(job.grains);
+    plot(job.grains,'grayscale');
     hold on
-    % Plot the HABs in black
-    plot(job.grains.boundary,'LineColor','k','displayName','HABs',varargin{:});
-    hold on
-    % Plot the LABs boundaries in navajowhite
-    plot(job.grains.innerBoundary,'LineColor',[255/255 222/255 173/255],'displayName','LABs',varargin{:});
+    % Plot the GBs in black
+    plot(job.grains.boundary,'LineColor','k','displayName','GBs',varargin{:});
     hold on
     % Plot the IPBs in jet scale
     plot(gB_c2c,gB_c2c.misorientation.angle./degree,varargin{:})
@@ -47,6 +43,4 @@ else
     uiwait(errordlg(message));
     error('Child-child misorientation distribution map empty');
 end
-job.ebsd = swapColors(job.ebsd,'RGB');
 end
-

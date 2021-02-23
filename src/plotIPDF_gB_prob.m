@@ -21,6 +21,11 @@ cmap = get_option(varargin,'colormap','hot');
 threshold = get_option(varargin,'threshold',2.5);
 tolerance = get_option(varargin,'tolerance',2.5);
 
+if job.p2c == orientation.id(job.csParent,job.csChild)
+    warning("Orientation relationship is (0,0,0). Initialize ""job.p2c""!");
+    return
+end
+
 %% Compute the p2c and c2c boundary probabilities
 % Find all grain pairs
 grainPairs = neighbors(job.grains);

@@ -6,7 +6,7 @@
 % demonstrate the reconstruction of beta parent grains from alpha 
 % grains in the official MTEX example for phase transitions in titanium
 % alloys. Here ORplotter's misorientation peak-fitter is used to determine
-% the orientation relationship and advanced plotting functions are used 
+% the orientation relationship and advanced plotting functions are 
 % employed to produce publication-ready plots.
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
@@ -44,7 +44,7 @@ ebsd = renamePhases(ebsd,phaseNames);
 [ebsd,grains] = recolorPhases(ebsd,grains);
 %% Finding the orientation relationship
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
-job = parentGrainReconstructor(ebsd,grains);
+job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
 job = defineORs(job);
 %% Plotting (with ORPlotter functions)
 screenPrint('SegmentStart','Plotting some ORPlotter maps');

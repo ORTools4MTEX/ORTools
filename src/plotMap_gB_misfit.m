@@ -13,6 +13,10 @@ function plotMap_gB_misfit(job,varargin)
 
 cmap = get_option(varargin,'colormap','jet');
 
+if job.p2c == orientation.id(job.csParent,job.csChild)
+    warning("Orientation relationship is (0,0,0). Initialize ""job.p2c""!");
+    return
+end
 %% Compute the p2c and c2c boundary disorientation (misfits)
 gB = job.grains.boundary;
 % Compute all parent-child grain boundaries
@@ -40,14 +44,10 @@ misfit_c2c = angle_outer(gB_c2c.misorientation,c2c_variants);
 if ~isempty(gB)
     %% Plot the OR boundary probability distribution map
     f = figure;
-    job.ebsd = swapColors(job.ebsd,'gray');
-    plot(job.grains);
+    plot(job.grains, 'grayscale');
     hold on
-    % Plot the HABs in black
-    plot(job.grains.boundary,'LineColor','k','displayName','HABs',varargin{:});
-    hold on
-    % Plot the LABs boundaries in navajowhite
-    plot(job.grains.innerBoundary,'LineColor',[255/255 222/255 173/255],'displayName','LABs',varargin{:});
+    % Plot the GBs in black
+    plot(job.grains.boundary,'LineColor','k','displayName','GBs',varargin{:});
     hold on
     % Plot the p2c and c2c boundary probabilities
     if ~isempty(gB_p2c)
@@ -78,5 +78,4 @@ else
     error('p2c and c2c boundary disorientation distribution map empty');
 end
 
-job.ebsd = swapColors(job.ebsd,'RGB');
 end 

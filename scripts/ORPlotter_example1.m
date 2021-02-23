@@ -2,8 +2,11 @@
 % *********************************************************************
 %                        ORPlotter - Example 1
 % *********************************************************************
-% Program to plot orientation relationship(s)
-% between parent-child phases in an EBSD dataset
+% This script follows the same dataset and steps that are used to 
+% demonstrate the reconstruction of austenitic parent grains from martensite 
+% grains in the official MTEX example for phase transitions in steels. Here 
+% some of ORplotter's plotting functions are used to create 
+% publication-ready plots.
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
@@ -20,6 +23,11 @@ startup_mtex;
 setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
 setMTEXpref('FontSize',14);   
+% Default directories - Do not modify
+Ini.dataPath = [fileparts(mfilename('fullpath')),'\data\'];
+Ini.cifPath = [Ini.dataPath,'input\cif\'];
+Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
+Ini.texturePath = [Ini.dataPath,'output\transformationTexture\'];
 %% Load data
 mtexDataset = 'martensite';
 screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));
@@ -39,7 +47,7 @@ ebsd = renamePhases(ebsd,phaseNames);
 [ebsd,grains] = recolorPhases(ebsd,grains);
 %% Define and refine parent-to-child orientation relationship
 screenPrint('SegmentStart','Define and refine parent-to-child OR');
-job = parentGrainReconstructor(ebsd,grains);
+job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
 % initial guess for the parent to child orientation relationship
 job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
 % optimizing the parent child orientation relationship

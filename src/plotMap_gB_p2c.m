@@ -19,14 +19,10 @@ if ~isempty(gB_p2c)
     fprintf(' -> Plotting the parent-child misorientation distribution map');
     
     f = figure;
-    job.ebsd = swapColors(job.ebsd,'gray');
-    plot(job.grains);
+    plot(job.grains,'grayscale');
     hold on
     % Plot the HABs in black
-    plot(job.grains.boundary,'LineColor','k','displayName','HABs',varargin{:});
-    hold on
-    % Plot the LABs boundaries in navajowhite
-    plot(job.grains.innerBoundary,'LineColor',[255/255 222/255 173/255],'displayName','LABs',varargin{:});
+    plot(job.grains.boundary,'LineColor','k','displayName','GBs',varargin{:});
     hold on
     % Plot the IPBs in jet scale
     plot(gB_p2c,gB_p2c.misorientation.angle./degree,varargin{:})
@@ -46,6 +42,6 @@ if ~isempty(gB_p2c)
 else
     warning('There are no parent-child grain boundaries in the dataset');
 end
-job.ebsd = swapColors(job.ebsd,'RGB');
 end
+
 
