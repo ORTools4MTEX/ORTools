@@ -163,6 +163,20 @@ The function plots the inverse polefigure maps of the parent and child phases an
   <img src="./doc/images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="800"/>
 </p>
 
+### [plotMap_packets](./src/plotMap_packets.m)
+The function plots the map of child grains colored according to their packet ID.
+
+- Syntax
+  -  plotMap_packets(job)
+- Input
+  - job  - @parentGrainReconstructor
+- Output
+  - colormap - colormap string
+
+<p align="center">
+  <img src="./doc/images/plotMap_packets.png" alt="plotMap_packets" width="500"/>
+</p>
+
 ### [plotMap_phases](./src/plotMap_phases.m)
 The function plots a phase map of the grains within *job* and adds the high-angle boundaries (*job.grains.boundary*) and low-angle boundaries (*jobgrains.innerBoundary*).
 
@@ -173,6 +187,20 @@ The function plots a phase map of the grains within *job* and adds the high-angl
 
 <p align="center">
   <img src="./doc/images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
+</p>
+
+### [plotMap_variants](./src/plotMap_variants.m)
+The function plots the map of child grains colored according to their variant ID.
+
+- Syntax
+  -  plotMap_variants(job)
+- Input
+  - job  - @parentGrainReconstructor
+- Output
+  - colormap - colormap string
+
+<p align="center">
+  <img src="./doc/images/plotMap_variants.png" alt="plotMap_variants" width="500"/>
 </p>
 
 ### [plotPDF_variants](./src/plotPDF_variants.m)
