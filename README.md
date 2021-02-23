@@ -31,12 +31,21 @@ This script follows the same dataset and steps that are used to demonstrate  the
 #### Parent grain reconstruction and variant analysis in titanium alloys
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here ORplotter's misorientation peak-fitter is used to determine the orientation relationship and advanced plotting functions are employed to produce publication-ready plots.
 
+### [Example 3](./scripts/ORPlotter_example3.m)
+#### Using the parent-child misorientation peak fitting GUI to deconvolute multiple OR's 
+To be added tomorrow...
+
+### [Example 4](./scripts/ORPlotter_example4.m)
+#### Analysing transformation texture
+To be added tomorrow...
+
 ---
 
 ##  Function reference
 
 ### Function Index
 
+- [computeGrains](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#computeGrains)
 - [defineORs](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#defineors)
 - [fibreMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibreMaker)
 - [guiOR](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#guiOR)
@@ -59,6 +68,21 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [renamePhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#renamePhases)
 - [screenPrint](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#screenPrint)
 
+### [computeGrains](./src/computeGrains.m)
+Small GUI to compute grains from EBSD data and optionally filter them.
+
+- Syntax
+  - [ebsd,grains,gB] = computeGrains(ebsd)
+- Input
+  - ebsd  - @EBSD
+- Output
+  - ebsd     - @EBSD
+  - grains   - @grains2d 
+  - gB       - @grainBoundary
+
+<p align="center">
+  <img src="./doc/images/computeGrains.png" alt="UI of computeGrains" width="400"/>
+</p>
 
 ### [defineORs](./src/defineORs.m)
 Auxiliary function to define orientation relationships for a parent and child phase given in *job* by either parallel planes and directions in a GUI or peakfitting of the parent-child boundary misorientation angle distribution
