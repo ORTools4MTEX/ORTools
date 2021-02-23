@@ -165,7 +165,7 @@ The function plots a pole figure of the martensitic variants associated with the
   - pdf       - @Miller
 
 <p align="center">
-  <img src="./doc/images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="500"/>
+  <img src="./doc/images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="300"/>
 </p>
 
 ### [recolorPhases](./src/recolorPhases.m)
