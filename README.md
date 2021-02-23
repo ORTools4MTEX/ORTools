@@ -209,7 +209,7 @@ The function colorizes the parent-child boundaries in *job* according to their m
 
 ### [plotMap_gB_Prob](./src/plotMap_gB_Prob.m)
 The function calculates and plots the probability distribution between 0 and 1, that a 
-boundary belongs to the orientation relationship (see more [here](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html))
+boundary belongs to the orientation relationship (see more [here](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html){:target="_blank"})
 
 - Syntax
   -  plotMap_gB_Prob(job)
