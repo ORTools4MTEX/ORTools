@@ -21,6 +21,18 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ##  Function reference
 
+### [fibreMaker](./src/fibreMaker.m)
+The function creates a VPSC file with orientations following the distribution of a fibre ODF
+
+- Syntax
+  -  fibreMaker(crystalDirection,specimenDirection)
+- Input
+  - crystalDirection  - @Miller
+  - specimenDirection - @vector3d
+- Options
+  - halfwidth   - Halfwidth for ODF calculation
+  - nrPoints    - Nr of points in the VPSC file
+
 ### [ORinfo](./src/ORinfo.m)
 The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
 
