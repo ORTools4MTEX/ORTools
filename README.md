@@ -10,11 +10,19 @@ While the **ORPlotter** library mostly consists of plotting functionalities, it 
 ORPlotter has been created by Dr Azdiar Gazder and Dr Frank Niessen. Please report any bugs that you encounter to us so that we can keep this library maintained.
 
 ---
+## How to use
+- The library can be downloaded as a *zip* file and unpacked into the directory of your choice.
+- This library only works with an installation of **MATLAB** and **MTEX**. Follow the instructions for installation [here](https://se.mathworks.com/help/install/install-products.html) and [here](https://mtex-toolbox.github.io/download).
+- Open MATLAB, navigate to the *ORPlotter* folder and run one of the example files.
+- If you encounter problems, feel free to contact us.
+
+---
 
 ##  Example scripts
 The world of martensitic transformation analysis can be difficult to navigate, which is why the **ORPlotter** library consists of plug-and-play functions to make life easier. To make things even more accessible, some example scripts are provided to demonstrate these functions *in action*.
 
 ### [Example 1](./scripts/ORPlotter_example1.m)
+#### Parent grain reconstruction and variant analysis in lath martensitic steel
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here some of ORplotter's functionalities are introduced to demonstrate which functions can be used in which steps of the process to generate publication-ready plots.
 
 ---
