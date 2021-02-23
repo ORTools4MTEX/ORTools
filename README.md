@@ -23,8 +23,11 @@ The world of martensitic transformation analysis can be difficult to navigate, w
 
 ### [Example 1](./scripts/ORPlotter_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here some of ORplotter's plotting functions are used to create publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate  the reconstruction of beta parent grains from alpha grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here some of ORplotter's plotting functions are used to create publication-ready plots.
 
+### [Example 2](./scripts/ORPlotter_example2.m)
+#### Parent grain reconstruction and variant analysis in titanium alloys
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here ORplotter's misorientation peak-fitter is used to determine the orientation relationship and advanced plotting functions are employed to produce publication-ready plots.
 ---
 
 ##  Function reference
