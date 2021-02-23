@@ -1,12 +1,12 @@
-function f = plotPODF_transformation(job,hP,hD,varargin)
+function f = plotPODF_transformation(job,hParent,hChild,varargin)
 % plot transformation texture from VPSC file 
 %
 % Syntax
-%  f = plotPODF_transformation(job,hP,hD)
+%  f = plotPODF_transformation(job,hParent,hChild)
 %
 % Input
-%  crystalDirection     - @Miller
-%  specimenDirection    - @vector3d
+%  hParent     - @Miller
+%  hChild      - @Miller
 %
 % Options
 %  odfSecP      - array with angles of parent ODF section to display
@@ -42,19 +42,19 @@ oriP = orientation.load(FileName,OR.CS.parent,ss,'interface','generic',...
 odfP = calcDensity(oriP,'halfwidth',hwidth*degree,'points','all');
 odfP.SS = specimenSymmetry('orthorhombic');
 %--- Calculate the parent pole figures from the parent orientation distribution function 
-pfP = calcPoleFigure(odfP,hP,regularS2Grid('resolution',2.5*degree),'antipodal');
+pfP = calcPoleFigure(odfP,hParent,regularS2Grid('resolution',2.5*degree),'antipodal');
 
 %--- Plot the parent pole figures
 setMTEXpref('xAxisDirection','north');
 odfP.SS = specimenSymmetry('triclinic');
 f = figure;
 plotPDF(odfP,...
-    hP,...
+    hParent,...
     'points','all',...
     'equal','antipodal',...
     'contourf',...
     'colorrange',[1 ceil(max(max(pfP)))]);
-mtexColorMap white2black
+colormap(cmap)
 movegui(f,'center');
 set(f,'Name','Parent pole figure(s)','NumberTitle','on');
 setMTEXpref('xAxisDirection','east');
@@ -68,7 +68,7 @@ plotSection(odfP,...
     'points','all','equal',...
     'contourf',...
     'colorrange',[1 ceil(max(odfP))]);    
-mtexColorMap white2black
+colormap(cmap)
 movegui(f,'center');
 set(f,'Name','Parent orientation distribution function','NumberTitle','on');
 %---
@@ -105,7 +105,7 @@ oriD = oriD(:);
 odfD = calcDensity(oriD,'halfwidth',hwidth*degree,'points','all');
 odfD.SS = specimenSymmetry('orthorhombic');
 %--- Calculate the parent pole figures from the parent orientation distribution function 
-pfD = calcPoleFigure(odfD,hD,regularS2Grid('resolution',2.5*degree),'antipodal');
+pfD = calcPoleFigure(odfD,hChild,regularS2Grid('resolution',2.5*degree),'antipodal');
 %---
 
 %--- Plot the child pole figures
@@ -113,7 +113,7 @@ setMTEXpref('xAxisDirection','north');
 odfD.SS = specimenSymmetry('triclinic');
 f = figure;
 plotPDF(odfD,...
-    hD,...
+    hChild,...
     'points','all',...
     'equal','antipodal',...
     'contourf',...
