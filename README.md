@@ -36,11 +36,12 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ### Overview
 
 - [defineORs](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#defineors)
-- [fibremaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibremaker)
+- [fibreMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibremaker)
 - [guiOR](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#guiOR)
 - [orientationMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#orientationMaker)
 - [ORinfo](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#ORinfo)
 - [peakFitORs](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#peakFitORs)
+- [plotIPDF_gB_Misfit](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#peakFitORs)
 
 ### [defineORs](./src/defineORs.m)
 Auxiliary function to define orientation relationships for a parent and child phase given in *job* by either parallel planes and directions in a GUI or peakfitting of the parent-child boundary misorientation angle distribution
