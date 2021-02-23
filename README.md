@@ -34,9 +34,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ##  Function reference
 
 ### [defineORs](./src/defineORs.m)
-Auxiliary function to define orientation relationships for a parent and child phase given in *job* by:
-- Parallel Planes Directions in a GUI
-- Peakfit of the parent-child boundary misorientation angle distribution
+Auxiliary function to define orientation relationships for a parent and child phase given in *job* by either parallel planes and directions in a GUI or peakfitting of the parent-child boundary misorientation angle distribution
 
 - Syntax
   - job = defineORs(job)
@@ -68,7 +66,7 @@ Graphical user interface for definition of an orientation relationship by parall
   - p2c  - parent to child misorientation
 
 <p align="center">
-  <img src="./doc/images/guiOR.png" alt="UI of guiOR" width="400"/>
+  <img src="./doc/images/guiOR.png" alt="UI of guiOR" width="600"/>
 </p>
 
 ### [orientationMaker](./src/orientationMaker.m)
@@ -96,6 +94,22 @@ The function outputs information about the orientation relationship in the comma
 
 <p align="center">
   <img src="./doc/images/ORinfo.png" alt="Command window output example from ORinfo" width="500"/>
+</p>
+
+### [peakFitORs](./src/peakFitORs.m)
+The function peak fits parent-child misorientation angle ranges for determination of one or several orientation relationships.
+The function is called by [defineORs](./src/defineORs.m).
+
+- Syntax
+  -  p2c = peakFitORs(job,misoRange)
+- Input
+  - job         - @parentGrainReconstructor
+  - misoRange   - range of misorientation angles in which to fit
+- Output
+  - p2c       - parent to child misorientation
+
+<p align="center">
+  <img src="./doc/images/peakFitORs.png" alt="Interactive fitting window on which peakFitORs is applied." width="500"/>
 </p>
 
 ### [plotIPDF_gB_Misfit](./src/plotIPDF_gB_Misfit.m)
