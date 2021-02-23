@@ -152,6 +152,22 @@ The function plots a phase map of the grains within *job* and adds the high-angl
   <img src="./doc/images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
 </p>
 
+### [plotPDF_variants](./src/plotPDF_variants.m)
+The function plots a pole figure of the martensitic variants associated with the OR *job.p2c*. It is an alternative to MTEX's [plotVariantPF](https://mtex-toolbox.github.io/parentGrainReconstructor.plotVariantPF.html).
+
+- Syntax
+  -  plotPDF_variants(job)
+  -  plotPDF_variants(job, oriParent)
+  -  plotPDF_variants(job, oriParent, pdf)
+- Input
+  - job       - @parentGrainReconstructor
+  - oriParent - @orientation
+  - pdf       - @Miller
+
+<p align="center">
+  <img src="./doc/images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="500"/>
+</p>
+
 ### [recolorPhases](./src/recolorPhases.m)
 The function opens an interactive colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
 
