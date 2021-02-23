@@ -5,15 +5,15 @@ function f = plotPODF_transformation(job,hParent,hChild,varargin)
 %  f = plotPODF_transformation(job,hParent,hChild)
 %
 % Input
-%  hParent     - @Miller
-%  hChild      - @Miller
+%  hParent     - @Miller (parent polefigures to plot)
+%  hChild      - @Miller (child polefigures to plot)
 %
 % Options
 %  odfSecP      - array with angles of parent ODF section to display
 %  odfSecC      - array with angles of child ODF section to display
 %  variantId    - list with specific variant Ids to plot
 %  halfwidth    - halfwidth for ODF calculation
-%  nrPoints     - Nr of points to be written into the VPSC file
+%  nrPoints     - nr of points to be written into the VPSC file
 %  colormap     - colormap string
 
 odfSecP = get_option(varargin,'odfSecP',[0 45 65]*degree);
