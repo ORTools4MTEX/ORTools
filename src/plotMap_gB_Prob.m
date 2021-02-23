@@ -1,24 +1,5 @@
-function plotMap_gB_Prob(job,varargin)
-% calculate and plot the probability distribution between 0 and 1, that a 
-% boundary belongs to the orientation relationship
-%
-% Syntax
-%  plotMap_gB_Prob(job)
-%
-% Input
-%  job          - @parentGrainreconstructor
-%
-% Options
-%  threshold - the misfit at which the probability is exactly 50 percent ... 
-%  tolerance - ... and the standard deviation in a cumulative Gaussian distribution
-%  colormap - colormap string
-%
-%See also:
-%https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html 
-
-cmap = get_option(varargin,'colormap','hot');
-threshold = get_option(varargin,'threshold',2.5);
-tolerance = get_option(varargin,'tolerance',2.5);
+function plotMap_gB_prob(job,param)
+screenPrint('Step',sprintf('Plotting the p2c and c2c boundary probability distribution map'));
 
 %% Compute the p2c and c2c boundary probabilities
 % Find all grain pairs
@@ -43,8 +24,8 @@ if isempty(idx_c2c(idx_c2c==1))
 end
 
 % Define all boundaries and calculate their probabilities
-job.calcGraph('threshold',threshold*degree,...
-    'tolerance',tolerance*degree);
+job.calcGraph('threshold',param.calcGraph.thrsh*degree,...
+    'tolerance',param.calcGraph.tol*degree);
 v = full(job.graph(sub2ind(size(job.graph),grainPairs(:,1),grainPairs(:,2))));
 [gB,pairId] = job.grains.boundary.selectByGrainId(grainPairs);
 
@@ -64,26 +45,26 @@ if ~isempty(gB)
     plot(job.grains);
     hold on
     % Plot the HABs in black
-    plot(job.grains.boundary,'LineColor','k','displayName','HABs',varargin{:});
+    plot(job.grains.boundary,'LineColor','k','LineWidth',1,'displayName','HABs');
     hold on
     % Plot the LABs boundaries in navajowhite
-    plot(job.grains.innerBoundary,'LineColor',[255/255 222/255 173/255],'displayName','LABs',varargin{:});
+    plot(job.grains.innerBoundary,'LineColor',[255/255 222/255 173/255],'LineWidth',1,'displayName','LABs');
     hold on
     % Plot the p2c and c2c boundary probabilities
     if ~isempty(gB_p2c)
-        plot(gB_p2c,v_p2c(pairId_p2c),varargin{:});
+        plot(gB_p2c,v_p2c(pairId_p2c),'linewidth',1.5);
     else
         warning('p2c boundary probability distribution map empty');
     end
     if ~isempty(gB_c2c)
-        plot(gB_c2c,v_c2c(pairId_c2c),varargin{:});
+        plot(gB_c2c,v_c2c(pairId_c2c),'linewidth',1.5);
     else
         warning('c2c boundary probability distribution map empty');
     end
     hold off
     
     % Define the maximum number of color levels and plot the colorbar
-    colormap(cmap);
+    colormap(hot);
     caxis([0 1]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'YTick', [0:0.1:1],...

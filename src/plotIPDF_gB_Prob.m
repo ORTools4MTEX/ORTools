@@ -1,10 +1,10 @@
-function plotIPDF_gB_Prob(job, varargin)
+function plotIPDF_gB_prob(job, varargin)
 % calculate and plot the probability distribution between 0 and 1, that a 
 % boundary belongs to the orientation relationship in an inverse 
 % polefigure showing the misorientation axes
 %
 % Syntax
-%  plotIPDF_gB_Prob(job)
+%  plotIPDF_gB_prob(job)
 %
 % Input
 %  job  - @parentGrainreconstructor

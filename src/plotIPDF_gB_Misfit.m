@@ -1,9 +1,9 @@
-function plotIPDF_gB_Misfit(job,varargin)
+function plotIPDF_gB_misfit(job,varargin)
 % plot the misfit, or the disorientation, between the parent-child and
 % child-child boundaries with the orientation relationship
 %
 % Syntax
-%  plotIPDF_gB_Misfit(job)
+%  plotIPDF_gB_misfit(job)
 %
 % Input
 %  job  - @parentGrainreconstructor

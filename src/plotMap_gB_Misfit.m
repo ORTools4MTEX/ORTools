@@ -1,9 +1,9 @@
-function plotMap_gB_Misfit(job,varargin)
+function plotMap_gB_misfit(job,varargin)
 % plot the misfit, or the disorientation, between the parent-child and
 % child-child boundaries with the orientation relationship
 %
 % Syntax
-%  plotMap_gB_Misfit(job)
+%  plotMap_gB_misfit(job)
 %
 % Input
 %  job          - @parentGrainreconstructor
