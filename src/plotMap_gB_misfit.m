@@ -79,4 +79,4 @@ else
     warning('There are no parent-child grain boundaries in the dataset');
 end
 job.ebsd = swapColors(job.ebsd,'RGB');
-end
+end 
