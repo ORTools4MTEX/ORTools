@@ -11,9 +11,6 @@ function fibreMaker(crystalDirection,specimenDirection,varargin)
 % Options
 %  halfwidth        - Halfwidth for ODF calculation
 %  nrPoints         - Nr of points in VPSC file
-%
-% Alternative to MTEX's plotVariantPF
-% https://mtex-toolbox.github.io/parentGrainReconstructor.plotVariantPF.html
 
 %% All fibres are defined based on the following specimen co-ordinate system
 % RD = xvector; TD = yvector; ND = zvector;
