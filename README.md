@@ -319,3 +319,13 @@ The function opens an interactive list with the possible phasenames in *phaseStr
   - phaseStrings     - cell array of strings with possible phase names
 - Output
   - ebsd             - @EBSD
+
+### [screenPrint](./src/screenPrint.m)
+Auxiliary function for formating command window output
+
+- Syntax
+  - screenPrint(mode)
+  - screenPrint(mode, string)
+- Input
+  - mode     - Formatting mode
+  - string   - Output string
