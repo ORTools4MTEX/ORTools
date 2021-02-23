@@ -183,7 +183,7 @@ The function opens an interactive colorpicker tool to redefine the phase colors 
   - grains           - @grain2d
   
 <p align="center">
-  <img src="./doc/images/recolorPhases.png" alt="GUI of recolorPhases" width="250"/>
+  <img src="./doc/images/recolorPhases.png" alt="GUI of recolorPhases" width="200"/>
 </p>
 
 ### [renamePhases](./src/renamePhases.m)
