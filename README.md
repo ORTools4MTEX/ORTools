@@ -33,7 +33,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ##  Function reference
 
-### Overview
+### Function Index
 
 - [defineORs](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#defineors)
 - [fibreMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibremaker)
@@ -42,6 +42,21 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [ORinfo](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#ORinfo)
 - [peakFitORs](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#peakFitORs)
 - [plotIPDF_gB_Misfit](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#peakFitORs)
+- [plotIPDF_gB_Prob](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotIPDF_gB_Prob)
+- [plotMap_gB_c2c](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_gB_c2c)
+- [plotMap_gB_Misfit](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_gB_Misfit)
+- [plotMap_gB_p2c](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_gB_p2c)
+- [plotMap_gB_Prob](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_gB_Prob)
+- [plotMap_IPF_p2c](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_IPF_p2c)
+- [plotMap_packets](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_packets)
+- [plotMap_phases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_phases)
+- [plotMap_variants](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_variants)
+- [plotPDF_variants](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotPDF_variants)
+- [plotPODF_transformation](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotPODF_transformation)
+- [recolorPhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#recolorPhases)
+- [renamePhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#renamePhases)
+- [screenPrint](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#screenPrint)
+
 
 ### [defineORs](./src/defineORs.m)
 Auxiliary function to define orientation relationships for a parent and child phase given in *job* by either parallel planes and directions in a GUI or peakfitting of the parent-child boundary misorientation angle distribution
