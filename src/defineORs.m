@@ -45,7 +45,11 @@ function job = defineORs(job)
             [misoRange] = gaussFit(classRange,classInterval,counts);
             % Find the parent-child orientation relationships
             [p2c] = peakFitORs(job,misoRange);
-            ORnumber = selectORnumber(p2c);
+            if length(p2c) > 1
+                ORnumber = selectORnumber(p2c);
+            else
+                ORnumber = 1;
+            end
             close gcf
         end
     end

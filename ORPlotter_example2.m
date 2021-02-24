@@ -46,6 +46,8 @@ ebsd = renamePhases(ebsd,phaseNames);
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
 % Use the peak fitter in the pop-up menu
+%     - Adjust the threshold to include only the largest peak
+%     - Compute the OR by "Maximum f(g)"
 job = defineORs(job);
 %% Plotting (with ORPlotter functions)
 screenPrint('SegmentStart','Plotting some ORPlotter maps');
