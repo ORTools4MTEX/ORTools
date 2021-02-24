@@ -21,7 +21,7 @@ ORPlotter has been created by Dr Azdiar Gazder and Dr Frank Niessen. Please repo
 ##  Example scripts
 The world of martensitic transformation analysis can be difficult to navigate, which is why the **ORPlotter** library consists of plug-and-play functions to make life easier. To make things even more accessible, some example scripts are provided to demonstrate these functions *in action*.
 
-It is possible to run the example scripts from start to end, but we encourage to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the relation between code and results.
+It is possible to run the example scripts from start to end, but we encourage to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the relation between code and results. This will also help you to follow the comments, which give instructions on which choices to make in the interactive parts of the program and narrate the obtained plots and results. 
 
 ### [Example 1](./scripts/ORPlotter_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
@@ -29,11 +29,11 @@ This script follows the same dataset and steps that are used to demonstrate  the
 
 ### [Example 2](./scripts/ORPlotter_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here ORplotter's misorientation peak-fitter is used to determine the orientation relationship and advanced plotting functions are employed to produce publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here ORplotter's misorientation peak-fitter is used to determine the orientation relationship from alpha-beta boundaries, which only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
 ### [Example 3](./scripts/ORPlotter_example3.m)
 #### Using the parent-child misorientation peak fitting GUI to deconvolute multiple OR's in titanium alloys
-Following example 2 you may have noted that the alpha-beta Ti microstructure showed two orientation relationships in the OR peak-fitter. In this example we want to return both ORs and investigate which one of them is the dominating OR. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse polefigure and on boundary maps.
+Following example 2 you may have noted that the alpha-beta Ti microstructure showed two orientation relationships in the OR peak-fitter. In this example we want to return both ORs and investigate which one of them is the dominating one. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse polefigure and on boundary maps.
 
 ### [Example 4](./scripts/ORPlotter_example4.m)
 #### Analysing transformation texture
