@@ -74,6 +74,7 @@ Here we look into a 20% cold rolled TRWIP steel microstructure in which Epsilon 
 - [recolorPhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#recolorPhases)
 - [renamePhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#renamePhases)
 - [screenPrint](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#screenPrint)
+- [setParentGrainReconstructor](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#setParentGrainReconstructor)
 
 ### [computeGrains](./src/computeGrains.m)
 Small GUI to compute grains from EBSD data and optionally filter them.
@@ -401,3 +402,16 @@ Auxiliary function for formating command window output
 - Input
   - mode     - Formatting mode
   - string   - Output string
+
+### [setParentGrainReconstructor](./src/setParentGrainReconstructor.m)
+Auxiliary GUI function to define a job of class [parentGrainReconstructor](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html)
+
+- Syntax
+  - setParentGrainReconstructor(ebsd,grains)
+  - setParentGrainReconstructor(ebsd,grains,inPath)
+- Input
+  - ebsd     - @EBSD
+  - grains   - @grain2d
+  - inPath   - string giving path to cif-file folder 
+- Output
+  - job      - @parentGrainReconstructor
