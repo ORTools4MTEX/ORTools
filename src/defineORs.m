@@ -1,57 +1,65 @@
 function job = defineORs(job)
-% auxiliary function to define orientation relationships for given parent
-% and child phase in "job" by:
-%    - Parallel Planes Directions in a GUI
-%    - Peakfit of the parent-child boundary misorientation angle
-%      distribution
-%
-% Syntax
-%  job = defineORs(job)
-%
-% Input
-%  job  - @parentGrainreconstructor
+    % auxiliary function to define orientation relationships for given parent
+    % and child phase in "job" by:
+    %    - Parallel Planes Directions in a GUI
+    %    - Peakfit of the parent-child boundary misorientation angle
+    %      distribution
+    %
+    % Syntax
+    %  job = defineORs(job)
+    %
+    % Input
+    %  job  - @parentGrainreconstructor
 
-% Check if p2c boundaries exist
-if isempty(job.parentGrains)
-    p2c = guiOR(job);
-    ORnumber = 1;
-else
-    % Method selection
-    methodTypes = {'Define','Peak-fit','Cancel'};
-    try
-        loadMode = questdlg('Define an OR or peak-fit ORs from parent-child grain boundaries', ...
-            'Method selection', methodTypes{:},methodTypes{1});
-    catch
-    end
-    
-    % This command prevents function execution in cases when
-    % the user presses the "Cancel" or "Close" buttons
-    if isempty(loadMode) || strcmp(loadMode,methodTypes{3})
-        message = sprintf('Script terminated: Execution aborted by user');
-        uiwait(warndlg(message));
-        return
-        
-    elseif strcmp(loadMode,'Define') || strcmp(loadMode,methodTypes{1})
+    % Check if p2c boundaries exist
+    if isempty(job.parentGrains)
         p2c = guiOR(job);
         ORnumber = 1;
-        
-    elseif strcmp(loadMode,'Peak-fit') || strcmp(loadMode,methodTypes{2})
-        % Compute the parent-child misorientation distribution histogram
-        f = msgbox(["Use LEFT and RIGHT arrows to define threshold for peak",...
-                   'fitting and push enter to continue!']);
-        uiwait(f);
-        [classRange,classInterval,counts] = computePCHistogram(job);
-        % Fit the parent-child misorientation distribution histogram
-        [misoRange] = gaussFit(classRange,classInterval,counts);
-        % Find the parent-child orientation relationships
-        [p2c] = peakFitORs(job,misoRange);
-        ORnumber = selectORnumber(p2c);
-        close all
+    else
+        % Method selection
+        methodTypes = {'Define','Peak-fit','Cancel'};
+        try
+            loadMode = questdlg('Define an OR or peak-fit ORs from parent-child grain boundaries', ...
+                'Method selection', methodTypes{:},methodTypes{1});
+        catch
+        end
+
+        % This command prevents function execution in cases when
+        % the user presses the "Cancel" or "Close" buttons
+        if isempty(loadMode) || strcmp(loadMode,methodTypes{3})
+            message = sprintf('Script terminated: Execution aborted by user');
+            uiwait(warndlg(message));
+            return
+
+        elseif strcmp(loadMode,'Define') || strcmp(loadMode,methodTypes{1})
+            p2c = guiOR(job);
+            ORnumber = 1;
+
+        elseif strcmp(loadMode,'Peak-fit') || strcmp(loadMode,methodTypes{2})
+            % Compute the parent-child misorientation distribution histogram
+            f = msgbox(["Use LEFT and RIGHT arrows to define threshold for peak",...
+                       'fitting and push enter to continue!']);
+            uiwait(f);
+            [classRange,classInterval,counts] = computePCHistogram(job);
+            % Fit the parent-child misorientation distribution histogram
+            [misoRange] = gaussFit(classRange,classInterval,counts);
+            % Find the parent-child orientation relationships
+            [p2c] = peakFitORs(job,misoRange);
+            ORnumber = selectORnumber(p2c);
+            close gcf
+        end
     end
-end
-% Update p2c
-job.p2c = p2c(ORnumber);
-ORinfo(job.p2c);
+
+    % Update p2c
+    if length(ORnumber) > 1
+        for ii = ORnumber
+           newJob{ii} = parentGrainReconstructor(job.ebsd,job.grains,p2c(ii));
+        end  
+        job = newJob;
+    else  
+        job.p2c = p2c(ORnumber);
+        ORinfo(job.p2c);
+    end
 end
 
 function [classRange,classInterval,counts] = computePCHistogram(job)
@@ -108,35 +116,24 @@ function [ORnumber] = selectORnumber(p2c)
     %
     % Output
     %  ORnumber     - number of selected OR
+    
+    list = arrayfun(@num2str, 1:length(p2c), 'UniformOutput', 0);
+    list = [list,{'All ORs'}];
 
-    prompt = {'Select a peak-fit OR by its number to continue:'};
-    windowTitle = 'Select a peak-fit OR';
-    dims = [1 75];
-    predefinedInput = {'1'};
-    try
-        userInput = inputdlg(prompt,windowTitle,dims,predefinedInput);
-
-        if  sum(isnan(str2double(userInput{1}))) > 0
-            message = sprintf('Script terminated: Non-numeric input');
-            uiwait(warndlg(message));
-            return
-        end
-        if userInput{1} == '0' ||...
-                isreal(str2double(userInput{1})) == 0 ||...
-                isreal(str2double(userInput{1})) > length(p2c)
-            message = sprintf('Script terminated: Invalid OR identification number');
-            uiwait(warndlg(message));
-            return
-        end
-    catch
-        % This command prevents function execution in cases when
-        % the user presses the "Cancel" or "Close" buttons
-        if isempty(userInput)
-            message = sprintf('Script terminated: Execution aborted by user');
-            uiwait(warndlg(message));
-            return
-        end
+    ind = listdlg('PromptString',{'Select the OR to continue with.',...
+                    'All ORs returns a cell array of ORs.',''}, ...
+                    'SelectionMode','single',...
+                    'ListString',list);
+    if isempty(ind)
+        message = sprintf('Script terminated: Execution aborted by user');
+        uiwait(warndlg(message));
+        return
     end
-    % Return the user-defined OR number
-    ORnumber = str2double(userInput{1});
+
+    % Return the user-defined OR number    
+    if ind == length(list), ind = 1:length(list)-1; end
+    ORnumber = ind;
 end
+
+
+

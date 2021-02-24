@@ -10,8 +10,10 @@ function plotMap_gB_misfit(job,varargin)
 %
 % Options
 %  colormap - colormap string
+%  maxColor - maximum color on color range [degree]
 
 cmap = get_option(varargin,'colormap','jet');
+maxColor = get_option(varargin,'maxColor',[]);
 
 if job.p2c == orientation.id(job.csParent,job.csChild)
     warning("Orientation relationship is (0,0,0). Initialize ""job.p2c""!");
@@ -63,12 +65,14 @@ if ~isempty(gB)
     hold off
 
     % Define the maximum number of color levels and plot the colorbar
-    maxColors = ceil(max(max(misfit_p2c),max(misfit_c2c))./degree/5)*5;
+    if isempty(maxColor)
+        maxColor = ceil(max(max(misfit_p2c),max(misfit_c2c))./degree/5)*5;
+    end
     colormap(cmap);
-    caxis([0 maxColors]);
+    caxis([0 maxColor]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
-        'YTick', [0:5:maxColors],...
-        'YTickLabel',num2str([0:5:maxColors]'), 'YLim', [0 maxColors],...
+        'YTick', [0:5:maxColor],...
+        'YTickLabel',num2str([0:5:maxColor]'), 'YLim', [0 maxColor],...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     set(f,'Name','p2c and c2c boundary disorientation map','NumberTitle','on');
     drawnow;

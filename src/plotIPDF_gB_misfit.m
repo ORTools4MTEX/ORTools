@@ -10,6 +10,7 @@ function plotIPDF_gB_misfit(job,varargin)
 %
 % Options
 %  colormap - colormap string
+%  maxColor - maximum color on color range [degree]
 
 cmap = get_option(varargin,'colormap','jet');
 
@@ -48,12 +49,16 @@ if ~isempty(gB_p2c)
         'LineWidth',0.25,...
         'Marker','o','MarkerSize',3,...
         'MarkerEdgeColor',[0 0 0]);
-    maxColors = ceil(max(misfit_p2c./degree)/5)*5;
+    if get_option(varargin,'maxColor')
+        maxColor = get_option(varargin,'maxColor');
+    else
+        maxColor = ceil(max(misfit_p2c./degree)/5)*5;
+    end
     colormap(cmap);
-    caxis([0 maxColors]);
+    caxis([0 maxColor]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
-        'YTick', [0:5:maxColors],...
-        'YTickLabel',int2str([0:5:maxColors]'), 'YLim', [0 maxColors],...
+        'YTick', [0:5:maxColor],...
+        'YTickLabel',int2str([0:5:maxColor]'), 'YLim', [0 maxColor],...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     hold all
 else
@@ -83,12 +88,16 @@ if ~isempty(gB_p2c)
         'LineWidth',0.25,...
         'Marker','o','MarkerSize',3,...
         'MarkerEdgeColor',[0 0 0]);
-    maxColors = ceil(max(misfit_p2c./degree)/5)*5;
+    if get_option(varargin,'maxColor')
+        maxColor = get_option(varargin,'maxColor');
+    else
+        maxColor = ceil(max(misfit_p2c./degree)/5)*5;
+    end
     colormap(cmap);
-    caxis([0 maxColors]);
+    caxis([0 maxColor]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
-        'YTick', [0:5:maxColors],...
-        'YTickLabel',int2str([0:5:maxColors]'), 'YLim', [0 maxColors],...
+        'YTick', [0:5:maxColor],...
+        'YTickLabel',int2str([0:5:maxColor]'), 'YLim', [0 maxColor],...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     hold all
 else
@@ -116,12 +125,16 @@ if ~isempty(gB_c2c)
         'LineWidth',0.25,...
         'Marker','o','MarkerSize',3,...
         'MarkerEdgeColor',[0 0 0]);
-    maxColors = ceil(max(misfit_c2c./degree)/5)*5;
+    if get_option(varargin,'maxColor')
+        maxColor = get_option(varargin,'maxColor');
+    else
+        maxColor = ceil(max(misfit_c2c./degree)/5)*5;
+    end    
     colormap(cmap);
-    caxis([0 maxColors]);
+    caxis([0 maxColor]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
-        'YTick', [0:5:maxColors],...
-        'YTickLabel',int2str([0:5:maxColors]'), 'YLim', [0 maxColors],...
+        'YTick', [0:5:maxColor],...
+        'YTickLabel',int2str([0:5:maxColor]'), 'YLim', [0 maxColor],...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     hold all
 else

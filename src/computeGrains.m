@@ -17,11 +17,11 @@ function [ebsd,grains,gB] = computeGrains(ebsd,varargin)
 %% Get min GB angle and min grain size
 [criticalAngle,minGrainSize] = setGrainParameters;
 %% Compute the grains
-screenPrint('Step',sprintf('Computing grains with >%.0f° misorientation',criticalAngle/degree));
+fprintf(' -> Computing grains with >%.0f° misorientation\n',criticalAngle/degree);
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',criticalAngle,'unitcell');
 %% Delete small grains (if any)
 if ~isnan(minGrainSize)
-    screenPrint('Step',sprintf('Deleting EBSD data of grains with <%.0f pxs',minGrainSize));
+    fprintf(' -> Deleting EBSD data of grains with <%.0f pxs\n',minGrainSize);
     % Assign ebsd data of filtered grains to phase 'noIndexed'
     ebsd(grains(grains.grainSize < minGrainSize)).phase = 0;
     % Set the orientation of ebsd data of filtered grains to 0
@@ -33,11 +33,11 @@ if ~isnan(minGrainSize)
     % Set the mean angular deviation of ebsd data of filtered grains to 0
     ebsd(grains(grains.grainSize < minGrainSize)).prop.mad = 0;
     % Recompute grains after the small grains have been removed
-    screenPrint('Step',sprintf('Recomputing grains with >%.0f° misorientation',criticalAngle/degree));
+    fprintf(' -> Recomputing grains with >%.0f° misorientation\n',criticalAngle/degree);
     [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',criticalAngle);
 end
 %% Compute grain boundaries
-screenPrint('Step',sprintf('Computing all grain boundaries'));
+fprintf(' -> Computing all grain boundaries\n');
 gB = grains.boundary;
 end
 
