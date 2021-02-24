@@ -42,7 +42,8 @@ To be added tomorrow...
 ### [Example 5](./scripts/ORPlotter_example5.m)
 #### Using the OR peak fitter to clean misindexed data
 Here we look into a 20% cold rolled TRWIP steel microstructure in which Epsilon martensite formed from Gamma austenite, and Alpha martensite formed from Epsilon martensite. This is a two-step martensitic transformation. Using the OR peak fitter, we find that two major ORs can be found. We identify that the first of them is actually not a real OR, but corresponds to points that were misindexed as Alpha even though they belong to Gamma. We use the parent phase reconstruction features in MTEX to revert these misindexed points. We then reiterate the grain calculation and run the OR peak fitter again to show that this apparent OR has been eliminated. This example is a template of how to reconstruct parent phase microstructures based on multiple orientation relationships in one microstructure. 
-*EBSD map courtesy of Dr. Sudipta Pramanik https://doi.org/-10.1016/j.msea.2018.06.024*
+
+*EBSD map courtesy of Dr. Sudipta Pramanik https://doi.org/10.1016/j.msea.2018.06.024*
 
 ---
 
