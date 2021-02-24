@@ -17,7 +17,7 @@
 % setpref('Mathworks_uisetcolor', 'Version', 1);
 clc; close all; clear all;
 currentFolder;
-screenPrint('StartUp','ORPlotter - Example 1');
+screenPrint('StartUp','ORPlotter - Example 2');
 %% Initialize MTEX
 % startup and set some settings
 startup_mtex;
