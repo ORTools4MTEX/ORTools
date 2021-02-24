@@ -2,7 +2,8 @@
 % *********************************************************************
 %                        ORPlotter - Example 3
 % *********************************************************************
-% Using the parent-child misorientation peak fitting GUI to deconvolute multiple OR's 
+% Using the parent-child misorientation peak fitting GUI to investigate 
+% multiple ORs in an alpha-beta titanium alloy 
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
