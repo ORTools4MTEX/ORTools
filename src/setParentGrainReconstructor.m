@@ -1,4 +1,18 @@
 function [job] = setParentGrainReconstructor(ebsd,grains,inPath)
+% Auxiliary GUI function to define a job of class parentGrainReconstructor
+%
+% Syntax
+%  setParentGrainReconstructor(ebsd,grains)
+%  setParentGrainReconstructor(ebsd,grains,inPath)
+%
+% Input
+%  ebsd     - @EBSD
+%  grains   - @grain2d
+%  inPath   - string giving path to cif-file folder 
+%
+% Output
+%  job      - @parentGrainReconstructor
+
 if nargin ==2, inPath = pwd; end
 %% Define the parent phase (minerals)
 phaseIDs = length(ebsd.CSList);
