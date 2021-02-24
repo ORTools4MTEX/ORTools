@@ -32,8 +32,8 @@ This script follows the same dataset and steps that are used to demonstrate  the
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here ORplotter's misorientation peak-fitter is used to determine the orientation relationship and advanced plotting functions are employed to produce publication-ready plots.
 
 ### [Example 3](./scripts/ORPlotter_example3.m)
-#### Using the parent-child misorientation peak fitting GUI to deconvolute multiple OR's 
-To be added tomorrow...
+#### Using the parent-child misorientation peak fitting GUI to deconvolute multiple OR's in titanium alloys
+Following example 2 you may have noted that the alpha-beta Ti microstructure showed two orientation relationships in the OR peak-fitter. In this example we want to return both ORs and investigate which one of them is the dominating OR. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse polefigure and on boundary maps.
 
 ### [Example 4](./scripts/ORPlotter_example4.m)
 #### Analysing transformation texture
@@ -64,6 +64,7 @@ To be added tomorrow...
 - [plotMap_variants](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_variants)
 - [plotPDF_variants](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotPDF_variants)
 - [plotPODF_transformation](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotPODF_transformation)
+- [readCPR](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#readCPR)
 - [recolorPhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#recolorPhases)
 - [renamePhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#renamePhases)
 - [screenPrint](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#screenPrint)
@@ -344,6 +345,19 @@ The function calculates and plots the transformation texture based on a parent t
 <p align="center">
   <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transformation" width="1000"/>
 </p>
+
+### [readCPR](./src/readCPR.m)
+This is a short auxiliary function to read in *.cpr/.crc* files with a browser window.
+
+- Syntax
+  - ebsd = readCPR
+  - ebsd = readCPR(inPath)
+  - ebsd = readCPR(inPath, fileName)
+- Input
+  - inPath   - string with path to directory 'xx\yy\zz\'
+  - fileName - string with filename 'xxyyzz.cpr'
+- Output
+  - ebsd             - @EBSD
 
 ### [recolorPhases](./src/recolorPhases.m)
 The function opens an interactive colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
