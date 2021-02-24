@@ -1,5 +1,3 @@
-*This repository is currently under construction. The current functionalities are working and you are welcome to try them out. More functions are being added constantly.*
-
 # ORPlotter
 **ORPlotter** is a function library for advanced orientation relationship analysis and the plotting of publication-ready figures when working on martensite transformation. The function library is written in **MATLAB** and can be used as an add-on to the basic phase-transition functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io).
 
@@ -13,7 +11,7 @@ ORPlotter has been created by Dr Azdiar Gazder and Dr Frank Niessen. Please repo
 ## How to use
 - The library can be downloaded as a *zip* file and unpacked into the directory of your choice.
 - This library only works with an installation of **MATLAB** and **MTEX**. Follow the instructions for installation [here](https://se.mathworks.com/help/install/install-products.html) and [here](https://mtex-toolbox.github.io/download).
-- Open MATLAB, navigate to the *ORPlotter* folder and run one of the example files.
+- Open MATLAB, navigate to the *ORPlotter* folder and run one of the example files. If you don't want to run examples but want to use the function library, make sure to add the directory with its subdirectories to the MATLAB path.
 - If you encounter problems, feel free to contact us.
 
 ---
