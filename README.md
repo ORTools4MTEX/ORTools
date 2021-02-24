@@ -32,11 +32,15 @@ This script follows the same dataset and steps that are used to demonstrate  the
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here ORplotter's misorientation peak-fitter is used to determine the orientation relationship from alpha-beta boundaries, which only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
 ### [Example 3](./scripts/ORPlotter_example3.m)
-#### Using the parent-child misorientation peak fitting GUI to deconvolute multiple OR's in titanium alloys
+#### Using the OR peak fitter to deconvolute multiple OR's in titanium alloys
 Following example 2 you may have noted that the alpha-beta Ti microstructure showed two orientation relationships in the OR peak-fitter. In this example we want to return both ORs and investigate which one of them is the dominating one. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse polefigure and on boundary maps.
 
 ### [Example 4](./scripts/ORPlotter_example4.m)
 #### Analysing transformation texture
+To be added tomorrow...
+
+### [Example 5](./scripts/ORPlotter_example5.m)
+#### Using the OR peak fitter to clean misindexed data
 To be added tomorrow...
 
 ---
