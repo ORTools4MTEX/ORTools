@@ -2,18 +2,12 @@
 % *********************************************************************
 %                        ORPlotter - Example 1
 % *********************************************************************
-% This script follows the same dataset and steps that are used to 
-% demonstrate the reconstruction of austenitic parent grains from martensite 
-% grains in the official MTEX example for phase transitions in steels. Here 
-% some of ORplotter's plotting functions are used to create 
-% publication-ready plots.
+% Reconstructing the prior austenite microstructure from lath martensite
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
 % (Remove "dot" and "at" to make this email address valid)
-% License provided in root directory
-% If old style color seleUI needed, type the following and re-start Matlab
-% setpref('Mathworks_uisetcolor', 'Version', 1);
+% *********************************************************************
 clc; close all; clear all;
 currentFolder;
 screenPrint('StartUp','ORPlotter - Example 1');
