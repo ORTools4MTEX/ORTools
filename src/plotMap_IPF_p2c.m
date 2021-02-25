@@ -9,6 +9,10 @@ function ipfKey = plotMap_IPF_p2c(job, varargin)
 %  job          - @parentGrainreconstructor
 %  direction    - @vector3d
 %
+% Option
+%  parent       - plot only map of parent phase
+%  child        - plot only map of child phase
+%
 % Output
 %  ipfKey       - @ipfHSVKey
 
@@ -16,7 +20,20 @@ vector = getClass(varargin,'vector3d',vector3d.X);
 ipfKey1 = [];
 ipfKey2 = [];
 
-if ~isempty(job.ebsd(job.csParent))
+
+% Check what to plot
+onlyChild = false; 
+onlyParent = false; 
+if check_option(varargin,'child')
+   onlyChild = true; 
+   varargin(find_option(varargin,'child')) =[];
+elseif check_option(varargin,'parent')
+   onlyParent = true; 
+   varargin(find_option(varargin,'parent')) =[];
+end
+
+% Parent map
+if ~isempty(job.ebsd(job.csParent)) && ~onlyChild
     f = figure;
     ipfKey1 = ipfHSVKey(job.ebsd(job.csParent));
     ipfKey1.inversePoleFigureDirection = vector;
@@ -28,12 +45,12 @@ if ~isempty(job.ebsd(job.csParent))
     guiTitle = ['Parent IPFx map = ',job.csParent.mineral];
     set(f,'Name',guiTitle,'NumberTitle','on');
     drawnow;
-else
+elseif isempty(job.ebsd(job.csParent))
     warning('Parent IPFx map empty');
 end
 
-
-if ~isempty(job.ebsd(job.csChild))
+% Child map
+if ~isempty(job.ebsd(job.csChild)) && ~onlyParent
     f = figure;
     ipfKey2 = ipfHSVKey(job.ebsd(job.csChild));
     ipfKey2.inversePoleFigureDirection = vector;
@@ -45,7 +62,7 @@ if ~isempty(job.ebsd(job.csChild))
     guiTitle = ['Child IPFx map = ',job.csChild.mineral];
     set(f,'Name',guiTitle,'NumberTitle','on');
     drawnow;
-else
+elseif isempty(job.ebsd(job.csChild))
     warning('Child IPFx map empty');
 end
 ipfKey = [ipfKey1, ipfKey2];
