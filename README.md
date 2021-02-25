@@ -27,7 +27,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ### [Example 2](./ORPlotter_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the OR [peak fitter](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#peakFitORs) is used to determine the orientation relationship from alpha-beta boundaries, even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the [OR peak fitter](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#peakFitORs) is used to determine the orientation relationship from alpha-beta boundaries, even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
 ### [Example 3](./ORPlotter_example3.m)
 #### Using the OR peak fitter to deconvolute multiple OR's in titanium alloys
