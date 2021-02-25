@@ -15,6 +15,7 @@ function f = plotPODF_transformation(job,hParent,hChild,varargin)
 %  halfwidth    - halfwidth for ODF calculation
 %  nrPoints     - nr of points to be written into the VPSC file
 %  colormap     - colormap string
+%  path         - path to the texture file
 
 odfSecP = get_option(varargin,'odfSecP',[0 45 65]*degree);
 odfSecC = get_option(varargin,'odfSecC',[0 45 90]*degree);
@@ -22,10 +23,8 @@ variantId = get_option(varargin,'variantId',[]);
 hwidth = get_option(varargin,'halfwidth',2.5);
 nrPoints = get_option(varargin,'nrPoints',1000);
 cmap = get_option(varargin,'colormap','jet');
+pathName = get_option(varargin,'path','');
 
-setMTEXpref('xAxisDirection','east');
-setMTEXpref('zAxisDirection','outOfPlane');
-setMTEXpref('FontSize',16);
 OR = ORinfo(job.p2c,'silent');
 
 %--- Define specimen symmetry
@@ -33,8 +32,8 @@ ss = specimenSymmetry('triclinic');
 
 
 %--- Import the VPSC ODF file into memory
-FileName = 'inputVPSC.Tex';
-oriP = orientation.load(FileName,OR.CS.parent,ss,'interface','generic',...
+fileName = 'inputVPSC.Tex';
+oriP = orientation.load([pathName,fileName],OR.CS.parent,ss,'interface','generic',...
     'ColumnNames', {'phi1' 'Phi' 'phi2' 'weights'}, 'Columns', [1 2 3 4], 'Bunge'); 
 %---
 
@@ -45,19 +44,16 @@ odfP.SS = specimenSymmetry('orthorhombic');
 pfP = calcPoleFigure(odfP,hParent,regularS2Grid('resolution',2.5*degree),'antipodal');
 
 %--- Plot the parent pole figures
-setMTEXpref('xAxisDirection','north');
 odfP.SS = specimenSymmetry('triclinic');
 f = figure;
 plotPDF(odfP,...
     hParent,...
     'points','all',...
     'equal','antipodal',...
-    'contourf',...
-    'colorrange',[1 ceil(max(max(pfP)))]);
+    'contourf');
 colormap(cmap)
 movegui(f,'center');
 set(f,'Name','Parent pole figure(s)','NumberTitle','on');
-setMTEXpref('xAxisDirection','east');
 odfP.SS = specimenSymmetry('orthorhombic');
 %---
 
@@ -66,8 +62,7 @@ f = figure;
 plotSection(odfP,...
     'phi2',odfSecP,...
     'points','all','equal',...
-    'contourf',...
-    'colorrange',[1 ceil(max(odfP))]);    
+    'contourf');    
 colormap(cmap)
 movegui(f,'center');
 set(f,'Name','Parent orientation distribution function','NumberTitle','on');
@@ -80,44 +75,36 @@ set(f,'Name','Parent orientation distribution function','NumberTitle','on');
 % % oriD = orientation.id(OR.crystalSystem.child.properGroup) * misoD;
 % % oriD = unique(oriD);
 
-% Compute the disorientation from the nominal OR
-p2c_V = job.p2c.variants;
-p2c_V = p2c_V(:);
-c2c_variants = job.p2c * inv(p2c_V);
-% Compute the transformed child orientations
-% Note: no variant selection is applied here - all children are possible
-oriD = reshape(oriP.project2FundamentalRegion,[],length(oriP)) .* inv(p2c_V);
+oriC = variants(job.p2c, oriP, job.variantMap);
 % Applying user-defined variants if specified
 if ~isempty(variantId)
     % Checks for user-defined variant numbers
     variantId = variantId(floor(variantId)==variantId); % integer check
     variantId = variantId(variantId > 0); % negative integer check
-    variantId = variantId(variantId <= length(p2c_V)); % highest positive integer check
+    variantId = variantId(variantId <= size(oriC,2)); % highest positive integer check
     fprintf(['    - Plotting user selected variants: \n', num2str(variantId)]);
     % Select only user-defined variants
-    oriD = oriD(variantId,:);
+    oriC = oriC(:,variantId);
 else
     fprintf('    - Plotting all variants without selection \n');
 end
-oriD = oriD(:);
+oriC = oriC(:);
 
 %--- Calculate the orientation distribution function and define the specimen symmetry of the child
-odfD = calcDensity(oriD,'halfwidth',hwidth*degree,'points','all');
-odfD.SS = specimenSymmetry('orthorhombic');
+odfC = calcDensity(oriC,'halfwidth',hwidth*degree,'points','all');
+odfC.SS = specimenSymmetry('orthorhombic');
 %--- Calculate the parent pole figures from the parent orientation distribution function 
-pfD = calcPoleFigure(odfD,hChild,regularS2Grid('resolution',2.5*degree),'antipodal');
+pfC = calcPoleFigure(odfC,hChild,regularS2Grid('resolution',2.5*degree),'antipodal');
 %---
 
 %--- Plot the child pole figures
-setMTEXpref('xAxisDirection','north');
-odfD.SS = specimenSymmetry('triclinic');
+odfC.SS = specimenSymmetry('triclinic');
 f = figure;
-plotPDF(odfD,...
+plotPDF(odfC,...
     hChild,...
     'points','all',...
     'equal','antipodal',...
-    'contourf',...
-    'colorrange',[1 ceil(max(max(pfD)))]);
+    'contourf');
 colormap(cmap)
 movegui(f,'center');
 if ~isempty(variantId)
@@ -125,17 +112,15 @@ if ~isempty(variantId)
 else
     set(f,'Name','Child pole figure(s) without variant selection','NumberTitle','on');
 end
-setMTEXpref('xAxisDirection','east');
-odfD.SS = specimenSymmetry('orthorhombic');
+odfC.SS = specimenSymmetry('orthorhombic');
 %---
 
 %--- Plot the child orientation distribution function
 f = figure;
-plotSection(odfD,...
+plotSection(odfC,...
     'phi2',odfSecC,...
     'points','all','equal',...
-    'contourf',...
-    'colorrange',[1 ceil(max(odfD))]);
+    'contourf');
 colormap(cmap)
 movegui(f,'center');
 if ~isempty(variantId)
@@ -146,8 +131,8 @@ end
 %---
 
 %--- Save a VPSC *.tex file
-FileName = 'outputVPSC.Tex';
-export_VPSC(odfD,FileName,'interface','VPSC','Bunge','points',nrPoints);
+fileName = 'outputVPSC.Tex';
+export_VPSC(odfC,[pathName,fileName],'interface','VPSC','Bunge','points',nrPoints);
 %---
 
 end
