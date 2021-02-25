@@ -1,45 +1,45 @@
 # ORPlotter
-**ORPlotter** is a function library for advanced orientation relationship analysis and the plotting of publication-ready figures when working on martensite transformation. The function library is written in **MATLAB** and can be used as an add-on to the basic phase-transition functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io).
+**ORPlotter** (orientation-relationship plotter) is a function library for advanced orientation relationship analysis and the plotting of publication-ready figures when working on martensite transformation. The function library is written in **MATLAB** and can be used as an add-on to the basic phase-transition functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io).
 
 MTEX has the functionality to analyse phase-transitions. Its major advantage compared to competing programs is its versatility, both in terms of functionality and data compatibility. The **ORPlotter** library is an add-on to MTEX for advanced OR discovery and analysis and for creating visually stunning and informative plots particular to martensitic microstructures. Due to their specific nature, the codes contained in this library have not been included in the main MTEX program. 
 
 While the **ORPlotter** library mostly consists of plotting functionalities, it also includes utilities that enable advanced OR analysis. These are highlighted together with the plotting functions in a series of [example scripts](https://github.com/frankNiessen/ORPlotter#example-scripts) to showcase how the functions work and what their output comprises.
 
-ORPlotter has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. Please report any bugs that you encounter to us so that we can keep this library maintained.
+**ORPlotter** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. Please report any bugs that you encounter to us so that we can keep this library maintained.
 
 ---
 ## How to use
 - The library can be downloaded as a *zip* file and unpacked into the directory of your choice.
 - This library only works with an installation of **MATLAB** and **MTEX**. Follow the instructions for installation [here](https://se.mathworks.com/help/install/install-products.html) and [here](https://mtex-toolbox.github.io/download).
-- Open MATLAB, navigate to the *ORPlotter* folder and run one of the example files. If you don't want to run examples but want to use the function library, make sure to add the directory with its subdirectories to the MATLAB path.
-- If you encounter problems, feel free to contact us.
+- Open MATLAB and run one of the example files. If you don't want to run any example files but want to use the function library, please make sure to add the **ORPlotter** directory together with its subdirectories to the MATLAB path.
+- If you encounter any problems, feel free to contact us.
 
 ---
 
 ##  Example scripts
 The world of martensitic transformation analysis can be difficult to navigate, which is why the **ORPlotter** library consists of plug-and-play functions to make life easier. To make things even more accessible, some example scripts are provided to demonstrate these functions *in action*.
 
-It is possible to run the example scripts from start to end, but we encourage to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the relation between code and results. This will also help you to follow the comments, which give instructions on which choices to make in the interactive parts of the program and narrate the obtained plots and results. 
+It is possible to run the example scripts from start to end, but we encourage to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the relation between code and results. This will also help you to follow the comments, which give instructions on which choices to make in the interactive parts of the program and narrate the obtained plots and results. In this way you will learn the code syntax and the meaning of the presented results.
 
 ### [Example 1](./ORPlotter_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
-This script follows the same dataset and steps that are used to demonstrate  the reconstruction of beta parent grains from alpha grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here some of ORplotter's plotting functions are used to create publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for martensite formation in steels. Here we show how **ORplotter** provides prewritten and additional plotting functions to create publication-ready plots.
 
 ### [Example 2](./ORPlotter_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here ORplotter's misorientation peak-fitter is used to determine the orientation relationship from alpha-beta boundaries, which only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of $\beta$ grains from an $\alpha$ microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the OR [peak fitter](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#peakFitORs) is used to determine the orientation relationship from alpha-beta boundaries, even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
 ### [Example 3](./ORPlotter_example3.m)
 #### Using the OR peak fitter to deconvolute multiple OR's in titanium alloys
-Following example 2 you may have noted that the alpha-beta Ti microstructure showed two orientation relationships in the OR peak-fitter. In this example we want to return both ORs and investigate which one of them is the dominating one. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse polefigure and on boundary maps.
+In [example 2](https://github.com/frankNiessen/ORPlotter#example-2) we saw that the $\alpha$-$\beta$ Ti microstructure showed two orientation relationships in the OR peak fitter. In this example we want to return both ORs and investigate which one of them is the dominating one. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse polefigure and on boundary maps to evaluate the best match.
 
 ### [Example 4](./ORPlotter_example4.m)
-#### Analysing transformation texture
-To be added tomorrow...
+#### Predicting the $\beta$-to-$\alpha$ transformation texture in a titanium alloy
+In this script we repeat the reconstruction of the prior $\beta$ microstructure from an $\alpha$ microstructure as shown in [example 2](https://github.com/frankNiessen/ORPlotter#example-2) with less detail. We then look at the variant distribution and conclude that no strong variant selection has taken place. We are therefore in a good position to predict the transformation texture of $\alpha$ from the reconstructed $\beta$ using the ORPlotter function [plotPODF_transformation](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotPODF_transformation). The predicted transformed $\alpha$ texture shows good agreement with the actual $\alpha$ texture.
 
 ### [Example 5](./ORPlotter_example5.m)
 #### Using the OR peak fitter to clean misindexed data
-Here we look into a 20% cold rolled twinning and transformation induced plasticity (TRWIP) steel microstructure in which Epsilon martensite formed from Gamma austenite, and Alpha martensite formed from Epsilon martensite. This is a two-step martensitic transformation. Using the OR peak fitter, we discover that two possible ORs could be in operation. We identify that the first of them is actually not a real OR, but corresponds to points that were misindexed as Alpha even though they belong to Gamma. We use the parent phase reconstruction features in MTEX to revert these misindexed points. We then reiterate the grain calculation and run the OR peak fitter again to show that this apparent OR has been eliminated. This example is a template of how to reconstruct parent phase microstructures based on multiple orientation relationships in one microstructure. 
+Here we look into a 20% cold rolled twinning and transformation induced plasticity (TRWIP) steel microstructure in which $\varepsilon$ martensite formed from $\gamma$ austenite, and $\alpha$ martensite formed from $\varepsilon$ martensite. This is a two-step martensitic transformation. Using the OR peak fitter, we discover that two possible ORs could be in operation. We identify that the first of them is actually not a real OR, but corresponds to points that were misindexed as $\alpha$ even though they belong to $\gamma$. We use the parent phase reconstruction features in MTEX to revert these misindexed points with the apparent OR. We then reiterate the grain calculation and run the OR peak fitter again to show that this apparent OR has been eliminated. This example serves as a template of how to reconstruct parent phase microstructures based on multiple orientation relationships in one microstructure. 
 
 *EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
 
@@ -332,7 +332,7 @@ The function plots a pole figure of the martensitic variants associated with the
 </p>
 
 ### [plotPODF_transformation](./src/plotPODF_transformation.m)
-The function calculates and plots the transformation texture, with or without imposing variant selection, based on a parent texture in inputVPSC.Tex, created with [fibreMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibreMaker) or [orientationMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#orientationMaker)
+The function calculates and plots the transformation texture, with or without imposing variant selection, based on a parent texture in inputVPSC.Tex. Input files can be created from EBSD data as presented in [example 4](https://github.com/frankNiessen/ORPlotter#example-4) or created with [fibreMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibreMaker) or [orientationMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#orientationMaker)
 
 - Syntax
   -  plotPODF_transformation(job,hParent,hChild)
@@ -346,6 +346,7 @@ The function calculates and plots the transformation texture, with or without im
   - halfwidth    - halfwidth for ODF calculation
   - nrPoints     - nr of points to be written into the VPSC file
   - colormap     - colormap string
+  - path         - path to the texture file
 
 <p align="center">
   <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transformation" width="1000"/>
