@@ -13,6 +13,9 @@ function [ebsd,grains] = recolorPhases(ebsd,grains)
 %  ebsd             - @EBSD
 %  grains           - @grain2d
 
+% If old style color seleUI needed, type the following and re-start Matlab
+% setpref('Mathworks_uisetcolor', 'Version', 1);
+
 %% ReColor the phases (minerals)
 fprintf(' -> Define the phase color\n');
 phaseNum = length(ebsd.CSList);
