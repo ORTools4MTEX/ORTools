@@ -21,23 +21,23 @@ The world of martensitic transformation analysis can be difficult to navigate, w
 
 It is possible to run the example scripts from start to end, but we encourage to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the relation between code and results. This will also help you to follow the comments, which give instructions on which choices to make in the interactive parts of the program and narrate the obtained plots and results. 
 
-### [Example 1](./scripts/ORPlotter_example1.m)
+### [Example 1](./ORPlotter_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
 This script follows the same dataset and steps that are used to demonstrate  the reconstruction of beta parent grains from alpha grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for phase transitions in steels. Here some of ORplotter's plotting functions are used to create publication-ready plots.
 
-### [Example 2](./scripts/ORPlotter_example2.m)
+### [Example 2](./ORPlotter_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here ORplotter's misorientation peak-fitter is used to determine the orientation relationship from alpha-beta boundaries, which only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
-### [Example 3](./scripts/ORPlotter_example3.m)
+### [Example 3](./ORPlotter_example3.m)
 #### Using the OR peak fitter to deconvolute multiple OR's in titanium alloys
 Following example 2 you may have noted that the alpha-beta Ti microstructure showed two orientation relationships in the OR peak-fitter. In this example we want to return both ORs and investigate which one of them is the dominating one. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse polefigure and on boundary maps.
 
-### [Example 4](./scripts/ORPlotter_example4.m)
+### [Example 4](./ORPlotter_example4.m)
 #### Analysing transformation texture
 To be added tomorrow...
 
-### [Example 5](./scripts/ORPlotter_example5.m)
+### [Example 5](./ORPlotter_example5.m)
 #### Using the OR peak fitter to clean misindexed data
 Here we look into a 20% cold rolled twinning and transformation induced plasticity (TRWIP) steel microstructure in which Epsilon martensite formed from Gamma austenite, and Alpha martensite formed from Epsilon martensite. This is a two-step martensitic transformation. Using the OR peak fitter, we discover that two possible ORs could be in operation. We identify that the first of them is actually not a real OR, but corresponds to points that were misindexed as Alpha even though they belong to Gamma. We use the parent phase reconstruction features in MTEX to revert these misindexed points. We then reiterate the grain calculation and run the OR peak fitter again to show that this apparent OR has been eliminated. This example is a template of how to reconstruct parent phase microstructures based on multiple orientation relationships in one microstructure. 
 
