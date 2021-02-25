@@ -266,6 +266,9 @@ The function plots the inverse polefigure maps of the parent and child phases an
 - Input
   - job       - @parentGrainReconstructor
   - direction - @vector3d 
+- Option
+  - parent - plot only map of parent phase
+  - child  - plot only map of child phase 
 - Output
   - ipfKey - @ipfHSVKey 
 
