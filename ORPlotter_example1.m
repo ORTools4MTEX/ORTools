@@ -3,6 +3,8 @@
 %                        ORPlotter - Example 1
 % *********************************************************************
 % Reconstructing the prior austenite microstructure from lath martensite
+% Find the detailed MTEX version on the details of the reconstruction here:
+% https://mtex-toolbox.github.io/MaParentGrainReconstruction.html
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
@@ -12,105 +14,139 @@ clc; close all; clear all;
 currentFolder;
 screenPrint('StartUp','ORPlotter - Example 1');
 %% Initialize MTEX
-% startup and set some settings
+% Startup and set some settings
 startup_mtex;
 setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
 setMTEXpref('FontSize',14);   
+
 % Default directories - Do not modify
 Ini.dataPath = [pwd,'\data\'];
 Ini.cifPath = [Ini.dataPath,'input\cif\'];
 Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
 Ini.texturePath = [Ini.dataPath,'output\texture\'];
 %% Load data
+% We load an MTEX dataset into 'ebsd'
 mtexDataset = 'martensite';
 screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
+% Grains are calculated with a 3° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle', 3*degree);
-% remove small grains
+% EBSD data in small grains are removed
 ebsd(grains(grains.grainSize < 4)) = [];
-% reidentify grains with small grains removed:
+% We then recalculate the grains from the remaining data ...
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',2*degree);
+% ... and smooth the grain boundaries
 grains = smooth(grains,5);
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
-phaseNames = {'Gamma','AlphaP','Alpha'};
+phaseNames = {'Gamma','AlphaP'};
+% We rename 'Iron bcc (old)'to 'AlphaP' and 'Iron fcc' to 'Gamma'
 ebsd = renamePhases(ebsd,phaseNames);
+% Choose your favourite colors
 [ebsd,grains] = recolorPhases(ebsd,grains);
 %% Define and refine parent-to-child orientation relationship
 screenPrint('SegmentStart','Define and refine parent-to-child OR');
-job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
-% initial guess for the parent to child orientation relationship
+% Define 'Gamma" as the parent and 'AlphaP' as the child phase
+job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
+% We give an initial guess for the OR: Kurdjumow-Sachs ...
 job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
-% optimizing the parent child orientation relationship
+% ... and refine it based on the fit with boundary misorientations
 job.calcParent2Child;
-% get information about the determined OR
+% Let's now plot some information about the OR
 ORinfo(job.p2c);
+%    - We have 24 martensitic variants
+%    - We are ~2.4° from Kurdjumow-Sachs
 %% Plotting (with ORPlotter functions)
 screenPrint('SegmentStart','Plotting some ORPlotter maps');
+% Let's use some of the ORPlotter functions to visualize the determined OR
+% and its relation to the microstructure
+
 % Phase map
 plotMap_phases(job,'linewidth',2);
-% Parent-child grain boundary misorientation map
-plotMap_gB_p2c(job,'linewidth',2);
-% Child-child grain boundary misorientation map
-plotMap_gB_c2c(job,'linewidth',2);
+%    - We have no retained austenite (gamma)
+
 % Parent and child IPF maps
 plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2);
-% Plot parent-child and child-child OR boundary disorientation map
-plotMap_gB_misfit(job,'linewidth',2);
-% Plot parent-child and child-child OR boundary probability map
+%    - We can see that martensite has formed from multiple prior 
+%    - austenite grains and that some surface scratches led to bad indexing
+
+% Child-child grain boundary misorientation map
+plotMap_gB_c2c(job,'linewidth',2);
+%    - We can see that misorientation angles of ~15-50° are not present
+%    within prior austenite grains and thus delinitate prior austenite
+%    grain boundaries
+
+% Plot a map of the OR boundary disorientation, or misfit
+plotMap_gB_misfit(job,'linewidth',2, 'maxColor',5);
+%    - By setting a threshold at 5 degrees we can identify the prior
+%    austenite grain boundaries by their large misfit with the OR
+
+% Plot a map of the OR boundary probability 
 plotMap_gB_prob(job,'linewidth',2);
-% Plot inverse pole figures for parent-child and child-child boundary
-% disorientations
-plotIPDF_gB_misfit(job);
-% Plot inverse pole figures for parent-child and child-child boundary 
-% probabilities
-plotIPDF_gB_prob(job);
+%   - the same can be visualized by calculating the probability that a
+%     boundary belongs to the OR
+
 %% Reconstruct parent microstructure
+%   - We reconstruct the microstructure with a graph-based approach
 job.calcGraph('threshold',2.5*degree,'tolerance',2.5*degree);
 job.clusterGraph('inflationPower',1.6);
 job.calcParentFromGraph;
-% Plot reconstructed parent microstructure
+% Let's plot the reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2);
 %% Remove badly reconstructed clusters
-% Plot misfit of reconstruction
+% While the first reconstruction looks good, plotting the fit of each 
+% reconstructed alphaP grain with the overall parernt orientation of the
+% cluster shows that some grains are not well-reconstructed
 figure;
 plot(job.grains,job.grains.fit./degree,'linewidth',2);
 setColorRange([0,5]);
 mtexColorbar;
-% Revert misfit > 5° and clusters < 15
+% We therefire decide to revert the reconstruction of grains with bad fits
+% or with very small clusters
 job.revert(job.grains.fit > 5*degree | job.grains.clusterSize < 15)
-% Plot the filtered reconstructed parent microstructure
+% Let's see the remaining grains
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation)
 %% Fill in unreconstructed regions with voting algorithm
+% We can now use the already confidently reconstructed gamma grains to 
+% vote for the gamma orientation of not yet reconstructed alpha grains
+% We iterate this 5 times ...
 for k = 1:5 
   % compute votes
   job.calcGBVotes('noC2C');
   % compute parent orientations from votes
   job.calcParentFromVote('minFit',7.5*degree)
 end
-% Plot optimized reconstructed parent microstructure
+%... and plot the optimized reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation)
 %% Clean reconstructed grains
-% merge grains with similar orientation
+% We can now clean the grains by 
+% - merging grains with similar orientation
 job.mergeSimilar('threshold',7.5*degree);
-% merge small inclusions into larger grains
+% - and mergeing small inclusions into larger grains
 job.mergeInclusions('maxSize',50);
-% Plot the cleaned reconstructed parent microstructure
+% This is the cleaned reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation)
 %% Variant analysis
-job.calcVariants;
-% Plot variant pole figure
+% Now that we have both the alpha and the associated prior gamma
+% orientations, we can conduct variant analysis.
+% Let's plot the possible variants in a pole figure
 plotPDF_variants(job);
-% Variant(s) map (ORPlotter function)
+% We then calculate the variant IDs of all alpha grains ...
+job.calcVariants;
+% ... and plot them
 plotMap_variants(job,'linewidth',3);
-% Packet(s) map (ORPlotter function)
+% The same can be done for the packets
 plotMap_packets(job,'linewidth',3);
+
+%% Interactive parent grain analysis
+% We will soon add an interactive tool to click at different parent (gamma)
+% grains and get information about orientations, variants etc.
 
 

@@ -28,6 +28,7 @@ ebsd = loadEBSD_ctf([Ini.ebsdPath,'TRWIPsteel.ctf'],'convertSpatial2EulerReferen
 ebsd = ebsd('indexed');
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
+% Grains are calculated with a 3° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
   'removeQuadruplePoints');
 %% Rename and recolor phases 

@@ -12,7 +12,7 @@ clc; close all; clear all;
 currentFolder;
 screenPrint('StartUp','ORPlotter - Example 2');
 %% Initialize MTEX
-% startup and set some settings
+% Startup and set some settings
 startup_mtex;
 setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
@@ -23,20 +23,25 @@ Ini.cifPath = [Ini.dataPath,'input\cif\'];
 Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
 Ini.texturePath = [Ini.dataPath,'output\texture\'];
 %% Load data
+% Let's open the MTEX dataset on alpha and beta titanium
 mtexDataset = 'alphaBetaTitanium';
 screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
+% Grains are calculated with a 1.5° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
   'removeQuadruplePoints');
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
 phaseNames = {'Gamma','AlphaP','Alpha','Beta','AlphaDP'};
+% Rename "Ti (BETA) to "Beta"and "Ti (alpha)" to "Alpha"
 ebsd = renamePhases(ebsd,phaseNames);
+% Choose your favourite colors
 [ebsd,grains] = recolorPhases(ebsd,grains);
 %% Finding the orientation relationship
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
+% Choose Beta as a parent and Alpha as a child phase in the transition
 job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
 % Use the peak fitter in the pop-up menu
 %     - Adjust the threshold to include only the largest peak
@@ -48,7 +53,7 @@ screenPrint('SegmentStart','Plotting some ORPlotter maps');
 plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child');
 % Plot map for parent-child and child-child boundary disorientations
 plotMap_gB_misfit(job,'maxColor',5,'linewidth',1.5);
-%% Compute parent orientations (see example 2)
+%% Compute parent orientations (see example 2 for details)
 job.calcTPVotes('numFit',2);
 job.calcParentFromVote('strict', 'minFit',2.5*degree,...
                                  'maxFit',5*degree,'minVotes',2);
