@@ -52,6 +52,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 - [computeGrains](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#computeGrains)
 - [defineORs](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#defineors)
 - [fibreMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#fibreMaker)
+- [grainClick](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#grainClick)
 - [guiOR](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#guiOR)
 - [orientationMaker](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#orientationMaker)
 - [ORinfo](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#ORinfo)
@@ -68,6 +69,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 - [plotMap_variants](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotMap_variants)
 - [plotPDF_variants](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotPDF_variants)
 - [plotPODF_transformation](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotPODF_transformation)
+- [plotStack](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#plotStack)
 - [readCPR](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#readCPR)
 - [recolorPhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#recolorPhases)
 - [renamePhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#renamePhases)
@@ -111,6 +113,19 @@ The function creates a VPSC file with orientations following the distribution of
 - Options
   - halfwidth   - Halfwidth for ODF calculation
   - nrPoints    - Nr of points in the VPSC file
+
+### [grainClick](./src/grainClick.m)
+Interactive map to select parent grains for further analysis
+
+- Syntax
+  - grainClick(job,parentEBSD)
+- Input
+  - job  - @parentGrainReconstructor
+  - parentEBSD - reconstructed @EBSD data
+
+<p align="center">
+  <img src="./doc/images/grainClick.png" alt="Plots from grainClick" width="500"/>
+</p>
 
 ### [guiOR](./src/guiOR.m)
 Graphical user interface for definition of an orientation relationship by parallel planes and directions
@@ -355,6 +370,21 @@ The function calculates and plots the transformation texture, with or without im
   <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transformation" width="1000"/>
 </p>
 
+### [plotStack](./src/plotStack.m)
+This function plot maps of the prior parent grain for martensite variant analysis
+
+- Syntax
+  -  plotStack(job,parentEBSD,pGrainId)
+- Input
+  - job          - @parentGrainreconstructor
+  - parentEBSD   - reconstructed @EBSD data
+  - pGrainId     - parent grain Id
+
+<p align="center">
+  <img src="./doc/images/plotStack.png" alt="Plot example from plotStack" width="1000"/>
+</p>
+
+
 ### [readCPR](./src/readCPR.m)
 This is a short auxiliary function to read in *.cpr/.crc* files with a browser window.
 
@@ -417,3 +447,9 @@ Auxiliary GUI function to define a job of class [parentGrainReconstructor](https
   - inPath   - string giving path to cif-file folder 
 - Output
   - job      - @parentGrainReconstructor
+
+### [tileFigs](./src/tileFigs.m)
+Auxhiliary function to distribute figures evenly over screen
+
+- Syntax
+  - fileFigs
