@@ -75,6 +75,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 - [renamePhases](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#renamePhases)
 - [screenPrint](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#screenPrint)
 - [setParentGrainReconstructor](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#setParentGrainReconstructor)
+- [tileFigs](https://github.com/frankNiessen/ORPlotter/blob/master/README.md#tileFigs)
 
 ### [computeGrains](./src/computeGrains.m)
 Small GUI to compute grains from EBSD data and optionally filter them.
