@@ -145,8 +145,16 @@ plotMap_variants(job,'linewidth',3);
 % The same can be done for the packets
 plotMap_packets(job,'linewidth',3);
 
-%% Interactive parent grain analysis
-% We will soon add an interactive tool to click at different parent (gamma)
-% grains and get information about orientations, variants etc.
+%% Reconstruct parent EBSD 
+% We can finally obtain the reconstructed EBSD data
+parentEBSD = job.calcParentEBSD;
+% And plot it with the prior beta grain boundaries
+figure;
+plot(parentEBSD(job.csParent),parentEBSD(job.csParent).orientations);
+hold on; 
+plot(job.grains.boundary,'lineWidth',3)
+
+%% Check the gamma grains interactively by clicking on them
+grainClick(job,parentEBSD);
 
 

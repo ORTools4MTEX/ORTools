@@ -21,9 +21,6 @@ oriParent = getClass(varargin,'orientation',orientation('Euler',0*degree,0*degre
 pdf = getClass(varargin,'Miller',Miller(0,0,1,job.csChild,'hkl'));
 cmap = get_option(varargin,'colormap','jet');
 
-setMTEXpref('xAxisDirection','north');
-setMTEXpref('zAxisDirection','outOfPlane');
-
 % Compute the disorientation from the nominal OR
 p2c_V = job.p2c.variants;
 p2c_V = p2c_V(:);
@@ -31,7 +28,6 @@ c2c_variants = job.p2c * inv(p2c_V);
 oriVariants = reshape(oriParent.project2FundamentalRegion,[],1) .* inv(p2c_V);
 oriVariants = oriVariants(:);
 
-figure
 % Note: Include the last 2 lines to uniquely label each variant marker with
 % the variant number
 plotPDF(oriVariants, 1:length(oriVariants), pdf,...
@@ -55,6 +51,4 @@ plot(Miller(0,0,1,job.csChild),'plane','LineColor',[0 0 0],'LineWidth',1);
 
 hold off
 
-setMTEXpref('xAxisDirection','east');
-setMTEXpref('zAxisDirection','outOfPlane');
 end

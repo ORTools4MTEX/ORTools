@@ -129,3 +129,5 @@ plot(parentEBSD(job.csParent),parentEBSD(job.csParent).orientations);
 hold on; 
 plot(job.grains.boundary,'lineWidth',3)
 
+%% Check the beta grains interactively by clicking on them
+grainClick(job,parentEBSD);
