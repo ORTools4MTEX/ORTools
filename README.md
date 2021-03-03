@@ -12,7 +12,7 @@ While the **ORTools** library mostly consists of plotting functionalities, it al
 
 **Check out this short video introduction:**
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
+[![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
 ---
 ## How to use
@@ -22,7 +22,8 @@ While the **ORTools** library mostly consists of plotting functionalities, it al
 - If you encounter any problems, feel free to contact us.
 
 **How to install MTEX:**
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/SsiDFqqqZU4/0.jpg)](http://www.youtube.com/watch?v=SsiDFqqqZU4 "Video Title")
+
+[![ORTools - How to install MTEX](http://img.youtube.com/vi/SsiDFqqqZU4/0.jpg)](http://www.youtube.com/watch?v=SsiDFqqqZU4 "Video Title")
 
 ---
 
