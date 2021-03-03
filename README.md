@@ -21,6 +21,9 @@ While the **ORTools** library mostly consists of plotting functionalities, it al
 - Open MATLAB and run one of the example files. If you don't want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path.
 - If you encounter any problems, feel free to contact us.
 
+**How to install MTEX:**
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/SsiDFqqqZU4/0.jpg)](http://www.youtube.com/watch?v=SsiDFqqqZU4 "Video Title")
+
 ---
 
 ##  Example scripts
