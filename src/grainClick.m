@@ -35,7 +35,7 @@ datacursormode off
 
 % Define a selector
 set(gcf,'WindowButtonDownFcn',{@spatialSelection});
-setappdata(mP.ax,'grains',[pGrains;getappdata(mP.ax,'grains')]);
+setappdata(mP.ax,'grains',[pGrains]);
 
 
 
