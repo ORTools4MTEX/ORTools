@@ -1,6 +1,6 @@
 
 % *********************************************************************
-%                        ORPlotter - Example 5
+%                        ORTools - Example 5
 % *********************************************************************
 % Using the OR peak fitter to deconvolute multiple OR's in a TRWIP alloy
 % *********************************************************************
@@ -10,7 +10,7 @@
 % *********************************************************************
 clc; close all; clear all;
 currentFolder;
-screenPrint('StartUp','ORPlotter - Example 5');
+screenPrint('StartUp','ORTools - Example 5');
 %% Initialize MTEX
 % startup and set some settings
 startup_mtex;

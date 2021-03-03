@@ -1,6 +1,6 @@
 
 % *********************************************************************
-%                        ORPlotter - Example 1
+%                        ORTools - Example 1
 % *********************************************************************
 % Reconstructing the prior austenite microstructure from lath martensite
 % Find the detailed MTEX version on the details of the reconstruction here:
@@ -12,7 +12,7 @@
 % *********************************************************************
 clc; close all; clear all;
 currentFolder;
-screenPrint('StartUp','ORPlotter - Example 1');
+screenPrint('StartUp','ORTools - Example 1');
 %% Initialize MTEX
 % Startup and set some settings
 startup_mtex;
@@ -59,9 +59,9 @@ job.calcParent2Child;
 ORinfo(job.p2c);
 %    - We have 24 martensitic variants
 %    - We are ~2.4° from Kurdjumow-Sachs
-%% Plotting (with ORPlotter functions)
-screenPrint('SegmentStart','Plotting some ORPlotter maps');
-% Let's use some of the ORPlotter functions to visualize the determined OR
+%% Plotting (with ORTools functions)
+screenPrint('SegmentStart','Plotting some ORTools maps');
+% Let's use some of the ORTools functions to visualize the determined OR
 % and its relation to the microstructure
 
 % Phase map

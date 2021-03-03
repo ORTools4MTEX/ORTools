@@ -1,6 +1,6 @@
 
 % *********************************************************************
-%                        ORPlotter - Example 3
+%                        ORTools - Example 3
 % *********************************************************************
 % Using the parent-child misorientation peak fitting GUI to investigate 
 % multiple ORs in an alpha-beta titanium alloy 
@@ -11,7 +11,7 @@
 % *********************************************************************
 clc; close all; clear all;
 currentFolder;
-screenPrint('StartUp','ORPlotter - Example 3');
+screenPrint('StartUp','ORTools - Example 3');
 %% Initialize MTEX
 % startup and set some settings
 startup_mtex;

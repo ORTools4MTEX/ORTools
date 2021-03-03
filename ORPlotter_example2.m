@@ -1,6 +1,6 @@
 
 % *********************************************************************
-%                        ORPlotter - Example 2
+%                        ORTools - Example 2
 % *********************************************************************
 % Reconstruction of beta parent grains from alpha in titanium alloys. 
 % Find the detailed MTEX version on the details of the reconstruction here:
@@ -12,7 +12,7 @@
 % *********************************************************************
 clc; close all; clear all;
 currentFolder;
-screenPrint('StartUp','ORPlotter - Example 2');
+screenPrint('StartUp','ORTools - Example 2');
 %% Initialize MTEX
 % Startup and set some settings
 startup_mtex;
@@ -50,9 +50,9 @@ job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %     - Adjust the threshold to include only the largest peak
 %     - Compute the OR by "Maximum f(g)"
 job = defineORs(job);
-%% Plotting (with ORPlotter functions)
-screenPrint('SegmentStart','Plotting some ORPlotter maps');
-% Let's use some of the ORPlotter functions to visualize the determined OR
+%% Plotting (with ORTools functions)
+screenPrint('SegmentStart','Plotting some ORTools maps');
+% Let's use some of the ORTools functions to visualize the determined OR
 % and its relation to the microstructure
 
 % Phase map

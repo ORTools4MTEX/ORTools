@@ -1,6 +1,6 @@
 
 % *********************************************************************
-%                        ORPlotter - Example 4
+%                        ORTools - Example 4
 % *********************************************************************
 % Predicting the transformation texture in an alpha-beta titanium alloy 
 % *********************************************************************
@@ -10,7 +10,7 @@
 % *********************************************************************
 clc; close all; clear all;
 currentFolder;
-screenPrint('StartUp','ORPlotter - Example 2');
+screenPrint('StartUp','ORTools - Example 2');
 %% Initialize MTEX
 % Startup and set some settings
 startup_mtex;
@@ -47,8 +47,8 @@ job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %     - Adjust the threshold to include only the largest peak
 %     - Compute the OR by "Maximum f(g)"
 job.p2c = orientation.Burger(job.csParent, job.csChild);
-%% Plotting (with ORPlotter functions)
-screenPrint('SegmentStart','Plotting some ORPlotter maps');
+%% Plotting (with ORTools functions)
+screenPrint('SegmentStart','Plotting some ORTools maps');
 % Parent and child IPF maps
 plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child');
 % Plot map for parent-child and child-child boundary disorientations
