@@ -10,15 +10,15 @@ While the **ORTools** library mostly consists of plotting functionalities, it al
 
 **ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. Please report any bugs that you encounter to us so that we can keep this library maintained.
 
+**Check out this short video introduction:**
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
+
 ---
 ## How to use
 - The library can be downloaded as a *zip* file and unpacked into the directory of your choice.
 - This library only works with an installation of **MATLAB** and **MTEX**. Follow the instructions for installation [here](https://se.mathworks.com/help/install/install-products.html) and [here](https://mtex-toolbox.github.io/download).
 - Open MATLAB and run one of the example files. If you don't want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path.
 - If you encounter any problems, feel free to contact us.
-
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
-
 
 ---
 
