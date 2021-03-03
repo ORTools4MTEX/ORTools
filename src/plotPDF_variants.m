@@ -45,10 +45,12 @@ colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
     'YTickLabel',num2str([1:1:maxColors]'), 'YLim', [1 maxColors],...
     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
 hold on
-plot(Miller(1,0,0,job.csChild),'plane','LineColor',[0 0 0],'LineWidth',1); 
-plot(Miller(0,1,0,job.csChild),'plane','LineColor',[0 0 0],'LineWidth',1); 
-plot(Miller(0,0,1,job.csChild),'plane','LineColor',[0 0 0],'LineWidth',1); 
 
+if strcmpi(job.csChild.lattice, 'cubic')
+    plot(Miller(1,0,0,job.csChild),'plane','LineColor',[0 0 0],'LineWidth',1); 
+    plot(Miller(0,1,0,job.csChild),'plane','LineColor',[0 0 0],'LineWidth',1); 
+    plot(Miller(0,0,1,job.csChild),'plane','LineColor',[0 0 0],'LineWidth',1); 
+end
 hold off
 
 end

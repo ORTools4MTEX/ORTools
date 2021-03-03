@@ -113,6 +113,7 @@ figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation)
 %% Variant analysis    
 % Let's plot the variant pole figure
+figure; 
 plotPDF_variants(job);
 % We can calculate variants and packets
 job.calcVariants;

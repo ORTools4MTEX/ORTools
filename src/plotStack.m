@@ -28,7 +28,7 @@ function plotStack(job,parentEBSD,pGrainId)
     % Define the child grain(s) IPF notation
     ipfKeyChild = ipfHSVKey(job.csChild);
     ipfKeyChild.inversePoleFigureDirection = vector3d.X;
-    cbsChild = ipfKeyParent.orientation2color(cGrains.meanOrientation);
+    cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
     % Define the child PDF
     hChild = Miller(0,0,1,job.csChild,'hkl');
 
