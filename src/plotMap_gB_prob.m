@@ -80,11 +80,11 @@ if ~isempty(gB)
         'YTick', [0:0.1:1],...
         'YTickLabel',num2str([0:0.1:1]'), 'YLim', [0 1],...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-    set(f,'Name','Child-child boundary misorientation map','NumberTitle','on');
+    set(f,'Name','Child-child OR boundary probabilities map','NumberTitle','on');
     drawnow;
 else
-    message = sprintf('Plotting aborted: No p2c and c2c boundary probabilities found');
+    message = sprintf('Plotting aborted: No p2c and c2c OR boundary probabilities found');
     uiwait(errordlg(message));
-    error('p2c and c2c boundary probability distribution map empty');
+    error('p2c and c2c OR boundary probability distribution map empty');
 end
 end
