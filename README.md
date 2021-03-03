@@ -1,4 +1,7 @@
-# ORTools
+<p align="left">
+  <img src="./doc/images/ORTools.png" alt="ORTools" width="200"/>
+</p>
+
 **ORTools** (orientation relationship tools) is a function library for advanced orientation relationship analysis and the plotting of publication-ready figures when working on martensite transformation. The function library is written in **MATLAB** and can be used as an add-on to the basic phase-transition functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io).
 
 MTEX has the functionality to analyse phase transitions. Its major advantage compared to competing programs is its versatility, both in terms of functionality and data compatibility. The **ORTools** library is an add-on to MTEX for advanced OR discovery and analysis and for creating visually stunning and informative plots particular to martensitic microstructures. Due to their specific nature, the codes contained in this library have not been included in MTEX. 
