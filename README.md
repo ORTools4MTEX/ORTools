@@ -35,24 +35,35 @@ It is possible to run the example scripts from start to end, but we encourage to
 ### [Example 1](./ORTools_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for martensite formation in steels. Here we show how **ORTools** provides prewritten and additional plotting functions to create publication-ready plots.
+**Follow the step-by-step guide through example 1:**
+
+[![ORTools - Example 1](http://img.youtube.com/vi/ezPFZhhSYPs/0.jpg)](http://www.youtube.com/watch?v=ezPFZhhSYPs "Video Title")
 
 ### [Example 2](./ORTools_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) is used to determine the orientation relationship from alpha-beta boundaries, even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
+**Step-by-step guide for example 2 to be added soon.**
+
 ### [Example 3](./ORTools_example3.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
 In [example 2](https://github.com/frankNiessen/ORTools#example-2) we saw that the α-β Ti microstructure showed two orientation relationships in the OR peak fitter. In this example, we want to return both ORs and investigate which one of them dominated the phase transformation. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figure and on boundary maps to evaluate the best match.
 
+**Step-by-step guide for example 3 to be added soon.**
+
 ### [Example 4](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
 In this script, we repeat the reconstruction of the prior β microstructure from an α microstructure as shown in [example 2](https://github.com/frankNiessen/ORTools#example-2) with less detail. We then look at the variant distribution and conclude that strongly preferential variant selection did not occur. We are therefore in a good position to predict the transformation texture of α from the reconstructed β using the ORTools function [plotPODF_transformation](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPODF_transformation). The predicted transformed α texture shows good agreement with the actual α texture.
+
+**Step-by-step guide for example 4 to be added soon.**
 
 ### [Example 5](./ORTools_example5.m)
 #### Using the OR peak fitter to clean misindexed data
 This example is of a 20% cold-rolled twinning and transformation induced plasticity (TRWIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the OR peak fitter, we discover that two possible ORs could be in operation. We identify that the first of them is not a real OR but corresponds to points that were misindexed as α' even though they belong to γ. We use the parent phase reconstruction features in MTEX to revert these misindexed points with the apparent OR. We then re-run the grain calculation and the OR peak fitter to show that the apparent OR was eliminated. This example serves as a template of how to reconstruct parent phase microstructures based on multiple orientation relationships in one microstructure. 
 
 *EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
+
+**Step-by-step guide for example 5 to be added soon.**
 
 ---
 
