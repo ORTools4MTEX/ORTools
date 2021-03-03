@@ -138,7 +138,7 @@ The function creates a VPSC file with orientations following the distribution of
   - specimenDirection - @vector3d
 - Options
   - halfwidth   - Halfwidth for ODF calculation
-  - nrPoints    - Nr of points in the VPSC file
+  - nrPoints    - Number of points (orientations) in the VPSC file
 
 ### [grainClick](./src/grainClick.m)
 Interactive map to select parent grains for further analysis
@@ -176,7 +176,7 @@ The function creates a VPSC file with orientations following the distribution of
   - ori   - @orientation
 - Options
   - halfwidth   - Halfwidth for ODF calculation
-  - nrPoints    - Nr of points in the VPSC file
+  - nrPoints    - Number of points (orientations) in the VPSC file
 
 ### [ORinfo](./src/ORinfo.m)
 The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
