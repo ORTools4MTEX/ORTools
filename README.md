@@ -11,6 +11,7 @@ While the **ORTools** library mostly consists of plotting functionalities, it al
 **ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. Please report any bugs that you encounter to us so that we can keep this library maintained.
 
 **Check out this short video introduction:**
+
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
 ---
