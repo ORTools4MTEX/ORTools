@@ -10,9 +10,9 @@ While the **ORTools** library mostly consists of plotting functionalities, it al
 
 **ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. Please report any bugs that you encounter to us so that we can keep this library maintained.
 
-**Check out this short video introduction:**
-
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
+
+[*ORTools Introduction*](https://youtu.be/inkR6LBzFeQ)
 
 ---
 ## How to use
@@ -21,9 +21,9 @@ While the **ORTools** library mostly consists of plotting functionalities, it al
 - Open MATLAB and run one of the example files. If you don't want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path.
 - If you encounter any problems, feel free to contact us.
 
-**How to install MTEX:**
-
 [![ORTools - How to install MTEX](http://img.youtube.com/vi/SsiDFqqqZU4/0.jpg)](http://www.youtube.com/watch?v=SsiDFqqqZU4 "Video Title")
+
+[*How to install MTEX*](https://youtu.be/SsiDFqqqZU4)
 
 ---
 
@@ -36,19 +36,17 @@ It is possible to run the example scripts from start to end, but we encourage to
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for martensite formation in steels. Here we show how **ORTools** provides prewritten and additional plotting functions to create publication-ready plots.
 
-**Follow the step-by-step guide to example 1:**
-
 [![ORTools - Example 1](http://img.youtube.com/vi/AcR-nXg5QKo/0.jpg)](http://www.youtube.com/watch?v=AcR-nXg5QKo "Video Title")
+
+[*Example 1 - Parent Grain Reconstruction in Steel*](https://youtu.be/AcR-nXg5QKo)
 
 ### [Example 2](./ORTools_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) is used to determine the orientation relationship from alpha-beta boundaries, even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
-**Follow the step-by-step guide to example 2:**
-
 [![ORTools - Example 2](http://img.youtube.com/vi/e6R0dApUc8Q/0.jpg)](http://www.youtube.com/watch?v=e6R0dApUc8Q "Video Title")
 
-[**ORTools - Example 2 - Parent Grain Reconstruction in Titanium alloys**](https://youtu.be/e6R0dApUc8Q).
+[*Example 2 - Parent Grain Reconstruction in Titanium alloys*](https://youtu.be/e6R0dApUc8Q)
 
 ### [Example 3](./ORTools_example3.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
@@ -62,7 +60,7 @@ In this script, we repeat the reconstruction of the prior β microstructure from
 
 [![ORTools - Example 4](http://img.youtube.com/vi/vEKsV--N9Fc/0.jpg)](http://www.youtube.com/watch?v=vEKsV--N9Fc "Video Title")
 
-[**ORTools - Example 4 - Transformation texture prediction in Titanium alloys**](http://www.youtube.com/watch?v=vEKsV).
+[*Example 4 - Transformation texture prediction in Titanium alloys*](http://www.youtube.com/watch?v=vEKsV)
 
 ### [Example 5](./ORTools_example5.m)
 #### Using the OR peak fitter to clean misindexed data
