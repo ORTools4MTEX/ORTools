@@ -70,7 +70,9 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 
 *EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
 
-**Step-by-step guide for example 5 to be added soon.**
+[![ORTools - Example 5](http://img.youtube.com/vi/Yx2jKII3HUc/0.jpg)](http://www.youtube.com/watch?v=Hj5kVscjljU "Video Title")
+
+[*Example 5 - Partial parent grain reconstruction to clean TRWIP steel EBSD data*](https://youtu.be/Hj5kVscjljU)
 
 ---
 
