@@ -48,6 +48,8 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 [![ORTools - Example 2](http://img.youtube.com/vi/e6R0dApUc8Q/0.jpg)](http://www.youtube.com/watch?v=e6R0dApUc8Q "Video Title")
 
+[**ORTools - Example 2 - Parent Grain Reconstruction in Titanium alloys**](https://youtu.be/e6R0dApUc8Q).
+
 ### [Example 3](./ORTools_example3.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
 In [example 2](https://github.com/frankNiessen/ORTools#example-2) we saw that the α-β Ti microstructure showed two orientation relationships in the OR peak fitter. In this example, we want to return both ORs and investigate which one of them dominated the phase transformation. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figure and on boundary maps to evaluate the best match.
@@ -58,7 +60,9 @@ In [example 2](https://github.com/frankNiessen/ORTools#example-2) we saw that th
 #### Predicting the β to α transformation texture in a titanium alloy
 In this script, we repeat the reconstruction of the prior β microstructure from an α microstructure as shown in [example 2](https://github.com/frankNiessen/ORTools#example-2) with less detail. We then look at the variant distribution and conclude that strongly preferential variant selection did not occur. We are therefore in a good position to predict the transformation texture of α from the reconstructed β using the ORTools function [plotPODF_transformation](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPODF_transformation). The predicted transformed α texture shows good agreement with the actual α texture.
 
-**Step-by-step guide for example 4 to be added soon.**
+[![ORTools - Example 4](http://img.youtube.com/vi/vEKsV--N9Fc/0.jpg)](http://www.youtube.com/watch?v=vEKsV--N9Fc "Video Title")
+
+[**ORTools - Example 4 - Transformation texture prediction in Titanium alloys**](http://www.youtube.com/watch?v=vEKsV).
 
 ### [Example 5](./ORTools_example5.m)
 #### Using the OR peak fitter to clean misindexed data
