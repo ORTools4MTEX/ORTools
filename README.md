@@ -52,7 +52,9 @@ This script follows the same dataset and steps that are used to demonstrate the 
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
 In [example 2](https://github.com/frankNiessen/ORTools#example-2) we saw that the α-β Ti microstructure showed two orientation relationships in the OR peak fitter. In this example, we want to return both ORs and investigate which one of them dominated the phase transformation. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figure and on boundary maps to evaluate the best match.
 
-**Step-by-step guide for example 3 to be added soon.**
+[![ORTools - Example 3](http://img.youtube.com/vi/8e9PhhFCWYc/0.jpg)](http://www.youtube.com/watch?v=8e9PhhFCWYc "Video Title")
+
+[*Example 3 - Separation of multiple OR's in Titanium alloys*](https://youtu.be/8e9PhhFCWYc)
 
 ### [Example 4](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
