@@ -58,9 +58,9 @@ In [example 2](https://github.com/frankNiessen/ORTools#example-2) we saw that th
 #### Predicting the β to α transformation texture in a titanium alloy
 In this script, we repeat the reconstruction of the prior β microstructure from an α microstructure as shown in [example 2](https://github.com/frankNiessen/ORTools#example-2) with less detail. We then look at the variant distribution and conclude that strongly preferential variant selection did not occur. We are therefore in a good position to predict the transformation texture of α from the reconstructed β using the ORTools function [plotPODF_transformation](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPODF_transformation). The predicted transformed α texture shows good agreement with the actual α texture.
 
-[![ORTools - Example 4](http://img.youtube.com/vi/vEKsV--N9Fc/0.jpg)](http://www.youtube.com/watch?v=vEKsV--N9Fc "Video Title")
+[![ORTools - Example 4](http://img.youtube.com/vi/Yx2jKII3HUc/0.jpg)](http://www.youtube.com/watch?v=Yx2jKII3HUc "Video Title")
 
-[*Example 4 - Transformation texture prediction in Titanium alloys*](http://www.youtube.com/watch?v=vEKsV)
+[*Example 4 - Transformation texture prediction in Titanium alloys*](https://youtu.be/Yx2jKII3HUc)
 
 ### [Example 5](./ORTools_example5.m)
 #### Using the OR peak fitter to clean misindexed data
