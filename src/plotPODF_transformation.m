@@ -90,7 +90,7 @@ if ~isempty(variantId) && ~isempty(variantWt) % Both variant Ids and weights are
     % Normalise the weights
     variantWt = normalize(variantWt,'norm',1);
     fprintf(['    - Based on normalised weights: \n', num2str(variantId)]);
-    % Define an empty ODF
+    % Define an empty total ODF
     odfC = ODF();
     % Apply user-defined weights to each of the user-defined variants &
     % add to the total ODF
