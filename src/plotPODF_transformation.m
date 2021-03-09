@@ -83,7 +83,7 @@ if ~isempty(variantId) && ~isempty(variantWt) % Both variant Ids and weights are
     fprintf(['    - Plotting user-selected variants: \n', num2str(variantId)]);
     
     % Checks for user-defined variant weights
-    if any(variantWt < 0) % negative float check
+    if any(variantWt < 0) % negative floating point number check
         error('Variant weights require positive floating point numbers')
     elseif ~isequal(length(variantId), length(variantWt)) %  equal array size check
         error('Variant Ids and weights arrays of unequal size')
@@ -91,10 +91,10 @@ if ~isempty(variantId) && ~isempty(variantWt) % Both variant Ids and weights are
     % Normalise the weights
     variantWt = normalize(variantWt,'norm',1);
     fprintf(['    - Based on normalised weights: \n', num2str(variantId)]);
-    % Define an empty total ODF
+    % Define an empty total child ODF
     odfC = ODF();
     % Apply user-defined weights to each of the user-defined variants &
-    % add to the total ODF
+    % add to the total child ODF
     for ii = 1:length(variantId)
         temp_odfC(ii) = calcODF(oriC(:,variantId(ii)),'halfwidth',hwidth*degree,'points','all');
         odfC =  odfC + variantWt(ii)*temp_odfC(ii);
