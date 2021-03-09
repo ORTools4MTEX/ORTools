@@ -25,6 +25,7 @@ Ini.dataPath = [pwd,'\data\'];
 Ini.cifPath = [Ini.dataPath,'input\cif\'];
 Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
 Ini.texturePath = [Ini.dataPath,'output\texture\'];
+Ini.imagePath = [Ini.dataPath,'output\images\'];
 %% Load data
 % We load an MTEX dataset into 'ebsd'
 mtexDataset = 'martensite';
@@ -58,7 +59,7 @@ job.calcParent2Child;
 % Let's now plot some information about the OR
 ORinfo(job.p2c);
 %    - We have 24 martensitic variants
-%    - We are ~2.4° from Kurdjumow-Sachs
+%    - We are ~2.4° from Nishiyama-Wassermann
 %% Plotting (with ORTools functions)
 screenPrint('SegmentStart','Plotting some ORTools maps');
 % Let's use some of the ORTools functions to visualize the determined OR

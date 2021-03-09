@@ -104,6 +104,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 - [readCPR](https://github.com/frankNiessen/ORTools/blob/master/README.md#readCPR)
 - [recolorPhases](https://github.com/frankNiessen/ORTools/blob/master/README.md#recolorPhases)
 - [renamePhases](https://github.com/frankNiessen/ORTools/blob/master/README.md#renamePhases)
+- [saveImage](https://github.com/frankNiessen/ORTools/blob/master/README.md#saveImage)
 - [screenPrint](https://github.com/frankNiessen/ORTools/blob/master/README.md#screenPrint)
 - [setParentGrainReconstructor](https://github.com/frankNiessen/ORTools/blob/master/README.md#setParentGrainReconstructor)
 - [tileFigs](https://github.com/frankNiessen/ORTools/blob/master/README.md#tileFigs)
@@ -456,6 +457,17 @@ The function opens an interactive list with the possible phasenames in *phaseStr
   - phaseStrings     - cell array of strings with possible phase names
 - Output
   - ebsd             - @EBSD
+
+### [saveImage](./src/saveImage.m)
+Auxiliary function to save all open figures as images.
+
+- Syntax
+  - saveImage(fileDir,fileName)
+  - saveImage(fileDir)
+  - saveImage
+- Input
+  - fileName    - file name (string with file of type * .bmp, * .jpeg, * .png or * .tiff )
+  - fileDir     - file directory
 
 ### [screenPrint](./src/screenPrint.m)
 Auxiliary function for formating command window output
