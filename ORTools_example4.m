@@ -22,6 +22,7 @@ Ini.dataPath = [pwd,'\data\'];
 Ini.cifPath = [Ini.dataPath,'input\cif\'];
 Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
 Ini.texturePath = [Ini.dataPath,'output\texture\'];
+Ini.imagePath = [Ini.dataPath,'output\images\'];
 %% Load data
 % Let's open the MTEX dataset on alpha and beta titanium
 mtexDataset = 'alphaBetaTitanium';
@@ -118,7 +119,8 @@ plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
 plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
                         'variantId',[3 4 6 8],'variantWt',[100 10 1 0.1]);
                   
-
+%% Save images
+saveImage(Ini.imagePath);
 
 
 

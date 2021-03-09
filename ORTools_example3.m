@@ -23,6 +23,7 @@ Ini.dataPath = [pwd,'\data\'];
 Ini.cifPath = [Ini.dataPath,'input\cif\'];
 Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
 Ini.texturePath = [Ini.dataPath,'output\texture\'];
+Ini.imagePath = [Ini.dataPath,'output\images\'];
 Ini.phaseNames = {'Gamma','AlphaP','Epsilon','Beta','Alpha','AlphaDP'};
 %% Load data
 mtexDataset = 'alphaBetaTitanium';
@@ -104,6 +105,9 @@ plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
 plotMap_gB_prob(job{1},'linewidth',1.5);
 
 plotMap_gB_prob(job{2},'linewidth',1.5);
+
+%% Save images
+saveImage(Ini.imagePath);
 
 %% Summary
 BurgersOR = orientation.Burger(job{1}.csParent,job{1}.csChild);

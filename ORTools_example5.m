@@ -22,6 +22,7 @@ Ini.dataPath = [pwd,'\data\'];
 Ini.cifPath = [Ini.dataPath,'input\cif\'];
 Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
 Ini.texturePath = [Ini.dataPath,'output\texture\'];
+Ini.imagePath = [Ini.dataPath,'output\images\'];
 Ini.phaseNames = {'Gamma','AlphaP','Epsilon','Beta','Alpha','AlphaDP'};
 %% Import EBSD data and save current file name
 ebsd = loadEBSD_ctf([Ini.ebsdPath,'TRWIPsteel.ctf'],'convertSpatial2EulerReferenceFrame');
@@ -128,6 +129,8 @@ job = defineORs(job);
 % We can now see that the peak at 0° has disappeared.
 % From here we can continue working with the second OR or explore the other
 % smaller peaks to plot maps or reconstruct the parent microstructure
+%% Save images
+saveImage(Ini.imagePath);
 %% Summary
 % This example has shown how to identify different ORs and revert them
 % individually. In the present case, we found an OR corresponding to a

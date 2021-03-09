@@ -25,6 +25,7 @@ Ini.dataPath = [pwd,'\data\'];
 Ini.cifPath = [Ini.dataPath,'input\cif\'];
 Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
 Ini.texturePath = [Ini.dataPath,'output\texture\'];
+Ini.imagePath = [Ini.dataPath,'output\images\'];
 %% Load data
 % Let's open the MTEX dataset on alpha and beta titanium
 mtexDataset = 'alphaBetaTitanium';
@@ -129,6 +130,9 @@ figure;
 plot(parentEBSD(job.csParent),parentEBSD(job.csParent).orientations);
 hold on; 
 plot(job.grains.boundary,'lineWidth',3)
+
+%% Save images
+saveImage(Ini.imagePath);
 
 %% Check the beta grains interactively by clicking on them
 grainClick(job,parentEBSD);

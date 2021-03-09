@@ -155,6 +155,9 @@ plot(parentEBSD(job.csParent),parentEBSD(job.csParent).orientations);
 hold on; 
 plot(job.grains.boundary,'lineWidth',3)
 
+%% Save images
+saveImage(Ini.imagePath);
+
 %% Check the gamma grains interactively by clicking on them
 grainClick(job,parentEBSD);
 
