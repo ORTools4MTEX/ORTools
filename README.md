@@ -20,7 +20,7 @@ While the **ORTools** library mostly consists of plotting functionalities, it al
 - This library only works with an installation of **MATLAB** and **MTEX**. Follow the instructions for installation [here](https://se.mathworks.com/help/install/install-products.html) and [here](https://mtex-toolbox.github.io/download) (or check the video below).
 - Open MATLAB and run one of the example files. If you don't want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path. See also the instruction video to [*Example 1*](https://youtu.be/AcR-nXg5QKo) to learn how to run the examples.
 - If you encounter any problems, please contact us.
-- If you would like to help by contributing additional functionality, please contact us.
+- If you would like to contribute additional functionality, please contact us.
 
 [![ORTools - How to install MTEX](http://img.youtube.com/vi/SsiDFqqqZU4/0.jpg)](http://www.youtube.com/watch?v=SsiDFqqqZU4 "Video Title")
 
