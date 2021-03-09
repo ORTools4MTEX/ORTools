@@ -74,18 +74,18 @@ oriC = variants(job.p2c, oriP, job.variantMap);
 
 if ~isempty(variantId) && ~isempty(variantWt) % Both variant Ids and weights are specified
     % Checks for user-defined variant numbers
-    variantId = variantId(floor(variantId)==variantId); % integer check
-    variantId = variantId(variantId > 0); % negative integer check
-    variantId = variantId(variantId <= size(oriC,2)); % highest positive integer check
+    if ~isinteger(variantId) ||... % integer check
+            any(variantId < 0) ||... % negative integer check
+            any(variantId > size(oriC,2)) % highest positive integer check
+        error(['Variant Ids require positive integers between 1 and ',num2str(size(oriC,2))])
+    end
     fprintf(['    - Plotting user-selected variants: \n', num2str(variantId)]);
     
     % Checks for user-defined variant weights
-    % check if the variantId and variantWt arrays are of equal size
-    % if not equal, populate with the minimum weight value
-    if length(variantId) > length(variantWt)
-        variantWt(...
-            end+1:...
-            end+(length(variantId)-length(variantWt))) = min(variantWt);
+    if any(variantWt < 0) % negative float check
+        error('Variant weights require positive floating point numbers')
+    elseif ~isequal(length(variantId), length(variantWt)) %  equal array size check
+        error('Variant Ids and weights arrays of unequal size')
     end
     % Normalise the weights
     variantWt = normalize(variantWt,'norm',1);
@@ -101,9 +101,11 @@ if ~isempty(variantId) && ~isempty(variantWt) % Both variant Ids and weights are
     
 elseif ~isempty(variantId) && isempty(variantWt) % Only variant Ids specified
     % Checks for user-defined variant numbers
-    variantId = variantId(floor(variantId)==variantId); % integer check
-    variantId = variantId(variantId > 0); % negative integer check
-    variantId = variantId(variantId <= size(oriC,2)); % highest positive integer check
+    if ~isinteger(variantId) ||... % integer check
+            any(variantId < 0) ||... % negative integer check
+            any(variantId > size(oriC,2)) % highest positive integer check
+        error(['Variant Ids require positive integers between 1 and ',num2str(size(oriC,2))])
+    end
     fprintf(['    - Plotting user-selected variants with equal weights: \n', num2str(variantId)]);
     % Select only user-defined variants
     oriC = oriC(:,variantId);
@@ -114,7 +116,7 @@ elseif ~isempty(variantId) && isempty(variantWt) % Only variant Ids specified
 elseif isempty(variantId) && ~isempty(variantWt) % Only variant Wts specified
     error('Unable to assign variant weights. Variant numbers unspecified.')
 
-elseif isempty(variantId) && isempty(variantWt) % Both variant Ids and weights are NOT specified
+elseif isempty(variantId) && isempty(variantWt) % Both variant Ids and weights are unspecified
     warning('Plotting all variants without selection and with equal weights \n');
     %--- Calculate the orientation distribution function
     oriC = oriC(:);
