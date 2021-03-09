@@ -111,6 +111,9 @@ colormap jet
 
 plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
                         'variantId',[3 4 6 8]);
+                    
+plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
+                        'variantId',[3 4 6 8],'variantWt',[100 10 1 0.01]);
 
 
 
