@@ -37,11 +37,6 @@ function plotStack(job,parentEBSD,pGrainId)
     maxVariants = length(job.p2c.variants);
     maxPackets = max(job.packetId);
 
-
-
-
-
-
     %% Plot the parent phase map
     f = figure;
     plot(pGrain);
@@ -233,8 +228,9 @@ function plotStack(job,parentEBSD,pGrainId)
     [~,abs_counts] = histwc(cGrains.variantId,cGrains.area,maxVariants);
     norm_counts = abs_counts./sum(abs_counts);
     f = figure;
-    bar(class_range, norm_counts, 'hist');
-    set(gca, 'xlim',[class_range(1) class_range(end)]);
+    h = bar(class_range,norm_counts,'hist');
+    h.FaceColor ='#A2142F';
+    set(gca, 'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
     set(gca,'XTick',class_range);
     set(gca,'FontSize',8);
     xlabel('Variant Id','FontSize',14,'FontWeight','bold');
@@ -248,8 +244,9 @@ function plotStack(job,parentEBSD,pGrainId)
     [~,abs_counts] = histwc(cGrains.packetId,cGrains.area,maxPackets);
     norm_counts = abs_counts./sum(abs_counts);
     f = figure;
-    bar(class_range, norm_counts, 'hist');
-    set(gca, 'xlim',[class_range(1) class_range(end)]);
+    h = bar(class_range, norm_counts, 'hist');
+    h.FaceColor ='#A2142F';
+    set(gca, 'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
     set(gca,'XTick',class_range);
     set(gca,'FontSize',8);
     xlabel('Packet Id','FontSize',14,'FontWeight','bold');

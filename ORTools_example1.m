@@ -43,7 +43,7 @@ ebsd(grains(grains.grainSize < 4)) = [];
 grains = smooth(grains,5);
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
-phaseNames = {'Gamma','AlphaP', 'testphase'};
+phaseNames = {'Gamma','AlphaP'};
 % We rename 'Iron bcc (old)'to 'AlphaP' and 'Iron fcc' to 'Gamma'
 ebsd = renamePhases(ebsd,phaseNames);
 % Choose your favourite colors
