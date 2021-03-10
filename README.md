@@ -39,7 +39,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 [![ORTools - Example 1](http://img.youtube.com/vi/AcR-nXg5QKo/0.jpg)](http://www.youtube.com/watch?v=AcR-nXg5QKo "Video Title")
 
-[*Example 1 - Parent Grain Reconstruction in Steel*](https://youtu.be/AcR-nXg5QKo)
+[*Example 1 - Parent grain reconstruction in steel*](https://youtu.be/AcR-nXg5QKo)
 
 ### [Example 2](./ORTools_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
@@ -47,7 +47,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 [![ORTools - Example 2](http://img.youtube.com/vi/e6R0dApUc8Q/0.jpg)](http://www.youtube.com/watch?v=e6R0dApUc8Q "Video Title")
 
-[*Example 2 - Parent Grain Reconstruction in Titanium alloys*](https://youtu.be/e6R0dApUc8Q)
+[*Example 2 - Parent grain reconstruction in titanium alloys*](https://youtu.be/e6R0dApUc8Q)
 
 ### [Example 3](./ORTools_example3.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
@@ -55,7 +55,7 @@ In [example 2](https://github.com/frankNiessen/ORTools#example-2) we saw that th
 
 [![ORTools - Example 3](http://img.youtube.com/vi/8e9PhhFCWYc/0.jpg)](http://www.youtube.com/watch?v=8e9PhhFCWYc "Video Title")
 
-[*Example 3 - Separation of multiple OR's in Titanium alloys*](https://youtu.be/8e9PhhFCWYc)
+[*Example 3 - Separation of multiple ORs in titanium alloys*](https://youtu.be/8e9PhhFCWYc)
 
 ### [Example 4](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
@@ -63,7 +63,7 @@ In this script, we repeat the reconstruction of the prior β microstructure from
 
 [![ORTools - Example 4](http://img.youtube.com/vi/Yx2jKII3HUc/0.jpg)](http://www.youtube.com/watch?v=Yx2jKII3HUc "Video Title")
 
-[*Example 4 - Transformation texture prediction in Titanium alloys*](https://youtu.be/Yx2jKII3HUc)
+[*Example 4 - Transformation texture prediction in titanium alloys*](https://youtu.be/Yx2jKII3HUc)
 
 ### [Example 5](./ORTools_example5.m)
 #### Partial parent grain reconstruction to clean TRWIP steel EBSD data
@@ -73,7 +73,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 
 [![ORTools - Example 5](http://img.youtube.com/vi/Hj5kVscjljU/0.jpg)](http://www.youtube.com/watch?v=Hj5kVscjljU "Video Title")
 
-[*Example 5 - Partial parent grain reconstruction to clean TRWIP steel EBSD data*](https://youtu.be/Hj5kVscjljU)
+[*Example 5 - Partial parent grain reconstruction to clean TRIP-TWIP steel EBSD map data*](https://youtu.be/Hj5kVscjljU)
 
 ---
 
