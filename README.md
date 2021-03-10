@@ -2,11 +2,9 @@
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 </p>
 
-**ORTools** (orientation relationship tools) is a function library for advanced orientation relationship analysis and the plotting of publication-ready figures when working on martensite transformation. The function library is written in **MATLAB** and can be used as an add-on to the basic phase-transition functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io).
+**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full martensitic transformation. The **ORTools** function library is written in **MATLAB** and is used as an add-on to the basic phase transformation functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. 
 
-MTEX has the functionality to analyse phase transitions. Its major advantage compared to competing programs is its versatility, both in terms of functionality and data compatibility. The **ORTools** library is an add-on to MTEX for advanced OR discovery and analysis and for creating visually stunning and informative plots particular to martensitic microstructures. Due to their specific nature, the codes contained in this library have not been included in MTEX. 
-
-While the **ORTools** library mostly consists of plotting functionalities, it also includes utilities that enable advanced OR analysis. These are highlighted together with the plotting functions in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) to showcase how the functions work and what their output comprises.
+The advanced advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
 **ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. To help maintain the library, please report any bugs you encounter. If you would like to contribute additional functionality to help improve **ORTools**, please contact us.
 
