@@ -23,7 +23,7 @@ if ~isempty(intersect(ebsd.mineralList(2:numel(ebsd.mineralList)),phaseStrings))
     fprintf(' -> %s phase(s) automatically identified ''%s''\n',phaseStrings{ind});
 
 else
-    fprintf(' -> Identifying phases to rename');
+    fprintf(' -> Identifying phases to rename\n');
     try
         for ii = 2:phaseNum
             fprintf(['    - ''',phaseNames(ii,:),'''']);
