@@ -10,7 +10,7 @@
 % *********************************************************************
 clc; close all; clear all;
 currentFolder;
-screenPrint('StartUp','ORTools - Example 2');
+screenPrint('StartUp','ORTools - Example 4');
 %% Initialize MTEX
 % Startup and set some settings
 startup_mtex;
