@@ -2,11 +2,9 @@
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 </p>
 
-**ORTools** (orientation relationship tools) is a function library for advanced orientation relationship analysis and the plotting of publication-ready figures when working on martensite transformation. The function library is written in **MATLAB** and can be used as an add-on to the basic phase-transition functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io).
+**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full martensitic transformation. The **ORTools** function library is written in **MATLAB** and is used as an add-on to the basic phase transformation functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. 
 
-MTEX has the functionality to analyse phase transitions. Its major advantage compared to competing programs is its versatility, both in terms of functionality and data compatibility. The **ORTools** library is an add-on to MTEX for advanced OR discovery and analysis and for creating visually stunning and informative plots particular to martensitic microstructures. Due to their specific nature, the codes contained in this library have not been included in MTEX. 
-
-While the **ORTools** library mostly consists of plotting functionalities, it also includes utilities that enable advanced OR analysis. These are highlighted together with the plotting functions in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) to showcase how the functions work and what their output comprises.
+The advanced advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
 **ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. To help maintain the library, please report any bugs you encounter. If you would like to contribute additional functionality to help improve **ORTools**, please contact us.
 
@@ -18,7 +16,7 @@ While the **ORTools** library mostly consists of plotting functionalities, it al
 ## How to use
 - Download the **latest stable release** of **ORTools** right [**here**](https://github.com/frankNiessen/ORTools/archive/ORTools-1.0.zip)
 - This library only works with an installation of **MATLAB** and **MTEX**. Follow the instructions for installation [here](https://se.mathworks.com/help/install/install-products.html) and [here](https://mtex-toolbox.github.io/download) (or check the video below).
-- Open MATLAB and run one of the example files. If you don't want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path. See also the instruction video to [*Example 1*](https://youtu.be/AcR-nXg5QKo) to learn how to run the examples.
+- Open MATLAB and run one of the example files. If you do not want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path. See also the instruction video to [*Example 1*](https://youtu.be/AcR-nXg5QKo) to learn how to run the examples.
 - If you encounter any problems, please contact us.
 - If you would like to contribute additional functionality, please contact us.
 
@@ -39,7 +37,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 [![ORTools - Example 1](http://img.youtube.com/vi/AcR-nXg5QKo/0.jpg)](http://www.youtube.com/watch?v=AcR-nXg5QKo "Video Title")
 
-[*Example 1 - Parent Grain Reconstruction in Steel*](https://youtu.be/AcR-nXg5QKo)
+[*Example 1 - Parent grain reconstruction in steel*](https://youtu.be/AcR-nXg5QKo)
 
 ### [Example 2](./ORTools_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
@@ -47,7 +45,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 [![ORTools - Example 2](http://img.youtube.com/vi/e6R0dApUc8Q/0.jpg)](http://www.youtube.com/watch?v=e6R0dApUc8Q "Video Title")
 
-[*Example 2 - Parent Grain Reconstruction in Titanium alloys*](https://youtu.be/e6R0dApUc8Q)
+[*Example 2 - Parent grain reconstruction in titanium alloys*](https://youtu.be/e6R0dApUc8Q)
 
 ### [Example 3](./ORTools_example3.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
@@ -55,7 +53,7 @@ In [example 2](https://github.com/frankNiessen/ORTools#example-2) we saw that th
 
 [![ORTools - Example 3](http://img.youtube.com/vi/8e9PhhFCWYc/0.jpg)](http://www.youtube.com/watch?v=8e9PhhFCWYc "Video Title")
 
-[*Example 3 - Separation of multiple OR's in Titanium alloys*](https://youtu.be/8e9PhhFCWYc)
+[*Example 3 - Separation of multiple ORs in titanium alloys*](https://youtu.be/8e9PhhFCWYc)
 
 ### [Example 4](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
@@ -63,7 +61,7 @@ In this script, we repeat the reconstruction of the prior β microstructure from
 
 [![ORTools - Example 4](http://img.youtube.com/vi/Yx2jKII3HUc/0.jpg)](http://www.youtube.com/watch?v=Yx2jKII3HUc "Video Title")
 
-[*Example 4 - Transformation texture prediction in Titanium alloys*](https://youtu.be/Yx2jKII3HUc)
+[*Example 4 - Transformation texture prediction in titanium alloys*](https://youtu.be/Yx2jKII3HUc)
 
 ### [Example 5](./ORTools_example5.m)
 #### Partial parent grain reconstruction to clean TRWIP steel EBSD data
@@ -73,7 +71,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 
 [![ORTools - Example 5](http://img.youtube.com/vi/Hj5kVscjljU/0.jpg)](http://www.youtube.com/watch?v=Hj5kVscjljU "Video Title")
 
-[*Example 5 - Partial parent grain reconstruction to clean TRWIP steel EBSD data*](https://youtu.be/Hj5kVscjljU)
+[*Example 5 - Partial parent grain reconstruction to clean TRIP-TWIP steel EBSD map data*](https://youtu.be/Hj5kVscjljU)
 
 ---
 
