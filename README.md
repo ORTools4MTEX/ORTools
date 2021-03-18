@@ -14,7 +14,7 @@ The advanced advanced OR discovery, analysis and plotting functionalities of the
 
 ---
 ## How to use
-- Download the **latest stable release** of **ORTools** [**here**](https://github.com/frankNiessen/ORTools/archive/v1.0.zip)
+- Download the **latest stable release** of **ORTools** [**here**](https://github.com/frankNiessen/ORTools/archive/v1.0.zip) or download the developer version [**here**](https://github.com/frankNiessen/ORTools/archive/develop.zip).
 - This library only works with an installation of **MATLAB** and **MTEX**. Follow the instructions for installation [here](https://se.mathworks.com/help/install/install-products.html) and [here](https://mtex-toolbox.github.io/download) (or check the video below).
 - Open MATLAB and run one of the example files. If you do not want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path. See also the instruction video to [*Example 1*](https://youtu.be/AcR-nXg5QKo) to learn how to run the examples.
 - If you encounter any problems, please contact us.
@@ -330,8 +330,9 @@ The function plots the map of child grains colored according to their packet ID.
   -  plotMap_packets(job)
 - Input
   - job  - @parentGrainReconstructor
-- Output
+- Option
   - colormap - colormap string
+  - grains   - Plot grain data instead of EBSD data 
 
 <p align="center">
   <img src="./doc/images/plotMap_packets.png" alt="plotMap_packets" width="500"/>
@@ -356,8 +357,9 @@ The function plots the map of child grains colored according to their variant ID
   -  plotMap_variants(job)
 - Input
   - job  - @parentGrainReconstructor
-- Output
+- Option
   - colormap - colormap string
+  - grains   - Plot grain data instead of EBSD data 
 
 <p align="center">
   <img src="./doc/images/plotMap_variants.png" alt="plotMap_variants" width="500"/>
@@ -403,7 +405,7 @@ The function calculates and plots the transformation texture, with or without im
 </p>
 
 ### [plotStack](./src/plotStack.m)
-This function plot maps of the prior parent grain for martensite variant analysis
+This function plot maps of the prior parent grain for martensite variant analysis. You can manually supply a parent grain Id *pGrainId* or use the function [grainClick](https://github.com/frankNiessen/ORTools/blob/master/README.md#grainClick) to choose a grain interactively.
 
 - Syntax
   -  plotStack(job,parentEBSD,pGrainId)
@@ -411,6 +413,8 @@ This function plot maps of the prior parent grain for martensite variant analysi
   - job          - @parentGrainreconstructor
   - parentEBSD   - reconstructed @EBSD data
   - pGrainId     - parent grain Id
+- Option
+  - grains       - Plot grain data instead of EBSD data 
 
 <p align="center">
   <img src="./doc/images/plotStack.png" alt="Plot example from plotStack" width="1000"/>
