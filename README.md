@@ -1,13 +1,8 @@
 Download the [**latest stable release**](https://github.com/frankNiessen/ORTools/archive/v1.0.1.zip) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip)
 
-
-**Content**
-
-[Hot to use](https://github.com/frankNiessen/ORTools#how-to-use)
-
-[Example scripts](https://github.com/frankNiessen/ORTools#example-scripts)
-
-[Function reference](https://github.com/frankNiessen/ORTools#function-reference)
+| [*How to use*](https://github.com/frankNiessen/ORTools#how-to-use) 
+| [Example scripts*](https://github.com/frankNiessen/ORTools#example-scripts) 
+| [*Function reference*](https://github.com/frankNiessen/ORTools#function-reference)
 
 <p align="left">
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
