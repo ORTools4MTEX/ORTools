@@ -88,11 +88,11 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 - [ORinfo](https://github.com/frankNiessen/ORTools/blob/master/README.md#ORinfo)
 - [peakFitORs](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs)
 - [plotIPDF_gB_Misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs)
-- [plotIPDF_gB_Prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_Prob)
+- [plotIPDF_gB_prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_prob)
 - [plotMap_gB_c2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_c2c)
 - [plotMap_gB_Misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_Misfit)
 - [plotMap_gB_p2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_p2c)
-- [plotMap_gB_Prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_Prob)
+- [plotMap_gB_prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_prob)
 - [plotMap_IPF_p2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_IPF_p2c)
 - [plotMap_packets](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_packets)
 - [plotMap_phases](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_phases)
@@ -230,11 +230,11 @@ This function plots the misfit, or the disorientation, between the parent-child 
   <img src="./doc/images/plotIPDF_gB_Misfit.png" alt="Plot example from plotIPDF_gB_Misfit" width="1000"/>
 </p>
 
-### [plotIPDF_gB_Prob](./src/plotIPDF_gB_Prob.m)
+### [plotIPDF_gB_prob](./src/plotIPDF_gB_prob.m)
 This function calculates and plots the probability distribution between 0 and 1, that a boundary belongs to the orientation relationship in an inverse polefigure showing the misorientation axes
 
 - Syntax
-  -  plotIPDF_gB_Prob(job)
+  -  plotIPDF_gB_prob(job)
 - Input
   - job  - @parentGrainReconstructor
 - Options
@@ -286,12 +286,12 @@ The function colorizes the parent-child boundaries in *job* according to their m
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
 </p>
 
-### [plotMap_gB_Prob](./src/plotMap_gB_Prob.m)
+### [plotMap_gB_prob](./src/plotMap_gB_prob.m)
 The function calculates and plots the probability distribution between 0 and 1, that a 
 boundary belongs to the orientation relationship (see more [here](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html))
 
 - Syntax
-  -  plotMap_gB_Prob(job)
+  -  plotMap_gB_prob(job)
 - Input
   - job  - @parentGrainReconstructor
 - Options
