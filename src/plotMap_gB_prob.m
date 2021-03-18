@@ -3,7 +3,7 @@ function plotMap_gB_prob(job,varargin)
 % boundary belongs to the orientation relationship
 %
 % Syntax
-%  plotMap_gB_Prob(job)
+%  plotMap_gB_prob(job)
 %
 % Input
 %  job          - @parentGrainreconstructor
