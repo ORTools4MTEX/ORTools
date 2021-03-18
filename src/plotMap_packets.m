@@ -9,14 +9,25 @@ function plotMap_packets(job, varargin)
 %
 % Options
 %  colormap - colormap string
+%  grains   - plot grain data instead of EBSD data
 
-cmap = get_option(varargin,'colormap','parula');
+cmap = get_option(varargin,'colormap','viridis');
 
 p2c_V = job.p2c.variants;
 p2c_V = p2c_V(:);
 
 f = figure;
-plot(job.transformedGrains,job.transformedGrains.packetId);
+if check_option(varargin,'grains')
+    plot(job.transformedGrains,job.transformedGrains.packetId);
+else
+    pGrains = job.grains(job.ebsd(job.csChild).grainId);
+    cEBSD = job.ebsd(pGrains(job.csParent));
+    pGrains = pGrains(job.csParent);   
+    [~,packIds] = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
+    plot(cEBSD,packIds);   
+end
+
+
 hold on
 parentGrains = smooth(job.parentGrains,10);
 plot(parentGrains.boundary,varargin{:})

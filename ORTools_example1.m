@@ -36,9 +36,9 @@ screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 3° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle', 3*degree);
 % EBSD data in small grains are removed
-ebsd(grains(grains.grainSize < 4)) = [];
+ebsd(grains(grains.grainSize < 3)) = [];
 % We then recalculate the grains from the remaining data ...
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',2*degree);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
 % ... and smooth the grain boundaries
 grains = smooth(grains,5);
 %% Rename and recolor phases 
@@ -116,7 +116,7 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 % We can now use the already confidently reconstructed gamma grains to 
 % vote for the gamma orientation of not yet reconstructed alpha grains
 % We iterate this 5 times ...
-for k = 1:5 
+for k = 1:3 
   % compute votes
   job.calcGBVotes('noC2C');
   % compute parent orientations from votes
@@ -143,8 +143,10 @@ plotPDF_variants(job);
 job.calcVariants;
 % ... and plot them
 plotMap_variants(job,'linewidth',3);
+%plotMap_variants(job,'grains','linewidth',3);  %Plot grain data instead
 % The same can be done for the packets
-plotMap_packets(job,'linewidth',3);
+plotMap_packets(job,'grains','linewidth',3);
+%plotMap_packets(job,'grains','linewidth',3);   %Plot grain data instead
 
 %% Reconstruct parent EBSD 
 % We can finally obtain the reconstructed EBSD data
@@ -160,5 +162,6 @@ saveImage(Ini.imagePath);
 
 %% Check the gamma grains interactively by clicking on them
 grainClick(job,parentEBSD);
+%grainClick(job,parentEBSD,'grains');    %Plot grain data instead
 
 

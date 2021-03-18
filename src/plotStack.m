@@ -1,4 +1,4 @@
-function plotStack(job,parentEBSD,pGrainId)
+function plotStack(job,parentEBSD,pGrainId,varargin)
 % plot maps of a prior parent grain
 %
 % Syntax
@@ -8,16 +8,17 @@ function plotStack(job,parentEBSD,pGrainId)
 %  job          - @parentGrainreconstructor
 %  parentEBSD   - reconstructed @EBSD data
 %  pGrainId     - parent grain Id
+%
+% Option
+%  grains       - plot grain data instead of EBSD data
 
     %% Define the parent grain
-    % pGrainId = 2214
     pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
-    oriP = parentEBSD(pGrain);
-    oriP = oriP(job.csParent);
+    pEBSD = parentEBSD(pGrain);
+    pEBSD = pEBSD(job.csParent);
     % Define the parent grain IPF notation
     ipfKeyParent = ipfHSVKey(job.csParent);
     ipfKeyParent.inversePoleFigureDirection = vector3d.X;
-    cbsParent = ipfKeyParent.orientation2color(pGrain.meanOrientation);
     % Define the parent PDF
     hParent = Miller(0,0,1,job.csParent,'hkl');
 
@@ -25,10 +26,11 @@ function plotStack(job,parentEBSD,pGrainId)
     %% Define the child grain(s)
     clusterGrains = job.grainsMeasured(job.mergeId == pGrainId);
     cGrains = clusterGrains(job.csChild);
+    cEBSD = job.ebsd(pGrain);
+    cEBSD = cEBSD(job.csChild);
     % Define the child grain(s) IPF notation
     ipfKeyChild = ipfHSVKey(job.csChild);
     ipfKeyChild.inversePoleFigureDirection = vector3d.X;
-    cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
     % Define the child PDF
     hChild = Miller(0,0,1,job.csChild,'hkl');
 
@@ -39,7 +41,11 @@ function plotStack(job,parentEBSD,pGrainId)
 
     %% Plot the parent phase map
     f = figure;
-    plot(pGrain);
+    if check_option(varargin,'grains')
+        plot(pGrain);
+    else
+        plot(pEBSD);
+    end
     hold all
     plot(pGrain.boundary,...
         'lineWidth',1,'lineColor',[0 0 0]);
@@ -50,7 +56,11 @@ function plotStack(job,parentEBSD,pGrainId)
 
     %% Plot the child phase map
     f = figure;
-    plot(cGrains);
+    if check_option(varargin,'grains')
+        plot(cGrains);
+    else
+        plot(cEBSD);
+    end
     hold all
     plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
@@ -64,7 +74,13 @@ function plotStack(job,parentEBSD,pGrainId)
 
     %% Plot the parent IPF map
     f = figure;
-    plot(pGrain,cbsParent);
+    if check_option(varargin,'grains')
+        cbsParent = ipfKeyParent.orientation2color(pGrain.meanOrientation);
+        plot(pGrain,cbsParent);
+    else
+        cbsParent = ipfKeyParent.orientation2color(pEBSD.orientations);
+        plot(pEBSD,cbsParent);
+    end
     hold all
     plot(pGrain.boundary,...
         'lineWidth',1,'lineColor',[0 0 0]);
@@ -75,7 +91,13 @@ function plotStack(job,parentEBSD,pGrainId)
 
     %% Plot the child IPF map
     f = figure;
-    plot(cGrains,cbsChild);
+    if check_option(varargin,'grains')
+        cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
+        plot(cGrains,cbsChild);
+    else
+        cbsChild = ipfKeyChild.orientation2color(cEBSD.orientations);
+        plot(cEBSD,cbsChild);
+    end
     hold all
     plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
@@ -88,7 +110,14 @@ function plotStack(job,parentEBSD,pGrainId)
 
     %% Plot the child variant map
     f = figure;
-    plot(cGrains(~isnan(cGrains.variantId)),cGrains.variantId(~isnan(cGrains.variantId)));
+    if check_option(varargin,'grains')
+        plot(cGrains(~isnan(cGrains.variantId)),cGrains.variantId(~isnan(cGrains.variantId)));
+    else
+        [varIds,packIds] = calcVariantId(pGrain.meanOrientation,cEBSD.orientations,job.p2c, ...
+                                         'variantMap', job.variantMap);
+        plot(cEBSD,varIds);
+    end
+
     hold all
     plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
@@ -108,7 +137,11 @@ function plotStack(job,parentEBSD,pGrainId)
 
     %% Plot the child packet map
     f = figure;
-    plot(cGrains(~isnan(cGrains.packetId)),cGrains.packetId(~isnan(cGrains.packetId)));
+    if check_option(varargin,'grains')
+        plot(cGrains(~isnan(cGrains.packetId)),cGrains.packetId(~isnan(cGrains.packetId)));
+    else
+        plot(cEBSD,packIds);
+    end
     hold all
     plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
@@ -127,18 +160,19 @@ function plotStack(job,parentEBSD,pGrainId)
 
     %% Plot the parent orientation PDF
     f = figure;
-    plotPDF(oriP.orientations,...
-        hParent,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',4,'MarkerEdgeColor',job.csParent.color,...
-        'MarkerFaceColor', 'none', 'LineWidth',1);
-    hold all
-    % plot(pGrain.meanOrientation.symmetrise*hParent,...
-    plotPDF(pGrain.meanOrientation,...
-        hParent,...
-        'equal','antipodal',...
-        'MarkerSize',10,'MarkerFaceColor',[1 1 1],...
-        'LineWidth',1,'MarkerEdgeColor',[0 0 0]);
+    if check_option(varargin,'grains')
+        plotPDF(pGrain.meanOrientation,...
+            hParent,...
+            'equal','antipodal',...
+            'MarkerSize',10,'MarkerFaceColor',[1 1 1],...
+            'LineWidth',1,'MarkerEdgeColor',job.csParent.color);
+    else
+        plotPDF(pEBSD.orientations,...
+            hParent,...
+            'equal','antipodal',...
+            'MarkerSize',10,'MarkerFaceColor',[1 1 1],...
+            'LineWidth',1,'MarkerEdgeColor',job.csParent.color);
+    end
     hold off
     set(f,'Name','PDF: Parent grain orientation','NumberTitle','on');
 
@@ -149,14 +183,21 @@ function plotStack(job,parentEBSD,pGrainId)
     set(f,'Name','PDF: Child grain(s) IDEAL variant Id(s)','NumberTitle','on');
 
 
-
     %% Plot the child variant PDF
     f = figure;
-    plotPDF(cGrains.meanOrientation,...
-        cGrains.variantId,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',5,'MarkerEdgeColor','k');
+    if check_option(varargin,'grains')
+        plotPDF(cGrains.meanOrientation,...
+            cGrains.variantId,...
+            hChild,...
+            'equal','antipodal','points','all',...
+            'MarkerSize',5,'MarkerEdgeColor','k');
+    else
+         plotPDF(cEBSD.orientations,...
+            varIds,...
+            hChild,...
+            'equal','antipodal','points','all',...
+            'MarkerSize',3,'MarkerEdgeColor','k');
+    end
     % Define the maximum number of color levels and plot the colorbar
     colormap(jet(maxVariants));
     caxis([1 maxVariants]);
@@ -169,11 +210,19 @@ function plotStack(job,parentEBSD,pGrainId)
 
     %% Plot the child packet PDF
     f = figure;
-    plotPDF(cGrains.meanOrientation,...
-        cGrains.packetId,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',5,'MarkerEdgeColor','k');
+    if check_option(varargin,'grains')
+        plotPDF(cGrains.meanOrientation,...
+            cGrains.packetId,...
+            hChild,...
+            'equal','antipodal','points','all',...
+            'MarkerSize',5,'MarkerEdgeColor','k');
+    else
+         plotPDF(cEBSD.orientations,...
+            packIds,...
+            hChild,...
+            'equal','antipodal','points','all',...
+            'MarkerSize',3,'MarkerEdgeColor','k');
+    end    
     % Define the maximum number of color levels and plot the colorbar
     colormap(parula(maxPackets));
     caxis([1 maxPackets]);
@@ -187,10 +236,17 @@ function plotStack(job,parentEBSD,pGrainId)
     f = figure;
     plot(ipfKeyChild)
     hold all
-    plotIPDF(cGrains.meanOrientation,...
-        cGrains.variantId,...
-        ipfKeyChild.inversePoleFigureDirection,...
-        hChild,'MarkerSize',5,'MarkerEdgeColor','k');
+    if check_option(varargin,'grains')
+        plotIPDF(cGrains.meanOrientation,...
+            cGrains.variantId,...
+            ipfKeyChild.inversePoleFigureDirection,...
+            hChild,'MarkerSize',5,'MarkerEdgeColor','k');
+    else
+        plotIPDF(cEBSD.orientations,...
+            varIds,...
+            ipfKeyChild.inversePoleFigureDirection,...
+            hChild,'MarkerSize',3,'MarkerEdgeColor','k');
+    end    
     hold off
     % Define the maximum number of color levels and plot the colorbar
     colormap(jet(maxVariants));
@@ -207,10 +263,17 @@ function plotStack(job,parentEBSD,pGrainId)
     f = figure;
     plot(ipfKeyChild)
     hold all
+    if check_option(varargin,'grains')
     plotIPDF(cGrains.meanOrientation,...
         cGrains.packetId,...
         ipfKeyChild.inversePoleFigureDirection,...
         hChild,'MarkerSize',5,'MarkerEdgeColor','k');
+    else
+        plotIPDF(cEBSD.orientations,...
+            packIds,...
+            ipfKeyChild.inversePoleFigureDirection,...
+            hChild,'MarkerSize',3,'MarkerEdgeColor','k');
+    end   
     hold off
     % Define the maximum number of color levels and plot the colorbar
     colormap(parula(maxPackets));
@@ -224,11 +287,15 @@ function plotStack(job,parentEBSD,pGrainId)
 
 
     %% Plot the weighted area variant Id frequency histogram
-    class_range = 1:1:maxVariants;
-    [~,abs_counts] = histwc(cGrains.variantId,cGrains.area,maxVariants);
-    norm_counts = abs_counts./sum(abs_counts);
     f = figure;
-    h = bar(class_range,norm_counts,'hist');
+    class_range = 1:1:maxVariants;
+    if check_option(varargin,'grains')
+        [~,abs_counts] = histwc(cGrains.variantId,cGrains.area,maxVariants);
+        norm_counts = abs_counts./sum(abs_counts);
+        h = bar(class_range,norm_counts,'hist');
+    else
+        h = histogram(varIds);
+    end
     h.FaceColor ='#A2142F';
     set(gca, 'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
     set(gca,'XTick',class_range);
@@ -238,13 +305,16 @@ function plotStack(job,parentEBSD,pGrainId)
     set(f,'Name','Histogram: Weighted area variant Ids','NumberTitle','on');
 
 
-
     %% Plot the weighted area packet Id frequency histogram
-    class_range = 1:1:maxPackets;
-    [~,abs_counts] = histwc(cGrains.packetId,cGrains.area,maxPackets);
-    norm_counts = abs_counts./sum(abs_counts);
     f = figure;
-    h = bar(class_range, norm_counts, 'hist');
+    class_range = 1:1:maxPackets;
+    if check_option(varargin,'grains')
+        [~,abs_counts] = histwc(cGrains.packetId,cGrains.area,maxPackets);
+        norm_counts = abs_counts./sum(abs_counts);   
+        h = bar(class_range, norm_counts, 'hist');
+    else
+        h = histogram(packIds);
+    end
     h.FaceColor ='#A2142F';
     set(gca, 'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
     set(gca,'XTick',class_range);
@@ -253,7 +323,7 @@ function plotStack(job,parentEBSD,pGrainId)
     ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
     
-    try; tileFigs; end
+    try tileFigs; end
     return
     end
 

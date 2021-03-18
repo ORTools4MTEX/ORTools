@@ -1,4 +1,4 @@
-function grainClick(job,parentEBSD)
+function grainClick(job,parentEBSD,varargin)
 % interactive parent grain selector
 %
 % Syntax
@@ -101,7 +101,7 @@ setappdata(mP.ax,'grains',[pGrains]);
         end
         % Plot the user-defined stack of plots
         if any(job.isTransformed(job.mergeId == pGrain_select.id)) 
-            plotStack(job,parentEBSD,unique(pGrain_select.id));
+            plotStack(job,parentEBSD,unique(pGrain_select.id),varargin{:});
         else
             f = msgbox('Choose a reconstructed parent grain (within the thick boundaries)', 'Error','warn');
             uiwait(f); 

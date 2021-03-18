@@ -23,7 +23,8 @@ function OR = ORinfo(mori,varargin)
 		OR.plane.child,...
 		OR.direction.parent,...
 		OR.direction.child] = ...
-		round2Miller(OR.misorientation,'maxHKL',15);
+        round2Miller(OR.misorientation);
+		%round2Miller(OR.misorientation,'maxHKL',15);
 
 	OR.plane.parent = setDisplayStyle(OR.plane.parent,'plane');
 	OR.plane.child = setDisplayStyle(OR.plane.child,'plane');
