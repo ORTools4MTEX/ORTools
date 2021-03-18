@@ -14,7 +14,7 @@ The advanced advanced OR discovery, analysis and plotting functionalities of the
 
 ---
 ## How to use
-- Download the **latest stable release** of **ORTools** [**here**](https://github.com/frankNiessen/ORTools/archive/v1.0.zip) or download the developer version [**here**](https://github.com/frankNiessen/ORTools/archive/develop.zip).
+- Download the **latest stable release** of **ORTools** [**here**](https://github.com/frankNiessen/ORTools/archive/v1.0.zip) or the **developer version** [**here**](https://github.com/frankNiessen/ORTools/archive/develop.zip).
 - This library only works with an installation of **MATLAB** and **MTEX**. Follow the instructions for installation [here](https://se.mathworks.com/help/install/install-products.html) and [here](https://mtex-toolbox.github.io/download) (or check the video below).
 - Open MATLAB and run one of the example files. If you do not want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path. See also the instruction video to [*Example 1*](https://youtu.be/AcR-nXg5QKo) to learn how to run the examples.
 - If you encounter any problems, please contact us.
