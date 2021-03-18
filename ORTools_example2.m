@@ -122,7 +122,7 @@ job.calcVariants;
 plotMap_variants(job,'linewidth',3);
 %plotMap_variants(job,'grains','linewidth',3);  %Plot grain data instead
 % The same can be done for the packets
-plotMap_packets(job,'grains','linewidth',3);
+plotMap_packets(job,'linewidth',3);
 %plotMap_packets(job,'grains','linewidth',3);   %Plot grain data instead
 %% Reconstruct parent EBSD 
 % We can finally obtain the reconstructed EBSD data
