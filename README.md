@@ -9,7 +9,7 @@
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 </p>
 
-**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full martensitic transformation. The **ORTools** function library is written in **MATLAB** and is used as an add-on to the basic phase transformation functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. 
+**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full martensitic transformation. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB** crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. 
 
 The advanced advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
