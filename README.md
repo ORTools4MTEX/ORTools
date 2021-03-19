@@ -1,4 +1,4 @@
-*Download the [**latest stable release**](https://github.com/frankNiessen/ORTools/archive/v1.0.1.zip) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip)*
+*Download the [**latest stable release**](https://github.com/frankNiessen/ORTools/archive/v1.0.1.zip) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip) by clicking on either weblink*
 
 | [*How to use*](https://github.com/frankNiessen/ORTools#how-to-use) 
 | [*Example scripts*](https://github.com/frankNiessen/ORTools#example-scripts) 
