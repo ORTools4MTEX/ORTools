@@ -13,7 +13,7 @@
 
 The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
-**ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. To help maintain the library, please report any bugs you encounter. If you would like to contribute or suggest additional features and functionality to help improve **ORTools**, please contact us.
+**ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. To help maintain the library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve **ORTools**, please contact us.
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
@@ -25,7 +25,7 @@ The advanced OR discovery, analysis and plotting functionalities of the **ORTool
 - This library only works after the prior installation of **MATLAB** and **MTEX**. Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below.
 - Open MATLAB and run one of the example files. If you do not want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path. See also the instruction video to [*Example 1*](https://youtu.be/AcR-nXg5QKo) to learn how to run the examples.
 - If you encounter any problems, please contact us.
-- If you would like to contribute or suggest additional features and functionality, please contact us.
+- If you would like to contribute additional functionality or wish to suggest new features, please contact us.
 
 [![ORTools - How to install MTEX](http://img.youtube.com/vi/SsiDFqqqZU4/0.jpg)](http://www.youtube.com/watch?v=SsiDFqqqZU4 "Video Title")
 
