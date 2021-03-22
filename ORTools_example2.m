@@ -95,7 +95,7 @@ job.calcParentFromVote('strict', 'minFit',2.5*degree,...
                                  'maxFit',5*degree,'minVotes',2);
 %Let's plot them
 figure;
-plot(job.parentGrains, job.parentGrains.meanOrientation,'linewidth',1);
+plot(job.parentGrains, job.parentGrains.meanOrientation,'linewidth',1.5);
 %% Grow parent grains at grain boundaries by voting algorithm
 % We can then let the parent grains grow into the child grains by a voting
 % algorithm
@@ -103,7 +103,7 @@ job.calcGBVotes('noC2C');
 job.calcParentFromVote('minFit',5*degree);
 % This is the resulting reconstructed parent microstructure
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1);
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5);
 %% Clean reconstructed grains
 % We now merge grains with similar orientation
 job.mergeSimilar('threshold',5*degree);
@@ -111,7 +111,7 @@ job.mergeSimilar('threshold',5*degree);
 job.mergeInclusions('maxSize',50);
 % and then plot the cleaned reconstructed parent microstructure
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation)
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5)
 %% Variant analysis    
 % Let's plot the variant pole figure
 figure; 
