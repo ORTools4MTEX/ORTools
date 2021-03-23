@@ -141,6 +141,7 @@ set(gca,'XColor','none','YColor','none','ZColor','none');
 axis equal;
 axis tight;
 
+% The following lines do not work correctly yet
 % Since the OR direction is in-plane to the OR plane, 
 % define the normal to the direction
 v = v.uvw;
