@@ -66,7 +66,7 @@ function fibreMaker(crystalDirection,specimenDirection,varargin)
 % % rotN = rotation('Euler',90*degree,60*degree,0*degree);
 % % sD = rotN * ND;
 %%
-hwidth = get_option(varargin,'halfwidth',2.5);
+hwidth = get_option(varargin,'halfwidth',2.5*degree);
 nrPoints = get_option(varargin,'nrPoints',1000);
 
 %--- Define specimen symmetry
@@ -74,7 +74,7 @@ ss = specimenSymmetry('triclinic');
 
 %--- Calculate a fibre ODF
 odf = fibreODF(crystalDirection,specimenDirection,ss,'de la Vallee Poussin',...
-    'halfwidth',hwidth*degree,'Fourier',22);
+    'halfwidth',hwidth,'Fourier',22);
 %--- Define the ODF specimen symmetry
 odf.SS = specimenSymmetry('orthorhombic');
 %--- Save a VPSC *.tex file
