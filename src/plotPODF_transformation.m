@@ -23,7 +23,7 @@ odfSecP = get_option(varargin,'odfSecP',[0 45 65]*degree);
 odfSecC = get_option(varargin,'odfSecC',[0 45 90]*degree);
 variantId = get_option(varargin,'variantId',[]);
 variantWt = get_option(varargin,'variantWt',[]);
-hwidth = get_option(varargin,'halfwidth',2.5);
+hwidth = get_option(varargin,'halfwidth',2.5*degree);
 nrPoints = get_option(varargin,'nrPoints',1000);
 cmapP = get_option(varargin,'colormapP','jet');
 cmapC = get_option(varargin,'colormapC','hot');
@@ -45,7 +45,7 @@ fileName = 'inputVPSC.Tex';
 oriP = oriP(:);
 wtP = fileProp.weights; 
 wtP = wtP(:);
-odfP = calcDensity(oriP,'weights',wtP,'halfwidth',hwidth*degree,'points','all');
+odfP = calcDensity(oriP,'weights',wtP,'halfwidth',hwidth,'points','all');
 %--- Define the specimen symmetry of the parent
 odfP.SS = specimenSymmetry('orthorhombic');
 %--- Calculate the value and orientation of the maximum f(g) in the ODF
@@ -108,7 +108,7 @@ end
 %--- Calculate the orientation distribution function and define the specimen symmetry of the child
 oriC = oriC(:);
 wtC = wtC(:);
-odfC = calcDensity(oriC,'weights',wtC,'halfwidth',hwidth*degree,'points','all');
+odfC = calcDensity(oriC,'weights',wtC,'halfwidth',hwidth,'points','all');
 %--- Define the specimen symmetry of the child
 odfC.SS = specimenSymmetry('orthorhombic');
 %--- Calculate the value and orientation of the maximum f(g) in the ODF
