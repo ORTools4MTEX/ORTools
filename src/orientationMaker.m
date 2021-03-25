@@ -49,14 +49,14 @@ function orientationMaker(ori,varargin)
 % % (0 0 1)[-1-1 0]:       phi1 = 90; PHI = 0;  phi2 = 45;
 % % (1 1 3)[4-7 1]:        phi1 = 17; PHI = 25; phi2 = 45;
 
-hwidth = get_option(varargin,'halfwidth',2.5);
+hwidth = get_option(varargin,'halfwidth',2.5*degree);
 nrPoints = get_option(varargin,'nrPoints',1000);
 
 %--- Define specimen symmetry
 ss = specimenSymmetry('triclinic');
 %--- Calculate a single orientation ODF with all symmetries
 odf = unimodalODF(symmetrise(ori),'de la Vallee Poussin',...
-    'halfwidth',hwidth*degree,'Fourier',22);
+    'halfwidth',hwidth,'Fourier',22);
 %--- Define the ODF specimen symmetry
 odf.SS = specimenSymmetry('orthorhombic');
 %--- Save a VPSC *.tex file
