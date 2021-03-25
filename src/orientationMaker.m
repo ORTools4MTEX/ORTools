@@ -1,4 +1,4 @@
-function orientationMaker(ori)
+function orientationMaker(ori,varargin)
 % create a unimodal ODF and export a VPSC file
 %
 % Syntax
