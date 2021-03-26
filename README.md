@@ -94,8 +94,10 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 - [orientationMaker](https://github.com/frankNiessen/ORTools/blob/master/README.md#orientationMaker)
 - [ORinfo](https://github.com/frankNiessen/ORTools/blob/master/README.md#ORinfo)
 - [peakFitORs](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs)
-- [plotIPDF_gB_Misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs)
+- [plotHist_ORMisfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotHist_ORMisfit)
+- [plotIPDF_gB_Misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_Misfit)
 - [plotIPDF_gB_prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_prob)
+- [plotMap_clusters](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_clusters)
 - [plotMap_gB_c2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_c2c)
 - [plotMap_gB_Misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_Misfit)
 - [plotMap_gB_p2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_p2c)
@@ -223,6 +225,20 @@ The function is called by [defineORs](https://github.com/frankNiessen/ORTools/bl
   <img src="./doc/images/peakFitORs.png" alt="Interactive fitting window on which peakFitORs is applied." width="500"/>
 </p>
 
+### [plotHist_ORMisfit](./src/plotHist_ORMisfit.m)
+This function plots the misfit, or the disorientation, between the child-child boundaries with the orientation relationship in a histogram. This is by defeault done with the current OR (*job.p2c*), but additional OR's can be supplied by the argument *p2c* n inverse polefigure showing the misorientation axes
+
+- Syntax
+  -  plotHist_ORMisfit(job)
+  -  plotHist_ORMisfit(job,p2c)
+- Input
+  - job  - @parentGrainReconstructor
+  - p2c  - One or multiple orientation-relationships to evaluate
+
+<p align="center">
+  <img src="./doc/images/plotHist_ORMisfit.png" alt="Plot example from plotHist_ORMisfit" width="1000"/>
+</p>
+
 ### [plotIPDF_gB_Misfit](./src/plotIPDF_gB_Misfit.m)
 This function plots the misfit, or the disorientation, between the parent-child and child-child boundaries with the orientation relationship in an inverse polefigure showing the misorientation axes
 
@@ -249,6 +265,20 @@ This function calculates and plots the probability distribution between 0 and 1,
 
 <p align="center">
   <img src="./doc/images/plotIPDF_gB_Prob.png" alt="Plot example from plotIPDF_gB_Prob" width="1000"/>
+</p>
+
+### [plotMap_clusters](./src/plotMap_clusters.m)
+The function shows the clusters of grains that are likely to belong to the same parent grain, created with [clusterGraph](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterGraph.html) on top of the  semin-transparent IPF map of child grains.
+
+- Syntax
+  -  ipfKey = plotMap_clusters(job)
+  -  ipfKey = plotMap_clusters(job,direction)
+- Input
+  - job  - @parentGrainReconstructor
+  - direction  - @vector3d - IPF direction
+
+<p align="center">
+  <img src="./doc/images/plotMap_clusters.png" alt="Plot example from plotMap_clusters" width="500"/>
 </p>
 
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
