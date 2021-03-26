@@ -46,6 +46,7 @@ function fibreMaker(crystalDirection,specimenDirection,varargin)
 % % 10-10-fibre = <1 0 -1 0> || ND
 % % hkil-fibre = <0 0 0 1> tilted 20° from ND towards RD
 
+
 %% How to define fibres as used in the function
 %% Example 1 
 % % Applied to the bcc {h 1 1} <1/h 1 2> fibre 
