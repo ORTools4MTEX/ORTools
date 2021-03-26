@@ -8,8 +8,9 @@ function orientationMaker(ori,varargin)
 %  ori     - @orientation
 %
 % Options
-%  halfwidth        - Halfwidth for ODF calculation
-%  nrPoints         - Nr of points in VPSC file
+%  halfwidth    - halfwidth for ODF calculation
+%  points       - number of points in VPSC file
+%  export       - (optional path) & name of VPSC file to save
 
 %% Common ideal orientations for fcc materials
 % % Cube (C):              phi1 = 45; PHI = 0;  phi2 = 45;
@@ -50,7 +51,8 @@ function orientationMaker(ori,varargin)
 % % (1 1 3)[4-7 1]:        phi1 = 17; PHI = 25; phi2 = 45;
 
 hwidth = get_option(varargin,'halfwidth',2.5*degree);
-nrPoints = get_option(varargin,'nrPoints',1000);
+numPoints = get_option(varargin,'points',1000);
+pfName_Out = get_option(varargin,'export','inputVPSC.Tex');
 
 %--- Define specimen symmetry
 ss = specimenSymmetry('triclinic');
@@ -60,8 +62,7 @@ odf = unimodalODF(symmetrise(ori),'de la Vallee Poussin',...
 %--- Define the ODF specimen symmetry
 odf.SS = specimenSymmetry('orthorhombic');
 %--- Save a VPSC *.tex file
-FileName = 'inputVPSC.Tex';
-export_VPSC(odf,FileName,'interface','VPSC','Bunge','points',nrPoints);
+export_VPSC(odf,pfName_Out,'interface','VPSC','Bunge','points',numPoints);
 %---
 
 end
