@@ -111,7 +111,7 @@ mtexColorbar;
 job.revert(job.grains.fit > 5*degree | job.grains.clusterSize < 15)
 % Let's see the remaining grains
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation)
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 %% Fill in unreconstructed regions with voting algorithm
 % We can now use the already confidently reconstructed gamma grains to 
 % vote for the gamma orientation of not yet reconstructed alpha grains
@@ -124,7 +124,7 @@ for k = 1:3
 end
 %... and plot the optimized reconstructed parent microstructure
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation)
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 %% Clean reconstructed grains
 % We can now clean the grains by 
 % - merging grains with similar orientation
@@ -133,7 +133,7 @@ job.mergeSimilar('threshold',7.5*degree);
 job.mergeInclusions('maxSize',50);
 % This is the cleaned reconstructed parent microstructure
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation)
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 %% Variant analysis
 % Now that we have both the alpha and the associated prior gamma
 % orientations, we can conduct variant analysis.

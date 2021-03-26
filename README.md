@@ -1,4 +1,4 @@
-*Download the [**latest stable release**](https://github.com/frankNiessen/ORTools/archive/v1.0.1.zip) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip)*
+*Download the [**latest stable release**](https://github.com/frankNiessen/ORTools/archive/v1.0.1.zip) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip) by clicking on either weblink*
 
 | [*How to use*](https://github.com/frankNiessen/ORTools#how-to-use) 
 | [*Example scripts*](https://github.com/frankNiessen/ORTools#example-scripts) 
@@ -9,11 +9,11 @@
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 </p>
 
-**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full martensitic transformation. The **ORTools** function library is written in **MATLAB** and is used as an add-on to the basic phase transformation functionalities within the crystallographic [**MATLAB**](https://mathworks.com/products/matlab.html) toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. 
+**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full martensitic transformation. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB**-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. 
 
-The advanced advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
+The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
-**ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. To help maintain the library, please report any bugs you encounter. If you would like to contribute additional functionality to help improve **ORTools**, please contact us.
+**ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. To help maintain the library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve **ORTools**, please contact us.
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
@@ -22,10 +22,10 @@ The advanced advanced OR discovery, analysis and plotting functionalities of the
 ---
 ## How to use
 - You can download the [**latest stable release**](https://github.com/frankNiessen/ORTools/archive/v1.0.1.zip) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip).
-- This library only works with an installation of **MATLAB** and **MTEX**. Follow the instructions for installation [here](https://se.mathworks.com/help/install/install-products.html) and [here](https://mtex-toolbox.github.io/download) (or check the video below).
-- Open MATLAB and run one of the example files. If you do not want to run any example files but want to use the function library, please make sure to add the **ORTools** directory together with its subdirectories to the MATLAB path. See also the instruction video to [*Example 1*](https://youtu.be/AcR-nXg5QKo) to learn how to run the examples.
+- This library only works after the prior installation of **MATLAB** and **MTEX**. Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below.
+- Open MATLAB and run one of the example files. Please refer to the [*Example 1*](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files but instead want to use the function library, please ensure the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
 - If you encounter any problems, please contact us.
-- If you would like to contribute additional functionality, please contact us.
+- If you would like to contribute additional functionality or wish to suggest new features, please contact us.
 
 [![ORTools - How to install MTEX](http://img.youtube.com/vi/SsiDFqqqZU4/0.jpg)](http://www.youtube.com/watch?v=SsiDFqqqZU4 "Video Title")
 
@@ -34,9 +34,9 @@ The advanced advanced OR discovery, analysis and plotting functionalities of the
 ---
 
 ##  Example scripts
-The world of martensitic transformation analysis can be difficult to navigate, which is why the **ORTools** library consists of plug-and-play functions to make life easier. To make things even more accessible, some example scripts are provided to demonstrate these functions *in action*.
+The world of martensitic transformation analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the **ORTools** library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions *in action*.
 
-It is possible to run the example scripts from start to end, but we encourage to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the relation between code and results. This will also help you to follow the comments, which give instructions on which choices to make in the interactive parts of the program and narrate the obtained plots and results. In this way you will learn the code syntax and the meaning of the presented results.
+It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the code and the generated results. This will also help you to follow the comments, which provide instructions on the choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the code as well as the meaning behind the presented results.
 
 ### [Example 1](./ORTools_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
