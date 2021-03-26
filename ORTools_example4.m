@@ -48,6 +48,9 @@ job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %     - Adjust the threshold to include only the largest peak
 %     - Compute the OR by "Maximum f(g)"
 job.p2c = orientation.Burger(job.csParent, job.csChild);
+%Let us check the disorientation
+plotHist_ORMisfit(job);
+xlim([0,10]);
 %% Plotting (with ORTools functions)
 screenPrint('SegmentStart','Plotting some ORTools maps');
 % Parent and child IPF maps

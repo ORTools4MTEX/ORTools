@@ -1,5 +1,6 @@
 function ipfKey = plotMap_clusters(job, varargin)
-    % plot inverse polefigure maps of parent and child phases
+    % plot clusters from "clusterGraph" on top of semi-transparent child 
+    % IPF map
     %
     % Syntax
     %  ipfKey = plotMap_clusters(job)

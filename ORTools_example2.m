@@ -51,6 +51,11 @@ job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %     - Adjust the threshold to include only the largest peak
 %     - Compute the OR by "Maximum f(g)"
 job = defineORs(job);
+% Let us check the disorientation and compare it with the Burgers OR
+plotHist_ORMisfit(job,orientation.Burger(job.csParent, job.csChild));
+xlim([0,10]);
+%     - The misfit with Burgers OR and the experimental OR is almost
+%     identical
 %% Plotting (with ORTools functions)
 screenPrint('SegmentStart','Plotting some ORTools maps');
 % Let's use some of the ORTools functions to visualize the determined OR

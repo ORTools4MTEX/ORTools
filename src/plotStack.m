@@ -136,6 +136,9 @@ function plotStack(job,parentEBSD,pGrainId,varargin)
 
 
     %% Plot the child packet map
+    if   isnan(maxPackets)
+        maxPackets = max(packIds);
+    end
     f = figure;
     if check_option(varargin,'grains')
         plot(cGrains(~isnan(cGrains.packetId)),cGrains.packetId(~isnan(cGrains.packetId)));
