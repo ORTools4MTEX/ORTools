@@ -24,6 +24,7 @@ if check_option(varargin,'grains')
 else
     pGrains = job.grains(job.ebsd(job.csChild).grainId);
     cEBSD = job.ebsd(pGrains(job.csParent));
+    cEBSD = cEBSD(job.csChild);
     pGrains = pGrains(job.csParent);   
     varIds = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
     plot(cEBSD,varIds);   

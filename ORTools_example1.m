@@ -95,6 +95,7 @@ plotMap_gB_prob(job,'linewidth',2);
 job.calcGraph('threshold',2.5*degree,'tolerance',2.5*degree);
 job.clusterGraph('inflationPower',1.6);
 job.calcParentFromGraph;
+
 % Let's plot the reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2);
@@ -122,6 +123,7 @@ for k = 1:3
   % compute parent orientations from votes
   job.calcParentFromVote('minFit',7.5*degree)
 end
+
 %... and plot the optimized reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
