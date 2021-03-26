@@ -17,8 +17,8 @@ function plotMap_gB_prob(job,varargin)
 %https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html 
 
 cmap = get_option(varargin,'colormap','viridis');
-threshold = get_option(varargin,'threshold',2.5);
-tolerance = get_option(varargin,'tolerance',2.5);
+threshold = get_option(varargin,'threshold',2.5*degree);
+tolerance = get_option(varargin,'tolerance',2.5*degree);
 
 if job.p2c == orientation.id(job.csParent,job.csChild)
     warning("Orientation relationship is (0,0,0). Initialize ""job.p2c""!");
@@ -44,8 +44,8 @@ if isempty(idx_c2c(idx_c2c==1))
     [idx_c2c,~] = ismember(grainPairs,grainPairs_c2c,'rows');
 end
 % Define all boundaries and calculate their probabilities
-job.calcGraph('threshold',threshold*degree,...
-    'tolerance',tolerance*degree);
+job.calcGraph('threshold',threshold,...
+    'tolerance',tolerance);
 v = full(job.graph(sub2ind(size(job.graph),grainPairs(:,1),grainPairs(:,2))));
 [gB,pairId] = job.grains.boundary.selectByGrainId(grainPairs);
 % Define p2c boundaries and find their probabilities

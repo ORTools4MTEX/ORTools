@@ -42,7 +42,7 @@ if ~isempty(job.ebsd(job.csParent)) && ~onlyChild
     hold all
     plot(job.grains.boundary,varargin{:});
     hold off
-    guiTitle = ['Parent IPFx map = ',job.csParent.mineral];
+    guiTitle = ['Child IPF ',vector.char ,' map = ',job.csParent.mineral];
     set(f,'Name',guiTitle,'NumberTitle','on');
     drawnow;
 elseif isempty(job.ebsd(job.csParent))
@@ -59,7 +59,7 @@ if ~isempty(job.ebsd(job.csChild)) && ~onlyParent
     hold all  
     plot(job.grains.boundary,varargin{:});
     hold off
-    guiTitle = ['Child IPFx map = ',job.csChild.mineral];
+    guiTitle = ['Child IPF ',vector.char ,' map = ',job.csChild.mineral];
     set(f,'Name',guiTitle,'NumberTitle','on');
     drawnow;
 elseif isempty(job.ebsd(job.csChild))
