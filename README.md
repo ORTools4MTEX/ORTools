@@ -236,7 +236,7 @@ This function plots the misfit, or the disorientation, between the child-child b
   - p2c  - One or multiple orientation-relationships to evaluate
 
 <p align="center">
-  <img src="./doc/images/plotHist_ORMisfit.png" alt="Plot example from plotHist_ORMisfit" width="1000"/>
+  <img src="./doc/images/plotHist_ORMisfit.png" alt="Plot example from plotHist_ORMisfit" width="500"/>
 </p>
 
 ### [plotIPDF_gB_Misfit](./src/plotIPDF_gB_Misfit.m)
