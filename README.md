@@ -9,7 +9,7 @@
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 </p>
 
-**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full martensitic transformation. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB**-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. 
+**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB**-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. 
 
 The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
@@ -23,7 +23,7 @@ The advanced OR discovery, analysis and plotting functionalities of the **ORTool
 ## How to use
 - You can download the [**latest stable release**](https://github.com/frankNiessen/ORTools/archive/v1.0.1.zip) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip).
 - This library only works after the prior installation of **MATLAB** and **MTEX**. Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below.
-- Open MATLAB and run one of the example files. Please refer to the [*Example 1*](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files but instead want to use the function library, please ensure the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
+- Open MATLAB and run one of the example files. Please refer to the [*Example 1*](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and instead want to use the function library, please ensure the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
 - If you encounter any problems, please contact us.
 - If you would like to contribute additional functionality or wish to suggest new features, please contact us.
 
@@ -34,13 +34,13 @@ The advanced OR discovery, analysis and plotting functionalities of the **ORTool
 ---
 
 ##  Example scripts
-The world of martensitic transformation analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the **ORTools** library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions *in action*.
+The world of martensitic transformation or phase transition analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the **ORTools** library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions *in action*.
 
-It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the code and the generated results. This will also help you to follow the comments, which provide instructions on the choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the code as well as the meaning behind the presented results.
+It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the code and the generated results. This will also help you follow the comments, which provide instructions on the choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the code as well as the meaning behind the presented results.
 
 ### [Example 1](./ORTools_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for martensite formation in steels. Here we show how **ORTools** provides prewritten and additional plotting functions to create publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for martensite transformation in steels. Here we show how **ORTools** provides pre-written and additional plotting functions to create publication-ready plots.
 
 [![ORTools - Example 1](http://img.youtube.com/vi/AcR-nXg5QKo/0.jpg)](http://www.youtube.com/watch?v=AcR-nXg5QKo "Video Title")
 
@@ -48,7 +48,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ### [Example 2](./ORTools_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) is used to determine the orientation relationship from alpha-beta boundaries, even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) function is used to determine the OR from alpha-beta boundaries even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
 [![ORTools - Example 2](http://img.youtube.com/vi/e6R0dApUc8Q/0.jpg)](http://www.youtube.com/watch?v=e6R0dApUc8Q "Video Title")
 
@@ -56,7 +56,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ### [Example 3](./ORTools_example3.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
-In [example 2](https://github.com/frankNiessen/ORTools#example-2) we saw that the α-β Ti microstructure showed two orientation relationships in the OR peak fitter. In this example, we want to return both ORs and investigate which one of them dominated the phase transformation. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figure and on boundary maps to evaluate the best match.
+In [example 2](https://github.com/frankNiessen/ORTools#example-2) we noted that the α-β Ti microstructure showed two ORs in the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) function. In this example, we want to return both ORs and investigate which one of them dominated during phase transition. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figures and on boundary maps to evaluate the best match.
 
 [![ORTools - Example 3](http://img.youtube.com/vi/8e9PhhFCWYc/0.jpg)](http://www.youtube.com/watch?v=8e9PhhFCWYc "Video Title")
 
@@ -64,7 +64,7 @@ In [example 2](https://github.com/frankNiessen/ORTools#example-2) we saw that th
 
 ### [Example 4](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
-In this script, we repeat the reconstruction of the prior β microstructure from an α microstructure as shown in [example 2](https://github.com/frankNiessen/ORTools#example-2) with less detail. We then look at the variant distribution and conclude that strongly preferential variant selection did not occur. We are therefore in a good position to predict the transformation texture of α from the reconstructed β using the ORTools function [plotPODF_transformation](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPODF_transformation). The predicted transformed α texture shows good agreement with the actual α texture.
+In this script, we repeat the reconstruction of the prior β microstructure from an α microstructure as shown in [example 2](https://github.com/frankNiessen/ORTools#example-2) with less detail. We then look at the variant distribution and conclude that strongly preferential variant selection did not occur. We are therefore in a good position to predict the transition texture of α from the reconstructed β using the ORTools function [plotPODF_transformation](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPODF_transformation). The predicted transition α texture is in good agreement with the experimental α texture.
 
 [![ORTools - Example 4](http://img.youtube.com/vi/Yx2jKII3HUc/0.jpg)](http://www.youtube.com/watch?v=Yx2jKII3HUc "Video Title")
 
@@ -72,7 +72,7 @@ In this script, we repeat the reconstruction of the prior β microstructure from
 
 ### [Example 5](./ORTools_example5.m)
 #### Partial parent grain reconstruction to clean TRWIP steel EBSD data
-This example is of a 20% cold-rolled twinning and transformation induced plasticity (TRWIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the OR peak fitter, we discover that two possible ORs could be in operation for the γ to α' microstructure. We identify that the first of them is not a real OR but corresponds to points that were misindexed as α' even though they belong to γ. We use the parent phase reconstruction features in MTEX to revert these misindexed points with the apparent OR. We then re-run the grain calculation and the OR peak fitter to show that the apparent OR was eliminated. This example serves as a template of how to reconstruct parent phase microstructures based on multiple orientation relationships in one microstructure. 
+This example is of a 20% cold-rolled twinning and transformation induced plasticity (TRWIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) function, we discover that two possible ORs could be in operation for the γ to α' microstructure. We identify that the first of them is not a real OR but corresponds to points that were misindexed as α' even though they belong to γ. We use the parent phase reconstruction features in MTEX and the apprent OR to revert these misindexed points to γ. We then re-run the grain calculation and the OR peak fitter to show that the apparent OR was eliminated. This example also serves as a template on how to reconstruct parent phase microstructures based on multiple ORs in one microstructure. 
 
 *EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
 
