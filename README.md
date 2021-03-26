@@ -97,6 +97,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 - [plotHist_ORMisfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotHist_ORMisfit)
 - [plotIPDF_gB_Misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_Misfit)
 - [plotIPDF_gB_prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_prob)
+- [plotMap_clusters](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_clusters)
 - [plotMap_gB_c2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_c2c)
 - [plotMap_gB_Misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_Misfit)
 - [plotMap_gB_p2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_p2c)
@@ -264,6 +265,20 @@ This function calculates and plots the probability distribution between 0 and 1,
 
 <p align="center">
   <img src="./doc/images/plotIPDF_gB_Prob.png" alt="Plot example from plotIPDF_gB_Prob" width="1000"/>
+</p>
+
+### [plotMap_clusters](./src/plotMap_clusters.m)
+The function shows the clusters of grains that are likely to belong to the same parent grain, created with [clusterGraph](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterGraph.html) on top of the  semin-transparent IPF map of child grains.
+
+- Syntax
+  -  ipfKey = plotMap_clusters(job)
+  -  ipfKey = plotMap_clusters(job,direction)
+- Input
+  - job  - @parentGrainReconstructor
+  - direction  - @vector3d - IPF direction
+
+<p align="center">
+  <img src="./doc/images/plotMap_clusters.png" alt="Plot example from plotMap_clusters" width="500"/>
 </p>
 
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
