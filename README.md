@@ -226,14 +226,14 @@ The function is called by [defineORs](https://github.com/frankNiessen/ORTools/bl
 </p>
 
 ### [plotHist_ORMisfit](./src/plotHist_ORMisfit.m)
-This function plots the misfit, or the disorientation, between the child-child boundaries with the orientation relationship in a histogram. This is by defeault done with the current OR (*job.p2c*), but additional OR's can be supplied by the argument *p2c* n inverse polefigure showing the misorientation axes
+This function plots the misfit, or the disorientation, between the child-child boundaries with the orientation relationship in a histogram. This is by defeault done with the current OR (*job.p2c*), but additional OR's can be supplied with the argument *p2c*.
 
 - Syntax
   -  plotHist_ORMisfit(job)
   -  plotHist_ORMisfit(job,p2c)
 - Input
   - job  - @parentGrainReconstructor
-  - p2c  - One or multiple orientation-relationships to evaluate
+  - p2c  - One or multiple additional orientation-relationships to evaluate
 
 <p align="center">
   <img src="./doc/images/plotHist_ORMisfit.png" alt="Plot example from plotHist_ORMisfit" width="500"/>
