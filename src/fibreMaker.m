@@ -10,7 +10,7 @@ function fibreMaker(crystalDirection,specimenDirection,varargin)
 %
 % Options
 %  halfwidth    - halfwidth for ODF calculation
-%  points       - humber of points in VPSC file
+%  points       - number of points in VPSC file
 %  export       - (optional path) & name of VPSC file to save
 
 
