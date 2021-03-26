@@ -1,8 +1,8 @@
-function f = plotPODF_transformation(job,hParent,hChild,varargin)
+function plotPODF_transformation(job,hParent,hChild,varargin)
 % plot transformation texture from VPSC file 
 %
 % Syntax
-%  f = plotPODF_transformation(job,hParent,hChild)
+%  plotPODF_transformation(job,hParent,hChild)
 %
 % Input
 %  hParent     - @Miller (parent polefigures to plot)
@@ -11,23 +11,28 @@ function f = plotPODF_transformation(job,hParent,hChild,varargin)
 % Options
 %  odfSecP      - array with angles of parent ODF section to display
 %  odfSecC      - array with angles of child ODF section to display
+%  colormapP    - colormap string for parent PFs and ODFs
+%  colormapC    - colormap string for child PFs and ODFs
 %  variantId    - list with specific variant Ids to plot
 %  variantWt    - list with specific variant weights to plot
 %  halfwidth    - halfwidth for ODF calculation
-%  nrPoints     - nr of points to be written into the VPSC file
-%  colormapP    - colormap string for parent PFs and ODFs
-%  colormapC    - colormap string for child PFs and ODFs
-%  path         - path to the texture file
+%  points       - number of points to be written into the VPSC file
+%  import       - (optional path) & name of VPSC file to transform
+%  export       - (optional path) & name of transformed VPSC file to save
+
 
 odfSecP = get_option(varargin,'odfSecP',[0 45 65]*degree);
 odfSecC = get_option(varargin,'odfSecC',[0 45 90]*degree);
+cmapP = get_option(varargin,'colormapP','jet');
+cmapC = get_option(varargin,'colormapC','hot');
 variantId = get_option(varargin,'variantId',[]);
 variantWt = get_option(varargin,'variantWt',[]);
 hwidth = get_option(varargin,'halfwidth',2.5*degree);
-nrPoints = get_option(varargin,'nrPoints',1000);
-cmapP = get_option(varargin,'colormapP','jet');
-cmapC = get_option(varargin,'colormapC','hot');
-pathName = get_option(varargin,'path','');
+numPoints = get_option(varargin,'points',1000);
+pfName_In = get_option(varargin,'import','inputVPSC.Tex');
+pfName_Out = get_option(varargin,'export','outputVPSC.Tex');
+
+
 
 ORinfo(job.p2c,'silent');
 
@@ -36,8 +41,7 @@ ss = specimenSymmetry('triclinic');
 
 
 %--- Import the VPSC ODF file into memory
-fileName = 'inputVPSC.Tex';
-[oriP,fileProp] = orientation.load([pathName,fileName],job.csParent,ss,'interface','generic',...
+[oriP,fileProp] = orientation.load([pfName_In],job.csParent,ss,'interface','generic',...
     'ColumnNames', {'phi1' 'Phi' 'phi2' 'weights'}, 'Columns', [1 2 3 4], 'Bunge'); 
 %---
 
@@ -210,8 +214,7 @@ end
 %---
 
 %--- Save a VPSC *.tex file
-fileName = 'outputVPSC.Tex';
-export_VPSC(odfC,[pathName,fileName],'interface','VPSC','Bunge','points',nrPoints);
+export_VPSC(odfC,[pfName_Out],'interface','VPSC','Bunge','points',numPoints);
 %---
 
 end
