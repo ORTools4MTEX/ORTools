@@ -9,8 +9,10 @@ function fibreMaker(crystalDirection,specimenDirection,varargin)
 %  specimenDirection    - @vector3d
 %
 % Options
-%  halfwidth        - Halfwidth for ODF calculation
-%  nrPoints         - Nr of points in VPSC file
+%  halfwidth    - halfwidth for ODF calculation
+%  points       - humber of points in VPSC file
+%  export       - (optional path) & name of VPSC file to save
+
 
 %% All fibres are defined based on the following specimen co-ordinate system
 % RD = xvector; TD = yvector; ND = zvector;
@@ -67,7 +69,8 @@ function fibreMaker(crystalDirection,specimenDirection,varargin)
 % % sD = rotN * ND;
 %%
 hwidth = get_option(varargin,'halfwidth',2.5*degree);
-nrPoints = get_option(varargin,'nrPoints',1000);
+numPoints = get_option(varargin,'points',1000);
+pfName_Out = get_option(varargin,'export','inputVPSC.Tex');
 
 %--- Define specimen symmetry
 ss = specimenSymmetry('triclinic');
@@ -78,8 +81,7 @@ odf = fibreODF(crystalDirection,specimenDirection,ss,'de la Vallee Poussin',...
 %--- Define the ODF specimen symmetry
 odf.SS = specimenSymmetry('orthorhombic');
 %--- Save a VPSC *.tex file
-FileName = 'inputVPSC.Tex';
-export_VPSC(odf,FileName,'interface','VPSC','Bunge','points',nrPoints);
+export_VPSC(odf,pfName_Out,'interface','VPSC','Bunge','points',numPoints);
 %---
 
 end
