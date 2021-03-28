@@ -49,7 +49,7 @@ job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %     - Compute the OR by "Maximum f(g)"
 job.p2c = orientation.Burger(job.csParent, job.csChild);
 %Let us check the disorientation
-plotHist_ORMisfit(job);
+plotHist_OR_misfit(job);
 xlim([0,10]);
 %% Plotting (with ORTools functions)
 screenPrint('SegmentStart','Plotting some ORTools maps');
