@@ -14,7 +14,7 @@ function job = defineORs(job)
     % Check if p2c boundaries exist
     if isempty(job.parentGrains)
         p2c = guiOR(job);
-        ORnumber = 1;
+        ORNumber = 1;
     else
         % Method selection
         methodTypes = {'Define','Peak-fit','Cancel'};
@@ -33,45 +33,45 @@ function job = defineORs(job)
 
         elseif strcmp(loadMode,'Define') || strcmp(loadMode,methodTypes{1})
             p2c = guiOR(job);
-            ORnumber = 1;
+            ORNumber = 1;
 
         elseif strcmp(loadMode,'Peak-fit') || strcmp(loadMode,methodTypes{2})
             % Compute the parent-child misorientation distribution histogram
-            f = msgbox(["Use LEFT and RIGHT arrows to define threshold for peak",...
-                       'fitting and push enter to continue!']);
+            f = msgbox(["Use LEFT and RIGHT keyboard arrows to define the threshold for the peak(s)",...
+                       'fitting and press enter to continue']);
             uiwait(f);
-            [classRange,classInterval,counts] = computePCHistogram(job);
+            [classRange,classInterval,counts] = computePCHist(job);
             % Fit the parent-child misorientation distribution histogram
             [misoRange] = gaussFit(classRange,classInterval,counts);
             % Find the parent-child orientation relationships
             [p2c] = peakFitORs(job,misoRange);
             if length(p2c) > 1
-                ORnumber = selectORnumber(p2c);
+                ORNumber = setORNumber(p2c);
             else
-                ORnumber = 1;
+                ORNumber = 1;
             end
             close gcf
         end
     end
 
     % Update p2c
-    if length(ORnumber) > 1
-        for ii = ORnumber
+    if length(ORNumber) > 1
+        for ii = ORNumber
            newJob{ii} = parentGrainReconstructor(job.ebsd,job.grains,p2c(ii));
         end  
         job = newJob;
     else  
-        job.p2c = p2c(ORnumber);
+        job.p2c = p2c(ORNumber);
         ORinfo(job.p2c);
     end
 end
 
-function [classRange,classInterval,counts] = computePCHistogram(job)
+function [classRange,classInterval,counts] = computePCHist(job)
     % Graphical user interface for definition of an orientation relationship by
     % parallel planes and directions
     %
     % Syntax
-    %  [classRange,classInterval,counts] = computePCHistogram(job)
+    %  [classRange,classInterval,counts] = computePCHist(job)
     %
     % Input
     %  job          - @parentGrainreconstructor
@@ -109,17 +109,17 @@ function [classRange,classInterval,counts] = computePCHistogram(job)
 end
 
 
-function [ORnumber] = selectORnumber(p2c)
+function [ORNumber] = setORNumber(p2c)
     % Auxiliary function for selcting one out of several fitted OR's 
     %
     % Syntax
-    %  [ORnumber] = selectORnumber(p2c)
+    %  [ORNumber] = setORNumber(p2c)
     %
     % Input
     %  p2c  - parent to child orientation relationship
     %
     % Output
-    %  ORnumber     - number of selected OR
+    %  ORNumber     - number of selected OR
     
     list = arrayfun(@num2str, 1:length(p2c), 'UniformOutput', 0);
     list = [list,{'All ORs'}];
@@ -136,7 +136,7 @@ function [ORnumber] = selectORnumber(p2c)
 
     % Return the user-defined OR number    
     if ind == length(list), ind = 1:length(list)-1; end
-    ORnumber = ind;
+    ORNumber = ind;
 end
 
 
