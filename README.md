@@ -250,7 +250,7 @@ This function plots the misfit, or disorientation, between parent-child and chil
   - colormap  - colormap string  
 
 <p align="center">
-  <img src="./doc/images/plotIPDF_gB_misfit.png" alt="Plot example from plotIPDF_gB_Misfit" width="1000"/>
+  <img src="./doc/images/plotIPDF_gB_misfit.png" alt="Plot example from plotIPDF_gB_misfit" width="1000"/>
 </p>
 
 ### [plotIPDF_gB_prob](./src/plotIPDF_gB_prob.m)
