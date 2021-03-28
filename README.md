@@ -23,7 +23,7 @@ The advanced OR discovery, analysis and plotting functionalities of the **ORTool
 ## How to use
 - You can download the [**latest stable release**](https://github.com/frankNiessen/ORTools/archive/v1.0.2.zip) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip).
 - This library only works after the prior installation of **MATLAB** and **MTEX**. Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below.
-- Open MATLAB and run one of the example files. Please refer to the [*Example 1*](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and instead want to use the function library, please ensure the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
+- Open MATLAB and run one of the example files. Please refer to the [*Example 1*](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and want to use the function library instead, please ensure the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
 - If you encounter any problems, please contact us.
 - If you would like to contribute additional functionality or wish to suggest new features, please contact us.
 
@@ -36,11 +36,11 @@ The advanced OR discovery, analysis and plotting functionalities of the **ORTool
 ##  Example scripts
 The world of martensitic transformation or phase transition analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the **ORTools** library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions *in action*.
 
-It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the code and the generated results. This will also help you follow the comments, which provide instructions on the choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the code as well as the meaning behind the presented results.
+It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the code and the generated results. This will also help you follow the comments, which provide instructions on the various choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the code as well as the meaning behind the presented results.
 
 ### [Example 1](./ORTools_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for martensite transformation in steels. Here we show how **ORTools** provides pre-written and additional plotting functions to create publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for martensite transformation in steels. Here we demonstrate how **ORTools** provides pre-written and additional plotting functions to create publication-ready plots.
 
 [![ORTools - Example 1](http://img.youtube.com/vi/AcR-nXg5QKo/0.jpg)](http://www.youtube.com/watch?v=AcR-nXg5QKo "Video Title")
 
@@ -94,12 +94,12 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 - [orientationMaker](https://github.com/frankNiessen/ORTools/blob/master/README.md#orientationMaker)
 - [ORinfo](https://github.com/frankNiessen/ORTools/blob/master/README.md#ORinfo)
 - [peakFitORs](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs)
-- [plotHist_ORMisfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotHist_ORMisfit)
-- [plotIPDF_gB_Misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_Misfit)
+- [plotHist_OR_misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotHist_OR_misfit)
+- [plotIPDF_gB_misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_misfit)
 - [plotIPDF_gB_prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_prob)
 - [plotMap_clusters](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_clusters)
 - [plotMap_gB_c2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_c2c)
-- [plotMap_gB_Misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_Misfit)
+- [plotMap_gB_misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_misfit)
 - [plotMap_gB_p2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_p2c)
 - [plotMap_gB_prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_prob)
 - [plotMap_IPF_p2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_IPF_p2c)
@@ -225,36 +225,36 @@ The function is called by [defineORs](https://github.com/frankNiessen/ORTools/bl
   <img src="./doc/images/peakFitORs.png" alt="Interactive fitting window on which peakFitORs is applied." width="500"/>
 </p>
 
-### [plotHist_ORMisfit](./src/plotHist_ORMisfit.m)
-This function plots the misfit, or the disorientation, between the child-child boundaries with the orientation relationship in a histogram. This is by defeault done with the current OR (*job.p2c*), but additional OR's can be supplied with the argument *p2c*.
+### [plotHist_OR_misfit](./src/plotHist_OR_misfit.m)
+This function plots the misfit, or disorientation, between child-child boundaries and an orientation relationship in a histogram. By default, the current OR (*job.p2c*) is selected. Additional ORs can be supplied with the argument *p2c*.
 
 - Syntax
-  -  plotHist_ORMisfit(job)
-  -  plotHist_ORMisfit(job,p2c)
+  -  plotHist_OR_misfit(job)
+  -  plotHist_OR_misfit(job,p2c)
 - Input
   - job  - @parentGrainReconstructor
   - p2c  - One or multiple additional orientation-relationships to evaluate
 
 <p align="center">
-  <img src="./doc/images/plotHist_ORMisfit.png" alt="Plot example from plotHist_ORMisfit" width="500"/>
+  <img src="./doc/images/plotHist_OR_misfit.png" alt="Plot example from plotHist_OR_misfit" width="500"/>
 </p>
 
-### [plotIPDF_gB_Misfit](./src/plotIPDF_gB_Misfit.m)
-This function plots the misfit, or the disorientation, between the parent-child and child-child boundaries with the orientation relationship in an inverse polefigure showing the misorientation axes
+### [plotIPDF_gB_misfit](./src/plotIPDF_gB_misfit.m)
+This function plots the misfit, or disorientation, between parent-child and child-child boundaries with the orientation relationship in an inverse pole figure showing the misorientation axes
 
 - Syntax
-  -  plotIPDF_gB_Misfit(job)
+  -  plotIPDF_gB_misfit(job)
 - Input
   - job  - @parentGrainReconstructor
 - Options
   - colormap  - colormap string  
 
 <p align="center">
-  <img src="./doc/images/plotIPDF_gB_Misfit.png" alt="Plot example from plotIPDF_gB_Misfit" width="1000"/>
+  <img src="./doc/images/plotIPDF_gB_misfit.png" alt="Plot example from plotIPDF_gB_Misfit" width="1000"/>
 </p>
 
 ### [plotIPDF_gB_prob](./src/plotIPDF_gB_prob.m)
-This function calculates and plots the probability distribution between 0 and 1, that a boundary belongs to the orientation relationship in an inverse polefigure showing the misorientation axes
+This function calculates and plots the probability distribution between 0 and 1, that a boundary belongs to an orientation relationship in an inverse pole figure showing the misorientation axes
 
 - Syntax
   -  plotIPDF_gB_prob(job)
@@ -264,7 +264,7 @@ This function calculates and plots the probability distribution between 0 and 1,
   - colormap  - colormap string  
 
 <p align="center">
-  <img src="./doc/images/plotIPDF_gB_Prob.png" alt="Plot example from plotIPDF_gB_Prob" width="1000"/>
+  <img src="./doc/images/plotIPDF_gB_prob.png" alt="Plot example from plotIPDF_gB_prob" width="1000"/>
 </p>
 
 ### [plotMap_clusters](./src/plotMap_clusters.m)
@@ -295,18 +295,18 @@ The function colorizes the child-child boundaries in *job*
   <img src="./doc/images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
 </p>
 
-### [plotMap_gB_Misfit](./src/plotMap_gB_Misfit.m)
-The function colorizes the misfit, or the disorientation, between the parent-child and child-child boundaries with the orientation relationship *job.p2c*
+### [plotMap_gB_misfit](./src/plotMap_gB_misfit.m)
+The function colorizes the misfit, or disorientation, between parent-child and child-child boundaries with the orientation relationship *job.p2c*
 
 - Syntax
-  - plotMap_gB_Misfit(job)
+  - plotMap_gB_misfit(job)
 - Input
   - job  - @parentGrainReconstructor
 - Options
   - colormap  - colormap string 
 
 <p align="center">
-  <img src="./doc/images/plotMap_gB_Misfit.png" alt="Plot example from plotMap_gB_Misfit" width="500"/>
+  <img src="./doc/images/plotMap_gB_misfit.png" alt="Plot example from plotMap_gB_misfit" width="500"/>
 </p>
 
 ### [plotMap_gB_p2c](./src/plotMap_gB_p2c.m)
@@ -337,7 +337,7 @@ boundary belongs to the orientation relationship (see more [here](https://mtex-t
   - colormap  - colormap string 
  
 <p align="center">
-  <img src="./doc/images/plotMap_gB_Prob.png" alt="Plot example from plotMap_gB_Prob" width="500"/>
+  <img src="./doc/images/plotMap_gB_prob.png" alt="Plot example from plotMap_gB_prob" width="500"/>
 </p>
 
 
