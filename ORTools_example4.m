@@ -24,13 +24,13 @@ Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
 Ini.texturePath = [Ini.dataPath,'output\texture\'];
 Ini.imagePath = [Ini.dataPath,'output\images\'];
 %% Load data
-% Let's open the MTEX dataset on alpha and beta titanium
+% Open the MTEX dataset on alpha and beta titanium
 mtexDataset = 'alphaBetaTitanium';
 screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 1.5Â° threshold
+% Grains are calculated with a 1.5° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
   'removeQuadruplePoints');
 %% Rename and recolor phases 
@@ -48,7 +48,7 @@ job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %     - Adjust the threshold to include only the largest peak
 %     - Compute the OR by "Maximum f(g)"
 job.p2c = orientation.Burger(job.csParent, job.csChild);
-%Let us check the disorientation
+% Check the disorientation
 plotHist_OR_misfit(job);
 xlim([0,10]);
 %% Plotting (with ORTools functions)
@@ -71,7 +71,7 @@ parentEBSD = job.calcParentEBSD;
 figure;
 plot(parentEBSD(job.csParent),parentEBSD(job.csParent).orientations);
 %% Variant analysis                                
-%We calculate the variants ...
+% We calculate the variants ...
 job.calcVariants;
 % ... and plot them
 plotMap_variants(job,'linewidth',3);
@@ -83,17 +83,17 @@ xlabel('Variant Ids'); ylabel('Frequency');
 % The even distribution of variants is great to calculate the
 % transformation texture, assuming no strong variant selection
 
-%We will plot these polefigures
+% We will plot these pole figures
 hParent = [Miller(1,0,0,job.csParent),Miller(1,1,0,job.csParent)];
 hChild = [Miller(0,0,0,2,job.csChild),Miller(1,1,-2,0,job.csChild)];
 
-%Let's compute and plot the reconstructed parent ODF
+% Compute and plot the reconstructed parent ODF
 odf_parent = calcDensity(parentEBSD(job.csParent).orientations);
 figure;
 plotPDF(odf_parent,hParent,'antipodal','silent','contourf');
 colormap jet
 
-%We write a texture file generated from the parent ODF ...
+% We write a texture file generated from the parent ODF ...
 export_VPSC(odf_parent,[Ini.texturePath,'inputVPSC.Tex'],'interface',...
             'VPSC','Bunge','points', 50000);
 
@@ -101,17 +101,17 @@ export_VPSC(odf_parent,[Ini.texturePath,'inputVPSC.Tex'],'interface',...
 % We plot it, and write a file containing the transformed texture
 plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath);
         
-%Let's compare the transformation texture to the actual child ODF
+% Compare the transformation texture to the actual child ODF
 odf_child = calcDensity(ebsd(job.csChild).orientations);
 figure;
 plotPDF(odf_child,hChild,'antipodal','silent','contourf');
 colormap jet
 
-%We can see a quite good agreement. Slight mismatches in the intensity 
-%originate from a non-random variant selection
+% We can see a quite good agreement. Slight mismatches in the intensity 
+% originate from a non-random variant selection
 
-%We can also calculate the transformation texture using strict variant
-%selection:
+% We can also calculate the transformation texture using strict variant
+% selection:
 
 plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
                         'variantId',[3 4 6 8]);
