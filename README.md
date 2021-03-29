@@ -235,7 +235,8 @@ This function plots the misfit, or disorientation, between child-child grains an
   - job  - @parentGrainReconstructor
   - p2c  - one or multiple additional orientation relationship(s) to evaluate
 - Option
-  - bins - number of histogram bins
+  - bins    - number of histogram bins
+  - legend  - user-defined legend of ORs to evaluate
 
 
 <p align="center">
