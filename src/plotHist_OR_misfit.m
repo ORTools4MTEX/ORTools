@@ -19,15 +19,15 @@ numBins = get_option(varargin,'bins',150);
 allLegend = get_option(varargin,'legend',{});
 
 if ~isempty(p2c) && (p2c.CS ~= job.csParent || p2c.SS ~= job.csChild)
-    p2c = []; 
+    p2c = [];
 end
 if ~isempty(job.p2c)
-    p2c = [job.p2c,p2c]; 
+    p2c = [job.p2c,p2c];
 end
 
 if isempty(p2c)
-    warning('No OR was provided by the user'); 
-    return; 
+    warning('No OR was provided by the user');
+    return;
 end
 
 %% Plot histogram
@@ -46,9 +46,9 @@ end
 f = figure;
 c = ind2color(1:length(p2c));
 for ii = 1:length(p2c)
-    c2c = p2c(ii) * inv(p2c(ii).variants);      
+    c2c = p2c(ii) * inv(p2c(ii).variants);
     omegaTemp = angle_outer(moriSub,c2c);
-    [omega(ii,:),~] = min(omegaTemp,[],2); 
+    [omega(ii,:),~] = min(omegaTemp,[],2);
     %--- Calculate the counts in each class interval
     [counts(ii,:),binCenters(ii,:)] = hist(omega(ii,:),numBins);
     %--- Normalise the absolute counts in each class interval
@@ -62,13 +62,14 @@ end
 hold off
 
 if ~isempty(job.p2c)
-    h(1).DisplayName = "OR 1**"; 
+%     h(1).DisplayName = "OR 1**";
+    h(1).DisplayName = "OR **";
 end
 
 if ~isempty(allLegend)
     for ii = 2:length(p2c)
 %          h(ii).DisplayName = ['OR ',num2str(ii),' ',allLegend{ii-1}];
-         h(ii).DisplayName = allLegend{ii-1};
+        h(ii).DisplayName = allLegend{ii-1};
     end
 end
 
@@ -78,5 +79,5 @@ grid on
 legend
 set(f,'Name','Child-child grain disorientation distribution histogram','NumberTitle','on');
 end
-    
+
 
