@@ -234,6 +234,9 @@ This function plots the misfit, or disorientation, between child-child boundarie
 - Input
   - job  - @parentGrainReconstructor
   - p2c  - One or multiple additional orientation-relationships to evaluate
+- Option
+  - nrBins - Number of bins of the histogram
+
 
 <p align="center">
   <img src="./doc/images/plotHist_OR_misfit.png" alt="Plot example from plotHist_OR_misfit" width="500"/>
