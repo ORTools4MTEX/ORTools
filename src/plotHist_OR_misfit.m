@@ -12,7 +12,7 @@ function plotHist_OR_misfit(job,varargin)
 %
 % Options
 %  bins         - number of histogram bins
-%  legend       - figure legend
+%  legend       - user-defined legend of ORs to evaluate
 
 p2c = getClass(varargin,'orientation');
 numBins = get_option(varargin,'bins',150);
@@ -67,7 +67,8 @@ end
 
 if ~isempty(allLegend)
     for ii = 2:length(p2c)
-         h(ii).DisplayName = ['OR ',num2str(ii),' ',allLegend{ii-1}];
+%          h(ii).DisplayName = ['OR ',num2str(ii),' ',allLegend{ii-1}];
+         h(ii).DisplayName = allLegend{ii-1};
     end
 end
 
