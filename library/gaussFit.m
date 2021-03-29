@@ -18,7 +18,7 @@ if ~any([isempty(classRange),isempty(classInterval),isempty(counts)])
     grid on
     %% Annotate the graph axes and title
     xlabel('Parent-child boundary misorientation (°)','FontSize',14);
-    ylabel('Relative frequency ({\it f}(g))', 'FontSize',14);
+    ylabel('Relative frequency ({\itf}(g))', 'FontSize',14);
     set(f,'Name','Interpolated parent-child misorientation distribution histogram','NumberTitle','on');
     %% Plot the initial graph
     for ii = 1:length(s)
@@ -100,7 +100,7 @@ if ~any([isempty(classRange),isempty(classInterval),isempty(counts)])
     grid on
     %% Annotate the graph axes and title
     xlabel('Parent-child boundary misorientation (°)','FontSize',14);
-    ylabel('Relative frequency ({\it f}(g))', 'FontSize',14);
+    ylabel('Relative frequency ({\itf}(g))', 'FontSize',14);
     set(f,'Name','Fitted parent-child misorientation distribution histogram','NumberTitle','on');
     pause(1.0)
 else
