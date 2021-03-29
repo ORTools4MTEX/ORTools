@@ -11,7 +11,7 @@ function plotHist_OR_misfit(job,varargin)
 %  p2c          - One or multiple orientation-relationships to evaluate
 %
 % Options
-%  nrBins       - Number of bins of the histogram (500 by default)
+%  nrBins       - Number of bins of the histogram
 
 p2c = getClass(varargin,'orientation');
 nrBins = get_option(varargin,'nrBins',150);
