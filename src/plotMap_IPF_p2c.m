@@ -26,10 +26,10 @@ onlyChild = false;
 onlyParent = false; 
 if check_option(varargin,'child')
    onlyChild = true; 
-   varargin(find_option(varargin,'child')) =[];
+   varargin(find_option(varargin,'child'))=[];
 elseif check_option(varargin,'parent')
    onlyParent = true; 
-   varargin(find_option(varargin,'parent')) =[];
+   varargin(find_option(varargin,'parent'))=[];
 end
 
 % Parent map
@@ -42,7 +42,7 @@ if ~isempty(job.ebsd(job.csParent)) && ~onlyChild
     hold all
     plot(job.grains.boundary,varargin{:});
     hold off
-    guiTitle = ['Child IPF ',vector.char ,' map = ',job.csParent.mineral];
+    guiTitle = ['Parent IPF <',vector.char,'> map = ',job.csParent.mineral];
     set(f,'Name',guiTitle,'NumberTitle','on');
     drawnow;
 elseif isempty(job.ebsd(job.csParent))
@@ -59,11 +59,11 @@ if ~isempty(job.ebsd(job.csChild)) && ~onlyParent
     hold all  
     plot(job.grains.boundary,varargin{:});
     hold off
-    guiTitle = ['Child IPF ',vector.char ,' map = ',job.csChild.mineral];
+    guiTitle = ['Child IPF <',vector.char,'> map = ',job.csChild.mineral];
     set(f,'Name',guiTitle,'NumberTitle','on');
     drawnow;
 elseif isempty(job.ebsd(job.csChild))
     warning('Child IPFx map empty');
 end
-ipfKey = [ipfKey1, ipfKey2];
+ipfKey = [ipfKey1,ipfKey2];
 end
