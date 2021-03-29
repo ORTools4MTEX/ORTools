@@ -27,13 +27,13 @@ Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
 Ini.texturePath = [Ini.dataPath,'output\texture\'];
 Ini.imagePath = [Ini.dataPath,'output\images\'];
 %% Load data
-% Let's open the MTEX dataset on alpha and beta titanium
+% Open the MTEX dataset on alpha and beta titanium
 mtexDataset = 'alphaBetaTitanium';
 screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 1.5Â° threshold
+% Grains are calculated with a 1.5° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
   'removeQuadruplePoints');
 %% Rename and recolor phases 
@@ -51,14 +51,14 @@ job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %     - Adjust the threshold to include only the largest peak
 %     - Compute the OR by "Maximum f(g)"
 job = defineORs(job);
-% Let us check the disorientation and compare it with the Burgers OR
-plotHist_OR_misfit(job,orientation.Burger(job.csParent, job.csChild));
+% Check the disorientation and compare it with the Burgers OR
+plotHist_OR_misfit(job,orientation.Burger(job.csParent,job.csChild));
 xlim([0,10]);
 %     - The misfit with Burgers OR and the experimental OR is almost
 %     identical
 %% Plotting (with ORTools functions)
 screenPrint('SegmentStart','Plotting some ORTools maps');
-% Let's use some of the ORTools functions to visualize the determined OR
+% Use some of the ORTools functions to visualize the determined OR
 % and its relation to the microstructure
 
 % Phase map
@@ -71,11 +71,11 @@ plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child')
 
 % Child-child grain boundary misorientation map
 plotMap_gB_c2c(job,'linewidth',1);
-%       - Alpha of same prior beta grain seem to have ~58Â° misorientation
+%       - Alpha of same prior beta grain seem to have ~58° misorientation
 
 % Plot a map of the OR boundary disorientation, or misfit
 plotMap_gB_misfit(job,'linewidth',1.5, 'maxColor', 10);
-%       - A threshold of 10Â° shows where the prior beta boundaries are
+%       - A threshold of 10° shows where the prior beta boundaries are
 
 % Plot parent-child and child-child OR boundary probability map
 plotMap_gB_prob(job,'linewidth',1.5);
@@ -98,7 +98,7 @@ job.calcTPVotes('numFit',2);
 % and calcualte parent orientations based on this vote
 job.calcParentFromVote('strict', 'minFit',2.5*degree,...
                                  'maxFit',5*degree,'minVotes',2);
-%Let's plot them
+%Plot the data
 figure;
 plot(job.parentGrains, job.parentGrains.meanOrientation,'linewidth',1.5);
 %% Grow parent grains at grain boundaries by voting algorithm
@@ -118,7 +118,7 @@ job.mergeInclusions('maxSize',50);
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5)
 %% Variant analysis    
-% Let's plot the variant pole figure
+% Plot the variant pole figure
 figure; 
 plotPDF_variants(job);
 % We can calculate variants and packets
