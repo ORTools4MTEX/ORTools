@@ -226,16 +226,16 @@ The function is called by [defineORs](https://github.com/frankNiessen/ORTools/bl
 </p>
 
 ### [plotHist_OR_misfit](./src/plotHist_OR_misfit.m)
-This function plots the misfit, or disorientation, between child-child boundaries and an orientation relationship in a histogram. By default, the current OR (*job.p2c*) is selected. Additional ORs can be supplied with the argument *p2c*.
+This function plots the misfit, or disorientation, between child-child grains and an orientation relationship in a histogram. By default, the current OR (*job.p2c*) is selected and is denoted by 2 stars (**). Additional ORs can be supplied with the argument *p2c*.
 
 - Syntax
   -  plotHist_OR_misfit(job)
   -  plotHist_OR_misfit(job,p2c)
 - Input
   - job  - @parentGrainReconstructor
-  - p2c  - One or multiple additional orientation-relationships to evaluate
+  - p2c  - one or multiple additional orientation relationship(s) to evaluate
 - Option
-  - nrBins - Number of bins of the histogram
+  - bins - number of histogram bins
 
 
 <p align="center">
