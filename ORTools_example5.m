@@ -2,7 +2,7 @@
 % *********************************************************************
 %                        ORTools - Example 5
 % *********************************************************************
-% Using the OR peak fitter to deconvolute multiple OR's in a TRWIP alloy
+% Using the OR peak fitter to deconvolute multiple ORs in a TRIP-TWIP (TRWIP) alloy
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
@@ -73,6 +73,12 @@ job = defineORs(job);
 % The command window shows us that two ORs are at work:
 %  - The first OR is showing no misorientation, or cube-on-cube OR
 
+% Let us check the disorientation of alphaP child-child boundaries and 
+% compare it with K-S and N-W
+plotHist_OR_misfit(job,[orientation.KurdjumovSachs(job.csParent,job.csChild), ...
+                       orientation.NishiyamaWassermann(job.csParent,job.csChild)],...
+                       'legend',{'K-S','N-W'});
+return
 %% Plot the inverse pole figure
 % Plot inverse pole figures for parent-child and child-child boundary
 % disorientations
