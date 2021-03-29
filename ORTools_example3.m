@@ -43,16 +43,16 @@ ebsd = renamePhases(ebsd,Ini.phaseNames);
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose Beta as a parent and Alpha as a child phase in the transition
 job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
-%% Let's plot some maps
+%% Plot initial maps
 % Plotting the phase map 
 plotMap_phases(job,'linewidth',1);
 %       - The microstructure consists of 99.75 % alpha 
 
 % Child-child grain boundary misorientation map 
 plotMap_gB_c2c(job,'linewidth',1.5);
-%       - Alpha of same prior beta grain seem to have ~58Â° misorientation
+%       - Alpha of same prior beta grain seem to have ~58° misorientation
 
-%% Fit multiple OR's
+%% Fit multiple ORs
 % We can fit the OR from alpha-beta boundaries even though only 0.25 % 
 % beta are present
 %
@@ -67,12 +67,12 @@ job = defineORs(job);
 %  - OR2: (11-1)_beta||(-1-100)_alpha [0-1-1]_beta||[000-3]_alpha 
 
 dori = angle(job{1}.p2c,job{2}.p2c)/degree
-%       - We have a disorientation angle of 30Â° between the ORs 
+%       - We have a disorientation angle of 30° between the ORs 
 
-%% Let's plot Inverse PoleFigure
+%% Plot the inverse pole figure
 % Plot inverse pole figures for parent-child and child-child boundary
 % disorientations
-% We color the boundaries up to 5Â° disorientation to emphasize the effects
+% We color the boundaries up to 5° disorientation to emphasize the effects
 plotIPDF_gB_misfit(job{1},'maxColor',5);
 %       - OR 1 belongs to a distinct alpha-beta boundary miso axis
 %       - Few of the alpha-alpha boundary misorientations match the OR
@@ -83,15 +83,15 @@ plotIPDF_gB_misfit(job{2},'maxColor',5);
 %       - Misorientaitons not fulfilled by OR2 also don't fit to OR1
 %          - may be part of non-OR related prior-beta boundaries
 
-%% Let's analyze the microstructure by plotting maps
+%% Analyze the microstructure by plotting maps
 % Plot parent-child and child-child OR boundary disorientation map
-% We color the boundaries up to 5Â° disorientation to emphasize the effects
+% We color the boundaries up to 5° disorientation to emphasize the effects
 plotMap_gB_misfit(job{1},'linewidth',1.5,'maxColor',5);
-%       - Many regions have >= 5Â° disorientation from OR 1
+%       - Many regions have >= 5° disorientation from OR 1
 %       - Locally OR 1 seems to work well 
 
 plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
-%       - Most regions have <= 2Â° disorientation from OR 2
+%       - Most regions have <= 2° disorientation from OR 2
 %       - Locally OR 2 seems to not work
 
 % It follows that OR2 
@@ -114,4 +114,4 @@ BurgersOR = orientation.Burger(job{1}.csParent,job{1}.csChild);
 dori = angle(job{2}.p2c,BurgersOR)/degree
 
 % We can see that the 2nd OR is equivalent to the common Burgers OR
-% in Titanium alloys (misfit < 0.2Â°)
+% in Titanium alloys (misfit < 0.2°)
