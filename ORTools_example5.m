@@ -29,7 +29,7 @@ ebsd = loadEBSD_ctf([Ini.ebsdPath,'TRWIPsteel.ctf'],'convertSpatial2EulerReferen
 ebsd = ebsd('indexed');
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 3Â° threshold
+% Grains are calculated with a 3° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
   'removeQuadruplePoints');
 %% Rename and recolor phases 
@@ -43,7 +43,7 @@ ebsd = renamePhases(ebsd,Ini.phaseNames);
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose "Gamma" as a parent and "Alpha" as a child phase
 job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
-%% Let's plot some maps
+%% Plot initial maps
 % Plotting the phase map 
 plotMap_phases(job,'linewidth',2);
 %       - Epsilon has formed from Gamma and AlphaP from Epsilon
@@ -54,14 +54,14 @@ plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2);
 
 % Parent-child grain boundary misorientation map 
 plotMap_gB_p2c(job,'linewidth',1.5);
-%       - Misorientation mainly around ~45Â°
+%       - Misorientation mainly around ~45°
 
 % Child-child grain boundary misorientation map 
 plotMap_gB_c2c(job,'linewidth',1.5);
 %       - Different misorientation angles are visible
 
 
-%% Fit multiple OR's
+%% Fit multiple ORs
 % We can fit the OR from gamma-alpha boundary misorientations
 %
 % Use the peak fitter in the pop-up menu
@@ -70,40 +70,40 @@ plotMap_gB_c2c(job,'linewidth',1.5);
 %     - Compute ORs by "Maximum f(g)"
 %     - Choose to export "All ORs" - defineOR returns a cell array job{:}
 job = defineORs(job);
-% The command window shows us that two OR's are at work:
+% The command window shows us that two ORs are at work:
 %  - The first OR is showing no misorientation, or cube-on-cube OR
 
-%% Let's plot Inverse PoleFigure
+%% Plot the inverse pole figure
 % Plot inverse pole figures for parent-child and child-child boundary
 % disorientations
-% We color the boundaries up to 5Â° disorientation to emphasize the effects
+% We color the boundaries up to 5° disorientation to emphasize the effects
 plotIPDF_gB_misfit(job{1},'maxColor',5);
-%       - The misorientation axis is scattered because of the 0Â° angle
+%       - The misorientation axis is scattered because of the 0° angle
 %       - The disorientation is quite high
 
 plotIPDF_gB_misfit(job{2},'maxColor',5);
 %       - OR 2 is the governing OR with a good match for the misorientation
 %         axis and the disorientation angle
 
-%% Let's analyze the microstructure by plotting maps
+%% Analyze the microstructure by plotting maps
 % Plot parent-child and child-child OR boundary disorientation map
-% We color the boundaries up to 5Â° disorientation to emphasize the effects
+% We color the boundaries up to 5° disorientation to emphasize the effects
 plotMap_gB_misfit(job{1},'linewidth',1.5,'maxColor',5);
 %       - Only few small grains of Alpha with no connection to Epsilon
 %         match
 
 plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
-%       - Most grains apart from the small grains of OR1 match
+%       - Most grains apart from the small grains of OR 1 match
 
-% Seeing that the OR1 describes a cube-on-cube misorientation of small
+% Seeing that the OR 1 describes a cube-on-cube misorientation of small
 % alphaP grains in gamma, these are identified as misindexed points, i.e.
-% points belonging to gamma, but indexed as alpha - let's clean this up
+% points belonging to gamma, but indexed as alpha - so let's clean this up
 
 %% Merging misindexed gamma
-% OR1 has only variant, calcGBVotes finds the fit of that theoretical
+% OR 1 has only variant, calcGBVotes finds the fit of that theoretical
 % variant with the parent-child boundary misorientations
 job{1}.calcGBVotes('noC2C','numfit',1);
-% We transform all alpha grains that have a fit of <=5Â° to gamma
+% We transform all alpha grains that have a fit of <=5° to gamma
 job{1}.calcParentFromVote('minFit',5*degree);
 % We can see that the small grains have been transformed
 figure;
@@ -126,7 +126,7 @@ screenPrint('SegmentStart','Finding the orientation relationship(s)');
 job = setParentGrainReconstructor(ebsdCleaned,grains,Ini.cifPath);
 % And enter the OR peak fitter again
 job = defineORs(job);
-% We can now see that the peak at 0Â° has disappeared.
+% We can now see that the peak at 0° has disappeared.
 % From here we can continue working with the second OR or explore the other
 % smaller peaks to plot maps or reconstruct the parent microstructure
 %% Save images
