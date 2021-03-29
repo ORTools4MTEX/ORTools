@@ -61,14 +61,14 @@ for ii = 1:length(p2c)
 end
 hold off
 
-if ~isempty(job.p2c)
-%     h(1).DisplayName = "OR 1**";
+if ~isempty(job.p2c) && ~isempty(allLegend)
     h(1).DisplayName = "OR **";
+elseif ~isempty(job.p2c) && isempty(allLegend)
+    h(1).DisplayName = "OR 1**";
 end
 
 if ~isempty(allLegend)
     for ii = 2:length(p2c)
-%          h(ii).DisplayName = ['OR ',num2str(ii),' ',allLegend{ii-1}];
         h(ii).DisplayName = allLegend{ii-1};
     end
 end
