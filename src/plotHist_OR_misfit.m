@@ -12,9 +12,11 @@ function plotHist_OR_misfit(job,varargin)
 %
 % Options
 %  bins         - number of histogram bins
+%  legend       - figure legend
 
 p2c = getClass(varargin,'orientation');
 numBins = get_option(varargin,'bins',150);
+allLegend = get_option(varargin,'legend',{});
 
 if ~isempty(p2c) && (p2c.CS ~= job.csParent || p2c.SS ~= job.csChild)
     p2c = []; 
@@ -61,6 +63,12 @@ hold off
 
 if ~isempty(job.p2c)
     h(1).DisplayName = "OR 1**"; 
+end
+
+if ~isempty(allLegend)
+    for ii = 2:length(p2c)
+         h(ii).DisplayName = ['OR ',num2str(ii),' ',allLegend{ii-1}];
+    end
 end
 
 xlabel('Child-child grain disorientation (°)','FontSize',14);
