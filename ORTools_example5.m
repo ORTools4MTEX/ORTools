@@ -78,7 +78,7 @@ job = defineORs(job);
 plotHist_OR_misfit(job,[orientation.KurdjumovSachs(job.csParent,job.csChild), ...
                        orientation.NishiyamaWassermann(job.csParent,job.csChild)],...
                        'legend',{'K-S','N-W'});
-return
+
 %% Plot the inverse pole figure
 % Plot inverse pole figures for parent-child and child-child boundary
 % disorientations
