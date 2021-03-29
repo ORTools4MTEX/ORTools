@@ -33,7 +33,7 @@ screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDatase
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 3Â° threshold
+% Grains are calculated with a 3° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle', 3*degree);
 % EBSD data in small grains are removed
 ebsd(grains(grains.grainSize < 3)) = [];
@@ -57,15 +57,15 @@ job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
 % ... and refine it based on the fit with boundary misorientations
 job.calcParent2Child;
 % Let us check the disorientation and compare it with K-S and N-W
-plotHist_OR_misfit(job,[orientation.KurdjumovSachs(job.csParent, job.csChild), ...
-                       orientation.NishiyamaWassermann(job.csParent, job.csChild)]);
-% Let's now plot some information about the OR
+plotHist_OR_misfit(job,[orientation.KurdjumovSachs(job.csParent,job.csChild), ...
+                       orientation.NishiyamaWassermann(job.csParent,job.csChild)]);
+% Plot information about the OR
 ORinfo(job.p2c);
 %    - We have 24 martensitic variants
-%    - We are ~2.4Â° from Nishiyama-Wassermann
+%    - We are ~2.4° from the Nishiyama-Wassermann OR
 %% Plotting (with ORTools functions)
 screenPrint('SegmentStart','Plotting some ORTools maps');
-% Let's use some of the ORTools functions to visualize the determined OR
+% Use some of the ORTools functions to visualize the determined OR
 % and its relation to the microstructure
 
 % Phase map
@@ -79,7 +79,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2);
 
 % Child-child grain boundary misorientation map
 plotMap_gB_c2c(job,'linewidth',2);
-%    - We can see that misorientation angles of ~15-50Â° are not present
+%    - We can see that misorientation angles of ~15-50° are not present
 %    within prior austenite grains and thus delinitate prior austenite
 %    grain boundaries
 
@@ -97,12 +97,12 @@ plotMap_gB_prob(job,'linewidth',2);
 %   - We reconstruct the microstructure with a graph-based approach
 job.calcGraph('threshold',2.5*degree,'tolerance',2.5*degree);
 job.clusterGraph('inflationPower',1.6);
-% Let us plot the clusters ...
+% Plot the clusters ...
 plotMap_clusters(job,'linewidth',2);
 % ... and calculate the parent orientations
 job.calcParentFromGraph;
 
-% Let's plot the reconstructed parent microstructure
+% Plot the reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2);
 %% Remove badly reconstructed clusters
@@ -116,7 +116,7 @@ mtexColorbar;
 % We therefire decide to revert the reconstruction of grains with bad fits
 % or with very small clusters
 job.revert(job.grains.fit > 5*degree | job.grains.clusterSize < 15)
-% Let's see the remaining grains
+% Plot the remaining grains
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 %% Fill in unreconstructed regions with voting algorithm
@@ -145,7 +145,7 @@ plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 %% Variant analysis
 % Now that we have both the alpha and the associated prior gamma
 % orientations, we can conduct variant analysis.
-% Let's plot the possible variants in a pole figure
+% Plot the possible variants in a pole figure
 plotPDF_variants(job);
 % We then calculate the variant IDs of all alpha grains ...
 job.calcVariants;
