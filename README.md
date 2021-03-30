@@ -435,11 +435,13 @@ The function calculates and plots the transformation texture, with or without im
 - Options
   - odfSecP      - array with angles of parent ODF section to display
   - odfSecC      - array with angles of child ODF section to display
+  - colormapP    - colormap string for parent PFs and ODFs
+  - colormapC    - colormap string for child PFs and ODFs
   - variantId    - list with specific variant Ids to plot
   - halfwidth    - halfwidth for ODF calculation
-  - nrPoints     - nr of points to be written into the VPSC file
-  - colormap     - colormap string
-  - path         - path to the texture file
+  - points       - number of points to be written into the VPSC file
+  - import       - (optional path) & name of VPSC file to transform
+  - export       - (optional path) & name of transformed VPSC file to save
 
 <p align="center">
   <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transformation" width="1000"/>
