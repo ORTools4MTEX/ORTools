@@ -57,8 +57,9 @@ job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
 % ... and refine it based on the fit with boundary misorientations
 job.calcParent2Child;
 % Let us check the disorientation and compare it with K-S and N-W
-plotHist_OR_misfit(job,[orientation.KurdjumovSachs(job.csParent,job.csChild), ...
-                       orientation.NishiyamaWassermann(job.csParent,job.csChild)]);
+KS = orientation.KurdjumovSachs(job.csParent,job.csChild);
+NW = orientation.NishiyamaWassermann(job.csParent,job.csChild);
+plotHist_OR_misfit(job,[KS,NW],'legend',{'K-S','N-W'});
 % Plot information about the OR
 ORinfo(job.p2c);
 %    - We have 24 martensitic variants
