@@ -12,7 +12,7 @@ function plotHist_OR_misfit(job,varargin)
 %
 % Options
 %  bins         - number of histogram bins
-%  legend       - user-defined legend of ORs to evaluate
+%  legend       - cell array of strings with legend names of ORs to evaluate
 
 p2c = getClass(varargin,'orientation');
 numBins = get_option(varargin,'bins',150);
