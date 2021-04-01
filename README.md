@@ -238,7 +238,7 @@ This function plots the misfit, or disorientation, between child-child grains an
   - p2c  - one or multiple additional orientation relationship(s) to evaluate
 - Options
   - bins    - number of histogram bins
-  - legend  - legend of ORs to evaluate
+  - legend  - cell array of strings with legend names of ORs to evaluate
 
 
 <p align="center">
