@@ -17,8 +17,8 @@ function plotPODF_transformation(job,hParent,hChild,varargin)
 %  variantWt    - list with specific variant weights to plot
 %  halfwidth    - halfwidth for ODF calculation
 %  points       - number of points to be written into the VPSC file
-%  import       - (optional path) & name of VPSC file to transform
-%  export       - (optional path) & name of transformed VPSC file to save
+%  import       - (optional path) & name of the input VPSC file to transform
+%  export       - (optional path) & name of the output transfromed VPSC file
 
 
 odfSecP = get_option(varargin,'odfSecP',[0 45 65]*degree);
