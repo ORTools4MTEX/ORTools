@@ -9,8 +9,8 @@ function orientationMaker(ori,varargin)
 %
 % Options
 %  halfwidth    - halfwidth for ODF calculation
-%  points       - number of points in VPSC file
-%  export       - (optional path) & name of VPSC file to save
+%  points       - number of points (orientations) in the VPSC file
+%  export       - (optional path) & name of the VPSC file
 
 %% Common ideal orientations for fcc materials
 % % Cube (C):              phi1 = 45; PHI = 0;  phi2 = 45;
