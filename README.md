@@ -152,8 +152,9 @@ The function creates a VPSC file with orientations following the distribution of
   - crystalDirection  - @Miller
   - specimenDirection - @vector3d
 - Options
-  - halfwidth   - Halfwidth for ODF calculation
-  - nrPoints    - Number of points (orientations) in the VPSC file
+  - halfwidth    - halfwidth for ODF calculation
+  - points       - number of points (orientations) in the VPSC file
+  - export       - (optional path) & name of the VPSC file
 
 ### [grainClick](./src/grainClick.m)
 Interactive map to select parent grains for further analysis
@@ -190,8 +191,9 @@ The function creates a VPSC file with orientations following the distribution of
 - Input
   - ori   - @orientation
 - Options
-  - halfwidth   - Halfwidth for ODF calculation
-  - nrPoints    - Number of points (orientations) in the VPSC file
+  - halfwidth    - halfwidth for ODF calculation
+  - points       - number of points (orientations) in the VPSC file
+  - export       - (optional path) & name of the VPSC file
 
 ### [ORinfo](./src/ORinfo.m)
 The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
@@ -234,9 +236,9 @@ This function plots the misfit, or disorientation, between child-child grains an
 - Input
   - job  - @parentGrainReconstructor
   - p2c  - one or multiple additional orientation relationship(s) to evaluate
-- Option
+- Options
   - bins    - number of histogram bins
-  - legend  - user-defined legend of ORs to evaluate
+  - legend  - legend of ORs to evaluate
 
 
 <p align="center">
@@ -278,7 +280,7 @@ The function shows the clusters of grains that are likely to belong to the same 
   -  ipfKey = plotMap_clusters(job)
   -  ipfKey = plotMap_clusters(job,direction)
 - Input
-  - job  - @parentGrainReconstructor
+  - job        - @parentGrainReconstructor
   - direction  - @vector3d - IPF direction
 
 <p align="center">
@@ -435,11 +437,13 @@ The function calculates and plots the transformation texture, with or without im
 - Options
   - odfSecP      - array with angles of parent ODF section to display
   - odfSecC      - array with angles of child ODF section to display
+  - colormapP    - colormap string for parent PFs and ODFs
+  - colormapC    - colormap string for child PFs and ODFs
   - variantId    - list with specific variant Ids to plot
   - halfwidth    - halfwidth for ODF calculation
-  - nrPoints     - nr of points to be written into the VPSC file
-  - colormap     - colormap string
-  - path         - path to the texture file
+  - points       - number of points to be written into the VPSC file
+  - import       - (optional path) & name of the input VPSC file to transform
+  - export       - (optional path) & name of the output transformed VPSC file
 
 <p align="center">
   <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transformation" width="1000"/>
