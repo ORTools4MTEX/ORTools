@@ -236,9 +236,9 @@ This function plots the misfit, or disorientation, between child-child grains an
 - Input
   - job  - @parentGrainReconstructor
   - p2c  - one or multiple additional orientation relationship(s) to evaluate
-- Option
+- Options
   - bins    - number of histogram bins
-  - legend  - user-defined legend of ORs to evaluate
+  - legend  - legend of ORs to evaluate
 
 
 <p align="center">
@@ -280,7 +280,7 @@ The function shows the clusters of grains that are likely to belong to the same 
   -  ipfKey = plotMap_clusters(job)
   -  ipfKey = plotMap_clusters(job,direction)
 - Input
-  - job  - @parentGrainReconstructor
+  - job        - @parentGrainReconstructor
   - direction  - @vector3d - IPF direction
 
 <p align="center">
