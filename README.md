@@ -152,8 +152,9 @@ The function creates a VPSC file with orientations following the distribution of
   - crystalDirection  - @Miller
   - specimenDirection - @vector3d
 - Options
-  - halfwidth   - Halfwidth for ODF calculation
-  - nrPoints    - Number of points (orientations) in the VPSC file
+  - halfwidth    - halfwidth for ODF calculation
+  - points       - number of points (orientations) in the VPSC file
+  - export       - (optional path) & name of the VPSC file
 
 ### [grainClick](./src/grainClick.m)
 Interactive map to select parent grains for further analysis
@@ -190,8 +191,9 @@ The function creates a VPSC file with orientations following the distribution of
 - Input
   - ori   - @orientation
 - Options
-  - halfwidth   - Halfwidth for ODF calculation
-  - nrPoints    - Number of points (orientations) in the VPSC file
+  - halfwidth    - halfwidth for ODF calculation
+  - points       - number of points (orientations) in the VPSC file
+  - export       - (optional path) & name of the VPSC file
 
 ### [ORinfo](./src/ORinfo.m)
 The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
@@ -440,8 +442,8 @@ The function calculates and plots the transformation texture, with or without im
   - variantId    - list with specific variant Ids to plot
   - halfwidth    - halfwidth for ODF calculation
   - points       - number of points to be written into the VPSC file
-  - import       - (optional path) & name of VPSC file to transform
-  - export       - (optional path) & name of transformed VPSC file to save
+  - import       - (optional path) & name of the input VPSC file to transform
+  - export       - (optional path) & name of the output transformed VPSC file
 
 <p align="center">
   <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transformation" width="1000"/>
