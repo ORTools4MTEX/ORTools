@@ -10,8 +10,8 @@ function fibreMaker(crystalDirection,specimenDirection,varargin)
 %
 % Options
 %  halfwidth    - halfwidth for ODF calculation
-%  points       - number of points in VPSC file
-%  export       - (optional path) & name of VPSC file to save
+%  points       - number of points (orientations) in the VPSC file
+%  export       - (optional path) & name of the VPSC file
 
 
 %% All fibres are defined based on the following specimen co-ordinate system
