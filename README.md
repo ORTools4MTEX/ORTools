@@ -450,7 +450,7 @@ The function calculates and plots the transformation texture, with or without im
 </p>
 
 ### [plotStack](./src/plotStack.m)
-This function plot maps of the prior parent grain for martensite variant analysis. You can manually supply a parent grain Id *pGrainId* or use the function [grainClick](https://github.com/frankNiessen/ORTools/blob/master/README.md#grainClick) to choose a grain interactively.
+The function plots maps for martensite variant analysis of a single prior parent grain. You can manually supply a parent grain Id *pGrainId* or use the function [grainClick](https://github.com/frankNiessen/ORTools/blob/master/README.md#grainClick) to choose a grain interactively.
 
 - Syntax
   -  plotStack(job,parentEBSD,pGrainId)
@@ -467,7 +467,7 @@ This function plot maps of the prior parent grain for martensite variant analysi
 
 
 ### [readCPR](./src/readCPR.m)
-This is a short auxiliary function to read in *.cpr/.crc* files with a browser window.
+An auxiliary function to read in *.cpr/.crc* files with a browser window.
 
 - Syntax
   - ebsd = readCPR
@@ -480,7 +480,7 @@ This is a short auxiliary function to read in *.cpr/.crc* files with a browser w
   - ebsd             - @EBSD
 
 ### [recolorPhases](./src/recolorPhases.m)
-The function opens an interactive colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
+The function opens an interactive GUI colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
 
 - Syntax
   - [ebsd,grains] = recolorPhases(ebsd,grains)
@@ -507,7 +507,7 @@ The function opens an interactive list with the possible phasenames in *phaseStr
   - ebsd             - @EBSD
 
 ### [saveImage](./src/saveImage.m)
-Auxiliary function to save all open figures as images.
+An auxiliary function to save all open figures as images.
 
 - Syntax
   - saveImage(fileDir,fileName)
@@ -518,7 +518,7 @@ Auxiliary function to save all open figures as images.
   - fileDir     - file directory
 
 ### [screenPrint](./src/screenPrint.m)
-Auxiliary function for formating command window output
+An auxiliary function for formating command window output.
 
 - Syntax
   - screenPrint(mode)
@@ -528,7 +528,7 @@ Auxiliary function for formating command window output
   - string   - Output string
 
 ### [setParentGrainReconstructor](./src/setParentGrainReconstructor.m)
-Auxiliary GUI function to define a job of class [parentGrainReconstructor](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html)
+An auxiliary GUI function to define a job of class [parentGrainReconstructor](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html).
 
 - Syntax
   - setParentGrainReconstructor(ebsd,grains)
@@ -541,7 +541,7 @@ Auxiliary GUI function to define a job of class [parentGrainReconstructor](https
   - job      - @parentGrainReconstructor
 
 ### [tileFigs](./src/tileFigs.m)
-Auxhiliary function to distribute figures evenly over screen
+An auxiliary function to distribute figures evenly over a user screen/monitor.
 
 - Syntax
   - fileFigs
