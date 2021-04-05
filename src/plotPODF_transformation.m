@@ -13,8 +13,8 @@ function plotPODF_transformation(job,hParent,hChild,varargin)
 %  odfSecC      - array with angles of child ODF section to display
 %  colormapP    - colormap string for parent PFs and ODFs
 %  colormapC    - colormap string for child PFs and ODFs
-%  variantId    - list with specific variant Ids to plot
-%  variantWt    - list with specific variant weights to plot
+%  variantId    - list of specific variant Ids to plot
+%  variantWt    - list of specific variant weights to plot
 %  halfwidth    - halfwidth for ODF calculation
 %  points       - number of points to be written into the VPSC file
 %  import       - (optional path) & name of the input VPSC file to transform
