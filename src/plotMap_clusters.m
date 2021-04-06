@@ -28,7 +28,7 @@ function ipfKey = plotMap_clusters(job, varargin)
     hold all  
     plot(grainsMerged.boundary,varargin{:});
     hold off
-    guiTitle = ['Child IPF ',vector.char ,' map = ',job.csChild.mineral];
+    guiTitle = ['Cluster + Child IPF ',vector.char ,' map = ',job.csChild.mineral];
     set(f,'Name',guiTitle,'NumberTitle','on');
     drawnow;
 

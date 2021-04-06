@@ -16,7 +16,7 @@ function ebsd = readCPR(inPath,fileName)
     % Get filename and path
     fprintf(' -> Load *.cpr file containing EBSD map data\n');
     if nargin == 0
-        [fileName,inPath] = uigetfile('.\*.cpr','EBSD map data: Open *.cpr file');
+        [fileName,inPath] = uigetfile('./*.cpr','EBSD map data: Open *.cpr file');
     elseif nargin == 1
         [fileName,inPath] = uigetfile([inPath,'*.cpr'],'EBSD map data: Open *.cpr file');
     end

@@ -19,11 +19,11 @@ setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
 setMTEXpref('FontSize',14);   
 % Default directories - Do not modify
-Ini.dataPath = [pwd,'\data\'];
-Ini.cifPath = [Ini.dataPath,'input\cif\'];
-Ini.ebsdPath = [Ini.dataPath,'input\ebsd\'];
-Ini.texturePath = [Ini.dataPath,'output\texture\'];
-Ini.imagePath = [Ini.dataPath,'output\images\'];
+Ini.dataPath = [pwd,'/data/'];
+Ini.cifPath = [Ini.dataPath,'input/cif/'];
+Ini.ebsdPath = [Ini.dataPath,'input/ebsd/'];
+Ini.texturePath = [Ini.dataPath,'output/texture/'];
+Ini.imagePath = [Ini.dataPath,'output/images/'];
 Ini.phaseNames = {'Gamma','AlphaP','Epsilon','Beta','Alpha','AlphaDP'};
 %% Load data
 mtexDataset = 'alphaBetaTitanium';
