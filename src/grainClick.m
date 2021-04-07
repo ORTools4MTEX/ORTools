@@ -7,6 +7,10 @@ function grainClick(job,parentEBSD,varargin)
 % Input
 %  job          - @parentGrainreconstructor
 %  parentEBSD   - reconstructed @EBSD data
+% 
+% Option
+%  grains       - plot grain data instead of ebsd data
+%  parentTwins  - Detect parent twins
 
 close all;
 %% Plot reconstructed parent grains
@@ -100,7 +104,9 @@ setappdata(mP.ax,'grains',[pGrains]);
             disp(txt{k});
         end
         % Plot the user-defined stack of plots
-        if any(job.isTransformed(job.mergeId == pGrain_select.id)) 
+        if any(strcmp(varargin{:},'parentTwins'))
+           detectParentTwins(job,parentEBSD,unique(pGrain_select.id),varargin{:});        
+        elseif any(job.isTransformed(job.mergeId == pGrain_select.id)) 
             plotStack(job,parentEBSD,unique(pGrain_select.id),varargin{:});
         else
             f = msgbox('Choose a reconstructed parent grain (within the thick boundaries)', 'Error','warn');

@@ -173,4 +173,7 @@ saveImage(Ini.imagePath);
 grainClick(job,parentEBSD);
 %grainClick(job,parentEBSD,'grains');    %Plot grain data instead
 
+%% Refine gamma twins by clicking on gamma grains
+grainClick(job,parentEBSD,'parentTwins');
+
 
