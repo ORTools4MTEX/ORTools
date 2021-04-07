@@ -105,7 +105,7 @@ setappdata(mP.ax,'grains',[pGrains]);
         end
         % Plot the user-defined stack of plots
         if any(strcmp(varargin{:},'parentTwins'))
-           detectParentTwins(job,parentEBSD,unique(pGrain_select.id),varargin{:});        
+           detectParentTwins2(job,parentEBSD,unique(pGrain_select.id),varargin{:});        
         elseif any(job.isTransformed(job.mergeId == pGrain_select.id)) 
             plotStack(job,parentEBSD,unique(pGrain_select.id),varargin{:});
         else
