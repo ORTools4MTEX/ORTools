@@ -25,18 +25,33 @@ else
     twgB = job.parentGrains.boundary.selectByGrainId(twIds);
 
     %% Check fit of local child orienations to parent and twin orientation
-    newPId = nan(size(twIds,1),length(twEBSDc));
+    newPoris = orientation.nan(size(twEBSDc.orientations),pGrain.CS);
     for ii = 1:size(twIds,1)
-       [~,fit(:,1)] = calcParent(twEBSDc.orientations,twGrains.meanOrientation(1,ii),job.p2c);
-       [~,fit(:,2)] = calcParent(twEBSDc.orientations,twGrains.meanOrientation(2,ii),job.p2c);
+       for gNr = 1:2 %Loop grain pair
+           %Get parent variant IDs and Fit
+           [pVarIds(:,gNr),fit(:,gNr)] = calcParent(twEBSDc.orientations,twGrains.meanOrientation(gNr,ii),job.p2c,'id');
+           %Get local parent orientations
+           pOris(:,gNr) = variants(job.p2c, twEBSDc.orientations, pVarIds(:,gNr));
+         
+    % *** ATTEMPT OF CHECKING LOCAL FIT - NOT SUCCESFUL        
+%            %Get parent variant IDs
+%            [pVarIds(:,gNr),~] = calcParent(twEBSDc.orientations,twGrains.meanOrientation(gNr,ii),job.p2c,'id');
+%            %Get local parent orientations
+%            pOris(:,gNr) = variants(job.p2c, twEBSDc.orientations, pVarIds(:,gNr));
+%            %Remove the ones that don't match the mean orientation well
+%            badFit = angle(pOris(:,gNr),twGrains.meanOrientation(gNr,ii)) > 2*get_option(varargin,'threshold',5*degree);
+%            pOris(badFit,gNr) = orientation.nan(pGrain.CS);
+%            %Get fit of each orientation
+%            [~,fit(:,gNr)] = calcParent(twEBSDc.orientations,pOris(:,gNr),job.p2c);
+       end   
 
-       %Assign parent Ids
-        fit = fit/degree;
-        [~,id] = min(fit,[],2);
-        newPId(ii,id == 1) = twIds(ii,1);
-        newPId(ii,id == 2) = twIds(ii,2);
+            %Assign parent orienetations based on best fit
+            fit = fit/degree;
+            [~,id] = min(fit,[],2);
+            newPoris(id == 1) = pOris(id == 1,1);
+            newPoris(id == 2) = pOris(id == 2,2);
+       
     end
-    twOris = job.parentGrains(job.parentGrains.id2ind(newPId(ii,:))).meanOrientation;
 
     %% Plot results
     figure;
@@ -48,7 +63,7 @@ else
 
     nextAxis
     for ii = 1:size(twIds,1)
-        plot(twEBSDp,twOris);
+        plot(twEBSDp,newPoris);
         hold on
     end
     set(gcf,'name','Reconstructed vs. Refined parent orientations');
