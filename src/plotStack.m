@@ -326,7 +326,7 @@ function plotStack(job,parentEBSD,pGrainId,varargin)
     ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
     
-    try tileFigs; end
+%     try tileFigs; end
     return
     end
 
