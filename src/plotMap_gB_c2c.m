@@ -15,12 +15,15 @@ cmap = get_option(varargin,'colormap','jet');
 
 gB_c2c = job.grains.boundary(job.csChild.mineral,job.csChild.mineral);
 if ~isempty(gB_c2c)
-    %% Plot the parent-child misorientation distribution map
+    %% Plot the child-child misorientation distribution map
+    fprintf(' -> Plotting the child-child misorientation distribution map \n');
+    
+    % Plot the child-child misorientation distribution map
     f = figure;
     plot(job.grains,'grayscale');
     hold on
     % Plot the GBs in black
-    plot(job.grains.boundary,'LineColor','k','displayName','GBs',varargin{:});
+    plot(job.grains.boundary,'LineColor',[0 0 0],'displayName','GBs',varargin{:});
     hold on
     % Plot the IPBs in jet scale
     plot(gB_c2c,gB_c2c.misorientation.angle./degree,varargin{:})
