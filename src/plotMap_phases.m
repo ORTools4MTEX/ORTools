@@ -13,7 +13,7 @@ f = figure;
 plot(job.grains);
 hold all
 % Plot the GBs in black
-plot(job.grains.boundary,'LineColor','k','displayName','GBs',varargin{:});
+plot(job.grains.boundary,'LineColor',[0 0 0],'displayName','GBs',varargin{:});
 hold off
 set(f,'Name','Phases','NumberTitle','on');
 drawnow;
