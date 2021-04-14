@@ -39,15 +39,15 @@ OR.misorientationRational = orientation('map',...
     OR.direction.child);
 
 %Misorientation axes
-OR.misorientationAxis.parent = axis(OR.misorientation,OR.CS.parent);
-OR.misorientationAxis.parent = setDisplayStyle(OR.misorientationAxis.parent,'direction');
-OR.misorientationAxis.child = axis(OR.misorientation,OR.CS.child);
-OR.misorientationAxis.child = setDisplayStyle(OR.misorientationAxis.child,'direction');
+OR.rotationAxis.parent = axis(OR.misorientation,OR.CS.parent);
+OR.rotationAxis.parent = setDisplayStyle(OR.rotationAxis.parent,'direction');
+OR.rotationAxis.child = axis(OR.misorientation,OR.CS.child);
+OR.rotationAxis.child = setDisplayStyle(OR.rotationAxis.child,'direction');
 
-%Deviation angle between rational and actual OR misorientations
-OR.devAngle.plane = min(angle(OR.misorientation*OR.plane.parent.symmetrise,OR.plane.child));
-OR.devAngle.direction = min(angle(OR.misorientation*OR.direction.parent.symmetrise,OR.direction.child));
-OR.devAngle.axis = min(angle(OR.misorientation*OR.misorientationAxis.parent.symmetrise,OR.misorientationAxis.child));
+%Angle between rational and actual OR misorientations
+OR.angle.plane = min(angle(OR.misorientation*OR.plane.parent.symmetrise,OR.plane.child));
+OR.angle.direction = min(angle(OR.misorientation*OR.direction.parent.symmetrise,OR.direction.child));
+OR.angle.axis = min(angle(OR.misorientation*OR.rotationAxis.parent.symmetrise,OR.rotationAxis.child));
 
 %Variants
 OR.variants.orientation = OR.misorientation.variants;
@@ -67,24 +67,24 @@ if ~check_option(varargin,'silent')
         sprintMiller(OR.plane.parent,'round')]));
     screenPrint('SubStep',sprintf(['Closest child plane = ',...
         sprintMiller(OR.plane.child,'round')]));
-    screenPrint('SubStep',sprintf(['Angle between planes = ',...
-        num2str(OR.devAngle.plane./degree),'º']));
+    screenPrint('SubStep',sprintf(['Ang. dev. of parallel plane relationship from OR = ',...
+        num2str(OR.angle.plane./degree),'º']));
     
     screenPrint('Step','Parallel directions');
     screenPrint('SubStep',sprintf(['Closest parent direction = ',...
         sprintMiller(OR.direction.parent,'round')]));
     screenPrint('SubStep',sprintf(['Closest child direction = ',...
         sprintMiller(OR.direction.child,'round')]));
-    screenPrint('SubStep',sprintf(['Angle between directions = ',...
-        num2str(OR.devAngle.direction./degree),'º']));
+    screenPrint('SubStep',sprintf(['Ang. dev. of parallel directions relationship from OR = ',...
+        num2str(OR.angle.direction./degree),'º']));
     
     screenPrint('Step','OR misorientation rotation axes');
     screenPrint('SubStep',sprintf(['Parent rot. axis = ',...
-        sprintMiller(OR.misorientationAxis.parent)]));
+        sprintMiller(OR.rotationAxis.parent)]));
     screenPrint('SubStep',sprintf(['Child rot. axis = ',...
-        sprintMiller(OR.misorientationAxis.child)]));
-    screenPrint('SubStep',sprintf(['Angle between rot. axes = ',...
-        num2str(OR.devAngle.axis./degree),'º']));
+        sprintMiller(OR.rotationAxis.child)]));
+    screenPrint('SubStep',sprintf(['Ang. dev. of parallel rot. axes relationship from OR = ',...
+        num2str(OR.angle.axis./degree),'º']));
     
     screenPrint('Step','Angle & rot. axes of unique variants');
     for ii = 1:length(OR.variants.orientation)
