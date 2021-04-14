@@ -38,16 +38,18 @@ function OR = ORinfo(mori,varargin)
 		OR.direction.parent,...
 		OR.direction.child);
 
-	%Deviation angle between rational and actual OR misorientations
-	OR.devAngle.plane = min(angle(OR.misorientation*OR.plane.parent.symmetrise,OR.plane.child));
-	OR.devAngle.direction = min(angle(OR.misorientation*OR.direction.parent.symmetrise,OR.direction.child));
-
 	%Misorientation axes
 	OR.misorientationAxis.parent = axis(OR.misorientation,OR.CS.parent);
 	OR.misorientationAxis.parent = setDisplayStyle(OR.misorientationAxis.parent,'direction');
 	OR.misorientationAxis.child = axis(OR.misorientation,OR.CS.child);
 	OR.misorientationAxis.child = setDisplayStyle(OR.misorientationAxis.child,'direction');
 
+    %Deviation angle between rational and actual OR misorientations
+	OR.devAngle.plane = min(angle(OR.misorientation*OR.plane.parent.symmetrise,OR.plane.child));
+	OR.devAngle.direction = min(angle(OR.misorientation*OR.direction.parent.symmetrise,OR.direction.child));
+    OR.devAngle.axis = min(angle(OR.misorientation*OR.misorientationAxis.parent.symmetrise,OR.misorientationAxis.child));
+
+    
 	%Variants
 	OR.variants.orientation = OR.misorientation.variants;
 	OR.variants.misorientation = OR.misorientation.variants.*inv(OR.misorientation.variants(1));
@@ -66,7 +68,7 @@ function OR = ORinfo(mori,varargin)
 			sprintMiller(OR.plane.parent,'round')]));
 		screenPrint('SubStep',sprintf(['Closest child plane = ',...
 			sprintMiller(OR.plane.child,'round')]));
-		screenPrint('SubStep',sprintf(['Ang. dev. of parallel plane relationship from OR = ',...
+		screenPrint('SubStep',sprintf(['Angle between planes = ',...
 			num2str(OR.devAngle.plane./degree),'º']));
 		
 		screenPrint('Step','Parallel directions');
@@ -74,7 +76,7 @@ function OR = ORinfo(mori,varargin)
 			sprintMiller(OR.direction.parent,'round')]));
 		screenPrint('SubStep',sprintf(['Closest child direction = ',...
 			sprintMiller(OR.direction.child,'round')]));
-		screenPrint('SubStep',sprintf(['Ang. dev. of parallel directions relationship from OR = ',...
+		screenPrint('SubStep',sprintf(['Angle between directions = ',...
 			num2str(OR.devAngle.direction./degree),'º']));
 		
 		screenPrint('Step','OR misorientation rotation axes');
@@ -82,7 +84,9 @@ function OR = ORinfo(mori,varargin)
 			sprintMiller(OR.misorientationAxis.parent)]));
 		screenPrint('SubStep',sprintf(['Child rot. axis = ',...
 			sprintMiller(OR.misorientationAxis.child)]));
-		
+        screenPrint('SubStep',sprintf(['Angle between axes = ',...
+			num2str(OR.devAngle.axis./degree),'º']));
+        
 		screenPrint('Step','Angle & rot. axes of unique variants');
 		for ii = 1:length(OR.variants.orientation)
 			screenPrint('SubStep',sprintf([num2str(ii),': ',...
