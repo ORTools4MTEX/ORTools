@@ -318,7 +318,7 @@ function plotStack(job,parentEBSD,pGrainId,varargin)
     else
         h = histogram(packIds);
     end
-    h.FaceColor =[162 20 47]./255;
+    h.FaceColor = [162 20 47]./255;
     set(gca, 'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
     set(gca,'XTick',class_range);
     set(gca,'FontSize',8);

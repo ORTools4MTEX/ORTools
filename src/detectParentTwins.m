@@ -75,8 +75,6 @@ catch
 end
 
 
-
-
 %% Plot results
 figure;
 %Initial parent EBSD data and twin boundary
@@ -89,11 +87,8 @@ plot(twgB,'lineColor','cyan','linewidth',5,'DisplayName','CSL 3');
 
 %And the refined twin orientations
 nextAxis
-for ii = 1:size(twIds,1)
-    cbsParent = ipfKeyParent.orientation2color(newPoris);
-    plot(twEBSDp,cbsParent);
-    hold on
-end
+cbsParent = ipfKeyParent.orientation2color(newPoris);
+plot(twEBSDp,cbsParent);
 set(gcf,'name','Reconstructed vs. Refined parent orientations');
 
 end
