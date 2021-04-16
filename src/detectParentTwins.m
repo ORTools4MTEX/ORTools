@@ -29,6 +29,7 @@ ipfKeyParent.inversePoleFigureDirection = getClass(varargin,'vector3d',vector3d.
 twGrains = job.parentGrains(job.parentGrains.id2ind(twIds));
 twEBSDp = parentEBSD(twGrains);
 twEBSDc = job.ebsd(twGrains);
+twEBSDc = twEBSDc(job.csChild);
 twgB = job.parentGrains.boundary.selectByGrainId(twIds);
 
 %% Check fit of local child orienations to mean parent and twin orientation
@@ -88,7 +89,7 @@ plot(twgB,'lineColor','cyan','linewidth',5,'DisplayName','CSL 3');
 %And the refined twin orientations
 nextAxis
 cbsParent = ipfKeyParent.orientation2color(newPoris);
-plot(twEBSDp,cbsParent);
+plot(twEBSDc,cbsParent);
 set(gcf,'name','Reconstructed vs. Refined parent orientations');
 
 end
