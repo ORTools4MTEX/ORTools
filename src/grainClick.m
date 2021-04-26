@@ -23,9 +23,9 @@ hold on
 
 
 
-isNowParent = job.grainsMeasured.phaseId == job.childPhaseId &...
+isNowParent = job.grainsPrior.phaseId == job.childPhaseId &...
                 job.grains(job.mergeId).phaseId == job.parentPhaseId;
-plot(job.grainsMeasured(isNowParent).boundary,'linewidth',0.5);
+plot(job.grainsPrior(isNowParent).boundary,'linewidth',0.5);
 plot(job.parentGrains.boundary,'linewidth',2);
 
 

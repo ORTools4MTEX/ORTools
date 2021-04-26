@@ -47,7 +47,7 @@ job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
 % Use the peak fitter in the pop-up menu
 %     - Adjust the threshold to include only the largest peak
 %     - Compute the OR by "Maximum f(g)"
-job.p2c = orientation.Burger(job.csParent, job.csChild);
+job.p2c = orientation.Burgers(job.csParent, job.csChild);
 % Check the disorientation
 plotHist_OR_misfit(job);
 xlim([0,10]);

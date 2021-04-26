@@ -24,9 +24,9 @@ function plotStack(job,parentEBSD,pGrainId,varargin)
 
 
     %% Define the child grain(s)
-    clusterGrains = job.grainsMeasured(job.mergeId == pGrainId);
+    clusterGrains = job.grainsPrior(job.mergeId == pGrainId);
     cGrains = clusterGrains(job.csChild);
-    cEBSD = job.ebsd(pGrain);
+    cEBSD = job.ebsdPrior(pGrain);
     cEBSD = cEBSD(job.csChild);
     % Define the child grain(s) IPF notation
     ipfKeyChild = ipfHSVKey(job.csChild);
@@ -326,15 +326,9 @@ function plotStack(job,parentEBSD,pGrainId,varargin)
     ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
     
-%     try tileFigs; end
+    try tileFigs; end
     return
     end
-
-
-
-
-
-
 
     function [vinterval,histw] = histwc(val,wt,nbins)
     % HISTWC  Weighted histogram count given number of bins

@@ -20,8 +20,8 @@ f = figure;
 if check_option(varargin,'grains')
     plot(job.transformedGrains,job.transformedGrains.packetId);
 else
-    pGrains = job.grains(job.ebsd(job.csChild).grainId);
-    cEBSD = job.ebsd(pGrains(job.csParent));
+    pGrains = job.grains(job.ebsdPrior(job.csChild).grainId);
+    cEBSD = job.ebsdPrior(pGrains(job.csParent));
     cEBSD = cEBSD(job.csChild);
     pGrains = pGrains(job.csParent);   
     [~,packIds] = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});

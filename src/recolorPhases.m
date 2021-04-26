@@ -55,7 +55,7 @@ ebsd.opt.cRGB = cRGB;
 end
 
 function [ebsd,grains] = recolorGrains(ebsd,grains)
-    fprintf(' -> Recoloring all grains\n');
+%     fprintf(' -> Recoloring all grains\n');
     %% Add phase colors
     cRGB = repmat(ebsd.opt.cRGB(1:end,:)',1,1,length(grains));
     cRGB = permute(cRGB,[3 2 1]);

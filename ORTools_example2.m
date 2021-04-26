@@ -52,7 +52,7 @@ job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %     - Compute the OR by "Maximum f(g)"
 job = defineORs(job);
 % Check the disorientation and compare it with the Burgers OR
-plotHist_OR_misfit(job,orientation.Burger(job.csParent,job.csChild));
+plotHist_OR_misfit(job,orientation.Burgers(job.csParent,job.csChild));
 xlim([0,10]);
 %     - The misfit with Burgers OR and the experimental OR is almost
 %     identical
