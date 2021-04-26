@@ -63,7 +63,7 @@ plotHist_OR_misfit(job,[KS,NW],'legend',{'K-S','N-W'});
 % Plot information about the OR
 ORinfo(job.p2c);
 %    - There are 24 martensitic variants
-%    - A ~2.4° disorientation exists from the Nishiyama-Wassermann OR
+%    - And a ~2.4° disorientation exists from the Nishiyama-Wassermann OR
 %% Plotting (with ORTools functions)
 screenPrint('SegmentStart','Plotting some ORTools maps');
 % Use some of the ORTools functions to visualize the determined OR
@@ -114,8 +114,8 @@ figure;
 plot(job.grains,job.grains.fit./degree,'linewidth',2);
 setColorRange([0,5]);
 mtexColorbar;
-% Therefore, the reconstructed grains with bad fits or with very small 
-% clusters are reverted
+% Therefore, the reconstructed grains with bad fits or very small clusters
+% are reverted
 job.revert(job.grains.fit > 5*degree | job.grains.clusterSize < 15)
 % Plot the remaining grains
 figure;
