@@ -126,7 +126,7 @@ plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 % Iterate this 5 times ...
 for k = 1:3 
   % compute votes
-  job.calcGBVotes('P2C');
+  job.calcGBVotes('P2C'); %'noC2C' in MTex v5.6.0
   % compute parent orientations from votes
   job.calcParentFromVote('minFit',7.5*degree)
 end
