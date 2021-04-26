@@ -108,7 +108,7 @@ plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
 %% Merging misindexed gamma
 % OR 1 has only variant, calcGBVotes finds the fit of that theoretical
 % variant with the parent-child boundary misorientations
-job{1}.calcGBVotes('P2C','numfit',1);
+job{1}.calcGBVotes('P2C','numfit',1); %'noC2C' in MTex v5.6.0
 % We transform all alpha grains that have a fit of <=5° to gamma
 job{1}.calcParentFromVote('minFit',5*degree);
 % We can see that the small grains have been transformed
