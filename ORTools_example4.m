@@ -8,7 +8,7 @@
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
 % (Remove "dot" and "at" to make this email address valid)
 % *********************************************************************
-clc; close all; clear all;
+home; close all; clear variables;
 currentFolder;
 screenPrint('StartUp','ORTools - Example 4');
 %% Initialize MTEX
