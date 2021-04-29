@@ -28,7 +28,7 @@ ipfKeyParent.inversePoleFigureDirection = getClass(varargin,'vector3d',vector3d.
 %% Define the parent grainand find twin related neighbor grains
 twGrains = job.parentGrains(job.parentGrains.id2ind(twIds));
 twEBSDp = parentEBSD(twGrains);
-twEBSDc = job.ebsd(twGrains);
+twEBSDc = job.ebsdPrior(twGrains);
 twEBSDc = twEBSDc(job.csChild);
 twgB = job.parentGrains.boundary.selectByGrainId(twIds);
 
