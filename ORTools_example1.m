@@ -97,11 +97,11 @@ plotMap_gB_prob(job,'linewidth',2);
 %% Reconstruct parent microstructure
 %   - Reconstruct the microstructure with a graph-based approach
 job.calcGraph('threshold',2.5*degree,'tolerance',2.5*degree);
-job.clusterGraph('inflationPower',1.6);
+job.clusterGraph('inflationPower',1.6)
 % Plot the clusters ...
 plotMap_clusters(job,'linewidth',2);
 % ... and calculate the parent orientations
-job.calcParentFromGraph;
+job.calcParentFromGraph
 
 % Plot the reconstructed parent microstructure
 figure;
