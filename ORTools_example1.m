@@ -176,5 +176,3 @@ grainClick(job,parentEBSD);
 
 %% Refine gamma twins by clicking on gamma grains
 grainClick(job,parentEBSD,'parentTwins');
-
-
