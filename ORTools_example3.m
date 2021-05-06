@@ -66,7 +66,7 @@ job = defineORs(job);
 %  - OR1: (110)_beta||(1000)_alpha [1-11]_beta||[-12-10]_alpha 
 %  - OR2: (11-1)_beta||(-1-100)_alpha [0-1-1]_beta||[000-3]_alpha 
 
-dori = angle(job{1}.p2c,job{2}.p2c)/degree
+dori = angle(job{1}.p2c,job{2}.p2c)/degree;
 %       - We have a disorientation angle of 30° between the ORs 
 
 %% Plot the inverse pole figure
@@ -111,7 +111,7 @@ saveImage(Ini.imagePath);
 
 %% Summary
 BurgersOR = orientation.Burger(job{1}.csParent,job{1}.csChild);
-dori = angle(job{2}.p2c,BurgersOR)/degree
+dori = angle(job{2}.p2c,BurgersOR)/degree;
 
 % We can see that the 2nd OR is equivalent to the common Burgers OR
 % in Titanium alloys (misfit < 0.2°)
