@@ -1,4 +1,4 @@
-function [ebsd,grains] = recolorPhases(ebsd,grains)
+function [ebsd] = recolorPhases(ebsd)
 % recolor phases in ebsd and grains interactively
 %
 % Syntax
@@ -7,11 +7,9 @@ function [ebsd,grains] = recolorPhases(ebsd,grains)
 %
 % Input
 %  ebsd             - @EBSD
-%  grains           - @grain2d
 %
 % Output
 %  ebsd             - @EBSD
-%  grains           - @grain2d
 
 % If old style color seleUI needed, type the following and re-start Matlab
 % setpref('Mathworks_uisetcolor', 'Version', 1);
@@ -35,11 +33,7 @@ for ii = 2:phaseNum
         if tempRGB == 0 %%&& size(tempRGB,2) == 1
             % Response to "Cancel" or "Close" buttons
             warning('Phase recoloring aborted by user: Keeping default colors');
-            for jj = 2:phaseNum
-               ebsd.opt.cRGB(jj,:) = ebsd.CSList{jj}.color;
-            end
-            [ebsd,grains] = recolorGrains(ebsd,grains);
-            return
+                return
         else
             %% Add phase colors
             cRGB(ii,:) = tempRGB;
@@ -49,21 +43,8 @@ for ii = 2:phaseNum
     catch
     end
 end
-ebsd.opt.cRGB = cRGB;
-
-[ebsd,grains] = recolorGrains(ebsd,grains);
 end
 
-function [ebsd,grains] = recolorGrains(ebsd,grains)
-%     fprintf(' -> Recoloring all grains\n');
-    %% Add phase colors
-    cRGB = repmat(ebsd.opt.cRGB(1:end,:)',1,1,length(grains));
-    cRGB = permute(cRGB,[3 2 1]);
-    grains.prop.cRGB = cRGB;
-    cGS = repmat(ebsd.opt.cGS(1:end,:)',1,1,length(grains));
-    cGS = permute(cGS,[3 2 1]);
-    grains.prop.cGS = cGS;
-end
 
 
 

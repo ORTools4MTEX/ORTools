@@ -22,7 +22,7 @@ f = figure;
 if check_option(varargin,'grains')
     plot(job.transformedGrains,job.transformedGrains.variantId);
 else
-    pGrains = job.grains(job.ebsdPrior(job.csChild).grainId);
+    pGrains = job.grains(job.mergeId(job.ebsdPrior(job.csChild).grainId));
     cEBSD = job.ebsdPrior(pGrains(job.csParent));
     cEBSD = cEBSD(job.csChild);
     pGrains = pGrains(job.csParent);   
