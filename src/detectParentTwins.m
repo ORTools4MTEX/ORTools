@@ -1,12 +1,11 @@
-function detectParentTwins(job,parentEBSD,pGrainId,varargin)
+function detectParentTwins(job,pGrainId,varargin)
 % Detect twins in a parent grains by local refinement
 %
 % Syntax
-%  detectParentTwins(jjob,parentEBSD,pGrainId)
+%  detectParentTwins(job,pGrainId)
 %
 % Input
 %  job          - @parentGrainreconstructor
-%  parentEBSD   - reconstructed @EBSD data
 %  pGrainId     - parent grain Id
 %
 % Option
@@ -27,8 +26,8 @@ ipfKeyParent.inversePoleFigureDirection = getClass(varargin,'vector3d',vector3d.
 
 %% Define the parent grainand find twin related neighbor grains
 twGrains = job.parentGrains(job.parentGrains.id2ind(twIds));
-twEBSDp = parentEBSD(twGrains);
-twEBSDc = job.ebsdPrior(twGrains);
+twEBSDp = job.ebsd(twGrains);
+twEBSDc = job.ebsdPrior(job.ebsdPrior.id2ind(twEBSDp.id));
 twEBSDc = twEBSDc(job.csChild);
 twgB = job.parentGrains.boundary.selectByGrainId(twIds);
 

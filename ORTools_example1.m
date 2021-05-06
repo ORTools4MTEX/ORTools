@@ -159,20 +159,18 @@ plotMap_packets(job,'linewidth',3);
 
 %% Reconstruct parent EBSD 
 % Finally, obtain the reconstructed EBSD data ...
-parentEBSD = job.calcParentEBSD;
 % ... and plot it with the prior beta grain boundaries
 figure;
-plot(parentEBSD(job.csParent),parentEBSD(job.csParent).orientations);
+plot(job.ebsd(job.csParent),job.ebsd(job.csParent).orientations);
 hold on; 
 plot(job.grains.boundary,'lineWidth',3)
 
 %% Save images
-% saveImage(Ini.imagePath);
-close all
-return
+saveImage(Ini.imagePath);
+
 %% Check the gamma grains interactively by clicking on them
-grainClick(job,parentEBSD);
+grainClick(job);
 %grainClick(job,parentEBSD,'grains');    %Plot grain data instead
 
 %% Refine gamma twins by clicking on gamma grains
-grainClick(job,parentEBSD,'parentTwins');
+grainClick(job,'parentTwins');

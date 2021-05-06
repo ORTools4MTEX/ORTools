@@ -1,12 +1,11 @@
-function plotStack(job,parentEBSD,pGrainId,varargin)
+function plotStack(job,pGrainId,varargin)
 % plot maps of a prior parent grain
 %
 % Syntax
-%  plotStack(job,parentEBSD,pGrainId)
+%  plotStack(job,pGrainId)
 %
 % Input
 %  job          - @parentGrainreconstructor
-%  parentEBSD   - reconstructed @EBSD data
 %  pGrainId     - parent grain Id
 %
 % Option
@@ -14,7 +13,7 @@ function plotStack(job,parentEBSD,pGrainId,varargin)
 
     %% Define the parent grain
     pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
-    pEBSD = parentEBSD(pGrain);
+    pEBSD = job.ebsd(pGrain);
     pEBSD = pEBSD(job.csParent);
     % Define the parent grain IPF notation
     ipfKeyParent = ipfHSVKey(job.csParent);
@@ -22,18 +21,16 @@ function plotStack(job,parentEBSD,pGrainId,varargin)
     % Define the parent PDF
     hParent = Miller(0,0,1,job.csParent,'hkl');
 
-
     %% Define the child grain(s)
     clusterGrains = job.grainsPrior(job.mergeId == pGrainId);
     cGrains = clusterGrains(job.csChild);
-    cEBSD = job.ebsdPrior(pGrain);
+    cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
     cEBSD = cEBSD(job.csChild);
     % Define the child grain(s) IPF notation
     ipfKeyChild = ipfHSVKey(job.csChild);
     ipfKeyChild.inversePoleFigureDirection = vector3d.X;
     % Define the child PDF
     hChild = Miller(0,0,1,job.csChild,'hkl');
-
 
     %% Define the maximum number of variants and packets for the p2c OR
     maxVariants = length(job.p2c.variants);

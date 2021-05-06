@@ -23,9 +23,10 @@ if check_option(varargin,'grains')
     plot(job.transformedGrains,job.transformedGrains.variantId);
 else
     pGrains = job.grains(job.mergeId(job.ebsdPrior(job.csChild).grainId));
-    cEBSD = job.ebsdPrior(pGrains(job.csParent));
-    cEBSD = cEBSD(job.csChild);
-    pGrains = pGrains(job.csParent);   
+    isParent = pGrains.phaseId == job.parentPhaseId;
+    pGrains = pGrains(isParent);
+    cEBSD = job.ebsdPrior(job.csChild);
+    cEBSD = cEBSD(isParent);
     varIds = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
     plot(cEBSD,varIds);   
 end
