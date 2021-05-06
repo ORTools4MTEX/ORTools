@@ -126,9 +126,9 @@ plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 % Iterate this 5 times ...
 for k = 1:3 
   % compute votes
-  job.calcGBVotes('P2C'); %'noC2C' in MTex v5.6.0
+  job.calcGBVotes('p2c','threshold', k*2.5*degree);
   % compute parent orientations from votes
-  job.calcParentFromVote('minFit',7.5*degree)
+  job.calcParentFromVote
 end
 
 %... and plot the optimized reconstructed parent microstructure
@@ -157,9 +157,8 @@ plotMap_variants(job,'linewidth',3);
 plotMap_packets(job,'linewidth',3);
 %plotMap_packets(job,'grains','linewidth',3);   %Plot grain data instead
 
-%% Reconstruct parent EBSD 
-% Finally, obtain the reconstructed EBSD data ...
-% ... and plot it with the prior beta grain boundaries
+%% Plot the reconstructed parent EBSD 
+% Finally, and plot it with the prior parent grain boundaries
 figure;
 plot(job.ebsd(job.csParent),job.ebsd(job.csParent).orientations);
 hold on; 

@@ -39,7 +39,7 @@ phaseNames = {'Gamma','AlphaP','Alpha','Beta','AlphaDP'};
 % Rename "Ti (BETA) to "Beta"and "Ti (alpha)" to "Alpha"
 ebsd = renamePhases(ebsd,phaseNames);
 % Choose your favourite colors
-[ebsd,grains] = recolorPhases(ebsd,grains);
+ebsd = recolorPhases(ebsd);
 %% Finding the orientation relationship
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose Beta as a parent and Alpha as a child phase in the transition
@@ -58,18 +58,20 @@ plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child');
 % Plot map for parent-child and child-child boundary disorientations
 plotMap_gB_misfit(job,'maxColor',5,'linewidth',1.5);
 %% Compute parent orientations (see example 2 for details)
-job.calcTPVotes('numFit',2);
-job.calcParentFromVote('strict', 'minFit',2.5*degree,...
-                                 'maxFit',5*degree,'minVotes',2);
-job.calcGBVotes('noC2C');
-job.calcParentFromVote('minFit',5*degree);
+job.calcTPVotes('minFit',2.5*degree,'maxFit',5*degree);
+job.calcParentFromVote('minProb',0.7);
+for k = 1:3
+    job.calcGBVotes('p2c','threshold',k * 2.5*degree);
+    job.calcParentFromVote
+end
 % Clean reconstructed grains
 job.mergeSimilar('threshold',5*degree);
-job.mergeInclusions('maxSize',50);
-parentEBSD = job.calcParentEBSD;
+job.mergeInclusions('maxSize',5);
 % Plot the cleaned reconstructed parent microstructure
 figure;
-plot(parentEBSD(job.csParent),parentEBSD(job.csParent).orientations);
+plot(job.ebsd(job.csParent),job.ebsd(job.csParent).orientations);
+hold on; 
+plot(job.grains.boundary,'lineWidth',3)
 %% Variant analysis                                
 % We calculate the variants ...
 job.calcVariants;
@@ -105,20 +107,24 @@ plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath);
 odf_child = calcDensity(ebsd(job.csChild).orientations);
 figure;
 plotPDF(odf_child,hChild,'antipodal','silent','contourf');
-colormap jet
+colormap(flipud(colormap('hot')))
 
 % We can see a quite good agreement. Slight mismatches in the intensity 
 % originate from a non-random variant selection
 
+%% Include variant selection in prediction of transformation texture
 % We can also calculate the transformation texture using strict variant
 % selection:
 
+%Only consider variants 3,4,6 and 8
 plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
                         'variantId',[3 4 6 8]);
 
+%Only consider variants 3,4,6 and 8 with weights between 0 and 100
 plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
                         'variantId',[3 4 6 8],'variantWt',[100 100 10 10]);  
-                    
+
+%Only consider variants 3,4,6 and 8 with weights between 0 and 100
 plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
                         'variantId',[3 4 6 8],'variantWt',[100 10 1 0.1]);
                   

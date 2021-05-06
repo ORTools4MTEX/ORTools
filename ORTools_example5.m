@@ -38,7 +38,7 @@ screenPrint('SegmentStart','Renaming and recoloring phases');
 %"Epsilon_Martensite" to "Epsilon"
 ebsd = renamePhases(ebsd,Ini.phaseNames);
 %Choose your favourite colors
-[ebsd,grains] = recolorPhases(ebsd,grains);
+ebsd = recolorPhases(ebsd);
 %% Define the transformation system
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose "Gamma" as a parent and "Alpha" as a child phase
@@ -74,10 +74,11 @@ job = defineORs(job);
 %  - The first OR is showing no misorientation, or cube-on-cube OR
 
 % Let us check the disorientation of alphaP child-child boundaries and 
-% compare it with K-S and N-W
+% compare OR 1 with K-S and N-W
 plotHist_OR_misfit(job{1},[orientation.KurdjumovSachs(job{1}.csParent,job{1}.csChild), ...
                        orientation.NishiyamaWassermann(job{1}.csParent,job{1}.csChild)],...
                        'legend',{'K-S','N-W'});
+% compare OR 2 with K-S and N-W
 plotHist_OR_misfit(job{2},[orientation.KurdjumovSachs(job{2}.csParent,job{2}.csChild), ...
                        orientation.NishiyamaWassermann(job{2}.csParent,job{2}.csChild)],...
                        'legend',{'K-S','N-W'});

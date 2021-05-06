@@ -42,7 +42,7 @@ phaseNames = {'Gamma','AlphaP','Alpha','Beta','AlphaDP'};
 % Rename "Ti (BETA) to "Beta"and "Ti (alpha)" to "Alpha"
 ebsd = renamePhases(ebsd,phaseNames);
 % Choose your favourite colors
-[ebsd,grains] = recolorPhases(ebsd,grains);
+ebsd = recolorPhases(ebsd);
 %% Finding the orientation relationship
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose Beta as a parent and Alpha as a child phase in the transition
@@ -70,7 +70,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child')
 %       - We can visually recognize the prior beta grains
 
 % Child-child grain boundary misorientation map
-plotMap_gB_c2c(job,'linewidth',1);
+plotMap_gB_c2c(job,'linewidth',1);  
 %       - Alpha of same prior beta grain seem to have ~58° misorientation
 
 % Plot a map of the OR boundary disorientation, or misfit
@@ -94,18 +94,25 @@ plotIPDF_gB_prob(job);
 %% Compute parent orientations from triple junctions
 % We can use a voting algorithm which votes for a parent orientation at
 % triple points of child grains
-job.calcTPVotes('numFit',2);
-% and calcualte parent orientations based on this vote
-job.calcParentFromVote('strict', 'minFit',2.5*degree,...
-                                 'maxFit',5*degree,'minVotes',2);
+job.calcTPVotes('minFit',2.5*degree,'maxFit',5*degree);
+% Check the votes for all grains
+figure
+plot(job.grains, job.votes.prob(:,1));
+mtexColorbar
+% and calcualte parent orientations for all grains with a probability of 
+% > 70%
+job.calcParentFromVote('minProb',0.7);
 %Plot the data
 figure;
 plot(job.parentGrains, job.parentGrains.meanOrientation,'linewidth',1.5);
 %% Grow parent grains at grain boundaries by voting algorithm
 % We can then let the parent grains grow into the child grains by a voting
 % algorithm
-job.calcGBVotes('noC2C');
-job.calcParentFromVote('minFit',5*degree);
+for k = 1:3
+    job.calcGBVotes('p2c','threshold',k * 2.5*degree);
+    job.calcParentFromVote
+end
+
 % This is the resulting reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5);
@@ -113,7 +120,7 @@ plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5);
 % We now merge grains with similar orientation
 job.mergeSimilar('threshold',5*degree);
 % and merge small inclusions into larger grains
-job.mergeInclusions('maxSize',50);
+job.mergeInclusions('maxSize',5);
 % and then plot the cleaned reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5)
@@ -126,15 +133,9 @@ job.calcVariants;
 % and plot the variant map
 plotMap_variants(job,'linewidth',3);
 %plotMap_variants(job,'grains','linewidth',3);  %Plot grain data instead
-% The same can be done for the packets
-plotMap_packets(job,'linewidth',3);
-%plotMap_packets(job,'grains','linewidth',3);   %Plot grain data instead
-%% Reconstruct parent EBSD 
-% We can finally obtain the reconstructed EBSD data
-parentEBSD = job.calcParentEBSD;
-% And plot it with the prior beta grain boundaries
+%% Plot reconstructed parent EBSD 
 figure;
-plot(parentEBSD(job.csParent),parentEBSD(job.csParent).orientations);
+plot(job.ebsd(job.csParent),job.ebsd(job.csParent).orientations);
 hold on; 
 plot(job.grains.boundary,'lineWidth',3)
 
@@ -142,5 +143,5 @@ plot(job.grains.boundary,'lineWidth',3)
 saveImage(Ini.imagePath);
 
 %% Check the beta grains interactively by clicking on them
-grainClick(job,parentEBSD);
-%grainClick(job,parentEBSD,'grains');    %Plot grain data instead
+grainClick(job);
+%grainClick(job,'grains');    %Plot grain data instead

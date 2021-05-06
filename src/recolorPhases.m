@@ -3,7 +3,7 @@ function [ebsd] = recolorPhases(ebsd)
 %
 % Syntax
 %
-%  [ebsd,grains] = recolorPhases(ebsd,grains)
+%  [ebsd] = recolorPhases(ebsd)
 %
 % Input
 %  ebsd             - @EBSD
