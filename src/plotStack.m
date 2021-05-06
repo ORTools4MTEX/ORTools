@@ -31,6 +31,7 @@ function plotStack(job,pGrainId,varargin)
     ipfKeyChild.inversePoleFigureDirection = vector3d.X;
     % Define the child PDF
     hChild = Miller(0,0,1,job.csChild,'hkl');
+    hParent = Miller(0,0,1,job.csParent,'hkl');
 
     %% Define the maximum number of variants and packets for the p2c OR
     maxVariants = length(job.p2c.variants);
@@ -182,7 +183,16 @@ function plotStack(job,pGrainId,varargin)
     plotPDF_variants(job,pGrain.meanOrientation,hChild);
     set(f,'Name','PDF: Child grain(s) IDEAL variant Id(s)','NumberTitle','on');
 
-
+    %% Plot the ideal child variant PDF
+    f = figure;
+    plotPDF_packets(job,pGrain.meanOrientation,hChild);
+    set(f,'Name','PDF: Child grain(s) IDEAL packet Id(s)','NumberTitle','on');
+    
+    %% Plot the ideal parent PDF
+    f = figure;
+    plotPDF(pGrain.meanOrientation,hParent,'markersize',6,'markerfacecolor' ,'k');
+    set(f,'Name','PDF: Mean parent grain orientation','NumberTitle','on');
+    
     %% Plot the child variant PDF
     f = figure;
     if check_option(varargin,'grains')

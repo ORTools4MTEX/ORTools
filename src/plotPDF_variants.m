@@ -20,6 +20,7 @@ function plotPDF_variants(job,varargin)
 oriParent = getClass(varargin,'orientation',orientation.id(job.csParent));
 pdf = getClass(varargin,'Miller',Miller(0,0,1,job.csChild,'hkl'));
 cmap = get_option(varargin,'colormap','jet');
+msz = get_option(varargin,'markersize','6');
 
 % Compute the disorientation from the nominal OR
 p2c_V = job.p2c.variants;
@@ -34,7 +35,7 @@ oriVariants = oriVariants(:);
 if isempty(job.variantMap); job.variantMap = 1:length(c2c_variants); end
 plotPDF(oriVariants, job.variantMap, pdf,...
     'equal','antipodal','points','all',...
-    'MarkerSize',6,'MarkerEdgeColor',[0 0 0]);
+    'MarkerSize',msz,'MarkerEdgeColor',[0 0 0]);
 %     'label',1:length(oriVariants),'nosymmetry',...
 %     'fontsize',10,'fontweight','bold');
 
