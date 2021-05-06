@@ -10,7 +10,12 @@ function plotStack(job,pGrainId,varargin)
 %
 % Option
 %  grains       - plot grain data instead of EBSD data
+<<<<<<< HEAD
 %  noScalebar   -  Remove scalebar from maps
+=======
+%  noScalebar   - Remove scalebar from maps
+%  noFrame      - Remove frame around maps
+>>>>>>> 2935a8b05dfca30bf48fc2c097f5ead6ee67afce
 
     %% Define the parent grain
     pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
@@ -51,10 +56,15 @@ function plotStack(job,pGrainId,varargin)
     hold off
     set(f,'Name','Map: Parent phase + GBs','NumberTitle','on');
     if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+<<<<<<< HEAD
     if check_option(varargin,'noFrame')
         mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
     end
 
+=======
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
+    
+>>>>>>> 2935a8b05dfca30bf48fc2c097f5ead6ee67afce
     %% Plot the child phase map
     f = figure;
     if check_option(varargin,'grains')
@@ -71,9 +81,13 @@ function plotStack(job,pGrainId,varargin)
     hold off
     set(f,'Name','Map: Child phase + GBs','NumberTitle','on');
     if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+<<<<<<< HEAD
     if check_option(varargin,'noFrame')
         mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
     end
+=======
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
+>>>>>>> 2935a8b05dfca30bf48fc2c097f5ead6ee67afce
 
     %% Plot the parent IPF map
     f = figure;
@@ -90,9 +104,13 @@ function plotStack(job,pGrainId,varargin)
     hold off
     set(f,'Name','Map: Parent grain IPF_x + GBs','NumberTitle','on');
     if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+<<<<<<< HEAD
     if check_option(varargin,'noFrame')
         mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
     end
+=======
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
+>>>>>>> 2935a8b05dfca30bf48fc2c097f5ead6ee67afce
 
     %% Plot the child IPF map
     f = figure;
@@ -111,9 +129,13 @@ function plotStack(job,pGrainId,varargin)
     hold off
     set(f,'Name','Map: Child grain IPF_x + GBs','NumberTitle','on');
     if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+<<<<<<< HEAD
     if check_option(varargin,'noFrame')
         mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
     end
+=======
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
+>>>>>>> 2935a8b05dfca30bf48fc2c097f5ead6ee67afce
 
     %% Plot the child variant map
     f = figure;
@@ -140,9 +162,13 @@ function plotStack(job,pGrainId,varargin)
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     set(f,'Name','Map: Child grain(s) variant Id(s) + GBs','NumberTitle','on');
     if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+<<<<<<< HEAD
     if check_option(varargin,'noFrame')
         mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
     end
+=======
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
+>>>>>>> 2935a8b05dfca30bf48fc2c097f5ead6ee67afce
 
     %% Plot the child packet map
     if   isnan(maxPackets)
@@ -169,9 +195,13 @@ function plotStack(job,pGrainId,varargin)
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     set(f,'Name','Map: Child grain(s) packet Id(s) + GBs','NumberTitle','on');
     if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+<<<<<<< HEAD
     if check_option(varargin,'noFrame')
         mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
     end
+=======
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
+>>>>>>> 2935a8b05dfca30bf48fc2c097f5ead6ee67afce
     
     %% Plot the parent orientation PDF
     f = figure;
