@@ -168,7 +168,7 @@ plot(job.grains.boundary,'lineWidth',3)
 saveImage(Ini.imagePath);
 
 %% Check the gamma grains interactively by clicking on them
-grainClick(job);
+grainClick(job,'noScalebar','noFrame');
 %grainClick(job,parentEBSD,'grains');    %Plot grain data instead
 
 %% Refine gamma twins by clicking on gamma grains

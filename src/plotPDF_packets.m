@@ -18,7 +18,7 @@ function plotPDF_packets(job,varargin)
 oriParent = getClass(varargin,'orientation',orientation.id(job.csParent));
 pdf = getClass(varargin,'Miller',Miller(0,0,1,job.csChild,'hkl'));
 cmap = get_option(varargin,'colormap','jet');
-msz = get_option(varargin,'markersize','6');
+msz = get_option(varargin,'markersize',6);
 
 % Compute the disorientation from the nominal OR
 p2c_V = job.p2c.variants;
@@ -40,7 +40,7 @@ plotPDF(oriVariants, packIds, pdf,...
 
 % Define the maximum number of color levels and plot the colorbar
 maxColors = max(packIds);
-colormap(parula);
+colormap(viridis);
 caxis([1 maxColors]);
 colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
     'YTick', [1:1:maxColors],...
