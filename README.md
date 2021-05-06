@@ -160,10 +160,11 @@ The function creates a VPSC file with orientations following the distribution of
 Interactive map to select parent grains for further analysis
 
 - Syntax
-  - grainClick(job,parentEBSD)
+  - grainClick(job)
 - Input
   - job  - @parentGrainReconstructor
-  - parentEBSD - reconstructed @EBSD data
+- Option
+  - parentTwins - Refine grains to detect parent twins
 
 <p align="center">
   <img src="./doc/images/grainClick.png" alt="Plots from grainClick" width="500"/>
@@ -454,10 +455,9 @@ The function calculates and plots the transformation texture, with or without im
 The function plots maps for martensite variant analysis of a single prior parent grain. You can manually supply a parent grain Id *pGrainId* or use the function [grainClick](https://github.com/frankNiessen/ORTools/blob/master/README.md#grainClick) to choose a grain interactively.
 
 - Syntax
-  -  plotStack(job,parentEBSD,pGrainId)
+  -  plotStack(job,pGrainId)
 - Input
   - job          - @parentGrainreconstructor
-  - parentEBSD   - reconstructed @EBSD data
   - pGrainId     - parent grain Id
 - Option
   - grains       - Plot grain data instead of EBSD data 
@@ -481,16 +481,14 @@ An auxiliary function to read in *.cpr/.crc* files with a browser window.
   - ebsd             - @EBSD
 
 ### [recolorPhases](./src/recolorPhases.m)
-The function opens an interactive GUI colorpicker tool to redefine the phase colors in the *grains* and *ebsd* variables.
+The function opens an interactive GUI colorpicker tool to redefine the phase colors in the *ebsd* variable.
 
 - Syntax
-  - [ebsd,grains] = recolorPhases(ebsd,grains)
+  - [ebsd] = recolorPhases(ebsd)
 - Input
   - ebsd             - @EBSD
-  - grains           - @grain2d
 - Output
   - ebsd             - @EBSD
-  - grains           - @grain2d
   
 <p align="center">
   <img src="./doc/images/recolorPhases.png" alt="GUI of recolorPhases" width="200"/>
