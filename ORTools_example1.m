@@ -169,7 +169,7 @@ saveImage(Ini.imagePath);
 
 %% Check the gamma grains interactively by clicking on them
 grainClick(job,'noScalebar','noFrame');
-%grainClick(job,parentEBSD,'grains');    %Plot grain data instead
+%grainClick(job,'grains');    %Plot grain data instead
 
 %% Refine gamma twins by clicking on gamma grains
 grainClick(job,'parentTwins');
