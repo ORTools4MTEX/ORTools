@@ -20,7 +20,7 @@ function plotPDF_variants(job,varargin)
 oriParent = getClass(varargin,'orientation',orientation.id(job.csParent));
 pdf = getClass(varargin,'Miller',Miller(0,0,1,job.csChild,'hkl'));
 cmap = get_option(varargin,'colormap','jet');
-msz = get_option(varargin,'markersize','6');
+msz = get_option(varargin,'markersize',6);
 
 % Compute the disorientation from the nominal OR
 p2c_V = job.p2c.variants;

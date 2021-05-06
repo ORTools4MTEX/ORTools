@@ -10,6 +10,8 @@ function plotStack(job,pGrainId,varargin)
 %
 % Option
 %  grains       - plot grain data instead of EBSD data
+%  noScalebar   - Remove scalebar from maps
+%  noFrame      - Remove frame around maps
 
     %% Define the parent grain
     pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
@@ -45,13 +47,13 @@ function plotStack(job,pGrainId,varargin)
         plot(pEBSD);
     end
     hold all
-    plot(pGrain.boundary,...
+    [~,mP] = plot(pGrain.boundary,...
         'lineWidth',1,'lineColor',[0 0 0]);
     hold off
     set(f,'Name','Map: Parent phase + GBs','NumberTitle','on');
-
-
-
+    if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
+    
     %% Plot the child phase map
     f = figure;
     if check_option(varargin,'grains')
@@ -62,13 +64,13 @@ function plotStack(job,pGrainId,varargin)
     hold all
     plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
-    plot(cGrains.boundary,...
+    [~,mP] = plot(cGrains.boundary,...
         'lineWidth',1,'lineColor',[0 0 0]);
 
     hold off
     set(f,'Name','Map: Child phase + GBs','NumberTitle','on');
-
-
+    if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
 
     %% Plot the parent IPF map
     f = figure;
@@ -80,12 +82,12 @@ function plotStack(job,pGrainId,varargin)
         plot(pEBSD,cbsParent);
     end
     hold all
-    plot(pGrain.boundary,...
+    [~,mP] = plot(pGrain.boundary,...
         'lineWidth',1,'lineColor',[0 0 0]);
     hold off
     set(f,'Name','Map: Parent grain IPF_x + GBs','NumberTitle','on');
-
-
+    if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
 
     %% Plot the child IPF map
     f = figure;
@@ -99,12 +101,12 @@ function plotStack(job,pGrainId,varargin)
     hold all
     plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
-    plot(cGrains.boundary,...
+    [~,mP] = plot(cGrains.boundary,...
         'lineWidth',1,'lineColor',[0 0 0]);
     hold off
     set(f,'Name','Map: Child grain IPF_x + GBs','NumberTitle','on');
-
-
+    if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
 
     %% Plot the child variant map
     f = figure;
@@ -119,7 +121,7 @@ function plotStack(job,pGrainId,varargin)
     hold all
     plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
-    plot(cGrains.boundary,...
+    [~,mP] = plot(cGrains.boundary,...
         'lineWidth',1,'lineColor',[0 0 0]);
     hold off
     % Define the maximum number of color levels and plot the colorbar
@@ -130,8 +132,8 @@ function plotStack(job,pGrainId,varargin)
         'YTickLabel',num2str([1:1:maxVariants]'), 'YLim', [1 maxVariants],...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     set(f,'Name','Map: Child grain(s) variant Id(s) + GBs','NumberTitle','on');
-
-
+    if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
 
     %% Plot the child packet map
     if   isnan(maxPackets)
@@ -146,19 +148,20 @@ function plotStack(job,pGrainId,varargin)
     hold all
     plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
-    plot(cGrains.boundary,...
+    [~,mP] = plot(cGrains.boundary,...
         'lineWidth',1,'lineColor',[0 0 0]);
     hold off
     % Define the maximum number of color levels and plot the colorbar
-    colormap(parula(maxPackets));
+    colormap(viridis);
     caxis([1 maxPackets]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'YTick', [1:1:maxPackets],...
         'YTickLabel',num2str([1:1:maxPackets]'), 'YLim', [1 maxPackets],...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     set(f,'Name','Map: Child grain(s) packet Id(s) + GBs','NumberTitle','on');
-
-
+    if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin,'noFrame'), mP.ax.Box = 'off'; end
+    
     %% Plot the parent orientation PDF
     f = figure;
     if check_option(varargin,'grains')
@@ -183,14 +186,14 @@ function plotStack(job,pGrainId,varargin)
     plotPDF_variants(job,pGrain.meanOrientation,hChild);
     set(f,'Name','PDF: Child grain(s) IDEAL variant Id(s)','NumberTitle','on');
 
-    %% Plot the ideal child variant PDF
+    %% Plot the ideal child packet PDF
     f = figure;
     plotPDF_packets(job,pGrain.meanOrientation,hChild);
     set(f,'Name','PDF: Child grain(s) IDEAL packet Id(s)','NumberTitle','on');
     
     %% Plot the ideal parent PDF
     f = figure;
-    plotPDF(pGrain.meanOrientation,hParent,'markersize',6,'markerfacecolor' ,'k');
+    plotPDF(pGrain.meanOrientation,hParent,'markersize',12,'markerfacecolor' ,'k');
     set(f,'Name','PDF: Mean parent grain orientation','NumberTitle','on');
     
     %% Plot the child variant PDF
@@ -234,7 +237,7 @@ function plotStack(job,pGrainId,varargin)
             'MarkerSize',3,'MarkerEdgeColor','k');
     end    
     % Define the maximum number of color levels and plot the colorbar
-    colormap(parula(maxPackets));
+    colormap(viridis);
     caxis([1 maxPackets]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'YTick', [1:1:maxPackets],...
@@ -286,7 +289,7 @@ function plotStack(job,pGrainId,varargin)
     end   
     hold off
     % Define the maximum number of color levels and plot the colorbar
-    colormap(parula(maxPackets));
+    colormap(viridis);
     caxis([1 maxPackets]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'YTick', [1:1:maxPackets],...
