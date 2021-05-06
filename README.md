@@ -106,6 +106,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 - [plotMap_packets](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_packets)
 - [plotMap_phases](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_phases)
 - [plotMap_variants](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_variants)
+- [plotPDF_packets](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPDF_packets)
 - [plotPDF_variants](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPDF_variants)
 - [plotPODF_transformation](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPODF_transformation)
 - [plotStack](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotStack)
@@ -164,7 +165,10 @@ Interactive map to select parent grains for further analysis
 - Input
   - job  - @parentGrainReconstructor
 - Option
-  - parentTwins - Refine grains to detect parent twins
+  - parentTwins  - Refine grains to detect parent twins
+  - grains       - Plot grain data instead of EBSD data 
+  - noScalebar   - Remove scalebar from maps
+  - noFrame      - Remove frame around maps
 
 <p align="center">
   <img src="./doc/images/grainClick.png" alt="Plots from grainClick" width="500"/>
@@ -409,6 +413,25 @@ The function plots the map of child grains colored according to their variant ID
   <img src="./doc/images/plotMap_variants.png" alt="plotMap_variants" width="500"/>
 </p>
 
+### [plotPDF_packets](./src/plotPDF_packets.m)
+The function plots a pole figure of the martensitic packets associated with the OR *job.p2c*.
+
+- Syntax
+  -  plotPDF_packets(job)
+  -  plotPDF_packets(job, oriParent)
+  -  plotPDF_packets(job, oriParent, pdf)
+- Input
+  - job       - @parentGrainReconstructor
+  - oriParent - @orientation
+  - pdf       - @Miller
+- Options
+  - colormap   - colormap string 
+  - markersize - markersize 
+
+<p align="center">
+  <img src="./doc/images/plotPDF_packets.png" alt="Plot example from plotPDF_packets" width="300"/>
+</p>
+
 ### [plotPDF_variants](./src/plotPDF_variants.m)
 The function plots a pole figure of the martensitic variants associated with the OR *job.p2c*. It is an alternative to MTEX's [plotVariantPF](https://mtex-toolbox.github.io/parentGrainReconstructor.plotVariantPF.html).
 
@@ -421,7 +444,8 @@ The function plots a pole figure of the martensitic variants associated with the
   - oriParent - @orientation
   - pdf       - @Miller
 - Options
-  - colormap  - colormap string 
+  - colormap   - colormap string 
+  - markersize - markersize 
 
 <p align="center">
   <img src="./doc/images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="300"/>
@@ -461,6 +485,8 @@ The function plots maps for martensite variant analysis of a single prior parent
   - pGrainId     - parent grain Id
 - Option
   - grains       - Plot grain data instead of EBSD data 
+  - noScalebar   - Remove scalebar from maps
+  - noFrame      - Remove frame around maps
 
 <p align="center">
   <img src="./doc/images/plotStack.png" alt="Plot example from plotStack" width="1000"/>
