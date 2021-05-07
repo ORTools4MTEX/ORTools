@@ -61,7 +61,7 @@ plotMap_gB_misfit(job,'maxColor',5,'linewidth',1.5);
 job.calcTPVotes('minFit',2.5*degree,'maxFit',5*degree);
 job.calcParentFromVote('minProb',0.7);
 for k = 1:3
-    job.calcGBVotes('p2c','threshold',k * 2.5*degree);
+    job.calcGBVotes('p2c','threshold',k*2.5*degree);
     job.calcParentFromVote
 end
 % Clean reconstructed grains
