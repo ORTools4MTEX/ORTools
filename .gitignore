@@ -8,4 +8,5 @@
 *.ctf
 *.mat
 *.Tex
+*.tex
 data/output/
