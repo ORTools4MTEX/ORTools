@@ -110,14 +110,14 @@ plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
 % points belonging to gamma, but indexed as alpha - so let's clean this up
 
 %% Merging misindexed gamma
-% OR 1 has only 1 variant, calcGBVotes finds the fit of that theoretical
+% OR1 has only 1 variant, calcGBVotes finds the fit of that theoretical
 % variant with the parent-child boundary misorientations
 job{1}.calcGBVotes('p2c','numFit',1); %'noC2C' in MTex v5.6.0
 % We transform all alpha grains that have a fit of <=5° to gamma
 job{1}.calcParentFromVote('minFit',5*degree);
-% We can see that the small grains have been transformed
+% We can see that the small grains are transformed
 figure;
-plot(job{1}.parentGrains, job{1}.parentGrains.meanOrientation);
+plot(job{1}.parentGrains,job{1}.parentGrains.meanOrientation);
 % We can merge them into the surrounding grains and check the result
 job{1}.mergeSimilar('threshold',5*degree);
 figure;
