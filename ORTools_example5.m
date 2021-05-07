@@ -108,11 +108,11 @@ plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
 % Seeing that the OR 1 describes a cube-on-cube misorientation of small
 % alphaP grains in gamma, these are identified as misindexed points, i.e.
 % points belonging to gamma, but indexed as alpha - so let's clean this up
-
+return
 %% Merging misindexed gamma
 % OR 1 has only variant, calcGBVotes finds the fit of that theoretical
 % variant with the parent-child boundary misorientations
-job{1}.calcGBVotes('P2C','numfit',1); %'noC2C' in MTex v5.6.0
+job{1}.calcGBVotes('p2c','numFit',1); %'noC2C' in MTex v5.6.0
 % We transform all alpha grains that have a fit of <=5° to gamma
 job{1}.calcParentFromVote('minFit',5*degree);
 % We can see that the small grains have been transformed
@@ -140,7 +140,7 @@ job = defineORs(job);
 % From here we can continue working with the second OR or explore the other
 % smaller peaks to plot maps or reconstruct the parent microstructure
 %% Save images
-saveImage(Ini.imagePath);
+% saveImage(Ini.imagePath);
 %% Summary
 % This example has shown how to identify different ORs and revert them
 % individually. In the present case, we found an OR corresponding to a
