@@ -108,7 +108,7 @@ plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
 % Seeing that the OR 1 describes a cube-on-cube misorientation of small
 % alphaP grains in gamma, these are identified as misindexed points, i.e.
 % points belonging to gamma, but indexed as alpha - so let's clean this up
-return
+
 %% Merging misindexed gamma
 % OR 1 has only variant, calcGBVotes finds the fit of that theoretical
 % variant with the parent-child boundary misorientations
