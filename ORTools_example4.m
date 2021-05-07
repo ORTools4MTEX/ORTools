@@ -90,7 +90,7 @@ hParent = [Miller(1,0,0,job.csParent),Miller(1,1,0,job.csParent)];
 hChild = [Miller(0,0,0,2,job.csChild),Miller(1,1,-2,0,job.csChild)];
 
 % Compute and plot the reconstructed parent ODF
-odf_parent = calcDensity(parentEBSD(job.csParent).orientations);
+odf_parent = calcDensity(job.parentEBSD.orientations);
 figure;
 plotPDF(odf_parent,hParent,'antipodal','silent','contourf');
 colormap jet
