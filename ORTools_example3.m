@@ -80,8 +80,8 @@ plotIPDF_gB_misfit(job{1},'maxColor',5);
 plotIPDF_gB_misfit(job{2},'maxColor',5);
 %       - OR 2 belongs to a distinct alpha-beta boundary miso axis
 %       - The majority of alpha-alpha boundary misorientations match the OR
-%       - Misorientaitons not fulfilled by OR2 also don't fit to OR1
-%          - may be part of non-OR related prior-beta boundaries
+%       - Misorientations not fulfilled by OR2 also do not fit to OR1
+%         and may be part of non-OR related prior-beta boundaries
 
 %% Analyze the microstructure by plotting maps
 % Plot parent-child and child-child OR boundary disorientation map
