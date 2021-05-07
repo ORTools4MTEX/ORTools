@@ -1,3 +1,8 @@
+*.png
+*.jpg
+*.tiff
+*.bmp
 *.asv
 *.Tex
+*.mat
 data/output/
