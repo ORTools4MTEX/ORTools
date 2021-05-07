@@ -109,7 +109,7 @@ plot(job.parentGrains, job.parentGrains.meanOrientation,'linewidth',1.5);
 % We can then let the parent grains grow into the child grains by a voting
 % algorithm
 for k = 1:3
-    job.calcGBVotes('p2c','threshold',k * 2.5*degree);
+    job.calcGBVotes('p2c','threshold',k*2.5*degree);
     job.calcParentFromVote
 end
 
