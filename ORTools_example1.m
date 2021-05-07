@@ -47,7 +47,7 @@ phaseNames = {'Gamma','AlphaP'};
 % Rename 'Iron bcc (old)'to 'AlphaP' and 'Iron fcc' to 'Gamma'
 ebsd = renamePhases(ebsd,phaseNames);
 % Choose your favourite colors
-[ebsd] = recolorPhases(ebsd);
+ebsd = recolorPhases(ebsd);
 %% Define and refine parent-to-child orientation relationship
 screenPrint('SegmentStart','Define and refine parent-to-child OR');
 % Define 'Gamma" as the parent and 'AlphaP' as the child phase
