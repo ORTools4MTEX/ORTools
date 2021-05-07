@@ -1,8 +1,11 @@
-*.png
+*.bmp
 *.jpg
 *.tiff
-*.bmp
+*.png
 *.asv
-*.Tex
+*.cpr
+*.crc
+*.ctf
 *.mat
+*.Tex
 data/output/
