@@ -42,6 +42,6 @@ else
 end
 screenPrint('SubStep',sprintf('''%s''',CS.child.mineral));
 %% Define parentGrainReconstructor job
-%Dummy misorientation for p2c OR
+%Dummy misorientation to define p2c crystal symmetries
 p2c0 = orientation.byEuler(0,0,0,CS.parent,CS.child);
 job = parentGrainReconstructor(ebsd,grains,p2c0);
