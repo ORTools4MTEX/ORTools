@@ -1,4 +1,4 @@
-function [job] = setParentGrainReconstructor(ebsd,grains,inPath)
+function job = setParentGrainReconstructor(ebsd,grains,inPath)
 % Auxiliary GUI function to define a job of class parentGrainReconstructor
 %
 % Syntax
@@ -42,8 +42,6 @@ else
 end
 screenPrint('SubStep',sprintf('''%s''',CS.child.mineral));
 %% Define parentGrainReconstructor job
-%Dummy misorientation
-%p2c0 = orientation.rand(CS.parent,CS.child);
-%job = parentGrainReconstructor(ebsd,grains,p2c0);
-%job.p2c = orientation.byEuler(0,0,0,CS.parent,CS.child);
-job = parentGrainReconstructor(ebsd,grains);
+%Dummy misorientation for p2c OR
+p2c0 = orientation.byEuler(0,0,0,CS.parent,CS.child);
+job = parentGrainReconstructor(ebsd,grains,p2c0);
