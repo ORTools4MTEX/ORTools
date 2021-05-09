@@ -99,12 +99,12 @@ job.calcTPVotes('minFit',2.5*degree,'maxFit',5*degree);
 figure
 plot(job.grains, job.votes.prob(:,1));
 mtexColorbar
-% and calcualte parent orientations for all grains with a probability of 
-% > 70%
+% .... and calculate parent orientations for all grains with a > 70%
+% probability
 job.calcParentFromVote('minProb',0.7);
 %Plot the data
 figure;
-plot(job.parentGrains, job.parentGrains.meanOrientation,'linewidth',1.5);
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5);
 %% Grow parent grains at grain boundaries by voting algorithm
 % We can then let the parent grains grow into the child grains by a voting
 % algorithm
