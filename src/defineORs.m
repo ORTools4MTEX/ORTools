@@ -1,7 +1,7 @@
 function job = defineORs(job)
     % auxiliary function to define orientation relationships for given parent
     % and child phase in "job" by:
-    %    - Parallel Planes Directions in a GUI
+    %    - Parallel planes & directions in a GUI or,
     %    - Peakfit of the parent-child boundary misorientation angle
     %      distribution
     %
