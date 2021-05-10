@@ -97,7 +97,7 @@ plotIPDF_gB_prob(job);
 job.calcTPVotes('minFit',2.5*degree,'maxFit',5*degree);
 % Check the votes for all grains
 figure
-plot(job.grains, job.votes.prob(:,1));
+plot(job.grains,job.votes.prob(:,1));
 mtexColorbar
 % .... and calculate parent orientations for all grains with a > 70%
 % probability
