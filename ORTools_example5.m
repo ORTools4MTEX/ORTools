@@ -109,11 +109,15 @@ plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
 % alphaP grains in gamma, these are identified as misindexed points, i.e.
 % points belonging to gamma, but indexed as alpha - so let's clean this up
 
+% Select OR1 and refine it based on the fit with boundary misorientations
+
 %% Merging misindexed gamma
-% OR1 has only 1 variant, calcGBVotes finds the fit of that theoretical
-% variant with the parent-child boundary misorientations
+% % Check details on OR1
+ORinfo(job{1}.p2c);
+% % OR1 has only 1 variant, calcGBVotes finds the fit of that theoretical
+% % variant with the parent-child boundary misorientations
 job{1}.calcGBVotes('p2c','numFit',1); %'noC2C' in MTex v5.6.0
-% We transform all alpha grains that have a fit of <=5° to gamma
+% % We transform all alpha grains that have a fit of <=5° to gamma
 job{1}.calcParentFromVote('minFit',5*degree);
 % We can see that the small grains are transformed
 figure;
