@@ -72,13 +72,23 @@ In this script, we repeat the reconstruction of the prior β microstructure from
 
 ### [Example 5](./ORTools_example5.m)
 #### Partial parent grain reconstruction to clean TRWIP steel EBSD data
-This example is of a 20% cold-rolled twinning and transformation induced plasticity (TRWIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) function, we discover that two possible ORs could be in operation for the γ to α' microstructure. We identify that the first of them is not a real OR but corresponds to points that were misindexed as α' even though they belong to γ. We use the parent phase reconstruction features in MTEX and the apprent OR to revert these misindexed points to γ. We then re-run the grain calculation and the OR peak fitter to show that the apparent OR was eliminated. This example also serves as a template on how to reconstruct parent phase microstructures based on multiple ORs in one microstructure. 
+This example is of a 20% cold-rolled twinning and transformation induced plasticity (TRWIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) function, we discover that two possible ORs could be in operation for the γ to α' microstructure. We identify that the first of them is not a real OR but corresponds to points that were misindexed as α' even though they belong to γ. We use the parent phase reconstruction features in MTEX and the apprent OR to revert these misindexed points to γ. We then re-run the grain calculation and the OR peak fitter to show that the apparent OR was eliminated. 
 
 *EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
 
 [![ORTools - Example 5](http://img.youtube.com/vi/Hj5kVscjljU/0.jpg)](http://www.youtube.com/watch?v=Hj5kVscjljU "Video Title")
 
 [*Example 5 - Partial parent grain reconstruction to clean TRIP-TWIP steel EBSD map data*](https://youtu.be/Hj5kVscjljU)
+
+### [Example 6](./ORTools_example5.m)
+#### Two-stage parent grain reconstruction in a TRWIP steel
+This example is of a 10% cold-rolled twinning and transformation induced plasticity (TRWIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Here we use ORTools and the MTEX parent grain reconstruction functionalities to reconstruct both parent microstructures in a single workflow. In the end we demonstrate that variant analysis can be conducted on both transformations. 
+
+*EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
+
+[![ORTools - Example 6](http://img.youtube.com/vi/Hj5kVscjljU/0.jpg)](http://www.youtube.com/watch?v=Hj5kVscjljU "Video Title")
+
+[*Example 6 - Two-stage parent grain reconstruction in a TRWIP steel*](https://youtu.be/Hj5kVscjljU)
 
 ---
 
