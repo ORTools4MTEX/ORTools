@@ -116,9 +116,9 @@ plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
 ORinfo(job{1}.p2c);
 % % OR1 has only 1 variant, calcGBVotes finds the fit of that theoretical
 % % variant with the parent-child boundary misorientations
-job{1}.calcGBVotes('p2c','numFit',1); %'noC2C' in MTex v5.6.0
-% % We transform all alpha grains that have a fit of <=5° to gamma
-job{1}.calcParentFromVote('minFit',5*degree);
+job{1}.calcGBVotes('p2c','numFit',1); % was 'noC2C' in MTex v5.6.0
+% % We transform all alpha grains that have a fit of <=3° to gamma
+job{1}.calcParentFromVote('minFit',3*degree);
 % We can see that the small grains are transformed
 figure;
 plot(job{1}.parentGrains,job{1}.parentGrains.meanOrientation);
@@ -134,11 +134,11 @@ ebsdCleaned = job{1}.calcParentEBSD;
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 [grains,ebsd.grainId] = calcGrains(ebsdCleaned,'threshold',3*degree,...
   'removeQuadruplePoints');
-%% Making a new "job" containing the new EBSD data and grains
+%% Making a "new" job containing the new EBSD data and grains
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose "Gamma" as a parent and "Alpha" as a child phase
 job = setParentGrainReconstructor(ebsdCleaned,grains,Ini.cifPath);
-% And enter the OR peak fitter again
+%% Use the OR peak fitter again to check the histogram
 job = defineORs(job);
 % We can now see that the peak at 0° has disappeared.
 % From here we can continue working with the second OR or explore the other
