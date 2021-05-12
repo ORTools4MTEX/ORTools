@@ -8,6 +8,10 @@
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
 % (Remove "dot" and "at" to make this email address valid)
 % *********************************************************************
+
+% Example 5 may return an error with MTEX 5.7.0, but will work without error 
+% with MTEX. 5.6.x and ORTools v.1.0 or with MTEX v5.7.1 onwards."
+
 home; close all; clear variables;
 currentFolder;
 screenPrint('StartUp','ORTools - Example 5');
@@ -29,7 +33,7 @@ ebsd = loadEBSD_ctf([Ini.ebsdPath,'TRWIPsteel.ctf'],'convertSpatial2EulerReferen
 ebsd = ebsd('indexed');
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 3° threshold
+% Grains are calculated with a 3Â° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
   'removeQuadruplePoints');
 %% Rename and recolor phases 
@@ -54,7 +58,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2);
 
 % Parent-child grain boundary misorientation map 
 plotMap_gB_p2c(job,'linewidth',1.5);
-%       - Misorientation mainly around ~45°
+%       - Misorientation mainly around ~45Â°
 
 % Child-child grain boundary misorientation map 
 plotMap_gB_c2c(job,'linewidth',1.5);
@@ -86,9 +90,9 @@ plotHist_OR_misfit(job{2},[orientation.KurdjumovSachs(job{2}.csParent,job{2}.csC
 %% Plot the inverse pole figure
 % Plot inverse pole figures for parent-child and child-child boundary
 % disorientations
-% We color the boundaries up to 5° disorientation to emphasize the effects
+% We color the boundaries up to 5Â° disorientation to emphasize the effects
 plotIPDF_gB_misfit(job{1},'maxColor',5);
-%       - The misorientation axis is scattered because of the 0° angle
+%       - The misorientation axis is scattered because of the 0Â° angle
 %       - The disorientation is quite high
 
 plotIPDF_gB_misfit(job{2},'maxColor',5);
@@ -97,7 +101,7 @@ plotIPDF_gB_misfit(job{2},'maxColor',5);
 
 %% Analyze the microstructure by plotting maps
 % Plot parent-child and child-child OR boundary disorientation map
-% We color the boundaries up to 5° disorientation to emphasize the effects
+% We color the boundaries up to 5Â° disorientation to emphasize the effects
 plotMap_gB_misfit(job{1},'linewidth',1.5,'maxColor',5);
 %       - Only few small grains of Alpha with no connection to Epsilon
 %         match
@@ -119,7 +123,7 @@ job{1}.calcParent2Child;
 % % OR1 has only 1 variant, calcGBVotes finds the fit of that theoretical
 % % variant with the parent-child boundary misorientations
 job{1}.calcGBVotes('p2c','numFit',1); % was 'noC2C' in MTex v5.6.0
-% % We transform all alpha grains that have a fit of <=3° to gamma
+% % We transform all alpha grains that have a fit of <=3Â° to gamma
 job{1}.calcParentFromVote('minFit',3*degree);
 % We can see that the small grains are transformed
 figure;
@@ -142,7 +146,7 @@ screenPrint('SegmentStart','Finding the orientation relationship(s)');
 job = setParentGrainReconstructor(ebsdCleaned,grains,Ini.cifPath);
 %% Use the OR peak fitter again to check the histogram
 job = defineORs(job);
-% We can now see that the peak at 0° has disappeared.
+% We can now see that the peak at 0Â° has disappeared.
 % From here we can continue working with the second OR or explore the other
 % smaller peaks to plot maps or reconstruct the parent microstructure
 %% Save images
