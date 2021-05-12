@@ -107,13 +107,14 @@ plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
 
 % Seeing that the OR 1 describes a cube-on-cube misorientation of small
 % alphaP grains in gamma, these are identified as misindexed points, i.e.
-% points belonging to gamma, but indexed as alpha - so let's clean this up
-
-% Select OR1 and refine it based on the fit with boundary misorientations
+% points belonging to gamma but misindexed as alphaP.
+% We should revert these misindexed grains.
 
 %% Merging misindexed gamma
 % % Check details on OR1
 ORinfo(job{1}.p2c);
+% % Select OR1 and refine it based on the fit with boundary misorientations
+job{1}.calcParent2Child;
 % % OR1 has only 1 variant, calcGBVotes finds the fit of that theoretical
 % % variant with the parent-child boundary misorientations
 job{1}.calcGBVotes('p2c','numFit',1); % was 'noC2C' in MTex v5.6.0
@@ -125,7 +126,7 @@ plot(job{1}.parentGrains,job{1}.parentGrains.meanOrientation);
 % We can merge them into the surrounding grains and check the result
 job{1}.mergeSimilar('threshold',5*degree);
 figure;
-plot(job{1}.parentGrains, job{1}.parentGrains.meanOrientation);
+plot(job{1}.parentGrains,job{1}.parentGrains.meanOrientation);
 % Finally, we make a new ebsd map, with the misindexed alpha grains of OR1
 % being transformed to gamma grains
 ebsdCleaned = job{1}.calcParentEBSD;
