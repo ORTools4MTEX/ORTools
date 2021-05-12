@@ -110,7 +110,8 @@ plotMap_gB_misfit(job{2},'linewidth',1.5,'maxColor',5);
 % points belonging to gamma but misindexed as alphaP.
 % We should revert these misindexed grains.
 
-%% Merging misindexed gamma
+%% Merging misindexed alphaP with gamma
+screenPrint('SegmentStart','Merging misindexed alphaP with gamma');
 % % Check details on OR1
 ORinfo(job{1}.p2c);
 % % Select OR1 and refine it based on the fit with boundary misorientations
@@ -132,7 +133,7 @@ plot(job{1}.parentGrains,job{1}.parentGrains.meanOrientation);
 ebsdCleaned = job{1}.calcParentEBSD;
 
 %% Recomputing the grains from the new EBSD dataset
-screenPrint('SegmentStart','Computing, filtering and smoothing grains');
+screenPrint('SegmentStart','Recomputing, filtering and smoothing grains');
 [grains,ebsd.grainId] = calcGrains(ebsdCleaned,'threshold',3*degree,...
   'removeQuadruplePoints');
 %% Making a "new" job containing the new EBSD data and grains
