@@ -9,11 +9,11 @@
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 </p>
 
-**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB**-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. You may want to watch this [*talk by Frank Niessen*](https://youtu.be/B0faPjtOdmA) at the MTEX Workshop 2021, which gives an introduction to the phase transition features in MTEX and ORTools. 
+**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB**-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the MTEX Workshop 2021, which gives an introduction to the phase transition features in MTEX and ORTools. 
 
 The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
-**ORTools** has been created by *Dr Azdiar Gazder* and *Dr Frank Niessen*. To help maintain the library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve **ORTools**, please contact us.
+**ORTools** has been created by **Dr Azdiar Gazder**[https://www.researchgate.net/profile/Azdiar-Gazder] and **Dr Frank Niessen**[https://www.researchgate.net/profile/Frank-Niessen-4]. To help maintain the library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve **ORTools**, please contact us.
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
@@ -574,7 +574,7 @@ An auxiliary GUI function to define a job of class [parentGrainReconstructor](ht
 - Input
   - ebsd     - @EBSD
   - grains   - @grain2d
-  - inPath   - string giving path to cif-file folder 
+  - inPath   - string giving path to .cif file folder 
 - Output
   - job      - @parentGrainReconstructor
 
