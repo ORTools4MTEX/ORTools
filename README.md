@@ -82,7 +82,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 
 ### [Example 6](./ORTools_example6.m)
 #### Two-stage parent grain reconstruction in a TRWIP steel
-This example is of a 10% cold-rolled twinning and transformation induced plasticity (TRWIP) steel microstructure presenting a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Here we use ORTools and the MTEX parent grain reconstruction functionalities to reconstruct both parent microstructures in a single workflow. In the end we demonstrate that variant analysis can be conducted on both transformations. 
+This example is of a 10% cold-rolled twinning and transformation induced plasticity (TWIP-TRIP) steel microstructure with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Here we use ORTools and the MTEX parent grain reconstruction functionalities to reconstruct both parent microstructures in a single workflow. Towards the end, we demonstrate that variant analysis can be conducted on both transformations. 
 
 *EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
 
@@ -517,14 +517,17 @@ An auxiliary function to read in *.cpr/.crc* files with a browser window.
   - ebsd             - @EBSD
 
 ### [recolorPhases](./src/recolorPhases.m)
-The function opens an interactive GUI colorpicker tool to redefine the phase colors in the *ebsd* variable.
+The function opens an interactive GUI color picker to redefine the phase colors using the *ebsd* or *grains* variables.
 
 - Syntax
   - [ebsd] = recolorPhases(ebsd)
+  - [grains] = recolorPhases(grains)
 - Input
   - ebsd             - @EBSD
+  - grains           - @grains2d
 - Output
   - ebsd             - @EBSD
+  - grains           - @grains2d
   
 <p align="center">
   <img src="./doc/images/recolorPhases.png" alt="GUI of recolorPhases" width="200"/>
