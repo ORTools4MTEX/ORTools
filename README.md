@@ -17,7 +17,7 @@ The advanced OR discovery, analysis and plotting functionalities of the **ORTool
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
-[**ORTools Introduction**](https://youtu.be/inkR6LBzFeQ)
+[*ORTools Introduction*](https://youtu.be/inkR6LBzFeQ)
 
 ---
 ## How to use
