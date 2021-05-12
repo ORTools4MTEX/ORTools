@@ -1,8 +1,8 @@
-*Download the [**LATEST STABLE RELEASE**](https://github.com/frankNiessen/ORTools/releases/tag/v1.1.2) or the [**DEVELOPER VERSION**](https://github.com/frankNiessen/ORTools/archive/develop.zip) by clicking on either weblink*
+Download the [**LATEST STABLE RELEASE**](https://github.com/frankNiessen/ORTools/releases/tag/v1.1.2) or the [**DEVELOPER VERSION**](https://github.com/frankNiessen/ORTools/archive/develop.zip) by clicking on either weblink
 
-| [*How to use*](https://github.com/frankNiessen/ORTools#how-to-use) 
-| [*Example scripts*](https://github.com/frankNiessen/ORTools#example-scripts) 
-| [*Function reference*](https://github.com/frankNiessen/ORTools#function-reference) |
+| [**How to use**](https://github.com/frankNiessen/ORTools#how-to-use) 
+| [**Example scripts**](https://github.com/frankNiessen/ORTools#example-scripts) 
+| [**Function reference**](https://github.com/frankNiessen/ORTools#function-reference) |
 
 ---
 <p align="left">
@@ -17,7 +17,7 @@ The advanced OR discovery, analysis and plotting functionalities of the **ORTool
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
-[*ORTools Introduction*](https://youtu.be/inkR6LBzFeQ)
+[**ORTools Introduction**](https://youtu.be/inkR6LBzFeQ)
 
 ---
 ## How to use
