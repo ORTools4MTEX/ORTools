@@ -13,7 +13,7 @@
 
 The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
-**ORTools** has been created by **Dr Azdiar Gazder**[https://www.researchgate.net/profile/Azdiar-Gazder] and **Dr Frank Niessen**[https://www.researchgate.net/profile/Frank-Niessen-4]. To help maintain the library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve **ORTools**, please contact us.
+**ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). To help maintain the library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve **ORTools**, please contact us.
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
