@@ -18,7 +18,6 @@ The advanced OR discovery, analysis and plotting functionalities of the **ORTool
 To help maintain the **ORTools** library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve it, please contact us.
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
-
 [*ORTools Introduction*](https://youtu.be/inkR6LBzFeQ)
 
 ---
