@@ -525,8 +525,8 @@ The function calculates and plots the transformation texture, with or without im
 - Syntax
   -  plotPODF_transformation(job,hParent,hChild)
 - Input
-  - hParent     - @Miller  (parent polefigures to plot)
-  - hChild      - @Miller  (child polefigures to plot)
+  - hParent     - @Miller  (parent pole figures to display)
+  - hChild      - @Miller  (child pole figures to display)
 - Options
   - odfSecP      - array with angles of parent ODF section to display
   - odfSecC      - array with angles of child ODF section to display
