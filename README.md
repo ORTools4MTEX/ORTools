@@ -645,7 +645,7 @@ An auxiliary GUI function to define a job of class [parentGrainReconstructor](ht
 - Input
   - ebsd     - @EBSD
   - grains   - @grain2d
-  - inPath   - string giving path to .cif file folder 
+  - inPath   - string giving path to * .cif file folder 
 - Output
   - job      - @parentGrainReconstructor
 
