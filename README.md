@@ -13,7 +13,7 @@ Download the [**LATEST STABLE RELEASE**](https://github.com/frankNiessen/ORTools
 
 The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
-**ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite [this paper](https://arxiv.org/abs/2104.14603) as your reference.
+**ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, [**please cite this paper as your reference**](https://arxiv.org/abs/2104.14603).
 
 To help maintain the **ORTools** library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve it, please contact us.
 
