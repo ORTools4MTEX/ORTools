@@ -38,6 +38,8 @@ The world of martensitic transformation or phase transition analysis can be diff
 
 It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the code and the generated results. This will also help you follow the comments, which provide instructions on the various choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the code as well as the meaning behind the presented results.
 
+---
+
 ### [Example 1](./ORTools_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for martensite transformation in steels. Here we demonstrate how **ORTools** provides pre-written and additional plotting functions to create publication-ready plots.
@@ -45,6 +47,8 @@ This script follows the same dataset and steps that are used to demonstrate the 
 [![ORTools - Example 1](http://img.youtube.com/vi/AcR-nXg5QKo/0.jpg)](http://www.youtube.com/watch?v=AcR-nXg5QKo "Video Title")
 
 [*Example 1 - Parent grain reconstruction in steel*](https://youtu.be/AcR-nXg5QKo)
+
+---
 
 ### [Example 2](./ORTools_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
@@ -54,6 +58,8 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 [*Example 2 - Parent grain reconstruction in titanium alloys*](https://youtu.be/e6R0dApUc8Q)
 
+---
+
 ### [Example 3](./ORTools_example3.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
 In [example 2](https://github.com/frankNiessen/ORTools#example-2) we noted that the α-β Ti microstructure showed two ORs in the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) function. In this example, we want to return both ORs and investigate which one of them dominated during phase transition. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figures and on boundary maps to evaluate the best match.
@@ -61,6 +67,8 @@ In [example 2](https://github.com/frankNiessen/ORTools#example-2) we noted that 
 [![ORTools - Example 3](http://img.youtube.com/vi/8e9PhhFCWYc/0.jpg)](http://www.youtube.com/watch?v=8e9PhhFCWYc "Video Title")
 
 [*Example 3 - Separation of multiple ORs in titanium alloys*](https://youtu.be/8e9PhhFCWYc)
+
+---
 
 ### [Example 4](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
@@ -81,6 +89,8 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 [![ORTools - Example 5](http://img.youtube.com/vi/Hj5kVscjljU/0.jpg)](http://www.youtube.com/watch?v=Hj5kVscjljU "Video Title")
 
 [*Example 5 - Partial parent grain reconstruction to clean TRIP-TWIP steel EBSD map data*](https://youtu.be/Hj5kVscjljU)
+
+---
 
 ### [Example 6](./ORTools_example6.m)
 #### Two-stage parent grain reconstruction in a TRWIP steel
@@ -130,6 +140,8 @@ This example is of a 10% cold-rolled twinning and transformation induced plastic
 - [setParentGrainReconstructor](https://github.com/frankNiessen/ORTools/blob/master/README.md#setParentGrainReconstructor)
 - [tileFigs](https://github.com/frankNiessen/ORTools/blob/master/README.md#tileFigs)
 
+---
+
 ### [computeGrains](./src/computeGrains.m)
 Small GUI to compute grains from EBSD data and optionally filter them.
 
@@ -146,6 +158,8 @@ Small GUI to compute grains from EBSD data and optionally filter them.
   <img src="./doc/images/computeGrains.png" alt="UI of computeGrains" width="400"/>
 </p>
 
+---
+
 ### [defineORs](./src/defineORs.m)
 Auxiliary function to define orientation relationships for a parent and child phase given in *job* by either parallel planes and directions in a GUI or peakfitting of the parent-child boundary misorientation angle distribution
 
@@ -155,6 +169,8 @@ Auxiliary function to define orientation relationships for a parent and child ph
   - job  - @parentGrainReconstructor
 - Output
   - job  - @parentGrainReconstructor
+
+---
 
 ### [fibreMaker](./src/fibreMaker.m)
 The function creates a VPSC file with orientations following the distribution of a fibre ODF
@@ -168,6 +184,8 @@ The function creates a VPSC file with orientations following the distribution of
   - halfwidth    - halfwidth for ODF calculation
   - points       - number of points (orientations) in the VPSC file
   - export       - (optional path) & name of the VPSC file
+
+---
 
 ### [grainClick](./src/grainClick.m)
 Interactive map to select parent grains for further analysis
@@ -186,6 +204,8 @@ Interactive map to select parent grains for further analysis
   <img src="./doc/images/grainClick.png" alt="Plots from grainClick" width="500"/>
 </p>
 
+---
+
 ### [guiOR](./src/guiOR.m)
 Graphical user interface for definition of an orientation relationship by parallel planes and directions
 
@@ -200,6 +220,8 @@ Graphical user interface for definition of an orientation relationship by parall
   <img src="./doc/images/guiOR.png" alt="UI of guiOR" width="600"/>
 </p>
 
+---
+
 ### [orientationMaker](./src/orientationMaker.m)
 The function creates a VPSC file with orientations following the distribution of a unimodal ODF
 
@@ -211,6 +233,8 @@ The function creates a VPSC file with orientations following the distribution of
   - halfwidth    - halfwidth for ODF calculation
   - points       - number of points (orientations) in the VPSC file
   - export       - (optional path) & name of the VPSC file
+
+---
 
 ### [ORinfo](./src/ORinfo.m)
 The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
@@ -228,6 +252,8 @@ The function outputs information about the orientation relationship in the comma
   <img src="./doc/images/ORinfo.png" alt="Command window output example from ORinfo" width="500"/>
 </p>
 
+---
+
 ### [peakFitORs](./src/peakFitORs.m)
 The function peak fits parent-child misorientation angle ranges for determination of one or several orientation relationships.
 The function is called by [defineORs](https://github.com/frankNiessen/ORTools/blob/master/README.md#defineors).
@@ -244,6 +270,8 @@ The function is called by [defineORs](https://github.com/frankNiessen/ORTools/bl
   <img src="./doc/images/peakFitORs.png" alt="Interactive fitting window on which peakFitORs is applied." width="500"/>
 </p>
 
+---
+
 ### [plotHist_OR_misfit](./src/plotHist_OR_misfit.m)
 This function plots the disorientation, or misfit, between parent-child and child-child grains and an orientation relationship in a histogram. By default, the current OR (*job.p2c*) is selected and is denoted by 2 stars (**). Additional ORs can be supplied with the argument *p2c*.
 
@@ -257,10 +285,11 @@ This function plots the disorientation, or misfit, between parent-child and chil
   - bins    - number of histogram bins
   - legend  - cell array of strings with legend names of ORs to evaluate
 
-
 <p align="center">
   <img src="./doc/images/plotHist_OR_misfit.png" alt="Plot example from plotHist_OR_misfit" width="500"/>
 </p>
+
+---
 
 ### [plotIPDF_gB_misfit](./src/plotIPDF_gB_misfit.m)
 This function plots the misfit, or disorientation, between parent-child and child-child boundaries with the orientation relationship in an inverse pole figure showing the misorientation axes
@@ -276,6 +305,8 @@ This function plots the misfit, or disorientation, between parent-child and chil
   <img src="./doc/images/plotIPDF_gB_misfit.png" alt="Plot example from plotIPDF_gB_misfit" width="1000"/>
 </p>
 
+---
+
 ### [plotIPDF_gB_prob](./src/plotIPDF_gB_prob.m)
 This function calculates and plots the probability distribution between 0 and 1, that a boundary belongs to an orientation relationship in an inverse pole figure showing the misorientation axes
 
@@ -289,6 +320,8 @@ This function calculates and plots the probability distribution between 0 and 1,
 <p align="center">
   <img src="./doc/images/plotIPDF_gB_prob.png" alt="Plot example from plotIPDF_gB_prob" width="1000"/>
 </p>
+
+---
 
 ### [plotMap_clusters](./src/plotMap_clusters.m)
 The function shows the clusters of grains that are likely to belong to the same parent grain, created with [clusterGraph](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterGraph.html) on top of the  semin-transparent IPF map of child grains.
@@ -304,6 +337,8 @@ The function shows the clusters of grains that are likely to belong to the same 
   <img src="./doc/images/plotMap_clusters.png" alt="Plot example from plotMap_clusters" width="500"/>
 </p>
 
+---
+
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
 The function colorizes the child-child boundaries in *job*
 
@@ -317,6 +352,8 @@ The function colorizes the child-child boundaries in *job*
 <p align="center">
   <img src="./doc/images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
 </p>
+
+---
 
 ### [plotMap_gB_misfit](./src/plotMap_gB_misfit.m)
 The function colorizes the misfit, or disorientation, between parent-child and child-child boundaries with the orientation relationship *job.p2c*
@@ -332,6 +369,8 @@ The function colorizes the misfit, or disorientation, between parent-child and c
   <img src="./doc/images/plotMap_gB_misfit.png" alt="Plot example from plotMap_gB_misfit" width="500"/>
 </p>
 
+---
+
 ### [plotMap_gB_p2c](./src/plotMap_gB_p2c.m)
 The function colorizes the parent-child boundaries in *job* according to their misorientation angle.
 
@@ -345,6 +384,8 @@ The function colorizes the parent-child boundaries in *job* according to their m
 <p align="center">
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
 </p>
+
+---
 
 ### [plotMap_gB_prob](./src/plotMap_gB_prob.m)
 The function calculates and plots the probability distribution between 0 and 1, that a 
@@ -363,6 +404,7 @@ boundary belongs to the orientation relationship (see more [here](https://mtex-t
   <img src="./doc/images/plotMap_gB_prob.png" alt="Plot example from plotMap_gB_prob" width="500"/>
 </p>
 
+---
 
 ### [plotMap_IPF_p2c](./src/plotMap_IPF_p2c.m)
 The function plots the inverse polefigure maps of the parent and child phases and returns the ipfHSV color key.
@@ -383,6 +425,8 @@ The function plots the inverse polefigure maps of the parent and child phases an
   <img src="./doc/images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="800"/>
 </p>
 
+---
+
 ### [plotMap_packets](./src/plotMap_packets.m)
 The function plots the map of child grains colored according to their packet ID.
 
@@ -398,6 +442,8 @@ The function plots the map of child grains colored according to their packet ID.
   <img src="./doc/images/plotMap_packets.png" alt="plotMap_packets" width="500"/>
 </p>
 
+---
+
 ### [plotMap_phases](./src/plotMap_phases.m)
 The function plots a phase map of the grains within *job* and the grain boundaries (*job.grains.boundary*).
 
@@ -409,6 +455,8 @@ The function plots a phase map of the grains within *job* and the grain boundari
 <p align="center">
   <img src="./doc/images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
 </p>
+
+---
 
 ### [plotMap_variants](./src/plotMap_variants.m)
 The function plots the map of child grains colored according to their variant ID.
@@ -424,6 +472,8 @@ The function plots the map of child grains colored according to their variant ID
 <p align="center">
   <img src="./doc/images/plotMap_variants.png" alt="plotMap_variants" width="500"/>
 </p>
+
+---
 
 ### [plotPDF_packets](./src/plotPDF_packets.m)
 The function plots a pole figure of the martensitic packets associated with the OR *job.p2c*.
@@ -444,6 +494,8 @@ The function plots a pole figure of the martensitic packets associated with the 
   <img src="./doc/images/plotPDF_packets.png" alt="Plot example from plotPDF_packets" width="300"/>
 </p>
 
+---
+
 ### [plotPDF_variants](./src/plotPDF_variants.m)
 The function plots a pole figure of the martensitic variants associated with the OR *job.p2c*. It is an alternative to MTEX's [plotVariantPF](https://mtex-toolbox.github.io/parentGrainReconstructor.plotVariantPF.html).
 
@@ -462,6 +514,8 @@ The function plots a pole figure of the martensitic variants associated with the
 <p align="center">
   <img src="./doc/images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="300"/>
 </p>
+
+---
 
 ### [plotPODF_transformation](./src/plotPODF_transformation.m)
 The function calculates and plots the transformation texture, with or without imposing variant selection, based on a parent texture in inputVPSC.Tex. Input files can be created from EBSD data as presented in [example 4](https://github.com/frankNiessen/ORTools#example-4) or created with [fibreMaker](https://github.com/frankNiessen/ORTools/blob/master/README.md#fibreMaker) or [orientationMaker](https://github.com/frankNiessen/ORTools/blob/master/README.md#orientationMaker)
@@ -487,6 +541,8 @@ The function calculates and plots the transformation texture, with or without im
   <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transformation" width="1000"/>
 </p>
 
+---
+
 ### [plotStack](./src/plotStack.m)
 The function plots maps for martensite variant analysis of a single prior parent grain. You can manually supply a parent grain Id *pGrainId* or use the function [grainClick](https://github.com/frankNiessen/ORTools/blob/master/README.md#grainClick) to choose a grain interactively.
 
@@ -504,6 +560,7 @@ The function plots maps for martensite variant analysis of a single prior parent
   <img src="./doc/images/plotStack.png" alt="Plot example from plotStack" width="1000"/>
 </p>
 
+---
 
 ### [readCPR](./src/readCPR.m)
 An auxiliary function to read in *.cpr/.crc* files with a browser window.
@@ -517,6 +574,8 @@ An auxiliary function to read in *.cpr/.crc* files with a browser window.
   - fileName - string with filename 'xxyyzz.cpr'
 - Output
   - ebsd             - @EBSD
+
+---
 
 ### [recolorPhases](./src/recolorPhases.m)
 The function opens an interactive GUI color picker to redefine the phase colors using the *ebsd* or *grains* variables.
@@ -535,6 +594,8 @@ The function opens an interactive GUI color picker to redefine the phase colors 
   <img src="./doc/images/recolorPhases.png" alt="GUI of recolorPhases" width="200"/>
 </p>
 
+---
+
 ### [renamePhases](./src/renamePhases.m)
 The function opens an interactive list with the possible phasenames in *phaseStrings* and renames the phases in *ebsd* according to the selection.
 
@@ -545,6 +606,8 @@ The function opens an interactive list with the possible phasenames in *phaseStr
   - phaseStrings     - cell array of strings with possible phase names
 - Output
   - ebsd             - @EBSD
+
+---
 
 ### [saveImage](./src/saveImage.m)
 An auxiliary function to save all open figures as images.
@@ -557,6 +620,8 @@ An auxiliary function to save all open figures as images.
   - fileName    - file name (string with file of type * .bmp, * .jpeg, * .png or * .tiff )
   - fileDir     - file directory
 
+---
+
 ### [screenPrint](./src/screenPrint.m)
 An auxiliary function for formating command window output.
 
@@ -566,6 +631,8 @@ An auxiliary function for formating command window output.
 - Input
   - mode     - Formatting mode
   - string   - Output string
+
+---
 
 ### [setParentGrainReconstructor](./src/setParentGrainReconstructor.m)
 An auxiliary GUI function to define a job of class [parentGrainReconstructor](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html).
@@ -579,6 +646,8 @@ An auxiliary GUI function to define a job of class [parentGrainReconstructor](ht
   - inPath   - string giving path to .cif file folder 
 - Output
   - job      - @parentGrainReconstructor
+
+---
 
 ### [tileFigs](./src/tileFigs.m)
 An auxiliary function to distribute figures evenly over a user screen/monitor.
