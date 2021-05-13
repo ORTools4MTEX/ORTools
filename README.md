@@ -93,14 +93,14 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 ---
 
 ### [Example 6](./ORTools_example6.m)
-#### Two-stage parent grain reconstruction in a TRWIP steel
+#### Two-stage parent grain reconstruction in a TWIP-TRIP steel
 This example is of a 10% cold-rolled twinning and transformation induced plasticity (TWIP-TRIP) steel microstructure with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Here we use ORTools and the MTEX parent grain reconstruction functionalities to reconstruct both parent microstructures in a single workflow. Towards the end, we demonstrate that variant analysis can be conducted on both transformations. 
 
 *EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
 
 [![ORTools - Example 6](http://img.youtube.com/vi/K2rO3Mx4A8s/0.jpg)](http://www.youtube.com/watch?v=K2rO3Mx4A8s "Video Title")
 
-[*Example 6 - Two-stage parent grain reconstruction in a TRWIP steel*](https://youtu.be/K2rO3Mx4A8s)
+[*Example 6 - Two-stage parent grain reconstruction in a TWIP-TRIP steel*](https://youtu.be/K2rO3Mx4A8s)
 
 ---
 
