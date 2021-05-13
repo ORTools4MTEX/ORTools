@@ -2,7 +2,7 @@
 % *********************************************************************
 %                        ORTools - Example 6
 % *********************************************************************
-% Parent grain reconstruction in two-stages in a TWIP-TRIP steel
+% Two-stage parent grain reconstruction in a TWIP-TRIP steel
 % *********************************************************************
 % Dr. Azdiar Gazder, 2021, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2021, contactatfniessendotcom
@@ -120,8 +120,8 @@ saveImage(Ini.imagePath);
 %% Grain Click
 grainClick(job2,'noScalebar','noFrame');
 %% Summary
-% This example has shown how to conduct parent grain reconstruction in 
-% two-stages in a TWIP-TRIP steel. In the first stage, alphaP martensite 
-% was reverted to epsilon martensite. In the second stage, epsilon 
-% martensite was reverted to parent austenite.
+% This example has shown two-stage parent grain reconstruction in a 
+% TWIP-TRIP steel. In the first stage, alphaP martensite was reverted to 
+% epsilon martensite. In the second stage, epsilon martensite was reverted
+% to parent austenite.
 
