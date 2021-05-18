@@ -157,13 +157,9 @@ plotMap_variants(job,'linewidth',3);
 plotMap_packets(job,'linewidth',3);
 %plotMap_packets(job,'grains','linewidth',3);   %Plot grain data instead
 
-%% Plot the reconstructed parent EBSD 
-% Finally, and plot it with the prior parent grain boundaries
-figure;
-plot(job.ebsd(job.csParent),job.ebsd(job.csParent).orientations);
-hold on; 
-plot(job.grains.boundary,'lineWidth',3)
-
+%% Plot reconstructed parent EBSD orientations and the IPF key
+parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',3,'parent');
+figure; plot(parentIPFkey);
 %% Save images
 saveImage(Ini.imagePath);
 

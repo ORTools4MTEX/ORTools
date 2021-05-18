@@ -133,12 +133,9 @@ job.calcVariants;
 % and plot the variant map
 plotMap_variants(job,'linewidth',3);
 %plotMap_variants(job,'grains','linewidth',3);  %Plot grain data instead
-%% Plot reconstructed parent EBSD 
-figure;
-plot(job.ebsd(job.csParent),job.ebsd(job.csParent).orientations);
-hold on; 
-plot(job.grains.boundary,'lineWidth',3)
-
+%% Plot reconstructed parent EBSD orientations and the IPF key
+parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',3,'parent');
+figure; plot(parentIPFkey);
 %% Save images
 saveImage(Ini.imagePath);
 

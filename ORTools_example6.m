@@ -70,9 +70,10 @@ for k = 1:3
   job1.calcParentFromVote;
 end
 plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2,'parent');
-%% Merge similar
+%% Merge similar and show reconstructed orientation map
 job1.mergeSimilar('threshold',7.5*degree);
-plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2,'parent');
+parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2,'parent');
+figure; plot(parentIPFkey);
 
 % ************** %
 %% Define and check the OR GAMMA - EPSILON
@@ -94,9 +95,10 @@ for k = 1:3
   job2.calcParentFromVote;
 end
 plotMap_IPF_p2c(job2,vector3d.Z,'linewidth',2,'parent');
-%% Merge similar
+%% Merge similar and show reconstructed orientation map
 job2.mergeSimilar('threshold',7.5*degree);
-plotMap_IPF_p2c(job2,vector3d.Z,'linewidth',2,'parent');
+parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2,'parent');
+figure; plot(parentIPFkey);
 
 % ************** %
 %% Variant analysis Gamma-Epsilon
