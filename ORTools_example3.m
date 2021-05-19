@@ -24,7 +24,7 @@ Ini.cifPath = [Ini.dataPath,'input/cif/'];
 Ini.ebsdPath = [Ini.dataPath,'input/ebsd/'];
 Ini.texturePath = [Ini.dataPath,'output/texture/'];
 Ini.imagePath = [Ini.dataPath,'output/images/'];
-Ini.phaseNames = {'Gamma','AlphaP','Epsilon','Beta','Alpha','AlphaDP'};
+Ini.phaseNames = {'Beta','Alpha'};
 %% Load data
 mtexDataset = 'alphaBetaTitanium';
 screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));

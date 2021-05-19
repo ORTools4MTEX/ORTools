@@ -80,7 +80,7 @@ if ~isempty(variantId) && ~isempty(variantWt) % Both variant Ids and weights are
     % Select only user-defined variants and their weights
     oriC = oriC(:,variantId);
     % Normalise the weights
-    variantWt = normalize(variantWt,'norm',1);
+    variantWt = variantWt/sum(variantWt);
     wtC = repmat(variantWt,size(oriC,1),1)./size(oriC,1);
     fprintf(['    - Plotting user-selected variants = ', num2str(variantId),' \n']);
     fprintf(['    - Using normalised weights = ', num2str(variantWt),' \n']);  

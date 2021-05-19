@@ -35,7 +35,7 @@ screenPrint('SegmentStart','Computing, filtering and smoothing grains');
   'removeQuadruplePoints');
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
-phaseNames = {'Gamma','AlphaP','Alpha','Beta','AlphaDP'};
+phaseNames = {'Alpha','Beta'};
 % Rename "Ti (BETA) to "Beta"and "Ti (alpha)" to "Alpha"
 ebsd = renamePhases(ebsd,phaseNames);
 % Choose your favourite colors

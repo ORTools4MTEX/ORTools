@@ -27,7 +27,7 @@ Ini.cifPath = [Ini.dataPath,'input/cif/'];
 Ini.ebsdPath = [Ini.dataPath,'input/ebsd/'];
 Ini.texturePath = [Ini.dataPath,'output/texture/'];
 Ini.imagePath = [Ini.dataPath,'output/images/'];
-Ini.phaseNames = {'Gamma','AlphaP','Epsilon','Beta','Alpha','AlphaDP'};
+Ini.phaseNames = {'Gamma','AlphaP','Epsilon'};
 %% Import EBSD data and save current file name
 ebsd = loadEBSD_ctf([Ini.ebsdPath,'TRWIPsteel.ctf'],'convertSpatial2EulerReferenceFrame');
 ebsd = ebsd('indexed');

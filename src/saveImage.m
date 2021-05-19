@@ -45,7 +45,7 @@ else % Figure windows are open
         [~,fileName,fileType] = fileparts(fileNameType);
         
         % Check if file(s) with the same name and type exist(s) in the folder
-        if isfile(fileNameType) || exist([fileDir,fileNameType],'file') == 2
+        if exist([fileDir,fileNameType],'file') == 2
             % Find the number of files with the same name and type in the folder
             fileStruc = dir([fileDir,fileName,'*',fileType]);
             fileNameList = {fileStruc.name};
@@ -61,7 +61,9 @@ else % Figure windows are open
             set(gcf,'PaperPositionMode','auto');
             figFileName = sprintf(strcat(fileName,'_%02d',fileType),numFigs2Save);
             % Define the image format
-            imgType = ['-d',extractAfter(fileType,".")];
+            imgType = join(['-d',extractAfter(fileType,'.')]);
+            imgType = char(strrep(imgType,' ',''));
+
             % Case sensitive re-check for the correct image format
             if any(strcmp(imgType,{'-dbmp','-djpeg','-dpng','-dtiff'}))
                 % Save images

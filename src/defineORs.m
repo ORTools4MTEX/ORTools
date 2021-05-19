@@ -1,6 +1,6 @@
 function job = defineORs(job)
     % auxiliary function to define orientation relationships for given parent
-    % and child phase in "job" by:
+    % and child phase in 'job' by:
     %    - Parallel planes & directions in a GUI or,
     %    - Peakfit of the parent-child boundary misorientation angle
     %      distribution
@@ -25,7 +25,7 @@ function job = defineORs(job)
         end
 
         % This command prevents function execution in cases when
-        % the user presses the "Cancel" or "Close" buttons
+        % the user presses the 'Cancel' or 'Close' buttons
         if isempty(loadMode) || strcmp(loadMode,methodTypes{3})
             message = sprintf('Script terminated: Execution aborted by user');
             uiwait(warndlg(message));
@@ -37,7 +37,7 @@ function job = defineORs(job)
 
         elseif strcmp(loadMode,'Peak-fit') || strcmp(loadMode,methodTypes{2})
             % Compute the parent-child misorientation distribution histogram
-            f = msgbox(["Use LEFT and RIGHT keyboard arrows to define the threshold for the peak(s)",...
+            f = msgbox(['Use LEFT and RIGHT keyboard arrows to define the threshold for the peak(s)',...
                        'fitting and press enter to continue']);
             uiwait(f);
             [classRange,classInterval,counts] = computePCHist(job);

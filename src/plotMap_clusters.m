@@ -1,5 +1,5 @@
 function ipfKey = plotMap_clusters(job, varargin)
-    % plot clusters from "clusterGraph" on top of semi-transparent child 
+    % plot clusters from 'clusterGraph' on top of semi-transparent child 
     % IPF map
     %
     % Syntax
@@ -17,7 +17,7 @@ function ipfKey = plotMap_clusters(job, varargin)
     %Merge grains according to cluster
     [grainsMerged,~] = merge(job.grains,job.graph);
     if grainsMerged.length == job.grains.length
-        warning("Run method ""clusterGraph"" first to obtain clusters")
+        warning('Run method ''clusterGraph'' first to obtain clusters')
     end
 
     f = figure;

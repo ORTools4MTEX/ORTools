@@ -86,15 +86,15 @@ for ii = 1:length(p2c)
     h(ii) = area(binCenters(ii,:)./degree, countsNorm(ii,:),...
         'linewidth',2,...
         'edgecolor',c(ii,:), 'facecolor',c(ii,:),...
-        'DisplayName',sprintf("OR %d",ii),'facealpha',0.25);
+        'DisplayName',sprintf('OR %d',ii),'facealpha',0.25);
     hold on;
 end
 hold off
 
 if ~isempty(job.p2c) && ~isempty(allLegend)
-    h(1).DisplayName = "OR **";
+    h(1).DisplayName = 'OR **';
 elseif ~isempty(job.p2c) && isempty(allLegend)
-    h(1).DisplayName = "OR 1**";
+    h(1).DisplayName = 'OR 1**';
 end
 
 if ~isempty(allLegend)

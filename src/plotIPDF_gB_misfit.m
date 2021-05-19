@@ -15,7 +15,7 @@ function plotIPDF_gB_misfit(job,varargin)
 cmap = get_option(varargin,'colormap','jet');
 
 if job.p2c == orientation.id(job.csParent,job.csChild)
-    warning("Orientation relationship is (0,0,0). Initialize ""job.p2c""!");
+    warning('Orientation relationship is (0,0,0). Initialize ''job.p2c''!');
     return
 end
 %% Compute the p2c and c2c boundary disorientation (misfits)

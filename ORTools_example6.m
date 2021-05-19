@@ -72,7 +72,7 @@ end
 plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2,'parent');
 %% Merge similar and show reconstructed orientation map
 job1.mergeSimilar('threshold',7.5*degree);
-parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2,'parent');
+parentIPFkey = plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2,'parent');
 figure; plot(parentIPFkey);
 
 % ************** %
@@ -97,7 +97,7 @@ end
 plotMap_IPF_p2c(job2,vector3d.Z,'linewidth',2,'parent');
 %% Merge similar and show reconstructed orientation map
 job2.mergeSimilar('threshold',7.5*degree);
-parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2,'parent');
+parentIPFkey = plotMap_IPF_p2c(job2,vector3d.Z,'linewidth',2,'parent');
 figure; plot(parentIPFkey);
 
 % ************** %

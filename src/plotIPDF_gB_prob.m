@@ -22,7 +22,7 @@ threshold = get_option(varargin,'threshold',2.5*degree);
 tolerance = get_option(varargin,'tolerance',2.5*degree);
 
 if job.p2c == orientation.id(job.csParent,job.csChild)
-    warning("Orientation relationship is (0,0,0). Initialize ""job.p2c""!");
+    warning('Orientation relationship is (0,0,0). Initialize ''job.p2c''!');
     return
 end
 
@@ -32,7 +32,7 @@ grainPairs = neighbors(job.grains);
 
 % Find p2c grain pairs
 grainPairs_p2c = neighbors(job.grains(job.csParent.mineral),job.grains(job.csChild.mineral));
-% Find the index of p2c grain pairs in the "all grain pairs" variable
+% Find the index of p2c grain pairs in the 'all grain pairs' variable
 [idx_p2c,~] = ismember(grainPairs,grainPairs_p2c,'rows');
 if isempty(idx_p2c(idx_p2c==1))
     grainPairs_p2c = grainPairs_p2c(:,[2 1]);
@@ -41,7 +41,7 @@ end
 
 % Find c2c grain pairs
 grainPairs_c2c = neighbors(job.grains(job.csChild.mineral),job.grains(job.csChild.mineral));
-% Find the index of c2c grain pairs in the "all grain pairs" variable
+% Find the index of c2c grain pairs in the 'all grain pairs' variable
 [idx_c2c,~] = ismember(grainPairs,grainPairs_c2c,'rows');
 if isempty(idx_c2c(idx_c2c==1))
     grainPairs_c2c = grainPairs_c2c(:,[2 1]);
