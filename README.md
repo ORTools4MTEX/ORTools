@@ -1,4 +1,4 @@
-Download the [**LATEST STABLE RELEASE**](https://github.com/frankNiessen/ORTools/releases/tag/v1.1.2) or the [**DEVELOPER VERSION**](https://github.com/frankNiessen/ORTools/archive/develop.zip) by clicking on either weblink
+Download the [**LATEST STABLE RELEASE**](https://github.com/frankNiessen/ORTools/releases/tag/v1.1.3) or the [**DEVELOPER VERSION**](https://github.com/frankNiessen/ORTools/archive/develop.zip) by clicking on either weblink
 
 | [**How to use**](https://github.com/frankNiessen/ORTools#how-to-use) 
 | [**Example scripts**](https://github.com/frankNiessen/ORTools#example-scripts) 
@@ -23,8 +23,8 @@ To help maintain the **ORTools** library, please report any bugs you encounter. 
 
 ---
 ## How to use
-- You can download the [**latest stable release**](https://github.com/frankNiessen/ORTools/releases/tag/v1.1.2) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip).
-- This library only works after the prior installation of **MATLAB** and **MTEX**. Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below.
+- You can download the [**latest stable release**](https://github.com/frankNiessen/ORTools/releases/tag/v1.1.3) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip).
+- This library only works after the prior installation of **MATLAB** and **MTEX**. Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below. ORTools is tested for compatibility down to MATLAB 2016b. Check with each [release](https://github.com/frankNiessen/ORTools/releases) with which MTEX it is compatible.
 - Open MATLAB and run one of the example files. Please refer to the [*Example 1*](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and want to use the function library instead, please ensure the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
 - If you encounter any problems, please contact us.
 - If you would like to contribute additional functionality or wish to suggest new features, please contact us.
