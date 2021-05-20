@@ -96,5 +96,5 @@ X1(5,:)=X1(5,:)*0 + x(3);
 Y1(5,:)=Y1(5,:)*0 + y(3);
 Z1(5,:)=Z1(5,:)*0 + z(3);
 h=surf(X1,Y1,Z1,'facecolor',colr,'edgecolor','none');
-camlight
-lighting phong
+% camlight
+% lighting phong

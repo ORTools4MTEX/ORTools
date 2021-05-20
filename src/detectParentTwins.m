@@ -6,11 +6,11 @@ function detectParentTwins(job,pGrainId,varargin)
 %
 % Input
 %  job          - @parentGrainreconstructor
-%  pGrainId     - parent grain Id
+%  pGrainId     - parent grain Id 
+%  direction    - @vector3d
 %
 % Option
 %  grains       - plot grain data instead of EBSD data
-
 
 %% Check if any twins are around
 pGrain = job.parentGrains(job.parentGrains.id2ind(pGrainId));   
@@ -22,7 +22,7 @@ end
 
 %% Prepare IPF color key
 ipfKeyParent = ipfHSVKey(job.csParent);
-ipfKeyParent.inversePoleFigureDirection = getClass(varargin,'vector3d',vector3d.Z);
+ipfKeyParent.inversePoleFigureDirection = getClass(varargin,'vector3d',vector3d.X);
 
 %% Define the parent grainand find twin related neighbor grains
 twGrains = job.parentGrains(job.parentGrains.id2ind(twIds));

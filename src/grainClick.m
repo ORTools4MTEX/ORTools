@@ -7,6 +7,7 @@ function grainClick(job,varargin)
 % Input
 %  job          - @parentGrainreconstructor
 %  parentEBSD   - reconstructed @EBSD data
+%  direction    - @vector3d
 % 
 % Option
 %  grains       - plot grain data instead of ebsd data

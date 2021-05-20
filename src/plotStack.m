@@ -1,26 +1,27 @@
 function plotStack(job,pGrainId,varargin)
-% plot maps of a prior parent grain
-%
-% Syntax
-%  plotStack(job,pGrainId)
-%
-% Input
-%  job          - @parentGrainreconstructor
-%  pGrainId     - parent grain Id
-%
-% Option
-%  grains       - plot grain data instead of EBSD data
-%  noScalebar   - Remove scalebar from maps
-%  noFrame      - Remove frame around maps
+    % plot maps of a prior parent grain
+    %
+    % Syntax
+    %  plotStack(job,pGrainId)
+    %
+    % Input
+    %  job          - @parentGrainreconstructor
+    %  pGrainId     - parent grain Id
+    %  direction    - @vector3d
+    %
+    % Option
+    %  grains       - plot grain data instead of EBSD data
+    %  noScalebar   - Remove scalebar from maps
+    %  noFrame      - Remove frame around maps
 
-
+    vector = getClass(varargin,'vector3d',vector3d.X);
     %% Define the parent grain
     pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
     pEBSD = job.ebsd(pGrain);
     pEBSD = pEBSD(job.csParent);
     % Define the parent grain IPF notation
     ipfKeyParent = ipfHSVKey(job.csParent);
-    ipfKeyParent.inversePoleFigureDirection = vector3d.X;
+    ipfKeyParent.inversePoleFigureDirection = vector;
     % Define the parent PDF
     hParent = Miller(0,0,1,job.csParent,'hkl');
 
@@ -31,7 +32,7 @@ function plotStack(job,pGrainId,varargin)
     cEBSD = cEBSD(job.csChild);
     % Define the child grain(s) IPF notation
     ipfKeyChild = ipfHSVKey(job.csChild);
-    ipfKeyChild.inversePoleFigureDirection = vector3d.X;
+    ipfKeyChild.inversePoleFigureDirection = vector;
     % Define the child PDF
     hChild = Miller(0,0,1,job.csChild,'hkl');
     hParent = Miller(0,0,1,job.csParent,'hkl');
@@ -351,7 +352,7 @@ function plotStack(job,pGrainId,varargin)
     ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
     
-    try tileFigs; end
+%     try tileFigs; end
     return
     end
 
