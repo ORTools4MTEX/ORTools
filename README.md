@@ -196,6 +196,7 @@ Interactive map to select parent grains for further analysis
   - grainClick(job)
 - Input
   - job  - @parentGrainReconstructor
+  - direction - @vector3d 
 - Option
   - parentTwins  - Refine grains to detect parent twins
   - grains       - Plot grain data instead of EBSD data 
@@ -553,6 +554,7 @@ The function plots maps for martensite variant analysis of a single prior parent
 - Input
   - job          - @parentGrainreconstructor
   - pGrainId     - parent grain Id
+  - direction    - @vector3d 
 - Option
   - grains       - Plot grain data instead of EBSD data 
   - noScalebar   - Remove scalebar from maps
