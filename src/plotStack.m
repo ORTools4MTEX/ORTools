@@ -47,7 +47,7 @@ desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
 % figGroup = desktop.addGroup('figGroup');
 desktop.setGroupDocked('figGroup',0);
 figDim = java.awt.Dimension(6,3); % 6 columns,3 rows = Defined with space for more figures
-% % 1: Maximized, 2: Tiled, 3: Floating
+% % 1 = Maximized, 2 = Tiled, 3 = Floating
 desktop.setDocumentArrangement('figGroup',3,figDim);
 % f = gobjects(1,16);
 bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
