@@ -8,7 +8,7 @@ function grainClick(job,varargin)
 %  job          - @parentGrainreconstructor
 %  parentEBSD   - reconstructed @EBSD data
 %  direction    - @vector3d
-% 
+%
 % Option
 %  grains       - plot grain data instead of ebsd data
 %  parentTwins  - Detect parent twins
@@ -19,15 +19,15 @@ pGrains = job.parentGrains;
 f = figure;
 [~,mP] = plot(pGrains,'grayscale',...
     'lineColor',[0 0 0],...
-    'linewidth',0.1);
+    'lineWidth',0.1);
 hold on
 
 
 
 isNowParent = job.grainsPrior.phaseId == job.childPhaseId &...
-                job.grains(job.mergeId).phaseId == job.parentPhaseId;
-plot(job.grainsPrior(isNowParent).boundary,'linewidth',0.5);
-plot(job.parentGrains.boundary,'linewidth',2);
+    job.grains(job.mergeId).phaseId == job.parentPhaseId;
+plot(job.grainsPrior(isNowParent).boundary,'lineWidth',0.5);
+plot(job.parentGrains.boundary,'lineWidth',2);
 
 
 hold off
@@ -90,7 +90,7 @@ setappdata(mP.ax,'grains',[pGrains]);
         idSelected(localId) = ~idSelected(localId);
         if idSelected(localId)
             hold on
-            handleSelected{localId} = plot(pGrain_select.boundary,'lineColor',[0 0 0],'linewidth',2.5);
+            handleSelected{localId} = plot(pGrain_select.boundary,'lineColor',[0 0 0],'lineWidth',2);
             hold off
         end
         
@@ -106,15 +106,15 @@ setappdata(mP.ax,'grains',[pGrains]);
         end
         % Plot the user-defined stack of plots
         if ~isempty(varargin) && any(strcmp(varargin,'parentTwins'))
-           detectParentTwins(job,unique(pGrain_select.id),varargin{:});        
-        elseif any(job.isTransformed(job.mergeId == pGrain_select.id)) 
+            detectParentTwins(job,unique(pGrain_select.id),varargin{:});
+        elseif any(job.isTransformed(job.mergeId == pGrain_select.id))
             plotStack(job,unique(pGrain_select.id),varargin{:});
         else
             f = msgbox('Choose a reconstructed parent grain (within the thick boundaries)', 'Error','warn');
-            uiwait(f); 
+            uiwait(f);
         end
         uistack(figure(1),'top');
-         
+        
         setappdata(gca,'idSelected',idSelected);
         setappdata(gca,'handleSelected',handleSelected);
     end
