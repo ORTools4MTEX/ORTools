@@ -113,7 +113,7 @@ setappdata(mP.ax,'grains',[pGrains]);
             f = msgbox('Choose a reconstructed parent grain (within the thick boundaries)', 'Error','warn');
             uiwait(f);
         end
-        uistack(figure(1),'top');
+        figure(f);
         
         setappdata(gca,'idSelected',idSelected);
         setappdata(gca,'handleSelected',handleSelected);
