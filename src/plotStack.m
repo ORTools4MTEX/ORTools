@@ -55,7 +55,7 @@ warning off;
 
 %% Plot the parent phase map
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle', 'docked');
+f = figure('WindowStyle','docked');
 if check_option(varargin,'grains')
     plot(pGrain);
 else
@@ -74,7 +74,7 @@ end
 
 %% Plot the child phase map
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle', 'docked');
+f = figure('WindowStyle','docked');
 if check_option(varargin,'grains')
     plot(cGrains);
 else
@@ -224,7 +224,7 @@ set(f,'Name','PDF: Child grain(s) IDEAL variant Id(s)','NumberTitle','on');
 
 %% Plot the ideal child packet PDF
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle', 'docked');
+f = figure('WindowStyle','docked');
 plotPDF_packets(job,pGrain.meanOrientation,hChild);
 set(f,'Name','PDF: Child grain(s) IDEAL packet Id(s)','NumberTitle','on');
 
