@@ -55,7 +55,7 @@ warning off;
 
 %% Plot the parent phase map
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f1 = figure('WindowStyle','docked');
 if check_option(varargin,'grains')
     plot(pGrain);
 else
@@ -65,7 +65,7 @@ hold all
 [~,mP] = plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0 0 0]);
 hold off
-set(f,'Name','Map: Parent phase + GBs','NumberTitle','on');
+set(f1,'Name','Map: Parent phase + GBs','NumberTitle','on');
 if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
 
 if check_option(varargin,'noFrame')
@@ -381,6 +381,7 @@ ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
 set(f,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
 
 warning(bakWarn);
+figure(f1);
 %     try tileFigs; end
 return
 end
