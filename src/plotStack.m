@@ -229,6 +229,7 @@ plotPDF_packets(job,pGrain.meanOrientation,hChild);
 set(f,'Name','PDF: Child grain(s) IDEAL packet Id(s)','NumberTitle','on');
 
 %% Plot the ideal parent PDF
+pause(0.02);  % To reduce rendering errors
 f = figure('WindowStyle','docked');
 plotPDF(pGrain.meanOrientation,hParent,'markersize',12,'markerfacecolor' ,'k');
 set(f,'Name','PDF: Mean parent grain orientation','NumberTitle','on');
