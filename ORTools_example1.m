@@ -164,8 +164,8 @@ figure; plot(parentIPFkey);
 saveImage(Ini.imagePath);
 
 %% Check the gamma grains interactively by clicking on them
-grainClick(job,'noScalebar','noFrame');
-%grainClick(job,'grains');    %Plot grain data instead
+grainClick(job,'noScalebar','noFrame'); %Plot EBSD data
+%grainClick(job,'grains','noScalebar','noFrame');    %Plot grain data
 
 %% Refine gamma twins by clicking on gamma grains
 grainClick(job,'parentTwins');
