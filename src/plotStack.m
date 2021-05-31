@@ -358,12 +358,12 @@ if size(norm_counts,2)>1; norm_counts = norm_counts'; end
 if check_option(varargin,'grains')
     ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Weighted area variant Ids','NumberTitle','on');
-%     table(class_range,abs_counts,'VariableNames',{'packetId','areaNormAbsCounts'})
+%     table(class_range,abs_counts,'VariableNames',{'variantId','areaNormAbsCounts'})
     table(class_range,norm_counts,'VariableNames',{'variantId','areaNormFreq'})
 else
     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Relative frequency variant Ids','NumberTitle','on');
-%     table(class_range,abs_counts,'VariableNames',{'packetId','absCounts'})      
+%     table(class_range,abs_counts,'VariableNames',{'variantId','absCounts'})      
     table(class_range,norm_counts,'VariableNames',{'variantId','normFreq'})
 end
 
