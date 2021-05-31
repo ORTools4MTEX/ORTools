@@ -357,15 +357,15 @@ if size(class_range,2)>1; class_range = class_range'; end
 if size(abs_counts,2)>1; abs_counts = abs_counts'; end
 if size(norm_counts,2)>1; norm_counts = norm_counts'; end
 if check_option(varargin,'grains')
-    ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
+    ylabel('Weighted area relative frequency','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Weighted area variant Ids','NumberTitle','on');
-%     table(class_range,abs_counts,'VariableNames',{'variantId','areaNormAbsCounts'})
-    table(class_range,norm_counts,'VariableNames',{'variantId','areaNormFreq'})
+%     table(class_range,abs_counts,'VariableNames',{'variantId','wtAreaCounts'})
+    table(class_range,norm_counts,'VariableNames',{'variantId','wtAreaFreq'})
 else
     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Relative frequency variant Ids','NumberTitle','on');
-%     table(class_range,abs_counts,'VariableNames',{'variantId','absCounts'})      
-    table(class_range,norm_counts,'VariableNames',{'variantId','normFreq'})
+%     table(class_range,abs_counts,'VariableNames',{'variantId','Counts'})      
+    table(class_range,norm_counts,'VariableNames',{'variantId','Freq'})
 end
 
 
@@ -390,15 +390,15 @@ if size(class_range,2)>1; class_range = class_range'; end
 if size(abs_counts,2)>1; abs_counts = abs_counts'; end
 if size(norm_counts,2)>1; norm_counts = norm_counts'; end
 if check_option(varargin,'grains')
-    ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
+    ylabel('Weighted area relative frequency','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
-%     table(class_range,abs_counts,'VariableNames',{'packetId','areaNormAbsCounts'})   
-    table(class_range,norm_counts,'VariableNames',{'packetId','areaNormFreq'})
+%     table(class_range,abs_counts,'VariableNames',{'packetId','wtAreaCounts'})   
+    table(class_range,norm_counts,'VariableNames',{'packetId','wtAreaFreq'})
 else
     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(f,'Name','Histogram: Relative frequency packet Ids','NumberTitle','on');
-%     table(class_range,abs_counts,'VariableNames',{'packetId','absCounts'})   
-    table(class_range,norm_counts,'VariableNames',{'packetId','normFreq'})
+%     table(class_range,abs_counts,'VariableNames',{'packetId','Counts'})   
+    table(class_range,norm_counts,'VariableNames',{'packetId','Freq'})
 end
 
 %% Place first figure on top and return to grainClick
