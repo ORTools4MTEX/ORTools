@@ -43,7 +43,7 @@ maxPackets = max(job.packetId);
 
 %% Define the undocked and tabbed figure window settings
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
-desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+desktop = getDesktop;
 desktop.setGroupDocked('figGroup',0);
 bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 warning off;
@@ -406,6 +406,20 @@ figure(2);
 return
 end
 
+
+
+%% Get the Java desktop reference
+% % Ref: https://au.mathworks.com/matlabcentral/fileexchange/16650-setfigdockgroup
+function desktop = getDesktop
+  try
+      desktop = com.mathworks.mde.desk.MLDesktop.getInstance; %check for Matlab 7+
+  catch
+      desktop = com.mathworks.ide.desktop.MLDesktop.getMLDesktop; %check for Matlab 6
+  end
+end
+
+
+%% Calculate a weighted histogram
 function [vinterval,histw] = histwc(val,wt,nbins)
 % HISTWC  Weighted histogram count given number of bins
 %
@@ -427,8 +441,7 @@ function [vinterval,histw] = histwc(val,wt,nbins)
 %
 %
 % See also: HISTC, HISTWCV
-% Author:
-% mehmet.suzen physics org
+% Author: mehmet.suzen
 % BSD License
 % July 2013
 minV  = 1; %min(val)
