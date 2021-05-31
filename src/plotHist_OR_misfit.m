@@ -105,12 +105,12 @@ end
 
 grid on
 legend
-ylabel('Relative frequency ({\itf}(g))', 'FontSize',14);
+ylabel('Relative frequency ({\itf}(g))','FontSize',14);
 if strcmp(pairType,'p2c')==1
-    xlabel('Parent-child grain disorientation (Â°)','FontSize',14);
-    set(f,'Name','Parent-child grain disorientation distribution histogram','NumberTitle','on');
+    xlabel('Parent-child grain disorientation (°)','FontSize',14);
+    set(f,'Name','Parent-child grain disorientation histogram','NumberTitle','on');
 elseif strcmp(pairType,'c2c')==1
-    xlabel('Child-child grain disorientation (Â°)','FontSize',14);
-    set(f,'Name','Child-child grain disorientation distribution histogram','NumberTitle','on');
+    xlabel('Child-child grain disorientation (°)','FontSize',14);
+    set(f,'Name','Child-child grain disorientation histogram','NumberTitle','on');
 end
 end
