@@ -44,18 +44,13 @@ maxPackets = max(job.packetId);
 %% Define the undocked and tabbed figure window settings
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
 desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% figGroup = desktop.addGroup('figGroup');
 desktop.setGroupDocked('figGroup',0);
-figDim = java.awt.Dimension(6,3); % 6 columns,3 rows = Defined with space for more figures
-% % 1 = Maximized, 2 = Tiled, 3 = Floating
-desktop.setDocumentArrangement('figGroup',3,figDim);
-% f = gobjects(1,16);
 bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 warning off;
 
 %% Plot the parent phase map
 pause(0.02);  % To reduce rendering errors
-f1 = figure('WindowStyle','docked');
+f = figure('WindowStyle','docked');
 if check_option(varargin,'grains')
     plot(pGrain);
 else
@@ -65,7 +60,7 @@ hold all
 [~,mP] = plot(pGrain.boundary,...
     'lineWidth',1,'lineColor',[0 0 0]);
 hold off
-set(f1,'Name','Map: Parent phase + GBs','NumberTitle','on');
+set(f,'Name','Map: Parent phase + GBs','NumberTitle','on');
 if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
 
 if check_option(varargin,'noFrame')
@@ -167,7 +162,7 @@ if check_option(varargin,'noFrame')
 end
 
 %% Plot the child packet map
-if   isnan(maxPackets)
+if isnan(maxPackets)
     maxPackets = max(packIds);
 end
 pause(0.02);  % To reduce rendering errors
@@ -347,18 +342,31 @@ f = figure('WindowStyle','docked');
 class_range = 1:1:maxVariants;
 if check_option(varargin,'grains')
     [~,abs_counts] = histwc(cGrains.variantId,cGrains.area,maxVariants);
-    norm_counts = abs_counts./sum(abs_counts);
-    h = bar(class_range,norm_counts,'hist');
 else
-    h = histogram(varIds);
+    abs_counts = histc(varIds,class_range);
 end
+norm_counts = abs_counts./sum(abs_counts);
+h = bar(class_range,norm_counts,'hist');
 h.FaceColor =[162 20 47]./255;
 set(gca, 'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
 set(gca,'XTick',class_range);
-set(gca,'FontSize',8);
+set(gca,'FontSize',14);
 xlabel('Variant Id','FontSize',14,'FontWeight','bold');
-ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
-set(f,'Name','Histogram: Weighted area variant Ids','NumberTitle','on');
+if size(class_range,2)>1; class_range = class_range'; end
+if size(abs_counts,2)>1; abs_counts = abs_counts'; end
+if size(norm_counts,2)>1; norm_counts = norm_counts'; end
+if check_option(varargin,'grains')
+    ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
+    set(f,'Name','Histogram: Weighted area variant Ids','NumberTitle','on');
+%     table(class_range,abs_counts,'VariableNames',{'packetId','areaNormAbsCounts'})
+    table(class_range,norm_counts,'VariableNames',{'variantId','areaNormFreq'})
+else
+    ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+    set(f,'Name','Histogram: Normalised frequency variant Ids','NumberTitle','on');
+%     table(class_range,abs_counts,'VariableNames',{'packetId','absCounts'})      
+    table(class_range,norm_counts,'VariableNames',{'variantId','normFreq'})
+end
+
 
 
 %% Plot the weighted area packet Id frequency histogram
@@ -367,22 +375,34 @@ f = figure('WindowStyle','docked');
 class_range = 1:1:maxPackets;
 if check_option(varargin,'grains')
     [~,abs_counts] = histwc(cGrains.packetId,cGrains.area,maxPackets);
-    norm_counts = abs_counts./sum(abs_counts);
-    h = bar(class_range, norm_counts, 'hist');
 else
-    h = histogram(packIds);
+    abs_counts = histc(packIds,class_range);
 end
-h.FaceColor = [162 20 47]./255;
+norm_counts = abs_counts./sum(abs_counts);
+h = bar(class_range,norm_counts,'hist');
+h.FaceColor =[162 20 47]./255;
 set(gca, 'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
 set(gca,'XTick',class_range);
-set(gca,'FontSize',8);
-xlabel('Packet Id','FontSize',14,'FontWeight','bold');
-ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
-set(f,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
+set(gca,'FontSize',14);
+xlabel('Variant Id','FontSize',14,'FontWeight','bold');
+if size(class_range,2)>1; class_range = class_range'; end
+if size(abs_counts,2)>1; abs_counts = abs_counts'; end
+if size(norm_counts,2)>1; norm_counts = norm_counts'; end
+if check_option(varargin,'grains')
+    ylabel('Area normalised frequency','FontSize',14,'FontWeight','bold');
+    set(f,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
+%     table(class_range,abs_counts,'VariableNames',{'packetId','areaNormAbsCounts'})   
+    table(class_range,norm_counts,'VariableNames',{'packetId','areaNormFreq'})
+else
+    ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+    set(f,'Name','Histogram: Normalised frequency packet Ids','NumberTitle','on');
+%     table(class_range,abs_counts,'VariableNames',{'packetId','absCounts'})   
+    table(class_range,norm_counts,'VariableNames',{'packetId','normFreq'})
+end
 
+%% Place first figure on top and return to grainClick
 warning(bakWarn);
-figure(f1);
-%     try tileFigs; end
+figure(2);
 return
 end
 
