@@ -348,9 +348,9 @@ end
 norm_counts = abs_counts./sum(abs_counts);
 h = bar(class_range,norm_counts,'hist');
 h.FaceColor =[162 20 47]./255;
-set(gca, 'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
-set(gca,'XTick',class_range);
 set(gca,'FontSize',14);
+set(gca,'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
+set(gca,'XTick',class_range);
 xlabel('Variant Id','FontSize',14,'FontWeight','bold');
 if size(class_range,2)>1; class_range = class_range'; end
 if size(abs_counts,2)>1; abs_counts = abs_counts'; end
@@ -362,7 +362,7 @@ if check_option(varargin,'grains')
     table(class_range,norm_counts,'VariableNames',{'variantId','areaNormFreq'})
 else
     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
-    set(f,'Name','Histogram: Normalised frequency variant Ids','NumberTitle','on');
+    set(f,'Name','Histogram: Relative frequency variant Ids','NumberTitle','on');
 %     table(class_range,abs_counts,'VariableNames',{'packetId','absCounts'})      
     table(class_range,norm_counts,'VariableNames',{'variantId','normFreq'})
 end
@@ -381,9 +381,9 @@ end
 norm_counts = abs_counts./sum(abs_counts);
 h = bar(class_range,norm_counts,'hist');
 h.FaceColor =[162 20 47]./255;
-set(gca, 'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
-set(gca,'XTick',class_range);
 set(gca,'FontSize',14);
+set(gca,'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
+set(gca,'XTick',class_range);
 xlabel('Variant Id','FontSize',14,'FontWeight','bold');
 if size(class_range,2)>1; class_range = class_range'; end
 if size(abs_counts,2)>1; abs_counts = abs_counts'; end
@@ -395,7 +395,7 @@ if check_option(varargin,'grains')
     table(class_range,norm_counts,'VariableNames',{'packetId','areaNormFreq'})
 else
     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
-    set(f,'Name','Histogram: Normalised frequency packet Ids','NumberTitle','on');
+    set(f,'Name','Histogram: Relative frequency packet Ids','NumberTitle','on');
 %     table(class_range,abs_counts,'VariableNames',{'packetId','absCounts'})   
     table(class_range,norm_counts,'VariableNames',{'packetId','normFreq'})
 end
