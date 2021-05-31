@@ -57,6 +57,7 @@ plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2);
 % We define the Burgers OR between Epsilon and AlphaP
 job1.p2c = orientation.Burgers(job1.csParent,job1.csChild);
 plotHist_OR_misfit(job1);
+
 job1.calcParent2Child('p2c');
 plotHist_OR_misfit(job1);
 %% Check the fit with the OR locally
