@@ -42,15 +42,16 @@ maxVariants = length(job.p2c.variants);
 maxPackets = max(job.packetId);
 
 %% Define the undocked and tabbed figure window settings
-% % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
-desktop = getDesktop;
-desktop.setGroupDocked('figGroup',0);
-bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+% % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+% desktop = getDesktop;
+% desktop.setGroupDocked('figGroup',0);
+% bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 warning off;
+set(0,'DefaultFigureWindowStyle','docked');
 
 %% Plot the parent phase map
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 if check_option(varargin,'grains')
     plot(pGrain);
 else
@@ -69,7 +70,7 @@ end
 
 %% Plot the child phase map
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 if check_option(varargin,'grains')
     plot(cGrains);
 else
@@ -91,7 +92,7 @@ end
 
 %% Plot the parent IPF map
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 if check_option(varargin,'grains')
     cbsParent = ipfKeyParent.orientation2color(pGrain.meanOrientation);
     plot(pGrain,cbsParent);
@@ -111,7 +112,7 @@ end
 
 %% Plot the child IPF map
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 if check_option(varargin,'grains')
     cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
     plot(cGrains,cbsChild);
@@ -133,7 +134,7 @@ end
 
 %% Plot the child variant map
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 if check_option(varargin,'grains')
     plot(cGrains(~isnan(cGrains.variantId)),cGrains.variantId(~isnan(cGrains.variantId)));
 else
@@ -166,7 +167,7 @@ if isnan(maxPackets)
     maxPackets = max(packIds);
 end
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 if check_option(varargin,'grains')
     plot(cGrains(~isnan(cGrains.packetId)),cGrains.packetId(~isnan(cGrains.packetId)));
 else
@@ -193,7 +194,7 @@ end
 
 %% Plot the parent orientation PDF
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 if check_option(varargin,'grains')
     plotPDF(pGrain.meanOrientation,...
         hParent,...
@@ -213,25 +214,25 @@ set(f,'Name','PDF: Parent grain orientation','NumberTitle','on');
 
 %% Plot the ideal child variant PDF
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 plotPDF_variants(job,pGrain.meanOrientation,hChild);
 set(f,'Name','PDF: Child grain(s) IDEAL variant Id(s)','NumberTitle','on');
 
 %% Plot the ideal child packet PDF
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 plotPDF_packets(job,pGrain.meanOrientation,hChild);
 set(f,'Name','PDF: Child grain(s) IDEAL packet Id(s)','NumberTitle','on');
 
 %% Plot the ideal parent PDF
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 plotPDF(pGrain.meanOrientation,hParent,'markersize',12,'markerfacecolor' ,'k');
 set(f,'Name','PDF: Mean parent grain orientation','NumberTitle','on');
 
 %% Plot the child variant PDF
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 if check_option(varargin,'grains')
     plotPDF(cGrains.meanOrientation,...
         cGrains.variantId,...
@@ -257,7 +258,7 @@ set(f,'Name','PDF: Child grain(s) variant Id(s)','NumberTitle','on');
 
 %% Plot the child packet PDF
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 if check_option(varargin,'grains')
     plotPDF(cGrains.meanOrientation,...
         cGrains.packetId,...
@@ -282,7 +283,7 @@ set(f,'Name','PDF: Child grain(s) packet Id(s)','NumberTitle','on');
 
 %% Plot the child variant IPDF
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 plot(ipfKeyChild)
 hold all
 if check_option(varargin,'grains')
@@ -310,7 +311,7 @@ set(f,'Name','IPDF: Child grain(s) variant Id(s)','NumberTitle','on');
 
 %% Plot the child packet IPDF
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 plot(ipfKeyChild)
 hold all
 if check_option(varargin,'grains')
@@ -338,7 +339,7 @@ set(f,'Name','IPDF: Child grain(s) variant Id(s)','NumberTitle','on');
 
 %% Plot the weighted area variant Id frequency histogram
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 class_range = 1:1:maxVariants;
 if check_option(varargin,'grains')
     [~,abs_counts] = histwc(cGrains.variantId,cGrains.area,maxVariants);
@@ -371,7 +372,7 @@ end
 
 %% Plot the weighted area packet Id frequency histogram
 pause(0.02);  % To reduce rendering errors
-f = figure('WindowStyle','docked');
+f = figure;%('WindowStyle','docked');
 class_range = 1:1:maxPackets;
 if check_option(varargin,'grains')
     [~,abs_counts] = histwc(cGrains.packetId,cGrains.area,maxPackets);
@@ -401,22 +402,24 @@ else
 end
 
 %% Place first figure on top and return to grainClick
-warning(bakWarn);
+% warning(bakWarn);
 figure(2);
+set(0,'DefaultFigureWindowStyle','normal');
+pause(0.2);
 return
 end
 
 
 
-%% Get the Java desktop reference
-% % Ref: https://au.mathworks.com/matlabcentral/fileexchange/16650-setfigdockgroup
-function desktop = getDesktop
-  try
-      desktop = com.mathworks.mde.desk.MLDesktop.getInstance; %check for Matlab 7+
-  catch
-      desktop = com.mathworks.ide.desktop.MLDesktop.getMLDesktop; %check for Matlab 6
-  end
-end
+% %% Get the Java desktop reference
+% % % Ref: https://au.mathworks.com/matlabcentral/fileexchange/16650-setfigdockgroup
+% function desktop = getDesktop
+%   try
+%       desktop = com.mathworks.mde.desk.MLDesktop.getInstance; %check for Matlab 7+
+%   catch
+%       desktop = com.mathworks.ide.desktop.MLDesktop.getMLDesktop; %check for Matlab 6
+%   end
+% end
 
 
 %% Calculate a weighted histogram
