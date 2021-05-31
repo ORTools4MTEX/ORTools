@@ -74,7 +74,7 @@ setappdata(mP.ax,'grains',[pGrains]);
             % Delete previously selected parent-child grain(s) figures
             figh = findall(0,'type','figure');
             if length(figh) > 1
-                otherFigs = setdiff(figh, figure(1));
+                otherFigs = setdiff(figh,figure(1));
                 delete(otherFigs)
             end
         elseif strcmpi(src.SelectionType,'extend')
