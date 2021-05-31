@@ -422,7 +422,7 @@ end
 % end
 
 
-%% Calculate a weighted histogram
+%% Compute weighted histogram
 function [vinterval,histw] = histwc(val,wt,nbins)
 % HISTWC  Weighted histogram count given number of bins
 %
