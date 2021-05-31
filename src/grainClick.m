@@ -90,7 +90,7 @@ setappdata(mP.ax,'grains',[pGrains]);
         idSelected(localId) = ~idSelected(localId);
         if idSelected(localId)
             hold on
-            handleSelected{localId} = plot(pGrain_select.boundary,'lineColor',[0 0 0],'lineWidth',2);
+            handleSelected{localId} = plot(pGrain_select.boundary,'lineColor',[1 0 0],'lineWidth',2);
             hold off
         end
         
