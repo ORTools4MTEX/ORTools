@@ -41,11 +41,7 @@ hParent = Miller(0,0,1,job.csParent,'hkl');
 maxVariants = length(job.p2c.variants);
 maxPackets = max(job.packetId);
 
-%% Define the undocked and tabbed figure window settings
-% % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
-% desktop = getDesktop;
-% desktop.setGroupDocked('figGroup',0);
-% bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+%% Define the window settings for a set of docked figures
 warning off;
 set(0,'DefaultFigureWindowStyle','docked');
 
@@ -401,25 +397,12 @@ else
     table(class_range,norm_counts,'VariableNames',{'packetId','Freq'})
 end
 
-%% Place first figure on top and return to grainClick
-% warning(bakWarn);
+%% Place first figure on top, undock the figure window and return to grainClick
 figure(2);
 set(0,'DefaultFigureWindowStyle','normal');
 pause(0.2);
 return
 end
-
-
-
-% %% Get the Java desktop reference
-% % % Ref: https://au.mathworks.com/matlabcentral/fileexchange/16650-setfigdockgroup
-% function desktop = getDesktop
-%   try
-%       desktop = com.mathworks.mde.desk.MLDesktop.getInstance; %check for Matlab 7+
-%   catch
-%       desktop = com.mathworks.ide.desktop.MLDesktop.getMLDesktop; %check for Matlab 6
-%   end
-% end
 
 
 %% Compute weighted histogram
