@@ -10,6 +10,7 @@
 % *********************************************************************
 home; close all; clear variables;
 currentFolder;
+set(0,'DefaultFigureWindowStyle','normal');
 screenPrint('StartUp','ORTools - Example 6');
 %% Initialize MTEX
 % startup and set some settings
@@ -41,10 +42,7 @@ ebsd = renamePhases(ebsd,Ini.phaseNames);
 %Choose your favourite colors
 ebsd = recolorPhases(ebsd);
 %% Plot phase map
-figure;
-plot(ebsd); 
-hold on
-plot(grains.boundary,'linewidth',2);
+plotMap_phases(job1,'linewidth',2);
 %% Define the transformation system
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose "Epsilon" as a parent and "AlphaP" as a child phase
