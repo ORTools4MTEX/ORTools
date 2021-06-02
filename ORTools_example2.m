@@ -12,6 +12,7 @@
 % *********************************************************************
 home; close all; clear variables;
 currentFolder;
+set(0,'DefaultFigureWindowStyle','normal');
 screenPrint('StartUp','ORTools - Example 2');
 %% Initialize MTEX
 % Startup and set some settings
