@@ -14,6 +14,7 @@ function grainClick(job,varargin)
 %  parentTwins  - Detect parent twins
 
 close all;
+%% Define the default window settings for figures
 set(0,'DefaultFigureWindowStyle','normal');
 
 %% Plot reconstructed parent grains
