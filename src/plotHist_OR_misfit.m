@@ -88,7 +88,7 @@ end
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',groupName);
-pause(0.05);  % Reduce rendering errors
+pause(0.1);  % Reduce rendering errors
 
 c = ind2color(1:length(p2c));
 for ii = 1:length(p2c)
@@ -136,5 +136,5 @@ elseif strcmp(pairType,'c2c')==1
     xlabel('Child-child grain disorientation (°)','FontSize',14);
     set(figH,'Name','Child-child grain disorientation histogram','NumberTitle','on');
 end
-pause(0.05);  % Reduce rendering errors
+pause(0.1);  % Reduce rendering errors
 end
