@@ -59,13 +59,13 @@ else
     warning('No child-child neighbors found (c2c grain pairs empty)');
 end
 
-%% Place first tabbed figure on top, clear the counter and return
+%% Place first tabbed figure on top and return
 allfigh = findall(0,'type','figure');
 if length(allfigh) > 1
     figure(length(allfigh)-1);
 end
 warning(bakWarn);
-pause(1); % VERY IMPORTANT HERE: Reduce rendering errors
+pause(1); % Reduce rendering errors
 return
 end
 
