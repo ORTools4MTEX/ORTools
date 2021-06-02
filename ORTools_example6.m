@@ -41,12 +41,12 @@ screenPrint('SegmentStart','Renaming and recoloring phases');
 ebsd = renamePhases(ebsd,Ini.phaseNames);
 %Choose your favourite colors
 ebsd = recolorPhases(ebsd);
-%% Plot phase map
-plotMap_phases(job1,'linewidth',2);
 %% Define the transformation system
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose "Epsilon" as a parent and "AlphaP" as a child phase
 job1 = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
+%% Plot phase map
+plotMap_phases(job1,'linewidth',2);
 %% Plot parent and child IPF maps
 plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2);
 
