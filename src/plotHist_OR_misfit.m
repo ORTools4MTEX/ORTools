@@ -84,7 +84,7 @@ function misfitHist(groupName,figH,p2c,job,pairList,numBins,allLegend,varargin)
 % Setup a counter for the number of times the plotting function was called
 persistent count;
 if isempty(count); count = 0; end
-count = count+1
+count = count+1;
 
 pairType = get_option(varargin,'pairType','');
 
