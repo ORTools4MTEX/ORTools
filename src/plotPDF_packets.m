@@ -54,5 +54,5 @@ if strcmpi(job.csChild.lattice, 'cubic') && oriParent == orientation.id(job.csPa
     plot(Miller(0,0,1,job.csChild),'plane','LineColor',[0 0 0],'LineWidth',1); 
 end
 hold off
-
+drawnow;
 end
