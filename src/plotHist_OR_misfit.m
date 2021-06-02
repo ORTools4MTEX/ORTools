@@ -31,6 +31,7 @@ if isempty(p2c)
     return;
 end
 
+
 %% Define the window settings for a set of docked figures
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
 desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
