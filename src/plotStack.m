@@ -14,6 +14,9 @@ function plotStack(job,pGrainId,varargin)
 %  noScalebar   - Remove scalebar from maps
 %  noFrame      - Remove frame around maps
 
+%% Define the default window settings for figures
+set(0,'DefaultFigureWindowStyle','normal');
+
 vector = getClass(varargin,'vector3d',vector3d.X);
 %% Define the parent grain
 pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
@@ -41,13 +44,13 @@ hParent = Miller(0,0,1,job.csParent,'hkl');
 maxVariants = length(job.p2c.variants);
 maxPackets = max(job.packetId);
 
-%% Define the window settings for a set of docked figures
 warning off;
+%% Define the window settings for a set of docked figures
 set(0,'DefaultFigureWindowStyle','docked');
 
 %% Plot the parent phase map
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 if check_option(varargin,'grains')
     plot(pGrain);
 else
@@ -66,7 +69,7 @@ end
 
 %% Plot the child phase map
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 if check_option(varargin,'grains')
     plot(cGrains);
 else
@@ -88,7 +91,7 @@ end
 
 %% Plot the parent IPF map
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 if check_option(varargin,'grains')
     cbsParent = ipfKeyParent.orientation2color(pGrain.meanOrientation);
     plot(pGrain,cbsParent);
@@ -108,7 +111,7 @@ end
 
 %% Plot the child IPF map
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 if check_option(varargin,'grains')
     cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
     plot(cGrains,cbsChild);
@@ -130,7 +133,7 @@ end
 
 %% Plot the child variant map
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 if check_option(varargin,'grains')
     plot(cGrains(~isnan(cGrains.variantId)),cGrains.variantId(~isnan(cGrains.variantId)));
 else
@@ -163,7 +166,7 @@ if isnan(maxPackets)
     maxPackets = max(packIds);
 end
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 if check_option(varargin,'grains')
     plot(cGrains(~isnan(cGrains.packetId)),cGrains.packetId(~isnan(cGrains.packetId)));
 else
@@ -190,7 +193,7 @@ end
 
 %% Plot the parent orientation PDF
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 if check_option(varargin,'grains')
     plotPDF(pGrain.meanOrientation,...
         hParent,...
@@ -210,25 +213,25 @@ set(f,'Name','PDF: Parent grain orientation','NumberTitle','on');
 
 %% Plot the ideal child variant PDF
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 plotPDF_variants(job,pGrain.meanOrientation,hChild);
 set(f,'Name','PDF: Child grain(s) IDEAL variant Id(s)','NumberTitle','on');
 
 %% Plot the ideal child packet PDF
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 plotPDF_packets(job,pGrain.meanOrientation,hChild);
 set(f,'Name','PDF: Child grain(s) IDEAL packet Id(s)','NumberTitle','on');
 
 %% Plot the ideal parent PDF
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 plotPDF(pGrain.meanOrientation,hParent,'markersize',12,'markerfacecolor' ,'k');
 set(f,'Name','PDF: Mean parent grain orientation','NumberTitle','on');
 
 %% Plot the child variant PDF
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 if check_option(varargin,'grains')
     plotPDF(cGrains.meanOrientation,...
         cGrains.variantId,...
@@ -254,7 +257,7 @@ set(f,'Name','PDF: Child grain(s) variant Id(s)','NumberTitle','on');
 
 %% Plot the child packet PDF
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 if check_option(varargin,'grains')
     plotPDF(cGrains.meanOrientation,...
         cGrains.packetId,...
@@ -279,7 +282,7 @@ set(f,'Name','PDF: Child grain(s) packet Id(s)','NumberTitle','on');
 
 %% Plot the child variant IPDF
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 plot(ipfKeyChild)
 hold all
 if check_option(varargin,'grains')
@@ -307,7 +310,7 @@ set(f,'Name','IPDF: Child grain(s) variant Id(s)','NumberTitle','on');
 
 %% Plot the child packet IPDF
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 plot(ipfKeyChild)
 hold all
 if check_option(varargin,'grains')
@@ -335,7 +338,7 @@ set(f,'Name','IPDF: Child grain(s) variant Id(s)','NumberTitle','on');
 
 %% Plot the weighted area variant Id frequency histogram
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 class_range = 1:1:maxVariants;
 if check_option(varargin,'grains')
     [~,abs_counts] = histwc(cGrains.variantId,cGrains.area,maxVariants);
@@ -368,7 +371,7 @@ end
 
 %% Plot the weighted area packet Id frequency histogram
 pause(0.02);  % To reduce rendering errors
-f = figure;%('WindowStyle','docked');
+f = figure;
 class_range = 1:1:maxPackets;
 if check_option(varargin,'grains')
     [~,abs_counts] = histwc(cGrains.packetId,cGrains.area,maxPackets);
@@ -397,7 +400,7 @@ else
     table(class_range,norm_counts,'VariableNames',{'packetId','Freq'})
 end
 
-%% Place first figure on top, undock the figure window and return to grainClick
+%% Place first tabbed figure on top, undock the figure window and return to grainClick
 figure(2);
 set(0,'DefaultFigureWindowStyle','normal');
 pause(0.2);
