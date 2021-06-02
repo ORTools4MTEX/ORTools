@@ -35,8 +35,8 @@ end
 %% Define the window settings for a set of docked figures
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
 desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% % Define a unique group name for the dock
-groupName = ['plotHist',num2str(randi(100))];
+% % Define a unique group name for the dock using the system timestamp
+groupName = ['plotHist_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
 desktop.setGroupDocked(groupName,0);
 bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 
@@ -65,6 +65,7 @@ if length(allfigh) > 1
     figure(length(allfigh)-1);
 end
 warning(bakWarn);
+pause(1); % VERY IMPORTANT HERE: Reduce rendering errors
 return
 end
 
