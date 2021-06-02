@@ -34,30 +34,35 @@ end
 
 %% Define the window settings for a set of docked figures
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+warning off
 desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% % Define a unique group name for the dock using the system timestamp
-groupName = ['plotHist_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
-desktop.setGroupDocked(groupName,0);
+% % Define a unique group name for the dock using the fucntion name 
+% % and the system timestamp
+dockGroupName = ['plotHist_OR_misfit_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+desktop.setGroupDocked(dockGroupName,0);
 bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+warning on
 
 
 %% Plot p2c pairs histogram
 p2cPairs = neighbors(job.grains(job.csParent),job.grains(job.csChild));
 p2cPairs = p2cPairs(:,flip([1 2]));
 if ~isempty(p2cPairs)
-    misfitHist(groupName,p2c,job,p2cPairs,numBins,allLegend,'pairType','p2c')
+    misfitHist(dockGroupName,p2c,job,p2cPairs,numBins,allLegend,'pairType','p2c')
 else
     warning('No parent-child neighbors found (p2c grain pairs empty)');
 end
+
 
 %% Plot c2c pairs histogram
 c2cPairs = neighbors(job.grains(job.csChild),job.grains(job.csChild));
 c2cPairs = c2cPairs(:,flip([1 2]));
 if ~isempty(c2cPairs)
-    misfitHist(groupName,p2c,job,c2cPairs,numBins,allLegend,'pairType','c2c')
+    misfitHist(dockGroupName,p2c,job,c2cPairs,numBins,allLegend,'pairType','c2c')
 else
     warning('No child-child neighbors found (c2c grain pairs empty)');
 end
+
 
 %% Place first tabbed figure on top and return
 allfigh = findall(0,'type','figure');
@@ -71,7 +76,7 @@ end
 
 
 
-function misfitHist(groupName,p2c,job,pairList,numBins,allLegend,varargin)
+function misfitHist(dockGroupName,p2c,job,pairList,numBins,allLegend,varargin)
 pairType = get_option(varargin,'pairType','');
 
 mori = inv(job.grains('id',pairList(:,1)).meanOrientation).*...
@@ -85,9 +90,10 @@ end
 
 % Plot the grain pair disorientation
 % Define the graphics object array
+warning off;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',groupName);
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
 drawnow; 
 
 c = ind2color(1:length(p2c));
@@ -136,5 +142,6 @@ elseif strcmp(pairType,'c2c')==1
     xlabel('Child-child grain disorientation (°)','FontSize',14);
     set(figH,'Name','Child-child grain disorientation histogram','NumberTitle','on');
 end
-drawnow; 
+drawnow;
+warning on;
 end
