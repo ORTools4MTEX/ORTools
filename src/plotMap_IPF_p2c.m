@@ -88,7 +88,6 @@ ipfKey = [ipfKey1,ipfKey2];
 %% Place first tabbed figure on top and return
 warning on
 allfigh = findall(0,'type','figure');
-
 if length(allfigh) > 1 &&...
         ~isempty(job.ebsd(job.csParent)) && ~onlyChild &&...
         ~isempty(job.ebsd(job.csChild)) && ~onlyParent
@@ -99,5 +98,4 @@ end
 warning(bakWarn);
 pause(1); % Reduce rendering errors
 return
-
 end
