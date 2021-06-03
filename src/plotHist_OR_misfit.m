@@ -68,6 +68,8 @@ end
 allfigh = findall(0,'type','figure');
 if length(allfigh) > 1
     figure(length(allfigh)-1);
+else
+    figure(1);
 end
 warning(bakWarn);
 pause(1); % Reduce rendering errors
