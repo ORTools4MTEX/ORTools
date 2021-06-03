@@ -62,6 +62,7 @@ plotHist_OR_misfit(job1);
 % Plot parent-child and child-child OR boundary disorientation map
 % We color the boundaries up to 5° disorientation to emphasize the effects
 plotMap_gB_misfit(job1,'linewidth',1.5,'maxColor',5);
+
 % The fit is quite good most places
 %% Reconstruct alphaP
 for k = 1:3
