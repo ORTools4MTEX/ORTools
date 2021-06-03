@@ -36,7 +36,7 @@ end
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
 warning off
 desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% % Define a unique group name for the dock using the fucntion name 
+% % Define a unique group name for the dock using the function name 
 % % and the system timestamp
 dockGroupName = ['plotHist_OR_misfit_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
 desktop.setGroupDocked(dockGroupName,0);
