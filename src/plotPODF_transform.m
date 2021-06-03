@@ -2,7 +2,7 @@ function plotPODF_transform(job,hParent,hChild,varargin)
 % plot transformation texture from VPSC file 
 %
 % Syntax
-%  plotPODF_transformation(job,hParent,hChild)
+%  plotPODF_transform(job,hParent,hChild)
 %
 % Input
 %  hParent     - @Miller (parent polefigures to plot)
