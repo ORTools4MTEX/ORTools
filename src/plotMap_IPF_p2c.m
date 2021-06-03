@@ -38,7 +38,7 @@ warning off
 desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
 % % Define a unique group name for the dock using the function name
 % % and the system timestamp
-dockGroupName = ['plotPODF_transform_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+dockGroupName = ['plotMap_IPF_p2c_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
 desktop.setGroupDocked(dockGroupName,0);
 bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 
