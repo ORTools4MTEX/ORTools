@@ -2,7 +2,7 @@
 % *********************************************************************
 %                        ORTools - Example 4
 % *********************************************************************
-% Predicting the transformation texture in an alpha-beta titanium alloy 
+% Predicting the transformation texture in an alpha-beta titanium alloy
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
@@ -17,7 +17,7 @@ screenPrint('StartUp','ORTools - Example 4');
 startup_mtex;
 setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
-setMTEXpref('FontSize',14);   
+setMTEXpref('FontSize',14);
 % Default directories - Do not modify
 Ini.dataPath = [pwd,'/data/'];
 Ini.cifPath = [Ini.dataPath,'input/cif/'];
@@ -33,8 +33,8 @@ ebsd = mtexdata(mtexDataset);
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 1.5° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
-  'removeQuadruplePoints');
-%% Rename and recolor phases 
+    'removeQuadruplePoints');
+%% Rename and recolor phases
 screenPrint('SegmentStart','Renaming and recoloring phases');
 phaseNames = {'Alpha','Beta'};
 % Rename "Ti (BETA) to "Beta"and "Ti (alpha)" to "Alpha"
@@ -71,9 +71,9 @@ job.mergeInclusions('maxSize',5);
 % Plot the cleaned reconstructed parent microstructure
 figure;
 plot(job.ebsd(job.csParent),job.ebsd(job.csParent).orientations);
-hold on; 
+hold on;
 plot(job.grains.boundary,'lineWidth',3)
-%% Variant analysis                                
+%% Variant analysis
 % We calculate the variants ...
 job.calcVariants;
 % ... and plot them
@@ -98,19 +98,19 @@ colormap jet
 
 % We write a texture file generated from the parent ODF ...
 export_VPSC(odf_parent,[Ini.texturePath,'inputVPSC.Tex'],'interface',...
-            'VPSC','Bunge','points', 50000);
+    'VPSC','Bunge','points', 5000);
 
 % ... which is used to calculate the transformation texture.
 % We plot it, and write a file containing the transformed texture
-plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath);
-        
+plotPODF_transform(job,hParent,hChild,'path',Ini.texturePath);
+
 % Compare the transformation texture to the actual child ODF
 odf_child = calcDensity(ebsd(job.csChild).orientations);
 figure;
 plotPDF(odf_child,hChild,'antipodal','silent','contourf');
 colormap(flipud(colormap('hot')))
 
-% We can see a quite good agreement. Slight mismatches in the intensity 
+% We can see a quite good agreement. Slight mismatches in the intensity
 % originate from a non-random variant selection
 
 %% Include variant selection in prediction of transformation texture
@@ -118,17 +118,17 @@ colormap(flipud(colormap('hot')))
 % selection:
 
 %Only consider variants 3,4,6 and 8
-plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
-                        'variantId',[3 4 6 8]);
+plotPODF_transform(job,hParent,hChild,'path',Ini.texturePath,...
+    'variantId',[3 4 6 8]);
 
 %Only consider variants 3,4,6 and 8 with weights between 0 and 100
-plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
-                        'variantId',[3 4 6 8],'variantWt',[100 100 10 10]);  
+plotPODF_transform(job,hParent,hChild,'path',Ini.texturePath,...
+    'variantId',[3 4 6 8],'variantWt',[100 100 10 10]);
 
 %Only consider variants 3,4,6 and 8 with weights between 0 and 100
-plotPODF_transformation(job,hParent,hChild,'path',Ini.texturePath,...
-                        'variantId',[3 4 6 8],'variantWt',[100 10 1 0.1]);
-                  
+plotPODF_transform(job,hParent,hChild,'path',Ini.texturePath,...
+    'variantId',[3 4 6 8],'variantWt',[100 10 1 0.1]);
+
 %% Save images
 saveImage(Ini.imagePath);
 
