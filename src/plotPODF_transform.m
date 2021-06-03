@@ -245,6 +245,13 @@ drawnow;
 %---
 
 
+
+%%  Save a VPSC *.tex file
+export_VPSC(odfC,[pfName_Out],'interface','VPSC','Bunge','points',numPoints);
+%---
+
+
+
 %% Place first tabbed figure on top and return
 warning on
 allfigh = findall(0,'type','figure');
@@ -255,9 +262,5 @@ else
 end
 warning(bakWarn);
 pause(1); % Reduce rendering errors
-
-%--- Save a VPSC *.tex file
-export_VPSC(odfC,[pfName_Out],'interface','VPSC','Bunge','points',numPoints);
-%---
 return
 end
