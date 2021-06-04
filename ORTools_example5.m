@@ -10,7 +10,7 @@
 % *********************************************************************
 
 % Example 5 may return an error with MTEX 5.7.0, but will work without error 
-% with MTEX. 5.6.x and ORTools v.1.0 or with MTEX v5.7.1 onwards."
+% with MTEX. 5.6.x and ORTools v.1.0 or with MTEX v5.7.1 onwards.
 
 home; close all; clear variables;
 currentFolder;
