@@ -1,8 +1,8 @@
-Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**DEVELOPER VERSION**](https://github.com/frankNiessen/ORTools/archive/develop.zip) by clicking on either weblink
+Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) by clicking on either weblink
 
-| [**How to use**](https://github.com/frankNiessen/ORTools#how-to-use) 
-| [**Example scripts**](https://github.com/frankNiessen/ORTools#example-scripts) 
-| [**Function reference**](https://github.com/frankNiessen/ORTools#function-reference) |
+| [**How to use**](https://github.com/ORTools4MTEX/ORTools#how-to-use) 
+| [**Example scripts**](https://github.com/ORTools4MTEX/ORTools#example-scripts) 
+| [**Function reference**](https://github.com/ORTools4MTEX/ORTools#function-reference) |
 
 ---
 <p align="left">
@@ -11,7 +11,7 @@ Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools
 
 **ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB**-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the 2021 MTEX Workshop for an introduction to the phase transition features in MTEX and ORTools. 
 
-The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/frankNiessen/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
+The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/ORTools4MTEX/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
 
 **ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, [**please cite this paper as your reference**](https://arxiv.org/abs/2104.14603).
 
@@ -23,8 +23,8 @@ To help maintain the **ORTools** library, please report any bugs you encounter. 
 
 ---
 ## How to use
-- You can download the [**latest stable release**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**developer version**](https://github.com/frankNiessen/ORTools/archive/develop.zip).
-- This library only works after the prior installation of **MATLAB** and **MTEX**. Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below. ORTools is tested for compatibility down to MATLAB 2016b. Check with each [release](https://github.com/frankNiessen/ORTools/releases) with which MTEX it is compatible.
+- You can download the [**latest stable release**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**developer version**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip).
+- This library only works after the prior installation of **MATLAB** and **MTEX**. Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below. ORTools is tested for compatibility down to MATLAB 2016b. Check with each [release](https://github.com/ORTools4MTEX/ORTools/releases) with which MTEX it is compatible.
 - Open MATLAB and run one of the example files. Please refer to the [*Example 1*](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and want to use the function library instead, please ensure the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
 - If you encounter any problems, please contact us.
 - If you would like to contribute additional functionality or wish to suggest new features, please contact us.
@@ -54,7 +54,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ### [Example 2](./ORTools_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) function is used to determine the OR from alpha-beta boundaries even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
+This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function is used to determine the OR from alpha-beta boundaries even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
 [![ORTools - Example 2](http://img.youtube.com/vi/e6R0dApUc8Q/0.jpg)](http://www.youtube.com/watch?v=e6R0dApUc8Q "Video Title")
 
@@ -64,7 +64,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ### [Example 3](./ORTools_example3.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
-In [example 2](https://github.com/frankNiessen/ORTools#example-2) we noted that the α-β Ti microstructure showed two ORs in the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) function. In this example, we want to return both ORs and investigate which one of them dominated during phase transition. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figures and on boundary maps to evaluate the best match.
+In [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) we noted that the α-β Ti microstructure showed two ORs in the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function. In this example, we want to return both ORs and investigate which one of them dominated during phase transition. We do this by plotting the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figures and on boundary maps to evaluate the best match.
 
 [![ORTools - Example 3](http://img.youtube.com/vi/8e9PhhFCWYc/0.jpg)](http://www.youtube.com/watch?v=8e9PhhFCWYc "Video Title")
 
@@ -74,7 +74,7 @@ In [example 2](https://github.com/frankNiessen/ORTools#example-2) we noted that 
 
 ### [Example 4](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
-In this script, we repeat the reconstruction of the prior β microstructure from an α microstructure as shown in [example 2](https://github.com/frankNiessen/ORTools#example-2) with less detail. We then look at the variant distribution and conclude that strongly preferential variant selection did not occur. We are therefore in a good position to predict the transition texture of α from the reconstructed β using the [plotPODF_transformation](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPODF_transformation) function. The predicted transition α texture is in good agreement with the experimental α texture.
+In this script, we repeat the reconstruction of the prior β microstructure from an α microstructure as shown in [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) with less detail. We then look at the variant distribution and conclude that strongly preferential variant selection did not occur. We are therefore in a good position to predict the transition texture of α from the reconstructed β using the [plotPODF_transformation](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transformation) function. The predicted transition α texture is in good agreement with the experimental α texture.
 
 [![ORTools - Example 4](http://img.youtube.com/vi/Yx2jKII3HUc/0.jpg)](http://www.youtube.com/watch?v=Yx2jKII3HUc "Video Title")
 
@@ -84,7 +84,7 @@ In this script, we repeat the reconstruction of the prior β microstructure from
 
 ### [Example 5](./ORTools_example5.m)
 #### Partial parent grain reconstruction to clean TRWIP steel EBSD data
-This example is of a 20% cold-rolled twinning and transformation induced plasticity (TRWIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the [OR peak fitter](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs) function, we discover that two possible ORs could be in operation for the γ to α' microstructure. We identify that the first of them is not a real OR but corresponds to points that were misindexed as α' even though they belong to γ. We use the parent phase reconstruction features in MTEX and the apprent OR to revert these misindexed points to γ. We then re-run the grain calculation and the OR peak fitter to show that the apparent OR was eliminated. 
+This example is of a 20% cold-rolled twinning and transformation induced plasticity (TRWIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function, we discover that two possible ORs could be in operation for the γ to α' microstructure. We identify that the first of them is not a real OR but corresponds to points that were misindexed as α' even though they belong to γ. We use the parent phase reconstruction features in MTEX and the apprent OR to revert these misindexed points to γ. We then re-run the grain calculation and the OR peak fitter to show that the apparent OR was eliminated. 
 
 *EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
 
@@ -110,37 +110,37 @@ This example is of a 10% cold-rolled twinning and transformation induced plastic
 
 ### Function Index
 
-- [computeGrains](https://github.com/frankNiessen/ORTools/blob/master/README.md#computeGrains)
-- [defineORs](https://github.com/frankNiessen/ORTools/blob/master/README.md#defineors)
-- [fibreMaker](https://github.com/frankNiessen/ORTools/blob/master/README.md#fibreMaker)
-- [grainClick](https://github.com/frankNiessen/ORTools/blob/master/README.md#grainClick)
-- [guiOR](https://github.com/frankNiessen/ORTools/blob/master/README.md#guiOR)
-- [orientationMaker](https://github.com/frankNiessen/ORTools/blob/master/README.md#orientationMaker)
-- [ORinfo](https://github.com/frankNiessen/ORTools/blob/master/README.md#ORinfo)
-- [peakFitORs](https://github.com/frankNiessen/ORTools/blob/master/README.md#peakFitORs)
-- [plotHist_OR_misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotHist_OR_misfit)
-- [plotIPDF_gB_misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_misfit)
-- [plotIPDF_gB_prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotIPDF_gB_prob)
-- [plotMap_clusters](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_clusters)
-- [plotMap_gB_c2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_c2c)
-- [plotMap_gB_misfit](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_misfit)
-- [plotMap_gB_p2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_p2c)
-- [plotMap_gB_prob](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_gB_prob)
-- [plotMap_IPF_p2c](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_IPF_p2c)
-- [plotMap_packets](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_packets)
-- [plotMap_phases](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_phases)
-- [plotMap_variants](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotMap_variants)
-- [plotPDF_packets](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPDF_packets)
-- [plotPDF_variants](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPDF_variants)
-- [plotPODF_transformation](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotPODF_transformation)
-- [plotStack](https://github.com/frankNiessen/ORTools/blob/master/README.md#plotStack)
-- [readCPR](https://github.com/frankNiessen/ORTools/blob/master/README.md#readCPR)
-- [recolorPhases](https://github.com/frankNiessen/ORTools/blob/master/README.md#recolorPhases)
-- [renamePhases](https://github.com/frankNiessen/ORTools/blob/master/README.md#renamePhases)
-- [saveImage](https://github.com/frankNiessen/ORTools/blob/master/README.md#saveImage)
-- [screenPrint](https://github.com/frankNiessen/ORTools/blob/master/README.md#screenPrint)
-- [setParentGrainReconstructor](https://github.com/frankNiessen/ORTools/blob/master/README.md#setParentGrainReconstructor)
-- [tileFigs](https://github.com/frankNiessen/ORTools/blob/master/README.md#tileFigs)
+- [computeGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrains)
+- [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors)
+- [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker)
+- [grainClick](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#grainClick)
+- [guiOR](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#guiOR)
+- [orientationMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#orientationMaker)
+- [ORinfo](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#ORinfo)
+- [peakFitORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs)
+- [plotHist_OR_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotHist_OR_misfit)
+- [plotIPDF_gB_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_misfit)
+- [plotIPDF_gB_prob](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_prob)
+- [plotMap_clusters](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_clusters)
+- [plotMap_gB_c2c](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_gB_c2c)
+- [plotMap_gB_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_gB_misfit)
+- [plotMap_gB_p2c](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_gB_p2c)
+- [plotMap_gB_prob](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_gB_prob)
+- [plotMap_IPF_p2c](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_IPF_p2c)
+- [plotMap_packets](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_packets)
+- [plotMap_phases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_phases)
+- [plotMap_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_variants)
+- [plotPDF_packets](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_packets)
+- [plotPDF_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_variants)
+- [plotPODF_transformation](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transformation)
+- [plotStack](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotStack)
+- [readCPR](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#readCPR)
+- [recolorPhases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#recolorPhases)
+- [renamePhases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#renamePhases)
+- [saveImage](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#saveImage)
+- [screenPrint](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#screenPrint)
+- [setParentGrainReconstructor](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#setParentGrainReconstructor)
+- [tileFigs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#tileFigs)
 
 ---
 
@@ -259,7 +259,7 @@ The function outputs information about the orientation relationship in the comma
 
 ### [peakFitORs](./src/peakFitORs.m)
 The function peak fits parent-child misorientation angle ranges for determination of one or several orientation relationships.
-The function is called by [defineORs](https://github.com/frankNiessen/ORTools/blob/master/README.md#defineors).
+The function is called by [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors).
 
 - Syntax
   -  p2c = peakFitORs(job,misoRange)
@@ -521,7 +521,7 @@ The function plots a pole figure of the martensitic variants associated with the
 ---
 
 ### [plotPODF_transformation](./src/plotPODF_transformation.m)
-The function calculates and plots the transformation texture, with or without imposing variant selection, based on a parent texture in inputVPSC.Tex. Input files can be created from EBSD data as presented in [example 4](https://github.com/frankNiessen/ORTools#example-4) or created with [fibreMaker](https://github.com/frankNiessen/ORTools/blob/master/README.md#fibreMaker) or [orientationMaker](https://github.com/frankNiessen/ORTools/blob/master/README.md#orientationMaker)
+The function calculates and plots the transformation texture, with or without imposing variant selection, based on a parent texture in inputVPSC.Tex. Input files can be created from EBSD data as presented in [example 4](https://github.com/ORTools4MTEX/ORTools#example-4) or created with [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker) or [orientationMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#orientationMaker)
 
 - Syntax
   -  plotPODF_transformation(job,hParent,hChild)
@@ -547,7 +547,7 @@ The function calculates and plots the transformation texture, with or without im
 ---
 
 ### [plotStack](./src/plotStack.m)
-The function plots maps for martensite variant analysis of a single prior parent grain. You can manually supply a parent grain Id *pGrainId* or use the function [grainClick](https://github.com/frankNiessen/ORTools/blob/master/README.md#grainClick) to choose a grain interactively.
+The function plots maps for martensite variant analysis of a single prior parent grain. You can manually supply a parent grain Id *pGrainId* or use the function [grainClick](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#grainClick) to choose a grain interactively.
 
 - Syntax
   -  plotStack(job,pGrainId)
