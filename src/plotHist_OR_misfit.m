@@ -123,9 +123,9 @@ end
 hold off
 
 if ~isempty(job.p2c) && ~isempty(allLegend)
-    h(1).DisplayName = 'OR **';
+    h(1).DisplayName = 'job.p2c';
 elseif ~isempty(job.p2c) && isempty(allLegend)
-    h(1).DisplayName = 'OR 1**';
+    h(1).DisplayName = 'job.p2c 1';
 end
 
 if ~isempty(allLegend)

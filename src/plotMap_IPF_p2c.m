@@ -32,24 +32,38 @@ elseif check_option(varargin,'parent')
     varargin(find_option(varargin,'parent'))=[];
 end
 
+
+
 %% Define the window settings for a set of docked figures
-% % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
-warning off
-desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% % Define a unique group name for the dock using the function name
-% % and the system timestamp
-dockGroupName = ['plotMap_IPF_p2c_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
-desktop.setGroupDocked(dockGroupName,0);
-bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+%Check if docked figure is needed
+if (isempty(job.ebsd(job.csParent)) && onlyChild) || ...
+   (isempty(job.ebsd(job.csChild)) && onlyParent)
+    plot2Tabs = true;
+else
+    plot2Tabs = false;
+end
 
-
+if plot2Tabs
+    % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+    warning off
+    desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+    % % Define a unique group name for the dock using the function name
+    % % and the system timestamp
+    dockGroupName = ['plotMap_IPF_p2c_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+    desktop.setGroupDocked(dockGroupName,0);
+    bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+end
 
 %% Parent map
 if ~isempty(job.ebsd(job.csParent)) && ~onlyChild
-    figH = gobjects(1);
-    figH = figure('WindowStyle','docked');
-    set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-    drawnow;
+    if plot2Tabs
+        figH = gobjects(1);
+        figH = figure('WindowStyle','docked');
+        set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+        drawnow;
+    else 
+        figH = figure;
+    end
     ipfKey1 = ipfHSVKey(job.ebsd(job.csParent));
     ipfKey1.inversePoleFigureDirection = vector;
     colors = ipfKey1.orientation2color(job.ebsd(job.csParent).orientations);
@@ -66,10 +80,14 @@ end
 
 % Child map
 if ~isempty(job.ebsd(job.csChild)) && ~onlyParent
-    figH = gobjects(1);
-    figH = figure('WindowStyle','docked');
-    set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-    drawnow;
+    if plot2Tabs
+        figH = gobjects(1);
+        figH = figure('WindowStyle','docked');
+        set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+        drawnow;
+    else 
+        figH = figure;
+    end
     ipfKey2 = ipfHSVKey(job.ebsd(job.csChild));
     ipfKey2.inversePoleFigureDirection = vector;
     colors = ipfKey2.orientation2color(job.ebsd(job.csChild).orientations);
@@ -83,23 +101,23 @@ if ~isempty(job.ebsd(job.csChild)) && ~onlyParent
 elseif isempty(job.ebsd(job.csChild))
     warning('Child IPFx map empty');
 end
-% ipfKey = [ipfKey1,ipfKey2];
 
+ipfKey = [ipfKey1,ipfKey2];
 %% Place first tabbed figure on top and return
-warning on
-allfigh = findall(0,'type','figure');
-if length(allfigh) > 1 &&...
-        (~isempty(job.ebsd(job.csParent)) && ~onlyChild) &&...
-        (~isempty(job.ebsd(job.csChild)) && ~onlyParent)
-    figure(length(allfigh)-1);
-elseif length(allfigh) > 1 &&...
-        (~isempty(job.ebsd(job.csParent)) && ~onlyChild) ||...
-        (~isempty(job.ebsd(job.csChild)) && ~onlyParent)
-    figure(length(allfigh));
-else
-    figure(1);
-end
-warning(bakWarn);
-pause(1); % Reduce rendering errors
-return
+if plot2Tabs
+    warning on
+    allfigh = findall(0,'type','figure');
+    if length(allfigh) > 1 &&...
+            (~isempty(job.ebsd(job.csParent)) && ~onlyChild) &&...
+            (~isempty(job.ebsd(job.csChild)) && ~onlyParent)
+        figure(length(allfigh)-1);
+    elseif length(allfigh) > 1 &&...
+            (~isempty(job.ebsd(job.csParent)) && ~onlyChild) ||...
+            (~isempty(job.ebsd(job.csChild)) && ~onlyParent)
+        figure(length(allfigh));
+    else
+        figure(1);
+    end
+    warning(bakWarn);
+    pause(1); % Reduce rendering errors
 end
