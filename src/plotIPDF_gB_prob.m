@@ -1,7 +1,7 @@
 function plotIPDF_gB_prob(job, varargin)
-% calculate and plot the probability distribution between 0 and 1, that a 
-% boundary belongs to the orientation relationship in an inverse 
-% polefigure showing the misorientation axes
+% Calculate and plot the probability distribution between 0 and 1, that a 
+% boundary belongs to an orientation relationship in an inverse 
+% pole figure showing the misorientation axes
 %
 % Syntax
 %  plotIPDF_gB_prob(job)
@@ -22,7 +22,7 @@ threshold = get_option(varargin,'threshold',2.5*degree);
 tolerance = get_option(varargin,'tolerance',2.5*degree);
 
 if job.p2c == orientation.id(job.csParent,job.csChild)
-    warning('Orientation relationship is (0,0,0). Initialize ''job.p2c''!');
+    warning('Orientation relationship is (0,0,0). Initialize ''job.p2c''');
     return
 end
 
@@ -62,15 +62,31 @@ v_p2c = v(idx_p2c==1);
 [gB_c2c,pairId_c2c] = job.grains.boundary.selectByGrainId(grainPairs(idx_c2c,:));
 v_c2c = v(idx_c2c==1);
 
-
 % Compute the variants of the nominal OR
 p2c_V = job.p2c.variants;
 p2c_V = p2c_V(:);
 c2c_variants = job.p2c * inv(p2c_V);
+%---------------
 
 
-%--- Axis plot for parent grains using parent-child boundaries
-f = figure;
+
+%% Define the window settings for a set of docked figures
+% % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+warning off
+desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+% % Define a unique group name for the dock using the function name
+% % and the system timestamp
+dockGroupName = ['plotIPDF_gB_misfit_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+desktop.setGroupDocked(dockGroupName,0);
+bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+
+
+
+%% Axis plot for parent grains using parent-child boundaries
+figH = gobjects(1);
+figH = figure('WindowStyle','docked');
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+drawnow;
 if ~isempty(gB_p2c)
     plot(gB_p2c.misorientation.axis,...
         v_p2c(pairId_p2c),...
@@ -97,14 +113,17 @@ plot(job.p2c.axis,...
     'Marker','o','MarkerSize',12,...
     'MarkerEdgeColor',[0 0 0],'MarkerFaceColor',[1 1 1]);
 hold off
-set(f,'Name',strcat('Rotation axis p2c - Probability of parent boundaries'),'NumberTitle','on');
+set(figH,'Name',strcat('Rot. axis p2c - Probability of parent boundaries'),'NumberTitle','on');
 drawnow;
 %---------------
 
 
 
-%--- Axis plot for child grains using parent-child boundaries
-f = figure;
+%% Axis plot for child grains using parent-child boundaries
+figH = gobjects(1);
+figH = figure('WindowStyle','docked');
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+drawnow;
 if ~isempty(gB_p2c)
     plot(gB_p2c.misorientation.axis,...
         v_p2c(pairId_p2c),...
@@ -131,14 +150,17 @@ plot(job.p2c.axis,...
     'Marker','o','MarkerSize',12,...
     'MarkerEdgeColor',[0 0 0],'MarkerFaceColor',[1 1 1]);
 hold off
-set(f,'Name',strcat('Rotation axis p2c - Probability of parent boundaries'),'NumberTitle','on');
+set(figH,'Name',strcat('Rot. axis p2c - Probability of child boundaries'),'NumberTitle','on');
 drawnow;
 %---------------
 
 
 
-%--- Axis plot for child grains using child-child boundaries
-f = figure;
+%% Axis plot for child grains using child-child boundaries
+figH = gobjects(1);
+figH = figure('WindowStyle','docked');
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+drawnow;
 if ~isempty(gB_c2c)
     plot(gB_c2c.misorientation.axis,...
         v_c2c(pairId_c2c),...
@@ -165,7 +187,26 @@ plot(c2c_variants.axis,...
     'Marker','o','MarkerSize',12,...
     'MarkerEdgeColor',[0 0 0],'MarkerFaceColor',[1 1 1]);
 hold off
-set(f,'Name',strcat('Rotation axis c2c boundaries - Probability of child boundaries'),'NumberTitle','on');
+set(figH,'Name',strcat('Rot. axis c2c - Probability of child boundaries'),'NumberTitle','on');
 drawnow;
 %---------------
+
+
+%% Place first tabbed figure on top and return
+warning on
+allfigh = findall(0,'type','figure');
+if length(allfigh) > 1 &&...
+        ~isempty(gB_p2c) &&...
+        ~isempty(gB_c2c)
+    figure(length(allfigh)-2);
+elseif length(allfigh) > 1 &&...
+        isempty(gB_p2c) &&...
+        ~isempty(gB_c2c)
+    figure(length(allfigh));
+else
+    figure(1);
+end
+warning(bakWarn);
+pause(1); % Reduce rendering errors
+return
 end
