@@ -15,9 +15,11 @@ function plotIPDF_gB_misfit(job,varargin)
 cmap = get_option(varargin,'colormap','jet');
 
 if job.p2c == orientation.id(job.csParent,job.csChild)
-    warning('Orientation relationship is (0,0,0). Initialize ''job.p2c''!');
+    warning('Orientation relationship is (0,0,0). Initialize ''job.p2c''');
     return
 end
+
+
 %% Compute the p2c and c2c boundary disorientation (misfits)
 % Compute all parent-child grain boundaries
 gB_p2c = job.grains.boundary(job.csParent.mineral,job.csChild.mineral);
@@ -39,8 +41,25 @@ if ~isempty(gB_c2c)
     [misfit_c2c,~] = min(misfit_c2c,[],2);
 end
 
-%--- Axis plot for parent grains using parent-child boundaries
-f = figure;
+
+
+%% Define the window settings for a set of docked figures
+% % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+warning off
+desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+% % Define a unique group name for the dock using the function name
+% % and the system timestamp
+dockGroupName = ['plotIPDF_gB_misfit_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+desktop.setGroupDocked(dockGroupName,0);
+bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+
+
+
+%% Axis plot for parent grains using parent-child boundaries
+figH = gobjects(1);
+figH = figure('WindowStyle','docked');
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+drawnow;
 if ~isempty(gB_p2c)
     plot(gB_p2c.misorientation.axis,...
         misfit_p2c./degree,...
@@ -70,14 +89,17 @@ plot(job.p2c.axis,...
     'Marker','o','MarkerSize',12,...
     'MarkerEdgeColor',[0 0 0],'MarkerFaceColor',[1 1 1]);
 hold off
-set(f,'Name',strcat('Rotation axis p2c - Disorientation of parent from OR'),'NumberTitle','on');
+set(figH,'Name',strcat('Rot. axis p2c - Parent grain disori. from OR'),'NumberTitle','on');
 drawnow;
 %---------------
 
 
 
-%--- Axis plot for child grains using parent-child boundaries
-f = figure;
+%% Axis plot for child grains using parent-child boundaries
+figH = gobjects(1);
+figH = figure('WindowStyle','docked');
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+drawnow;
 if ~isempty(gB_p2c)
     plot(gB_p2c.misorientation.axis,...
         misfit_p2c./degree,...
@@ -107,12 +129,16 @@ plot(job.p2c.axis,...
     'Marker','o','MarkerSize',12,...
     'MarkerEdgeColor',[0 0 0],'MarkerFaceColor',[1 1 1]);
 hold off
-set(f,'Name',strcat('Rotation axis p2c - Disorientation of child from OR'),'NumberTitle','on');
+set(figH,'Name',strcat('Rot. axis p2c - Child grain disori. from OR'),'NumberTitle','on');
 drawnow;
 %---------------
 
-%--- Axis plot for child grains using child-child boundaries
-f = figure;
+
+%% Axis plot for child grains using child-child boundaries
+figH = gobjects(1);
+figH = figure('WindowStyle','docked');
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+drawnow;
 if ~isempty(gB_c2c)
     plot(gB_c2c.misorientation.axis,...
         misfit_c2c./degree,...
@@ -125,7 +151,7 @@ if ~isempty(gB_c2c)
         maxColor = get_option(varargin,'maxColor');
     else
         maxColor = ceil(max(misfit_c2c./degree)/5)*5;
-    end    
+    end
     colormap(cmap);
     caxis([0 maxColor]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
@@ -142,7 +168,27 @@ plot(c2c_variants.axis,...
     'Marker','o','MarkerSize',12,...
     'MarkerEdgeColor',[0 0 0],'MarkerFaceColor',[1 1 1]);
 hold off
-set(f,'Name',strcat('Rotation axis c2c boundaries - Disorientation of child from variants'),'NumberTitle','on');
+set(figH,'Name',strcat('Rot. axis c2c - Child grain disori. from OR variants'),'NumberTitle','on');
 drawnow;
 %---------------
+
+
+
+%% Place first tabbed figure on top and return
+warning on
+allfigh = findall(0,'type','figure');
+if length(allfigh) > 1 &&...
+        ~isempty(gB_p2c) &&...
+        ~isempty(gB_c2c)
+    figure(length(allfigh)-2);
+elseif length(allfigh) > 1 &&...
+        isempty(gB_p2c) &&...
+        ~isempty(gB_c2c)
+    figure(length(allfigh));
+else
+    figure(1);
+end
+warning(bakWarn);
+pause(1); % Reduce rendering errors
+return
 end
