@@ -4,8 +4,6 @@
 *.ctf
 *.mat
 *.Tex
-inputVPSC.Tex
-outputVPSC.Tex
 *.tex
 data/output/**
-*.Tex
+
