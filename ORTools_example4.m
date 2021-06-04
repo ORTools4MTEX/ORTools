@@ -45,9 +45,6 @@ ebsd = recolorPhases(ebsd);
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose Beta as a parent and Alpha as a child phase in the transition
 job = parentGrainReconstructor(ebsd,grains,Ini.cifPath);
-% Use the peak fitter in the pop-up menu
-%     - Adjust the threshold to include only the largest peak
-%     - Compute the OR by "Maximum f(g)"
 job.p2c = orientation.Burgers(job.csParent, job.csChild);
 % Check the disorientation
 plotHist_OR_misfit(job);
