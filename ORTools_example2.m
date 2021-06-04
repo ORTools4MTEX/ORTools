@@ -2,7 +2,7 @@
 % *********************************************************************
 %                        ORTools - Example 2
 % *********************************************************************
-% Reconstruction of beta parent grains from alpha in titanium alloys. 
+% Reconstruction of beta parent grains from alpha in titanium alloys.
 % Find the detailed MTEX version on the details of the reconstruction here:
 % https://mtex-toolbox.github.io/TiBetaReconstruction.html
 % *********************************************************************
@@ -19,7 +19,7 @@ screenPrint('StartUp','ORTools - Example 2');
 startup_mtex;
 setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
-setMTEXpref('FontSize',14);   
+setMTEXpref('FontSize',14);
 
 % Default directories - Do not modify
 Ini.dataPath = [pwd,'/data/'];
@@ -36,8 +36,8 @@ ebsd = mtexdata(mtexDataset);
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 1.5° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
-  'removeQuadruplePoints');
-%% Rename and recolor phases 
+    'removeQuadruplePoints');
+%% Rename and recolor phases
 screenPrint('SegmentStart','Renaming and recoloring phases');
 phaseNames = {'Gamma','AlphaP','Alpha','Beta','AlphaDP'};
 % Rename "Ti (BETA) to "Beta"and "Ti (alpha)" to "Alpha"
@@ -64,14 +64,14 @@ screenPrint('SegmentStart','Plotting some ORTools maps');
 
 % Phase map
 plotMap_phases(job,'linewidth',1);
-%       - The microstructure consists of 99.75 % alpha 
+%       - The microstructure consists of 99.75 % alpha
 
 % Parent and child IPF maps
 plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child')
 %       - We can visually recognize the prior beta grains
 
 % Child-child grain boundary misorientation map
-plotMap_gB_c2c(job,'linewidth',1);  
+plotMap_gB_c2c(job,'linewidth',1);
 %       - Alpha of same prior beta grain seem to have ~58° misorientation
 
 % Plot a map of the OR boundary disorientation, or misfit
@@ -82,9 +82,9 @@ plotMap_gB_misfit(job,'linewidth',1.5, 'maxColor', 10);
 plotMap_gB_prob(job,'linewidth',1.5);
 %       - This is also manifested in the OR probability map
 
-% We can plot the OR and boundary misorientation axes and color the 
-% experimental points according to their disorientation angle from the OR 
-% We plot the 
+% We can plot the OR and boundary misorientation axes and color the
+% experimental points according to their disorientation angle from the OR
+% We plot the
 %       - parent-child misorientation axes in the parent basis
 %       - parent-child misorientation axes in the child basis
 %       - and the child-child misorientation axes in the child basis
@@ -125,9 +125,9 @@ job.mergeInclusions('maxSize',5);
 % and then plot the cleaned reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5)
-%% Variant analysis    
+%% Variant analysis
 % Plot the variant pole figure
-figure; 
+figure;
 plotPDF_variants(job);
 % We can calculate variants and packets
 job.calcVariants;
