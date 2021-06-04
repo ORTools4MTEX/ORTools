@@ -83,7 +83,7 @@ if ~isempty(job.ebsd(job.csChild)) && ~onlyParent
 elseif isempty(job.ebsd(job.csChild))
     warning('Child IPFx map empty');
 end
-ipfKey = [ipfKey1,ipfKey2];
+% ipfKey = [ipfKey1,ipfKey2];
 
 %% Place first tabbed figure on top and return
 warning on
