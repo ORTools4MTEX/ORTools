@@ -36,11 +36,11 @@ end
 
 %% Define the window settings for a set of docked figures
 %Check if docked figure is needed
-if (isempty(job.ebsd(job.csParent)) && onlyChild) || ...
-   (isempty(job.ebsd(job.csChild)) && onlyParent)
-    plot2Tabs = true;
-else
+if (isempty(job.ebsd(job.csParent)) || onlyChild) || ...
+   (isempty(job.ebsd(job.csChild)) || onlyParent)
     plot2Tabs = false;
+else
+    plot2Tabs = true;
 end
 
 if plot2Tabs

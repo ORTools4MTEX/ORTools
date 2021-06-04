@@ -39,7 +39,7 @@ screenPrint('SegmentStart','Computing, filtering and smoothing grains');
     'removeQuadruplePoints');
 %% Rename and recolor phases
 screenPrint('SegmentStart','Renaming and recoloring phases');
-phaseNames = {'Gamma','AlphaP','Alpha','Beta','AlphaDP'};
+phaseNames = {'Alpha','Beta'};
 % Rename "Ti (BETA) to "Beta"and "Ti (alpha)" to "Alpha"
 ebsd = renamePhases(ebsd,phaseNames);
 % Choose your favourite colors
@@ -53,7 +53,8 @@ job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %     - Compute the OR by "Maximum f(g)"
 job = defineORs(job);
 % Check the disorientation and compare it with the Burgers OR
-plotHist_OR_misfit(job,orientation.Burgers(job.csParent,job.csChild));
+plotHist_OR_misfit(job,orientation.Burgers(job.csParent,job.csChild),...
+                   'legend',{'Burgers OR'});
 xlim([0,10]);
 %     - The misfit with Burgers OR and the experimental OR is almost
 %     identical
