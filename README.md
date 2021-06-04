@@ -74,7 +74,7 @@ In [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) we noted that 
 
 ### [Example 4](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
-In this script, we repeat the reconstruction of the prior β microstructure from an α microstructure as shown in [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) with less detail. We then look at the variant distribution and conclude that strongly preferential variant selection did not occur. We are therefore in a good position to predict the transition texture of α from the reconstructed β using the [plotPODF_transformation](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transformation) function. The predicted transition α texture is in good agreement with the experimental α texture.
+In this script, we repeat the reconstruction of the prior β microstructure from an α microstructure as shown in [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) with less detail. We then look at the variant distribution and conclude that strongly preferential variant selection did not occur. We are therefore in a good position to predict the transition texture of α from the reconstructed β using the [plotPODF_transform](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transform) function. The predicted transition α texture is in good agreement with the experimental α texture.
 
 [![ORTools - Example 4](http://img.youtube.com/vi/Yx2jKII3HUc/0.jpg)](http://www.youtube.com/watch?v=Yx2jKII3HUc "Video Title")
 
@@ -132,7 +132,7 @@ This example is of a 10% cold-rolled twinning and transformation induced plastic
 - [plotMap_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_variants)
 - [plotPDF_packets](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_packets)
 - [plotPDF_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_variants)
-- [plotPODF_transformation](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transformation)
+- [plotPODF_transform](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transform)
 - [plotStack](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotStack)
 - [readCPR](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#readCPR)
 - [recolorPhases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#recolorPhases)
@@ -520,7 +520,7 @@ The function plots a pole figure of the martensitic variants associated with the
 
 ---
 
-### [plotPODF_transformation](./src/plotPODF_transformation.m)
+### [plotPODF_transform](./src/plotPODF_transform.m)
 The function calculates and plots the transformation texture, with or without imposing variant selection, based on a parent texture in inputVPSC.Tex. Input files can be created from EBSD data as presented in [example 4](https://github.com/ORTools4MTEX/ORTools#example-4) or created with [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker) or [orientationMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#orientationMaker)
 
 - Syntax
@@ -541,7 +541,7 @@ The function calculates and plots the transformation texture, with or without im
   - export       - (optional path) & name of the output transformed VPSC file
 
 <p align="center">
-  <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transformation" width="1000"/>
+  <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transform" width="1000"/>
 </p>
 
 ---
