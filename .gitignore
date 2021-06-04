@@ -8,3 +8,4 @@ inputVPSC.Tex
 outputVPSC.Tex
 *.tex
 data/output/**
+*.Tex
