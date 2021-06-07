@@ -38,12 +38,12 @@ end
 %Check if docked figure is needed
 if (isempty(job.ebsd(job.csParent)) || onlyChild) || ...
    (isempty(job.ebsd(job.csChild)) || onlyParent)
-    plot2Tabs = false;
+    plot2tab = false;
 else
-    plot2Tabs = true;
+    plot2tab = true;
 end
 
-if plot2Tabs
+if plot2tab
     % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
     warning off
     desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
@@ -56,7 +56,7 @@ end
 
 %% Parent map
 if ~isempty(job.ebsd(job.csParent)) && ~onlyChild
-    if plot2Tabs
+    if plot2tab
         figH = gobjects(1);
         figH = figure('WindowStyle','docked');
         set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -80,7 +80,7 @@ end
 
 % Child map
 if ~isempty(job.ebsd(job.csChild)) && ~onlyParent
-    if plot2Tabs
+    if plot2tab
         figH = gobjects(1);
         figH = figure('WindowStyle','docked');
         set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -104,7 +104,7 @@ end
 
 ipfKey = [ipfKey1,ipfKey2];
 %% Place first tabbed figure on top and return
-if plot2Tabs
+if plot2tab
     warning on
     allfigh = findall(0,'type','figure');
     if length(allfigh) > 1 &&...
