@@ -10,8 +10,8 @@ function ipfKey = plotMap_IPF_p2c(job, varargin)
 %  direction    - @vector3d
 %
 % Option
-%  parent       - plot only map of parent phase
-%  child        - plot only map of child phase
+%  parent       - plot parent phase map only
+%  child        - plot child phase map only
 %
 % Output
 %  ipfKey       - @ipfHSVKey
