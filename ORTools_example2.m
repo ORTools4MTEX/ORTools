@@ -3,7 +3,7 @@
 %                        ORTools - Example 2
 % *********************************************************************
 % Reconstruction of beta parent grains from alpha in titanium alloys.
-% Find the detailed MTEX version on the details of the reconstruction here:
+% The MTEX description for reconstruction is given here:
 % https://mtex-toolbox.github.io/TiBetaReconstruction.html
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
