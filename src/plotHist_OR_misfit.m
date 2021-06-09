@@ -1,6 +1,6 @@
 function plotHist_OR_misfit(job,varargin)
-% Plot disorientation (or misfit) histogram between 
-% parent-child and child-child grain misorientations 
+% Plot disorientation (or misfit) histogram between
+% parent-child and child-child grain misorientations
 % with the OR misorientation
 %
 % Syntax
@@ -36,7 +36,7 @@ end
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
 warning off
 desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% % Define a unique group name for the dock using the function name 
+% % Define a unique group name for the dock using the function name
 % % and the system timestamp
 dockGroupName = ['plotHist_OR_misfit_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
 desktop.setGroupDocked(dockGroupName,0);
@@ -96,7 +96,7 @@ warning off;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow; 
+drawnow;
 
 c = ind2color(1:length(p2c));
 for ii = 1:length(p2c)
@@ -119,6 +119,13 @@ for ii = 1:length(p2c)
         'edgecolor',c(ii,:), 'facecolor',c(ii,:),...
         'DisplayName',sprintf('OR %d',ii),'facealpha',0.25);
     hold on;
+%     % % Output the histogram data in a table
+%     if strcmp(pairType,'p2c')==1
+%         screenPrint('SegmentStart',['p2c: Histogram ',num2str(ii)]);
+%     elseif strcmp(pairType,'c2c')==1
+%         screenPrint('SegmentStart',['c2c: Histogram ',num2str(ii)]);
+%     end
+%     table(binCenters(ii,:)'./degree,countsNorm(ii,:)','VariableNames',{'binCenters','Freq'})
 end
 hold off
 
