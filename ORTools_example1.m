@@ -3,7 +3,7 @@
 %                        ORTools - Example 1
 % *********************************************************************
 % Reconstructing the prior austenite microstructure from lath martensite
-% Find the MTEX description of reconstruction here:
+% The MTEX description for reconstruction is given here:
 % https://mtex-toolbox.github.io/MaParentGrainReconstruction.html
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
