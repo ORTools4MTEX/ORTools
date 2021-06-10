@@ -119,11 +119,12 @@ for ii = 1:length(p2c)
         'edgecolor',c(ii,:), 'facecolor',c(ii,:),...
         'DisplayName',sprintf('OR %d',ii),'facealpha',0.25);
     hold on;
-%     % % Output the histogram data in a table
+%     % % Output histogram data in a table
+%     figProp = get(groot,'CurrentFigure');
 %     if strcmp(pairType,'p2c')==1
-%         screenPrint('SegmentStart',['p2c: Histogram ',num2str(ii)]);
+%         screenPrint('Step',['Figure ',num2str(figProp.Number),', Histogram ',num2str(ii),': p2c']);
 %     elseif strcmp(pairType,'c2c')==1
-%         screenPrint('SegmentStart',['c2c: Histogram ',num2str(ii)]);
+%         screenPrint('Step',['Figure ',num2str(figProp.Number),', Histogram ',num2str(ii),': c2c']);
 %     end
 %     table(binCenters(ii,:)'./degree,countsNorm(ii,:)','VariableNames',{'binCenters','Freq'})
 end
