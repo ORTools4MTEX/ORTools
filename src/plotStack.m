@@ -416,6 +416,9 @@ if size(norm_counts,2)>1; norm_counts = norm_counts'; end
 if check_option(varargin,'grains')
     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Weighted area variant Ids','NumberTitle','on');
+    % % Output histogram data in a table
+    figProp = get(groot,'CurrentFigure');
+    screenPrint('Step',['Figure ',num2str(figProp.Number),': variantId weighted area histogram']);
     %     table(class_range,abs_counts,'VariableNames',{'variantId','wtAreaCounts'})
     table(class_range,norm_counts,'VariableNames',{'variantId','wtAreaFreq'})
 else
@@ -454,6 +457,9 @@ if size(norm_counts,2)>1; norm_counts = norm_counts'; end
 if check_option(varargin,'grains')
     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
+    % % Output histogram data in a table
+    figProp = get(groot,'CurrentFigure');
+    screenPrint('Step',['Figure ',num2str(figProp.Number),': packetId weighted area histogram']);
     %     table(class_range,abs_counts,'VariableNames',{'packetId','wtAreaCounts'})
     table(class_range,norm_counts,'VariableNames',{'packetId','wtAreaFreq'})
 else
