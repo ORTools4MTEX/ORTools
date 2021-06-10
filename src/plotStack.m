@@ -421,6 +421,9 @@ if check_option(varargin,'grains')
 else
     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Relative frequency variant Ids','NumberTitle','on');
+    % % Output histogram data in a table
+    figProp = get(groot,'CurrentFigure');
+    screenPrint('Step',['Figure ',num2str(figProp.Number),': variantId histogram']);
     %     table(class_range,abs_counts,'VariableNames',{'variantId','Counts'})
     table(class_range,norm_counts,'VariableNames',{'variantId','Freq'})
 end
@@ -456,6 +459,9 @@ if check_option(varargin,'grains')
 else
     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Relative frequency packet Ids','NumberTitle','on');
+    % % Output histogram data in a table
+    figProp = get(groot,'CurrentFigure');
+    screenPrint('Step',['Figure ',num2str(figProp.Number),': packetId histogram']);
     %     table(class_range,abs_counts,'VariableNames',{'packetId','Counts'})
     table(class_range,norm_counts,'VariableNames',{'packetId','Freq'})
 end
