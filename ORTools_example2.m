@@ -134,7 +134,7 @@ plotPDF_variants(job);
 job.calcVariants;
 % and plot the variant map
 plotMap_variants(job,'linewidth',3);
-%plotMap_variants(job,'grains','linewidth',3);  %Plot grain data instead
+%plotMap_variants(job,'grains','linewidth',3); %Plot grain data instead
 %% Plot reconstructed parent EBSD orientations and the IPF key
 parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',3,'parent');
 figure; plot(parentIPFkey);
@@ -142,5 +142,5 @@ figure; plot(parentIPFkey);
 saveImage(Ini.imagePath);
 
 %% Check the beta grains interactively by clicking on them
-grainClick(job);
-%grainClick(job,'grains');    %Plot grain data instead
+grainClick(job,'noScalebar','noFrame');
+%grainClick(job,'grains','noScalebar','noFrame'); %Plot grain data instead
