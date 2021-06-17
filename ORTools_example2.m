@@ -68,7 +68,7 @@ plotMap_phases(job,'linewidth',1);
 %       - The microstructure consists of 99.75 % alpha
 
 % Parent and child IPF maps
-plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child')
+plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child');
 %       - We can visually recognize the prior beta grains
 
 % Child-child grain boundary misorientation map
