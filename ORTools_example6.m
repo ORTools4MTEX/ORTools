@@ -63,7 +63,7 @@ plotHist_OR_misfit(job1,orientation.Burgers(job1.csParent,job1.csChild),...
 plotMap_gB_misfit(job1,'linewidth',1.5,'maxColor',5);
 
 % The fit is quite good most places
-%% Reconstruct alphaP
+%% Reconstruct epsilon
 for k = 1:3
   job1.calcGBVotes('p2c','threshold',k*2.5*degree);
   job1.calcParentFromVote;
@@ -78,12 +78,12 @@ figure; plot(parentIPFkey);
 %% Define and check the OR GAMMA - EPSILON
 % Choose "Gamma" as a parent and "Epsilon" as a child phase
 job2 = setParentGrainReconstructor(job1.ebsd,job1.grains,Ini.cifPath);
-% We define the Shoji Nishiyama OR between Gamma and Epsilon
+% We define the Shoji-Nishiyama (S-N) OR between Gamma and Epsilon
 job2.p2c = orientation.ShojiNishiyama(job2.csParent,job2.csChild);
 job2.calcParent2Child('p2c');
 plotHist_OR_misfit(job2,...
                    orientation.ShojiNishiyama(job2.csParent,job2.csChild),...
-                   'legend',{'ShojiNishiyama'});
+                   'legend',{'S-N OR'});
 %% Check the fit with the OR locally
 % Plot parent-child and child-child OR boundary disorientation map
 % We color the boundaries up to 5° disorientation to emphasize the effects
