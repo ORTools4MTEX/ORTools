@@ -1,9 +1,7 @@
 % *************************************************************************
 % Trace analysis of martensite laths from EBSD data
 % *************************************************************************
-% Dr. Frank Niessen, University of Wollongong, EMC, 02/2020
-% contactnospam@fniessen.com (remove the nospam to make this email address
-% work)
+% Experimental feature
 
 home; close all; clear variables;
 currentFolder;
