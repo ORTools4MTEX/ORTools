@@ -45,7 +45,7 @@ job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 minArea = 0.8;                                                             %Getting min area
 minAR = 3;                                                                 %Getting min aspect ratio
 childGrains = job.childGrains(all([job.childGrains.area>minArea,...
-                                              job.childGrains.aspectRatio>minAR],2)); %Filter grains
+                                   job.childGrains.aspectRatio>minAR],2)); %Filter grains
 
 %% Compute traces of grains
 %The trace is computed by identifying the longest axis by fitting of an
