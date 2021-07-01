@@ -1,12 +1,18 @@
 % *************************************************************************
 % Trace analysis of martensite laths from EBSD data
 % *************************************************************************
+
+% ##################################################
+% ##################################################
 % Experimental feature
+% Don't use this yet!
+% ##################################################
+% ##################################################
 
 home; close all; clear variables;
 currentFolder;
 set(0,'DefaultFigureWindowStyle','normal');
-screenPrint('StartUp','ORTools - Example 1');
+screenPrint('StartUp','ORTools - Example HP');
 %% Initialize MTEX
 % Startup and set some settings
 startup_mtex;
@@ -20,9 +26,9 @@ Ini.cifPath = [Ini.dataPath,'input/cif/'];
 Ini.ebsdPath = [Ini.dataPath,'input/ebsd/'];
 Ini.texturePath = [Ini.dataPath,'output/texture/'];
 Ini.imagePath = [Ini.dataPath,'output/images/'];
-Ini.phaseNames = {'Gamma','AlphaP','Epsilon'};
+Ini.phaseNames = {'Gamma','AlphaP','Epsilon','Alpha','Beta'};
 %% Import EBSD data and save current file name
-ebsd = mtexdata('martensite');
+ebsd = mtexdata('alphaBetaTitanium');
 %ebsd = loadEBSD_ctf([Ini.ebsdPath,'TRWIPsteel.ctf'],'convertSpatial2EulerReferenceFrame');
 ebsd = ebsd('indexed');
 %% Compute, filter and smooth grains
@@ -50,8 +56,10 @@ childGrains = job.childGrains(all([job.childGrains.area>minArea,...
 %% Compute traces of grains
 %The trace is computed by identifying the longest axis by fitting of an
 %elipse
-[omega,a,b] = childGrains.fitEllipse;
-v = childGrains.longAxis;                                                  %Get the longest axis                               
+v = childGrains.longAxis;                                                  %Get the longest axis        
+% [~,omega] = caliper(childGrains); %Get the ferret diameter of grain
+% omega = omega';
+% v = vector3d([cos(omega) sin(omega) zeros(size(omega,1))]')'; %Compute vectors
 %% Plot traces
 figure;                                                                    %Figure
 plot(ebsd,ebsd.prop.bc);                                                   %Mean grain orientations of children grains for trace analysis
@@ -74,7 +82,7 @@ weights = weights/max(weights);                                            %Norm
 H = Miller(tmp(1),tmp(2),tmp(3),job.csChild,'xyz');                        %Convert plane to Miller
 %% Plot traces and habit plane
 figure;
-plot(Htr,'markerfacecolor','k','markeredgecolor','k','markersize','fundamentalregion','markersize',weights*4); 
+plot(Htr,'markerfacecolor','k','markeredgecolor','k','markersize','fundamentalregion','markersize',weights*10); 
 
 % Add habit plane
 hold on
