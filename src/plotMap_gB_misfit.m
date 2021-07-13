@@ -24,7 +24,7 @@ gB = job.grains.boundary;
 % Compute all parent-child grain boundaries
 gB_p2c = job.grains.boundary(job.csParent.mineral,job.csChild.mineral);
 
-if ~isempty(gB_p2c)
+if ~isempty(job.grains(job.csParent))
     % Compute the disorientation from the nominal OR
     misfit_p2c = angle(gB_p2c.misorientation,job.p2c);
 else
