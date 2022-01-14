@@ -1,3 +1,11 @@
+---
+**JOIN THE MTEX WORKSHOP 2022 (21.03 – 30.03.2022 on ZOOM)**
+*Week 1: MTEX training course (5 ECTS)*
+*Week 2: User meeting*
+
+https://mtex-toolbox.github.io/workshops
+---
+
 Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) by clicking on either weblink
 
 | [**How to use**](https://github.com/ORTools4MTEX/ORTools#how-to-use) 
