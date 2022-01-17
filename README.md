@@ -9,6 +9,12 @@ https://mtex-toolbox.github.io/workshops
 
 ---
 
+<p align="left">
+  <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
+</p>
+
+---
+
 Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) by clicking on either weblink
 
 ---
@@ -19,10 +25,6 @@ Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools
 | [**Function reference**](https://github.com/ORTools4MTEX/ORTools#function-reference)
 
 ---
-
-<p align="left">
-  <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
-</p>
 
 **ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB**-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the 2021 MTEX Workshop for an introduction to the phase transformation features in MTEX and ORTools. 
 
