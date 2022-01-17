@@ -12,9 +12,12 @@ https://mtex-toolbox.github.io/workshops
 
 Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) by clicking on either weblink
 
-| [**How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools) 
+| [**How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools)
+
 | [**How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools) 
-| [**Example scripts**](https://github.com/ORTools4MTEX/ORTools#example-scripts) 
+
+| [**Example scripts**](https://github.com/ORTools4MTEX/ORTools#example-scripts)
+
 | [**Function reference**](https://github.com/ORTools4MTEX/ORTools#function-reference)
 
 
