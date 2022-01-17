@@ -1,4 +1,4 @@
-
+## ANNOUNCEMENTS
 **JOIN THE MTEX WORKSHOP 2022 (21 – 30 March 2022 on ZOOM)**
 
 *Week 1: MTEX training course (5 ECTS)*
