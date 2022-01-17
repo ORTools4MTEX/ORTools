@@ -20,8 +20,9 @@ Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools
 | [**Authors**](https://github.com/ORTools4MTEX/ORTools#authors)
 | [**How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools)
 | [**How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools)
-| [**Example scripts**](https://github.com/ORTools4MTEX/ORTools#example-scripts)
-| [**Function reference**](https://github.com/ORTools4MTEX/ORTools#function-reference) |
+
+| [**ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts)
+| [**ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference) |
 
 ---
 
@@ -62,7 +63,7 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 
 ---
 
-##  Example scripts
+##  ORTools example scripts
 The world of martensitic transformation or phase transition analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the **ORTools** library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions *in action*.
 
 It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the code and the generated results. This will also help you follow the comments, which provide instructions on the various choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the code as well as the meaning behind the presented results.
@@ -133,7 +134,7 @@ This example is of a 10% cold-rolled twinning and transformation induced plastic
 
 ---
 
-##  Function reference
+##  ORTools function reference
 
 ### Function Index
 
