@@ -1,5 +1,5 @@
 
-**JOIN THE MTEX WORKSHOP 2022 (21.03 – 30.03.2022 on ZOOM)**
+**JOIN THE MTEX WORKSHOP 2022 (21 – 30 March 2022 on ZOOM)**
 
 *Week 1: MTEX training course (5 ECTS)*
 
@@ -12,29 +12,40 @@ https://mtex-toolbox.github.io/workshops
 
 Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) by clicking on either weblink
 
-| [**How to use**](https://github.com/ORTools4MTEX/ORTools#how-to-use) 
+| [**How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools) 
+| [**How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools) 
 | [**Example scripts**](https://github.com/ORTools4MTEX/ORTools#example-scripts) 
-| [**Function reference**](https://github.com/ORTools4MTEX/ORTools#function-reference) |
+| [**Function reference**](https://github.com/ORTools4MTEX/ORTools#function-reference)
+
 
 ---
 <p align="left">
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 </p>
 
-**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB**-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the 2021 MTEX Workshop for an introduction to the phase transition features in MTEX and ORTools. 
+**ORTools** (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the **MATLAB**-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the 2021 MTEX Workshop for an introduction to the phase transformation features in MTEX and ORTools. 
 
-The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/ORTools4MTEX/ORTools#example-scripts) that showcase how the functions work and what their output comprises.
-
-**ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, [**please cite this paper as your reference**](https://arxiv.org/abs/2104.14603).
-
-To help maintain the **ORTools** library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve it, please contact us.
+The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/ORTools4MTEX/ORTools#example-scripts) that showcase how the functions work and what their output comprises. To help maintain the **ORTools** library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve it, please contact us.
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
 [*ORTools Introduction*](https://youtu.be/inkR6LBzFeQ)
 
+
 ---
-## How to use
+## Authors
+**ORTools** was created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
+
+
+---
+## How to cite ORTools
+If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite this paper as your reference:
+
+[**F. Niessen, T. Nyyssönen, A.A. Gazder, R. Hielscher, Parent grain reconstruction from partially and fully transformed microstructures in MTEX, Journal of Applied Crystallography: 55(1), https://doi.org/10.1107/S1600576721011560, 2022**](https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf).
+
+
+---
+## How to use ORTools
 - You can download the [**latest stable release**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**developer version**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip).
 - This library only works after the prior installation of **MATLAB** and **MTEX**. Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below. ORTools is tested for compatibility down to MATLAB 2016b. Check with each [release](https://github.com/ORTools4MTEX/ORTools/releases) with which MTEX it is compatible. The peak-fitting funcionality within function [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors) requires installation of the MATLAB Signal Processing Toolbox.
 - Open MATLAB and run one of the example files. Please refer to the [*Example 1*](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and want to use the function library instead, please ensure the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
