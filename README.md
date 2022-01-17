@@ -13,8 +13,6 @@ https://mtex-toolbox.github.io/workshops
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 </p>
 
----
-
 Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) by clicking on either weblink
 
 ---
