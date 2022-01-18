@@ -19,8 +19,7 @@ Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools
 
 | [**Authors**](https://github.com/ORTools4MTEX/ORTools#authors)
 | [**How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools)
-| [**How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools) |
-
+| [**How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools)
 | [**ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts)
 | [**ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference) |
 
