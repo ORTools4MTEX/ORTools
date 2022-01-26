@@ -35,7 +35,7 @@ To help maintain the **ORTools** library, please report any bugs you encounter. 
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
-[*ORTools Introduction*](https://youtu.be/inkR6LBzFeQ)
+[*An introduction to ORTools*](https://youtu.be/inkR6LBzFeQ)
 
 ---
 
@@ -45,7 +45,7 @@ To help maintain the **ORTools** library, please report any bugs you encounter. 
 ---
 
 ## How to cite ORTools
-If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite this paper as your reference:
+If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite this open-access paper as your reference:
 
 [**F. Niessen, T. Nyyssönen, A.A. Gazder, R. Hielscher, Parent grain reconstruction from partially and fully transformed microstructures in MTEX, Journal of Applied Crystallography: 55(1), https://doi.org/10.1107/S1600576721011560, 2022**](https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf).
 
