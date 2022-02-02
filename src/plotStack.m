@@ -469,7 +469,7 @@ end
 drawnow;
 
 
-%% Plot the block widths
+%% Plot martensite block widths
 % % THIS SCRIPT WAS CONTRIBUTED BY: Dr Tuomo Nyyssönen
 if check_option(varargin,'grains')
     % Get all 111 vector3ds for each grain:
@@ -544,7 +544,7 @@ if check_option(varargin,'grains')
     end
     drawnow;
     
-    % % Plot the child block width histogram
+    % % Plot the martensite block width histogram
     figH = gobjects(1);
     figH = figure('WindowStyle','docked');
     set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -557,16 +557,17 @@ if check_option(varargin,'grains')
     set(gca,'FontSize',14);
     set(gca,'xlim',[0 class_range(end)+0.5]);
     set(gca,'XTick',0:0.5:class_range(end)+0.5);
-    xlabel('Child block width [\mum]','FontSize',14,'FontWeight','bold');
+    xlabel('Martensite block width [\mum]','FontSize',14,'FontWeight','bold');
     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
-    set(figH,'Name','Histogram: Child block width','NumberTitle','on');
-    screenPrint('Step',['Figure ',num2str(figH.Number),': child block width histogram']);
+    set(figH,'Name','Histogram: Martensite block width','NumberTitle','on');
+    screenPrint('Step',['Figure ',num2str(figH.Number),': martensite block width histogram']);
     drawnow;
     % % Output histogram data in a table
     if size(class_range,2)>1; class_range = class_range'; end
     if size(abs_counts,2)>1; abs_counts = abs_counts'; end
     if size(norm_counts,2)>1; norm_counts = norm_counts'; end
     table(class_range,norm_counts,'VariableNames',{'blockWidth','Freq'})
+    
     % % The figure and histogram show that block widths are consistently
     % % smaller when calculated this way
 end
