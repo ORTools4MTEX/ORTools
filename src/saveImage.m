@@ -57,7 +57,7 @@ else % Figure windows are open
         
         % Save all images in the specified format
         for numFigs2Save = (numFilesInFolder+1):(numFilesInFolder+numOpenFigs)
-            figure(openFigs(numFigs2Save-numFilesInFolder));
+            figure(numFigs2Save-numFilesInFolder);
             set(gcf,'PaperPositionMode','auto');
             figFileName = sprintf(strcat(fileName,'_%02d',fileType),numFigs2Save);
             % Define the image format
