@@ -19,6 +19,7 @@ Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools
 
 | [**Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools)
 | [**Authors**](https://github.com/ORTools4MTEX/ORTools#authors)
+| [**Contributors**](https://github.com/ORTools4MTEX/ORTools#contributors)
 | [**How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools)
 | [**How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools)
 | [**ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts)
@@ -43,6 +44,11 @@ To help maintain the **ORTools** library, please report any bugs you encounter. 
 
 ## Authors
 **ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
+
+---
+
+## Contributors
+Child grain block width calculator - [**Dr Tuomo Nyyssönen**](https://www.researchgate.net/profile/Tuomo-Nyyssoenen)
 
 ---
 
