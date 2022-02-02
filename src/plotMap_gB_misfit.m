@@ -44,14 +44,14 @@ misfit_c2c = angle_outer(gB_c2c.misorientation,c2c_variants);
 
 
 if ~isempty(gB)
-    %% Plot the OR boundary probability distribution map
+    %% Plot the OR boundary disorientation (or misfit) distribution map
     f = figure;
     plot(job.grains, 'grayscale');
     hold on
     % Plot the GBs in black
     plot(job.grains.boundary,'LineColor','k','displayName','GBs',varargin{:});
     hold on
-    % Plot the p2c and c2c boundary probabilities
+    % Plot the p2c and c2c boundary disorientation (or misfit)
     if ~isempty(gB_p2c)
         plot(gB_p2c,misfit_p2c./degree,varargin{:});
     else
