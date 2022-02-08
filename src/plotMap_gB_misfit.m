@@ -19,6 +19,10 @@ if job.p2c == orientation.id(job.csParent,job.csChild)
     warning('Orientation relationship is (0,0,0). Initialize ''job.p2c''!');
     return
 end
+
+%% Define the text output format as Latex
+setLabels2Latex
+
 %% Compute the p2c and c2c boundary disorientation (misfits)
 gB = job.grains.boundary;
 % Compute all parent-child grain boundaries
