@@ -13,6 +13,9 @@ function plotMap_gB_c2c(job,varargin)
 
 cmap = get_option(varargin,'colormap','jet');
 
+%% Define the text output format as Latex
+setLabels2Latex
+
 gB_c2c = job.grains.boundary(job.csChild.mineral,job.csChild.mineral);
 if ~isempty(gB_c2c)
     %% Plot the child-child misorientation distribution map
