@@ -32,7 +32,8 @@ elseif check_option(varargin,'parent')
     varargin(find_option(varargin,'parent'))=[];
 end
 
-
+%% Define the text output format as Latex
+setLabels2Latex
 
 %% Define the window settings for a set of docked figures
 %Check if docked figure is needed
