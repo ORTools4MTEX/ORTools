@@ -13,6 +13,9 @@ function plotMap_variants(job, varargin)
 
 cmap = get_option(varargin,'colormap','jet');
 
+%% Define the text output format as Latex
+setLabels2Latex
+
 p2c_V = job.p2c.variants;
 p2c_V = p2c_V(:);
 c2c_variants = job.p2c * inv(p2c_V);
