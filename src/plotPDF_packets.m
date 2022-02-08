@@ -20,6 +20,9 @@ pdf = getClass(varargin,'Miller',Miller(0,0,1,job.csChild,'hkl'));
 cmap = get_option(varargin,'colormap','jet');
 msz = get_option(varargin,'markersize',6);
 
+%% Define the text output format as Latex
+setLabels2Latex
+
 % Compute the disorientation from the nominal OR
 p2c_V = job.p2c.variants;
 p2c_V = p2c_V(:);
