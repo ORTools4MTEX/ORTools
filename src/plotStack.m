@@ -42,6 +42,9 @@ hParent = Miller(0,0,1,job.csParent,'hkl');
 maxVariants = length(job.p2c.variants);
 maxPackets = max(job.packetId);
 
+%% Define the text output format as Latex
+setLabels2Latex
+
 %% Define the window settings for a set of docked figures
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
 warning off
@@ -408,19 +411,22 @@ h.FaceColor =[162 20 47]./255;
 set(gca,'FontSize',14);
 set(gca,'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
 set(gca,'XTick',class_range);
-xlabel('Variant Id','FontSize',14,'FontWeight','bold');
+xlabel('\bf Variant Id','FontSize',14);
+% xlabel('Variant Id','FontSize',14,'FontWeight','bold');
 if size(class_range,2)>1; class_range = class_range'; end
 if size(abs_counts,2)>1; abs_counts = abs_counts'; end
 if size(norm_counts,2)>1; norm_counts = norm_counts'; end
 if check_option(varargin,'grains')
-    ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
+    ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]','FontSize',14);
+%     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Weighted area variant Ids','NumberTitle','on');
     % % Output histogram data in a table
     screenPrint('Step',['Figure ',num2str(figH.Number),': variantId weighted area histogram']);
     %     table(class_range,abs_counts,'VariableNames',{'variantId','wtAreaCounts'})
     table(class_range,norm_counts,'VariableNames',{'variantId','wtAreaFreq'})
 else
-    ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+    ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
+%     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Relative frequency variant Ids','NumberTitle','on');
     % % Output histogram data in a table
     screenPrint('Step',['Figure ',num2str(figH.Number),': variantId histogram']);
@@ -447,19 +453,22 @@ h.FaceColor =[162 20 47]./255;
 set(gca,'FontSize',14);
 set(gca,'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
 set(gca,'XTick',class_range);
-xlabel('Variant Id','FontSize',14,'FontWeight','bold');
+xlabel('\bf Variant Id','FontSize',14);
+% xlabel('Variant Id','FontSize',14,'FontWeight','bold');
 if size(class_range,2)>1; class_range = class_range'; end
 if size(abs_counts,2)>1; abs_counts = abs_counts'; end
 if size(norm_counts,2)>1; norm_counts = norm_counts'; end
 if check_option(varargin,'grains')
-    ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
+    ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]','FontSize',14);
+%     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
     % % Output histogram data in a table
     screenPrint('Step',['Figure ',num2str(figH.Number),': packetId weighted area histogram']);
     %     table(class_range,abs_counts,'VariableNames',{'packetId','wtAreaCounts'})
     table(class_range,norm_counts,'VariableNames',{'packetId','wtAreaFreq'})
 else
-    ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+    ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
+%     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Relative frequency packet Ids','NumberTitle','on');
     % % Output histogram data in a table
     screenPrint('Step',['Figure ',num2str(figH.Number),': packetId histogram']);
@@ -557,8 +566,10 @@ if check_option(varargin,'grains')
     set(gca,'FontSize',14);
     set(gca,'xlim',[0 class_range(end)+0.5]);
     set(gca,'XTick',0:0.5:class_range(end)+0.5);
-    xlabel('Martensite block width [\mum]','FontSize',14,'FontWeight','bold');
-    ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+    xlabel('\bf Martensite block width [$\bf \mu$m]','FontSize',14,'FontWeight','bold');
+%     xlabel('Martensite block width [\mum]','FontSize',14,'FontWeight','bold');
+        ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
+%     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Martensite block width','NumberTitle','on');
     screenPrint('Step',['Figure ',num2str(figH.Number),': martensite block width histogram']);
     drawnow;
