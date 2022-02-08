@@ -20,6 +20,9 @@ if grainsMerged.length == job.grains.length
     warning('Run method ''clusterGraph'' first to obtain clusters')
 end
 
+%% Define the text output format as Latex
+setLabels2Latex
+
 f = figure;
 ipfKey = ipfHSVKey(job.ebsd(job.csChild));
 ipfKey.inversePoleFigureDirection = vector;
