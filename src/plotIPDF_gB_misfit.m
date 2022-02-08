@@ -41,6 +41,8 @@ if ~isempty(gB_c2c)
     [misfit_c2c,~] = min(misfit_c2c,[],2);
 end
 
+%% Define the text output format as Latex
+setLabels2Latex
 
 
 %% Define the window settings for a set of docked figures
