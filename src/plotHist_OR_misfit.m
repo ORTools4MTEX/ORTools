@@ -31,6 +31,8 @@ if isempty(p2c)
     return;
 end
 
+%% Define the text output format as Latex
+setLabels2Latex
 
 %% Define the window settings for a set of docked figures
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
@@ -144,12 +146,15 @@ end
 
 grid on
 legend
-ylabel('Relative frequency ({\itf}(g))','FontSize',14);
+% ylabel('Relative frequency ({\itf}(g))','FontSize',14);
+ylabel('\bf Relative frequency [$\bf f$(g)]');
 if strcmp(pairType,'p2c')==1
-    xlabel('Parent-child grain disorientation (°)','FontSize',14);
+%     xlabel('Parent-child grain disorientation [°]','FontSize',14);
+    xlabel('\bf Parent-child grain disorientation [$\bf ^\circ$]','FontSize',14);
     set(figH,'Name','Parent-child grain disorientation histogram','NumberTitle','on');
 elseif strcmp(pairType,'c2c')==1
-    xlabel('Child-child grain disorientation (°)','FontSize',14);
+%     xlabel('Child-child grain disorientation [°]','FontSize',14);
+    xlabel('\bf Child-child grain disorientation [$\bf ^\circ$]','FontSize',14);
     set(figH,'Name','Child-child grain disorientation histogram','NumberTitle','on');
 end
 drawnow;
