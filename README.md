@@ -110,7 +110,7 @@ In [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) the α-β Ti m
 
 ### [Example 4](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
-In this script, the reconstruction of the prior parent β microstructure from a child α microstructure is repeated as per [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) but with less detail. Examination of the variant distribution shows that strongly preferential variant selection did not occur. Therefore, the transition texture of α can be accurately predicted from the reconstructed β using the [plotPODF_transform](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transform) function. The result shows that the predicted α transition texture is in good agreement with the experimental α texture.
+In this script, the reconstruction of the prior parent β microstructure from a child α microstructure is repeated as shown in [example 2](https://github.com/ORTools4MTEX/ORTools#example-2). Examination of the variant distribution shows that strongly preferential variant selection did not occur. Therefore, the transition texture of α can be accurately predicted from the reconstructed β using the [plotPODF_transform](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transform) function. The result shows that the predicted α transition texture is in good agreement with the experimental α texture.
 
 [![ORTools - Example 4](http://img.youtube.com/vi/Yx2jKII3HUc/0.jpg)](http://www.youtube.com/watch?v=Yx2jKII3HUc "Video Title")
 
