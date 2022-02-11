@@ -482,9 +482,9 @@ drawnow;
 % % THIS SCRIPT WAS CONTRIBUTED BY: Dr Tuomo Nyyssönen
 if check_option(varargin,'grains')
     % Get all 111 vector3ds for each grain:
-    h = Miller({1,1,1},{1,-1,1},{-1,1,1},{1,1,-1},job.p2c.CS);
-    h = h(job.packetId(job.mergeId == pGrainId))';
-    z = pGrain.meanOrientation.project2FundamentalRegion.*h;
+    hh = Miller({1,1,1},{1,-1,1},{-1,1,1},{1,1,-1},job.p2c.CS);
+    hh = hh(job.packetId(job.mergeId == pGrainId))';
+    zz = pGrain.meanOrientation.project2FundamentalRegion.*hh;
     
     % figH = gobjects(1);
     % figH = figure('WindowStyle','docked');
@@ -510,7 +510,7 @@ if check_option(varargin,'grains')
     % % Using the function at the bottom of this script, all grain boundary
     % % points of a grain are projected to a vector going through the center of
     % % that grain:
-    [p,~,~] = projectPoints2Vector(cGrains,rotate(cross(z,zvector),...
+    [p,~,~] = projectPoints2Vector(cGrains,rotate(cross(zz,zvector),...
         rotation.byAxisAngle(zvector,90*degree)));
     
     % % A representative value for the average halfwidth could be the mean of
@@ -518,14 +518,14 @@ if check_option(varargin,'grains')
     new_A = cellfun(@abs,p,'UniformOutput',false);
     new_A = cellfun(@mean,new_A);
     % % Vector form for visual verification:
-    new_A_vec = rotate(cross(z,zvector),rotation.byAxisAngle(zvector,90*degree));
+    new_A_vec = rotate(cross(zz,zvector),rotation.byAxisAngle(zvector,90*degree));
     new_A_vec = normalize(new_A_vec).*new_A';
     new_A_vec.antipodal = 1;
     
     % % Calculate the block widths again and plot to visually verify
     % % what the width perpendicular to the {111} trace looks like:
     % % Calculate the assumed block width:
-    d_block_new = 2*new_A'.*sin(z.theta);
+    d_block_new = 2*new_A'.*sin(zz.theta);
     
     % % Plot the grains along with their traces and normals
     figH = gobjects(1);
@@ -534,8 +534,8 @@ if check_option(varargin,'grains')
     drawnow;
     [~,mP] = plot(cGrains,d_block_new);
     hold all
-    ha(1) = quiver(cGrains,cross(z,zvector),'linecolor','r');
-    ha(2) = quiver(cGrains,z,'linecolor','g');
+    ha(1) = quiver(cGrains,cross(zz,zvector),'linecolor','r');
+    ha(2) = quiver(cGrains,zz,'linecolor','g');
     ha(3) = quiver(cGrains,new_A_vec,'linecolor','b');
     legend(ha,'111a || 011m trace','111a || 011m normal','Mean of projected points')
     hold off
