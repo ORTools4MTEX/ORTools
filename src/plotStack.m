@@ -478,6 +478,15 @@ end
 drawnow;
 
 
+%% Plot block IDs / variant pairing
+% Block definitions according to 
+% [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to
+% identify martensite and bainite, Mater. Today Proc., Volume 2,
+% Supplement 3, 2015, Pages S913-S916,
+% https://doi.org/10.1016/j.matpr.2015.07.430]
+if check_option(varargin,'grains')
+    plotMap_variantPairing(cGrains,cEBSD,'linewidth',1.5);
+end
 %% Plot martensite block widths
 % % THIS SCRIPT WAS CONTRIBUTED BY: Dr Tuomo Nyyssönen
 if check_option(varargin,'grains')

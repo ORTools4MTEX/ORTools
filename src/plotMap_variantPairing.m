@@ -1,4 +1,4 @@
-function variantPairs_boundary = plotMap_variantPairs(variantGrains,ebsdC,varargin)
+function variantPairs_boundary = plotMap_variantPairing(variantGrains,ebsdC,varargin)
 % Plot pairs of martensitic variants (block boundaries) in steel
 % microstructures as per the analysis in the following reference:
 % [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to

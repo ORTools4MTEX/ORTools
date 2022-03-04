@@ -179,7 +179,8 @@ saveImage(Ini.imagePath);
 grainClick(job,'noScalebar','noFrame'); %Plot EBSD data
 
 %% Do the same at the grain level 
-% This includes the block width calculator - valid for martensitic steels
+% This includes the variant pairing map (only useful after having refined
+% to laths!) and the block width calculator - valid for martensitic steels
 grainClick(job,'grains','noFrame'); %Plot grain data
 
 %% Refine gamma twins by clicking on gamma grains
