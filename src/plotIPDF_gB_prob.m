@@ -26,6 +26,9 @@ if job.p2c == orientation.id(job.csParent,job.csChild)
     return
 end
 
+%% Define the text output format as Latex
+setLabels2Latex
+
 %% Compute the p2c and c2c boundary probabilities
 % Find all grain pairs
 grainPairs = neighbors(job.grains);
