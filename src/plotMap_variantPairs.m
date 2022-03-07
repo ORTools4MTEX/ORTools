@@ -1,4 +1,4 @@
-function variantPairs_boundary = plotMap_variantPairing(variantGrains,ebsdC,varargin)
+function variantPairs_boundary = plotMap_variantPairs(variantGrains,ebsdC,varargin)
 % Plot pairs of martensitic variants (block boundaries) in steel
 % microstructures as per the analysis in the following reference:
 % [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to
@@ -54,16 +54,18 @@ end
 %% Define the text output format as Latex
 setLabels2Latex
 
-%% Define the window settings for a set of docked figures
-% % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
-warning off
-desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% % Define a unique group name for the dock using the function name
-% % and the system timestamp
-dockGroupName = ['plotMap_variantPairs_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
-desktop.setGroupDocked(dockGroupName,0);
-bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
-
+% %% Define the window settings for a set of docked figures
+% % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+% warning off
+% desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+% % % Define a unique group name for the dock using the function name
+% % % and the system timestamp
+% dockGroupName = ['plotMap_variantPairs_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+% desktop.setGroupDocked(dockGroupName,0);
+% bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+if exist('dockGroupName','var')==1
+    disp('FUCK YAH!')
+end
 
 %% Plot a map of variant pairs
 % Plot the boundaries
@@ -71,6 +73,7 @@ colors = {'r','g','b','k'};
 try data = ebsdC.bc;
 catch data = ebsdC.imagequality;
 end
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -94,6 +97,7 @@ drawnow;
 for ii = 1:size(cond,1)
     variantPairs_boundaryFraction(ii) = sum(variantPairs_boundary{ii}.segLength)/sum(variantBoundary(any(cond)).segLength);
 end
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -111,6 +115,7 @@ mapArea = prod(ebsdC.gridify.size.*[ebsdC.gridify.dx,ebsdC.gridify.dy]);
 for ii = 1:size(cond,1)
     variantPairs_boundaryFraction(ii) = sum(variantPairs_boundary{ii}.segLength)/mapArea;
 end
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
