@@ -95,6 +95,7 @@ end
 % Plot the grain pair disorientation
 % Define the graphics object array
 warning off;
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
