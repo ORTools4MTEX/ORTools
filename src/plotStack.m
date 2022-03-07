@@ -58,6 +58,7 @@ bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 
 
 %% Plot the parent phase map
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -81,6 +82,7 @@ drawnow;
 
 
 %% Plot the child phase map
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -106,6 +108,7 @@ drawnow;
 
 
 %% Plot the parent IPF map
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -130,6 +133,7 @@ drawnow;
 
 
 %% Plot the child IPF map
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -156,6 +160,7 @@ drawnow;
 
 
 %% Plot the child variant map
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -190,6 +195,7 @@ drawnow;
 
 
 %% Plot the child packet map
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -224,6 +230,7 @@ drawnow;
 
 
 %% Plot the parent orientation PDF
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -247,6 +254,7 @@ drawnow;
 
 
 %% Plot the ideal child variant PDF
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -257,6 +265,7 @@ drawnow;
 
 
 %% Plot the ideal child packet PDF
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -267,6 +276,7 @@ drawnow;
 
 
 %% Plot the ideal parent PDF
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -277,6 +287,7 @@ drawnow;
 
 
 %% Plot the child variant PDF
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -306,6 +317,7 @@ drawnow;
 
 
 %% Plot the child packet PDF
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -335,6 +347,7 @@ drawnow;
 
 
 %% Plot the child variant IPDF
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -365,6 +378,7 @@ drawnow;
 
 
 %% Plot the child packet IPDF
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -395,6 +409,7 @@ drawnow;
 
 
 %% Plot the weighted area variant Id frequency histogram
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -437,6 +452,7 @@ drawnow;
 
 
 %% Plot the weighted area packet Id frequency histogram
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -484,9 +500,12 @@ drawnow;
 % identify martensite and bainite, Mater. Today Proc., Volume 2,
 % Supplement 3, 2015, Pages S913-S916,
 % https://doi.org/10.1016/j.matpr.2015.07.430]
-if check_option(varargin,'grains')
-    plotMap_variantPairing(cGrains,cEBSD,'linewidth',1.5);
-end
+% if check_option(varargin,'grains')
+%     plotMap_variantPairing(cGrains,cEBSD,'linewidth',1.5);
+% end
+% drawnow;
+
+
 %% Plot martensite block widths
 % % THIS SCRIPT WAS CONTRIBUTED BY: Dr Tuomo Nyyssönen
 if check_option(varargin,'grains')
@@ -495,6 +514,7 @@ if check_option(varargin,'grains')
     hh = hh(job.packetId(job.mergeId == pGrainId))';
     zz = pGrain.meanOrientation.project2FundamentalRegion.*hh;
     
+	% drawnow;
     % figH = gobjects(1);
     % figH = figure('WindowStyle','docked');
     % set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -537,7 +557,8 @@ if check_option(varargin,'grains')
     d_block_new = 2*new_A'.*sin(zz.theta);
     
     % % Plot the grains along with their traces and normals
-    figH = gobjects(1);
+    drawnow;
+	figH = gobjects(1);
     figH = figure('WindowStyle','docked');
     set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
     drawnow;
@@ -546,7 +567,7 @@ if check_option(varargin,'grains')
     ha(1) = quiver(cGrains,cross(zz,zvector),'linecolor','r');
     ha(2) = quiver(cGrains,zz,'linecolor','g');
     ha(3) = quiver(cGrains,new_A_vec,'linecolor','b');
-    legend(ha,'111a || 011m trace','111a || 011m normal','Mean of projected points')
+    legend(ha,'$111_a {\parallel} 011_m$ trace','$111_a {\parallel} 011_m$ normal','Mean of projected points')
     hold off
     % Define the maximum number of color levels and plot the colorbar
     colormap(flipud(bone));
@@ -563,7 +584,8 @@ if check_option(varargin,'grains')
     drawnow;
     
     % % Plot the martensite block width histogram
-    figH = gobjects(1);
+    drawnow;
+	figH = gobjects(1);
     figH = figure('WindowStyle','docked');
     set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
     drawnow;
