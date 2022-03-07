@@ -1,8 +1,6 @@
 ## ANNOUNCEMENTS
 
-**[Example 7](./ORTools_example7.m)**
-
-*Update to Example 1*
+** NEW [Example 7](./ORTools_example7.m)**
 
 Parent grain reconstruction using the new variant graph approach and advanced variant analysis in lath martensitic steel
 
