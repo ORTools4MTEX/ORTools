@@ -54,18 +54,16 @@ end
 %% Define the text output format as Latex
 setLabels2Latex
 
-% %% Define the window settings for a set of docked figures
-% % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
-% warning off
-% desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% % % Define a unique group name for the dock using the function name
-% % % and the system timestamp
-% dockGroupName = ['plotMap_variantPairs_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
-% desktop.setGroupDocked(dockGroupName,0);
-% bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
-if exist('dockGroupName','var')==1
-    disp('FUCK YAH!')
-end
+%% Define the window settings for a set of docked figures
+% % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+warning off
+desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+% % Define a unique group name for the dock using the function name
+% % and the system timestamp
+dockGroupName = ['plotMap_variantPairs_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+desktop.setGroupDocked(dockGroupName,0);
+bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+
 
 %% Plot a map of variant pairs
 % Plot the boundaries
