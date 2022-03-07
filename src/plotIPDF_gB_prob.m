@@ -86,6 +86,7 @@ bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 
 
 %% Axis plot for parent grains using parent-child boundaries
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -123,6 +124,7 @@ drawnow;
 
 
 %% Axis plot for child grains using parent-child boundaries
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -160,6 +162,7 @@ drawnow;
 
 
 %% Axis plot for child grains using child-child boundaries
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
