@@ -1,6 +1,6 @@
 
 % *********************************************************************
-%             ORTools - Example 1 - Variant Graph Approach
+%             ORTools - Example 7
 % *********************************************************************
 % Reconstructing the prior austenite microstructure from lath martensite
 % with the variant graph approach and analyzing variant pairing
