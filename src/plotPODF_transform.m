@@ -139,6 +139,7 @@ bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 
 
 %% Plot the parent pole figures
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -163,6 +164,7 @@ odfP.SS = specimenSymmetry('orthorhombic');
 %---
 
 %% Plot the parent orientation distribution function
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -187,6 +189,7 @@ drawnow;
 
 
 %% Plot the child pole figures
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
@@ -218,6 +221,7 @@ odfC.SS = specimenSymmetry('orthorhombic');
 
 
 %% Plot the child orientation distribution function
+drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
