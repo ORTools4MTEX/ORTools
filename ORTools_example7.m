@@ -167,11 +167,10 @@ plot(variant_grains,variant_grains.variantId);
 %We see that all the variant detail of the variantId's in the EBSD map are
 %not also present on grain level. This allows us to analyze the boundaries
 %between variants:
-variant_boundaries = plotMap_variantPairing(variant_grains,ebsdC,'linewidth',1.5);
+variant_boundaries = plotMap_variantPairs(variant_grains,ebsdC,'linewidth',1.5);
 %In theory one could use the reindexed grains to redo the parent grain
 %reconstruction based on these grains. This does however not lead to a
-%significantly better reconstruction (in the present dataset)
-
+%significantly better reconstruction (in the present datas
 %% Save images
 saveImage(Ini.imagePath);
 
