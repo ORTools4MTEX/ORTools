@@ -58,7 +58,8 @@ end
 %% Parent map
 if ~isempty(job.ebsd(job.csParent)) && ~onlyChild
     if plot2tab
-        figH = gobjects(1);
+        drawnow;
+		figH = gobjects(1);
         figH = figure('WindowStyle','docked');
         set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
         drawnow;
@@ -82,7 +83,8 @@ end
 % Child map
 if ~isempty(job.ebsd(job.csChild)) && ~onlyParent
     if plot2tab
-        figH = gobjects(1);
+        drawnow;
+		figH = gobjects(1);
         figH = figure('WindowStyle','docked');
         set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
         drawnow;
