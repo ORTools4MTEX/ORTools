@@ -168,9 +168,10 @@ plot(variant_grains,variant_grains.variantId);
 %not also present on grain level. This allows us to analyze the boundaries
 %between variants:
 variant_boundaries = plotMap_variantPairs(variant_grains,ebsdC,'linewidth',1.5);
-%In theory one could use the reindexed grains to redo the parent grain
+%In theory, one could use the reindexed grains to redo the parent grain
 %reconstruction based on these grains. This does however not lead to a
-%significantly better reconstruction (in the present datas
+%significantly better reconstruction in the present dataset.
+
 %% Save images
 saveImage(Ini.imagePath);
 
