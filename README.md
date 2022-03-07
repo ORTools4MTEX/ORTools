@@ -78,14 +78,6 @@ It is possible to run the example scripts from start to end, but we encourage yo
 
 ---
 
-### [Example 1 VGA](./ORTools_example1_VGA.m)
-#### Updated example 1: Parent grain reconstruction using the variant graph approach and advanced variant analysis in lath martensitic steel
-This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains using the **variant graph approach** in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) for martensite transformation in steels. Compared to the original [example 1](./ORTools_example1.m), this later version also features variant pairing analysis and measurement of the block width. The foundation of the variant graph approach is described in this [research paper](https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction).
-
-*A new video on this example will follow shortly*
-
----
-
 ### [Example 1](./ORTools_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains using the **grain graph approach** in the official [MTEX example](https://mtex-toolbox.github.io/GrainGraphBasedReconstruction.html) for martensite transformation in steels. The functionality of **ORTools** in providing pre-written and additional plotting functions to create publication-ready plots is demonstrated.
@@ -147,6 +139,16 @@ This example is of a 10% cold-rolled twinning and transformation induced plastic
 [![ORTools - Example 6](http://img.youtube.com/vi/K2rO3Mx4A8s/0.jpg)](http://www.youtube.com/watch?v=K2rO3Mx4A8s "Video Title")
 
 [*Example 6 - Two-stage parent grain reconstruction in a TWIP-TRIP steel*](https://youtu.be/K2rO3Mx4A8s)
+
+---
+
+### [Example 7](./ORTools_example7.m)
+#### Update to Example 1: Parent grain reconstruction using the variant graph approach and advanced variant analysis in lath martensitic steel
+This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) to demonstrate the reconstruction of parent austenite grains from child lath martensite using the new **variant graph approach**. Compared to the original [example 1](./ORTools_example1.m), this updated version also features equivalent variant pair analysis and the measurement of lath block widths. 
+
+The details related to the variant graph approach are described in this [research paper](https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction) currently under review.
+
+*A new video on this example will follow shortly*
 
 ---
 
