@@ -46,7 +46,7 @@ To help maintain the **ORTools** library, please report any bugs you encounter. 
 ---
 
 ## Contributors
-[**Dr Tuomo Nyyssönen**](https://www.researchgate.net/profile/Tuomo-Nyyssoenen) - Martensite block width calculator
+[**Dr Tuomo Nyyssönen**](https://www.researchgate.net/profile/Tuomo-Nyyssoenen) - Lath martensite block width calculator
 
 ---
 
