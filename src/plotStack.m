@@ -564,9 +564,9 @@ if check_option(varargin,'grains')
     drawnow;
     [~,mP] = plot(cGrains,d_block_new);
     hold all
-    ha(1) = quiver(cGrains,cross(zz,zvector),'color',[1 0 0]);
-    ha(2) = quiver(cGrains,zz,'color',[0 1 0]);
-    ha(3) = quiver(cGrains,new_A_vec,'color', [0 0 1]);
+    ha(1) = quiver(squeeze(cGrains),squeeze(cross(zz,zvector)),'color',[1 0 0]);
+    ha(2) = quiver(squeeze(cGrains),squeeze(zz),'color',[0 1 0]);
+    ha(3) = quiver(squeeze(cGrains),squeeze(new_A_vec),'color', [0 0 1]);
     legend(ha,'$111_a {\parallel} 011_m$ trace','$111_a {\parallel} 011_m$ normal','Mean of projected points')
     hold off
     % Define the maximum number of color levels and plot the colorbar
