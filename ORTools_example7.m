@@ -161,9 +161,9 @@ plotMap_variants(job,'linewidth',3); %EBSD data
 [variant_grains,ebsdC] = computeVariantGrains(job);
 %Compare variant indexing for old and new grains
 figure; %Old grains
-plot(job.transformedGrains,job.transformedGrains.variantId);
+plot(grains,grains.meanOrientation);
 figure; %New grains
-plot(variant_grains,variant_grains.variantId);
+plot(variant_grains,variant_grains.meanOrientation);
 %We see that all the variant detail of the variantId's in the EBSD map are
 %not also present on grain level. This allows us to analyze the boundaries
 %between variants:
@@ -182,6 +182,9 @@ grainClick(job,'noScalebar','noFrame'); %Plot EBSD data
 % This includes the variant pairing map (only useful after having refined
 % to laths!) and the block width calculator - valid for martensitic steels
 grainClick(job,'grains','noFrame'); %Plot grain data
+
+%% Show variant pairs by clicking on gamma grains
+grainClick(job,'variantPairs','linewidth',2);
 
 %% Refine gamma twins by clicking on gamma grains
 grainClick(job,'parentTwins');

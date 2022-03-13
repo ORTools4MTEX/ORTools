@@ -13,9 +13,14 @@ function variantPairs_boundary = plotMap_variantPairs(variantGrains,ebsdC,vararg
 %  variantGrains - @grains2D (this variable needs to contain the variantId's)
 %  ebsdC         - %EBSD Child EBSD data
 %
+%  Option
+%  varargin      - Parent grain boundary to plot (mostly for use with
+%                  "plotStack"
+%
 % Output
 %  variantPairs_boundary - a structure variable containing 4 groups of
 %  variant pair boundaries
+
 
 
 %% Determine the variant pairs
@@ -68,9 +73,7 @@ bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 %% Plot a map of variant pairs
 % Plot the boundaries
 colors = {'r','g','b','k'};
-try data = ebsdC.bc;
-catch data = ebsdC.imagequality;
-end
+
 drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
@@ -85,6 +88,9 @@ for ii = 1:size(cond,1)
     plot(variantPairs_boundary{ii},'linecolor',colors{ii},'DisplayName',xlabelString{ii},varargin{:});
     hold all;
 end
+
+parentGB = getClass(varargin,"grainBoundary",grainBoundary);
+plot(parentGB,varargin{:},'linecolor',[0.45 0.45 0.45])
 hold off
 legend
 drawnow;
