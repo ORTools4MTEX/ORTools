@@ -90,7 +90,9 @@ for ii = 1:size(cond,1)
 end
 
 parentGB = getClass(varargin,"grainBoundary",grainBoundary);
-plot(parentGB,varargin{:},'linecolor',[0.45 0.45 0.45])
+if ~isempty(parentGB)
+    plot(parentGB,varargin{:},'linecolor',[0.45 0.45 0.45])
+end
 hold off
 legend
 drawnow;
