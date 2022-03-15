@@ -39,7 +39,7 @@ The **ORTools** function library is written in [**MATLAB**](https://mathworks.co
 
 The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/ORTools4MTEX/ORTools#example-scripts) that showcase how the functions work and what their output comprises. 
 
-To help maintain the **ORTools** library, please report any bugs you encounter. If you would like to contribute additional functionality or wish to suggest new features that help improve it, please contact us.
+To help maintain the **ORTools** library, please report any bugs you encounter. If you would like to contribute additional functionalities or wish to suggest new features that help improve it, please contact us.
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
