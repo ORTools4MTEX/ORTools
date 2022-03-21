@@ -103,24 +103,24 @@ setappdata(mP.ax,'grains',[pGrains]);
         if pGrain_select.isIndexed
             txt{4} = ['Euler = ' char(pGrain_select.meanOrientation,'nodegree')];
         end
-
         
         
         for k = 1:length(txt)
             disp(txt{k});
         end
-        % Plot the user-defined stack of plots
-        if ~isempty(varargin) && any(strcmp(varargin,'parentTwins'))
+        % Plot the user-defined type of plots or plot stack
+        if ~isempty(varargin) && any(strcmpi(varargin,'parentTwins'))
             detectParentTwins(job,unique(pGrain_select.id),varargin{:});
-        elseif ~isempty(varargin) && any(strcmp(varargin,'variantPairs'))
-            clusterGrains = job.grainsPrior(job.mergeId == pGrain_select.id);
-            cGrains = clusterGrains(job.csChild);
-            pEBSD = job.ebsd(pGrain_select);
-            pEBSD = pEBSD(job.csParent);
-            cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
-            plotMap_variantPairs(cGrains,cEBSD,pGrain_select.boundary,varargin{:});
+            
+        elseif ~isempty(varargin) && any(strcmpi(varargin,'variantPairs'))
+            plotMap_variantPairs(job,'parentId',unique(pGrain_select.id),varargin{:});
+            
+        elseif ~isempty(varargin) && any(strcmpi(varargin,'blockWidths'))
+            plotMap_blockWidths(job,'parentId',unique(pGrain_select.id),varargin{:});
+            
         elseif any(job.isTransformed(job.mergeId == pGrain_select.id))
             plotStack(job,unique(pGrain_select.id),varargin{:});
+            
         else
             f = msgbox('Choose a reconstructed parent grain (within the thick boundaries)', 'Error','warn');
             uiwait(f);
