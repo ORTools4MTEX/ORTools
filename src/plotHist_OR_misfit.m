@@ -103,12 +103,12 @@ drawnow;
 
 c = ind2color(1:length(p2c));
 for ii = 1:length(p2c)
-    if strcmp(pairType,'p2c')==1
+    if strcmpi(pairType,'p2c')==1
         omegaTemp = angle_outer(moriSub,p2c(ii));
-    elseif strcmp(pairType,'c2c')==1
+    elseif strcmpi(pairType,'c2c')==1
         c2c = p2c(ii) * inv(p2c(ii).variants);
         omegaTemp = angle_outer(moriSub,c2c);
-    elseif strcmp(pairType,'')==1
+    elseif strcmpi(pairType,'')==1
         warning('Grain pair type not specified)');
         return
     end
@@ -124,9 +124,9 @@ for ii = 1:length(p2c)
     hold on;
 %     % % Output histogram data in a table
 %     figProp = get(groot,'CurrentFigure');
-%     if strcmp(pairType,'p2c')==1
+%     if strcmpi(pairType,'p2c')==1
 %         screenPrint('Step',['Figure ',num2str(figProp.Number),', Histogram ',num2str(ii),': p2c']);
-%     elseif strcmp(pairType,'c2c')==1
+%     elseif strcmpi(pairType,'c2c')==1
 %         screenPrint('Step',['Figure ',num2str(figProp.Number),', Histogram ',num2str(ii),': c2c']);
 %     end
 %     table(binCenters(ii,:)'./degree,countsNorm(ii,:)','VariableNames',{'binCenters','Freq'})
@@ -149,11 +149,11 @@ grid on
 legend
 % ylabel('Relative frequency ({\itf}(g))','FontSize',14);
 ylabel('\bf Relative frequency [$\bf f$(g)]');
-if strcmp(pairType,'p2c')==1
+if strcmpi(pairType,'p2c')==1
 %     xlabel('Parent-child grain disorientation [°]','FontSize',14);
     xlabel('\bf Parent-child grain disorientation [$\bf ^\circ$]','FontSize',14);
     set(figH,'Name','Parent-child grain disorientation histogram','NumberTitle','on');
-elseif strcmp(pairType,'c2c')==1
+elseif strcmpi(pairType,'c2c')==1
 %     xlabel('Child-child grain disorientation [°]','FontSize',14);
     xlabel('\bf Child-child grain disorientation [$\bf ^\circ$]','FontSize',14);
     set(figH,'Name','Child-child grain disorientation histogram','NumberTitle','on');
