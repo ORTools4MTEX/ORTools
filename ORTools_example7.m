@@ -158,19 +158,21 @@ plotMap_variants(job,'linewidth',3); %EBSD data
 % to be reconstructed to grains
 
 %% Variant pairing (block boundary) analysis
-[variant_grains,ebsdC] = computeVariantGrains(job);
+[variantGrains,ebsdC] = computeVariantGrains(job);
 %Compare variant indexing for old and new grains
 figure; %Old grains
 plot(grains,grains.meanOrientation);
 figure; %New grains
-plot(variant_grains,variant_grains.meanOrientation);
-%We see that all the variant detail of the variantId's in the EBSD map are
-%not also present on grain level. This allows us to analyze the boundaries
-%between variants:
-variant_boundaries = plotMap_variantPairs(variant_grains,ebsdC,'linewidth',1.5);
-%In theory, one could use the reindexed grains to redo the parent grain
-%reconstruction based on these grains. This does however not lead to a
-%significantly better reconstruction in the present dataset.
+plot(variantGrains,variantGrains.meanOrientation);
+% We see that all the variant detail of the variantIds in the EBSD map are
+% absent at the grain level. This allows us to analyze the boundaries
+% between variants.
+variantBoundaries = plotMap_variantPairs(job,'linewidth',1.5);
+% We can also analyze and plot the same for individual grains.
+variantBoundaries = plotMap_variantPairs(job,'parentid',188,'linewidth',2);
+% In theory, one could use the reindexed grains to redo the parent grain
+% reconstruction based on these grains. This does however not lead to a
+% significantly better reconstruction in the present dataset.
 
 %% Save images
 saveImage(Ini.imagePath);
