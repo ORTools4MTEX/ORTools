@@ -20,8 +20,8 @@ function variantPairs_boundary = plotMap_variantPairs(job,varargin)
 %  variant pair boundaries
 
 
-if ~isempty(varargin) && any(strcmpi(varargin,'parentId'))
-    pGrainId = varargin{find(strcmpi('parentId',varargin)==1)+1};
+if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
+    pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
     
     %% Define the parent grain
     pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
@@ -108,7 +108,7 @@ for ii = 1:size(cond,1)
     hold all;
 end
 
-if ~isempty(varargin) && any(strcmpi(varargin,'parentId'))
+if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     plot(pGrain.boundary,varargin{:},'linecolor',[0.45 0.45 0.45])
 end
 hold off
