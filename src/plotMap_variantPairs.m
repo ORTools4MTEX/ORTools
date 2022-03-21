@@ -1,4 +1,4 @@
-function variantPairs_boundary = plotMap_variantPairs(variantGrains,ebsdC,varargin)
+function variantPairs_boundary = plotMap_variantPairs(job,varargin)
 % Plot pairs of martensitic variants (block boundaries) in steel
 % microstructures as per the analysis in the following reference:
 % [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to
@@ -7,20 +7,39 @@ function variantPairs_boundary = plotMap_variantPairs(variantGrains,ebsdC,vararg
 % https://doi.org/10.1016/j.matpr.2015.07.430]
 %
 % Syntax
-%  variantPairs_boundary = plotMap_variantPairs(variant_grains,ebsdC,varargin)
+%  variantPairs_boundary = plotMap_variantPairs(job,varargin)
 %
 % Input
-%  variantGrains - @grains2D (this variable needs to contain the variantId's)
-%  ebsdC         - %EBSD Child EBSD data
+%  job  - @parentGrainreconstructor
 %
 %  Option
-%  varargin      - Parent grain boundary to plot (mostly for use with
-%                  "plotStack"
+%  varargin - Parent grain to plot (mostly for use with "grainClick")
 %
 % Output
 %  variantPairs_boundary - a structure variable containing 4 groups of
 %  variant pair boundaries
 
+
+if ~isempty(varargin) && any(strcmpi(varargin,'parentId'))
+    pGrainId = varargin{find(strcmpi('parentId',varargin)==1)+1};
+    
+    %% Define the parent grain
+    pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
+    pEBSD = job.ebsd(pGrain);
+    pEBSD = pEBSD(job.csParent);
+    
+    %% Define the child grain(s)
+    clusterGrains = job.grainsPrior(job.mergeId == pGrainId);
+    cGrains = clusterGrains(job.csChild);
+    cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
+    cEBSD = cEBSD(job.csChild);
+    
+    variantGrains = cGrains;
+    ebsdC = cEBSD;
+    
+else
+    [variantGrains,ebsdC] = computeVariantGrains(job);
+end
 
 
 %% Determine the variant pairs
@@ -89,9 +108,8 @@ for ii = 1:size(cond,1)
     hold all;
 end
 
-parentGB = getClass(varargin,"grainBoundary",grainBoundary);
-if ~isempty(parentGB)
-    plot(parentGB,varargin{:},'linecolor',[0.45 0.45 0.45])
+if ~isempty(varargin) && any(strcmpi(varargin,'parentId'))
+    plot(pGrain.boundary,varargin{:},'linecolor',[0.45 0.45 0.45])
 end
 hold off
 legend
