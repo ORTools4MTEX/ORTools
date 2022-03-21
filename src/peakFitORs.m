@@ -31,7 +31,7 @@ if isempty(methodSelected)
     message = sprintf('Script terminated: Execution aborted by user');
     uiwait(warndlg(message));
     return
-elseif strcmp(methodSelected,methodTypes{3})
+elseif strcmpi(methodSelected,methodTypes{3})
     message = sprintf('Script terminated: Execution aborted by user');
     uiwait(warndlg(message));
     return
@@ -58,13 +58,13 @@ for jj = 1:numORs
         'resolution',0.25*degree,...
         'exact','silent');
     
-    if strcmp(methodSelected,methodTypes{1})
+    if strcmpi(methodSelected,methodTypes{1})
         [~,mdfCenterParent] = max(mdfParent,...
             'FundamentalRegion',...
             'resolution',0.25*degree,...
             'silent');
         
-    elseif strcmp(methodSelected,methodTypes{2})
+    elseif strcmpi(methodSelected,methodTypes{2})
         mdfCenterParent = calcModes(mdfParent,...
             'FundamentalRegion',...
             'resolution',0.25*degree,...
