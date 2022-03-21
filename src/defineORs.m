@@ -26,16 +26,16 @@ function job = defineORs(job)
 
         % This command prevents function execution in cases when
         % the user presses the 'Cancel' or 'Close' buttons
-        if isempty(loadMode) || strcmp(loadMode,methodTypes{3})
+        if isempty(loadMode) || strcmpi(loadMode,methodTypes{3})
             message = sprintf('Script terminated: Execution aborted by user');
             uiwait(warndlg(message));
             return
 
-        elseif strcmp(loadMode,'Define') || strcmp(loadMode,methodTypes{1})
+        elseif strcmpi(loadMode,'Define') || strcmpi(loadMode,methodTypes{1})
             p2c = guiOR(job);
             ORNumber = 1;
 
-        elseif strcmp(loadMode,'Peak-fit') || strcmp(loadMode,methodTypes{2})
+        elseif strcmpi(loadMode,'Peak-fit') || strcmpi(loadMode,methodTypes{2})
             % Compute the parent-child misorientation distribution histogram
             f = msgbox(['Use LEFT and RIGHT keyboard arrows to define the threshold for the peak(s)',...
                        'fitting and press enter to continue']);
