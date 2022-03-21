@@ -113,10 +113,10 @@ setappdata(mP.ax,'grains',[pGrains]);
             detectParentTwins(job,unique(pGrain_select.id),varargin{:});
             
         elseif ~isempty(varargin) && any(strcmpi(varargin,'variantPairs'))
-            plotMap_variantPairs(job,'parentId',unique(pGrain_select.id),varargin{:});
+            plotMap_variantPairs(job,'parentGrainId',unique(pGrain_select.id),varargin{:});
             
         elseif ~isempty(varargin) && any(strcmpi(varargin,'blockWidths'))
-            plotMap_blockWidths(job,'parentId',unique(pGrain_select.id),varargin{:});
+            plotMap_blockWidths(job,'parentGrainId',unique(pGrain_select.id),varargin{:});
             
         elseif any(job.isTransformed(job.mergeId == pGrain_select.id))
             plotStack(job,unique(pGrain_select.id),varargin{:});
