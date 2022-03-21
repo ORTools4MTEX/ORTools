@@ -1,5 +1,5 @@
 function plotIPDF_gB_misfit(job,varargin)
-% plot the misfit, or the disorientation, between the parent-child and
+% Plot the misfit, or the disorientation, between the parent-child and
 % child-child boundaries with the orientation relationship
 %
 % Syntax
