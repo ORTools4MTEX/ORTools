@@ -1,43 +1,31 @@
 function variantPairs_boundary = plotMap_variantPairs(job,varargin)
-% Plot pairs of martensitic variants (block boundaries) in steel
-% microstructures as per the analysis in the following reference:
-% [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to
-% identify martensite and bainite, Mater. Today Proc., Volume 2,
-% Supplement 3, 2015, Pages S913-S916,
-% https://doi.org/10.1016/j.matpr.2015.07.430]
+% % Plot pairs of martensitic variants (block boundaries) in steel
+% % microstructures as per the analysis in the following reference:
+% % [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to
+% % identify martensite and bainite, Mater. Today Proc., Volume 2,
+% % Supplement 3, 2015, Pages S913-S916,
+% % https://doi.org/10.1016/j.matpr.2015.07.430]
 %
 % Syntax
-%  variantPairs_boundary = plotMap_variantPairs(job,varargin)
+% variantPairs_boundary = plotMap_variantPairs(job,varargin)
 %
 % Input
-%  job  - @parentGrainreconstructor
+%  job          - @parentGrainreconstructor
+%  pGrainId     - parent grain Id using the argument 'parentGrainId'
 %
-%  Option
-%  varargin - Parent grain to plot (mostly for use with "grainClick")
+% Option
+%  noScalebar  - Remove scalebar from maps
+%  noFrame     - Remove frame around maps
 %
 % Output
 %  variantPairs_boundary - a structure variable containing 4 groups of
-%  variant pair boundaries
-
+% variant pair boundaries
 
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
-    
-    %% Define the parent grain
-    pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
-    pEBSD = job.ebsd(pGrain);
-    pEBSD = pEBSD(job.csParent);
-    
-    %% Define the child grain(s)
-    clusterGrains = job.grainsPrior(job.mergeId == pGrainId);
-    cGrains = clusterGrains(job.csChild);
-    cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
-    cEBSD = cEBSD(job.csChild);
-    
-    variantGrains = cGrains;
-    ebsdC = cEBSD;
-    
+    [pGrain,~,variantGrains,ebsdC] = getParentChildData(job,pGrainId);
 else
+    warning('The user has not specified the parent grain id. Equivalent variant pairs will be calculated for the EBSD map.');
     [variantGrains,ebsdC] = computeVariantGrains(job);
 end
 
@@ -102,17 +90,21 @@ drawnow;
 % setColorRange([mean(data)-2*std(data),mean(data)+2*std(data)])
 % mtexColorMap black2white
 % hold all
-xlabelString = {'V1-V2','V1-V3(V5)','V1-V6','V1-V4'};
+xlabelString = categorical({'V1-V2','V1-V3(V5)','V1-V6','V1-V4'});
 for ii = 1:size(cond,1)
-    plot(variantPairs_boundary{ii},'linecolor',colors{ii},'DisplayName',xlabelString{ii},varargin{:});
+    [~,mP] = plot(variantPairs_boundary{ii},'linecolor',colors{ii},'DisplayName',char(xlabelString(ii)),varargin{:});
     hold all;
 end
-
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
-    plot(pGrain.boundary,varargin{:},'linecolor',[0.45 0.45 0.45])
+    plot(pGrain.boundary,varargin{:},'linecolor',[0.45 0.45 0.45],varargin{:});
 end
 hold off
 legend
+set(figH,'Name','Map: Equivalent variant pair Boundaries','NumberTitle','on');
+if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+if check_option(varargin,'noFrame')
+    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+end
 drawnow;
 
 
@@ -126,12 +118,19 @@ figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
 drawnow;
-h = bar(categorical(xlabelString),variantPairs_boundaryFraction);
+h = bar(xlabelString,variantPairs_boundaryFraction);
 h.FaceColor =[162 20 47]./255;
 set(gca,'FontSize',14);
 % ylabel('Relative block boundary frequency ({\itf}(g))');
 ylabel('\bf Relative block boundary frequency [$\bf f$(g)]');
+set(figH,'Name','Histogram: Variant pair boundary fractions','NumberTitle','on');
+screenPrint('Step',['Figure ',num2str(figH.Number),': variant pair boundary fraction histogram']);
 drawnow;
+% % Output histogram data in a table
+if size(xlabelString,2)>1; xlabelString = xlabelString'; end
+if size(variantPairs_boundaryFraction,2)>1; variantPairs_boundaryFraction = variantPairs_boundaryFraction'; end
+table(xlabelString,variantPairs_boundaryFraction,'VariableNames',{'eqVariants','Freq'})
+
 
 
 %% Determine the block boundary density
@@ -149,7 +148,14 @@ h.FaceColor =[162 20 47]./255;
 set(gca,'FontSize',14);
 % ylabel(['Block boundary density [um/',ebsdC.scanUnit,'^2]'])
 ylabel('\bf Block boundary density [$\bf \mu m / \mu m^{2}$]')
+set(figH,'Name','Histogram: Variant pair boundary density','NumberTitle','on');
+screenPrint('Step',['Figure ',num2str(figH.Number),': variant pair boundary density histogram']);
+
 drawnow;
+% % Output histogram data in a table
+if size(xlabelString,2)>1; xlabelString = xlabelString'; end
+if size(variantPairs_boundaryFraction,2)>1; variantPairs_boundaryFraction = variantPairs_boundaryFraction'; end
+table(xlabelString,variantPairs_boundaryFraction,'VariableNames',{'eqVariants','Density'})
 
 
 %% Place first tabbed figure on top and return
@@ -163,4 +169,18 @@ end
 warning(bakWarn);
 pause(1); % Reduce rendering errors
 return
+end
+
+
+function [pGrain,pEBSD,cGrains,cEBSD] = getParentChildData(job,pGrainId)
+%% Define the parent grain
+pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
+pEBSD = job.ebsd(pGrain);
+pEBSD = pEBSD(job.csParent);
+
+%% Define the child grain(s)
+clusterGrains = job.grainsPrior(job.mergeId == pGrainId);
+cGrains = clusterGrains(job.csChild);
+cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
+cEBSD = cEBSD(job.csChild);
 end
