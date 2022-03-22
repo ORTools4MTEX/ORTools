@@ -109,17 +109,17 @@ setappdata(mP.ax,'grains',[pGrains]);
             disp(txt{k});
         end
         % Plot the user-defined type of plots or plot stack
-        if ~isempty(varargin) && any(strcmpi(varargin,'parentTwins'))
+        if ~isempty(varargin) && (any(strcmpi(varargin,'parentTwin')) || any(strcmpi(varargin,'parentTwins')))
             detectParentTwins(job,unique(pGrain_select.id),varargin{:});
             
-        elseif ~isempty(varargin) && any(strcmpi(varargin,'variantPairs'))
+        elseif ~isempty(varargin) && (any(strcmpi(varargin,'variantPair')) || any(strcmpi(varargin,'variantPairs')))
             plotMap_variantPairs(job,'parentGrainId',unique(pGrain_select.id),varargin{:});
             
-        elseif ~isempty(varargin) && any(strcmpi(varargin,'blockWidths'))
+        elseif ~isempty(varargin) && (any(strcmpi(varargin,'blockWidth')) || any(strcmpi(varargin,'blockWidths')))
             plotMap_blockWidths(job,'parentGrainId',unique(pGrain_select.id),varargin{:});
             
         elseif any(job.isTransformed(job.mergeId == pGrain_select.id))
-            plotStack(job,unique(pGrain_select.id),varargin{:});
+            plotStack(job,'parentGrainId',unique(pGrain_select.id),varargin{:});
             
         else
             f = msgbox('Choose a reconstructed parent grain (within the thick boundaries)', 'Error','warn');
