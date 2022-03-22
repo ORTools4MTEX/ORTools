@@ -85,7 +85,7 @@ It is possible to run the example scripts from start to end, but we encourage yo
 
 ---
 
-### [Example 7: 5 MAR 2022](./ORTools_example7.m)
+### [Example 7: 23 MAR 2022](./ORTools_example7.m)
 #### Update to Example 1: Parent grain reconstruction using the new variant graph approach and advanced variant analysis in lath martensitic steel
 This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) to demonstrate the reconstruction of parent austenite grains from child lath martensite using the new **variant graph approach**. Compared to the original [Example 1](./ORTools_example1.m), this updated version also features equivalent variant pair analysis and the measurement of lath block widths. 
 
