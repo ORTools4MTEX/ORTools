@@ -1,4 +1,4 @@
-function plotMap_blockWidths2(job,varargin)
+function plotMap_blockWidths(job,varargin)
 % % THIS SCRIPT WAS CONTRIBUTED BY: Dr Tuomo Nyyssönen
 % % This script calculates the representative value for martensite block
 % % widths by projecting all boundary points to the vector perpendicular
@@ -42,10 +42,10 @@ for ii = 1:length(pGrainId)
     %% Calculate martensite block widths
     if length(pGrainId)==1
         cGrains = clusterGrains(job.csChild);
-        [dBlock,zz,new_A_vec] = doCalc(job,pGrain,pGrainId(ii),cGrains);
+        [dBlock,zz,new_A_vec] = calcBlockWidth(job,pGrain,pGrainId(ii),cGrains);
     else
         cGrains{ii} = clusterGrains(job.csChild);
-        [dBlockNew{ii},~,~] = doCalc(job,pGrain,pGrainId(ii),cGrains{ii});
+        [dBlockNew{ii},~,~] = calcBlockWidth(job,pGrain,pGrainId(ii),cGrains{ii});
     end
     
 end
@@ -137,7 +137,7 @@ end
 
 
 
-function [d_block_new,zz,new_A_vec] = doCalc(job,pGrain,pGrainId,cGrains)
+function [d_block_new,zz,new_A_vec] = calcBlockWidth(job,pGrain,pGrainId,cGrains)
 %% Plot martensite block widths
 % if check_option(varargin,'grains')
 % Get all 111 vector3ds for each grain:
@@ -181,8 +181,6 @@ new_A_vec.antipodal = 1;
 % % Calculate the assumed block width:
 d_block_new = 2*new_A'.*sin(zz.theta);
 end
-
-
 
 function [p,px,py] = projectPoints2Vector(grains,v)
 % This function projects all grain boundary points to a vector

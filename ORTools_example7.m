@@ -176,8 +176,8 @@ variantBoundaries = plotMap_variantPairs(job,'parentGrainId',279,'linewidth',2);
 %% Calculate martensite block widths
 % ... for a PAG by specifying a gamma grain id
 plotMap_blockWidths(job,'parentGrainId',279,'linewidth',1.5);
-% ... for the entire map (can be slow for large maps!)
-plotMap_blockWidths(job,'linewidth',1,'minwidth', 0.25);
+% ... for the entire map (more statistics, but can be slow for large maps)
+plotMap_blockWidths(job,'linewidth',1);
 
 %% Display variant information for a PAG by specifying a gamma grain id
 plotStack(job,'parentGrainId',279,'linewidth',1.5);
