@@ -168,25 +168,30 @@ plot(variantGrains,variantGrains.meanOrientation);
 % absent at the grain level. This allows us to analyze the boundaries
 % between variants.
 variantBoundaries = plotMap_variantPairs(job,'linewidth',1.5);
-% We can also analyze and plot the same for individual grains.
-variantBoundaries = plotMap_variantPairs(job,'parentid',188,'linewidth',2);
+% We can also analyze and plot the same for individual prior austenite grains.
+variantBoundaries = plotMap_variantPairs(job,'parentGrainId',188,'linewidth',2);
 % In theory, one could use the reindexed grains to redo the parent grain
 % reconstruction based on these grains. This does however not lead to a
 % significantly better reconstruction in the present dataset.
 
+%% Calculate martensite block widths for a PAG by specifying a gamma grain id
+plotMap_blockWidths(job,'parentGrainId',188,'linewidth',1.5);
+
 %% Save images
 saveImage(Ini.imagePath);
 
-%% Check the gamma grains interactively by clicking on them
+%% Display variant information for a PAG by interactively clicking on a gamma grain
 grainClick(job,'noScalebar','noFrame'); %Plot EBSD data
 
 %% Do the same at the grain level 
-% This includes the variant pairing map (only useful after having refined
-% to laths!) and the block width calculator - valid for martensitic steels
 grainClick(job,'grains','noFrame'); %Plot grain data
 
-%% Show variant pairs by clicking on gamma grains
-grainClick(job,'variantPairs','linewidth',2);
+%% Calculate equivalent variant pairs for a PAG by interactively clicking on a gamma grain
+grainClick(job,'variantPairs','noFrame','linewidth',2);
 
-%% Refine gamma twins by clicking on gamma grains
+%% Calculate martensite block widths for a PAG by interactively clicking on a gamma grain
+grainClick(job,'blockWidth','noFrame','linewidth',2);
+
+%% Refine gamma twins for a PAG by interactively clicking on a gamma grain
 grainClick(job,'parentTwins');
+
