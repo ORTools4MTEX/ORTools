@@ -400,7 +400,7 @@ This function calculates and plots the probability distribution between 0 and 1,
 ### [plotMap_blockWidths](./src/plotMap_blockWidhts.m)
 This script calculates the representative value for martensite block widths by projecting all boundary points to the vector perpendicular to the trace of the {111}a plane as per the following reference: [S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A, Volumes 438–440, 2006, Pages 237-240](https://doi.org/10.1016/j.msea.2005.12.048)
 
-Contributed by Tuomo Nyyssönen
+Contributed by *Dr. Tuomo Nyyssönen*
 
 - Syntax
   - plotMap_blockWidths(job,varargin)
