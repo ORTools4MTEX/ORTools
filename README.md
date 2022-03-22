@@ -414,7 +414,7 @@ Contributed by Tuomo Nyyssönen
   - noFrame      - Remove frame around maps
 
 <p align="center">
-  <img src="./doc/images/plotMap_clusters.png" alt="Plot example from plotMap_blockWidths" width="500"/>
+  <img src="./doc/images/plotMap_blockWidths.png" alt="Plot example from plotMap_blockWidths" width="500"/>
 </p>
 
 ---
@@ -572,7 +572,7 @@ Plot pairs of martensitic variants (block boundaries) in steel microstructures a
   - variantPairs_boundary - a structure variable containing 4 groups of variant pair boundaries
 
 <p align="center">
-  <img src="./doc/images/plotMap_variants.png" alt="plotMap_variantPairs" width="500"/>
+  <img src="./doc/images/plotMap_variantPairs.png" alt="plotMap_variantPairs" width="500"/>
 </p>
 
 ---
