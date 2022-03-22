@@ -60,19 +60,19 @@ screenPrint('SegmentStart','Define and refine parent-to-child OR');
 % Define 'Gamma" as the parent and 'AlphaP' as the child phase
 job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 % Give an initial guess for the OR: Kurdjumov-Sachs ...
-job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
+KS = orientation.KurdjumovSachs(job.csParent,job.csChild);
+job.p2c = KS;
 % ... and refine it based on the fit with boundary misorientations
 job.calcParent2Child;
 % Let us check the disorientation and compare it with K-S and N-W
 % (The disorientation is the misfit between the grain misorientations
 % and the misorientation of the OR)
-KS = orientation.KurdjumovSachs(job.csParent,job.csChild);
 NW = orientation.NishiyamaWassermann(job.csParent,job.csChild);
 plotHist_OR_misfit(job,[KS,NW],'legend',{'K-S OR','N-W OR'});
 % Plot information about the OR
 ORinfo(job.p2c);
 %    - There are 24 martensitic variants
-%    - And a ~2.4° disorientation exists from the Nishiyama-Wassermann OR
+%    - And a ~2.1° disorientation exists from the Nishiyama-Wassermann OR
 
 %% Plotting (with ORTools functions)
 screenPrint('SegmentStart','Plotting some ORTools maps');
@@ -107,9 +107,7 @@ plotMap_gB_prob(job,'linewidth',2);
 %% Reconstruct parent microstructure
 %   - Reconstruct the microstructure with the variant graph based approach
 job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree);
-% job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree,'mergeSimilar')
-% job.clusterVariantGraph
-% job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree)
+%job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree,'mergeSimilar')
 job.clusterVariantGraph('includeSimilar');
 % ... plot the votes (high values show high certainty)
 figure; plot(job.grains,job.votes.prob(:,1))
@@ -181,7 +179,7 @@ plotMap_blockWidths(job,'linewidth',1);
 
 %% Display variant information for a PAG by specifying a gamma grain id
 plotStack(job,'parentGrainId',279,'linewidth',1.5);
-plotStack(job,'grains','noFrame','parentGrainId',188,'linewidth',1.5);
+plotStack(job,'grains','noFrame','parentGrainId',279,'linewidth',1.5);
 
 %% Save images
 saveImage(Ini.imagePath);
