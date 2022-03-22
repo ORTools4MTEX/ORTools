@@ -1,11 +1,11 @@
-function plotMap_blockWidths(job,varargin)
+function plotMap_blockWidths2(job,varargin)
 % % THIS SCRIPT WAS CONTRIBUTED BY: Dr Tuomo Nyyssönen
-% % This script calculates the representative value for martensite block 
-% % widths by projecting all boundary points to the vector perpendicular 
+% % This script calculates the representative value for martensite block
+% % widths by projecting all boundary points to the vector perpendicular
 % % to the trace of the {111}a plane as per the following reference:
 % % [S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the
 % % strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A,
-% % Volumes 438–440, 2006, Pages 237-240, 
+% % Volumes 438–440, 2006, Pages 237-240,
 % % https://doi.org/10.1016/j.msea.2005.12.048]
 %
 % Syntax
@@ -23,22 +23,121 @@ function plotMap_blockWidths(job,varargin)
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
 else
-    error('Argument "parentGrainId" (in single quotes) not specified.');
-    return;
+    warning('Argument "parentGrainId" (in single quotes) not specified. Block widths will be calculated for the EBSD map.');
+    pGrainId = job.parentGrains.id;
 end
 
 
-%% Define the parent grain
-pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
-pEBSD = job.ebsd(pGrain);
-pEBSD = pEBSD(job.csParent);
+for ii = 1:length(pGrainId)
+    %% Define the parent grain
+    pGrain = job.parentGrains(job.parentGrains.id == pGrainId(ii));
+    % pEBSD = job.ebsd(pGrain);
+    % pEBSD = pEBSD(job.csParent);
+    
+    %% Define the child grain(s)
+    clusterGrains = job.grainsPrior(job.mergeId == pGrainId(ii));
+    % cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
+    % cEBSD = cEBSD(job.csChild);
+    
+    %% Calculate martensite block widths
+    if length(pGrainId)==1
+        cGrains = clusterGrains(job.csChild);
+        [dBlock,zz,new_A_vec] = doCalc(job,pGrain,pGrainId(ii),cGrains);
+    else
+        cGrains{ii} = clusterGrains(job.csChild);
+        [dBlockNew{ii},~,~] = doCalc(job,pGrain,pGrainId(ii),cGrains{ii});
+    end
+    
+end
 
-%% Define the child grain(s)
-clusterGrains = job.grainsPrior(job.mergeId == pGrainId);
-cGrains = clusterGrains(job.csChild);
-cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
-cEBSD = cEBSD(job.csChild);
+%% Define the text output format as Latex
+setLabels2Latex
 
+%% Define the window settings for a set of docked figures
+% % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+warning off
+desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+% % Define a unique group name for the dock using the function name
+% % and the system timestamp
+dockGroupName = ['plotMap_blockWidths_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+desktop.setGroupDocked(dockGroupName,0);
+bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+
+
+%% Plot the grains along with their traces and normals
+drawnow;
+figH = gobjects(1);
+figH = figure('WindowStyle','docked');
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+drawnow;
+if length(pGrainId)==1
+    [~,mP] = plot(cGrains,dBlock,varargin{:});
+    hold all
+    ha(1) = quiver(squeeze(cGrains),squeeze(cross(zz,zvector)),'color',[1 0 0]);
+    ha(2) = quiver(squeeze(cGrains),squeeze(zz),'color',[0 1 0]);
+    ha(3) = quiver(squeeze(cGrains),squeeze(new_A_vec),'color', [0 0 1]);
+    legend(ha,'$111_a {\parallel} 011_m$ trace','$111_a {\parallel} 011_m$ normal','Mean of projected points')
+else
+    for ii = 1:length(cGrains)
+        [~,mP] = plot(cGrains{ii},dBlockNew{ii},varargin{:});
+        hold all
+    end
+    % % https://au.mathworks.com/matlabcentral/answers/388193-how-do-i-convert-a-cell-array-of-different-size-cells-to-a-matrix
+    [dBlock,tf] = padcat(dBlockNew{:}); % concatenate, pad rows with NaNs
+    dBlock(~tf) = 0; % replace NaNs by zeros
+    dBlock = dBlock(:);
+end
+hold off
+% Define the maximum number of color levels and plot the colorbar
+colormap(flipud(bone));
+caxis([0 round(max(dBlock))]);
+colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
+    'YTick', [0:1:round(max(dBlock))],...
+    'YTickLabel',num2str([0:1:round(max(dBlock))]'), 'YLim', [0 round(max(dBlock))],...
+    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
+set(figH,'Name','Map: Trace & normal for block width calculation','NumberTitle','on');
+if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+if check_option(varargin,'noFrame')
+    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+end
+drawnow;
+
+
+%% Plot the martensite block width histogram
+drawnow;
+figH = gobjects(1);
+figH = figure('WindowStyle','docked');
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+drawnow;
+h = histogram(dBlock(dBlock>0),'Normalization', 'probability','faceColor',[162 20 47]./255);
+set(gca,'FontSize',14);
+xlabel('\bf Martensite block width [$\bf \mu$m]','FontSize',14,'FontWeight','bold');
+ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
+set(figH,'Name','Histogram: Martensite block width','NumberTitle','on');
+screenPrint('Step',['Figure ',num2str(figH.Number),': martensite block width histogram']);
+drawnow;
+% % Output histogram data in a table
+class_range = h.BinEdges(2:end) - ((h.BinEdges(2)-h.BinEdges(1))/2);
+disp(table(class_range',h.Values','VariableNames',{'blockWidth','Freq'}))
+% % The figure and histogram show that block widths are consistently
+% % smaller when calculated this way
+
+%% Place first tabbed figure on top and return
+warning on
+allfigh = findall(0,'type','figure');
+if length(allfigh) > 1
+    figure(length(allfigh)-1);
+else
+    figure(1);
+end
+warning(bakWarn);
+pause(1); % Reduce rendering errors
+return
+end
+
+
+
+function [d_block_new,zz,new_A_vec] = doCalc(job,pGrain,pGrainId,cGrains)
 %% Plot martensite block widths
 % if check_option(varargin,'grains')
 % Get all 111 vector3ds for each grain:
@@ -81,92 +180,8 @@ new_A_vec.antipodal = 1;
 % % what the width perpendicular to the {111} trace looks like:
 % % Calculate the assumed block width:
 d_block_new = 2*new_A'.*sin(zz.theta);
-
-
-%% Define the text output format as Latex
-setLabels2Latex
-
-%% Define the window settings for a set of docked figures
-% % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
-warning off
-desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% % Define a unique group name for the dock using the function name
-% % and the system timestamp
-dockGroupName = ['plotMap_blockWidths_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
-desktop.setGroupDocked(dockGroupName,0);
-bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
-
-
-%% Plot the grains along with their traces and normals
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-[~,mP] = plot(cGrains,d_block_new,varargin{:});
-hold all
-ha(1) = quiver(squeeze(cGrains),squeeze(cross(zz,zvector)),'color',[1 0 0]);
-ha(2) = quiver(squeeze(cGrains),squeeze(zz),'color',[0 1 0]);
-ha(3) = quiver(squeeze(cGrains),squeeze(new_A_vec),'color', [0 0 1]);
-legend(ha,'$111_a {\parallel} 011_m$ trace','$111_a {\parallel} 011_m$ normal','Mean of projected points')
-hold off
-% Define the maximum number of color levels and plot the colorbar
-colormap(flipud(bone));
-caxis([0 round(max(d_block_new))]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [0:1:round(max(d_block_new))],...
-    'YTickLabel',num2str([0:1:round(max(d_block_new))]'), 'YLim', [0 round(max(d_block_new))],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','Map: Trace & normal for block width calculation','NumberTitle','on');
-if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
-if check_option(varargin,'noFrame')
-    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
 end
-drawnow;
 
-
-%% Plot the martensite block width histogram
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-class_range = 0:0.25:round(max(d_block_new));
-abs_counts = histc(d_block_new,class_range);
-norm_counts = abs_counts./sum(abs_counts);
-h = bar(class_range,norm_counts,'hist');
-h.FaceColor =[162 20 47]./255;
-set(gca,'FontSize',14);
-set(gca,'xlim',[0 class_range(end)+0.5]);
-set(gca,'XTick',0:0.5:class_range(end)+0.5);
-xlabel('\bf Martensite block width [$\bf \mu$m]','FontSize',14,'FontWeight','bold');
-%     xlabel('Martensite block width [\mum]','FontSize',14,'FontWeight','bold');
-ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
-%     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
-set(figH,'Name','Histogram: Martensite block width','NumberTitle','on');
-screenPrint('Step',['Figure ',num2str(figH.Number),': martensite block width histogram']);
-drawnow;
-% % Output histogram data in a table
-if size(class_range,2)>1; class_range = class_range'; end
-if size(abs_counts,2)>1; abs_counts = abs_counts'; end
-if size(norm_counts,2)>1; norm_counts = norm_counts'; end
-table(class_range,norm_counts,'VariableNames',{'blockWidth','Freq'})
-
-% % The figure and histogram show that block widths are consistently
-% % smaller when calculated this way
-
-%% Place first tabbed figure on top and return
-warning on
-allfigh = findall(0,'type','figure');
-if length(allfigh) > 1
-    figure(length(allfigh)-1);
-else
-    figure(1);
-end
-warning(bakWarn);
-pause(1); % Reduce rendering errors
-return
-end
 
 
 function [p,px,py] = projectPoints2Vector(grains,v)

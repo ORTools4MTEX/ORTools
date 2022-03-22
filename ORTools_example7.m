@@ -173,13 +173,14 @@ variantBoundaries = plotMap_variantPairs(job,'parentGrainId',279,'linewidth',2);
 % reconstruction based on these grains. This does however not lead to a
 % significantly better reconstruction in the present dataset.
 
-%% Calculate martensite block widths for a PAG by specifying a gamma grain id
+%% Calculate martensite block widths
+% ... for a PAG by specifying a gamma grain id
 plotMap_blockWidths(job,'parentGrainId',279,'linewidth',1.5);
-plotMap_blockWidths2(job,'linewidth',1,'minwidth', 0.25);
-plotMap_blockWidths2(job,'parentGrainId',279,'linewidth',1.5);
+% ... for the entire map (can be slow for large maps!)
+plotMap_blockWidths(job,'linewidth',1,'minwidth', 0.25);
 
 %% Display variant information for a PAG by specifying a gamma grain id
-plotStack(job,'parentGrainId',188,'linewidth',1.5);
+plotStack(job,'parentGrainId',279,'linewidth',1.5);
 plotStack(job,'grains','noFrame','parentGrainId',188,'linewidth',1.5);
 
 %% Save images
