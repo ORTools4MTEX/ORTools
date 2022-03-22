@@ -175,6 +175,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [plotHist_OR_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotHist_OR_misfit)
 - [plotIPDF_gB_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_misfit)
 - [plotIPDF_gB_prob](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_prob)
+- [plotMap_blockWidths](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_blockWidths)
 - [plotMap_clusters](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_clusters)
 - [plotMap_gB_c2c](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_gB_c2c)
 - [plotMap_gB_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_gB_misfit)
@@ -183,6 +184,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [plotMap_IPF_p2c](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_IPF_p2c)
 - [plotMap_packets](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_packets)
 - [plotMap_phases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_phases)
+- [plotMap_variantPairs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_variantPairs)
 - [plotMap_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_variants)
 - [plotPDF_packets](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_packets)
 - [plotPDF_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_variants)
@@ -395,6 +397,28 @@ This function calculates and plots the probability distribution between 0 and 1,
 
 ---
 
+### [plotMap_blockWidths](./src/plotMap_blockWidhts.m)
+This script calculates the representative value for martensite block widths by projecting all boundary points to the vector perpendicular to the trace of the {111}a plane as per the following reference: [S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A, Volumes 438–440, 2006, Pages 237-240](https://doi.org/10.1016/j.msea.2005.12.048)
+
+Contributed by Tuomo Nyyssönen
+
+- Syntax
+  - plotMap_blockWidths(job,varargin)
+
+- Input
+  - job          - @parentGrainreconstructor
+  - pGrainId     - parent grain Id using the argument 'parentGrainId'
+
+- Option
+  - noScalebar   - Remove scalebar from maps
+  - noFrame      - Remove frame around maps
+
+<p align="center">
+  <img src="./doc/images/plotMap_clusters.png" alt="Plot example from plotMap_clusters" width="500"/>
+</p>
+
+---
+
 ### [plotMap_clusters](./src/plotMap_clusters.m)
 The function shows the clusters of grains that are likely to belong to the same parent grain, created with [clusterGraph](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterGraph.html) on top of the  semin-transparent IPF map of child grains.
 
@@ -526,6 +550,29 @@ The function plots a phase map of the grains within *job* and the grain boundari
 
 <p align="center">
   <img src="./doc/images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
+</p>
+
+---
+
+### [plotMap_variantPairs](./src/plotMap_variantPairs.m)
+Plot pairs of martensitic variants (block boundaries) in steel microstructures as per the analysis in the following reference: [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to identify martensite and bainite, Mater. Today Proc., Volume 2, Supplement 3, 2015, Pages S913-S916,](https://doi.org/10.1016/j.matpr.2015.07.430)
+
+- Syntax
+  - variantPairs_boundary = plotMap_variantPairs(job,varargin)
+
+- Input
+  - job          - @parentGrainreconstructor
+  - pGrainId     - parent grain Id using the argument 'parentGrainId'
+
+- Option
+  - noScalebar  - Remove scalebar from maps
+  - noFrame     - Remove frame around maps
+
+- Output
+  - variantPairs_boundary - a structure variable containing 4 groups of variant pair boundaries
+
+<p align="center">
+  <img src="./doc/images/plotMap_variants.png" alt="plotMap_variants" width="500"/>
 </p>
 
 ---
