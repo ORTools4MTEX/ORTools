@@ -164,6 +164,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ### Function Index
 
 - [computeGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrains)
+- [computeVariantGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantGrains)
 - [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors)
 - [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker)
 - [grainClick](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#grainClick)
@@ -194,6 +195,21 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [screenPrint](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#screenPrint)
 - [setParentGrainReconstructor](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#setParentGrainReconstructor)
 - [tileFigs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#tileFigs)
+
+---
+
+### [computeVariantGrains](./src/computeVariantGrains.m)
+Refine the child grains in the job object based on their variant IDs and return the refined grains and the child EBSD date with the new grain Ids
+
+- Syntax
+  - [variant_grains,cEBSD] = computeVariantGrains(job,varargin)
+- Input
+  - job  - @parentGrainReconstructor
+- Optional
+  - parentGrainId    - parent grain Id using the argument 'parentGrainId'
+- Output
+  - variant_grains   - @grains2d 
+  - ebsdC  - @EBSD
 
 ---
 
