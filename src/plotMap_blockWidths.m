@@ -23,7 +23,7 @@ function plotMap_blockWidths(job,varargin)
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
 else
-    error('The user has not specified the parent grain id.');
+    error('Argument "parentGrainId" (in single quotes) not specified.');
     return;
 end
 
