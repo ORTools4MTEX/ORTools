@@ -156,7 +156,7 @@ plotMap_variants(job,'linewidth',3); %EBSD data
 % We see that each child grain contains several variants on EBSD level
 % For analyzing the variant pairing, we need the variants on EBSD level
 % to be reconstructed to grains
-
+return
 %% Variant pairing (block boundary) analysis
 [variantGrains,ebsdC] = computeVariantGrains(job);
 %Compare variant indexing for old and new grains
@@ -176,6 +176,8 @@ variantBoundaries = plotMap_variantPairs(job,'parentGrainId',188,'linewidth',2);
 
 %% Calculate martensite block widths for a PAG by specifying a gamma grain id
 plotMap_blockWidths(job,'parentGrainId',188,'linewidth',1.5);
+plotMap_blockWidths2(job,'linewidth',1);
+plotMap_blockWidths2(job,'parentGrainId',188,'linewidth',1.5);
 
 %% Display variant information for a PAG by specifying a gamma grain id
 plotStack(job,'parentGrainId',188,'linewidth',1.5);
