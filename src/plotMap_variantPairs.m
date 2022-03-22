@@ -25,7 +25,7 @@ if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
     [pGrain,~,variantGrains,ebsdC] = getParentChildData(job,pGrainId);
 else
-    warning('The user has not specified the parent grain id. Equivalent variant pairs will be calculated for the EBSD map.');
+    warning('Argument "parentGrainId" (in single quotes) not specified. Equivalent variant pairs will be calculated for the EBSD map.');
     [variantGrains,ebsdC] = computeVariantGrains(job);
 end
 
