@@ -20,14 +20,6 @@ function plotMap_blockWidths2(job,varargin)
 %  noFrame      - Remove frame around maps
 
 
-% if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
-%     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
-% else
-%     error('Argument "parentGrainId" (in single quotes) not specified.');
-%     return;
-% end
-
-
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
 else
