@@ -37,11 +37,8 @@ twgB = job.parentGrains.boundary.selectByGrainId(twIds);
 for ii = 1:size(twIds,1)
    for gNr = 1:2 %Loop grain pair
        %Get parent variant IDs and Fit
-       if all(size(twGrains) == [2,1]) % THIS SHOULD BE FIXED IN MTEX!!
-           [pVarIds(:,gNr),fit(:,ii,gNr)] = calcParent(twEBSDc.orientations,twGrains.meanOrientation(gNr,ii),job.p2c,'id');
-       else
-           [pVarIds(:,gNr),fit(:,ii,gNr)] = calcParent(twEBSDc.orientations,twGrains.meanOrientation(ii,gNr),job.p2c,'id');
-       end
+       [pVarIds(:,gNr),fit(:,ii,gNr)] = calcParent(twEBSDc.orientations,twGrains.meanOrientation(ii,gNr),job.p2c,'id');
+
        %Get local parent orientations
        pOris(:,ii,gNr) = variants(job.p2c, twEBSDc.orientations, pVarIds(:,gNr));
 
@@ -83,7 +80,7 @@ cbsParent = ipfKeyParent.orientation2color(twEBSDp.orientations);
 plot(twEBSDp,cbsParent);
 hold on
 plot(job.grains(twIds).boundary,'linewidth',3);
-plot(twgB,'lineColor','cyan','linewidth',5,'DisplayName','CSL 3');
+plot(twgB,'lineColor','cyan','linewidth',3,'DisplayName','CSL 3');
 
 %And the refined twin orientations
 nextAxis

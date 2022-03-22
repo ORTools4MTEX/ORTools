@@ -23,7 +23,8 @@ function variantPairs_boundary = plotMap_variantPairs(job,varargin)
 
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
-    [pGrain,~,variantGrains,ebsdC] = setParentChildData(job,pGrainId);
+    [variantGrains,ebsdC] = computeVariantGrains(job,'parentGrainId',pGrainId);
+    pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
 else
     warning('Argument "parentGrainId" (in single quotes) not specified. Equivalent variant pairs will be calculated for the EBSD map.');
     [variantGrains,ebsdC] = computeVariantGrains(job);

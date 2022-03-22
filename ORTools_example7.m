@@ -166,9 +166,9 @@ plot(variantGrains,variantGrains.meanOrientation);
 % We see that all the variant detail of the variantIds in the EBSD map are
 % absent at the grain level. This allows us to analyze the boundaries
 % between variants.
-variantBoundaries = plotMap_variantPairs(job,'linewidth',1.5);
+variantBoundaries_map = plotMap_variantPairs(job,'linewidth',1.5);
 % We can also analyze and plot the same for individual prior austenite grains.
-variantBoundaries = plotMap_variantPairs(job,'parentGrainId',279,'linewidth',2);
+variantBoundaries_PAG = plotMap_variantPairs(job,'parentGrainId',279,'linewidth',2);
 % In theory, one could use the reindexed grains to redo the parent grain
 % reconstruction based on these grains. This does however not lead to a
 % significantly better reconstruction in the present dataset.
@@ -187,12 +187,12 @@ plotStack(job,'grains','noFrame','parentGrainId',188,'linewidth',1.5);
 saveImage(Ini.imagePath);
 
 %% Display variant information for a PAG by interactively clicking on a gamma grain
-grainClick(job,'noScalebar','noFrame'); %Plot EBSD data
+grainClick(job,'noScalebar','noFrame'); %Based on EBSD data
 
 %% Do the same at the grain level 
-grainClick(job,'grains','noFrame'); %Plot grain data
+grainClick(job,'grains','noFrame'); %Based on grain data
 
-%% Calculate equivalent variant pairs for a PAG by interactively clicking on a gamma grain
+%% Display variant pairing (block boundary) analysis for a PAG by interactively clicking on a gamma grain
 grainClick(job,'variantPairs','noFrame','linewidth',2);
 
 %% Calculate martensite block widths for a PAG by interactively clicking on a gamma grain
