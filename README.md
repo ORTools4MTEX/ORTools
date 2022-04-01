@@ -6,16 +6,6 @@
 
 ---
 
-**JOIN THE 2022 MTEX WORKSHOP (21 – 30 March 2022 on ZOOM)**
-
-*Week 1: MTEX training course (5 ECTS)*
-
-*Week 2: User meeting*
-
-https://mtex-toolbox.github.io/workshops
-
----
-
 <p align="left">
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 </p>
