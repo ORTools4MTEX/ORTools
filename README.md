@@ -2,17 +2,7 @@
 
 **NEW SCRIPT ADDED**
 
-**[Example 7: Parent grain reconstruction using the new variant graph approach and advanced variant analysis in lath martensitic steel](https://github.com/ORTools4MTEX/ORTools#example-7-5-mar-2022)** 
-
----
-
-**JOIN THE 2022 MTEX WORKSHOP (21 – 30 March 2022 on ZOOM)**
-
-*Week 1: MTEX training course (5 ECTS)*
-
-*Week 2: User meeting*
-
-https://mtex-toolbox.github.io/workshops
+**[Example 7: Parent grain reconstruction using the new variant graph approach and advanced variant analysis in lath martensitic steel](https://github.com/ORTools4MTEX/ORTools#example-7-23-mar-2022)** 
 
 ---
 
@@ -35,7 +25,7 @@ https://mtex-toolbox.github.io/workshops
 ## Introduction to ORTools
 **Orientation relationship tools** (**ORTools**) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. 
 
-The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the MATLAB-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the codes contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the 2021 MTEX Workshop for an introduction to the phase transformation features in MTEX and **ORTools**. 
+The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the MATLAB-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the scripts contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the 2021 MTEX Workshop for an introduction to the phase transformation features in MTEX and **ORTools**. 
 
 The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/ORTools4MTEX/ORTools#example-scripts) that showcase how the functions work and what their output comprises. 
 
@@ -65,10 +55,10 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 ---
 
 ## How to use ORTools
-- Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v1.2.0) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) of **ORTools** by clicking on either weblink.
-- This library only works after the prior installation of MATLAB and MTEX. Follow the instructions for installing [**MATLAB**](https://se.mathworks.com/help/install/install-products.html) and [**MTEX**](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below. ORTools is tested for compatibility down to MATLAB 2016b. Check with each [release](https://github.com/ORTools4MTEX/ORTools/releases) with which MTEX it is compatible. 
+- Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) of **ORTools** by clicking on either weblink.
+- This library only works after the prior installation of [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download). Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below. ORTools is tested for compatibility from MATLAB 2016b onwards. With each [release](https://github.com/ORTools4MTEX/ORTools/releases) of ORTools, please check which version of MTEX it is compatible with. 
 - The peak fitting functionality within the function [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors) requires the prior installation of the [MATLAB Signal Processing Toolbox](https://au.mathworks.com/products/signal.html).
-- Open MATLAB and run one of the example files. Please refer to the [*Example 1*](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and want to use the function library instead, please ensure that the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
+- Open MATLAB and run one of the example files. Please refer to the [Example 1](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and want to use the function library instead, please ensure that the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
 - If you encounter any problems, please [submit an issue](https://github.com/ORTools4MTEX/ORTools/issues).
 - If you would like to contribute additional functionalities or wish to suggest new features, please [submit a contribution or request for a feature](https://github.com/ORTools4MTEX/ORTools/issues).
 
@@ -81,17 +71,21 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 ##  ORTools example scripts
 The world of martensitic transformation or phase transition analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the **ORTools** library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions *in action*.
 
-It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the code and the generated results. This will also help you follow the comments, which provide instructions on the various choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the code as well as the meaning behind the presented results.
+It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the scripts and the generated results. This will also help you follow the comments, which provide instructions on the various choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the scripts as well as the meaning behind the presented results.
 
 ---
 
-### [Example 7: 5 MAR 2022](./ORTools_example7.m)
+### [Example 7: 23 MAR 2022](./ORTools_example7.m)
 #### Update to Example 1: Parent grain reconstruction using the new variant graph approach and advanced variant analysis in lath martensitic steel
-This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) to demonstrate the reconstruction of parent austenite grains from child lath martensite using the new **variant graph approach**. Compared to the original [example 1](./ORTools_example1.m), this updated version also features equivalent variant pair analysis and the measurement of lath block widths. 
+This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) to demonstrate the reconstruction of parent austenite grains from child lath martensite using the new **variant graph approach**. Compared to the original [Example 1](./ORTools_example1.m), this updated version also features equivalent variant pair analysis and the measurement of lath block widths. 
 
-The details related to the variant graph approach are described in this [research paper](https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction) which recently got accepted for publication in MAterialia.
+The details related to the variant graph approach are described in the following paper:
 
-*A new video on this example will follow shortly*
+[**R. Hielscher, T. Nyyssönen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia: Accepted March 2022**](https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction)
+
+[![ORTools - Example 7](http://img.youtube.com/vi/E9IFyFUQNl4/0.jpg)](https://www.youtube.com/watch?v=E9IFyFUQNl4 "Video Title")
+
+[*Example 7 - Variant graph approach & advanced variant analysis in lath martensitic steel*](https://youtu.be/E9IFyFUQNl4)
 
 ---
 
@@ -400,7 +394,7 @@ This function calculates and plots the probability distribution between 0 and 1,
 ### [plotMap_blockWidths](./src/plotMap_blockWidhts.m)
 This script calculates the representative value for martensite block widths by projecting all boundary points to the vector perpendicular to the trace of the {111}a plane as per the following reference: [S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A, Volumes 438–440, 2006, Pages 237-240](https://doi.org/10.1016/j.msea.2005.12.048)
 
-Contributed by Tuomo Nyyssönen
+Contributed by *Dr. Tuomo Nyyssönen*
 
 - Syntax
   - plotMap_blockWidths(job,varargin)
@@ -414,7 +408,7 @@ Contributed by Tuomo Nyyssönen
   - noFrame      - Remove frame around maps
 
 <p align="center">
-  <img src="./doc/images/plotMap_clusters.png" alt="Plot example from plotMap_blockWidths" width="500"/>
+  <img src="./doc/images/plotMap_blockWidths.png" alt="Plot example from plotMap_blockWidths" width="500"/>
 </p>
 
 ---
@@ -572,7 +566,7 @@ Plot pairs of martensitic variants (block boundaries) in steel microstructures a
   - variantPairs_boundary - a structure variable containing 4 groups of variant pair boundaries
 
 <p align="center">
-  <img src="./doc/images/plotMap_variants.png" alt="plotMap_variantPairs" width="500"/>
+  <img src="./doc/images/plotMap_variantPairs.png" alt="plotMap_variantPairs" width="500"/>
 </p>
 
 ---
