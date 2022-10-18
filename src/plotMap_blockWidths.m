@@ -45,7 +45,11 @@ for ii = 1:length(pGrainId)
         [dBlock,zz,new_A_vec] = calcBlockWidth(job,pGrain,pGrainId(ii),cGrains);
     else
         cGrains{ii} = clusterGrains(job.csChild);
-        [dBlockNew{ii},~,~] = calcBlockWidth(job,pGrain,pGrainId(ii),cGrains{ii});
+        if job.isTransformed(find(job.mergeId == pGrainId(ii)))
+            [dBlockNew{ii},~,~] = calcBlockWidth(job,pGrain,pGrainId(ii),cGrains{ii});
+        else
+            dBlockNew{ii} = nan;
+        end
     end
     
 end
@@ -79,7 +83,9 @@ if length(pGrainId)==1
     legend(ha,'$111_a {\parallel} 011_m$ trace','$111_a {\parallel} 011_m$ normal','Mean of projected points')
 else
     for ii = 1:length(cGrains)
-        [~,mP] = plot(cGrains{ii},dBlockNew{ii},varargin{:});
+        if ~isnan(dBlockNew{ii})
+            [~,mP] = plot(cGrains{ii},dBlockNew{ii},varargin{:});
+        end
         hold all
     end
     % % https://au.mathworks.com/matlabcentral/answers/388193-how-do-i-convert-a-cell-array-of-different-size-cells-to-a-matrix

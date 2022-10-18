@@ -106,7 +106,7 @@ plotMap_gB_prob(job,'linewidth',2);
 
 %% Reconstruct parent microstructure
 %   - Reconstruct the microstructure with the variant graph based approach
-job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree);
+job.calcVariantGraph('threshold',3.5*degree,'tolerance',3.5*degree);
 %job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree,'mergeSimilar')
 job.clusterVariantGraph('includeSimilar');
 % ... plot the votes (high values show high certainty)
@@ -135,7 +135,7 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 % - merging grains with similar orientation
 job.mergeSimilar('threshold',7.5*degree);
 % - merging small inclusions
-job.mergeInclusions('maxSize',50);
+job.mergeInclusions('maxSize',150);
 % This is the cleaned reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
@@ -155,6 +155,7 @@ plotMap_variants(job,'linewidth',3); %EBSD data
 % For analyzing the variant pairing, we need the variants on EBSD level
 % to be reconstructed to grains
 %% Variant pairing (block boundary) analysis
+[~,maxGrainId] = max(job.grains.area);
 [variantGrains,ebsdC] = computeVariantGrains(job);
 %Compare variant indexing for old and new grains
 figure; %Old grains
@@ -166,20 +167,20 @@ plot(variantGrains,variantGrains.meanOrientation);
 % between variants.
 variantBoundaries_map = plotMap_variantPairs(job,'linewidth',1.5);
 % We can also analyze and plot the same for individual prior austenite grains.
-variantBoundaries_PAG = plotMap_variantPairs(job,'parentGrainId',279,'linewidth',2);
+variantBoundaries_PAG = plotMap_variantPairs(job,'parentGrainId',maxGrainId,'linewidth',2);
 % In theory, one could use the reindexed grains to redo the parent grain
 % reconstruction based on these grains. This does however not lead to a
 % significantly better reconstruction in the present dataset.
 
 %% Calculate martensite block widths
 % ... for a PAG by specifying a gamma grain id
-plotMap_blockWidths(job,'parentGrainId',279,'linewidth',1.5);
+plotMap_blockWidths(job,'parentGrainId',maxGrainId,'linewidth',1.5);
 % ... for the entire map (more statistics, but can be slow for large maps)
 plotMap_blockWidths(job,'linewidth',1);
 
 %% Display variant information for a PAG by specifying a gamma grain id
-plotStack(job,'parentGrainId',279,'linewidth',1.5);
-plotStack(job,'grains','noFrame','parentGrainId',279,'linewidth',1.5);
+plotStack(job,'parentGrainId',maxGrainId,'linewidth',1.5);
+plotStack(job,'grains','noFrame','parentGrainId',maxGrainId,'linewidth',1.5);
 
 %% Save images
 saveImage(Ini.imagePath);
