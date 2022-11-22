@@ -77,7 +77,7 @@ job.calcVariants;
 plotMap_variants(job,'linewidth',3);
 % The histogram shows a quite even distribution of the variants
 figure
-histogram(job.transformedGrains.variantId,'facecolor', 'r');
+histogram(job.transformedGrains.variantId,'facecolor', 'r','Normalization','pdf');
 xlabel('Variant Ids'); ylabel('Frequency');
 %% Predict transformation texture
 % The even distribution of variants is great to calculate the
