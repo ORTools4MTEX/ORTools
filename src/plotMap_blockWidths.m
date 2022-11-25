@@ -36,7 +36,6 @@ for ii = 1:length(pGrainId)
     
     %% Define the child grain(s)
     clusterGrains = job.grainsPrior(job.mergeId == pGrainId(ii));
-    clusterGrains(job.csChild);
     % cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
     % cEBSD = cEBSD(job.csChild);
     
@@ -46,11 +45,17 @@ for ii = 1:length(pGrainId)
         [dBlock,zz,new_A_vec] = calcBlockWidth(job,pGrain,pGrainId(ii),cGrains);
     else
         cGrains{ii} = clusterGrains(job.csChild);
-        if job.isTransformed(find(job.mergeId == pGrainId(ii)))
+        if ~isempty(cGrains{ii})
             [dBlockNew{ii},~,~] = calcBlockWidth(job,pGrain,pGrainId(ii),cGrains{ii});
         else
             dBlockNew{ii} = nan;
         end
+            %         
+%         if job.isTransformed(find(job.mergeId == pGrainId(ii)))
+%             [dBlockNew{ii},~,~] = calcBlockWidth(job,pGrain,pGrainId(ii),cGrains{ii});
+%         else
+%             dBlockNew{ii} = nan;
+%         end
     end
     
 end
