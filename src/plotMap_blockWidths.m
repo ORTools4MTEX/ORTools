@@ -36,6 +36,7 @@ for ii = 1:length(pGrainId)
     
     %% Define the child grain(s)
     clusterGrains = job.grainsPrior(job.mergeId == pGrainId(ii));
+    clusterGrains(job.csChild);
     % cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
     % cEBSD = cEBSD(job.csChild);
     
@@ -148,7 +149,7 @@ function [d_block_new,zz,new_A_vec] = calcBlockWidth(job,pGrain,pGrainId,cGrains
 % if check_option(varargin,'grains')
 % Get all 111 vector3ds for each grain:
 hh = Miller({1,1,1},{1,-1,1},{-1,1,1},{1,1,-1},job.p2c.CS);
-hh = hh(job.packetId(job.mergeId == pGrainId))';
+hh = hh(job.packetId(cGrains.id))';
 zz = pGrain.meanOrientation.project2FundamentalRegion.*hh;
 
 % drawnow;
