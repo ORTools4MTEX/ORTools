@@ -2,7 +2,7 @@
 
 **LATEST RELEASE 2.0.1**
 
-**[Release 2.0.1 contains several minor bugfixes](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.0.1)** 
+**[Release 2.0.1 contains several minor bugfixes](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.0.2)** 
 
 ---
 
