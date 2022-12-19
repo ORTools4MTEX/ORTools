@@ -1,27 +1,27 @@
-function packets = getPacketGrains(job, varargin)
-% get the packet grains
+function packets = computePacketGrains(job, varargin)
+% Compute the packet grains
 %
 % Syntax
-%  getPacketGrains(job)
+%  computePacketGrains(job)
 %
 % Input
 %  job          - @parentGrainreconstructor
 %
 % Options
 
-%Get the grain boundaries
+% Get the grain boundaries
 gB = job.grainsPrior.boundary;
-%Only get child to child boundaries
+% Only get child to child boundaries
 gB = gB(job.csChild,job.csChild);
-%Get packet Ids
+% Get packet Ids
 packetId = job.packetId;
-%Get the packet numbers of the grains at the boundaries
+% Get the packet numbers of the grains at the boundaries
 ids = packetId(gB.grainId);
-%Check where they are identical
+% Check where they are identical
 isPacket = ids(:,1) - ids(:,2) == 0;
-%Get the packet boundaries
+% Get the packet boundaries
 packetBoundary = gB(isPacket);
-%Get packets
+% Get packets
 [packets,parentId] = merge(job.grainsPrior,packetBoundary);
  pId = nan(length(packets),1);
 
