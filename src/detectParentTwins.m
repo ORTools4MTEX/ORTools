@@ -16,8 +16,8 @@ function detectParentTwins(job,pGrainId,varargin)
 pGrain = job.parentGrains(job.parentGrains.id2ind(pGrainId));   
 twIds = checkNeighbors(pGrain,job.parentGrains);
 if isempty(twIds)
-    fprintf('-> No twins in the parent phase detected\n')
-    return
+    error('No twins detected in the parent phase.')
+    return;
 end
 
 %% Prepare IPF color key
