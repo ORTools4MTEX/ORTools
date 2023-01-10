@@ -22,8 +22,12 @@ function plotMap_blockWidths(job,varargin)
 
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
+    if ~isnumeric(pGrainId)
+        error('Argument ''parentGrainId'' must be numeric.');
+        return;
+    end
 else
-    warning('Argument "parentGrainId" (in single quotes) not specified. Block widths will be calculated for the EBSD map.');
+    warning('Argument ''parentGrainId'' not specified. Block widths will be calculated for the EBSD map.');
     pGrainId = job.parentGrains.id;
 end
 
