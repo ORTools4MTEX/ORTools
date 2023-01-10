@@ -16,8 +16,12 @@ function plotStack(job,varargin)
 
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
+    if ~isnumeric(pGrainId)
+        error('Argument ''parentGrainId'' must be numeric.');
+        return;
+    end
 else
-    error('Argument "parentGrainId" (in single quotes) not specified.');
+    error('Argument ''parentGrainId'' not specified.');
     return;
 end
 
