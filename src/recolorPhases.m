@@ -1,5 +1,5 @@
 function obj = recolorPhases(obj)
-% recolor phases in ebsd or grains interactively
+% interactively recolor phases for ebsd or grains -type variables
 %
 % Syntax
 %
