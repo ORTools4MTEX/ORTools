@@ -4,7 +4,7 @@ function obj = recolorPhases(obj)
 % Syntax
 %
 %  ebsd   = recolorPhases(ebsd)
-%  grains = recolorGrains(grains)
+%  grains = recolorPhases(grains)
 %
 % Input
 %  ebsd             - @EBSD
