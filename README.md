@@ -72,6 +72,17 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 The world of martensitic transformation or phase transition analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the **ORTools** library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions *in action*.
 
 It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the scripts and the generated results. This will also help you follow the comments, which provide instructions on the various choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the scripts as well as the meaning behind the presented results.
+---
+
+### [Example 8: 29 MAR 2022](./ORTools_example8.m)
+#### Update to Example 2: Parent grain reconstruction using the variant graph approach in Ti alloys
+This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) to demonstrate the reconstruction of parent beta grains from child alpha grains in a aplha-beta Ti alloy.
+The script provides a faster and less involved way of reconstructing this microstructure compared to the
+tripple-point based approach from [Example 2](./ORTools_example2.m). 
+
+The details related to the variant graph approach are described in the following paper:
+
+[**R. Hielscher, T. Nyyssönen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia: Accepted March 2022**](https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction)
 
 ---
 

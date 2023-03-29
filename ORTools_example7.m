@@ -14,7 +14,7 @@
 home; close all; clear variables;
 currentFolder;
 set(0,'DefaultFigureWindowStyle','normal');
-screenPrint('StartUp','ORTools - Example 1 - Variant Graph Approach');
+screenPrint('StartUp','ORTools - Example 7 - Variant Graph Approach');
 
 %% Initialize MTEX
 % Startup and set some settings
@@ -106,7 +106,7 @@ plotMap_gB_prob(job,'linewidth',2);
 
 %% Reconstruct parent microstructure
 %   - Reconstruct the microstructure with the variant graph based approach
-job.calcVariantGraph('threshold',3.5*degree,'tolerance',3.5*degree);
+job.calcVariantGraph('threshold',4*degree,'tolerance',3.5*degree);
 %job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree,'mergeSimilar')
 job.clusterVariantGraph('includeSimilar');
 % ... plot the votes (high values show high certainty)

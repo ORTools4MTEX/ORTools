@@ -155,7 +155,7 @@ plotPDF_variants(job);
 % Then calculate the variant IDs of all alpha grains ...
 job.calcVariants;
 % ... and plot them
-plotMap_variants(job,'linewidth',3);
+plotMap_variants(job,'linewidth',1);
 %plotMap_variants(job,'grains','linewidth',3);  %Plot grain data instead
 % The same can be done for the packets
 plotMap_packets(job,'linewidth',3);
