@@ -1,4 +1,4 @@
-function plotMap_variants(job, varargin)
+function f_area = plotMap_variants(job, varargin)
 % plot the map of child grains colored according to their variant ID
 %
 % Syntax
@@ -7,6 +7,9 @@ function plotMap_variants(job, varargin)
 % Input
 %  job          - @parentGrainreconstructor
 %
+% Output
+%  f_area: Area fraction of each variant
+%  entire EBSD map
 % Options
 %  colormap - colormap string
 %  grains   - plot grain data instead of EBSD data
@@ -32,6 +35,8 @@ else
     cEBSD = cEBSD(isParent);
     varIds = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
     plot(cEBSD,varIds);
+    f_area = [histcounts(varIds,length(p2c_V))/length(varIds)]';
+    disp(table([1:length(p2c_V)]',f_area,'VariableNames',{'Variants','AreaFrac'}))
 end
 
 hold on
