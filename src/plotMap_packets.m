@@ -36,7 +36,7 @@ else
     [~,packIds] = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
     plot(cEBSD,packIds);
     f_area = [histcounts(packIds,maxNrPackets)/length(packIds)]';
-    disp(table([1:maxNrPackets]',f_area,'VariableNames',{'Variants','AreaFrac'}))
+    disp(table([1:maxNrPackets]',f_area,'VariableNames',{'Packets','AreaFrac'}))
 end
 
 
