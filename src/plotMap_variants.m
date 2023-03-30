@@ -10,6 +10,7 @@ function f_area = plotMap_variants(job, varargin)
 % Output
 %  f_area: Area fraction of each variant
 %  entire EBSD map
+%
 % Options
 %  colormap - colormap string
 %  grains   - plot grain data instead of EBSD data
