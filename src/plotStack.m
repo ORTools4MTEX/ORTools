@@ -25,7 +25,7 @@ else
     return;
 end
 
-
+close all;
 vector = getClass(varargin,'vector3d',vector3d.X);
 %% Define the parent grain
 pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
