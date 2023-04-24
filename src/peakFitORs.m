@@ -1,5 +1,5 @@
 function [p2c] = peakFitORs(job,misoRange)
-% peak fitting of parent-child misorientation angle ranges for 
+% peak fitting of parent-child misorientation angle ranges for
 % determination of one or several orientation relationships
 % Function is executed by "defineORs.m"
 %
@@ -19,7 +19,19 @@ ss = specimenSymmetry('triclinic');
 numORs = length(misoRange.min);
 
 %% Method selection
-methodTypes = {'Maximum f(g)','Modal center','Cancel'};
+% check for MTEX version
+currentVersion = 5.9;
+fid = fopen('VERSION','r');
+MTEXversion = fgetl(fid);
+fclose(fid);
+MTEXversion = str2double(MTEXversion(5:end-2));
+
+if MTEXversion >= currentVersion % for MTEX versions 5.9.0 and above
+    methodTypes = {'Maximum f(g)','Cancel'};
+else % for MTEX versions 5.8.2 and below
+    methodTypes = {'Maximum f(g)','Modal center','Cancel'};
+end
+
 try
     methodSelected = questdlg('Choose the method to compute the OR(s):', ...
         'Method selection', methodTypes{:},methodTypes{1});
@@ -31,7 +43,11 @@ if isempty(methodSelected)
     message = sprintf('Script terminated: Execution aborted by user');
     uiwait(warndlg(message));
     return
-elseif strcmpi(methodSelected,methodTypes{3})
+elseif MTEXversion >= currentVersion && strcmpi(methodSelected,methodTypes{2})
+    message = sprintf('Script terminated: Execution aborted by user');
+    uiwait(warndlg(message));
+    return
+elseif MTEXversion < currentVersion && strcmpi(methodSelected,methodTypes{3})
     message = sprintf('Script terminated: Execution aborted by user');
     uiwait(warndlg(message));
     return
@@ -46,31 +62,38 @@ for jj = 1:numORs
     gBrange = gB(...
         gB.misorientation.angle >= misoRange.min(jj).*degree &...
         gB.misorientation.angle <= misoRange.max(jj).*degree);
-    
+
     if length(gBrange)>1500
         gBrange = discreteSample(gBrange,1500,'withReplacement');
     end
-    
+
     psiMODF = calcKernel(gBrange.misorientation,'exact','silent');
     mdfParent = calcDensity(gBrange(job.csParent.mineral).misorientation,...
         job.csParent,...
         'halfwidth',psiMODF.halfwidth,...
         'resolution',0.25*degree,...
         'exact','silent');
-    
-    if strcmpi(methodSelected,methodTypes{1})
+
+    if MTEXversion >= currentVersion % for MTEX versions 5.9.0 and above
         [~,mdfCenterParent] = max(mdfParent,...
-            'FundamentalRegion',...
-            'resolution',0.25*degree,...
-            'silent');
-        
-    elseif strcmpi(methodSelected,methodTypes{2})
-        mdfCenterParent = calcModes(mdfParent,...
-            'FundamentalRegion',...
-            'resolution',0.25*degree,...
-            'silent');
-%         'accuracy',0.05*degree,...
+            'accuracy',0.25*degree);
+
+    else % for MTEX versions 5.8.2 and below
+        if strcmpi(methodSelected,methodTypes{1})
+            [~,mdfCenterParent] = max(mdfParent,...
+                'FundamentalRegion',...
+                'resolution',0.25*degree,...
+                'silent');
+
+        elseif strcmpi(methodSelected,methodTypes{2})
+            mdfCenterParent = calcModes(mdfParent,...
+                'FundamentalRegion',...
+                'resolution',0.25*degree,...
+                'silent');
+            %         'accuracy',0.05*degree,...
+        end
     end
+
     mdfAxisParent = mdfCenterParent.axis(job.csParent.mineral,job.csParent.mineral,ss);
     p2c(jj) = mdfCenterParent;
     ORinfo(p2c(jj),'silent');
