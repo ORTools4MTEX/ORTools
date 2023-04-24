@@ -1,7 +1,7 @@
 ## UPDATE
 **For MTEX Version 5.9.0 (released in Mar 2023):**
 - Fixes for known bugs have been implemented in the **[ORTools Developer](https://github.com/ORTools4MTEX/ORTools)** branch.
-- In case of any new bugs/issues, please report them in the **[ORTools Discussions](https://github.com/ORTools4MTEX/ORTools/discussions)** section.
+- In case of any new bugs/issues, please report them in the **[ORTools Issues](https://github.com/ORTools4MTEX/ORTools/issues)** section.
 - A new version, **ORTools v2.1.0**, will be released shortly.
 
 **For MTEX Version 5.8.2 (released in Nov 2022):**
