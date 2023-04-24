@@ -9,7 +9,7 @@ function plotMap_phases(job,varargin)
 %  job  - @parentGrainReconstructor
 
 %% Define the text output format as Latex
-setLabels2Latex
+setInterp2Latex
 
 %% Plot the phase map
 f = figure;
