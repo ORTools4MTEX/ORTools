@@ -18,7 +18,7 @@ function f_area = plotMap_packets(job, varargin)
 cmap = get_option(varargin,'colormap','viridis');
 
 %% Define the text output format as Latex
-setLabels2Latex
+setInterp2Latex
 
 p2c_V = job.p2c.variants;
 p2c_V = p2c_V(:);
