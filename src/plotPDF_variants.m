@@ -23,7 +23,7 @@ cmap = get_option(varargin,'colormap','jet');
 msz = get_option(varargin,'markersize',6);
 
 %% Define the text output format as Latex
-setLabels2Latex
+setInterp2Latex
 
 % Compute the disorientation from the nominal OR
 p2c_V = job.p2c.variants;
