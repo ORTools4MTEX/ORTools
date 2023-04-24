@@ -21,7 +21,7 @@ if grainsMerged.length == job.grains.length
 end
 
 %% Define the text output format as Latex
-setLabels2Latex
+setInterp2Latex
 
 f = figure;
 ipfKey = ipfHSVKey(job.ebsd(job.csChild));
