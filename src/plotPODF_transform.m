@@ -33,7 +33,7 @@ pfName_In = get_option(varargin,'import','inputVPSC.Tex');
 pfName_Out = get_option(varargin,'export','outputVPSC.Tex');
 
 %% Define the text output format as Latex
-setLabels2Latex
+setInterp2Latex
 
 ORinfo(job.p2c,'silent');
 
