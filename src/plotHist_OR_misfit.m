@@ -32,7 +32,7 @@ if isempty(p2c)
 end
 
 %% Define the text output format as Latex
-setLabels2Latex
+setInterp2Latex
 
 %% Define the window settings for a set of docked figures
 % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
