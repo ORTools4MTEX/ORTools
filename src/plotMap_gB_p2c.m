@@ -14,7 +14,7 @@ function plotMap_gB_p2c(job,varargin)
 cmap = get_option(varargin,'colormap','jet');
 
 %% Define the text output format as Latex
-setLabels2Latex
+setInterp2Latex
 
 gB_p2c = job.grains.boundary(job.csParent.mineral,job.csChild.mineral);
 if ~isempty(gB_p2c)
