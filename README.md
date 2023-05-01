@@ -15,14 +15,6 @@
 
 ---
 
-| Left-aligned | Center-aligned | Right-aligned |
-| git status   | git status     | git status    |
-| git diff     | git diff       | git diff      |
-| :---         |     :---:      |          ---: |
-| git status   | git status     | git status    |
-
-
-
 | [**Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools) |
 
 | [**Authors**](https://github.com/ORTools4MTEX/ORTools#authors) |
