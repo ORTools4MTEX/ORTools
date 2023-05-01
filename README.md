@@ -14,9 +14,15 @@
 </p>
 
 ---
+
+| Left-aligned | Center-aligned | Right-aligned |
 | :---         |     :---:      |          ---: |
 | git status   | git status     | git status    |
 | git diff     | git diff       | git diff      |
+
+
+
+
 
 | [**Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools) |
 
