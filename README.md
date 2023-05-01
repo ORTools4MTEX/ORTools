@@ -17,17 +17,17 @@
 
 | [**Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools) |
 
-| [**Authors**](https://github.com/ORTools4MTEX/ORTools#authors)
+| [**Authors**](https://github.com/ORTools4MTEX/ORTools#authors) |
 
-| [**Contributors**](https://github.com/ORTools4MTEX/ORTools#contributors)
+| [**Contributors**](https://github.com/ORTools4MTEX/ORTools#contributors) |
 
-| [**How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools)
+| [**How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools) |
 
-| [**How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools)
+| [**How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools) |
 
-| [**ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts)
+| [**ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts) |
 
-| [**ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference)
+| [**ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference) |
 
 ---
 
