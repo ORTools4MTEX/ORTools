@@ -15,7 +15,7 @@
 
 ---
 
-|| [**Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools)
+| [**Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools) |
 
 | [**Authors**](https://github.com/ORTools4MTEX/ORTools#authors)
 
@@ -25,7 +25,9 @@
 
 | [**How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools)
 
-| [**ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts)                          | [**ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference)
+| [**ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts)
+
+| [**ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference)
 
 ---
 
