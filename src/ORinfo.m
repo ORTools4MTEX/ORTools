@@ -60,7 +60,7 @@ OR.variants.axis = setDisplayStyle(OR.variants.axis,'direction');
 if ~check_option(varargin,'silent')
     screenPrint('Step','Detailed information on the selected OR:');
     screenPrint('SubStep',sprintf(['OR misorientation angle = ',...
-        num2str(angle(OR.misorientation)./degree),'º']));
+        num2str(angle(OR.misorientation)./degree),'°']));
     
     screenPrint('Step','Parallel planes');
     screenPrint('SubStep',sprintf(['Closest parent plane = ',...
@@ -68,7 +68,7 @@ if ~check_option(varargin,'silent')
     screenPrint('SubStep',sprintf(['Closest child plane = ',...
         sprintMiller(OR.plane.child,'round')]));
     screenPrint('SubStep',sprintf(['Disor. of parallel plane relationship from OR = ',...
-        num2str(OR.misfit.plane./degree),'º']));
+        num2str(OR.misfit.plane./degree),'°']));
     
     screenPrint('Step','Parallel directions');
     screenPrint('SubStep',sprintf(['Closest parent direction = ',...
@@ -76,7 +76,7 @@ if ~check_option(varargin,'silent')
     screenPrint('SubStep',sprintf(['Closest child direction = ',...
         sprintMiller(OR.direction.child,'round')]));
     screenPrint('SubStep',sprintf(['Disor. of parallel directions relationship from OR = ',...
-        num2str(OR.misfit.direction./degree),'º']));
+        num2str(OR.misfit.direction./degree),'°']));
     
     screenPrint('Step','OR misorientation rotation axes');
     screenPrint('SubStep',sprintf(['Parent rot. axis = ',...
@@ -84,23 +84,23 @@ if ~check_option(varargin,'silent')
     screenPrint('SubStep',sprintf(['Child rot. axis = ',...
         sprintMiller(OR.rotationAxis.child)]));
     screenPrint('SubStep',sprintf(['Disor. of parallel rot. axes relationship from OR = ',...
-        num2str(OR.misfit.axis./degree),'º']));
+        num2str(OR.misfit.axis./degree),'°']));
     
     screenPrint('Step','Angle & rot. axes of unique variants');
     for ii = 1:length(OR.variants.orientation)
         screenPrint('SubStep',sprintf([num2str(ii),': ',...
             num2str(OR.variants.angle(ii)./degree,'%2.2f'),...
-            'º / ',sprintMiller(OR.variants.axis(ii))]));
+            '° / ',sprintMiller(OR.variants.axis(ii))]));
     end
     
 else
     screenPrint('SubStep',['OR =\t',...
         sprintMiller(OR.plane.parent,'round'),'_p || ',...
         sprintMiller(OR.plane.child,'round'),'_c,\t',...
-        'Ang. dev: ',num2str(OR.misfit.plane./degree),'º\n',...
+        'Ang. dev: ',num2str(OR.misfit.plane./degree),'°\n',...
         '\t\t\t',sprintMiller(OR.direction.parent,'round'),'_p || ',...
         sprintMiller(OR.direction.child,'round'),'_c,\t',...
-        'Ang. dev: ',num2str(OR.misfit.direction./degree),'º']);
+        'Ang. dev: ',num2str(OR.misfit.direction./degree),'°']);
 end
 end
 
@@ -124,7 +124,7 @@ if isa(m,'Miller')
 end
 end
 
-%% Print Crystal Planes
+%% Screenprint Crystal Planes
 function s = sprintMiller(mil,varargin)
 if any(strcmpi(mil.dispStyle,{'hkl','hkil'}))
     if strcmpi(mil.dispStyle,'hkil')
