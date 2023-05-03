@@ -104,6 +104,7 @@ figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 
 %% Compute the habit plane
+screenPrint('SegmentStart','Compute the habit plane');
 [hPlane,statistics] =  computeHabitPlane(job);
 statistics('Deviation')
 statistics('meanDeviation')
