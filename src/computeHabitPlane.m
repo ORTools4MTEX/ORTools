@@ -45,9 +45,9 @@ habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
 %% Calculate the angular deviation between the traces and the fitted habit plane
 deviation = angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree - 90; 
 % Mean deviation
-meanDeviation = abs(mean(deviation)); 
+meanDeviation = mean(abs(deviation)); 
 % Std deviation
-stdDeviation = abs(std(deviation)); 
+stdDeviation = std(abs(deviation)); 
 % Quantiles
 quantiles = quantile(deviation,[0.25 0.5 0.75]);
 % Return the statistics of fitting
@@ -77,7 +77,7 @@ screenPrint('SubStep',sprintf(['Nr. analysed parent grains = ',...
     num2str(length(oriParent))]));
 screenPrint('SubStep',sprintf(['Mean deviation = ',...
     num2str(meanDeviation),'° ± ',num2str(stdDeviation),'°']));
-screenPrint('SubStep',sprintf(['Quantiles = [',...
+screenPrint('SubStep',sprintf(['Quantiles [25%, 50%, 75%] = [',...
     num2str(quantiles(1)),'°, ',num2str(quantiles(2)),'°, ',num2str(quantiles(3)),'°]']));
 end
 
