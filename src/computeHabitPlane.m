@@ -1,45 +1,147 @@
-function [hPlane,statistics] = computeHabitPlane(job,varargin)
+function [habitPlane,statistics] = computeHabitPlane(job,varargin)
 % Compute the habit plane based on determined traces of a 2D map
-% Implemented as in https://doi.org/10.48550/arXiv.2303.07750 
+% Implemented as per https://doi.org/10.48550/arXiv.2303.07750
 %
 % Syntax
-%
 % [hPlane,statistics] = computeHabitPlane(job)
 %
 % Input
 %  job      - @parentGrainReconstructor
 %
 % Output
-%  hPlane   - @Miller  Habit Plane
-%  statistics  - @Container  Fitting statistics
+%  hPlane      - @Miller     = Habit plane
+%  statistics  - @Container  = Statistics of fitting
 
-if all(isnan(job.variantId)); job.calcVariants; end % Compute variants
-childGrains = job.grainsPrior; %Get child grains
-traces = calcTraces(childGrains, [job.mergeId(:), job.variantId(:)]); %Calculate traces
-traces = traces(job.isParent,:); % Only consider those that have a reconstructed parent orientation
-oriParent = job.parentGrains.meanOrientation; %Get the parent orientations
+if all(isnan(job.variantId))
+    job.calcVariants  % Compute variants
+end
+
+% Get child grains
+childGrains = job.grainsPrior;
+
+% Calculate the traces ofthe child grains
+traces = calcTraces(childGrains, [job.mergeId(:), job.variantId(:)]);
+
+% Only consider those traces that have a reconstructed parent orientation
+traces = traces(job.isParent,:); 
+
+% Get the parent orientations
+oriParent = job.parentGrains.meanOrientation;
+
+% Determine the variant specific parent orientations
 oriPVariant = oriParent.project2FundamentalRegion .* ...
-inv(variants(job.p2c)) .* job.p2c; % Determine the variant specific parent orientations
-tracesParent = inv(oriPVariant) .* traces; % Transform traces into the parent reference frame
-hPlane = perp(tracesParent,'robust'); % Determine the habit plane (orthogonal fit)
-hPlane.dispStyle = "hkl"; % Change Miller object to type crystal plane
-deviation = angle(hPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree-90; % Deviation between traces and fitted habit plane
-meanDeviation = abs(mean(deviation)); %Mean deviation
-quantiles = quantile(deviation,[0.25 0.5 0.75]); %Quantiles
+    inv(variants(job.p2c)) .* job.p2c; 
+
+% Transform traces into the parent reference frame
+tracesParent = inv(oriPVariant) .* traces;
+
+% Determine the habit plane (orthogonal fit)
+habitPlane = perp(tracesParent,'robust'); 
+
+% Change Miller object to type crystal plane
+habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
+% habitPlane.dispStyle = "hkl"; %Mtex default
+
+%% Calculate the angular deviation between the traces and the fitted habit plane
+deviation = angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree - 90; 
+% Mean deviation
+meanDeviation = abs(mean(deviation)); 
+% Std deviation
+stdDeviation = abs(std(deviation)); 
+% Quantiles
+quantiles = quantile(deviation,[0.25 0.5 0.75]);
+% Return the statistics of fitting
 statistics = containers.Map({'Deviation','meanDeviation','Quantiles'},{deviation,meanDeviation,quantiles},'UniformValues',false);
-%% Plot and return the habit plane 
+
+
+%% Plot and return the habit plane
 % Plot traces and fitted habit plane
 figure;
-plot(tracesParent,'MarkerSize',6,'MarkerFaceColor','k','MarkerFaceAlpha',0.4,'MarkerEdgeAlpha',0.5);
-hold on
-plot(hPlane,'plane','linecolor','r','linewidth',2);
-plot(hPlane,'Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1);
+h{1} = plot(tracesParent,'MarkerSize',6,'MarkerFaceColor','k','MarkerFaceAlpha',0.4,'MarkerEdgeAlpha',0.5);
+hold all
+h{2} = plot(habitPlane,'plane','linecolor','r','linewidth',2);
+h{3} = plot(habitPlane,'Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane)});
+hold off;
+legend([h{1:2}], {'Parent traces','Fitted habit plane'}, 'location', 'east');
 
-%Text output
-nr_traces = length(find(~isnan(traces)));
-fprintf("\n*** Habit Plane determination ***\n")
-fprintf("Nr. analyzed traces: %d\n",nr_traces);
-fprintf("Nr. analyzed parent grains: %d\n",length(oriParent));
-fprintf("The habit plane is (%s %s %s)\n",num2str(hPlane.h),num2str(hPlane.k),num2str(hPlane.l));
-fprintf("The rounded habit plane is %s\n",hPlane.round);
-fprintf("Mean deviation: %0.2f °, Quantiles: [%0.2f %0.2f %0.2f] °\n",meanDeviation, quantiles);
+
+%% Output habit plane text
+screenPrint('Step','Detailed information on the computed habit plane:');
+screenPrint('SubStep',sprintf(['Habit plane (as-computed) = ',...
+    sprintMiller(habitPlane)]));
+screenPrint('SubStep',sprintf(['Habit plane (rounded-off) = ',...
+    sprintMiller(habitPlane,'round')]));
+screenPrint('SubStep',sprintf(['Nr. analysed traces = ',...
+    num2str(length(find(~isnan(traces))))]));
+screenPrint('SubStep',sprintf(['Nr. analysed parent grains = ',...
+    num2str(length(oriParent))]));
+screenPrint('SubStep',sprintf(['Mean deviation = ',...
+    num2str(meanDeviation),'° ± ',num2str(stdDeviation),'°']));
+screenPrint('SubStep',sprintf(['Quantiles = [',...
+    num2str(quantiles(1)),'°, ',num2str(quantiles(2)),'°, ',num2str(quantiles(3)),'°]']));
+end
+
+
+
+
+%% Set Display Style of Miller objects
+function m = setDisplayStyle(millerObj,mode)
+m = millerObj;
+if isa(m,'Miller')
+    if any(strcmpi(m.CS.lattice,{'hexagonal','trigonal'})) == 1
+        if strcmpi(mode,'direction')
+            m.dispStyle = 'UVTW';
+        elseif strcmpi(mode,'plane')
+            m.dispStyle = 'hkil';
+        end
+    else
+        if strcmpi(mode,'direction')
+            m.dispStyle = 'uvw';
+        elseif strcmpi(mode,'plane')
+            m.dispStyle = 'hkl';
+        end
+    end
+end
+end
+
+%% Screenprint Crystal Planes
+function s = sprintMiller(mil,varargin)
+if any(strcmpi(mil.dispStyle,{'hkl','hkil'}))
+    if strcmpi(mil.dispStyle,'hkil')
+        mill = {'h','k','i','l'};
+    elseif strcmpi(mil.dispStyle,'hkl')
+        mill = {'h','k','l'};
+    end
+    s = '(';
+    for i = 1:length(mill)
+        if check_option(varargin,'round')
+            s = [s,num2str(round(mil.(mill{i}),0))];
+        else
+            s = [s,num2str(mil.(mill{i}),'%0.4f')];
+        end
+        if i<length(mill)
+            s = [s,','];
+        end
+    end
+    s = [s,')'];
+elseif any(strcmpi(mil.dispStyle,{'uvw','UVTW'}))
+    if strcmpi(mil.dispStyle,'UVTW')
+        mill = {'U','V','T','W'};
+    elseif strcmpi(mil.dispStyle,'uvw')
+        mill = {'u','v','w'};
+    end
+    s = '[';
+    for i = 1:length(mill)
+        if check_option(varargin,'round')
+            s = [s,num2str(round(mil.(mill{i}),0))];
+        else
+            s = [s,num2str(mil.(mill{i}),'%0.4f')];
+        end
+        if i<length(mill)
+            s = [s,','];
+        end
+    end
+    s = [s,']'];
+end
+end
+
