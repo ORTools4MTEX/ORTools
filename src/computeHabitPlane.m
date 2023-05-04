@@ -11,6 +11,14 @@ function [habitPlane,statistics] = computeHabitPlane(job,varargin)
 % Output
 %  hPlane      - @Miller     = Habit plane
 %  statistics  - @Container  = Statistics of fitting
+%
+% Options
+%  minClusterSize - minimum number of pixels required for trace computation (default: 100) 
+%  Radon          - Radon based algorithm
+%  Fourier        - Fourier based algorithm
+%  Shape          - Grain shaped based algorithm 
+%  Hist           - Histogram based algorithm 
+
 
 if all(isnan(job.variantId))
     job.calcVariants  % Compute variants
@@ -20,7 +28,7 @@ end
 childGrains = job.grainsPrior;
 
 % Calculate the traces ofthe child grains
-traces = calcTraces(childGrains, [job.mergeId(:), job.variantId(:)]);
+[traces, relIndex, clusterSize] = calcTraces(childGrains, [job.mergeId(:), job.variantId(:)],varargin);
 
 % Only consider those traces that have a reconstructed parent orientation
 traces = traces(job.isParent,:); 
@@ -43,7 +51,7 @@ habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
 % habitPlane.dispStyle = "hkl"; %Mtex default
 
 %% Calculate the angular deviation between the traces and the fitted habit plane
-deviation = angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree - 90; 
+deviation = 90 - angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree; 
 % Mean deviation
 meanDeviation = mean(deviation); 
 % Std deviation
@@ -52,20 +60,29 @@ stdDeviation = std(deviation);
 quantiles = quantile(deviation,[0.25 0.5 0.75]);
 % Return the statistics of fitting
 statistics = containers.Map(...
-    {'Deviation','meanDeviation','stdDeviation','Quantiles'},...
-    {deviation,meanDeviation,stdDeviation,quantiles},...
+    {'relIndex','clusterSize','Deviation','meanDeviation','stdDeviation','Quantiles'},...
+    {relIndex,clusterSize,deviation,meanDeviation,stdDeviation,quantiles},...
     'UniformValues',false);
 
 
 %% Plot and return the habit plane
 % Plot traces and fitted habit plane
 figure;
-h{1} = plot(tracesParent,'MarkerSize',6,'MarkerFaceColor','k','MarkerFaceAlpha',0.4,'MarkerEdgeAlpha',0.5);
+h{1} = scatter(tracesParent,'MarkerSize',6,'MarkerFaceColor','k','MarkerFaceAlpha',0.4,'MarkerEdgeAlpha',0.5);
+drawnow;
 hold all
 h{2} = plot(habitPlane,'plane','linecolor','r','linewidth',2);
 h{3} = plot(habitPlane,'Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane)});
 hold off;
-legend([h{1:2}], {'Parent traces','Fitted habit plane'}, 'location', 'east');
+% legend([h{1:2}], {'Parent traces','Fitted habit plane'}, 'location', 'east');
+
+figure;
+tpd = calcDensity(tracesParent,'noSymmetry','halfwidth',2.5*degree);
+contourf(tpd)
+mtexColorMap white2black
+mtexColorbar
+circle(habitPlane,'color','red','linewidth',2)
+
 
 
 %% Output habit plane text
