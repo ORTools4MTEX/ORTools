@@ -84,7 +84,7 @@ This will also help you follow the comments, which provide instructions on the v
 
 ### [Example 8: 29 MAR 2023](./ORTools_example8.m)
 #### Update to Example 2: Parent grain reconstruction using the variant graph approach in Ti alloys
-This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) to demonstrate the reconstruction of parent beta grains from child alpha grains in a aplha-beta Ti alloy.
+This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) to demonstrate the reconstruction of parent beta grains from child alpha grains in a alpha-beta Ti alloy.
 The script provides a faster and less involved way of reconstructing this microstructure compared to the
 tripple-point based approach from [Example 2](./ORTools_example2.m). 
 
