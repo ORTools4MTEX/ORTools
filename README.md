@@ -56,7 +56,7 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
 ## How to cite ORTools
 If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite this open-access paper as your reference:
 
-[**F. Niessen, T. Nyyssönen, A.A. Gazder, R. Hielscher, Parent grain reconstruction from partially and fully transformed microstructures in MTEX, Journal of Applied Crystallography: 55(1), https://doi.org/10.1107/S1600576721011560, 2022**](https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf).
+[**F. Niessen, T. Nyyssönen, A.A. Gazder, R. Hielscher, Parent grain reconstruction from partially and fully transformed microstructures in MTEX, Journal of Applied Crystallography: 55(1), pp. 180-194, 2022. (https://doi.org/10.1107/S1600576721011560)**](https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf).
 
 ---
 
@@ -90,7 +90,7 @@ tripple-point based approach from [Example 2](./ORTools_example2.m).
 
 The details related to the variant graph approach are described in the following paper:
 
-[**R. Hielscher, T. Nyyssönen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia: Accepted March 2022**](https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction)
+[**R. Hielscher, T. Nyyssönen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia: 22,101399, 2022. (https://doi.org/10.1016/j.mtla.2022.101399)**](https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction)
 
 ---
 
@@ -100,7 +100,7 @@ This script follows the same dataset as that used in the official [MTEX example]
 
 The details related to the variant graph approach are described in the following paper:
 
-[**R. Hielscher, T. Nyyssönen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia: Accepted March 2022**](https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction)
+[**R. Hielscher, T. Nyyssönen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia: 22,101399, 2022. (https://doi.org/10.1016/j.mtla.2022.101399)**](https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction)
 
 [![ORTools - Example 7](http://img.youtube.com/vi/E9IFyFUQNl4/0.jpg)](https://www.youtube.com/watch?v=E9IFyFUQNl4 "Video Title")
 
