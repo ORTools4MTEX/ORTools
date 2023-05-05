@@ -14,10 +14,10 @@ function [habitPlane,statistics] = computeHabitPlane(job,varargin)
 %
 % Options
 %  minClusterSize - minimum number of pixels required for trace computation (default: 100) 
-%  Radon          - Radon based algorithm
-%  Fourier        - Fourier based algorithm
-%  Shape          - Grain shaped based algorithm 
-%  Hist           - Histogram based algorithm 
+%  Radon          - Radon based algorithm (pixel data used)
+%  Fourier        - Fourier based algorithm (pixel data used)
+%  Shape          - Characteristic grain shape based algorithm (grain data used)
+%  Hist           - Circular histogram based algorithm (grain data used)
 
 
 if all(isnan(job.variantId))
@@ -27,7 +27,7 @@ end
 % Get child grains
 childGrains = job.grainsPrior;
 
-% Calculate the traces ofthe child grains
+% Calculate the traces of the child grains
 [traces, relIndex, clusterSize] = calcTraces(childGrains, [job.mergeId(:), job.variantId(:)],varargin);
 
 % Only consider those traces that have a reconstructed parent orientation
@@ -69,12 +69,12 @@ statistics = containers.Map(...
 % Plot traces and fitted habit plane
 figure;
 h{1} = scatter(tracesParent,'MarkerSize',6,'MarkerFaceColor','k','MarkerFaceAlpha',0.4,'MarkerEdgeAlpha',0.5);
-drawnow;
 hold all
 h{2} = plot(habitPlane,'plane','linecolor','r','linewidth',2);
 h{3} = plot(habitPlane,'Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane)});
 hold off;
-% legend([h{1:2}], {'Parent traces','Fitted habit plane'}, 'location', 'east');
+drawnow;
+legend([h{:}], {'Parent traces','Habit trace','Habit plane'}, 'location', 'east');
 
 figure;
 tpd = calcDensity(tracesParent,'noSymmetry','halfwidth',2.5*degree);
