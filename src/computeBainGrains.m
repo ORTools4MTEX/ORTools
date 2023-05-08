@@ -26,6 +26,6 @@ bainBoundary = gB(isBain);
  pId = nan(length(bains),1);
 
 %Somebody help me remove the loop to speed up the function!
-for i=1:length(bains)
-    pId(i) = median(bainId(bains(i).id==parentId),"all","omitnan");
+for ii=1:length(bains)
+    pId(ii) = median(bainId(bains(ii).id==parentId),"all","omitnan");
 end
