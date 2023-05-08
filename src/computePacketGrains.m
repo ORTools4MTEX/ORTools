@@ -26,6 +26,6 @@ packetBoundary = gB(isPacket);
  pId = nan(length(packets),1);
 
 %Somebody help me remove the loop to speed up the function!
-for i=1:length(packets)
-    pId(i) = median(packetId(packets(i).id==parentId),"all","omitnan");
+for ii=1:length(packets)
+    pId(ii) = median(packetId(packets(ii).id==parentId),"all","omitnan");
 end
