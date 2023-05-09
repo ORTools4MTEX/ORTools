@@ -1,8 +1,8 @@
-function detectParentTwins(job,pGrainId,varargin)
-% Detect twins in a parent grains by local refinement
+function computeParentTwins(job,pGrainId,varargin)
+% Computes twins in a parent grains by local refinement
 %
 % Syntax
-%  detectParentTwins(job,pGrainId)
+%  computeParentTwins(job,pGrainId)
 %
 % Input
 %  job          - @parentGrainreconstructor
