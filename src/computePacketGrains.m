@@ -1,4 +1,4 @@
-function packets = computePacketGrains(job, varargin)
+function packets = computePacketGrains(job,varargin)
 % Compute the packet grains
 %
 % Syntax
