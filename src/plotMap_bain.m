@@ -36,7 +36,7 @@ else
     [~,~,bainIds] = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
     plot(cEBSD,bainIds);
     f_area = [histcounts(bainIds,maxColors)/length(bainIds)]';
-    disp(table([1:maxColors]',f_area,'VariableNames',{'Bain groups','Area fraction'}))
+    disp(table([1:maxColors]',f_area,'VariableNames',{'BainGroups','AreaFrac'}))
 end
 
 
