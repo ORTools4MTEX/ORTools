@@ -17,7 +17,7 @@ function plotPDF_bain(job,varargin)
 
 oriParent = getClass(varargin,'orientation',orientation.id(job.csParent));
 pdf = getClass(varargin,'Miller',Miller(0,0,1,job.csChild,'hkl'));
-cmap = get_option(varargin,'colormap','jet');
+cmap = get_option(varargin,'colormap','hot');
 msz = get_option(varargin,'markersize',6);
 
 %% Define the text output format as Latex
@@ -43,7 +43,7 @@ plotPDF(oriVariants, bainIds, pdf,...
 
 % Define the maximum number of color levels and plot the colorbar
 maxColors = max(bainIds);
-colormap(flipud(hot));
+colormap(cmap);
 caxis([1 maxColors]);
 colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
     'YTick', [1:1:maxColors],...
