@@ -31,6 +31,8 @@ else
     pGrainId = job.parentGrains.id;
 end
 
+cmap = get_option(varargin,'colormap',flipud(bone));
+
 
 for ii = 1:length(pGrainId)
     %% Define the parent grain
@@ -105,7 +107,7 @@ else
 end
 hold off
 % Define the maximum number of color levels and plot the colorbar
-colormap(flipud(bone));
+colormap(cmap);
 caxis([0 round(max(dBlock))]);
 colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
     'YTick', [0:1:round(max(dBlock))],...
