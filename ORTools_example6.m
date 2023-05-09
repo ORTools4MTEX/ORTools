@@ -26,7 +26,7 @@ Ini.texturePath = [Ini.dataPath,'output/texture/'];
 Ini.imagePath = [Ini.dataPath,'output/images/'];
 Ini.phaseNames = {'Gamma','AlphaP','Epsilon'};
 %% Import EBSD data and save current file name
-ebsd = loadEBSD_ctf([Ini.ebsdPath,'TRWIPsteel2.ctf'],'convertSpatial2EulerReferenceFrame');
+ebsd = loadEBSD_ctf([Ini.ebsdPath,'TRWIPsteel.ctf'],'convertSpatial2EulerReferenceFrame');
 ebsd = ebsd('indexed');
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
@@ -73,7 +73,7 @@ plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2,'parent');
 job1.mergeSimilar('threshold',7.5*degree);
 parentIPFkey = plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2,'parent');
 figure; plot(parentIPFkey);
-
+return
 % ************** %
 %% Define and check the OR GAMMA - EPSILON
 % Choose "Gamma" as a parent and "Epsilon" as a child phase
