@@ -23,9 +23,12 @@ isPacket = ids(:,1) - ids(:,2) == 0;
 packetBoundary = gB(isPacket);
 % Get packets
 [packets,parentId] = merge(job.grainsPrior,packetBoundary);
- pId = nan(length(packets),1);
+%  pId = nan(length(packets),1);
+% 
+% % Somebody help me remove the loop to speed up the function!
+% for ii = 1:length(packets)
+%     pId(ii) = median(packetId(packets(ii).id==parentId),"all","omitnan");
+% end
 
-%Somebody help me remove the loop to speed up the function!
-for ii=1:length(packets)
-    pId(ii) = median(packetId(packets(ii).id==parentId),"all","omitnan");
-end
+pId = arrayfun(@(idx) median(packetId(packets(idx).id == parentId(idx)),'all','omitnan'), 1:length(packets));
+pId = reshape(pId, [], 1);
