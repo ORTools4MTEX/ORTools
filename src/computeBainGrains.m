@@ -1,4 +1,4 @@
-function bains = computeBainGrains(job, varargin)
+function bains = computeBainGrains(job,varargin)
 % Compute the Bain group grains
 %
 % Syntax
