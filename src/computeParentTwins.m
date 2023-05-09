@@ -1,5 +1,5 @@
 function computeParentTwins(job,pGrainId,varargin)
-% Computes twins in a parent grains by local refinement
+% Compute twins in a parent grains by local refinement.
 %
 % Syntax
 %  computeParentTwins(job,pGrainId)

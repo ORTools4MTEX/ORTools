@@ -1,5 +1,5 @@
 function [habitPlane,statistics] = computeHabitPlane(job,varargin)
-% Compute the habit plane based on determined traces of a 2D map
+% Compute the habit plane based on determined traces of a 2D map.
 % Implemented as per https://doi.org/10.48550/arXiv.2303.07750
 %
 % Syntax

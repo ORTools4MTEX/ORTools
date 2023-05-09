@@ -1,13 +1,14 @@
 function packets = computePacketGrains(job,varargin)
-% Compute the packet grains
+% Compute the crystallographic packets of grains.
 %
 % Syntax
-%  computePacketGrains(job)
+% computePacketGrains(job)
 %
 % Input
-%  job          - @parentGrainreconstructor
-%
-% Options
+% job          - @parentGrainreconstructor
+% 
+% Output
+% grains       - @grains2d 
 
 % Get the grain boundaries
 gB = job.grainsPrior.boundary;

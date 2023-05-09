@@ -219,18 +219,19 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ---
 
-### [computeVariantGrains](./src/computeVariantGrains.m)
-Refine the child grains in the job object based on their variant IDs and return the refined grains and the child EBSD date with the new grain Ids
+### [computeBainGrains](./src/computeBainGrains.m)
+Compute the Bain groups of grains.
 
 - Syntax
-  - [variant_grains,cEBSD] = computeVariantGrains(job,varargin)
+  - [bain_grains] = computeBainGrains(job)
 - Input
   - job  - @parentGrainReconstructor
-- Optional
-  - parentGrainId    - parent grain Id using the argument 'parentGrainId'
 - Output
-  - variant_grains   - @grains2d 
-  - ebsdC  - @EBSD
+  - bain_grains   - @grains2d 
+
+<p align="center">
+  <img src="./doc/images/computeBainGrains.png" alt="UI of computeGrains" width="400"/>
+</p>
 
 ---
 
@@ -250,6 +251,79 @@ Small GUI to compute grains from EBSD data and optionally filter them.
   <img src="./doc/images/computeGrains.png" alt="UI of computeGrains" width="400"/>
 </p>
 
+---
+
+### [computeHabitPlane](./src/computeHabitPlane.m)
+Compute the habit plane based on determined traces of a 2D map.
+Implemented as per https://doi.org/10.48550/arXiv.2303.07750
+
+- Syntax
+  - [hPlane,statistics] = computeHabitPlane(job)
+- Input
+  -  job      - @parentGrainReconstructor
+- Output
+  -  hPlane      - @Miller     = Habit plane
+  -  statistics  - @Container  = Statistics of fitting
+- Options
+  -  minClusterSize - minimum number of pixels required for trace computation (default: 100) 
+  -  Radon          - Radon based algorithm (pixel data used)
+  -  Fourier        - Fourier based algorithm (pixel data used)
+  -  Shape          - Characteristic grain shape based algorithm (grain data used)
+  -  Hist           - Circular histogram based algorithm (grain data used)
+
+<p align="center">
+  <img src="./doc/images/computeHabitPlane.png" alt="UI of computeGrains" width="400"/>
+</p>
+
+---
+
+### [computePacketGrains](./src/computePacketGrains.m)
+Compute the crystallographic packets of grains.
+
+- Syntax
+  - [packet_grains] = computePacketGrains(job)
+- Input
+  - job  - @parentGrainReconstructor
+- Output
+  - packet_grains   - @grains2d 
+
+<p align="center">
+  <img src="./doc/images/computePacketGrains.png" alt="UI of computeGrains" width="400"/>
+</p>
+
+---
+
+### [computeParentTwins](./src/computeParentTwins.m)
+Compute twins in a parent grains by local refinement.
+
+- Syntax
+  -  computeParentTwins(job,pGrainId)
+- Input
+  -  job          - @parentGrainreconstructor
+  -  pGrainId     - parent grain Id 
+  -  direction    - @vector3d
+- Option
+  -  grains       - plot grain data instead of EBSD data
+
+<p align="center">
+  <img src="./doc/images/computeParentTwins.png" alt="UI of computeGrains" width="400"/>
+</p>
+
+---
+
+### [computeVariantGrains](./src/computeVariantGrains.m)
+Refine the child grains in the job object based on their variant IDs and return the refined grains and the child EBSD date with the new grain Ids
+
+- Syntax
+  - [variant_grains,cEBSD] = computeVariantGrains(job,varargin)
+- Input
+  - job  - @parentGrainReconstructor
+- Optional
+  - parentGrainId    - parent grain Id using the argument 'parentGrainId'
+- Output
+  - variant_grains   - @grains2d 
+  - ebsdC  - @EBSD
+  
 ---
 
 ### [defineORs](./src/defineORs.m)
@@ -428,7 +502,7 @@ Contributed by *Dr. Tuomo Nyyssönen*
   - job          - @parentGrainreconstructor
   - pGrainId     - parent grain Id using the argument 'parentGrainId'
 
-- Option
+- Options
   - noScalebar   - Remove scalebar from maps
   - noFrame      - Remove frame around maps
 

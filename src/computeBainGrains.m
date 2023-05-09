@@ -1,13 +1,14 @@
 function bains = computeBainGrains(job,varargin)
-% Compute the Bain group grains
+% Compute the Bain groups of grains.
 %
 % Syntax
-%  computeBainGrains(job)
+% computeBainGrains(job)
 %
 % Input
-%  job          - @parentGrainreconstructor
+% job          - @parentGrainreconstructor
 %
-% Options
+% Output
+% grains       - @grains2d 
 
 % Get the grain boundaries
 gB = job.grainsPrior.boundary;

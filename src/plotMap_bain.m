@@ -1,5 +1,5 @@
 function f_area = plotMap_bain(job, varargin)
-% plot the map of child grains colored according to their bain ID
+% Plot the map of child grains colored according to their Bain groups.
 %
 % Syntax
 %  plotMap_bain(job)
@@ -8,8 +8,7 @@ function f_area = plotMap_bain(job, varargin)
 %  job          - @parentGrainreconstructor
 %
 % Output
-%  f_area: Area fraction of each variant
-%  entire EBSD map
+%  f_area: Area fraction of each Bain group in the EBSD map
 %
 % Options
 %  colormap - colormap string
