@@ -1,4 +1,4 @@
-function tileFigs() 
+function tileFigures() 
 % Utility function to tile all figures evenly spread accros the screen
 %
 % Syntax
