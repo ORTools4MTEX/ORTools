@@ -176,7 +176,11 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ### Function Index
 
+- [computeBainGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains)
 - [computeGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrains)
+- [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane)
+- [computePacketGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computePacketGrains)
+- [computeParentTwins](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeParentTwins)
 - [computeVariantGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantGrains)
 - [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors)
 - [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker)
@@ -188,6 +192,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [plotHist_OR_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotHist_OR_misfit)
 - [plotIPDF_gB_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_misfit)
 - [plotIPDF_gB_prob](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_prob)
+- [plotMap_bain](https://github.com/ORTools4MTEX/ORTools/blob/develop/README.md#plotmap_bain)
 - [plotMap_blockWidths](https://github.com/ORTools4MTEX/ORTools/blob/develop/README.md#plotmap_blockwidths)
 - [plotMap_clusters](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_clusters)
 - [plotMap_gB_c2c](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_gB_c2c)
@@ -199,6 +204,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [plotMap_phases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_phases)
 - [plotMap_variantPairs](https://github.com/ORTools4MTEX/ORTools/blob/develop/README.md#plotmap_variantPairs)
 - [plotMap_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_variants)
+- [plotPDF_bain](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_bain)
 - [plotPDF_packets](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_packets)
 - [plotPDF_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_variants)
 - [plotPODF_transform](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transform)
@@ -209,7 +215,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [saveImage](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#saveImage)
 - [screenPrint](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#screenPrint)
 - [setParentGrainReconstructor](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#setParentGrainReconstructor)
-- [tileFigs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#tileFigs)
+- [tileFigures](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#tileFigures)
 
 ---
 
@@ -782,7 +788,7 @@ An auxiliary GUI function to define a job of class [parentGrainReconstructor](ht
 
 ---
 
-### [tileFigs](./src/tileFigs.m)
+### [tileFigures](./src/tileFigures.m)
 An auxiliary function to distribute figures evenly over a user screen/monitor.
 
 - Syntax
