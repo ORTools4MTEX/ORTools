@@ -173,7 +173,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ---
 
 
-## ORTools alphabetical function index
+### ORTools alphabetical function index
 
 # C
 - [computeBainGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains)
