@@ -281,8 +281,8 @@ Small GUI to compute grains from EBSD data and optionally filter them.
 ---
 
 ### [computeHabitPlane](./src/computeHabitPlane.m)
-Compute the habit plane based on determined traces of a 2D map.
-Implemented as per https://doi.org/10.48550/arXiv.2303.07750
+Compute the habit plane based on determined traces of a 2D map as per the following reference:
+[T. Nyyssonen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane determination from reconstructed parent phase orientation maps (https://doi.org/10.48550/arXiv.2303.07750)
 
 - Syntax
   - [hPlane,statistics] = computeHabitPlane(job)
@@ -541,7 +541,8 @@ Plot the map of child grains colored according to their Bain groups.
 ---
 
 ### [plotMap_blockWidths](./src/plotMap_blockWidhts.m)
-This script calculates the representative value for martensite block widths by projecting all boundary points to the vector perpendicular to the trace of the {111}a plane as per the following reference: [S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A, Volumes 438–440, 2006, Pages 237-240](https://doi.org/10.1016/j.msea.2005.12.048)
+This script calculates the representative value for martensite block widths by projecting all boundary points to the vector perpendicular to the trace of the {111}a plane as per the following reference:
+[S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A, Volumes 438–440, 2006, Pages 237-240](https://doi.org/10.1016/j.msea.2005.12.048)
 
 Contributed by *Dr. Tuomo Nyyssönen*
 
@@ -698,7 +699,8 @@ The function plots a phase map of the grains within *job* and the grain boundari
 ---
 
 ### [plotMap_variantPairs](./src/plotMap_variantPairs.m)
-Plot pairs of martensitic variants (block boundaries) in steel microstructures as per the analysis in the following reference: [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to identify martensite and bainite, Mater. Today Proc., Volume 2, Supplement 3, 2015, Pages S913-S916,](https://doi.org/10.1016/j.matpr.2015.07.430)
+Plot pairs of martensitic variants (block boundaries) in steel microstructures as per the analysis in the following reference:
+[S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to identify martensite and bainite, Mater. Today Proc., Volume 2, Supplement 3, 2015, Pages S913-S916,](https://doi.org/10.1016/j.matpr.2015.07.430)
 
 - Syntax
   - variantPairs_boundary = plotMap_variantPairs(job,varargin)
