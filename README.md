@@ -182,16 +182,32 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [computePacketGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computePacketGrains)
 - [computeParentTwins](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeParentTwins)
 - [computeVariantGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantGrains)
+
+
 - [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors)
+
+
 - [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker)
+
+
 - [grainClick](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#grainClick)
 - [guiOR](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#guiOR)
+
+
 - [orientationMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#orientationMaker)
 - [ORinfo](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#ORinfo)
+
+
 - [peakFitORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs)
+
+
 - [plotHist_OR_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotHist_OR_misfit)
+
+
 - [plotIPDF_gB_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_misfit)
 - [plotIPDF_gB_prob](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_prob)
+
+
 - [plotMap_bain](https://github.com/ORTools4MTEX/ORTools/blob/develop/README.md#plotmap_bain)
 - [plotMap_blockWidths](https://github.com/ORTools4MTEX/ORTools/blob/develop/README.md#plotmap_blockwidths)
 - [plotMap_clusters](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_clusters)
@@ -204,17 +220,29 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [plotMap_phases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_phases)
 - [plotMap_variantPairs](https://github.com/ORTools4MTEX/ORTools/blob/develop/README.md#plotmap_variantPairs)
 - [plotMap_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_variants)
+
+
 - [plotPDF_bain](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_bain)
 - [plotPDF_packets](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_packets)
 - [plotPDF_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_variants)
+
+
 - [plotPODF_transform](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transform)
+
+
 - [plotStack](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotStack)
+
+
 - [readCPR](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#readCPR)
 - [recolorPhases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#recolorPhases)
 - [renamePhases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#renamePhases)
+
+
 - [saveImage](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#saveImage)
 - [screenPrint](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#screenPrint)
 - [setParentGrainReconstructor](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#setParentGrainReconstructor)
+
+
 - [tileFigures](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#tileFigures)
 
 ---
