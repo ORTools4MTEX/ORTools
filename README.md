@@ -282,7 +282,7 @@ Small GUI to compute grains from EBSD data and optionally filter them.
 
 ### [computeHabitPlane](./src/computeHabitPlane.m)
 Compute the habit plane based on determined traces of a 2D map as per the following reference:
-[T. Nyyssonen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane determination from reconstructed parent phase orientation maps (https://doi.org/10.48550/arXiv.2303.07750)
+[T. Nyyssonen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane determination from reconstructed parent phase orientation maps](https://doi.org/10.48550/arXiv.2303.07750)
 
 - Syntax
   - [hPlane,statistics] = computeHabitPlane(job)
