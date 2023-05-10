@@ -1,6 +1,9 @@
 function [habitPlane,statistics] = computeHabitPlane(job,varargin)
-% Compute the habit plane based on determined traces of a 2D map.
-% Implemented as per https://doi.org/10.48550/arXiv.2303.07750
+% Compute the habit plane based on determined traces of a 2D map as per the
+% following reference:
+% T. Nyyssonen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane 
+% determination from reconstructed parent phase orientation maps 
+% (https://doi.org/10.48550/arXiv.2303.07750)
 %
 % Syntax
 % [hPlane,statistics] = computeHabitPlane(job)
