@@ -174,7 +174,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ##  ORTools function reference
 
-### Function Index
+### Alphabetical function index
 
 ## C
 - [computeBainGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains)
@@ -205,15 +205,9 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ## P
 - [peakFitORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs)
-
-
 - [plotHist_OR_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotHist_OR_misfit)
-
-
 - [plotIPDF_gB_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_misfit)
 - [plotIPDF_gB_prob](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_prob)
-
-
 - [plotMap_bain](https://github.com/ORTools4MTEX/ORTools/blob/develop/README.md#plotmap_bain)
 - [plotMap_blockWidths](https://github.com/ORTools4MTEX/ORTools/blob/develop/README.md#plotmap_blockwidths)
 - [plotMap_clusters](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_clusters)
@@ -226,16 +220,10 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [plotMap_phases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_phases)
 - [plotMap_variantPairs](https://github.com/ORTools4MTEX/ORTools/blob/develop/README.md#plotmap_variantPairs)
 - [plotMap_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotMap_variants)
-
-
 - [plotPDF_bain](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_bain)
 - [plotPDF_packets](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_packets)
 - [plotPDF_variants](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPDF_variants)
-
-
 - [plotPODF_transform](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transform)
-
-
 - [plotStack](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotStack)
 
 
@@ -747,8 +735,28 @@ The function plots the map of child grains colored according to their variant ID
 
 ---
 
+### [plotPDF_bain](./src/plotPDF_bain.m)
+The function plots a pole figure of the child Bain groups associated with an OR *job.p2c*.
+
+- Syntax
+  -  plotPDF_bain(job)
+  -  plotPDF_bain(job,oriParent)
+  -  plotPDF_bain(job,oriParent,pdf)
+- Input
+  -  job          - @parentGrainreconstructor
+  -  oriParent    - @orientation
+  -  pdf          - @Miller
+- Options
+  -  colormap     - colormap string
+
+<p align="center">
+  <img src="./doc/images/plotPDF_bain.png" alt="Plot example from plotPDF_bain" width="300"/>
+</p>
+
+---
+
 ### [plotPDF_packets](./src/plotPDF_packets.m)
-The function plots a pole figure of the martensitic packets associated with the OR *job.p2c*.
+The function plots a pole figure of the child crystallographic packets associated with an OR *job.p2c*.
 
 - Syntax
   -  plotPDF_packets(job)
@@ -795,8 +803,8 @@ The function calculates and plots the transformation texture, with or without im
 - Syntax
   -  plotPODF_transformation(job,hParent,hChild)
 - Input
-  - hParent     - @Miller  (parent pole figures to display)
-  - hChild      - @Miller  (child pole figures to display)
+  - hParent      - @Miller  (parent pole figures to display)
+  - hChild       - @Miller  (child pole figures to display)
 - Options
   - odfSecP      - array with angles of parent ODF section to display
   - odfSecC      - array with angles of child ODF section to display

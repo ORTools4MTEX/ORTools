@@ -1,5 +1,6 @@
 function plotPDF_bain(job,varargin)
-% plot a pole figure of the child packets associated with an OR
+% The function plots a pole figure of the child Bain groups associated with
+% an OR *job.p2c*.
 %
 % Syntax
 %  plotPDF_bain(job)

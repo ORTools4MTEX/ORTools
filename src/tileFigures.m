@@ -38,7 +38,7 @@ k = 1;                                                                     %Init
 for i =1:n.h %Loop over height
     for j = 1:n.w  %Loop over width
         if k > nFigs; return; end                                          %Stop when all figures have been resized 
-        fig_pos = [scr.orX + fig.w*(j-1) scr.h-fig.h*i fig.w fig.h];   %Compute new figure position 
+        fig_pos = [scr.orX + fig.w*(j-1) scr.h-fig.h*i fig.w fig.h];       %Compute new figure position 
         set(h.figs(k),'OuterPosition',fig_pos);                            %Set new figure position
         k = k + 1;                                                         %Increase figure counter
     end 

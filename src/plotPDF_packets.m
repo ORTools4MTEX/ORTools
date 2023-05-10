@@ -1,5 +1,6 @@
 function plotPDF_packets(job,varargin)
-% plot a pole figure of the child packets associated with an OR
+% The function plots a pole figure of the child crystallographic packets 
+% associated with an OR *job.p2c*.
 %
 % Syntax
 %  plotPDF_packets(job)
