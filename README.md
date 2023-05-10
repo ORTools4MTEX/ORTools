@@ -28,7 +28,7 @@
 | :--- | :--- |
 ---
 
-## Introduction to ORTools
+# Introduction to ORTools
 **Orientation relationship tools** (**ORTools**) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. 
 
 The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the MATLAB-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the scripts contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the 2021 MTEX Workshop for an introduction to the phase transformation features in MTEX and **ORTools**. 
@@ -43,24 +43,24 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
 
 ---
 
-## Authors
+# Authors
 **ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
 
 ---
 
-## Contributors
+# Contributors
 [**Dr Tuomo Nyyssönen**](https://www.researchgate.net/profile/Tuomo-Nyyssoenen) - Lath martensite block width calculator
 
 ---
 
-## How to cite ORTools
+# How to cite ORTools
 If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite this open-access paper as your reference:
 
 [**F. Niessen, T. Nyyssönen, A.A. Gazder, R. Hielscher, Parent grain reconstruction from partially and fully transformed microstructures in MTEX, Journal of Applied Crystallography: 55(1), pp. 180-194, 2022. (https://doi.org/10.1107/S1600576721011560)**](https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf)
 
 ---
 
-## How to use ORTools
+# How to use ORTools
 - Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) of **ORTools** by clicking on either weblink.
 - This library only works after the prior installation of [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download). Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below. ORTools is tested for compatibility from MATLAB 2016b onwards. With each [release](https://github.com/ORTools4MTEX/ORTools/releases) of ORTools, please check which version of MTEX it is compatible with. 
 - The peak fitting functionality within the function [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors) requires the prior installation of the [MATLAB Signal Processing Toolbox](https://au.mathworks.com/products/signal.html).
@@ -74,7 +74,7 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 
 ---
 
-##  ORTools example scripts
+#  ORTools example scripts
 The world of martensitic transformation or phase transition analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the **ORTools** library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions *in action*.
 
 It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the scripts and the generated results. 
