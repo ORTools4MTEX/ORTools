@@ -172,9 +172,8 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ---
 
-##  ORTools function reference
 
-### Alphabetical function index
+### ORTools alphabetical function index
 
 ## C
 - [computeBainGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains)
@@ -242,6 +241,9 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ## T
 - [tileFigures](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#tileFigures)
 
+
+
+###  ORTools function reference
 ---
 
 ### [computeBainGrains](./src/computeBainGrains.m)
