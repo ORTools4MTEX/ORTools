@@ -176,6 +176,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ### Function Index
 
+## C
 - [computeBainGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains)
 - [computeGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrains)
 - [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane)
@@ -184,20 +185,25 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [computeVariantGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantGrains)
 
 
+## D
 - [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors)
 
 
+## F
 - [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker)
 
 
+## G
 - [grainClick](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#grainClick)
 - [guiOR](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#guiOR)
 
 
+## O
 - [orientationMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#orientationMaker)
 - [ORinfo](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#ORinfo)
 
 
+## P
 - [peakFitORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs)
 
 
@@ -233,16 +239,19 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [plotStack](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotStack)
 
 
+## R
 - [readCPR](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#readCPR)
 - [recolorPhases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#recolorPhases)
 - [renamePhases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#renamePhases)
 
 
+## S
 - [saveImage](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#saveImage)
 - [screenPrint](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#screenPrint)
 - [setParentGrainReconstructor](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#setParentGrainReconstructor)
 
 
+## T
 - [tileFigures](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#tileFigures)
 
 ---
