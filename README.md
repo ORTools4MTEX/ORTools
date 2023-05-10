@@ -225,12 +225,12 @@ Compute the Bain groups of grains.
 - Syntax
   - [bain_grains] = computeBainGrains(job)
 - Input
-  - job  - @parentGrainReconstructor
+  - job           - @parentGrainReconstructor
 - Output
   - bain_grains   - @grains2d 
 
 <p align="center">
-  <img src="./doc/images/computeBainGrains.png" alt="UI of computeGrains" width="400"/>
+  <img src="./doc/images/computeBainGrains.png" alt="UI of computeBainGrains" width="400"/>
 </p>
 
 ---
@@ -260,10 +260,10 @@ Implemented as per https://doi.org/10.48550/arXiv.2303.07750
 - Syntax
   - [hPlane,statistics] = computeHabitPlane(job)
 - Input
-  -  job      - @parentGrainReconstructor
+  -  job            - @parentGrainReconstructor
 - Output
-  -  hPlane      - @Miller     = Habit plane
-  -  statistics  - @Container  = Statistics of fitting
+  -  hPlane         - @Miller     = Habit plane
+  -  statistics     - @Container  = Statistics of fitting
 - Options
   -  minClusterSize - minimum number of pixels required for trace computation (default: 100) 
   -  Radon          - Radon based algorithm (pixel data used)
@@ -272,7 +272,7 @@ Implemented as per https://doi.org/10.48550/arXiv.2303.07750
   -  Hist           - Circular histogram based algorithm (grain data used)
 
 <p align="center">
-  <img src="./doc/images/computeHabitPlane.png" alt="UI of computeGrains" width="400"/>
+  <img src="./doc/images/computeHabitPlane.png" alt="UI of computeHabitPlane" width="400"/>
 </p>
 
 ---
@@ -283,12 +283,12 @@ Compute the crystallographic packets of grains.
 - Syntax
   - [packet_grains] = computePacketGrains(job)
 - Input
-  - job  - @parentGrainReconstructor
+  - job             - @parentGrainReconstructor
 - Output
   - packet_grains   - @grains2d 
 
 <p align="center">
-  <img src="./doc/images/computePacketGrains.png" alt="UI of computeGrains" width="400"/>
+  <img src="./doc/images/computePacketGrains.png" alt="UI of computePacketGrains" width="400"/>
 </p>
 
 ---
@@ -306,7 +306,7 @@ Compute twins in a parent grains by local refinement.
   -  grains       - plot grain data instead of EBSD data
 
 <p align="center">
-  <img src="./doc/images/computeParentTwins.png" alt="UI of computeGrains" width="400"/>
+  <img src="./doc/images/computeParentTwins.png" alt="UI of computeParentTwins" width="400"/>
 </p>
 
 ---
@@ -317,12 +317,17 @@ Refine the child grains in the job object based on their variant IDs and return 
 - Syntax
   - [variant_grains,cEBSD] = computeVariantGrains(job,varargin)
 - Input
-  - job  - @parentGrainReconstructor
+  - job              - @parentGrainReconstructor
 - Optional
   - parentGrainId    - parent grain Id using the argument 'parentGrainId'
 - Output
   - variant_grains   - @grains2d 
-  - ebsdC  - @EBSD
+  - ebsdC            - @EBSD
+
+
+<p align="center">
+  <img src="./doc/images/computeVariantGrains.png" alt="UI of computeVariantGrains" width="400"/>
+</p>
   
 ---
 
@@ -339,7 +344,7 @@ Auxiliary function to define orientation relationships for a parent and child ph
 ---
 
 ### [fibreMaker](./src/fibreMaker.m)
-The function creates a VPSC file with orientations following the distribution of a fibre ODF
+The function creates a text file with orientations following the distribution of a fibre ODF
 
 - Syntax
   -  fibreMaker(crystalDirection,specimenDirection)
@@ -347,9 +352,9 @@ The function creates a VPSC file with orientations following the distribution of
   - crystalDirection  - @Miller
   - specimenDirection - @vector3d
 - Options
-  - halfwidth    - halfwidth for ODF calculation
-  - points       - number of points (orientations) in the VPSC file
-  - export       - (optional path) & name of the VPSC file
+  - halfwidth         - halfwidth for ODF calculation
+  - points            - number of points (orientations) in the VPSC file
+  - export            - (optional path) & name of the VPSC file
 
 ---
 
@@ -359,8 +364,8 @@ Interactive map to select parent grains for further analysis
 - Syntax
   - grainClick(job)
 - Input
-  - job  - @parentGrainReconstructor
-  - direction - @vector3d 
+  - job          - @parentGrainReconstructor
+  - direction    - @vector3d 
 - Option
   - parentTwins  - Refine grains to detect parent twins
   - grains       - Plot grain data instead of EBSD data 
@@ -395,7 +400,7 @@ The function creates a VPSC file with orientations following the distribution of
 - Syntax
   -  orientationMaker(ori)
 - Input
-  - ori   - @orientation
+  - ori          - @orientation
 - Options
   - halfwidth    - halfwidth for ODF calculation
   - points       - number of points (orientations) in the VPSC file
@@ -431,7 +436,7 @@ The function is called by [defineORs](https://github.com/ORTools4MTEX/ORTools/bl
   - job         - @parentGrainReconstructor
   - misoRange   - range of misorientation angles in which to fit
 - Output
-  - p2c       - parent to child misorientation
+  - p2c         - parent to child misorientation
 
 <p align="center">
   <img src="./doc/images/peakFitORs.png" alt="Interactive fitting window on which peakFitORs is applied." width="500"/>
@@ -446,8 +451,8 @@ This function plots the disorientation, or misfit, between parent-child and chil
   -  plotHist_OR_misfit(job)
   -  plotHist_OR_misfit(job,p2c)
 - Input
-  - job  - @parentGrainReconstructor
-  - p2c  - one or multiple additional orientation relationship(s) to evaluate
+  - job     - @parentGrainReconstructor
+  - p2c     - one or multiple additional orientation relationship(s) to evaluate
 - Options
   - bins    - number of histogram bins
   - legend  - cell array of strings with legend names of ORs to evaluate
@@ -464,7 +469,7 @@ This function plots the misfit, or disorientation, between parent-child and chil
 - Syntax
   -  plotIPDF_gB_misfit(job)
 - Input
-  - job  - @parentGrainReconstructor
+  - job       - @parentGrainReconstructor
 - Options
   - colormap  - colormap string  
 
@@ -480,12 +485,30 @@ This function calculates and plots the probability distribution between 0 and 1,
 - Syntax
   -  plotIPDF_gB_prob(job)
 - Input
-  - job  - @parentGrainReconstructor
+  - job       - @parentGrainReconstructor
 - Options
   - colormap  - colormap string  
 
 <p align="center">
   <img src="./doc/images/plotIPDF_gB_prob.png" alt="Plot example from plotIPDF_gB_prob" width="1000"/>
+</p>
+
+---
+### [plotMap_bain](./src/plotMap_bain.m)
+Plot the map of child grains colored according to their Bain groups.
+
+- Syntax
+  -  plotMap_bain(job)
+- Input
+  -  job          - @parentGrainreconstructor
+- Output
+  -  f_area: Area fraction of each Bain group in the EBSD map
+- Options
+  -  colormap     - colormap string
+  -  grains       - plot grain data instead of EBSD data
+
+<p align="center">
+  <img src="./doc/images/plotMap_bain.png" alt="Plot example from plotMap_bain" width="500"/>
 </p>
 
 ---
@@ -550,7 +573,7 @@ The function colorizes the misfit, or disorientation, between parent-child and c
 - Syntax
   - plotMap_gB_misfit(job)
 - Input
-  - job  - @parentGrainReconstructor
+  - job       - @parentGrainReconstructor
 - Options
   - colormap  - colormap string 
 
@@ -566,7 +589,7 @@ The function colorizes the parent-child boundaries in *job* according to their m
 - Syntax
   -  plotMap_gB_p2c(job)
 - Input
-  - job  - @parentGrainReconstructor
+  - job       - @parentGrainReconstructor
 - Options
   - colormap  - colormap string 
  
@@ -583,7 +606,7 @@ boundary belongs to the orientation relationship (see more [here](https://mtex-t
 - Syntax
   -  plotMap_gB_prob(job)
 - Input
-  - job  - @parentGrainReconstructor
+  - job       - @parentGrainReconstructor
 - Options
   - threshold - the misfit at which the probability is exactly 50 percent ... 
   - tolerance - ... and the standard deviation in a cumulative Gaussian distribution
@@ -605,10 +628,10 @@ The function plots the inverse polefigure maps of the parent and child phases an
   - job       - @parentGrainReconstructor
   - direction - @vector3d 
 - Option
-  - parent - plot only map of parent phase
-  - child  - plot only map of child phase 
+  - parent    - plot only map of parent phase
+  - child     - plot only map of child phase 
 - Output
-  - ipfKey - @ipfHSVKey 
+  - ipfKey    - @ipfHSVKey 
 
 <p align="center">
   <img src="./doc/images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="800"/>
@@ -622,7 +645,7 @@ The function plots the map of child grains colored according to their packet ID.
 - Syntax
   -  plotMap_packets(job)
 - Input
-  - job  - @parentGrainReconstructor
+  - job      - @parentGrainReconstructor
 - Option
   - colormap - colormap string
   - grains   - Plot grain data instead of EBSD data 
@@ -658,8 +681,8 @@ Plot pairs of martensitic variants (block boundaries) in steel microstructures a
   - pGrainId     - parent grain Id using the argument 'parentGrainId'
 
 - Option
-  - noScalebar  - Remove scalebar from maps
-  - noFrame     - Remove frame around maps
+  - noScalebar   - Remove scalebar from maps
+  - noFrame      - Remove frame around maps
 
 - Output
   - variantPairs_boundary - a structure variable containing 4 groups of variant pair boundaries
