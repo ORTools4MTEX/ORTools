@@ -235,6 +235,8 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ### S
 - [saveImage](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#saveImage)
 - [screenPrint](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#screenPrint)
+- [setInterp2Latex](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#setInterp2Tex)
+- [setInterp2Tex](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#setInterp2Tex)
 - [setParentGrainReconstructor](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#setParentGrainReconstructor)
 
 
