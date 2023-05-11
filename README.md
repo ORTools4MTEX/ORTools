@@ -838,7 +838,7 @@ Input files can be created using:
 
 ### [plotStack](./src/plotStack.m)
 This function plots a series of maps, figures, graphs, and tables for detailed child variant analysis within a single parent grain as follows: 
-- By manually supplying a parent grain Id *pGrainId*, or 
+- By manually supplying a *parentGrainId*, or 
 - Using the [grainClick](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#grainClick) function and interactively choosing a grain of interest.
 
 - Syntax

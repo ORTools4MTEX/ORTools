@@ -1,8 +1,8 @@
 function plotStack(job,varargin)
 %% Function description:
 % This function plots a series of maps, figures, graphs, and tables for
-% detailed child variant analysis within a single parent grain as follows: 
-% - By manually supplying a parent grain Id *pGrainId*, or 
+% detailed child variant analysis within a single parent grain as follows:
+% - By manually supplying a *parentGrainId*, or
 % - Using the [grainClick] function and interactively choosing a grain of
 % interest.
 %
@@ -31,10 +31,21 @@ else
     return;
 end
 
-allfigh = findall(0,'type','figure');
-if length(allfigh) > 1
-    close all;
+% check if the plotStack function was called from grainClick or not
+if ~any(strcmpi(varargin,'grainClick2plotStack')) % if not...
+    % ...close all other open figures
+    allfigh = findall(0,'type','figure');
+    % allfigh = findall(groot,'type','figure');
+    for ii = 1:numel(allfigh)
+        try
+            close(ii); % delete figures
+            % clf(allfigh(ii)); % clear figures
+        catch
+            % do nothing
+        end
+    end
 end
+
 vector = getClass(varargin,'vector3d',vector3d.X);
 %% Define the parent grain
 pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
@@ -453,7 +464,7 @@ if size(abs_counts,2)>1; abs_counts = abs_counts'; end
 if size(norm_counts,2)>1; norm_counts = norm_counts'; end
 if check_option(varargin,'grains')
     ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]','FontSize',14);
-%     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
+    %     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Weighted area variant Ids','NumberTitle','on');
     % % Output histogram data in a table
     screenPrint('Step',['Figure ',num2str(figH.Number),': variantId weighted area histogram']);
@@ -461,7 +472,7 @@ if check_option(varargin,'grains')
     table(class_range,norm_counts,'VariableNames',{'variantId','wtAreaFreq'})
 else
     ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
-%     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+    %     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Relative frequency variant Ids','NumberTitle','on');
     % % Output histogram data in a table
     screenPrint('Step',['Figure ',num2str(figH.Number),': variantId histogram']);
@@ -496,7 +507,7 @@ if size(abs_counts,2)>1; abs_counts = abs_counts'; end
 if size(norm_counts,2)>1; norm_counts = norm_counts'; end
 if check_option(varargin,'grains')
     ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]','FontSize',14);
-%     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
+    %     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Weighted area packet Ids','NumberTitle','on');
     % % Output histogram data in a table
     screenPrint('Step',['Figure ',num2str(figH.Number),': packetId weighted area histogram']);
@@ -504,7 +515,7 @@ if check_option(varargin,'grains')
     table(class_range,norm_counts,'VariableNames',{'packetId','wtAreaFreq'})
 else
     ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
-%     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+    %     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
     set(figH,'Name','Histogram: Relative frequency packet Ids','NumberTitle','on');
     % % Output histogram data in a table
     screenPrint('Step',['Figure ',num2str(figH.Number),': packetId histogram']);

@@ -122,7 +122,7 @@ setappdata(mP.ax,'grains',[pGrains]);
             plotMap_blockWidths(job,'parentGrainId',unique(pGrain_select.id),varargin{:});
 
         elseif any(job.isTransformed(job.mergeId == pGrain_select.id))
-            plotStack(job,'parentGrainId',unique(pGrain_select.id),varargin{:});
+            plotStack(job,'parentGrainId',unique(pGrain_select.id),'grainClick2plotStack',varargin{:});
 
         else
             f = msgbox('Choose a reconstructed parent grain (within the thick boundaries)', 'Error','warn');
