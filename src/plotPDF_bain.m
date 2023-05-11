@@ -1,24 +1,25 @@
 function plotPDF_bain(job,varargin)
-% The function plots a pole figure of the child Bain groups associated with
-% an OR *job.p2c*.
+%% Function description:
+% This function plots a pole figure of the child Bain group IDs associated 
+% with an OR *job.p2c*.
 %
-% Syntax
+%% Syntax:
 %  plotPDF_bain(job)
 %  plotPDF_bain(job,oriParent)
 %  plotPDF_bain(job,oriParent,pdf)
 %
-% Input
+%% Input:
 %  job          - @parentGrainreconstructor
 %  oriParent    - @orientation
 %  pdf          - @Miller
 %
-% Options
-%  colormap - colormap string
-%
+%% Options:
+%  colormap - colormap variable
+
 
 oriParent = getClass(varargin,'orientation',orientation.id(job.csParent));
 pdf = getClass(varargin,'Miller',Miller(0,0,1,job.csChild,'hkl'));
-cmap = get_option(varargin,'colormap','hot');
+cmap = get_option(varargin,'colormap',flipud(hot));
 msz = get_option(varargin,'markersize',6);
 
 %% Define the text output format as Latex

@@ -1,12 +1,13 @@
 function saveImage(fileDir,fileName)
-% Save all open figures
+%% Function description:
+% This function saves all open figures as images.
 %
-% Syntax
+%% Syntax:
 % saveImage(fileDir,fileName)
 % saveImage(fileDir)
 % saveImage
 %
-% Input
+%% Input:
 %  fileName    - file name (string with file of type *.bmp, *.jpeg, *.png or *.tiff )
 %  fileDir     - file directory
 

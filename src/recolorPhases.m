@@ -1,21 +1,23 @@
 function obj = recolorPhases(obj)
-% interactively recolor phases for ebsd or grains -type variables
+%% Function description:
+% This function is a GUI to interactively recolor phases in the *ebsd* 
+% or *grains* variables.
 %
-% Syntax
-%
+%% Syntax:
 %  ebsd   = recolorPhases(ebsd)
 %  grains = recolorPhases(grains)
 %
-% Input
+%% Input:
 %  ebsd             - @EBSD
 %  grains           - @grains
 %
-% Output
+%% Output:
 %  ebsd             - @EBSD
 %  grains           - @grains
 
-% If old style color seleUI needed, type the following and re-start Matlab
-% setpref('Mathworks_uisetcolor', 'Version', 1);
+
+% % If old style color seleUI needed, type the following and re-start Matlab
+% % setpref('Mathworks_uisetcolor', 'Version', 1);
 
 %% Recolor the phases (minerals)
 if isa(obj,'EBSD') || isa(obj,'grain2d')

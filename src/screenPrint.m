@@ -1,11 +1,12 @@
 function screenPrint(mode,varargin)
-% function for formating command window output
+%% Function description:
+% This function formats command window output.
 %
-% Syntax
+%% Syntax:
 %  screenPrint(mode)
 %  screenPrint(mode, string)
 %
-% Input
+%% Input:
 %  mode     - Formatting mode (string)
 %  string   - Output string
 
@@ -15,23 +16,23 @@ switch mode
         titleStr = varargin{1};
         fprintf('\n*************************************************************');
         fprintf(['\n                 ',titleStr,' \n']);
-        fprintf('*************************************************************\n'); 
+        fprintf('*************************************************************\n');
     case 'Termination'
         titleStr = varargin{1};
         fprintf('\n*************************************************************');
         fprintf(['\n                 ',titleStr,' \n']);
-        fprintf('*************************************************************\n'); 
+        fprintf('*************************************************************\n');
     case 'SegmentStart'
         titleStr = varargin{1};
         fprintf('\n------------------------------------------------------');
         fprintf(['\n     ',titleStr,' \n']);
-        fprintf('------------------------------------------------------\n'); 
-   case 'Step'
+        fprintf('------------------------------------------------------\n');
+    case 'Step'
         titleStr = varargin{1};
         fprintf([' -> ',titleStr,'\n']);
-   case 'SubStep'
+    case 'SubStep'
         titleStr = varargin{1};
         fprintf(['    - ',titleStr,'\n']);
-   case 'SegmentEnd'
+    case 'SegmentEnd'
         fprintf('\n------------------------------------------------------\n');
 end

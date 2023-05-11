@@ -1,19 +1,10 @@
 function fibreMaker(crystalDirection,sampleDirection,sampleSymmetry,varargin)
 %% Function description:
-% Creates an ideal crystallographic fibre with a user specified
-% half-width and exports the data as a lossless Mtex *.txt file (for 
-% version 5.9.0 and onwards) or as a lossy discretised Mtex *.txt file (for 
-% up to version 5.8.2) for later use.
-%
-%% Author:
-% Dr. Azdiar Gazder, 2023, azdiaratuowdotedudotau
-%
-%% Modified by:
-% Dr. Frank Niessen to include varargin.
-%
-%% Version(s):
-% The first version of this function was posted in:
-% https://github.com/ORTools4MTEX/ORTools/blob/develop/fibreMaker.m
+% This function creates an ideal crystallographic fibre with a user 
+% specified half-width and exports the data as:
+% (i) a lossless Mtex *.txt file (for MTEX v5.9.0 and onwards), or 
+% (ii) as a lossy discretised Mtex *.txt file (for MTEX up to v5.8.2),
+% for later use.
 %
 %% Syntax:
 %  fibreMaker(crystalDirection,samplenDirection,,sampleSymmetry)
@@ -25,22 +16,23 @@ function fibreMaker(crystalDirection,sampleDirection,sampleSymmetry,varargin)
 %
 %% Options:
 %  halfwidth    - halfwidth for the ODF calculation
-%  points       - number of points (discrete orientations) in the VPSC file
-%  export       - (optional path) and name of the VPSC file
-%%
+%  points       - number of points (discrete orientations) in the file
+%  export       - (optional path and) name of the file
+
 
 hwidth = get_option(varargin,'halfwidth',2.5*degree);
 
-% define the specimen symmetry to compute ODF
+%% define the specimen symmetry to compute ODF
 ss = specimenSymmetry('triclinic');
 
-% check for MTEX version
+%% check for MTEX version
 currentVersion = 5.9;
 fid = fopen('VERSION','r');
 MTEXversion = fgetl(fid);
 fclose(fid);
 MTEXversion = str2double(MTEXversion(5:end-2));
 
+%%
 if MTEXversion >= currentVersion % for MTEX versions 5.9.0 and above
     pfName_Out = get_option(varargin,'export','inputFibre.txt');
 
@@ -58,6 +50,7 @@ if MTEXversion >= currentVersion % for MTEX versions 5.9.0 and above
     % save an MTEX ASCII File *.txt file (lossless format)
     export(odf,pfname,'Bunge');
 
+%%
 else % for MTEX versions 5.8.2 and below
     pfName_Out = get_option(varargin,'export','inputFibre.Tex');
 

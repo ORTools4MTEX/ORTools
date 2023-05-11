@@ -1,28 +1,31 @@
 function f_area = plotMap_packets(job, varargin)
-% plot the map of child grains colored according to their packet ID
+%% Function description:
+% This function plots an ebsd map by colorising child grains according to 
+% their crystallographic packet ID. It also outputs the area fraction
+% of each crystallographic packet.
 %
-% Syntax
+%% Syntax:
 %  plotMap_packets(job)
 %
-% Input
-%  job          - @parentGrainreconstructor
+%% Input:
+%  job      - @parentGrainreconstructor
 %
-% Output
+%% Output:
 %  f_area: Area fraction of each variant
 %  entire EBSD map
 %
-% Options
-%  colormap - colormap string
+%% Options:
+%  colormap - colormap variable
 %  grains   - plot grain data instead of EBSD data
 
-cmap = get_option(varargin,'colormap','viridis');
+cmap = get_option(varargin,'colormap',viridis);
 
 %% Define the text output format as Latex
 setInterp2Latex
 
 p2c_V = job.p2c.variants;
 p2c_V = p2c_V(:);
-maxNrPackets = max(job.transformedGrains.packetId);
+maxPackets = max(job.transformedGrains.packetId);
 
 f = figure;
 if check_option(varargin,'grains')
@@ -35,8 +38,8 @@ else
     cEBSD = cEBSD(isParent);
     [~,packIds] = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
     plot(cEBSD,packIds);
-    f_area = [histcounts(packIds,maxNrPackets)/length(packIds)]';
-    disp(table([1:maxNrPackets]',f_area,'VariableNames',{'Packets','AreaFrac'}))
+    f_area = [histcounts(packIds,maxPackets)/length(packIds)]';
+    disp(table([1:maxPackets]',f_area,'VariableNames',{'Packets','AreaFrac'}))
 end
 
 
@@ -48,10 +51,10 @@ hold off
 % Define the maximum number of color levels and plot the colorbar
 
 colormap(cmap);
-caxis([1 maxNrPackets]);
+caxis([1 maxPackets]);
 colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
-    'YTick', [1:1:maxNrPackets],...
-    'YTickLabel',num2str([1:1:maxNrPackets]'), 'YLim', [1 maxNrPackets],...
+    'YTick', [1:1:maxPackets],...
+    'YTickLabel',num2str([1:1:maxPackets]'), 'YLim', [1 maxPackets],...
     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
 set(f,'Name','Packet Id map','NumberTitle','on');
 drawnow;

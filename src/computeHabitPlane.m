@@ -1,21 +1,22 @@
 function [habitPlane,statistics] = computeHabitPlane(job,varargin)
-% Compute the habit plane based on determined traces of a 2D map as per the
-% following reference:
-% T. Nyyssonen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane 
+%% Function description:
+% This function computes the habit plane based on the determined traces 
+% from 2D ebsd map data as per the following reference:
+% T. Nyyssönen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane 
 % determination from reconstructed parent phase orientation maps 
 % (https://doi.org/10.48550/arXiv.2303.07750)
 %
-% Syntax
+%% Syntax:
 % [hPlane,statistics] = computeHabitPlane(job)
 %
-% Input
+%% Input:
 %  job      - @parentGrainReconstructor
 %
-% Output
+%% Output:
 %  hPlane      - @Miller     = Habit plane
 %  statistics  - @Container  = Statistics of fitting
 %
-% Options
+%% Options:
 %  minClusterSize - minimum number of pixels required for trace computation (default: 100) 
 %  Radon          - Radon based algorithm (pixel data used)
 %  Fourier        - Fourier based algorithm (pixel data used)
@@ -27,29 +28,29 @@ if all(isnan(job.variantId))
     job.calcVariants  % Compute variants
 end
 
-% Get child grains
+%% Get the child grains
 childGrains = job.grainsPrior;
 
-% Calculate the traces of the child grains
+%% Calculate the traces of the child grains
 [traces, relIndex, clusterSize] = calcTraces(childGrains, [job.mergeId(:), job.variantId(:)],varargin);
 
-% Only consider those traces that have a reconstructed parent orientation
+%% Only consider those traces that have a reconstructed parent orientation
 traces = traces(job.isParent,:); 
 
-% Get the parent orientations
+%% Get the parent orientations
 oriParent = job.parentGrains.meanOrientation;
 
-% Determine the variant specific parent orientations
+%% Determine the variant specific parent orientations
 oriPVariant = oriParent.project2FundamentalRegion .* ...
     inv(variants(job.p2c)) .* job.p2c; 
 
-% Transform traces into the parent reference frame
+%% Transform traces into the parent reference frame
 tracesParent = inv(oriPVariant) .* traces;
 
-% Determine the habit plane (orthogonal fit)
+%% Determine the habit plane (orthogonal fit)
 habitPlane = perp(tracesParent,'robust'); 
 
-% Change Miller object to type crystal plane
+%% Change Miller object to type = crystal plane
 habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
 % habitPlane.dispStyle = "hkl"; %Mtex default
 

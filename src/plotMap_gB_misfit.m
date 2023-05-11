@@ -1,18 +1,21 @@
 function plotMap_gB_misfit(job,varargin)
-% plot the misfit, or the disorientation, between the parent-child and
-% child-child boundaries with the orientation relationship
+%% Function description:
+% This function plots an ebsd map by colorising the misfit, or 
+% disorientation, between parent-child and child-child boundaries with 
+% the orientation relationship (OR) *job.p2c*.
 %
-% Syntax
+%% Syntax:
 %  plotMap_gB_misfit(job)
 %
-% Input
-%  job          - @parentGrainreconstructor
+%% Input:
+%  job      - @parentGrainreconstructor
 %
-% Options
-%  colormap - colormap string
+%% Options:
+%  colormap - colormap variable
 %  maxColor - maximum color on color range [degree]
 
-cmap = get_option(varargin,'colormap','jet');
+
+cmap = get_option(varargin,'colormap',jet);
 maxColor = get_option(varargin,'maxColor',[]);
 
 if job.p2c == orientation.id(job.csParent,job.csChild)

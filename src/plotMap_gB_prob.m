@@ -1,22 +1,25 @@
 function plotMap_gB_prob(job,varargin)
-% calculate and plot the probability distribution between 0 and 1, that a 
-% boundary belongs to the orientation relationship
+%% Function description:
+% This function calculates and plots an ebsd map of the probability 
+% distribution, between 0 and 1, that a boundary belongs to an orientation
+% relationship (OR).
 %
-% Syntax
+%% Syntax:
 %  plotMap_gB_prob(job)
 %
-% Input
-%  job          - @parentGrainreconstructor
+%% Input:
+%  job       - @parentGrainreconstructor
 %
-% Options
-%  threshold - the misfit at which the probability is exactly 50 percent ... 
-%  tolerance - ... and the standard deviation in a cumulative Gaussian distribution
-%  colormap - colormap string
+%% Options:
+%  threshold - the misfit at which the probability is exactly 50%... 
+%  tolerance - ...and the standard deviation in a cumulative Gaussian distribution
+%  colormap  - colormap variable
 %
-%See also:
-%https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html 
+% See also:
+% https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html 
 
-cmap = get_option(varargin,'colormap','viridis');
+
+cmap = get_option(varargin,'colormap',viridis);
 threshold = get_option(varargin,'threshold',2.5*degree);
 tolerance = get_option(varargin,'tolerance',2.5*degree);
 

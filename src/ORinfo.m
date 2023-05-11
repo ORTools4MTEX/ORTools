@@ -1,24 +1,30 @@
 function OR = ORinfo(mori,varargin)
-% Extract OR information in a structure variable
-% Syntax
+%% Function description:
+% The function extracts orientation relationship (OR) information
+% contained in the *job.p2c* structure variable and outputs it in the
+% MATLAB command window.
+%
+%% Syntax:
 % OR = ORinfo(mori,varargin)
-% Input
+%
+%% Input:
 %  mori     - parent to child misorientation
 %  varargin - 'silent': suppress command window output
-% Output
+%
+%% Output:
 %  OR       - structure containing OR information
 
 
-%Misorientation
+%% Misorientation
 OR.misorientation = mori;
 
-%CrystalSymmetries
+%% CrystalSymmetries
 OR.CS.parent = OR.misorientation.CS;
 OR.CS.child = OR.misorientation.SS;
 OR.parent = OR.CS.parent.mineral;
 OR.child = OR.CS.child.mineral;
 
-%Closest rational parallel planes and directions
+%% Closest rational parallel planes and directions
 [OR.plane.parent,...
     OR.plane.child,...
     OR.direction.parent,...
@@ -31,37 +37,37 @@ OR.plane.child = setDisplayStyle(OR.plane.child,'plane');
 OR.direction.parent = setDisplayStyle(OR.direction.parent,'direction');
 OR.direction.child = setDisplayStyle(OR.direction.child,'direction');
 
-%Misorientation of rational OR
+%% Misorientation of rational OR
 OR.misorientationRational = orientation('map',...
     OR.plane.parent,...
     OR.plane.child,...
     OR.direction.parent,...
     OR.direction.child);
 
-%Misorientation axes
+%% Misorientation axes
 OR.rotationAxis.parent = axis(OR.misorientation,OR.CS.parent);
 OR.rotationAxis.parent = setDisplayStyle(OR.rotationAxis.parent,'direction');
 OR.rotationAxis.child = axis(OR.misorientation,OR.CS.child);
 OR.rotationAxis.child = setDisplayStyle(OR.rotationAxis.child,'direction');
 
-%Angle between rational and actual OR misorientations
+%% Angle between rational and actual OR misorientations
 OR.misfit.plane = min(angle(OR.misorientation*OR.plane.parent.symmetrise,OR.plane.child));
 OR.misfit.direction = min(angle(OR.misorientation*OR.direction.parent.symmetrise,OR.direction.child));
 OR.misfit.axis = min(angle(OR.misorientation*OR.rotationAxis.parent.symmetrise,OR.rotationAxis.child));
 
-%Variants
+%% Variants
 OR.variants.orientation = OR.misorientation.variants;
 OR.variants.misorientation = OR.misorientation.variants.*inv(OR.misorientation.variants(1));
 OR.variants.angle = angle(OR.variants.misorientation);
 OR.variants.axis = axis(OR.variants.misorientation,OR.CS.child);
 OR.variants.axis = setDisplayStyle(OR.variants.axis,'direction');
 
-%Screen output
+%% Screen output
 if ~check_option(varargin,'silent')
     screenPrint('Step','Detailed information on the selected OR:');
     screenPrint('SubStep',sprintf(['OR misorientation angle = ',...
         num2str(angle(OR.misorientation)./degree),'°']));
-    
+
     screenPrint('Step','Parallel planes');
     screenPrint('SubStep',sprintf(['Closest parent plane = ',...
         sprintMiller(OR.plane.parent,'round')]));
@@ -69,7 +75,7 @@ if ~check_option(varargin,'silent')
         sprintMiller(OR.plane.child,'round')]));
     screenPrint('SubStep',sprintf(['Disor. of parallel plane relationship from OR = ',...
         num2str(OR.misfit.plane./degree),'°']));
-    
+
     screenPrint('Step','Parallel directions');
     screenPrint('SubStep',sprintf(['Closest parent direction = ',...
         sprintMiller(OR.direction.parent,'round')]));
@@ -77,7 +83,7 @@ if ~check_option(varargin,'silent')
         sprintMiller(OR.direction.child,'round')]));
     screenPrint('SubStep',sprintf(['Disor. of parallel directions relationship from OR = ',...
         num2str(OR.misfit.direction./degree),'°']));
-    
+
     screenPrint('Step','OR misorientation rotation axes');
     screenPrint('SubStep',sprintf(['Parent rot. axis = ',...
         sprintMiller(OR.rotationAxis.parent)]));
@@ -85,14 +91,14 @@ if ~check_option(varargin,'silent')
         sprintMiller(OR.rotationAxis.child)]));
     screenPrint('SubStep',sprintf(['Disor. of parallel rot. axes relationship from OR = ',...
         num2str(OR.misfit.axis./degree),'°']));
-    
+
     screenPrint('Step','Angle & rot. axes of unique variants');
     for ii = 1:length(OR.variants.orientation)
         screenPrint('SubStep',sprintf([num2str(ii),': ',...
             num2str(OR.variants.angle(ii)./degree,'%2.2f'),...
             '° / ',sprintMiller(OR.variants.axis(ii))]));
     end
-    
+
 else
     screenPrint('SubStep',['OR =\t',...
         sprintMiller(OR.plane.parent,'round'),'_p || ',...
@@ -103,6 +109,8 @@ else
         'Ang. dev: ',num2str(OR.misfit.direction./degree),'°']);
 end
 end
+
+
 
 %% Set Display Style of Miller objects
 function m = setDisplayStyle(millerObj,mode)
@@ -123,6 +131,8 @@ if isa(m,'Miller')
     end
 end
 end
+
+
 
 %% Screenprint Crystal Planes
 function s = sprintMiller(mil,varargin)

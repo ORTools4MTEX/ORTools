@@ -1,12 +1,14 @@
 function plotMap_phases(job,varargin)
-% plot phase map with low and high angle boundaries
+%% Function description:
+% This function plots an ebsd map of the grain phases in the *job* 
+% variable as well as the grain boundaries (*job.grains.boundary*).
 %
-% Syntax
+%% Syntax:
+% p2c = plotMap_phases(job)
 %
-%  p2c = plotMap_phases(job)
-%
-% Input
+%% Input:
 %  job  - @parentGrainReconstructor
+
 
 %% Define the text output format as Latex
 setInterp2Latex

@@ -1,8 +1,11 @@
 function tileFigures() 
-% Utility function to tile all figures evenly spread accros the screen
+%% Function description:
+% This function tiles all figures evenly across the computer screen/
+% monitor.
 %
-% Syntax
+%% Syntax:
 %  tileFigs
+
 
 %% Initialization
 mon = 2;                                                                   %Choose monitor number

@@ -1,19 +1,23 @@
 function plotHist_OR_misfit(job,varargin)
-% Plot disorientation (or misfit) histogram between
-% parent-child and child-child grain misorientations
-% with the OR misorientation
+%% Function description:
+% This function plots the disorientation, (or misfit), between parent-child
+% and child-child grains and an orientation relationship (OR) in a
+% histogram.
+% By default, the current OR (*job.p2c*) is selected and is denoted by
+% 2 stars (**). Additional ORs can be supplied with the argument *p2c*.
 %
-% Syntax
+%% Syntax:
 %  plotHist_OR_misfit(job)
 %  plotHist_OR_misfit(job,p2c)
 %
-% Input
-%  job          - @parentGrainreconstructor
-%  p2c          - one or multiple orientation relationship(s) to evaluate
+%% Input:
+%  job    - @parentGrainreconstructor
+%  p2c    - one or multiple orientation relationship(s) to evaluate
 %
-% Options
-%  bins         - number of histogram bins
-%  legend       - cell array of strings with legend names of ORs to evaluate
+%% Options:
+%  bins   - number of histogram bins
+%  legend - cell array of strings with legend names of ORs to evaluate
+
 
 p2c = getClass(varargin,'orientation');
 numBins = get_option(varargin,'bins',150);
@@ -50,7 +54,7 @@ warning on
 p2cPairs = neighbors(job.grains(job.csParent),job.grains(job.csChild));
 p2cPairs = p2cPairs(:,flip([1 2]));
 if ~isempty(p2cPairs)
-    misfitHist(dockGroupName,p2c,job,p2cPairs,numBins,allLegend,'pairType','p2c')
+    misfitHistogram(dockGroupName,p2c,job,p2cPairs,numBins,allLegend,'pairType','p2c')
 else
     warning('No parent-child neighbors found (p2c grain pairs empty)');
 end
@@ -60,7 +64,7 @@ end
 c2cPairs = neighbors(job.grains(job.csChild),job.grains(job.csChild));
 c2cPairs = c2cPairs(:,flip([1 2]));
 if ~isempty(c2cPairs)
-    misfitHist(dockGroupName,p2c,job,c2cPairs,numBins,allLegend,'pairType','c2c')
+    misfitHistogram(dockGroupName,p2c,job,c2cPairs,numBins,allLegend,'pairType','c2c')
 else
     warning('No child-child neighbors found (c2c grain pairs empty)');
 end
@@ -80,7 +84,7 @@ end
 
 
 
-function misfitHist(dockGroupName,p2c,job,pairList,numBins,allLegend,varargin)
+function misfitHistogram(dockGroupName,p2c,job,pairList,numBins,allLegend,varargin)
 pairType = get_option(varargin,'pairType','');
 
 mori = inv(job.grains('id',pairList(:,1)).meanOrientation).*...
@@ -92,7 +96,7 @@ else
     moriSub = mori;
 end
 
-% Plot the grain pair disorientation
+%% Plot the grain pair disorientation
 % Define the graphics object array
 warning off;
 drawnow;
@@ -122,14 +126,14 @@ for ii = 1:length(p2c)
         'edgecolor',c(ii,:), 'facecolor',c(ii,:),...
         'DisplayName',sprintf('OR %d',ii),'facealpha',0.25);
     hold on;
-%     % % Output histogram data in a table
-%     figProp = get(groot,'CurrentFigure');
-%     if strcmpi(pairType,'p2c')==1
-%         screenPrint('Step',['Figure ',num2str(figProp.Number),', Histogram ',num2str(ii),': p2c']);
-%     elseif strcmpi(pairType,'c2c')==1
-%         screenPrint('Step',['Figure ',num2str(figProp.Number),', Histogram ',num2str(ii),': c2c']);
-%     end
-%     table(binCenters(ii,:)'./degree,countsNorm(ii,:)','VariableNames',{'binCenters','Freq'})
+    %     % % Output histogram data in a table
+    %     figProp = get(groot,'CurrentFigure');
+    %     if strcmpi(pairType,'p2c')==1
+    %         screenPrint('Step',['Figure ',num2str(figProp.Number),', Histogram ',num2str(ii),': p2c']);
+    %     elseif strcmpi(pairType,'c2c')==1
+    %         screenPrint('Step',['Figure ',num2str(figProp.Number),', Histogram ',num2str(ii),': c2c']);
+    %     end
+    %     table(binCenters(ii,:)'./degree,countsNorm(ii,:)','VariableNames',{'binCenters','Freq'})
 end
 hold off
 
@@ -150,11 +154,11 @@ legend
 % ylabel('Relative frequency ({\itf}(g))','FontSize',14);
 ylabel('\bf Relative frequency [$\bf f$(g)]');
 if strcmpi(pairType,'p2c')==1
-%     xlabel('Parent-child grain disorientation [°]','FontSize',14);
+    %     xlabel('Parent-child grain disorientation [°]','FontSize',14);
     xlabel('\bf Parent-child grain disorientation [$\bf ^\circ$]','FontSize',14);
     set(figH,'Name','Parent-child grain disorientation histogram','NumberTitle','on');
 elseif strcmpi(pairType,'c2c')==1
-%     xlabel('Child-child grain disorientation [°]','FontSize',14);
+    %     xlabel('Child-child grain disorientation [°]','FontSize',14);
     xlabel('\bf Child-child grain disorientation [$\bf ^\circ$]','FontSize',14);
     set(figH,'Name','Child-child grain disorientation histogram','NumberTitle','on');
 end

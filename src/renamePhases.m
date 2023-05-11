@@ -1,16 +1,19 @@
 function ebsd = renamePhases(ebsd,phaseStrings)
-% rename phases in ebsd interactively
+%% Function description:
+% This function is a GUI to interactively rename phases. It opens a list 
+% of phase names (pre-defined in *phaseStrings*) and renames each phase in
+% the *ebsd* variable according to a user's selection.
 %
-% Syntax
-%
+%% Syntax:
 %  ebsd = renamePhases(ebsd,phStr)
 %
-% Input
+%% Input:
 %  ebsd             - @EBSD
 %  phaseStrings     - cell array of strings with possible phase names
 %
-% Output
+%% Output:
 %  ebsd             - @EBSD
+
 
 %% Rename the phases (minerals)
 phaseNum = length(ebsd.CSList);

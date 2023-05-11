@@ -1,23 +1,25 @@
 function plotIPDF_gB_prob(job, varargin)
-% Calculate and plot the probability distribution between 0 and 1, that a 
-% boundary belongs to an orientation relationship in an inverse 
-% pole figure showing the misorientation axes
+%% Function description:
+% This function calculates and plots the probability distribution, between 
+% 0 and 1, that a boundary belongs to an orientation relationship (OR) in 
+% an inverse pole figure (IPF) showing the misorientation axes.
 %
-% Syntax
+% Syntax:
 %  plotIPDF_gB_prob(job)
 %
-% Input
+% Input:
 %  job  - @parentGrainreconstructor
 %
-% Options
-%  threshold - the misfit at which the probability is exactly 50 percent ... 
-%  tolerance - ... and the standard deviation in a cumulative Gaussian distribution
-%  colormap - colormap string
+% Options:
+%  threshold - the misfit at which the probability is exactly 50%... 
+%  tolerance - ...and the standard deviation in a cumulative Gaussian distribution
+%  colormap  - colormap variable
 %
-%See also:
-%https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html
+% See also:
+% https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html
 
-cmap = get_option(varargin,'colormap','hot');
+
+cmap = get_option(varargin,'colormap',hot);
 threshold = get_option(varargin,'threshold',2.5*degree);
 tolerance = get_option(varargin,'tolerance',2.5*degree);
 

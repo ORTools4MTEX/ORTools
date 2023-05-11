@@ -1,24 +1,25 @@
 function plotPDF_packets(job,varargin)
-% The function plots a pole figure of the child crystallographic packets 
-% associated with an OR *job.p2c*.
+%% Function description:
+% This function plots a pole figure of the child crystallographic packet 
+% IDs associated with an OR *job.p2c*.
 %
-% Syntax
+%% Syntax:
 %  plotPDF_packets(job)
 %  plotPDF_packets(job,oriParent)
 %  plotPDF_packets(job,oriParent,pdf)
 %
-% Input
+%% Input:
 %  job          - @parentGrainreconstructor
 %  oriParent    - @orientation
 %  pdf          - @Miller
 %
-% Options
-%  colormap - colormap string
-%
+%% Options:
+%  colormap - colormap variable
+
 
 oriParent = getClass(varargin,'orientation',orientation.id(job.csParent));
 pdf = getClass(varargin,'Miller',Miller(0,0,1,job.csChild,'hkl'));
-cmap = get_option(varargin,'colormap','jet');
+cmap = get_option(varargin,'colormap',viridis);
 msz = get_option(varargin,'markersize',6);
 
 %% Define the text output format as Latex
@@ -30,7 +31,7 @@ p2c_V = p2c_V(:);
 c2c_variants = job.p2c * inv(p2c_V);
 oriVariants = reshape(oriParent.project2FundamentalRegion,[],1) .* inv(p2c_V);
 oriVariants = oriVariants(:);
- [~,packIds] = calcVariantId(oriParent.project2FundamentalRegion,oriVariants,job.p2c,'variantMap',job.variantMap,varargin{:});
+[~,packIds] = calcVariantId(oriParent.project2FundamentalRegion,oriVariants,job.p2c,'variantMap',job.variantMap,varargin{:});
   
 
 % Note: Include the last 2 lines to uniquely label each variant marker with
@@ -44,7 +45,7 @@ plotPDF(oriVariants, packIds, pdf,...
 
 % Define the maximum number of color levels and plot the colorbar
 maxColors = max(packIds);
-colormap(viridis);
+colormap(cmap);
 caxis([1 maxColors]);
 colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
     'YTick', [1:1:maxColors],...

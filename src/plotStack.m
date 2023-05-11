@@ -1,18 +1,24 @@
 function plotStack(job,varargin)
-% Plot general variant data of a prior parent grain
+%% Function description:
+% This function plots a series of maps, figures, graphs, and tables for
+% detailed child variant analysis within a single parent grain as follows: 
+% - By manually supplying a parent grain Id *pGrainId*, or 
+% - Using the [grainClick] function and interactively choosing a grain of
+% interest.
 %
-% Syntax
+%% Syntax:
 %  plotStack(job)
 %
-% Input
+%% Input:
 %  job          - @parentGrainreconstructor
 %  pGrainId     - parent grain Id using the argument 'parentGrainId'
 %  direction    - @vector3d
 %
-% Option
+%% Options:
 %  grains       - plot grain data instead of EBSD data
 %  noScalebar   - Remove scalebar from maps
 %  noFrame      - Remove frame around maps
+
 
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
@@ -25,7 +31,10 @@ else
     return;
 end
 
-close all;
+allfigh = findall(0,'type','figure');
+if length(allfigh) > 1
+    close all;
+end
 vector = getClass(varargin,'vector3d',vector3d.X);
 %% Define the parent grain
 pGrain = job.parentGrains(job.parentGrains.id == pGrainId);

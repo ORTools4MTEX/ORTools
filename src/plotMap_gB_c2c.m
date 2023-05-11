@@ -1,17 +1,19 @@
 function plotMap_gB_c2c(job,varargin)
-% plot child-child boundary misorientation map
+%% Function description:
+% This function plots an ebsd map by colorising child-child boundary 
+% misorientations contained in the variable "job".
 %
-% Syntax
+%% Syntax:
+% plotMap_gB_c2c(job,varargin)
 %
-%  plotMap_gB_c2c(job,varargin)
+%% Input
+% job  - @parentGrainreconstructor
 %
-% Input
-%  job  - @parentGrainreconstructor
-%
-% Options
-%  colormap - colormap string
+%% Options:
+%  colormap - colormap variable
 
-cmap = get_option(varargin,'colormap','jet');
+
+cmap = get_option(varargin,'colormap',jet);
 
 %% Define the text output format as Latex
 setInterp2Latex

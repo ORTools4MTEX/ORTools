@@ -1,15 +1,18 @@
 function ipfKey = plotMap_clusters(job, varargin)
-% plot clusters from 'clusterGraph' on top of semi-transparent child
-% IPF map
+%% Function description:
+% This function plots an ebsd map of child grain clusters that are likely 
+% to belong to the same parent grain when clusterGraph.m is called.
+% It is displayed as an overlay on top of a semi-transparent IPF map of 
+% child grains.
 %
-% Syntax
+%% Syntax:
 %  ipfKey = plotMap_clusters(job)
 %  ipfKey = plotMap_clusters(job,direction)
 %
-% Input
+%% Input:
 %  job          - @parentGrainreconstructor
 %  direction    - @vector3d
-%
+
 
 % Check direction
 vector = getClass(varargin,'vector3d',vector3d.X);

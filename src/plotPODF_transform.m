@@ -1,18 +1,24 @@
 function plotPODF_transform(job,hParent,hChild,varargin)
-% plot transformation texture from VPSC file 
+%% Function description:
+% The function calculates and plots the transformation texture, with or 
+% without imposing variant selection, based on a parent texture file. 
+% Input files can be created from:
+% (1) ebsd data as shown in [example 4], 
+% (2) [fibreMaker], or
+% (3) [orientationMaker].
 %
-% Syntax
+%% Syntax:
 %  plotPODF_transform(job,hParent,hChild)
 %
-% Input
+%% Input:
 %  hParent     - @Miller (parent polefigures to plot)
 %  hChild      - @Miller (child polefigures to plot)
 %
-% Options
+%% Options:
 %  odfSecP      - array with angles of parent ODF section to display
 %  odfSecC      - array with angles of child ODF section to display
-%  colormapP    - colormap string for parent PFs and ODFs
-%  colormapC    - colormap string for child PFs and ODFs
+%  colormapP    - colormap variable for parent PFs and ODFs
+%  colormapC    - colormap variable for child PFs and ODFs
 %  variantId    - list of specific variant Ids to plot
 %  variantWt    - list of specific variant weights to plot
 %  halfwidth    - halfwidth for ODF calculation
@@ -23,14 +29,14 @@ function plotPODF_transform(job,hParent,hChild,varargin)
 
 odfSecP = get_option(varargin,'odfSecP',[0 45 65]*degree);
 odfSecC = get_option(varargin,'odfSecC',[0 45 90]*degree);
-cmapP = get_option(varargin,'colormapP','jet');
-cmapC = get_option(varargin,'colormapC','hot');
+cmapP = get_option(varargin,'colormapP',jet);
+cmapC = get_option(varargin,'colormapC', flipud(hot));
 variantId = get_option(varargin,'variantId',[]);
 variantWt = get_option(varargin,'variantWt',[]);
 hwidth = get_option(varargin,'halfwidth',2.5*degree);
 numPoints = get_option(varargin,'points',1000);
-pfName_In = get_option(varargin,'import','inputVPSC.Tex');
-pfName_Out = get_option(varargin,'export','outputVPSC.Tex');
+pfName_In = get_option(varargin,'import','inputTexture.txt');
+pfName_Out = get_option(varargin,'export','outputTexture.txt');
 
 %% Define the text output format as Latex
 setInterp2Latex
@@ -41,25 +47,44 @@ ORinfo(job.p2c,'silent');
 ss = specimenSymmetry('triclinic');
 
 
-%--- Import the VPSC ODF file into memory
-[oriP,fileProp] = orientation.load([pfName_In],job.csParent,ss,'interface','generic',...
-    'ColumnNames', {'phi1' 'Phi' 'phi2' 'weights'}, 'Columns', [1 2 3 4], 'Bunge'); 
-%---
+%% DO NOT EDIT/MODIFY BELOW THIS LINE
+setInterp2Latex;
+% check for MTEX version
+currentVersion = 5.9;
+fid = fopen('VERSION','r');
+MTEXversion = fgetl(fid);
+fclose(fid);
+MTEXversion = str2double(MTEXversion(5:end-2));
 
-%--- Calculate the orientation distribution function and define the specimen symmetry of the parent
-oriP = oriP(:);
-wtP = fileProp.weights; 
-wtP = wtP(:);
-odfP = calcDensity(oriP,'weights',wtP,'halfwidth',hwidth,'points','all');
-%--- Define the specimen symmetry of the parent
+if MTEXversion >= currentVersion % for MTEX versions 5.9.0 and above
+    %--- Load the texture file as an ODF
+    odfP = SO3Fun.load(pfName,'CS',CS,'resolution',hwidth,'Bunge',...
+        'ColumnNames',{'Euler 1','Euler 2','Euler 3','weights'});
+
+else % for MTEX versions 5.8.2 and below
+    %--- Load the texture file as discrete orientations
+    [ori,~] = orientation.load(pfName,CS,sS,'interface','generic',...
+        'ColumnNames', {'phi1' 'Phi' 'phi2'}, 'Columns', [1 2 3], 'Bunge');
+    ori = ori(:);
+    %--- Calculate the orientation distribution function and define the specimen symmetry of the parent
+    odfP = calcDensity(ori,'halfwidth',hwidth,'points','all');
+end
+
+%--- Re-define the specimen symmetry
 odfP.SS = specimenSymmetry('orthorhombic');
 %--- Calculate the value and orientation of the maximum f(g) in the ODF
+% [maxodfP_value,~] = max(odfP);
+% odfP = odfP.*(100/maxodf_value); % scale ODF to maximum f(g) = 100
 [maxodfP_value,maxodfP_ori] = max(odfP);
-%--- Calculate the parent pole figures from the parent orientation distribution function 
-pfP = calcPoleFigure(odfP,hParent,regularS2Grid('resolution',2.5*degree),'antipodal');
+maxodfP_value = round(maxodfP_value/5)*5;
+%---
+
+%--- Calculate the pole figures from the orientation distribution function
+pfP = calcPoleFigure(odfP,hParent,regularS2Grid('resolution',hwidth),'antipodal');
 %--- Calculate the value of the maximum f(g) in the PF
 maxpfP_value = max(max(pfP));
-
+maxpfP_value = round(maxpfP_value/5)*5;
+%---
 
 %% Find all the specified child orientations 
 oriC = variants(job.p2c, oriP, 'variantId',job.variantMap);
@@ -200,8 +225,8 @@ plotPDF(odfC,...
     'points','all',...
     'equal','antipodal',...
     'contourf');
-% colormap(cmapC);
-colormap(flipud(colormap(cmapC)));  % option to flip the colorbar
+colormap(cmapC);
+% colormap(flipud(cmapC));  % option to flip the colorbar
 % colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
 %     'YTick', [0:1:ceil(maxpfC_value)],...
 %     'YTickLabel',num2str([0:1:ceil(maxpfC_value)]'), 'YLim', [0 ceil(maxpfC_value)],...
@@ -230,8 +255,8 @@ plotSection(odfC,...
     'phi2',odfSecC,...
     'points','all','equal',...
     'contourf',1:ceil(maxodfC_value));
-% colormap(cmapC);
-colormap(flipud(colormap(cmapC))); % option to flip the colorbar
+colormap(cmapC);
+% colormap(flipud(cmapC)); % option to flip the colorbar
 caxis([1 ceil(maxodfC_value)]);
 % colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
 %     'YTick', [0:5:ceil(maxodfC_value)],...

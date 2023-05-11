@@ -28,7 +28,7 @@
 | :--- | :--- |
 ---
 
-# Introduction to ORTools
+## Introduction to ORTools
 **Orientation relationship tools** (**ORTools**) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. 
 
 The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the MATLAB-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the scripts contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the 2021 MTEX Workshop for an introduction to the phase transformation features in MTEX and **ORTools**. 
@@ -43,24 +43,24 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
 
 ---
 
-# Authors
+## Authors
 **ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
 
 ---
 
-# Contributors
+## Contributors
 [**Dr Tuomo Nyyssönen**](https://www.researchgate.net/profile/Tuomo-Nyyssoenen) - Lath martensite block width calculator
 
 ---
 
-# How to cite ORTools
+## How to cite ORTools
 If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite this open-access paper as your reference:
 
 [**F. Niessen, T. Nyyssönen, A.A. Gazder, R. Hielscher, Parent grain reconstruction from partially and fully transformed microstructures in MTEX, Journal of Applied Crystallography: 55(1), pp. 180-194, 2022. (https://doi.org/10.1107/S1600576721011560)**](https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf)
 
 ---
 
-# How to use ORTools
+## How to use ORTools
 - Download the [**LATEST STABLE RELEASE**](https://github.com/ORTools4MTEX/ORTools/releases) or the [**DEVELOPER VERSION**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) of **ORTools** by clicking on either weblink.
 - This library only works after the prior installation of [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download). Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [MTEX](https://mtex-toolbox.github.io/download) by clicking on these weblinks and/or refer to the video given below. ORTools is tested for compatibility from MATLAB 2016b onwards. With each [release](https://github.com/ORTools4MTEX/ORTools/releases) of ORTools, please check which version of MTEX it is compatible with. 
 - The peak fitting functionality within the function [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors) requires the prior installation of the [MATLAB Signal Processing Toolbox](https://au.mathworks.com/products/signal.html).
@@ -74,7 +74,7 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 
 ---
 
-#  ORTools example scripts
+##  ORTools example scripts
 The world of martensitic transformation or phase transition analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the **ORTools** library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions *in action*.
 
 It is possible to run the example scripts from start to end, but we encourage you to run the example scripts [in sections](https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html) to understand the correlation between the scripts and the generated results. 
@@ -173,9 +173,9 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ---
 
 
-# ORTools alphabetical function index
+## ORTools alphabetical function index
 
-## C
+### C
 - [computeBainGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains)
 - [computeGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrains)
 - [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane)
@@ -184,25 +184,25 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [computeVariantGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantGrains)
 
 
-## D
+### D
 - [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors)
 
 
-## F
+### F
 - [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker)
 
 
-## G
+### G
 - [grainClick](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#grainClick)
 - [guiOR](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#guiOR)
 
 
-## O
+### O
 - [orientationMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#orientationMaker)
 - [ORinfo](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#ORinfo)
 
 
-## P
+### P
 - [peakFitORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs)
 - [plotHist_OR_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotHist_OR_misfit)
 - [plotIPDF_gB_misfit](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotIPDF_gB_misfit)
@@ -226,28 +226,27 @@ This script follows the same dataset and steps that are used to demonstrate the 
 - [plotStack](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotStack)
 
 
-## R
+### R
 - [readCPR](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#readCPR)
 - [recolorPhases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#recolorPhases)
 - [renamePhases](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#renamePhases)
 
 
-## S
+### S
 - [saveImage](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#saveImage)
 - [screenPrint](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#screenPrint)
 - [setParentGrainReconstructor](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#setParentGrainReconstructor)
 
 
-## T
+### T
 - [tileFigures](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#tileFigures)
 
-
-
-#  ORTools function reference
 ---
 
+##  ORTools function reference
+
 ### [computeBainGrains](./src/computeBainGrains.m)
-Compute the Bain groups of grains.
+This function computes the Bain group IDs of child grains.
 
 - Syntax
   - [bain_grains] = computeBainGrains(job)
@@ -263,7 +262,7 @@ Compute the Bain groups of grains.
 ---
 
 ### [computeGrains](./src/computeGrains.m)
-Small GUI to compute grains from EBSD data and optionally filter them.
+This function is a GUI to compute grains from ebsd map data and optionally filters them.
 
 - Syntax
   - [ebsd,grains,gB] = computeGrains(ebsd)
@@ -281,8 +280,8 @@ Small GUI to compute grains from EBSD data and optionally filter them.
 ---
 
 ### [computeHabitPlane](./src/computeHabitPlane.m)
-Compute the habit plane based on determined traces of a 2D map as per the following reference:
-[T. Nyyssonen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane determination from reconstructed parent phase orientation maps](https://doi.org/10.48550/arXiv.2303.07750)
+This function computes the habit plane based on the determined traces from 2D ebsd map data as per the following reference:
+[T. Nyyssönen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane determination from reconstructed parent phase orientation maps. (https://doi.org/10.48550/arXiv.2303.07750)](https://doi.org/10.48550/arXiv.2303.07750)
 
 - Syntax
   - [hPlane,statistics] = computeHabitPlane(job)
@@ -305,7 +304,7 @@ Compute the habit plane based on determined traces of a 2D map as per the follow
 ---
 
 ### [computePacketGrains](./src/computePacketGrains.m)
-Compute the crystallographic packets of grains.
+This function computes the crystallographic packet IDs of child grains.
 
 - Syntax
   - [packet_grains] = computePacketGrains(job)
@@ -321,7 +320,7 @@ Compute the crystallographic packets of grains.
 ---
 
 ### [computeParentTwins](./src/computeParentTwins.m)
-Compute twins in a parent grains by local refinement.
+This function computes twins in parent grains by local refinement.
 
 - Syntax
   -  computeParentTwins(job,pGrainId)
@@ -329,7 +328,7 @@ Compute twins in a parent grains by local refinement.
   -  job          - @parentGrainreconstructor
   -  pGrainId     - parent grain Id 
   -  direction    - @vector3d
-- Option
+- Options
   -  grains       - plot grain data instead of EBSD data
 
 <p align="center">
@@ -339,18 +338,17 @@ Compute twins in a parent grains by local refinement.
 ---
 
 ### [computeVariantGrains](./src/computeVariantGrains.m)
-Refine the child grains in the job object based on their variant IDs and return the refined grains and the child EBSD date with the new grain Ids
+This function refines the child grains in the *job* object based on their variant IDs. It returns the refined child grains and assigns ebsd map data to the new child grain Ids.
 
 - Syntax
   - [variant_grains,cEBSD] = computeVariantGrains(job,varargin)
 - Input
   - job              - @parentGrainReconstructor
-- Optional
-  - parentGrainId    - parent grain Id using the argument 'parentGrainId'
 - Output
   - variant_grains   - @grains2d 
   - ebsdC            - @EBSD
-
+- Options
+  - parentGrainId    - parent grain Id using the argument 'parentGrainId'
 
 <p align="center">
   <img src="./doc/images/computeVariantGrains.png" alt="UI of computeVariantGrains" width="400"/>
@@ -359,7 +357,9 @@ Refine the child grains in the job object based on their variant IDs and return 
 ---
 
 ### [defineORs](./src/defineORs.m)
-Auxiliary function to define orientation relationships for a parent and child phase given in *job* by either parallel planes and directions in a GUI or peakfitting of the parent-child boundary misorientation angle distribution
+This auxiliary function defines an orientation relationship (OR) for a parent-child phase combination given in the *job* object as:
+- Parallel planes and directions in a GUI, or 
+- Peakfitting of the parent-child boundary misorientation angle distribution.
 
 - Syntax
   - job = defineORs(job)
@@ -371,29 +371,32 @@ Auxiliary function to define orientation relationships for a parent and child ph
 ---
 
 ### [fibreMaker](./src/fibreMaker.m)
-The function creates a text file with orientations following the distribution of a fibre ODF
+This function creates an ideal crystallographic fibre with a user specified half-width and exports the data as:
+- a lossless Mtex *.txt* file for MTEX v5.9.0 and onwards), or 
+- a lossy discretised Mtex *.txt* file for MTEX up to v5.8.2) for later use.
 
 - Syntax
   -  fibreMaker(crystalDirection,specimenDirection)
 - Input
   - crystalDirection  - @Miller
-  - specimenDirection - @vector3d
+  -  sampleDirection  - @vector3d
+  -  sampleSymmetry   - @specimenSymmetry
 - Options
-  - halfwidth         - halfwidth for ODF calculation
-  - points            - number of points (orientations) in the VPSC file
-  - export            - (optional path) & name of the VPSC file
+  - halfwidth         - halfwidth for the ODF calculation
+  - points            - number of points (orientations) in the file
+  - export            - (optional path and) name of the file
 
 ---
 
 ### [grainClick](./src/grainClick.m)
-Interactive map to select parent grains for further analysis
+This function produces a figure of an interactive ebsd map. It enables users to click on individual parent grains for detailed variant analysis.
 
 - Syntax
   - grainClick(job)
 - Input
   - job          - @parentGrainReconstructor
   - direction    - @vector3d 
-- Option
+- Options
   - parentTwins  - Refine grains to detect parent twins
   - grains       - Plot grain data instead of EBSD data 
   - noScalebar   - Remove scalebar from maps
@@ -406,7 +409,7 @@ Interactive map to select parent grains for further analysis
 ---
 
 ### [guiOR](./src/guiOR.m)
-Graphical user interface for definition of an orientation relationship by parallel planes and directions
+This function is a GUI to to define an orientation relationship (OR) with parallel planes and directions.
 
 - Syntax
   - p2c = guiOR(job)
@@ -422,21 +425,21 @@ Graphical user interface for definition of an orientation relationship by parall
 ---
 
 ### [orientationMaker](./src/orientationMaker.m)
-The function creates a VPSC file with orientations following the distribution of a unimodal ODF
+This function creates an ideal crystallographic orientation from a unimodal ODF with a user specified half-width and exports the data as a lossless Mtex *.txt* file for later use.
 
 - Syntax
   -  orientationMaker(ori)
 - Input
-  - ori          - @orientation
+  - ori              - @orientation
+  -  sampleSymmetry  - @specimenSymmetry
 - Options
-  - halfwidth    - halfwidth for ODF calculation
-  - points       - number of points (orientations) in the VPSC file
-  - export       - (optional path) & name of the VPSC file
+  - halfwidth        - halfwidth for the ODF calculation
+  - export           - (optional path and) name of the file
 
 ---
 
 ### [ORinfo](./src/ORinfo.m)
-The function outputs information about the orientation relationship in the command window and returns a structure containing the information.
+The function extracts orientation relationship (OR) information contained in the *job.p2c* structure variable and outputs it in the MATLAB command window.
 
 - Syntax
   -  ORinfo(p2c)
@@ -454,7 +457,7 @@ The function outputs information about the orientation relationship in the comma
 ---
 
 ### [peakFitORs](./src/peakFitORs.m)
-The function peak fits parent-child misorientation angle ranges for determination of one or several orientation relationships.
+This function peak fits parent-child misorientation angle ranges to determine one or several orientation relationships (ORs).
 The function is called by [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors).
 
 - Syntax
@@ -472,7 +475,7 @@ The function is called by [defineORs](https://github.com/ORTools4MTEX/ORTools/bl
 ---
 
 ### [plotHist_OR_misfit](./src/plotHist_OR_misfit.m)
-This function plots the disorientation, or misfit, between parent-child and child-child grains and an orientation relationship in a histogram. By default, the current OR (*job.p2c*) is selected and is denoted by 2 stars (**). Additional ORs can be supplied with the argument *p2c*.
+This function plots the disorientation, (or misfit), between parent-child and child-child grains and an orientation relationship (OR) in a histogram. By default, the current OR (*job.p2c*) is selected and is denoted by 2 stars (**). Additional ORs can be supplied with the argument *p2c*.
 
 - Syntax
   -  plotHist_OR_misfit(job)
@@ -491,14 +494,16 @@ This function plots the disorientation, or misfit, between parent-child and chil
 ---
 
 ### [plotIPDF_gB_misfit](./src/plotIPDF_gB_misfit.m)
-This function plots the misfit, or disorientation, between parent-child and child-child boundaries with the orientation relationship in an inverse pole figure showing the misorientation axes
+This function plots the misfit, or disorientation, between parent-child and child-child boundaries sharing an orientation relationship (OR) in an inverse pole figure (IPF) showing the misorientation axes.
 
 - Syntax
   -  plotIPDF_gB_misfit(job)
 - Input
   - job       - @parentGrainReconstructor
 - Options
-  - colormap  - colormap string  
+  - colormapP - colormap variable for parent grains
+  - colormapC - colormap variable for child grains
+  - maxColor  - maximum color on color range [degree]
 
 <p align="center">
   <img src="./doc/images/plotIPDF_gB_misfit.png" alt="Plot example from plotIPDF_gB_misfit" width="1000"/>
@@ -507,14 +512,14 @@ This function plots the misfit, or disorientation, between parent-child and chil
 ---
 
 ### [plotIPDF_gB_prob](./src/plotIPDF_gB_prob.m)
-This function calculates and plots the probability distribution between 0 and 1, that a boundary belongs to an orientation relationship in an inverse pole figure showing the misorientation axes
+This function calculates and plots the probability distribution, between 0 and 1, that a boundary belongs to an orientation relationship (OR) in an inverse pole figure (IPF) showing the misorientation axes.
 
 - Syntax
   -  plotIPDF_gB_prob(job)
 - Input
   - job       - @parentGrainReconstructor
 - Options
-  - colormap  - colormap string  
+  - colormap  - colormap variable  
 
 <p align="center">
   <img src="./doc/images/plotIPDF_gB_prob.png" alt="Plot example from plotIPDF_gB_prob" width="1000"/>
@@ -522,7 +527,7 @@ This function calculates and plots the probability distribution between 0 and 1,
 
 ---
 ### [plotMap_bain](./src/plotMap_bain.m)
-Plot the map of child grains colored according to their Bain groups.
+This function plots an ebsd map by colorising child grains according to their Bain group ID. It also outputs the area fraction of each Bain group.
 
 - Syntax
   -  plotMap_bain(job)
@@ -531,7 +536,7 @@ Plot the map of child grains colored according to their Bain groups.
 - Output
   -  f_area: Area fraction of each Bain group in the EBSD map
 - Options
-  -  colormap     - colormap string
+  -  colormap     - colormap variable
   -  grains       - plot grain data instead of EBSD data
 
 <p align="center">
@@ -541,18 +546,16 @@ Plot the map of child grains colored according to their Bain groups.
 ---
 
 ### [plotMap_blockWidths](./src/plotMap_blockWidhts.m)
-This script calculates the representative value for martensite block widths by projecting all boundary points to the vector perpendicular to the trace of the {111}a plane as per the following reference:
-[S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A, Volumes 438–440, 2006, Pages 237-240](https://doi.org/10.1016/j.msea.2005.12.048)
+This function calculates and plots an ebsd map of the representative value for martensite block widths by projecting all boundary points to the vector perpendicular to the trace of the {111}a plane as per the following reference:
+[S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A, Volumes 438–440, 2006, Pages 237-240.](https://doi.org/10.1016/j.msea.2005.12.048)
 
 Contributed by *Dr. Tuomo Nyyssönen*
 
 - Syntax
   - plotMap_blockWidths(job,varargin)
-
 - Input
   - job          - @parentGrainreconstructor
   - pGrainId     - parent grain Id using the argument 'parentGrainId'
-
 - Options
   - noScalebar   - Remove scalebar from maps
   - noFrame      - Remove frame around maps
@@ -564,7 +567,7 @@ Contributed by *Dr. Tuomo Nyyssönen*
 ---
 
 ### [plotMap_clusters](./src/plotMap_clusters.m)
-The function shows the clusters of grains that are likely to belong to the same parent grain, created with [clusterGraph](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterGraph.html) on top of the  semin-transparent IPF map of child grains.
+This function plots an ebsd map of child grain clusters that are likely to belong to the same parent grain when [clusterGraph](https://mtex-toolbox.github.io/parentGrainReconstructor.clusterGraph.html) is called. It is displayed as an overlay on top of a semi-transparent IPF map of child grains.
 
 - Syntax
   -  ipfKey = plotMap_clusters(job)
@@ -580,14 +583,14 @@ The function shows the clusters of grains that are likely to belong to the same 
 ---
 
 ### [plotMap_gB_c2c](./src/plotMap_gB_c2c.m)
-The function colorizes the child-child boundaries in *job*
+This function plots an ebsd map by colorising child-child boundary misorientations contained in the variable *job*.
 
 - Syntax
   -  plotMap_gB_c2c(job)
 - Input
   - job  - @parentGrainReconstructor
 - Options
-  - colormap  - colormap string 
+  - colormap  - colormap variable 
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
@@ -596,14 +599,14 @@ The function colorizes the child-child boundaries in *job*
 ---
 
 ### [plotMap_gB_misfit](./src/plotMap_gB_misfit.m)
-The function colorizes the misfit, or disorientation, between parent-child and child-child boundaries with the orientation relationship *job.p2c*
+This function plots an ebsd map by colorising the misfit, or disorientation, between parent-child and child-child boundaries with the orientation relationship (OR) *job.p2c*
 
 - Syntax
   - plotMap_gB_misfit(job)
 - Input
   - job       - @parentGrainReconstructor
 - Options
-  - colormap  - colormap string 
+  - colormap  - colormap variable 
 
 <p align="center">
   <img src="./doc/images/plotMap_gB_misfit.png" alt="Plot example from plotMap_gB_misfit" width="500"/>
@@ -612,14 +615,14 @@ The function colorizes the misfit, or disorientation, between parent-child and c
 ---
 
 ### [plotMap_gB_p2c](./src/plotMap_gB_p2c.m)
-The function colorizes the parent-child boundaries in *job* according to their misorientation angle.
+This function plots an ebsd map by colorising child-child boundary misorientations contained in the variable *job*.
 
 - Syntax
   -  plotMap_gB_p2c(job)
 - Input
   - job       - @parentGrainReconstructor
 - Options
-  - colormap  - colormap string 
+  - colormap  - colormap variable 
  
 <p align="center">
   <img src="./doc/images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
@@ -628,8 +631,8 @@ The function colorizes the parent-child boundaries in *job* according to their m
 ---
 
 ### [plotMap_gB_prob](./src/plotMap_gB_prob.m)
-The function calculates and plots the probability distribution between 0 and 1, that a 
-boundary belongs to the orientation relationship (see more [here](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html))
+This function calculates and plots an ebsd map of the probability distribution, between 0 and 1, that a boundary belongs to an orientation relationship (OR). 
+For more details, [please click here.](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html)
 
 - Syntax
   -  plotMap_gB_prob(job)
@@ -638,7 +641,7 @@ boundary belongs to the orientation relationship (see more [here](https://mtex-t
 - Options
   - threshold - the misfit at which the probability is exactly 50 percent ... 
   - tolerance - ... and the standard deviation in a cumulative Gaussian distribution
-  - colormap  - colormap string 
+  - colormap  - colormap variable 
  
 <p align="center">
   <img src="./doc/images/plotMap_gB_prob.png" alt="Plot example from plotMap_gB_prob" width="500"/>
@@ -647,7 +650,7 @@ boundary belongs to the orientation relationship (see more [here](https://mtex-t
 ---
 
 ### [plotMap_IPF_p2c](./src/plotMap_IPF_p2c.m)
-The function plots the inverse polefigure maps of the parent and child phases and returns the ipfHSV color key.
+This function plots inverse pole figure maps of the parent and child phases and returns the ipfHSV color key.
 
 - Syntax
   -  plotMap_IPF_p2c(job)
@@ -655,11 +658,11 @@ The function plots the inverse polefigure maps of the parent and child phases an
 - Input
   - job       - @parentGrainReconstructor
   - direction - @vector3d 
-- Option
-  - parent    - plot only map of parent phase
-  - child     - plot only map of child phase 
 - Output
   - ipfKey    - @ipfHSVKey 
+- Options
+  - parent    - plot only map of parent phase
+  - child     - plot only map of child phase 
 
 <p align="center">
   <img src="./doc/images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="800"/>
@@ -668,14 +671,14 @@ The function plots the inverse polefigure maps of the parent and child phases an
 ---
 
 ### [plotMap_packets](./src/plotMap_packets.m)
-The function plots the map of child grains colored according to their packet ID.
+This function plots an ebsd map by colorising child grains according to their crystallographic packet ID. It also outputs the area fraction of each crystallographic packet.
 
 - Syntax
   -  plotMap_packets(job)
 - Input
   - job      - @parentGrainReconstructor
-- Option
-  - colormap - colormap string
+- Options
+  - colormap - colormap variable
   - grains   - Plot grain data instead of EBSD data 
 
 <p align="center">
@@ -685,7 +688,7 @@ The function plots the map of child grains colored according to their packet ID.
 ---
 
 ### [plotMap_phases](./src/plotMap_phases.m)
-The function plots a phase map of the grains within *job* and the grain boundaries (*job.grains.boundary*).
+This function plots an ebsd map of the grain phases in the *job* variable as well as the grain boundaries (*job.grains.boundary*).
 
 - Syntax
   -  p2c = plotMap_phases(job)
@@ -699,22 +702,19 @@ The function plots a phase map of the grains within *job* and the grain boundari
 ---
 
 ### [plotMap_variantPairs](./src/plotMap_variantPairs.m)
-Plot pairs of martensitic variants (block boundaries) in steel microstructures as per the analysis in the following reference:
+This function plots an ebsd map of the equivalent pairs of martensitic variants (block boundaries) in steel microstructures as per the analysis in the following reference:
 [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to identify martensite and bainite, Mater. Today Proc., Volume 2, Supplement 3, 2015, Pages S913-S916,](https://doi.org/10.1016/j.matpr.2015.07.430)
 
 - Syntax
   - variantPairs_boundary = plotMap_variantPairs(job,varargin)
-
 - Input
   - job          - @parentGrainreconstructor
   - pGrainId     - parent grain Id using the argument 'parentGrainId'
-
-- Option
+- Output
+  - variantPairs_boundary - a structure variable of the groups of equivalent variant pair boundaries
+- Options
   - noScalebar   - Remove scalebar from maps
   - noFrame      - Remove frame around maps
-
-- Output
-  - variantPairs_boundary - a structure variable containing 4 groups of variant pair boundaries
 
 <p align="center">
   <img src="./doc/images/plotMap_variantPairs.png" alt="plotMap_variantPairs" width="500"/>
@@ -723,14 +723,16 @@ Plot pairs of martensitic variants (block boundaries) in steel microstructures a
 ---
 
 ### [plotMap_variants](./src/plotMap_variants.m)
+This function plots an ebsd map by colorising child grains according to their variant IDs. It also outputs the area fraction of each variant.
+
 The function plots the map of child grains colored according to their variant ID.
 
 - Syntax
   -  plotMap_variants(job)
 - Input
   - job  - @parentGrainReconstructor
-- Option
-  - colormap - colormap string
+- Options
+  - colormap - colormap variable
   - grains   - Plot grain data instead of EBSD data 
 
 <p align="center">
@@ -740,7 +742,7 @@ The function plots the map of child grains colored according to their variant ID
 ---
 
 ### [plotPDF_bain](./src/plotPDF_bain.m)
-The function plots a pole figure of the child Bain groups associated with an OR *job.p2c*.
+This function plots a pole figure of the child Bain group IDs associated with an OR *job.p2c*.
 
 - Syntax
   -  plotPDF_bain(job)
@@ -751,7 +753,7 @@ The function plots a pole figure of the child Bain groups associated with an OR 
   -  oriParent    - @orientation
   -  pdf          - @Miller
 - Options
-  -  colormap     - colormap string
+  -  colormap     - colormap variable
 
 <p align="center">
   <img src="./doc/images/plotPDF_bain.png" alt="Plot example from plotPDF_bain" width="300"/>
@@ -760,7 +762,7 @@ The function plots a pole figure of the child Bain groups associated with an OR 
 ---
 
 ### [plotPDF_packets](./src/plotPDF_packets.m)
-The function plots a pole figure of the child crystallographic packets associated with an OR *job.p2c*.
+This function plots a pole figure of the child crystallographic packet IDs associated with an OR *job.p2c*.
 
 - Syntax
   -  plotPDF_packets(job)
@@ -771,7 +773,7 @@ The function plots a pole figure of the child crystallographic packets associate
   - oriParent - @orientation
   - pdf       - @Miller
 - Options
-  - colormap   - colormap string 
+  - colormap   - colormap variable 
   - markersize - markersize 
 
 <p align="center">
@@ -781,7 +783,8 @@ The function plots a pole figure of the child crystallographic packets associate
 ---
 
 ### [plotPDF_variants](./src/plotPDF_variants.m)
-The function plots a pole figure of the martensitic variants associated with the OR *job.p2c*. It is an alternative to MTEX's [plotVariantPF](https://mtex-toolbox.github.io/parentGrainReconstructor.plotVariantPF.html).
+This function plots a pole figure of the child variant IDs associated with an OR *job.p2c*. 
+It is an alternative to MTEX's default [plotVariantPF](https://mtex-toolbox.github.io/parentGrainReconstructor.plotVariantPF.html).
 
 - Syntax
   -  plotPDF_variants(job)
@@ -792,7 +795,7 @@ The function plots a pole figure of the martensitic variants associated with the
   - oriParent - @orientation
   - pdf       - @Miller
 - Options
-  - colormap   - colormap string 
+  - colormap   - colormap variable 
   - markersize - markersize 
 
 <p align="center">
@@ -802,7 +805,11 @@ The function plots a pole figure of the martensitic variants associated with the
 ---
 
 ### [plotPODF_transform](./src/plotPODF_transform.m)
-The function calculates and plots the transformation texture, with or without imposing variant selection, based on a parent texture in inputVPSC.Tex. Input files can be created from EBSD data as presented in [example 4](https://github.com/ORTools4MTEX/ORTools#example-4) or created with [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker) or [orientationMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#orientationMaker)
+The function calculates and plots the transformation texture, with or without imposing variant selection, based on a parent texture file.
+Input files can be created using:
+ - ebsd map data [as shown in example 4](https://github.com/ORTools4MTEX/ORTools#example-4), 
+ - [fibreMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#fibreMaker), or
+ - [orientationMaker](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#orientationMaker).
 
 - Syntax
   -  plotPODF_transformation(job,hParent,hChild)
@@ -812,8 +819,8 @@ The function calculates and plots the transformation texture, with or without im
 - Options
   - odfSecP      - array with angles of parent ODF section to display
   - odfSecC      - array with angles of child ODF section to display
-  - colormapP    - colormap string for parent PFs and ODFs
-  - colormapC    - colormap string for child PFs and ODFs
+  - colormapP    - colormap variable for parent PFs and ODFs
+  - colormapC    - colormap variable for child PFs and ODFs
   - variantId    - list of specific variant Ids to plot
   - variantWt    - list of specific variant weights to plot
   - halfwidth    - halfwidth for ODF calculation
@@ -828,7 +835,9 @@ The function calculates and plots the transformation texture, with or without im
 ---
 
 ### [plotStack](./src/plotStack.m)
-The function plots maps for martensite variant analysis of a single prior parent grain. You can manually supply a parent grain Id *pGrainId* or use the function [grainClick](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#grainClick) to choose a grain interactively.
+This function plots a series of maps, figures, graphs, and tables for detailed child variant analysis within a single parent grain as follows: 
+- By manually supplying a parent grain Id *pGrainId*, or 
+- Using the [grainClick](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#grainClick) function and interactively choosing a grain of interest.
 
 - Syntax
   -  plotStack(job,pGrainId)
@@ -836,7 +845,7 @@ The function plots maps for martensite variant analysis of a single prior parent
   - job          - @parentGrainreconstructor
   - pGrainId     - parent grain Id
   - direction    - @vector3d 
-- Option
+- Options
   - grains       - Plot grain data instead of EBSD data 
   - noScalebar   - Remove scalebar from maps
   - noFrame      - Remove frame around maps
@@ -848,7 +857,7 @@ The function plots maps for martensite variant analysis of a single prior parent
 ---
 
 ### [readCPR](./src/readCPR.m)
-An auxiliary function to read in *.cpr/.crc* files with a browser window.
+This function is a GUI to interactively load *.cpr* and *.crc* ebsd map data files into MTEX.
 
 - Syntax
   - ebsd = readCPR
@@ -858,22 +867,22 @@ An auxiliary function to read in *.cpr/.crc* files with a browser window.
   - inPath   - string with path to directory 'xx\yy\zz\'
   - fileName - string with filename 'xxyyzz.cpr'
 - Output
-  - ebsd             - @EBSD
+  - ebsd     - @EBSD
 
 ---
 
 ### [recolorPhases](./src/recolorPhases.m)
-The function opens an interactive GUI color picker to redefine the phase colors using the *ebsd* or *grains* variables.
+This function is a GUI to interactively recolor phases in the *ebsd* or *grains* variables.
 
 - Syntax
   - [ebsd] = recolorPhases(ebsd)
   - [grains] = recolorPhases(grains)
 - Input
-  - ebsd             - @EBSD
-  - grains           - @grains2d
+  - ebsd    - @EBSD
+  - grains  - @grains2d
 - Output
-  - ebsd             - @EBSD
-  - grains           - @grains2d
+  - ebsd    - @EBSD
+  - grains  - @grains2d
   
 <p align="center">
   <img src="./doc/images/recolorPhases.png" alt="GUI of recolorPhases" width="200"/>
@@ -882,20 +891,21 @@ The function opens an interactive GUI color picker to redefine the phase colors 
 ---
 
 ### [renamePhases](./src/renamePhases.m)
-The function opens an interactive list with the possible phasenames in *phaseStrings* and renames the phases in *ebsd* according to the selection.
+This function is a GUI to interactively rename phases. 
+It opens a list of phase names (pre-defined in *phaseStrings*) and renames each phase in the *ebsd* variable according to a user's selection.
 
 - Syntax
   - ebsd = renamePhases(ebsd,phStr)
 - Input
-  - ebsd             - @EBSD
-  - phaseStrings     - cell array of strings with possible phase names
+  - ebsd         - @EBSD
+  - phaseStrings - cell array of strings with possible phase names
 - Output
-  - ebsd             - @EBSD
+  - ebsd         - @EBSD
 
 ---
 
 ### [saveImage](./src/saveImage.m)
-An auxiliary function to save all open figures as images.
+This function saves all open figures as images.
 
 - Syntax
   - saveImage(fileDir,fileName)
@@ -908,19 +918,35 @@ An auxiliary function to save all open figures as images.
 ---
 
 ### [screenPrint](./src/screenPrint.m)
-An auxiliary function for formating command window output.
+This function formats command window output.
 
 - Syntax
   - screenPrint(mode)
   - screenPrint(mode, string)
 - Input
-  - mode     - Formatting mode
-  - string   - Output string
+  - mode     - formatting mode
+  - string   - output string
+
+---
+
+### [setInterp2Latex](./src/setInterp2Latex.m)
+This function changes all MATLAB text interpreters from 'tex' to 'latex in all subsequent figures, plots, and graphs.
+
+- Syntax
+  - setInterp2Latex
+  
+---
+
+### [setInterp2Tex](./src/setInterp2Tex.m)
+This function changes all MATLAB text interpreters from 'latex' to 'tex in all subsequent figures, plots, and graphs.
+
+- Syntax
+  - setInterp2Tex
 
 ---
 
 ### [setParentGrainReconstructor](./src/setParentGrainReconstructor.m)
-An auxiliary GUI function to define a job of class [parentGrainReconstructor](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html).
+This function is a GUI to define a job of class [parentGrainReconstructor](https://mtex-toolbox.github.io/parentGrainReconstructor.parentGrainReconstructor.html).
 
 - Syntax
   - setParentGrainReconstructor(ebsd,grains)
@@ -935,7 +961,9 @@ An auxiliary GUI function to define a job of class [parentGrainReconstructor](ht
 ---
 
 ### [tileFigures](./src/tileFigures.m)
-An auxiliary function to distribute figures evenly over a user screen/monitor.
+This function tiles all figures evenly across the computer screen/monitor.
 
 - Syntax
   - fileFigs
+  
+---

@@ -1,21 +1,22 @@
 function [variant_grains,cEBSD] = computeVariantGrains(job,varargin)
-% Refine the child grains in the job object based on their variant IDs 
-% and return the refined grains and the child EBSD date with the new grain
-% Ids
+%% Function description:
+% This function refines the child grains in the "job" object based on 
+% their variant IDs. It returns the refined child grains and assigns ebsd 
+% map data to the new child grain Ids.
 %
-% Syntax
-%
+%% Syntax:
 %  [variant_grains,job] = computeVariantGrains(job,varargin)
 %
-% Input
+%% Input:
 %  job  - @parentGrainReconstructor
 %
-% Optional
-%  parentGrainId     - parent grain Id using the argument 'parentGrainId'
-%
-% Output
+%% Output:
 %  variant_grains   - @grains2d 
-%  ebsdC  - @EBSD
+%  ebsdC            - @EBSD
+%
+%% Options:
+%  parentGrainId     - parent grain Id using the argument 'parentGrainId'
+
 
 parentGrainId = get_option(varargin,'parentGrainId',[]);
 if parentGrainId
@@ -28,25 +29,29 @@ else
     cEBSD = job.ebsdPrior(job.grainsPrior(job.isTransformed));
 end
 
-%Get reconstructed mean parent orientations for each child grain
+%% Get reconstructed mean parent orientations for each child grain
 oriP = job.grains(job.mergeId(cEBSD.grainId)).meanOrientation;
+
 %% AAG EDIT
-%Calculate variant and packet Ids for transformed EBSD data
+% Calculate variant and packet Ids for transformed EBSD data
 % [varIds,packIds] = calcVariantId(oriP,cEBSD.orientations,job.p2c,...
 %                                  'variantMap', job.variantMap);
 
-%Calculate variant, packet and bain Ids for transformed EBSD data
+%% Calculate variant, packet and bain Ids for transformed EBSD data
 [varIds,packIds,bainIds] = calcVariantId(oriP,cEBSD.orientations,job.p2c,...
                                  'variantMap', job.variantMap);
 %% AAG EDIT
 
-%Concatenate variant Ids and parent grain Ids for transformed EBSD data
+%% Concatenate variant Ids and parent grain Ids for transformed EBSD data
 varPids = [varIds,job.grains(job.mergeId(cEBSD.grainId)).id];
-%Compute new child grains based on variant and parent identity
+
+%% Compute new child grains based on variant and parent identity
 [variant_grains,cEBSD.grainId] = calcGrains(cEBSD,'variants',varPids);
-%Save packet Ids in grain structure as well
+
+%% Save packet Ids in grain structure as well
 variant_grains(cEBSD.grainId).prop.packetId = packIds;
+
 %% AAG EDIT
-%Save bain Ids in grain structure as well
+%% Save bain Ids in grain structure as well
 variant_grains(cEBSD.grainId).prop.bainId = bainIds;
 %% AAG EDIT

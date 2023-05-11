@@ -1,14 +1,15 @@
 function [ebsd,grains,gB] = computeGrains(ebsd,varargin)
-% Small GUI to compute grains from EBSD data and optionally filter them
+%% Function description:
+% This function is a GUI to compute grains from ebsd map data and 
+% optionally filters them.
 %
-% Syntax
-%
+%% Syntax:
 %  [ebsd,grains,gB] = computeGrains(ebsd)
 %
-% Input
+%% Input:
 %  ebsd  - @EBSD
 %
-% Output
+%% Output:
 %  ebsd     - @EBSD
 %  grains   - @grains2d 
 %  gB       - @grainBoundary

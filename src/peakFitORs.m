@@ -1,17 +1,19 @@
 function [p2c] = peakFitORs(job,misoRange)
-% peak fitting of parent-child misorientation angle ranges for
-% determination of one or several orientation relationships
-% Function is executed by "defineORs.m"
+%% Function description:
+% This function peak fits parent-child misorientation angle ranges to
+% determine one or several orientation relationships (ORs).
+% The function is called by "defineORs.m".
 %
-% Syntax
+%% Syntax:
 %  p2c = peakFitORs(job,misoRange)
 %
-% Input
+%% Input:
 %  job          - @parentGrainreconstructor
 %  misoRange    - range of misorientation angles in which to fit
 %
-% Output
+%% Output:
 %  p2c          - parent to child orientation relationship
+
 
 screenPrint('Step','Computing ORs from peak-fitted data');
 %--- Define the angular misorientation range to display in the misorientation axis distribution

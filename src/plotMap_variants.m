@@ -1,21 +1,24 @@
 function f_area = plotMap_variants(job, varargin)
-% plot the map of child grains colored according to their variant ID
+%% Function description:
+% This function plots an ebsd map by colorising child grains according to 
+% their variant IDs. It also outputs the area fraction of each variant.
 %
-% Syntax
+%% Syntax:
 %  plotMap_variants(job)
 %
-% Input
-%  job          - @parentGrainreconstructor
+%% Input:
+%  job      - @parentGrainreconstructor
 %
-% Output
+%% Output:
 %  f_area: Area fraction of each variant
 %  entire EBSD map
 %
-% Options
-%  colormap - colormap string
+%% Options:
+%  colormap - colormap variable
 %  grains   - plot grain data instead of EBSD data
 
-cmap = get_option(varargin,'colormap','jet');
+
+cmap = get_option(varargin,'colormap',jet);
 
 %% Define the text output format as Latex
 setInterp2Latex

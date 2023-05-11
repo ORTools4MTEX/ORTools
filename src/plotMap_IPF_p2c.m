@@ -1,20 +1,22 @@
 function ipfKey = plotMap_IPF_p2c(job, varargin)
-% plot inverse pole figure maps of parent and child phases
+%% Function description:
+% This function plots inverse pole figure maps of the parent and child 
+% phases and returns the ipfHSV color key.
 %
-% Syntax
+%% Syntax
 %  plotMap_IPF_p2c(job)
 %  plotMap_IPF_p2c(job,direction)
 %
-% Input
-%  job          - @parentGrainreconstructor
-%  direction    - @vector3d
+%% Input:
+%  job       - @parentGrainreconstructor
+%  direction - @vector3d
 %
-% Option
-%  parent       - plot parent phase map only
-%  child        - plot child phase map only
-%
-% Output
-%  ipfKey       - @ipfHSVKey
+%% Output:
+%  ipfKey    - @ipfHSVKey
+%% Options:
+%  parent    - plot parent phase map only
+%  child     - plot child phase map only
+
 
 vector = getClass(varargin,'vector3d',vector3d.X);
 ipfKey1 = [];

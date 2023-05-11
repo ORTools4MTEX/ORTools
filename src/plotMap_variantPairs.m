@@ -1,25 +1,28 @@
 function variantPairs_boundary = plotMap_variantPairs(job,varargin)
-% % Plot pairs of martensitic variants (block boundaries) in steel
-% % microstructures as per the analysis in the following reference:
-% % [S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to
-% % identify martensite and bainite, Mater. Today Proc., Volume 2,
-% % Supplement 3, 2015, Pages S913-S916,
-% % https://doi.org/10.1016/j.matpr.2015.07.430]
+%% Function description:
+% This function plots an ebsd map of the equivalent pairs of martensitic 
+% variants (block boundaries) in steel microstructures as per the 
+% analysis in the following reference:
+% S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to
+% identify martensite and bainite, Mater. Today Proc., Volume 2,
+% Supplement 3, 2015, Pages S913-S916.
+% (https://doi.org/10.1016/j.matpr.2015.07.430)
 %
-% Syntax
+%% Syntax:
 % variantPairs_boundary = plotMap_variantPairs(job,varargin)
 %
-% Input
+%% Input:
 %  job          - @parentGrainreconstructor
 %  pGrainId     - parent grain Id using the argument 'parentGrainId'
 %
-% Option
+%% Output:
+% variantPairs_boundary - a structure variable of the groups of equivalent
+%                         variant pair boundaries
+%
+%% Options:
 %  noScalebar  - Remove scalebar from maps
 %  noFrame     - Remove frame around maps
-%
-% Output
-%  variantPairs_boundary - a structure variable containing 4 groups of
-% variant pair boundaries
+
 
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};

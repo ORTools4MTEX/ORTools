@@ -1,15 +1,17 @@
 function p2c = guiOR(job)
-% Graphical user interface for definition of an orientation relationship by
-% parallel planes and directions
+%% Function description:
+% This function is a GUI to to define an orientation relationship (OR)
+% with parallel planes and directions.
 %
-% Syntax
+%% Syntax:
 %  p2c = guiOR(job)
 %
-% Input
-%  job          - @parentGrainreconstructor
+%% Input:
+%  job - @parentGrainreconstructor
 %
-% Output
-%  p2c          - parent to child orientation relationship
+%% Output:
+%  p2c - parent to child orientation relationship
+
 
 screenPrint('Step','Computing a user-defined OR');
 windowTitle = 'Define an OR using Miller indices';
@@ -75,7 +77,7 @@ defAns.V_p = -1;
 defAns.T_p = 0;
 defAns.W_p = 0;
 
-% Parent convention radio button
+%% Parent convention radio button
 formats(4,1).type = 'list';
 formats(4,1).span = [1 4];
 formats(4,1).format = 'text';
@@ -88,12 +90,12 @@ defAns.rB_p = 'Miller (hkl)[UVW]';
 
 
 
-% Child plane text
+%% Child plane text
 formats(9,1).type = 'text';
 formats(9,1).format = 'text';
 formats(9,1).span = [1 4];
 
-% Child plane and direction indices
+%% Child plane and direction indices
 for ro = 10:11
     for col = 1:4
         formats(ro,col).type = 'edit';
@@ -111,7 +113,7 @@ defAns.V_c = -1;
 defAns.T_c = 0;
 defAns.W_c = -1;
 
-% Child convention radio button
+%% Child convention radio button
 formats(12,1).type = 'list';
 formats(12,1).span = [1 4];
 formats(12,1).format = 'text';
@@ -120,22 +122,18 @@ formats(12,1).items = {'Miller (hkl)[UVW]', 'Miller-Bravais (hkil)[UVTW]'};
 defAns.rB_c = 'Miller (hkl)[UVW]';
 
 
-
-
-
-
 % formats(16,1).type = 'text'; % Key
 % formats(16,1).span = [1 4];
-% 
+%
 % formats(17,1).type = 'text'; % Parent plane
 % formats(17,1).span = [1 2];
-% 
+%
 % formats(17,3).type = 'text'; % Parent direction
 % formats(17,3).span = [1 2];
-% 
+%
 % formats(18,1).type = 'text'; % Child plane
 % formats(18,1).span = [1 2];
-% 
+%
 % formats(18,3).type = 'text'; % Child direction
 % formats(18,3).span = [1 2];
 
@@ -145,7 +143,7 @@ defAns.rB_c = 'Miller (hkl)[UVW]';
 if guiCancel == 1
     warning('OR not defined. Please define an OR before continuing.')
     return
-    
+
 elseif guiCancel == 0
     if strcmpi(guiFields.rB_p,'Miller (hkl)[UVW]')
         planeParent = Miller(...
@@ -176,7 +174,7 @@ elseif guiCancel == 0
             job.csParent,...
             'UVTW');
     end
-    
+
     if strcmpi(guiFields.rB_c,'Miller (hkl)[UVW]')
         planechild = Miller(...
             guiFields.h_c,...
@@ -206,8 +204,8 @@ elseif guiCancel == 0
             job.csChild,...
             'UVTW');
     end
-    
-    %--- Define the OR as a misorientation
+
+    %% Define the OR as a misorientation
     p2c = orientation('map',...
         planeParent,...
         planechild,...

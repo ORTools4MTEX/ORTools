@@ -1,23 +1,27 @@
 function plotMap_blockWidths(job,varargin)
-% % THIS SCRIPT WAS CONTRIBUTED BY: Dr Tuomo Nyyssönen
-% % This script calculates the representative value for martensite block
-% % widths by projecting all boundary points to the vector perpendicular
-% % to the trace of the {111}a plane as per the following reference:
-% % [S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the
-% % strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A,
-% % Volumes 438–440, 2006, Pages 237-240,
-% % https://doi.org/10.1016/j.msea.2005.12.048]
+%% Function description:
+% This function calculates and plots an ebsd map of the representative 
+% value for martensite block widths by projecting all boundary points to 
+% the vector perpendicular to the trace of the {111}a plane as per the 
+% following reference:
+% [S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the
+% strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A,
+% Volumes 438–440, 2006, Pages 237-240. 
+% (https://doi.org/10.1016/j.msea.2005.12.048)
 %
-% Syntax
+% CONTRIBUTED BY:
+% Dr Tuomo Nyyssönen
+%
+%% Syntax:
 %  plotMap_blockWidths(job,varargin)
 %
-% Input
-%  job          - @parentGrainreconstructor
-%  pGrainId     - parent grain Id using the argument 'parentGrainId'
+%% Input:
+%  job        - @parentGrainreconstructor
+%  pGrainId   - parent grain Id using the argument 'parentGrainId'
 %
-% Option
-%  noScalebar   - Remove scalebar from maps
-%  noFrame      - Remove frame around maps
+%% Options:
+%  noScalebar - Remove scalebar from maps
+%  noFrame    - Remove frame around maps
 
 
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))

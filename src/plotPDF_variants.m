@@ -1,25 +1,26 @@
 function plotPDF_variants(job,varargin)
-% plot a pole figure of the martensitic variants associated with an OR
+%% Function description:
+% This function plots a pole figure of the child variant IDs associated 
+% with an OR *job.p2c*. 
+% It is an alternative to MTEX's default plotVariantPF.m.
 %
-% Syntax
+%% Syntax:
 %  plotPDF_variants(job)
 %  plotPDF_variants(job,oriParent)
 %  plotPDF_variants(job,oriParent,pdf)
 %
-% Input
+%% Input:
 %  job          - @parentGrainreconstructor
 %  oriParent    - @orientation
 %  pdf          - @Miller
 %
-% Options
-%  colormap - colormap string
-%
-% Alternative to MTEX's plotVariantPF
-% https://mtex-toolbox.github.io/parentGrainReconstructor.plotVariantPF.html
+%% Options:
+%  colormap - colormap variable
+
 
 oriParent = getClass(varargin,'orientation',orientation.id(job.csParent));
 pdf = getClass(varargin,'Miller',Miller(0,0,1,job.csChild,'hkl'));
-cmap = get_option(varargin,'colormap','jet');
+cmap = get_option(varargin,'colormap',jet);
 msz = get_option(varargin,'markersize',6);
 
 %% Define the text output format as Latex

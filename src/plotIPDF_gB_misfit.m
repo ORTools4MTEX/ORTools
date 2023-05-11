@@ -1,18 +1,25 @@
 function plotIPDF_gB_misfit(job,varargin)
-% Plot the misfit, or the disorientation, between the parent-child and
-% child-child boundaries with the orientation relationship
+%% Function description:
+% This function plots the misfit, or disorientation, between parent-child 
+% and child-child boundaries sharing an orientation relationship (OR) in an 
+% inverse pole figure (IPF) showing the misorientation axes.
 %
-% Syntax
+%% Syntax:
 %  plotIPDF_gB_misfit(job)
 %
-% Input
+%% Input:
 %  job  - @parentGrainreconstructor
 %
-% Options
-%  colormap - colormap string
-%  maxColor - maximum color on color range [degree]
+%% Options:
+%  colormapP - colormap variable for parent grains
+%  colormapC - colormap variable for child grains
+%  maxColor  - maximum color on color range [degree]
 
-cmap = get_option(varargin,'colormap','jet');
+cmapP = get_option(varargin,'colormapP',flipud(gray));
+cmapC = get_option(varargin,'colormapC',jet);
+
+%% Define the text output format as Latex
+setInterp2Latex
 
 if job.p2c == orientation.id(job.csParent,job.csChild)
     warning('Orientation relationship is (0,0,0). Initialize ''job.p2c''');
@@ -40,9 +47,6 @@ if ~isempty(gB_c2c)
     % Note: The second output is unused in this function, is variant number
     [misfit_c2c,~] = min(misfit_c2c,[],2);
 end
-
-%% Define the text output format as Latex
-setInterp2Latex
 
 
 %% Define the window settings for a set of docked figures
@@ -76,8 +80,8 @@ if ~isempty(gB_p2c)
     else
         maxColor = ceil(max(misfit_p2c./degree)/5)*5;
     end
-    colormap(cmap);
-    caxis([0 maxColor]);
+    colormap(cmapP);
+    caxis([1 maxColor]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     hold all
@@ -117,8 +121,8 @@ if ~isempty(gB_p2c)
     else
         maxColor = ceil(max(misfit_p2c./degree)/5)*5;
     end
-    colormap(cmap);
-    caxis([0 maxColor]);
+    colormap(cmapC);
+    caxis([1 maxColor]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     hold all
@@ -157,8 +161,8 @@ if ~isempty(gB_c2c)
     else
         maxColor = ceil(max(misfit_c2c./degree)/5)*5;
     end
-    colormap(cmap);
-    caxis([0 maxColor]);
+    colormap(cmapC);
+    caxis([1 maxColor]);
     colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     hold all
