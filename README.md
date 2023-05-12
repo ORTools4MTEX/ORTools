@@ -323,7 +323,7 @@ This function computes twins in parent grains by local refinement.
   -  grains       - plot grain data instead of EBSD data
 
 <p align="center">
-  <img src="./doc/images/computeParentTwins.png" alt="UI of computeParentTwins" width="400"/>
+  <img src="./doc/images/computeParentTwins.png" alt="GUI of computeParentTwins" width="400"/>
 </p>
 
 ---
@@ -340,10 +340,6 @@ This function refines the child grains in the *job* object based on their varian
   - ebsdC            - @EBSD
 - Options
   - parentGrainId    - parent grain Id using the argument 'parentGrainId'
-
-<p align="center">
-  <img src="./doc/images/computeVariantGrains.png" alt="UI of computeVariantGrains" width="400"/>
-</p>
   
 ---
 
