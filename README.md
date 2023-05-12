@@ -550,7 +550,8 @@ This function plots an ebsd map by colorising child grains according to their Ba
 
 ### [plotMap_blockWidths](./src/plotMap_blockWidhts.m)
 This function calculates and plots an ebsd map of the representative value for martensite block widths by projecting all boundary points to the vector perpendicular to the trace of the {111}a plane as per the following reference:
-[S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A, Volumes 438–440, 2006, Pages 237-240.](https://doi.org/10.1016/j.msea.2005.12.048)
+
+[**S.Morito, H.Yoshida, T.Maki, X.Huang, Effect of block size on the strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A, Volumes 438–440, 2006, Pages 237-240. (https://doi.org/10.1016/j.msea.2005.12.048)**](https://doi.org/10.1016/j.msea.2005.12.048)
 
 Contributed by *Dr. Tuomo Nyyssönen*
 
@@ -706,7 +707,8 @@ This function plots an ebsd map of the grain phases in the *job* variable as wel
 
 ### [plotMap_variantPairs](./src/plotMap_variantPairs.m)
 This function plots an ebsd map of the equivalent pairs of martensitic variants (block boundaries) in steel microstructures as per the analysis in the following reference:
-[S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to identify martensite and bainite, Mater. Today Proc., Volume 2, Supplement 3, 2015, Pages S913-S916,](https://doi.org/10.1016/j.matpr.2015.07.430)
+
+[**S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to identify martensite and bainite, Mater. Today Proc., Volume 2, Supplement 3, 2015, Pages S913-S916. (https://doi.org/10.1016/j.matpr.2015.07.430)](https://doi.org/10.1016/j.matpr.2015.07.430)
 
 - Syntax
   - variantPairs_boundary = plotMap_variantPairs(job,varargin)
