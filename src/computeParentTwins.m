@@ -18,7 +18,7 @@ function computeParentTwins(job,pGrainId,varargin)
 pGrain = job.parentGrains(job.parentGrains.id2ind(pGrainId));   
 twIds = checkNeighbors(pGrain,job.parentGrains);
 if isempty(twIds)
-    error('No twins detected in the parent phase.')
+    warning('No twins detected in the parent phase.')
     return;
 end
 

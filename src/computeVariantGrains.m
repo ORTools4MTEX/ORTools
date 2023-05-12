@@ -32,15 +32,9 @@ end
 %% Get reconstructed mean parent orientations for each child grain
 oriP = job.grains(job.mergeId(cEBSD.grainId)).meanOrientation;
 
-%% AAG EDIT
-% Calculate variant and packet Ids for transformed EBSD data
-% [varIds,packIds] = calcVariantId(oriP,cEBSD.orientations,job.p2c,...
-%                                  'variantMap', job.variantMap);
-
 %% Calculate variant, packet and bain Ids for transformed EBSD data
 [varIds,packIds,bainIds] = calcVariantId(oriP,cEBSD.orientations,job.p2c,...
                                  'variantMap', job.variantMap);
-%% AAG EDIT
 
 %% Concatenate variant Ids and parent grain Ids for transformed EBSD data
 varPids = [varIds,job.grains(job.mergeId(cEBSD.grainId)).id];
@@ -48,10 +42,8 @@ varPids = [varIds,job.grains(job.mergeId(cEBSD.grainId)).id];
 %% Compute new child grains based on variant and parent identity
 [variant_grains,cEBSD.grainId] = calcGrains(cEBSD,'variants',varPids);
 
-%% Save packet Ids in grain structure as well
+%% Save packet Ids in grain structure
 variant_grains(cEBSD.grainId).prop.packetId = packIds;
 
-%% AAG EDIT
-%% Save bain Ids in grain structure as well
+%% Save bain Ids in grain structure
 variant_grains(cEBSD.grainId).prop.bainId = bainIds;
-%% AAG EDIT
