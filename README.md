@@ -257,10 +257,6 @@ This function computes the Bain group IDs of child grains.
 - Output
   - bain_grains   - @grains2d 
 
-<p align="center">
-  <img src="./doc/images/computeBainGrains.png" alt="UI of computeBainGrains" width="400"/>
-</p>
-
 ---
 
 ### [computeGrains](./src/computeGrains.m)
@@ -300,10 +296,6 @@ This function computes the habit plane based on the determined traces from 2D eb
   -  Shape          - Characteristic grain shape based algorithm (grain data used)
   -  Hist           - Circular histogram based algorithm (grain data used)
 
-<p align="center">
-  <img src="./doc/images/computeHabitPlane.png" alt="UI of computeHabitPlane" width="400"/>
-</p>
-
 ---
 
 ### [computePacketGrains](./src/computePacketGrains.m)
@@ -315,10 +307,6 @@ This function computes the crystallographic packet IDs of child grains.
   - job             - @parentGrainReconstructor
 - Output
   - packet_grains   - @grains2d 
-
-<p align="center">
-  <img src="./doc/images/computePacketGrains.png" alt="UI of computePacketGrains" width="400"/>
-</p>
 
 ---
 
