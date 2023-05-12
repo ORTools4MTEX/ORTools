@@ -112,7 +112,7 @@ The details related to the variant graph approach are described in the following
 #### Two-stage parent grain reconstruction in a TWIP-TRIP steel
 This example is of a 10% cold-rolled twinning and transformation induced plasticity (TWIP-TRIP) steel microstructure with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. ORTools and the MTEX parent grain reconstruction functionalities are used to reconstruct both parent microstructures in a single workflow. Towards the end, it is demonstrated that variant analysis can be conducted on both transformations. 
 
-*EBSD map courtesy:* **Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024**
+**EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024**
 
 [![ORTools - Example 6](http://img.youtube.com/vi/K2rO3Mx4A8s/0.jpg)](http://www.youtube.com/watch?v=K2rO3Mx4A8s "Video Title")
 
@@ -124,7 +124,7 @@ This example is of a 10% cold-rolled twinning and transformation induced plastic
 #### Partial parent grain reconstruction to clean TWIP-TRIP steel EBSD data
 This example is of a 20% cold-rolled twinning and transformation induced plasticity (TWIP-TRIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function, it is discovered that two possible ORs could be in operation for the γ to α' microstructure. The first OR is identified as not a real OR but rather, an "apparent" OR corresponding to pixels that were misindexed as α' during map acquisition even though they notionally belong to γ. The parent phase reconstruction features in MTEX and the "apparent" OR are used to revert these misindexed points to γ. The grain calculation and the OR peak fitter is re-run to show that the "apparent" OR was eliminated. 
 
-*EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024*
+**EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024**
 
 [![ORTools - Example 5](http://img.youtube.com/vi/Hj5kVscjljU/0.jpg)](http://www.youtube.com/watch?v=Hj5kVscjljU "Video Title")
 
