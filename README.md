@@ -692,7 +692,7 @@ This function plots an ebsd map of the grain phases in the *job* variable as wel
 ### [plotMap_variantPairs](./src/plotMap_variantPairs.m)
 This function plots an ebsd map of the equivalent pairs of martensitic variants (block boundaries) in steel microstructures as per the analysis in the following reference:
 
-[**S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to identify martensite and bainite, Mater. Today Proc., Volume 2, Supplement 3, 2015, Pages S913-S916. (https://doi.org/10.1016/j.matpr.2015.07.430)](https://doi.org/10.1016/j.matpr.2015.07.430)
+[**S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to identify martensite and bainite, Mater. Today Proc., Volume 2, Supplement 3, 2015, Pages S913-S916. (https://doi.org/10.1016/j.matpr.2015.07.430)**](https://doi.org/10.1016/j.matpr.2015.07.430)
 
 - Syntax
   - variantPairs_boundary = plotMap_variantPairs(job,varargin)
