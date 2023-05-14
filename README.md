@@ -8,7 +8,7 @@
 - A newer stable version, **ORTools v2.1.0**, will be released shortly.
 
 ## **For MTEX Version 5.8.2 (stable release, Nov 2022):**
-- All scripts in **[ORTools v2.0.2](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.0.2)** are fully functional.
+- All scripts in **[ORTools v2.0.2](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.0.2)** (stable release) are fully functional.
 
 ---
 
