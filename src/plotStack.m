@@ -687,9 +687,14 @@ warning on
 % else
 %     figure(1);
 % end
-figure(2);
+% recheck if the plotStack function was called from grainClick or not
+if ~any(strcmpi(varargin,'grainClick2plotStack')) % if not...
+    figure(1);
+else
+    figure(2);
+end
 warning(bakWarn);
-pause(1); % Reduce rendering errors
+pause(1); % reduce rendering errors
 return
 end
 
