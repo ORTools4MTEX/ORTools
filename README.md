@@ -69,7 +69,9 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
   - Latest STABLE releases of: 
     - [**MTEX**](https://mtex-toolbox.github.io/download.html) and
     - [**ORTools**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.0.2).
+ 
  OR
+ 
   - DEVELOPER versions of: 
     - [**MTEX**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) and
     - [**ORTools**](https://github.com/ORTools4MTEX/ORTools).
