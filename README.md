@@ -67,11 +67,9 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 - The ORTools library only works **after** the prior installation of [MATLAB](https://se.mathworks.com/help/install/install-products.html). Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html). ORTools is tested for compatibility from MATLAB 2016b onwards. With each [release](https://github.com/ORTools4MTEX/ORTools/releases) of ORTools, please check exactly which version of MTEX it is compatible with. 
 - Click on the weblinks to download either one of the following two combinations:
   - <ins>Latest STABLE releases of:</ins> 
-    - [**MTEX**](https://mtex-toolbox.github.io/download.html) and
-    - [**ORTools**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.0.2).
+    - [**MTEX**](https://mtex-toolbox.github.io/download.html) and [**ORTools**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.0.2).
   - <ins>DEVELOPER versions of:</ins>
-    - [**MTEX**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) and
-    - [**ORTools**](https://github.com/ORTools4MTEX/ORTools).
+    - [**MTEX**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip) and [**ORTools**](https://github.com/ORTools4MTEX/ORTools).
 - For instructions on installing MTEX and ORTools within MATLAB, please refer to the video given below.
 - The peak fitting functionality within the function [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors) requires the prior installation of the [MATLAB Signal Processing Toolbox](https://au.mathworks.com/products/signal.html).
 - Open MATLAB and run one of the example files. Please refer to the [Example 1](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and want to use the function library instead, please ensure that the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
