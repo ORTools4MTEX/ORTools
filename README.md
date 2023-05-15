@@ -66,10 +66,10 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 ## How to use ORTools
 - The ORTools library only works **after** the prior installation of [MATLAB](https://se.mathworks.com/help/install/install-products.html). Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html). ORTools is tested for compatibility from MATLAB 2016b onwards. With each [release](https://github.com/ORTools4MTEX/ORTools/releases) of ORTools, please check exactly which version of MTEX it is compatible with. 
 - Click on the weblinks to download either one of the following two combinations:
-  - Latest STABLE releases of: 
+  - <ins>Latest STABLE releases of:</ins> 
     - [**MTEX**](https://mtex-toolbox.github.io/download.html) 
     - [**ORTools**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.0.2)
-  - DEVELOPER versions of: 
+  - <ins>DEVELOPER versions of:</ins>
     - [**MTEX**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip)
     - [**ORTools**](https://github.com/ORTools4MTEX/ORTools)
 - For instructions on installing MTEX and ORTools within MATLAB, please refer to the video given below.
