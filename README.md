@@ -1,6 +1,6 @@
 # UPDATES
 
-## Please use the <ins>DEVELOPER VERSIONS</ins> of [**MTEX**](https://github.com/mtex-toolbox/mtex) and [ORTools](https://github.com/ORTools4MTEX/ORTools) together.
+## Please use either the <ins>DEVELOPER</ins> or <ins>STABLE</ins> versions of **MTEX** and **ORTools** together.
 
 **For MTEX Version 5.9.0 (stable release, Mar 2023):**
 - Fixes for known bugs have been implemented in the **[ORTools Developer](https://github.com/ORTools4MTEX/ORTools)** branch.
