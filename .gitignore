@@ -6,4 +6,5 @@
 *.Tex
 *.tex
 data/output/**
+TEST/**
 
