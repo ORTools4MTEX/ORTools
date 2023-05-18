@@ -1,4 +1,4 @@
-function [variant_grains,cEBSD] = computeVariantGrains(job,varargin)
+function [variantGrains,cEBSD] = computeVariantGrains(job,varargin)
 %% Function description:
 % This function refines the child grains in the "job" object based on 
 % their variant IDs. It returns the refined child grains and assigns ebsd 
@@ -40,10 +40,28 @@ oriP = job.grains(job.mergeId(cEBSD.grainId)).meanOrientation;
 varPids = [varIds,job.grains(job.mergeId(cEBSD.grainId)).id];
 
 %% Compute new child grains based on variant and parent identity
-[variant_grains,cEBSD.grainId] = calcGrains(cEBSD,'variants',varPids);
+[variantGrains,cEBSD.grainId] = calcGrains(cEBSD,'variants',varPids);
 
 %% Save packet Ids in grain structure
-variant_grains(cEBSD.grainId).prop.packetId = packIds;
+variantGrains(cEBSD.grainId).prop.packetId = packIds;
 
 %% Save bain Ids in grain structure
-variant_grains(cEBSD.grainId).prop.bainId = bainIds;
+variantGrains(cEBSD.grainId).prop.bainId = bainIds;
+
+
+%% Compute the quality of fit 
+% Get all child variants
+childVariants  = variants(job.p2c,oriP);
+
+if size(childVariants,1) == 1
+    childVariants = repmat(childVariants,length(cEBSD),1);
+end
+
+%% Compute distance to all possible variants
+d = dot(childVariants,repmat(cEBSD.orientations(:),1,size(childVariants,2)));
+
+%% Take the best quality-of-fit (QOF)
+[qof,~] = max(d,[],2);
+
+%% Save the QOF in grain structure
+variantGrains(cEBSD.grainId).prop.qof = qof;
