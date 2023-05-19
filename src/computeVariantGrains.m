@@ -61,7 +61,7 @@ end
 d = dot(childVariants,repmat(cEBSD.orientations(:),1,size(childVariants,2)));
 
 %% Take the best quality-of-fit (QOF)
-[qof,~] = max(d,[],2);
+[fit,~] = max(d,[],2);
 
 %% Save the QOF in grain structure
-variantGrains(cEBSD.grainId).prop.qof = qof;
+variantGrains(cEBSD.grainId).prop.fit = fit;
