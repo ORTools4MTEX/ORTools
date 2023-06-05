@@ -22,8 +22,8 @@ function plotPODF_transform(job,hParent,hChild,varargin)
 %  variantId    - list of specific variant Ids to plot
 %  variantWt    - list of specific variant weights to plot
 %  halfwidth    - halfwidth for PF calculation & display
-%  import       - (optional path) & name of the input VPSC file to transform
-%  export       - (optional path) & name of the output transfromed VPSC file
+%  import       - (optional path) & name of the input *.mat file to transform
+%  export       - (optional path) & name of the output transfromed *.mat file
 
 setMTEXpref('maxSO3Bandwidth',100);
 
