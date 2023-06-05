@@ -57,9 +57,10 @@ odfP = inputODF;
 %---
 
 %--- Find the modes of the parent ODF
-[oriP,volP,~] = calcComponents(odfP,...
+[modesP,volP,~] = calcComponents(odfP,...
     'maxIter',500,...
     'exact');
+oriP = orientation.byEuler(modesP.phi1,modesP.Phi,modesP.phi2,job.csParent);
 % Normalise the volume fraction
 volP = volP./sum(volP);
 %---
