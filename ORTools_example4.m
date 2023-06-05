@@ -116,17 +116,17 @@ colormap(flipud(hot))
 % We can also calculate the transformation texture using strict variant
 % selection:
 
-% Only consider variants 3, 6, 9 and 12
+% Consider variants 3, 6, 9 and 12 
+% NOTE: since variantWt is not specified, the modal weights based on the 
+% parent ODF are used here
 plotPODF_transform(job,hParent,hChild,'import',pfName,...
     'variantId',[3 6 9 12]);
 
 % Consider variants 1, 3, 5, and 7 with weights between 0 and 100
+% NOTE: since variantWt is specified, modal weights are not used.
+% Instead, the normalised variantWt is used.
 plotPODF_transform(job,hParent,hChild,'import',pfName,...
-    'variantId',[1 3 5 7],'variantWt',[100 100 10 10]);
-
-% Consider variants 2, 4, 6 and 8 with weights between 0 and 100
-plotPODF_transform(job,hParent,hChild,'import',pfName,...
-    'variantId',[2 4 6 8],'variantWt',[100 10 1 0.1]);
+    'variantId',[1 3 5 7],'variantWt',[100 100 1 0.1]);
 
 % Consider variants 4, 8 and 12 with equal weights
 plotPODF_transform(job,hParent,hChild,'import',pfName,...
