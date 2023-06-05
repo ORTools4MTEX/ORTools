@@ -820,8 +820,8 @@ Input files can be created using:
   - variantId    - list of specific variant Ids to plot
   - variantWt    - list of specific variant weights to plot
   - halfwidth    - halfwidth for PF calculation & display
-  - import       - (optional path) & name of the input VPSC file to transform
-  - export       - (optional path) & name of the output transformed VPSC file
+  - import       - (optional path) & name of the input *.mat file to transform
+  - export       - (optional path) & name of the output transformed *.mat file
 
 <p align="center">
   <img src="./doc/images/plotPODF_transformation.png" alt="Plot example from plotPODF_transform" width="1000"/>
