@@ -19,8 +19,7 @@ setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
 setMTEXpref('FontSize',14);
 % Default directories - Do not modify
-writePath = pwd; writePath = strrep(writePath,'\','/');
-Ini.dataPath = [writePath,'/data/'];
+Ini.dataPath = [strrep(pwd,'\','/'),'/data/'];
 Ini.cifPath = [Ini.dataPath,'input/cif/'];
 Ini.ebsdPath = [Ini.dataPath,'input/ebsd/'];
 Ini.texturePath = [Ini.dataPath,'output/texture/'];
