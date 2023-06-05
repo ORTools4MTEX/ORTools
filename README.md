@@ -820,8 +820,7 @@ Input files can be created using:
   - colormapC    - colormap variable for child PFs and ODFs
   - variantId    - list of specific variant Ids to plot
   - variantWt    - list of specific variant weights to plot
-  - halfwidth    - halfwidth for ODF calculation
-  - points       - number of points to be written into the VPSC file
+  - halfwidth    - halfwidth for PF calculation & display
   - import       - (optional path) & name of the input VPSC file to transform
   - export       - (optional path) & name of the output transformed VPSC file
 
