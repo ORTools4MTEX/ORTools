@@ -116,21 +116,25 @@ colormap(flipud(hot))
 % We can also calculate the transformation texture using strict variant
 % selection:
 
-%Only consider variants 3, 6, 9 and 12
+% Only consider variants 3, 6, 9 and 12
 plotPODF_transform(job,hParent,hChild,'import',pfName,...
     'variantId',[3 6 9 12]);
 
-%Only consider variants 1, 3, 5, and 7 with weights between 0 and 100
+% Consider variants 1, 3, 5, and 7 with weights between 0 and 100
 plotPODF_transform(job,hParent,hChild,'import',pfName,...
     'variantId',[1 3 5 7],'variantWt',[100 100 10 10]);
 
-%Only consider variants 2, 4, 6 and 8 with weights between 0 and 100
+% Consider variants 2, 4, 6 and 8 with weights between 0 and 100
 plotPODF_transform(job,hParent,hChild,'import',pfName,...
     'variantId',[2 4 6 8],'variantWt',[100 10 1 0.1]);
 
-%Only consider variants 4, 8 and 12 with equal weights
+% Consider variants 4, 8 and 12 with equal weights
 plotPODF_transform(job,hParent,hChild,'import',pfName,...
     'variantId',[4 8 12],'variantWt',[1 1 1]);
+
+% Consider all variants with equal weights
+plotPODF_transform(job,hParent,hChild,'import',pfName,...
+    'variantId',[1:12],'variantWt',ones(1,12));
 
 %% Save images
 saveImage(Ini.imagePath);
