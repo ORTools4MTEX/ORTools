@@ -84,7 +84,7 @@ xlabel('Variant Ids'); ylabel('Frequency');
 % transformation texture, assuming no strong variant selection
 
 % We will plot these pole figures
-hParent = [Miller(1,0,0,job.csParent),Miller(1,1,0,job.csParent)];
+hParent = [Miller(1,1,0,job.csParent),Miller(2,0,0,job.csParent)];
 hChild = [Miller(0,0,0,2,job.csChild),Miller(1,1,-2,0,job.csChild)];
 
 % Compute and plot the reconstructed parent ODF
@@ -93,19 +93,21 @@ figure;
 plotPDF(odf_parent,hParent,'antipodal','silent','contourf');
 colormap jet
 
-% We write a texture file generated from the parent ODF ...
-export_VPSC(odf_parent,[Ini.texturePath,'inputVPSC.Tex'],'interface',...
-    'VPSC','Bunge','points', 5000);
+%% We write a texture file generated from the parent ODF...
+% save the odf_parent.mat variable (lossless format)
+pfName = [Ini.texturePath,'inputTexture.mat'];
+inputODF = odf_parent; % this step defines a constant input variable name for the plotPODFtrasform.m function 
+save(pfName,"inputODF");
 
-% ... which is used to calculate the transformation texture.
-% We plot it, and write a file containing the transformed texture
-plotPODF_transform(job,hParent,hChild,'path',Ini.texturePath);
+%% ... which is used to calculate the transformation texture.
+% The transformation tetxure is plotted and saved as a odf_child.mat variable
+plotPODF_transform(job,hParent,hChild,'import',pfName);
 
-% Compare the transformation texture to the actual child ODF
+%% Compare the transformation texture to the actual child ODF
 odf_child = calcDensity(ebsd(job.csChild).orientations);
 figure;
 plotPDF(odf_child,hChild,'antipodal','silent','contourf');
-colormap(flipud(colormap('hot')))
+colormap(flipud(hot))
 
 % We can see a quite good agreement. Slight mismatches in the intensity
 % originate from a non-random variant selection
@@ -115,15 +117,15 @@ colormap(flipud(colormap('hot')))
 % selection:
 
 %Only consider variants 3,4,6 and 8
-plotPODF_transform(job,hParent,hChild,'import',Ini.texturePath,...
+plotPODF_transform(job,hParent,hChild,'import',pfName,...
     'variantId',[3 4 6 8]);
 
 %Only consider variants 3,4,6 and 8 with weights between 0 and 100
-plotPODF_transform(job,hParent,hChild,'import',Ini.texturePath,...
+plotPODF_transform(job,hParent,hChild,'import',pfName,...
     'variantId',[3 4 6 8],'variantWt',[100 100 10 10]);
 
 %Only consider variants 3,4,6 and 8 with weights between 0 and 100
-plotPODF_transform(job,hParent,hChild,'import',Ini.texturePath,...
+plotPODF_transform(job,hParent,hChild,'import',pfName,...
     'variantId',[3 4 6 8],'variantWt',[100 10 1 0.1]);
 
 %% Save images
