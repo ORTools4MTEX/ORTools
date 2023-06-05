@@ -378,7 +378,6 @@ This function creates an ideal crystallographic fibre with a user specified half
   -  sampleSymmetry   - @specimenSymmetry
 - Options
   - halfwidth         - halfwidth for the ODF calculation
-  - points            - number of points (orientations) in the file
   - export            - (optional path and) name of the file
 
 ---
@@ -428,7 +427,7 @@ This function creates an ideal crystallographic orientation from a unimodal ODF 
   - ori              - @orientation
   -  sampleSymmetry  - @specimenSymmetry
 - Options
-  - halfwidth        - halfwidth for the ODF calculation
+  - halfwidth        - halfwidth for the odf calculation 
   - export           - (optional path and) name of the file
 
 ---
