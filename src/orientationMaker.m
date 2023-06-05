@@ -1,8 +1,8 @@
-function orientationMaker2(oriIn,sampleSymmetry,varargin)
+function orientationMaker(oriIn,sampleSymmetry,varargin)
 %% Function description:
 % This function creates an ideal crystallographic orientation from a 
-% unimodal ODF with a user specified half-width and exports the data as a
-% lossless Mtex *.txt file for later use.
+% unimodal ODF with a user specified half-width and exports the data as a 
+% lossless MATLAB *.mat variable for later use.
 %
 %% Syntax:
 %  orientationMaker(ori,sampleSymmetry)
@@ -17,24 +17,19 @@ function orientationMaker2(oriIn,sampleSymmetry,varargin)
 
 
 hwidth = get_option(varargin,'halfwidth',2.5*degree);
+pfName_Out = get_option(varargin,'export','inputOrN.mat');
 
 %% define the specimen symmetry to compute ODF
 sS = specimenSymmetry('triclinic');
 
-%% calculate a single orientation ODF with all symmetries
-pfName_Out = get_option(varargin,'export','inputOrN.txt');
-
 %% calculate a unimodal ODF
 odf = unimodalODF(symmetrise(oriIn),'halfwidth',hwidth);
 
-%% re-define the ODF specimen symmetry based on the user specification
+%% re-define the ODF specimen symmetry based on user specification
 odf.SS = sampleSymmetry;
 
-%% generate the user specified number of orientations from the ODF
-oriOut = odf.discreteSample(length(odf.weights));
-
-%% save an MTEX ASCII File *.txt file (lossless format)
-export(oriOut,pfName_Out,'Bunge','interface','mtex');
+%% save the ODF.mat variable (lossless format)
+save(pfName_Out,"odf");
 
 end
 

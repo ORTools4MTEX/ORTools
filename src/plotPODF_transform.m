@@ -26,6 +26,7 @@ function plotPODF_transform(job,hParent,hChild,varargin)
 %  import       - (optional path) & name of the input VPSC file to transform
 %  export       - (optional path) & name of the output transfromed VPSC file
 
+setMTEXpref('maxSO3Bandwidth',100);
 
 odfSecP = get_option(varargin,'odfSecP',[0 45 65]*degree);
 odfSecC = get_option(varargin,'odfSecC',[0 45 90]*degree);
@@ -35,8 +36,8 @@ variantId = get_option(varargin,'variantId',[]);
 variantWt = get_option(varargin,'variantWt',[]);
 hwidth = get_option(varargin,'halfwidth',2.5*degree);
 numPoints = get_option(varargin,'points',1000);
-pfName_In = get_option(varargin,'import','inputTexture.txt');
-pfName_Out = get_option(varargin,'export','outputTexture.txt');
+pfName_In = get_option(varargin,'import','inputTexture.mat');
+pfName_Out = get_option(varargin,'export','outputTexture.mat');
 
 %% Define the text output format as Latex
 setInterp2Latex
@@ -49,45 +50,30 @@ ss = specimenSymmetry('triclinic');
 
 %% DO NOT EDIT/MODIFY BELOW THIS LINE
 setInterp2Latex;
-% check for MTEX version
-currentVersion = 5.9;
-fid = fopen('VERSION','r');
-MTEXversion = fgetl(fid);
-fclose(fid);
-MTEXversion = str2double(MTEXversion(5:end-2));
 
-if MTEXversion >= currentVersion % for MTEX versions 5.9.0 and above
-    %--- Load the texture file as an ODF
-    odfP = SO3Fun.load(pfName,'CS',CS,'resolution',hwidth,'Bunge',...
-        'ColumnNames',{'Euler 1','Euler 2','Euler 3','weights'});
+%--- Load the ODF.mat variable
+load(pfName_In);
+odfP = inputODF;
+%---
 
-else % for MTEX versions 5.8.2 and below
-    %--- Load the texture file as discrete orientations
-    [ori,~] = orientation.load(pfName,CS,sS,'interface','generic',...
-        'ColumnNames', {'phi1' 'Phi' 'phi2'}, 'Columns', [1 2 3], 'Bunge');
-    ori = ori(:);
-    %--- Calculate the orientation distribution function and define the specimen symmetry of the parent
-    odfP = calcDensity(ori,'halfwidth',hwidth,'points','all');
-end
+%--- Find the modes of the parent ODF
+[oriP,volP,~] = calcComponents(odfP,...
+    'maxIter',500,...
+    'exact');
+% Normalise the volume fraction
+volP = volP./sum(volP);
+%---
 
 %--- Re-define the specimen symmetry
 odfP.SS = specimenSymmetry('orthorhombic');
-%--- Calculate the value and orientation of the maximum f(g) in the ODF
-% [maxodfP_value,~] = max(odfP);
-% odfP = odfP.*(100/maxodf_value); % scale ODF to maximum f(g) = 100
-[maxodfP_value,maxodfP_ori] = max(odfP);
-maxodfP_value = round(maxodfP_value/5)*5;
 %---
 
 %--- Calculate the pole figures from the orientation distribution function
 pfP = calcPoleFigure(odfP,hParent,regularS2Grid('resolution',hwidth),'antipodal');
-%--- Calculate the value of the maximum f(g) in the PF
-maxpfP_value = max(max(pfP));
-maxpfP_value = round(maxpfP_value/5)*5;
 %---
 
 %% Find all the specified child orientations 
-oriC = variants(job.p2c, oriP, 'variantId',job.variantMap);
+oriC = variants(job.p2c, oriP,'variantId',job.variantMap);
 
 if ~isempty(variantId) && ~isempty(variantWt) % Both variant Ids and weights are specified
     % Checks for user-defined variant numbers
@@ -138,15 +124,11 @@ end
 %--- Calculate the orientation distribution function and define the specimen symmetry of the child
 oriC = oriC(:);
 wtC = wtC(:);
-odfC = calcDensity(oriC,'weights',wtC,'halfwidth',hwidth,'points','all');
+odfC = calcDensity(oriC,'weights',wtC,'points','all');
 %--- Define the specimen symmetry of the child
 odfC.SS = specimenSymmetry('orthorhombic');
-%--- Calculate the value and orientation of the maximum f(g) in the ODF
-[maxodfC_value,maxodfC_ori] = max(odfC);
 %--- Calculate the parent pole figures from the parent orientation distribution function 
 pfC = calcPoleFigure(odfC,hChild,regularS2Grid('resolution',2.5*degree),'antipodal');
-%--- Calculate the value of the maximum f(g) in the PF
-maxpfC_value = max(max(pfC));
 
 
 
@@ -171,18 +153,9 @@ set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
 drawnow; 
 odfP.SS = specimenSymmetry('triclinic');
 plotPDF(odfP,...
-    hParent,...
-    'points','all',...
-    'equal','antipodal',...
-    'contourf',1:ceil(maxpfP_value));
-% colormap(cmapP);
-colormap(flipud(colormap(cmapP))); % option to flip the colorbar
-caxis([1 ceil(maxpfP_value)]);
-% colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
-%     'YTick', [0:1:ceil(maxpfP_value)],...
-%     'YTickLabel',num2str([0:1:ceil(maxpfP_value)]'), 'YLim', [0 ceil(maxpfP_value)],...
-%     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-% movegui(figH,'center');
+    hParent, ...
+    'antipodal','silent','contourf');
+colormap(cmapP);
 set(figH,'Name','Parent PF(s)','NumberTitle','on');
 drawnow;
 odfP.SS = specimenSymmetry('orthorhombic');
@@ -197,15 +170,8 @@ drawnow;
 plotSection(odfP,...
     'phi2',odfSecP,...
     'points','all','equal',...
-    'contourf',1:ceil(maxodfP_value));    
-% colormap(cmapP);
-colormap(flipud(colormap(cmapP))); % option to flip the colorbar
-caxis([1 ceil(maxodfP_value)]);
-% colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
-%     'YTick', [0:5:ceil(maxodfP_value)],...
-%     'YTickLabel',num2str([0:5:ceil(maxodfP_value)]'), 'YLim', [0 ceil(maxodfP_value)],...
-%     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-% movegui(figH,'center');
+    'contourf');%,1:ceil(maxodfP_value));    
+colormap(cmapP);
 set(figH,'Name','Parent ODF','NumberTitle','on');
 odfP.SS = specimenSymmetry('triclinic');
 drawnow;
@@ -222,16 +188,8 @@ drawnow;
 odfC.SS = specimenSymmetry('triclinic');
 plotPDF(odfC,...
     hChild,...
-    'points','all',...
-    'equal','antipodal',...
-    'contourf');
+    'antipodal','silent','contourf');
 colormap(cmapC);
-% colormap(flipud(cmapC));  % option to flip the colorbar
-% colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
-%     'YTick', [0:1:ceil(maxpfC_value)],...
-%     'YTickLabel',num2str([0:1:ceil(maxpfC_value)]'), 'YLim', [0 ceil(maxpfC_value)],...
-%     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-% movegui(figH,'center');
 if ~isempty(variantId) && ~isempty(variantWt)
     set(figH,'Name',['Child PF(s) for variants: ',num2str(variantId),' with norm. wts.'],'NumberTitle','on');
 elseif ~isempty(variantId) && isempty(variantWt)
@@ -254,15 +212,8 @@ drawnow;
 plotSection(odfC,...
     'phi2',odfSecC,...
     'points','all','equal',...
-    'contourf',1:ceil(maxodfC_value));
+    'contourf');%,1:ceil(maxodfC_value));
 colormap(cmapC);
-% colormap(flipud(cmapC)); % option to flip the colorbar
-caxis([1 ceil(maxodfC_value)]);
-% colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
-%     'YTick', [0:5:ceil(maxodfC_value)],...
-%     'YTickLabel',num2str([0:5:ceil(maxodfC_value)]'), 'YLim', [0 ceil(maxodfC_value)],...
-%     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-% movegui(figH,'center');
 if ~isempty(variantId) && ~isempty(variantWt)
     set(figH,'Name',['Child ODF for variants: ',num2str(variantId),' with norm. wts.'],'NumberTitle','on');
 elseif ~isempty(variantId) && isempty(variantWt)
@@ -275,9 +226,11 @@ drawnow;
 %---
 
 
-
-%%  Save a VPSC *.tex file
-export_VPSC(odfC,[pfName_Out],'interface','VPSC','Bunge','points',numPoints);
+%% Save the odf_transform.mat variable (lossless format)
+idxSlash = strfind(pfName_In,'/');
+pfName_Out = [pfName_In(1:idxSlash(end)) pfName_Out];
+outputODF = odfC;
+save(pfName_Out,"outputODF");
 %---
 
 
