@@ -118,8 +118,10 @@ elseif isempty(variantId) && ~isempty(variantWt) % Only variant weights specifie
     
     
 elseif isempty(variantId) && isempty(variantWt) % Both variant Ids and weights are unspecified
-    warning('Plotting all variants: (i) without selection, and (ii) with equal weights');
-    wtC = ones(size(oriC,1),size(oriC,2))./size(oriC,1);
+    warning('Plotting all variants: (i) without selection, and (ii) with modal weights');
+%     wtC = ones(size(oriC,1),size(oriC,2))./size(oriC,1);
+    volP = volP./size(oriC,2); % Divide each parent orientation vol fraction equally amongst all child variants
+    wtC = repmat(volP,1,size(oriC,2))';
 end
 
 %--- Calculate the orientation distribution function and define the specimen symmetry of the child
