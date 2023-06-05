@@ -106,11 +106,16 @@ elseif ~isempty(variantId) && isempty(variantWt) % Only variant Ids specified
             any(variantId > size(oriC,2)) % highest positive integer check
         error(['Variant Ids require positive integers between 1 and ',num2str(size(oriC,2))])
     end
-    % Select only user-defined variants and their equal weights
+
+    % Select only user-defined variants and their modal weights
+    volP = volP./size(oriC,2); % Divide the volume fraction of each parent mode/orientation equally amongst all child variants
+    volP = repmat(volP,1,size(oriC,2));
+    wtC = (volP(:,variantId))';
+
     oriC = oriC(:,variantId);
-    wtC = ones(size(oriC,1),length(variantId))./size(oriC,1);
+
     fprintf(['    - Plotting user-selected variants = ', num2str(variantId),' \n']);
-    fprintf(['    - Using equal weights \n']);
+    fprintf(['    - Using modal weights \n']);
         
     
 elseif isempty(variantId) && ~isempty(variantWt) % Only variant weights specified
@@ -119,8 +124,7 @@ elseif isempty(variantId) && ~isempty(variantWt) % Only variant weights specifie
     
 elseif isempty(variantId) && isempty(variantWt) % Both variant Ids and weights are unspecified
     warning('Plotting all variants: (i) without selection, and (ii) with modal weights');
-%     wtC = ones(size(oriC,1),size(oriC,2))./size(oriC,1);
-    volP = volP./size(oriC,2); % Divide each parent orientation vol fraction equally amongst all child variants
+    volP = volP./size(oriC,2); % Divide the volume fraction of each parent mode/orientation equally amongst all child variants
     wtC = repmat(volP,1,size(oriC,2))';
 end
 
@@ -196,7 +200,7 @@ colormap(cmapC);
 if ~isempty(variantId) && ~isempty(variantWt)
     set(figH,'Name',['Child PF(s) for variants: ',num2str(variantId),' with norm. wts.'],'NumberTitle','on');
 elseif ~isempty(variantId) && isempty(variantWt)
-    set(figH,'Name',['Child PF(s) for variants: ',num2str(variantId),' with equal weights'],'NumberTitle','on');
+    set(figH,'Name',['Child PF(s) for variants: ',num2str(variantId),' with modal weights'],'NumberTitle','on');
 elseif isempty(variantId) && isempty(variantWt)
     set(figH,'Name','Child PF(s) w/o variant selection & with equal wts.','NumberTitle','on');
 end
@@ -220,9 +224,9 @@ colormap(cmapC);
 if ~isempty(variantId) && ~isempty(variantWt)
     set(figH,'Name',['Child ODF for variants: ',num2str(variantId),' with norm. wts.'],'NumberTitle','on');
 elseif ~isempty(variantId) && isempty(variantWt)
-    set(figH,'Name',['Child ODF for variants: ',num2str(variantId),' with equal wts.'],'NumberTitle','on');
+    set(figH,'Name',['Child ODF for variants: ',num2str(variantId),' with modal wts.'],'NumberTitle','on');
 elseif isempty(variantId) && isempty(variantWt)
-    set(figH,'Name','Child ODF w/o variant selection & with equal wts.','NumberTitle','on');
+    set(figH,'Name','Child ODF w/o variant selection & with modal wts.','NumberTitle','on');
 end
 odfC.SS = specimenSymmetry('triclinic');
 drawnow;
