@@ -2,7 +2,7 @@ function orientationMaker(oriIn,sampleSymmetry,varargin)
 %% Function description:
 % This function creates an ideal crystallographic orientation from a 
 % unimodal ODF with a user specified half-width and exports the data as a 
-% lossless MATLAB *.mat variable for later use.
+% lossless MATLAB *.mat file object for later use.
 %
 %% Syntax:
 %  orientationMaker(ori,sampleSymmetry)
@@ -28,8 +28,9 @@ odf = unimodalODF(symmetrise(oriIn),'halfwidth',hwidth);
 %% re-define the ODF specimen symmetry based on user specification
 odf.SS = sampleSymmetry;
 
-%% save the ODF.mat variable (lossless format)
-save(pfName_Out,"odf");
+%% save the odf as a *.mat file object (lossless format)
+oriODF = odf;
+save(pfName_Out,"oriODF");
 
 end
 

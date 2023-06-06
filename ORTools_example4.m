@@ -94,14 +94,20 @@ plotPDF(odf_parent,hParent,'antipodal','silent','contourf');
 colormap jet
 
 %% We write a texture file generated from the parent ODF...
-% save the odf_parent.mat variable (lossless format)
-pfName = [Ini.texturePath,'inputTexture.mat'];
-inputODF = odf_parent; % this step defines a constant input variable name for the plotPODFtrasform.m function 
-save(pfName,"inputODF");
+% save the parent odf as a *.mat file object (lossless format)
+pfName_In = [Ini.texturePath,'inputTexture.mat']; % the name of the *.mat file may be changed 
+% In the plotPODFtrasform.m function:
+% - the input parent ODF must always be defined by the variable "inputODF"
+% - the output child transformed ODF is always defined by the variable "outputODF"
+% ** NOTE: the variable names "inputODF" and "outputODF" must not be 
+% edited. **
+inputODF = odf_parent; 
+save(pfName_In,"inputODF");
 
 %% ... which is used to calculate the transformation texture.
+pfName_Out = [Ini.texturePath,'outputTexture.mat']; % the name of the *.mat file may be changed 
 % The transformation tetxure is plotted and saved as a odf_child.mat variable
-plotPODF_transform(job,hParent,hChild,'import',pfName);
+plotPODF_transform(job,hParent,hChild,'import',pfName_In,'export',pfName_Out);
 return
 %% Compare the transformation texture to the actual child ODF
 odf_child = calcDensity(ebsd(job.csChild).orientations);
@@ -119,21 +125,21 @@ colormap(flipud(hot))
 % Consider variants 3, 6, 9 and 12 
 % NOTE: since variantWt is not specified, the modal weights based on the 
 % parent ODF are used here
-plotPODF_transform(job,hParent,hChild,'import',pfName,...
+plotPODF_transform(job,hParent,hChild,'import',pfName_In,...
     'variantId',[3 6 9 12]);
 
 % Consider variants 1, 3, 5, and 7 with weights between 0 and 100
 % NOTE: since variantWt is specified, modal weights are not used.
 % Instead, the normalised variantWt is used.
-plotPODF_transform(job,hParent,hChild,'import',pfName,...
+plotPODF_transform(job,hParent,hChild,'import',pfName_In,...
     'variantId',[1 3 5 7],'variantWt',[100 100 1 0.1]);
 
 % Consider variants 4, 8 and 12 with equal weights
-plotPODF_transform(job,hParent,hChild,'import',pfName,...
+plotPODF_transform(job,hParent,hChild,'import',pfName_In,...
     'variantId',[4 8 12],'variantWt',[1 1 1]);
 
 % Consider all variants with equal weights
-plotPODF_transform(job,hParent,hChild,'import',pfName,...
+plotPODF_transform(job,hParent,hChild,'import',pfName_In,...
     'variantId',[1:12],'variantWt',ones(1,12));
 
 %% Save images

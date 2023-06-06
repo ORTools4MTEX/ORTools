@@ -2,7 +2,7 @@ function fibreMaker(crystalDirection,sampleDirection,sampleSymmetry,varargin)
 %% Function description:
 % This function creates an ideal crystallographic fibre with a user 
 % specified half-width and exports the data as a lossless MATLAB *.mat 
-% variable for later use.
+% file object for later use.
 %
 %% Syntax:
 %  fibreMaker(crystalDirection,samplenDirection,,sampleSymmetry)
@@ -14,7 +14,6 @@ function fibreMaker(crystalDirection,sampleDirection,sampleSymmetry,varargin)
 %
 %% Options:
 %  halfwidth    - halfwidth for the ODF calculation
-%  points       - number of points (discrete orientations) in the file
 %  export       - (optional path and) name of the file
 
 
@@ -37,19 +36,19 @@ if MTEXversion >= currentVersion % for MTEX versions 5.9.0 and above
     f = fibre(symmetrise(crystalDirection),sampleDirection,ss,'full');
     % calculate a fibre ODF
     odf = fibreODF(f,'halfwidth',hwidth);
-    % re-define the ODF specimen symmetry based on user specification
-    odf.SS = sampleSymmetry;
 
-%%
+    %%
 else % for MTEX versions 5.8.2 and below
     % calculate a fibre ODF
     odf = fibreODF(symmetrise(crystalDirection),sampleDirection,ss,'de la Vallee Poussin',...
         'halfwidth',hwidth,'Fourier',22);
-    % re-define the ODF specimen symmetry based on user specification
-    odf.SS = sampleSymmetry;
 end
 
-%% save the ODF.mat variable (lossless format)
-save(pfName_Out,"odf");
+% re-define the ODF specimen symmetry based on user specification
+odf.SS = sampleSymmetry;
+
+%% save the odf as a *.mat file object (lossless format)
+fiberODF = odf;
+save(pfName_Out,"fiberODF");
 
 end
