@@ -114,13 +114,14 @@ elseif ~isempty(variantId) && isempty(variantWt) % Only variant Ids specified
 
     % Select only user-defined variants and their modal weights
     volP = volP./size(oriC,2); % Divide the volume fraction of each parent mode/orientation equally amongst all child variants
+    volP = volP./(sum(volP(:,1))); % Normalise the modal volume fractions
     volP = repmat(volP,1,size(oriC,2));
     wtC = (volP(:,variantId))';
 
     oriC = oriC(:,variantId);
 
     fprintf(['    - Plotting user-selected variants = ', num2str(variantId),' \n']);
-    fprintf(['    - Using modal weights \n']);
+    fprintf(['    - Using normalised modal weights \n']);
 
 
 elseif isempty(variantId) && ~isempty(variantWt) % Only variant weights specified
