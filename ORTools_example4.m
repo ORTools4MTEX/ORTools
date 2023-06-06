@@ -108,7 +108,7 @@ save(pfName_In,"inputODF");
 pfName_Out = [Ini.texturePath,'outputTexture.mat']; % the name of the *.mat file may be changed 
 % The transformation tetxure is plotted and saved as a odf_child.mat variable
 plotPODF_transform(job,hParent,hChild,'import',pfName_In,'export',pfName_Out);
-return
+
 %% Compare the transformation texture to the actual child ODF
 odf_child = calcDensity(ebsd(job.csChild).orientations);
 figure;
