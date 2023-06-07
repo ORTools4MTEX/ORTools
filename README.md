@@ -127,7 +127,7 @@ This example is of a 10% cold-rolled twinning and transformation induced plastic
 
 ---
 
-### [Example 5: 4 MAR 2021](./ORTools_example5.m)
+### [Example 5: 04 MAR 2021](./ORTools_example5.m)
 #### Partial parent grain reconstruction to clean TWIP-TRIP steel EBSD data
 This example is of a 20% cold-rolled twinning and transformation induced plasticity (TWIP-TRIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function, it is discovered that two possible ORs could be in operation for the γ to α' microstructure. The first OR is not a real OR but rather, an "apparent" OR corresponding to pixels that were misindexed as α' during map acquisition even though they notionally belong to γ. The parent phase reconstruction features in MTEX and the "apparent" OR are used to revert these misindexed points to γ. The grain calculation and the OR peak fitter is re-run to show that the "apparent" OR was eliminated. 
 
@@ -139,7 +139,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 
 ---
 
-### [Example 4: 4 MAR 2021](./ORTools_example4.m)
+### [Example 4: 04 MAR 2021](./ORTools_example4.m)
 #### Predicting the β to α transformation texture in a titanium alloy
 In this script, the reconstruction of the prior parent β microstructure from a child α microstructure is repeated as shown in [example 2](https://github.com/ORTools4MTEX/ORTools#example-2). Examination of the variant distribution shows that strongly preferential variant selection did not occur. Therefore, the transition texture of α can be accurately predicted from the reconstructed β using the [plotPODF_transform](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transform) function. The result shows that the predicted α transition texture is in good agreement with the experimental α texture.
 
@@ -149,7 +149,7 @@ In this script, the reconstruction of the prior parent β microstructure from a 
 
 ---
 
-### [Example 3: 4 MAR 2021](./ORTools_example3.m)
+### [Example 3: 04 MAR 2021](./ORTools_example3.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
 In [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) the α-β Ti microstructure showed two ORs in the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function. In this example, both ORs are investigated to find out which one of them dominated the phase transition. To evaluate the best match, the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figures and on boundary maps are plotted.
 
@@ -159,7 +159,7 @@ In [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) the α-β Ti m
 
 ---
 
-### [Example 2: 3 MAR 2021](./ORTools_example2.m)
+### [Example 2: 03 MAR 2021](./ORTools_example2.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function is used to determine the OR from alpha-beta boundaries even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
@@ -169,7 +169,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ---
 
-### [Example 1: 3 MAR 2021](./ORTools_example1.m)
+### [Example 1: 03 MAR 2021](./ORTools_example1.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains using the **grain graph approach** in the official [MTEX example](https://mtex-toolbox.github.io/GrainGraphBasedReconstruction.html) for martensite transformation in steels. The functionality of **ORTools** in providing pre-written and additional plotting functions to create publication-ready plots is demonstrated.
 
