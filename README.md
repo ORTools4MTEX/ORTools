@@ -29,7 +29,7 @@ The **ORTools** function library is written in [**MATLAB**](https://mathworks.co
 
 The advanced OR discovery, analysis and plotting functionalities of the **ORTools** library are highlighted in a series of [example scripts](https://github.com/ORTools4MTEX/ORTools#example-scripts) that showcase how the functions work and what their output comprises. 
 
-To help maintain the **ORTools** library, please report any bugs you encounter in the [discussions board](https://github.com/ORTools4MTEX/ORTools/discussions). If you would like to contribute additional functionalities or wish to suggest new features that help improve it, please contact us.
+To help maintain the **ORTools** library, please report any bugs you encounter in the [discussions board](https://github.com/ORTools4MTEX/ORTools/discussions). If you would like to contribute additional functionalities or wish to suggest new features that help improve it, please [submit an issue](https://github.com/ORTools4MTEX/ORTools/issues) or [open a discussion](https://github.com/ORTools4MTEX/ORTools/discussions).
 
 [![ORTools - Short video introduction](http://img.youtube.com/vi/inkR6LBzFeQ/0.jpg)](http://www.youtube.com/watch?v=inkR6LBzFeQ "Video Title")
 
@@ -64,8 +64,8 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 - For instructions on installing MTEX and ORTools within MATLAB, please refer to the video given below.
 - The peak fitting functionality within the function [defineORs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#defineors) requires the prior installation of the [MATLAB Signal Processing Toolbox](https://au.mathworks.com/products/signal.html).
 - Open MATLAB and run one of the example files. Please refer to the [Example 1](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and want to use the function library instead, please ensure that the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 
-- If you encounter any problems, please [submit an issue](https://github.com/ORTools4MTEX/ORTools/issues).
-- If you would like to contribute additional functionalities or wish to suggest new features, please [submit a contribution or request for a feature](https://github.com/ORTools4MTEX/ORTools/issues).
+- If you encounter any problems, please [submit an issue](https://github.com/ORTools4MTEX/ORTools/issues) or [open a discussion](https://github.com/ORTools4MTEX/ORTools/discussions).
+- If you would like to contribute additional functionalities or wish to suggest new features, please [submit a contribution or request a feature in the discussion](https://github.com/ORTools4MTEX/ORTools/discussions).
 
 [![ORTools - How to install MTEX](http://img.youtube.com/vi/SsiDFqqqZU4/0.jpg)](http://www.youtube.com/watch?v=SsiDFqqqZU4 "Video Title")
 
