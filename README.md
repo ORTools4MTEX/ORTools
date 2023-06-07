@@ -1,5 +1,5 @@
 # UPDATES
-The latest release **[ORTools v2.1.0](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.1.0)** should be employed together with **[MTEX 5.10](https://mtex-toolbox.github.io/download.html)** or later.
+The latest release **[ORTools v2.1.0](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.1.0)** should be employed together with **[MTEX v5.10](https://mtex-toolbox.github.io/download.html)** or later.
 
 ---
 
