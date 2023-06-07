@@ -83,7 +83,7 @@ This will also help you follow the comments, which provide instructions on the v
 
 ### [Example 9: 06 JUN 2023](./ORTools_example9.m)
 #### Update to Example 1: Parent grain reconstruction using the similarity graph approach in lath martensite
-This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane) function provides a faster and less involved way of calculating the habit plane compared to MTEX. 
+This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane) function provides a direct way of calculating the habit plane compared to conventional MTEX. 
 
 The details related to the habit plane calculation are described in the following paper:
 
