@@ -81,11 +81,19 @@ This will also help you follow the comments, which provide instructions on the v
 
 ---
 
+### [Example 9: 06 JUN 2023](./ORTools_example9.m)
+#### Update to Example 1: Parent grain reconstruction using the similarity graph approach in lath martensite
+This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane) function provides a faster and less involved way of calculating the habit plane compared to MTEX. 
+
+The details related to the habit plane calculation are described in the following paper:
+
+[**T. Nyyssönen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane determination from reconstructed parent phase orientation maps, Acta Materialia: 119035, 2023. (https://doi.org/10.1016/j.actamat.2023.119035)**]( https://www.researchgate.net/publication/371310735_Habit_plane_determination_from_reconstructed_parent_phase_orientation_maps)
+
+---
+
 ### [Example 8: 29 MAR 2023](./ORTools_example8.m)
 #### Update to Example 2: Parent grain reconstruction using the variant graph approach in Ti alloys
-This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) to demonstrate the reconstruction of parent beta grains from child alpha grains in a alpha-beta Ti alloy.
-The script provides a faster and less involved way of reconstructing this microstructure compared to the
-tripple-point based approach from [Example 2](./ORTools_example2.m). 
+This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) to demonstrate the reconstruction of parent beta grains from child alpha grains in a alpha-beta Ti alloy. The script provides a faster and less involved way of reconstructing this microstructure compared to the triple-point based approach from [Example 2](./ORTools_example2.m). 
 
 The details related to the variant graph approach are described in the following paper:
 
