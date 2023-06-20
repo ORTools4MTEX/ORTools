@@ -11,8 +11,8 @@ function plotPODF_transform(job,hParent,hChild,varargin)
 %  plotPODF_transform(job,hParent,hChild)
 %
 %% Input:
-%  hParent     - @Miller (parent polefigures to plot)
-%  hChild      - @Miller (child polefigures to plot)
+%  hParent     - @Miller parent pole figures to plot
+%  hChild      - @Miller child pole figures to plot
 %
 %% Options:
 %  odfSecP      - array with angles of parent ODF section to display
@@ -22,8 +22,10 @@ function plotPODF_transform(job,hParent,hChild,varargin)
 %  variantId    - list of specific variant Ids to plot
 %  variantWt    - list of specific variant weights to plot
 %  halfwidth    - halfwidth for PF calculation & display
-%  import       - (optional path) & name of the input *.mat file to transform
-%  export       - (optional path) & name of the output transfromed *.mat file
+%  import       - (optional path) & name of the input parent *.mat file 
+%                 object to transform
+%  export       - (optional path) & name of the output child transfromed 
+%                 *.mat file object
 
 
 odfSecP = get_option(varargin,'odfSecP',[0 45 65]*degree);
