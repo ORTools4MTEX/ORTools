@@ -105,7 +105,8 @@ plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 
 %% Compute the habit plane
 screenPrint('SegmentStart','Compute the habit plane');
-[hPlane,statistics] =  computeHabitPlane(job,'Radon','minClusterSize',50);
+[hPlane,statistics] =  computeHabitPlane(job,'Shape','minClusterSize',50);
+plotMap_habitPlane(job,hPlane);
 % statistics('Deviation')
 % statistics('meanDeviation')
 % statistics('stdDeviation')

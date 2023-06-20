@@ -1,4 +1,4 @@
-function [habitPlane,statistics] = computeHabitPlane(job,varargin)
+function [habitPlane,statistics,tracesPlotting] = computeHabitPlane(job,varargin)
 %% Function description:
 % This function computes the habit plane based on the determined traces 
 % from 2D ebsd map data as per the following reference:
@@ -29,10 +29,17 @@ if all(isnan(job.variantId))
 end
 
 %% Get the child grains
-childGrains = job.grainsPrior;
+childGrains = job.transformedGrains;
+childEBSD = job.ebsdPrior;
 
 %% Calculate the traces of the child grains
-[traces, relIndex, clusterSize] = calcTraces(childGrains, [job.mergeId(:), job.variantId(:)],varargin);
+if check_option(varargin,'Fourier') || check_option(varargin,'Radon')
+    [traces, relIndex, clusterSize] = calcTraces(childEBSD,[job.ebsd.variantId(:),job.ebsd.grainId(:)],varargin);
+else
+    ind = [job.mergeId(:), job.variantId(:)];
+    ind = ind(job.isTransformed,:);
+    [traces, relIndex, clusterSize] = calcTraces(childGrains, ind,varargin);
+end
 
 %% Only consider those traces that have a reconstructed parent orientation
 traces = traces(job.isParent,:); 
@@ -46,13 +53,18 @@ oriPVariant = oriParent.project2FundamentalRegion .* ...
 
 %% Transform traces into the parent reference frame
 tracesParent = inv(oriPVariant) .* traces;
-
+tracesPlotting = vector3d.nan(length(job.grains),1);
+tracesPlotting(job.parentGrains.id,1:size(oriPVariant,2)) = tracesParent;
 %% Determine the habit plane (orthogonal fit)
 habitPlane = perp(tracesParent,'robust'); 
 
 %% Change Miller object to type = crystal plane
 habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
 % habitPlane.dispStyle = "hkl"; %Mtex default
+
+%% Recompute traces from fitted habit plane
+traceImPlane = vector3d.nan(length(job.grains),1);
+traceImPlane(job.parentGrains.id,1:size(oriPVariant,2)) = cross(oriPVariant .* habitPlane,zvector);
 
 %% Calculate the angular deviation between the traces and the fitted habit plane
 deviation = 90 - angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree; 
@@ -70,8 +82,9 @@ statistics = containers.Map(...
 
 
 %% Plot and return the habit plane
-% Plot traces and fitted habit plane
-figure;
+
+% Plot traces and fitted habit planes in spherical projection
+figure();
 h{1} = scatter(tracesParent,'MarkerSize',6,'MarkerFaceColor','k','MarkerFaceAlpha',0.4,'MarkerEdgeAlpha',0.5);
 hold all
 h{2} = plot(habitPlane,'plane','linecolor','r','linewidth',2);
@@ -79,15 +92,36 @@ h{3} = plot(habitPlane,'Marker','s','MarkerColor','r','MarkerEdgeColor','k','Mar
 hold off;
 drawnow;
 legend([h{:}], {'Parent traces','Habit trace','Habit plane'}, 'location', 'east');
+set(gcf,'name','Spherical projection of determined traces and fitted habit plane');
 
-figure;
+% Plot ODF
+figure();
 tpd = calcDensity(tracesParent,'noSymmetry','halfwidth',2.5*degree);
 contourf(tpd)
 mtexColorMap white2black
 mtexColorbar
 circle(habitPlane,'color','red','linewidth',2)
+set(gcf,'name','ODF of fitted traces and habit plane');
 
+% Plot microstructure map - Fitted traces
+figure()
+plot(childGrains,'grayscale');
+hold on
+parentId = job.mergeId(job.isTransformed);
+variantId = job.variantId(job.isTransformed);
+tracesPlotting = tracesPlotting(parentId,:);
+quiver(childGrains,tracesPlotting(variantId),'color','r','linewidth',2,'DisplayName','Habit Plane Traces','MaxHeadSize',0);
+set(gcf,'name','Fitted traces');
 
+% Plot microstructure map - traces of fitted habit plane
+figure()
+plot(childGrains,'grayscale');
+hold on
+parentId = job.mergeId(job.isTransformed);
+variantId = job.variantId(job.isTransformed);
+traceImPlane = traceImPlane(parentId,:);
+quiver(childGrains,traceImPlane(variantId),'color','r','linewidth',2,'DisplayName','Habit Plane Traces','MaxHeadSize',0);
+set(gcf,'name','Traces of fitted habit plane');
 
 %% Output habit plane text
 screenPrint('Step','Detailed information on the computed habit plane:');
