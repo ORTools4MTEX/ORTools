@@ -1,9 +1,9 @@
 function [habitPlane,statistics,tracesPlotting] = computeHabitPlane(job,varargin)
 %% Function description:
-% This function computes the habit plane based on the determined traces 
+% This function computes the habit plane based on the determined traces
 % from 2D ebsd map data as per the following reference:
-% T. Nyyssönen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane 
-% determination from reconstructed parent phase orientation maps 
+% T. Nyyssönen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane
+% determination from reconstructed parent phase orientation maps
 % (https://doi.org/10.48550/arXiv.2303.07750)
 %
 %% Syntax:
@@ -17,7 +17,7 @@ function [habitPlane,statistics,tracesPlotting] = computeHabitPlane(job,varargin
 %  statistics  - @Container  = Statistics of fitting
 %
 %% Options:
-%  minClusterSize - minimum number of pixels required for trace computation (default: 100) 
+%  minClusterSize - minimum number of pixels required for trace computation (default: 100)
 %  Radon          - Radon based algorithm (pixel data used)
 %  Fourier        - Fourier based algorithm (pixel data used)
 %  Shape          - Characteristic grain shape based algorithm (grain data used)
@@ -28,50 +28,76 @@ if all(isnan(job.variantId))
     job.calcVariants  % Compute variants
 end
 
-%% Get the child grains
-childGrains = job.transformedGrains;
-childEBSD = job.ebsdPrior;
+pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
 
+%% Define the parent grain(s) and parent ebsd data
+pGrains = job.parentGrains(job.parentGrains.id == pGrainId);
+pEBSD = job.ebsd(pGrains);
+pEBSD = pEBSD(job.csParent);
+
+%% Get prior parent grain Ids and variant Ids for EBSD and grains
+%Grains
+ind1 = [job.mergeId, job.variantId];
+ind1 = ind1(job.isTransformed,:);
+
+%EBSD
+cEBSD = job.ebsdPrior(job.transformedGrains);
+ind2 = [job.ebsd(job.transformedGrains).grainId,job.ebsd(job.transformedGrains).variantId];
 %% Calculate the traces of the child grains
 if check_option(varargin,'Fourier') || check_option(varargin,'Radon')
-    [traces, relIndex, clusterSize] = calcTraces(childEBSD,[job.ebsd.variantId(:),job.ebsd.grainId(:)],varargin);
+    [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,varargin);
 else
-    ind = [job.mergeId(:), job.variantId(:)];
-    ind = ind(job.isTransformed,:);
-    [traces, relIndex, clusterSize] = calcTraces(childGrains, ind,varargin);
+    [traces, relIndex, clusterSize] = calcTraces(job.transformedGrains,ind1,varargin);
 end
 
 %% Only consider those traces that have a reconstructed parent orientation
-traces = traces(job.isParent,:); 
+if length(pGrainId) == 1
+    traces = traces(job.isParent(job.parentGrains.id == pGrainId),:);
+else
+    traces = traces(job.isParent,:);
+end
+% % traces = traces(~isnan(traces));
 
 %% Get the parent orientations
-oriParent = job.parentGrains.meanOrientation;
+oriParent = pGrains.meanOrientation;
 
 %% Determine the variant specific parent orientations
 oriPVariant = oriParent.project2FundamentalRegion .* ...
-    inv(variants(job.p2c)) .* job.p2c; 
+    inv(variants(job.p2c)) .* job.p2c;
 
 %% Transform traces into the parent reference frame
 tracesParent = inv(oriPVariant) .* traces;
-tracesPlotting = vector3d.nan(length(job.grains),1);
-tracesPlotting(job.parentGrains.id,1:size(oriPVariant,2)) = tracesParent;
+if length(pGrainId) == 1
+    tracesPlotting = vector3d.nan(length(pGrains),1);
+    tracesPlotting(pGrainId,1:size(oriPVariant,2)) = tracesParent;
+else
+    tracesPlotting = vector3d.nan(length(pGrainId),1);
+    tracesPlotting(pGrainId,1:size(oriPVariant,2)) = tracesParent;
+end
+
 %% Determine the habit plane (orthogonal fit)
-habitPlane = perp(tracesParent,'robust'); 
+habitPlane = perp(tracesParent,'robust');
 
 %% Change Miller object to type = crystal plane
 habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
 % habitPlane.dispStyle = "hkl"; %Mtex default
 
 %% Recompute traces from fitted habit plane
-traceImPlane = vector3d.nan(length(job.grains),1);
-traceImPlane(job.parentGrains.id,1:size(oriPVariant,2)) = cross(oriPVariant .* habitPlane,zvector);
+if length(pGrainId) == 1
+    traceImPlane = vector3d.nan(length(pGrains),1);
+    traceImPlane(pGrainId,1:size(oriPVariant,2)) = cross(oriPVariant .* habitPlane,zvector);
+else
+    traceImPlane = vector3d.nan(length(pGrainId),1);
+    traceImPlane(pGrainId,1:size(oriPVariant,2)) = cross(oriPVariant .* habitPlane,zvector);
+end
 
+if length(pGrainId) > 1
 %% Calculate the angular deviation between the traces and the fitted habit plane
-deviation = 90 - angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree; 
+deviation = 90 - angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree;
 % Mean deviation
-meanDeviation = mean(deviation); 
+meanDeviation = mean(deviation);
 % Std deviation
-stdDeviation = std(deviation); 
+stdDeviation = std(deviation);
 % Quantiles
 quantiles = quantile(deviation,[0.25 0.5 0.75]);
 % Return the statistics of fitting
@@ -79,7 +105,9 @@ statistics = containers.Map(...
     {'relIndex','clusterSize','Deviation','meanDeviation','stdDeviation','Quantiles'},...
     {relIndex,clusterSize,deviation,meanDeviation,stdDeviation,quantiles},...
     'UniformValues',false);
-
+else
+    statistics = NaN;
+end
 
 %% Plot and return the habit plane
 
@@ -103,26 +131,31 @@ mtexColorbar
 circle(habitPlane,'color','red','linewidth',2)
 set(gcf,'name','ODF of fitted traces and habit plane');
 
-% Plot microstructure map - Fitted traces
-figure()
-plot(childGrains,'grayscale');
-hold on
-parentId = job.mergeId(job.isTransformed);
-variantId = job.variantId(job.isTransformed);
-tracesPlotting = tracesPlotting(parentId,:);
-quiver(childGrains,tracesPlotting(variantId),'color','r','linewidth',2,'DisplayName','Habit Plane Traces','MaxHeadSize',0);
-set(gcf,'name','Fitted traces');
+% % Plot microstructure map - Fitted traces
+% figure()
+% plot(job.transformedGrains,'grayscale');
+% hold on
+% pId = ind1(:,1); %= [job.mergeId(ismember(job.mergeId,pGrainId)), job.variantId(ismember(job.mergeId,pGrainId))];
+% vId = ind1(:,2);
+% % pId = job.mergeId(job.isTransformed);
+% % vId = job.variantId(job.isTransformed);
+% tracesPlotting = tracesPlotting(pId,:);
+% quiver(job.transformedGrains,tracesPlotting(vId),'color','b','linewidth',2,'DisplayName','Fitted Plane Traces','MaxHeadSize',0);
+% set(gcf,'name','Fitted traces');
+% 
+% % Plot microstructure map - traces of fitted habit plane
+% figure()
+% plot(job.transformedGrains,'grayscale');
+% hold on
+% pId = ind1(:,1); %= [job.mergeId(ismember(job.mergeId,pGrainId)), job.variantId(ismember(job.mergeId,pGrainId))];
+% vId = ind1(:,2);
+% % pId = job.mergeId(job.isTransformed);
+% % vId = job.variantId(job.isTransformed);
+% traceImPlane = traceImPlane(pId,:);
+% quiver(job.transformedGrains,traceImPlane(vId),'color','r','linewidth',2,'DisplayName','Habit Plane Traces','MaxHeadSize',0);
+% set(gcf,'name','Traces of fitted habit plane');
 
-% Plot microstructure map - traces of fitted habit plane
-figure()
-plot(childGrains,'grayscale');
-hold on
-parentId = job.mergeId(job.isTransformed);
-variantId = job.variantId(job.isTransformed);
-traceImPlane = traceImPlane(parentId,:);
-quiver(childGrains,traceImPlane(variantId),'color','r','linewidth',2,'DisplayName','Habit Plane Traces','MaxHeadSize',0);
-set(gcf,'name','Traces of fitted habit plane');
-
+if length(pGrainId) > 1
 %% Output habit plane text
 screenPrint('Step','Detailed information on the computed habit plane:');
 screenPrint('SubStep',sprintf(['Habit plane (as-computed) = ',...
@@ -130,14 +163,16 @@ screenPrint('SubStep',sprintf(['Habit plane (as-computed) = ',...
 screenPrint('SubStep',sprintf(['Habit plane (rounded-off) = ',...
     sprintMiller(habitPlane,'round')]));
 screenPrint('SubStep',sprintf(['Nr. analysed traces = ',...
-    num2str(length(find(~isnan(traces))))]));
+    num2str(length(traceImPlane(~isnan(traceImPlane(:)))))]));
 screenPrint('SubStep',sprintf(['Nr. analysed parent grains = ',...
     num2str(length(oriParent))]));
 screenPrint('SubStep',sprintf(['Mean deviation = ',...
     num2str(meanDeviation),'° ± ',num2str(stdDeviation),'°']));
 screenPrint('SubStep',sprintf(['Quantiles [25, 50, 75 percent] = [',...
-    num2str(quantiles(1)),'°, ',num2str(quantiles(2)),'°, ',num2str(quantiles(3)),'°]']));
+        num2str(quantiles(1)),'°, ',num2str(quantiles(2)),'°, ',num2str(quantiles(3)),'°]']));
 end
+end
+
 
 
 
@@ -202,4 +237,3 @@ elseif any(strcmpi(mil.dispStyle,{'uvw','UVTW'}))
     s = [s,']'];
 end
 end
-
