@@ -48,12 +48,12 @@ cEBSD = job.ebsdPrior(job.transformedGrains);
 ind2 = [job.ebsd.grainId(job.ebsdPrior.id2ind(pEBSD.id)),job.ebsd.variantId(job.ebsdPrior.id2ind(pEBSD.id))];
 
 %% Calculate the traces of the child grains
-  switch hpMethod
-      case {'radon','fourier'}
-          [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,hpMethod,'minClusterSize',cSize);
-      case {'calliper', 'shape','hist'}
-              [traces, relIndex, clusterSize] = calcTraces(job.transformedGrains,ind1,hpMethod,'minClusterSize',cSize);
-  end
+switch hpMethod
+    case {'radon','fourier'}
+        [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,hpMethod,'minClusterSize',cSize);
+    case {'calliper', 'shape','hist'}
+        [traces, relIndex, clusterSize] = calcTraces(job.transformedGrains,ind1,hpMethod,'minClusterSize',cSize);
+end
 % if check_option(varargin,'Fourier') || check_option(varargin,'Radon')
 %     [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,hpMethod,'minClusterSize',cSize);
 % elseif check_option(varargin,'Calliper') || check_option(varargin,'Shape') || check_option(varargin,'Hist')
