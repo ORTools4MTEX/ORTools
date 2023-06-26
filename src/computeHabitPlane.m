@@ -71,11 +71,10 @@ oriPVariant = oriParent.project2FundamentalRegion .* ...
 tracesParent = inv(oriPVariant) .* traces;
 if length(pGrainId) == 1
     tracesPlotting = vector3d.nan(length(pGrains),1);
-    tracesPlotting(pGrainId,1:size(oriPVariant,2)) = tracesParent;
 else
     tracesPlotting = vector3d.nan(length(pGrainId),1);
-    tracesPlotting(pGrainId,1:size(oriPVariant,2)) = tracesParent;
 end
+tracesPlotting(pGrainId,1:size(oriPVariant,2)) = tracesParent;
 
 %% Determine the habit plane (orthogonal fit)
 habitPlane = perp(tracesParent,'robust');
@@ -87,11 +86,11 @@ habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
 %% Recompute traces from fitted habit plane
 if length(pGrainId) == 1
     traceImPlane = vector3d.nan(length(pGrains),1);
-    traceImPlane(pGrainId,1:size(oriPVariant,2)) = cross(oriPVariant .* habitPlane,zvector);
 else
     traceImPlane = vector3d.nan(length(pGrainId),1);
-    traceImPlane(pGrainId,1:size(oriPVariant,2)) = cross(oriPVariant .* habitPlane,zvector);
 end
+traceImPlane(pGrainId,1:size(oriPVariant,2)) = cross(oriPVariant .* habitPlane,zvector);
+
 
 if length(pGrainId) > 1
 %% Calculate the angular deviation between the traces and the fitted habit plane
