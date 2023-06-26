@@ -64,11 +64,12 @@ end
 %% Only consider those traces that have a reconstructed parent orientation
 if length(pGrainId) == 1
     traces = traces(job.isParent(job.parentGrains.id == pGrainId),:);
+    relIndex = relIndex(job.isParent(job.parentGrains.id == pGrainId),:);
+    clusterSize = clusterSize(job.isParent(job.parentGrains.id == pGrainId),:);
 else
     traces = traces(job.isParent,:);
     relIndex = relIndex(job.isParent,:);
     clusterSize = clusterSize(job.isParent,:);
-
 end
 % % traces = traces(~isnan(traces));
 hasTrace = ~isnan(traces) & relIndex >= rIdx;
