@@ -67,6 +67,7 @@ else
     traces = traces(job.isParent,:);
 end
 % % traces = traces(~isnan(traces));
+hasTrace = ~isnan(traces) & relIndex > 0.3;
 
 %% Get the parent orientations
 oriParent = pGrains.meanOrientation;
