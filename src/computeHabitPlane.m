@@ -23,6 +23,8 @@ function [habitPlane,statistics,tracesPlotting] = computeHabitPlane(job,varargin
 %  Shape          - Characteristic grain shape based algorithm (grain data used)
 %  Hist           - Circular histogram based algorithm (grain data used)
 
+hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','Fourier','Radon'},'Radon'));
+cSize = get_option(varargin,'minClusterSize',100);
 
 if all(isnan(job.variantId))
     job.calcVariants  % Compute variants
@@ -46,11 +48,17 @@ cEBSD = job.ebsdPrior(job.transformedGrains);
 ind2 = [job.ebsd.grainId(job.ebsdPrior.id2ind(pEBSD.id)),job.ebsd.variantId(job.ebsdPrior.id2ind(pEBSD.id))];
 
 %% Calculate the traces of the child grains
-if check_option(varargin,'Fourier') || check_option(varargin,'Radon')
-    [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,varargin);
-else
-    [traces, relIndex, clusterSize] = calcTraces(job.transformedGrains,ind1,varargin);
-end
+  switch hpMethod
+      case {'radon','fourier'}
+          [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,hpMethod,'minClusterSize',cSize);
+      case {'calliper', 'shape','hist'}
+              [traces, relIndex, clusterSize] = calcTraces(job.transformedGrains,ind1,hpMethod,'minClusterSize',cSize);
+  end
+% if check_option(varargin,'Fourier') || check_option(varargin,'Radon')
+%     [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,hpMethod,'minClusterSize',cSize);
+% elseif check_option(varargin,'Calliper') || check_option(varargin,'Shape') || check_option(varargin,'Hist')
+%     [traces, relIndex, clusterSize] = calcTraces(job.transformedGrains,ind1,hpMethod,'minClusterSize',cSize);
+% end
 
 %% Only consider those traces that have a reconstructed parent orientation
 if length(pGrainId) == 1
