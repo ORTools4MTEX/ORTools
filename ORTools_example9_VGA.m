@@ -109,7 +109,7 @@ return
 %% Compute the habit plane
 screenPrint('SegmentStart','Compute the habit plane');
 [hPlane,statistics] =  computeHabitPlane(job,'Radon','minClusterSize',50);
-[hPlane,statistics] =  computeHabitPlane(job,'shape','minClusterSize',50);
+[hPlane,statistics] =  computeHabitPlane(job,'shape','minClusterSize',50,'reliability',0.5);
 [hPlane,~] =  computeHabitPlane(job,'Shape','minClusterSize',50,'parentGrainId',215);
 % plotMap_habitPlane(job,hPlane);
 % statistics('Deviation')
