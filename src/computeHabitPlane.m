@@ -42,7 +42,9 @@ ind1 = ind1(job.isTransformed,:);
 
 %EBSD
 cEBSD = job.ebsdPrior(job.transformedGrains);
-ind2 = [job.ebsd(job.transformedGrains).grainId,job.ebsd(job.transformedGrains).variantId];
+% ind2 = [job.ebsd(job.transformedGrains).grainId,job.ebsd(job.transformedGrains).variantId];
+ind2 = [job.ebsd.grainId(job.ebsdPrior.id2ind(pEBSD.id)),job.ebsd.variantId(job.ebsdPrior.id2ind(pEBSD.id))];
+
 %% Calculate the traces of the child grains
 if check_option(varargin,'Fourier') || check_option(varargin,'Radon')
     [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,varargin);
