@@ -28,7 +28,7 @@ if all(isnan(job.variantId))
     job.calcVariants  % Compute variants
 end
 
-hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','Fourier','Radon'},'Radon'));
+hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','fourier','radon'},'radon'))
 cSize = get_option(varargin,'minClusterSize',100);
 pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
 
