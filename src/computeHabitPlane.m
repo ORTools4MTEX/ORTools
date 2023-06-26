@@ -65,9 +65,12 @@ if length(pGrainId) == 1
     traces = traces(job.isParent(job.parentGrains.id == pGrainId),:);
 else
     traces = traces(job.isParent,:);
+    relIndex = relIndex(job.isParent,:);
+    clusterSize = clusterSize(job.isParent,:);
+
 end
 % % traces = traces(~isnan(traces));
-hasTrace = ~isnan(traces) & relIndex > 0.3;
+hasTrace = ~isnan(traces) & relIndex > 0.5;
 
 %% Get the parent orientations
 oriParent = pGrains.meanOrientation;
@@ -86,7 +89,7 @@ end
 tracesPlotting(pGrainId,1:size(oriPVariant,2)) = tracesParent;
 
 %% Determine the habit plane (orthogonal fit)
-habitPlane = perp(tracesParent,'robust');
+habitPlane = perp(tracesParent(hasTrace),'robust');
 
 %% Change Miller object to type = crystal plane
 habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
@@ -175,7 +178,8 @@ if length(pGrainId) > 1
     screenPrint('SubStep',sprintf(['Habit plane (rounded-off) = ',...
         sprintMiller(habitPlane,'round')]));
     screenPrint('SubStep',sprintf(['Nr. analysed traces = ',...
-        num2str(length(traceImPlane(~isnan(traceImPlane(:)))))]));
+        num2str(length(traceImPlane(hasTrace)))]));
+%         num2str(length(traceImPlane(~isnan(traceImPlane(:)))))]));
     screenPrint('SubStep',sprintf(['Nr. analysed parent grains = ',...
         num2str(length(oriParent))]));
     screenPrint('SubStep',sprintf(['Mean deviation = ',...
