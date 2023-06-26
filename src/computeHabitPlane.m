@@ -93,19 +93,19 @@ traceImPlane(pGrainId,1:size(oriPVariant,2)) = cross(oriPVariant .* habitPlane,z
 
 
 if length(pGrainId) > 1
-%% Calculate the angular deviation between the traces and the fitted habit plane
-deviation = 90 - angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree;
-% Mean deviation
-meanDeviation = mean(deviation);
-% Std deviation
-stdDeviation = std(deviation);
-% Quantiles
-quantiles = quantile(deviation,[0.25 0.5 0.75]);
-% Return the statistics of fitting
-statistics = containers.Map(...
-    {'relIndex','clusterSize','Deviation','meanDeviation','stdDeviation','Quantiles'},...
-    {relIndex,clusterSize,deviation,meanDeviation,stdDeviation,quantiles},...
-    'UniformValues',false);
+    %% Calculate the angular deviation between the traces and the fitted habit plane
+    deviation = 90 - angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree;
+    % Mean deviation
+    meanDeviation = mean(deviation);
+    % Std deviation
+    stdDeviation = std(deviation);
+    % Quantiles
+    quantiles = quantile(deviation,[0.25 0.5 0.75]);
+    % Return the statistics of fitting
+    statistics = containers.Map(...
+        {'relIndex','clusterSize','Deviation','meanDeviation','stdDeviation','Quantiles'},...
+        {relIndex,clusterSize,deviation,meanDeviation,stdDeviation,quantiles},...
+        'UniformValues',false);
 else
     statistics = NaN;
 end
@@ -124,13 +124,15 @@ legend([h{:}], {'Parent traces','Habit trace','Habit plane'}, 'location', 'east'
 set(gcf,'name','Spherical projection of determined traces and fitted habit plane');
 
 % Plot ODF
-figure();
-tpd = calcDensity(tracesParent,'noSymmetry','halfwidth',2.5*degree);
-contourf(tpd)
-mtexColorMap white2black
-mtexColorbar
-circle(habitPlane,'color','red','linewidth',2)
-set(gcf,'name','ODF of fitted traces and habit plane');
+if length(pGrainId) > 1
+    figure();
+    tpd = calcDensity(tracesParent,'noSymmetry','halfwidth',2.5*degree);
+    contourf(tpd)
+    mtexColorMap white2black
+    mtexColorbar
+    circle(habitPlane,'color','red','linewidth',2)
+    set(gcf,'name','ODF of fitted traces and habit plane');
+end
 
 % % Plot microstructure map - Fitted traces
 % figure()
@@ -143,7 +145,7 @@ set(gcf,'name','ODF of fitted traces and habit plane');
 % tracesPlotting = tracesPlotting(pId,:);
 % quiver(job.transformedGrains,tracesPlotting(vId),'color','b','linewidth',2,'DisplayName','Fitted Plane Traces','MaxHeadSize',0);
 % set(gcf,'name','Fitted traces');
-% 
+%
 % % Plot microstructure map - traces of fitted habit plane
 % figure()
 % plot(job.transformedGrains,'grayscale');
@@ -157,19 +159,19 @@ set(gcf,'name','ODF of fitted traces and habit plane');
 % set(gcf,'name','Traces of fitted habit plane');
 
 if length(pGrainId) > 1
-%% Output habit plane text
-screenPrint('Step','Detailed information on the computed habit plane:');
-screenPrint('SubStep',sprintf(['Habit plane (as-computed) = ',...
-    sprintMiller(habitPlane)]));
-screenPrint('SubStep',sprintf(['Habit plane (rounded-off) = ',...
-    sprintMiller(habitPlane,'round')]));
-screenPrint('SubStep',sprintf(['Nr. analysed traces = ',...
-    num2str(length(traceImPlane(~isnan(traceImPlane(:)))))]));
-screenPrint('SubStep',sprintf(['Nr. analysed parent grains = ',...
-    num2str(length(oriParent))]));
-screenPrint('SubStep',sprintf(['Mean deviation = ',...
-    num2str(meanDeviation),'° ± ',num2str(stdDeviation),'°']));
-screenPrint('SubStep',sprintf(['Quantiles [25, 50, 75 percent] = [',...
+    %% Output habit plane text
+    screenPrint('Step','Detailed information on the computed habit plane:');
+    screenPrint('SubStep',sprintf(['Habit plane (as-computed) = ',...
+        sprintMiller(habitPlane)]));
+    screenPrint('SubStep',sprintf(['Habit plane (rounded-off) = ',...
+        sprintMiller(habitPlane,'round')]));
+    screenPrint('SubStep',sprintf(['Nr. analysed traces = ',...
+        num2str(length(traceImPlane(~isnan(traceImPlane(:)))))]));
+    screenPrint('SubStep',sprintf(['Nr. analysed parent grains = ',...
+        num2str(length(oriParent))]));
+    screenPrint('SubStep',sprintf(['Mean deviation = ',...
+        num2str(meanDeviation),'° ± ',num2str(stdDeviation),'°']));
+    screenPrint('SubStep',sprintf(['Quantiles [25, 50, 75 percent] = [',...
         num2str(quantiles(1)),'°, ',num2str(quantiles(2)),'°, ',num2str(quantiles(3)),'°]']));
 end
 end
