@@ -28,8 +28,9 @@ if all(isnan(job.variantId))
     job.calcVariants  % Compute variants
 end
 
-hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','fourier','radon'},'radon'))
+hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','fourier','radon'},'radon'));
 cSize = get_option(varargin,'minClusterSize',100);
+rIdx = get_option(varargin,'reliability',0.5);
 pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
 
 %% Define the parent grain(s) and parent ebsd data
@@ -70,7 +71,8 @@ else
 
 end
 % % traces = traces(~isnan(traces));
-hasTrace = ~isnan(traces) & relIndex > 0.5;
+hasTrace = ~isnan(traces) & relIndex >= rIdx;
+
 
 %% Get the parent orientations
 oriParent = pGrains.meanOrientation;
@@ -178,7 +180,8 @@ if length(pGrainId) > 1
     screenPrint('SubStep',sprintf(['Habit plane (rounded-off) = ',...
         sprintMiller(habitPlane,'round')]));
     screenPrint('SubStep',sprintf(['Nr. analysed traces = ',...
-        num2str(length(traceImPlane(hasTrace)))]));
+        num2str(sum(sum(hasTrace)))]));
+%         num2str(length(traceImPlane(hasTrace)))]));
 %         num2str(length(traceImPlane(~isnan(traceImPlane(:)))))]));
     screenPrint('SubStep',sprintf(['Nr. analysed parent grains = ',...
         num2str(length(oriParent))]));
