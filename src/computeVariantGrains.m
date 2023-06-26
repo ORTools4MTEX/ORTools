@@ -1,10 +1,9 @@
 function [newGrains,newEBSD] = computeVariantGrains(job,varargin)
 %% Function description:
 % This function refines the child grains in the "job" object based on 
-% their variant IDs. It returns the refined grains and refined ebsd 
-% map data containing different properties such as variant, packet and 
-% bain ID.
-%
+% their variant IDs while keeping the grains of the remaining phases untouched. 
+% The ebsd dataset is returned with updated grainIds associated with the refinde grains
+
 %% Syntax:
 %  [newGrains,newEBSD] = computeVariantGrains(job,varargin)
 %
@@ -47,7 +46,7 @@ oriP(is_cEBSD) = job.grains(job.mergeId(cEBSD(is_cEBSD).grainId)).meanOrientatio
 props = ["variantId","packetId","bainId"];
 %Declare properties
 for prop = props
-    r.prop = nan(l_ebsd,1);
+    r.(prop) = nan(l_ebsd,1);
 end
 %Compute properties
 [r.variantId(is_cEBSD),r.packetId(is_cEBSD),r.bainId(is_cEBSD)] = calcVariantId( ...
