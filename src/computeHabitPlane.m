@@ -23,13 +23,13 @@ function [habitPlane,statistics,tracesPlotting] = computeHabitPlane(job,varargin
 %  Shape          - Characteristic grain shape based algorithm (grain data used)
 %  Hist           - Circular histogram based algorithm (grain data used)
 
-hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','Fourier','Radon'},'Radon'));
-cSize = get_option(varargin,'minClusterSize',100);
 
 if all(isnan(job.variantId))
     job.calcVariants  % Compute variants
 end
 
+hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','Fourier','Radon'},'Radon'));
+cSize = get_option(varargin,'minClusterSize',100);
 pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
 
 %% Define the parent grain(s) and parent ebsd data
