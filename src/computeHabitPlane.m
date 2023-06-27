@@ -125,10 +125,11 @@ end
 
 % Plot traces and fitted habit planes in spherical projection
 figure();
-h{1} = scatter(tracesParent,'MarkerSize',6,'MarkerFaceColor','k','MarkerFaceAlpha',0.4,'MarkerEdgeAlpha',0.5);
+h{1} = scatter(tracesParent(hasTrace),relIndex(hasTrace),'MarkerSize',6,'MarkerEdgeColor','k');
 hold all
-h{2} = plot(habitPlane,'plane','linecolor','r','linewidth',2);
-h{3} = plot(habitPlane,'Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane)});
+h{2} = plot(habitPlane,'plane','antipodal','linecolor','r','linewidth',2);
+h{3} = plot(habitPlane,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane)});
+mtexColorbar
 hold off;
 drawnow;
 legend([h{:}], {'Parent traces','Habit trace','Habit plane'}, 'location', 'east');
@@ -137,7 +138,7 @@ set(gcf,'name','Spherical projection of determined traces and fitted habit plane
 % Plot ODF
 if length(pGrainId) > 1
     figure();
-    tpd = calcDensity(tracesParent,'noSymmetry','halfwidth',2.5*degree);
+    tpd = calcDensity(tracesParent(hasTrace),'noSymmetry','halfwidth',2.5*degree);
     contourf(tpd)
     mtexColorMap white2black
     mtexColorbar
@@ -182,9 +183,9 @@ if length(pGrainId) > 1
     aTrace = sum(sum(hasTrace));
     screenPrint('SubStep',sprintf(['Number of analysed traces = ',...
         num2str(aTrace)]));
-    pctTrace = round(aTrace/nTrace,4);    
-    screenPrint('SubStep',sprintf(['Fraction of analysed vs. possible traces = ',...
-        num2str(pctTrace)]));
+    rTrace = round(aTrace/nTrace,4);    
+    screenPrint('SubStep',sprintf(['Ratio of possible vs. analysed traces = 1 : ',...
+        num2str(rTrace)]));
     screenPrint('SubStep',sprintf(['Number of analysed parent grains = ',...
         num2str(length(oriParent))]));
     screenPrint('SubStep',sprintf(['Mean deviation = ',...

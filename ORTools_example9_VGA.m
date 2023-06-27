@@ -110,7 +110,7 @@ return
 screenPrint('SegmentStart','Compute the habit plane');
 [hPlane,statistics] =  computeHabitPlane(job,'Radon','minClusterSize',50);
 [hPlane,statistics] =  computeHabitPlane(job,'shape','minClusterSize',50,'reliability',0.5);
-[hPlane,statistics] =  computeHabitPlane(job,'Hist','minClusterSize',50,'reliability',0.1);
+[hPlane,statistics] =  computeHabitPlane(job,'Hist','minClusterSize',50,'reliability',0.25);
 [hPlane,~] =  computeHabitPlane(job,'calliper','minClusterSize',50,'parentGrainId',215);
 % statistics('Deviation')
 % statistics('meanDeviation')
