@@ -31,40 +31,56 @@ job.calcParentEBSD; % Apparently needs to be repeated
 
 hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','fourier','radon'},'radon'));
 cSize = get_option(varargin,'minClusterSize',100);
-plotTraces = get_option(varargin,'plotTraces',false);
 rIdx = get_option(varargin,'reliability',0.5);
 pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
 cmap = get_option(varargin,'colormap',viridis);
+plotTraces = check_option(varargin,'plotTraces');
 
 %% Define the parent grain(s) and parent ebsd data
-is_transformed_EBSD = ~isnan(job.ebsdPrior.variantId);
+is_transformed_EBSD = ~isnan(job.ebsd.variantId);
 %Get parent grain and EBSD data (only the reconstructed one!)
 pGrains = job.parentGrains(job.parentGrains.id == pGrainId);
 pEBSD = job.ebsd(is_transformed_EBSD);
 
 %% Define the child grain(s) and child ebsd data
-%%%%%% MAKE SPECIFIC FORM pGrainId
-cGrains = job.transformedGrains; 
-cEBSD = job.ebsdPrior(is_transformed_EBSD);
+if length(pGrainId) == 1
+   cGrains = job.grainsPrior(job.mergeId == pGrains.id);
+   cEBSD = job.ebsdPrior(cGrains);
+else
+    cGrains = job.transformedGrains; 
+    cEBSD = job.ebsdPrior(is_transformed_EBSD);
+end
 
 %% Calculate the traces of the child grains
 switch hpMethod
     case {'radon','fourier'}
         %EBSD
-        ind = [pEBSD.grainId,cEBSD.variantId];
-        [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind,hpMethod,'minClusterSize',cSize);
+        ind = [pEBSD.grainId,job.ebsd(is_transformed_EBSD).variantId];
+        traces = vector3d.nan(max(ind(:,1)),length(job.p2c.variants));
+        relIndex = nan(max(ind(:,1)),length(job.p2c.variants));
+        clusterSize = nan(max(ind(:,1)),length(job.p2c.variants));
+        isVar = ismember(1:length(job.p2c.variants),unique(ind(:,2)));
+        [traces(:,isVar), relIndex(:,isVar), clusterSize(:,isVar)] = calcTraces(cEBSD,ind,hpMethod,'minClusterSize',cSize);
     case {'calliper', 'shape','hist'}
         %Grains
-        ind = [job.mergeId, job.variantId];
-        ind = ind(job.isTransformed,:);
-        [traces, relIndex, clusterSize] = calcTraces(cGrains,ind,hpMethod,'minClusterSize',cSize);
+        if length(pGrainId) == 1
+            ind = [job.mergeId(job.mergeId == pGrains.id), job.variantId(job.mergeId == pGrains.id)];
+        else
+            ind = [job.mergeId(job.isTransformed), job.variantId(job.isTransformed)];
+        end
+        traces = vector3d.nan(max(ind(:,1)),length(job.p2c.variants));
+        relIndex = nan(max(ind(:,1)),length(job.p2c.variants));
+        clusterSize = nan(max(ind(:,1)),length(job.p2c.variants));
+        %ind = ind(job.isTransformed,:);
+        isVar = ismember(1:length(job.p2c.variants),unique(ind(:,2)));
+        [traces(:,isVar), relIndex(:,isVar), clusterSize(:,isVar)] = calcTraces(cGrains,ind,hpMethod,'minClusterSize',cSize);
 end
 
 %% Remove entries that are NaN
 if length(pGrainId) == 1
-    traces = traces(job.isParent(job.parentGrains.id == pGrainId),:);
-    relIndex = relIndex(job.isParent(job.parentGrains.id == pGrainId),:);
-    clusterSize = clusterSize(job.isParent(job.parentGrains.id == pGrainId),:);
+    traces = traces(pGrainId,:);
+    relIndex = relIndex(pGrainId,:);
+    clusterSize = clusterSize(pGrainId,:);
 else
     traces = traces(pGrainId,:);
     relIndex = relIndex(pGrainId,:);
@@ -75,13 +91,14 @@ hasTrace = ~isnan(traces) & relIndex >= rIdx;
 %% Plot the computed traces and the corresponding grains/EBSD data for each variant
 if plotTraces
     switch hpMethod
-        case {'calliper', 'shape','hist'}     
+        case {'calliper', 'shape','hist'}  
+            figure;
             plot(cGrains,cGrains.variantId);
             colormap(cmap);
             hold on
             plot(pGrains.boundary);
             for ii = 1:length(job.p2c.variants)      
-                isTrace = ~isnan(traces(:,ii));  
+                isTrace = ~isnan(traces(:,ii))  & relIndex(:,ii) >= rIdx ;  
                 pIds = pGrainId(isTrace);
                 cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
                 [~,ind_traces]=ismember(job.mergeId(cIds),pGrainId);       
@@ -108,7 +125,7 @@ if plotTraces
                 
                 isTrace = ~isnan(traces(:,ii));  
                 pIds = pGrainId(isTrace);
-                cIds = cEBSD(ismember(ind(:,1),pIds) & cEBSD.variantId == ii).id;
+                cIds = cEBSD(ismember(ind(:,1),pIds) & job.ebsd(is_transformed_EBSD).variantId == ii).id;
                 [~,ind_traces]=ismember(pIds,pGrainId);
                 plot(cEBSD(ismember(cEBSD.id,cIds)),'grayscale');
                 hold on
@@ -221,7 +238,7 @@ if plotTraces
                 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
                 drawnow;
                 
-                plot(cEBSD(cEBSD.variantId==ii),'grayscale');
+                plot(cEBSD(job.ebsd(is_transformed_EBSD).variantId==ii),'grayscale');
                 hold on
                 plot(pGrains.boundary);
                 

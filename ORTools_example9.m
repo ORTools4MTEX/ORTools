@@ -1,4 +1,3 @@
-
 % *********************************************************************
 %                        ORTools - Example 9
 % *********************************************************************
@@ -58,56 +57,55 @@ job.calcParent2Child;
 % here)
 
 %% Reconstruct parent microstructure
-%   - Reconstruct the microstructure with a graph-based approach
-job.calcGraph('threshold',2.5*degree,'tolerance',2.5*degree);
-job.clusterGraph('inflationPower',1.6)
-job.calcParentFromGraph;
+%   - Reconstruct the microstructure with the variant graph based approach
+job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree,'mergeSimilar')
+job.clusterVariantGraph
+job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree)
+job.clusterVariantGraph('includeSimilar')
+% ... plot the votes (high values show high certainty)
+figure; plot(job.grains,job.votes.prob(:,1))
+mtexColorbar
+% ... and calculate the parent orientations
+job.calcParentFromVote('minProb',0.5)
 % Plot the reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2);
 %% Remove badly reconstructed clusters
-% While the first reconstruction looks good, plotting the fit of each 
-% reconstructed alphaP grain with the overall parernt orientation of the
-% cluster shows that some grains are not well-reconstructed
-figure;
-plot(job.grains,job.grains.fit./degree,'linewidth',2);
-setColorRange([0,5]);
-mtexColorbar;
-% Therefore, the reconstructed grains with bad fits or very small clusters
-% are reverted
-job.revert(job.grains.fit > 5*degree | job.grains.clusterSize < 15)
-% Plot the remaining grains
-figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
-%% Fill in unreconstructed regions with voting algorithm
-% Use the already confidently reconstructed gamma grains to vote for the
-% gamma orientation of the yet-to-be reconstructed alpha grains
-% Iterate this 5 times ...
-for k = 1:3 
-  % compute votes
-  job.calcGBVotes('p2c','threshold',k*2.5*degree);
-  % compute parent orientations from votes
-  job.calcParentFromVote
-end
+% In order to reconstruct the remaining parent grains, we can calculate the
+% votes for surrounding parent grains by the already reconstructed parent
+% grains
 
-%... and plot the optimized reconstructed parent microstructure
-figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
+% compute the votes
+job.calcGBVotes('p2c','reconsiderAll')
+% assign parent orientations according to the votes
+job.calcParentFromVote
+% plot the result
+plot(job.parentGrains,job.parentGrains.meanOrientation)
 %% Clean reconstructed grains
 % Now clean the grains by: 
 % - merging grains with similar orientation
 job.mergeSimilar('threshold',7.5*degree);
-% - and merging small inclusions into larger grains
-job.mergeInclusions('maxSize',50);
+% - merging small inclusions
+job.mergeInclusions('maxSize',150);
 % This is the cleaned reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
-
+%% Get parent EBSD data
+figure;
+parentEBSD = job.ebsd;
+plot(parentEBSD('Gamma'),parentEBSD('Gamma').orientations);
+hold on;
+plot(job.grains.boundary,'linewidth',3);
+hold off;
+%% Variant analysis
+% We can calculate variants and packets
+job.calcVariants;
+% and plot the variant map
+plotMap_variants(job,'linewidth',3);
 %% Compute the habit plane
 screenPrint('SegmentStart','Compute the habit plane');
-[hPlane,statistics] =  computeHabitPlane(job,'Shape','minClusterSize',50);
-plotMap_habitPlane(job,hPlane);
-% statistics('Deviation')
-% statistics('meanDeviation')
-% statistics('stdDeviation')
-% statistics('Quantiles')
+[hPlane1,statistics1] =  computeHabitPlane(job,'Radon','minClusterSize',50,'plotTraces');
+[hPlane2,statistics2] =  computeHabitPlane(job,'shape','minClusterSize',50,'reliability',0.5,'plotTraces');
+[hPlane3,statistics3] =  computeHabitPlane(job,'Hist','minClusterSize',50,'reliability',0.25,'plotTraces');
+[~,ind_maxGrain] = max(job.grains.area);
+[hPlane4,~] =  computeHabitPlane(job,'calliper','minClusterSize',25,'parentGrainId',ind_maxGrain,'plotTraces');
