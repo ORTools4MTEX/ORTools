@@ -1,4 +1,4 @@
-function [habitPlane,statistics,tracesPlotting] = computeHabitPlane(job,varargin)
+function [habitPlane,statistics] = computeHabitPlane(job,varargin)
 %% Function description:
 % This function computes the habit plane based on the determined traces
 % from 2D ebsd map data as per the following reference:
@@ -27,49 +27,97 @@ function [habitPlane,statistics,tracesPlotting] = computeHabitPlane(job,varargin
 if all(isnan(job.variantId))
     job.calcVariants  % Compute variants
 end
+job.calcParentEBSD; % Apparently needs to be repeated
 
 hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','fourier','radon'},'radon'));
 cSize = get_option(varargin,'minClusterSize',100);
+plotTraces = get_option(varargin,'plotTraces',false);
 rIdx = get_option(varargin,'reliability',0.5);
 pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
+cmap = get_option(varargin,'colormap',viridis);
 
 %% Define the parent grain(s) and parent ebsd data
+is_transformed_EBSD = ~isnan(job.ebsdPrior.variantId);
+%Get parent grain and EBSD data (only the reconstructed one!)
 pGrains = job.parentGrains(job.parentGrains.id == pGrainId);
-pEBSD = job.ebsd(pGrains);
-pEBSD = pEBSD(job.csParent);
+pEBSD = job.ebsd(is_transformed_EBSD);
 
-%% Get prior parent grain Ids and variant Ids for EBSD and grains
-% Grain data
-cGrains = job.transformedGrains;
-ind1 = [job.mergeId, job.variantId];
-ind1 = ind1(job.isTransformed,:);
-
-% EBSD data
-cEBSD = job.ebsdPrior(job.transformedGrains);
-ind2 = [job.ebsd.grainId(job.ebsdPrior.id2ind(pEBSD.id)),job.ebsd.variantId(job.ebsdPrior.id2ind(pEBSD.id))];
+%% Define the child grain(s) and child ebsd data
+%%%%%% MAKE SPECIFIC FORM pGrainId
+cGrains = job.transformedGrains; 
+cEBSD = job.ebsdPrior(is_transformed_EBSD);
 
 %% Calculate the traces of the child grains
 switch hpMethod
-    case {'calliper', 'shape','hist'}
-        [traces, relIndex, clusterSize] = calcTraces(cGrains,ind1,hpMethod,'minClusterSize',cSize);
     case {'radon','fourier'}
-        [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,hpMethod,'minClusterSize',cSize);
+        %EBSD
+        ind = [pEBSD.grainId,cEBSD.variantId];
+        [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind,hpMethod,'minClusterSize',cSize);
+    case {'calliper', 'shape','hist'}
+        %Grains
+        ind = [job.mergeId, job.variantId];
+        ind = ind(job.isTransformed,:);
+        [traces, relIndex, clusterSize] = calcTraces(cGrains,ind,hpMethod,'minClusterSize',cSize);
 end
 
-
-%% Only consider those traces that have a reconstructed parent orientation
+%% Remove entries that are NaN
 if length(pGrainId) == 1
     traces = traces(job.isParent(job.parentGrains.id == pGrainId),:);
     relIndex = relIndex(job.isParent(job.parentGrains.id == pGrainId),:);
     clusterSize = clusterSize(job.isParent(job.parentGrains.id == pGrainId),:);
 else
-    traces = traces(job.isParent,:);
-    relIndex = relIndex(job.isParent,:);
-    clusterSize = clusterSize(job.isParent,:);
+    traces = traces(pGrainId,:);
+    relIndex = relIndex(pGrainId,:);
+    clusterSize = clusterSize(pGrainId,:);
 end
-% Logical index of traces with a high reliability index
+% % traces = traces(~isnan(traces));
 hasTrace = ~isnan(traces) & relIndex >= rIdx;
-
+%% Plot the computed traces and the corresponding grains/EBSD data for each variant
+if plotTraces
+    switch hpMethod
+        case {'calliper', 'shape','hist'}     
+            plot(cGrains,cGrains.variantId);
+            colormap(cmap);
+            hold on
+            plot(pGrains.boundary);
+            for ii = 1:length(job.p2c.variants)      
+                isTrace = ~isnan(traces(:,ii));  
+                pIds = pGrainId(isTrace);
+                cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
+                [~,ind_traces]=ismember(job.mergeId(cIds),pGrainId);       
+                quiver(cGrains(ismember(cGrains.id,cIds)),traces(ind_traces,ii),'color','r'); 
+            end
+            colorbar;  
+            set(gcf,'name',"Fitted traces");
+        case {'radon','fourier'}
+            % Define the window settings for a set of docked figures
+            % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+            warning off
+            desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+            % % Define a unique group name for the dock using the function name
+            % % and the system timestamp
+            dockGroupName = ['Fitted traces ',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+            desktop.setGroupDocked(dockGroupName,0);
+            bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+            
+            for ii = 1:length(job.p2c.variants)
+                figH = gobjects(1);
+                figH = figure('WindowStyle','docked');
+                set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+                drawnow;
+                
+                isTrace = ~isnan(traces(:,ii));  
+                pIds = pGrainId(isTrace);
+                cIds = cEBSD(ismember(ind(:,1),pIds) & cEBSD.variantId == ii).id;
+                [~,ind_traces]=ismember(pIds,pGrainId);
+                plot(cEBSD(ismember(cEBSD.id,cIds)),'grayscale');
+                hold on
+                plot(pGrains.boundary)
+                quiver(pGrains(ismember(pGrains.id,unique(pIds))),traces(unique(ind_traces),ii),'color','r');
+                set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');
+            end
+    end  
+end
 
 %% Get the parent orientations
 oriParent = pGrains.meanOrientation;
@@ -80,12 +128,6 @@ oriPVariant = oriParent.project2FundamentalRegion .* ...
 
 %% Transform traces into the parent reference frame
 tracesParent = inv(oriPVariant) .* traces;
-if length(pGrainId) == 1
-    tracesPlotting = vector3d.nan(length(pGrains),1);
-else
-    tracesPlotting = vector3d.nan(length(pGrainId),1);
-end
-tracesPlotting(pGrainId,1:size(oriPVariant,2)) = tracesParent;
 
 %% Determine the habit plane (orthogonal fit)
 habitPlane = perp(tracesParent(hasTrace),'robust');
@@ -95,13 +137,7 @@ habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
 % habitPlane.dispStyle = "hkl"; %Mtex default
 
 %% Recompute traces from fitted habit plane
-if length(pGrainId) == 1
-    traceImPlane = vector3d.nan(length(pGrains),1);
-else
-    traceImPlane = vector3d.nan(length(pGrainId),1);
-end
-traceImPlane(pGrainId,1:size(oriPVariant,2)) = cross(oriPVariant .* habitPlane,zvector);
-
+traceImPlane = cross(oriPVariant .* habitPlane,zvector);
 
 if length(pGrainId) > 1
     %% Calculate the angular deviation between the traces and the fitted habit plane
@@ -148,29 +184,58 @@ if length(pGrainId) > 1
     set(gcf,'name','ODF of fitted traces and habit plane');
 end
 
-% % Plot microstructure map - Fitted traces
-% figure()
-% plot(job.transformedGrains,'grayscale');
-% hold on
-% pId = ind1(:,1); %= [job.mergeId(ismember(job.mergeId,pGrainId)), job.variantId(ismember(job.mergeId,pGrainId))];
-% vId = ind1(:,2);
-% % pId = job.mergeId(job.isTransformed);
-% % vId = job.variantId(job.isTransformed);
-% tracesPlotting = tracesPlotting(pId,:);
-% quiver(job.transformedGrains,tracesPlotting(vId),'color','b','linewidth',2,'DisplayName','Fitted Plane Traces','MaxHeadSize',0);
-% set(gcf,'name','Fitted traces');
-%
-% % Plot microstructure map - traces of fitted habit plane
-% figure()
-% plot(job.transformedGrains,'grayscale');
-% hold on
-% pId = ind1(:,1); %= [job.mergeId(ismember(job.mergeId,pGrainId)), job.variantId(ismember(job.mergeId,pGrainId))];
-% vId = ind1(:,2);
-% % pId = job.mergeId(job.isTransformed);
-% % vId = job.variantId(job.isTransformed);
-% traceImPlane = traceImPlane(pId,:);
-% quiver(job.transformedGrains,traceImPlane(vId),'color','r','linewidth',2,'DisplayName','Habit Plane Traces','MaxHeadSize',0);
-% set(gcf,'name','Traces of fitted habit plane');
+%% Plot the traces associated with the determined habit plane
+
+if plotTraces
+    figure();
+    switch hpMethod
+       case {'calliper', 'shape','hist'}
+            plot(cGrains,cGrains.variantId);
+            colormap(cmap);
+            hold on
+            plot(pGrains.boundary);
+            for ii = 1:length(job.p2c.variants)      
+                isTrace = ~isnan(traceImPlane(:,ii));  
+                pIds = pGrainId(isTrace);
+                cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
+                [~,ind_traces]=ismember(job.mergeId(cIds),pGrainId);             
+                quiver(cGrains(ismember(cGrains.id,cIds)),traceImPlane(ind_traces,ii),'color','r'); 
+            end
+            colorbar;
+            set(gcf,'name',"Habit plane traces");
+        case {'radon','fourier'}
+            % Define the window settings for a set of docked figures
+            % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+            warning off
+            desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+            % % Define a unique group name for the dock using the function name
+            % % and the system timestamp
+            dockGroupName = ['Habit plane traces ',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+            desktop.setGroupDocked(dockGroupName,0);
+            bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+
+            for ii = 1:length(job.p2c.variants)      
+                %drawnow;
+                figH = gobjects(1);
+                figH = figure('WindowStyle','docked');
+                set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+                drawnow;
+                
+                plot(cEBSD(cEBSD.variantId==ii),'grayscale');
+                hold on
+                plot(pGrains.boundary);
+                
+                isTrace = ~isnan(traceImPlane(:,ii));
+                pIds = pGrainId(isTrace);
+                [~,ind_traces]=ismember(pIds,pGrainId);
+                quiver(pGrains(ismember(pGrains.id,unique(pIds))),traceImPlane(unique(ind_traces),ii),'color','r');
+                set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');
+                drawnow;
+            end          
+            warning on
+      end
+end
+
 
 if length(pGrainId) > 1
     %% Output habit plane text
@@ -195,10 +260,6 @@ if length(pGrainId) > 1
     screenPrint('SubStep',sprintf(['Quantiles [25, 50, 75 percent] = [',...
         num2str(quantiles(1)),'°, ',num2str(quantiles(2)),'°, ',num2str(quantiles(3)),'°]']));
 end
-end
-
-
-
 
 
 %% Set Display Style of Miller objects
