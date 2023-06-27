@@ -39,27 +39,23 @@ pEBSD = job.ebsd(pGrains);
 pEBSD = pEBSD(job.csParent);
 
 %% Get prior parent grain Ids and variant Ids for EBSD and grains
-%Grains
+% Grain data
+cGrains = job.transformedGrains;
 ind1 = [job.mergeId, job.variantId];
 ind1 = ind1(job.isTransformed,:);
 
-%EBSD
+% EBSD data
 cEBSD = job.ebsdPrior(job.transformedGrains);
-% ind2 = [job.ebsd(job.transformedGrains).grainId,job.ebsd(job.transformedGrains).variantId];
 ind2 = [job.ebsd.grainId(job.ebsdPrior.id2ind(pEBSD.id)),job.ebsd.variantId(job.ebsdPrior.id2ind(pEBSD.id))];
 
 %% Calculate the traces of the child grains
 switch hpMethod
+    case {'calliper', 'shape','hist'}
+        [traces, relIndex, clusterSize] = calcTraces(cGrains,ind1,hpMethod,'minClusterSize',cSize);
     case {'radon','fourier'}
         [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,hpMethod,'minClusterSize',cSize);
-    case {'calliper', 'shape','hist'}
-        [traces, relIndex, clusterSize] = calcTraces(job.transformedGrains,ind1,hpMethod,'minClusterSize',cSize);
 end
-% if check_option(varargin,'Fourier') || check_option(varargin,'Radon')
-%     [traces, relIndex, clusterSize] = calcTraces(cEBSD,ind2,hpMethod,'minClusterSize',cSize);
-% elseif check_option(varargin,'Calliper') || check_option(varargin,'Shape') || check_option(varargin,'Hist')
-%     [traces, relIndex, clusterSize] = calcTraces(job.transformedGrains,ind1,hpMethod,'minClusterSize',cSize);
-% end
+
 
 %% Only consider those traces that have a reconstructed parent orientation
 if length(pGrainId) == 1
@@ -71,7 +67,7 @@ else
     relIndex = relIndex(job.isParent,:);
     clusterSize = clusterSize(job.isParent,:);
 end
-% % traces = traces(~isnan(traces));
+% Logical index of traces with a high reliability index
 hasTrace = ~isnan(traces) & relIndex >= rIdx;
 
 
@@ -180,11 +176,16 @@ if length(pGrainId) > 1
         sprintMiller(habitPlane)]));
     screenPrint('SubStep',sprintf(['Habit plane (rounded-off) = ',...
         sprintMiller(habitPlane,'round')]));
-    screenPrint('SubStep',sprintf(['Nr. analysed traces = ',...
-        num2str(sum(sum(hasTrace)))]));
-%         num2str(length(traceImPlane(hasTrace)))]));
-%         num2str(length(traceImPlane(~isnan(traceImPlane(:)))))]));
-    screenPrint('SubStep',sprintf(['Nr. analysed parent grains = ',...
+    nTrace = sum(sum(~isnan(traces)));
+    screenPrint('SubStep',sprintf(['Number of possible traces = ',...
+        num2str(nTrace)]));
+    aTrace = sum(sum(hasTrace));
+    screenPrint('SubStep',sprintf(['Number of analysed traces = ',...
+        num2str(aTrace)]));
+    pctTrace = round(aTrace/nTrace,4);    
+    screenPrint('SubStep',sprintf(['Fraction of analysed vs. possible traces = ',...
+        num2str(pctTrace)]));
+    screenPrint('SubStep',sprintf(['Number of analysed parent grains = ',...
         num2str(length(oriParent))]));
     screenPrint('SubStep',sprintf(['Mean deviation = ',...
         num2str(meanDeviation),'° ± ',num2str(stdDeviation),'°']));
