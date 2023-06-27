@@ -125,14 +125,16 @@ end
 
 % Plot traces and fitted habit planes in spherical projection
 figure();
-h{1} = scatter(tracesParent(hasTrace),relIndex(hasTrace),'MarkerSize',6,'MarkerEdgeColor','k');
+h{1} = scatter(tracesParent(relIndex < rIdx),'MarkerSize',4,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','k');
+hold all;
+h{2} = scatter(tracesParent(hasTrace),relIndex(hasTrace),'MarkerSize',6,'MarkerEdgeColor','k');
 hold all
-h{2} = plot(habitPlane,'plane','antipodal','linecolor','r','linewidth',2);
-h{3} = plot(habitPlane,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane)});
+h{3} = plot(habitPlane,'plane','antipodal','linecolor','r','linewidth',2);
+h{4} = plot(habitPlane,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane)});
 mtexColorbar
 hold off;
 drawnow;
-legend([h{:}], {'Parent traces','Habit trace','Habit plane'}, 'location', 'east');
+legend([h{:}], {'Ignored parent traces','Analysed parent traces','Habit trace','Habit plane'}, 'location', 'east');
 set(gcf,'name','Spherical projection of determined traces and fitted habit plane');
 
 % Plot ODF
