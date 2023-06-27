@@ -260,7 +260,7 @@ if length(pGrainId) > 1
     screenPrint('SubStep',sprintf(['Quantiles [25, 50, 75 percent] = [',...
         num2str(quantiles(1)),'°, ',num2str(quantiles(2)),'°, ',num2str(quantiles(3)),'°]']));
 end
-
+end
 
 %% Set Display Style of Miller objects
 function m = setDisplayStyle(millerObj,mode)
