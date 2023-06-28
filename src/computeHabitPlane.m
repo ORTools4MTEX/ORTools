@@ -101,7 +101,7 @@ switch hpMethod
         isVar = ismember(1:length(job.p2c.variants),unique(ind(:,2)));
         [traces(:,isVar), relIndex(:,isVar), clusterSize(:,isVar)] = calcTraces(cGrains,ind,hpMethod,'minClusterSize',cSize);
 end
-
+traces.antipodal = true;
 %% Remove entries that are NaN
 if length(pGrainId) == 1
     traces = traces(pGrainId,:);
@@ -234,18 +234,20 @@ end
 
 % Plot traces and fitted habit planes in spherical projection
 figure();
-h{1} = scatter(tracesParent(relIndex < rIdx),'MarkerSize',4,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','k');
+h{1} = scatter(tracesParent(~hasTrace),'MarkerSize',6,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','none','MarkerFaceAlpha',0.5);
 hold all;
 h{2} = scatter(tracesParent(hasTrace),relIndex(hasTrace),'MarkerSize',6,'MarkerEdgeColor','k');
 hold all
 h{3} = plot(habitPlane,'plane','antipodal','linecolor','r','linewidth',2);
 h{4} = plot(habitPlane,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane)});
-mtexColorbar
+mtexColorMap jet
+colorbar;
+caxis([0,1])
 hold off;
 drawnow;
-legend([h{:}], {'Ignored parent traces','Analysed parent traces','Habit trace','Habit plane'}, 'location', 'east');
+legend([h{:}], {'Discarded parent traces','Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'east');
 set(gcf,'name','Spherical projection of determined traces and fitted habit plane');
-
+clear h
 % Plot ODF
 if length(pGrainId) > 1
     figure();
@@ -324,6 +326,9 @@ if plotTraces
             warning(bakWarn);
             pause(1); % reduce rendering errors
     end
+    
+   figure();
+   
 end
 
 
