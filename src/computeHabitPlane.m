@@ -17,11 +17,24 @@ function [habitPlane,statistics] = computeHabitPlane(job,varargin)
 %  statistics  - @Container  = Statistics of fitting
 %
 %% Options:
-%  minClusterSize - minimum number of pixels required for trace computation (default: 100)
 %  Radon          - Radon based algorithm (ebsd pixel data used)
 %  Fourier        - Fourier based algorithm (ebsd pixel data used)
-%  Shape          - Characteristic grain shape based algorithm (grain data used)
+%  Shape          - Characteristic grain shape based algorithm (grain data 
+%                   used)
 %  Hist           - Circular histogram based algorithm (grain data used)
+%  Calliper       - Shortest calliper based algorithm (grain data used)
+%
+%  minClusterSize - Minimum number of pixels required for trace 
+%                   computation (default = 100)
+%  reliability    - Minimum value of accuracy in trace determination
+%                   used to compute the habit plane (varies from 0 to 1, 
+%                   default = 0.5)
+%  colormap       - Defines the colormap to display the variants (default 
+%                   =  jet)
+%  noScalebar     - Remove scalebar from maps
+%  noFrame        - Remove frame around maps
+% 
+%  plotTraces     - Logical used to plot the trace & habit plane output
 
 
 if all(isnan(job.variantId))
