@@ -18,8 +18,8 @@ function [habitPlane,statistics] = computeHabitPlane(job,varargin)
 %
 %% Options:
 %  minClusterSize - minimum number of pixels required for trace computation (default: 100)
-%  Radon          - Radon based algorithm (pixel data used)
-%  Fourier        - Fourier based algorithm (pixel data used)
+%  Radon          - Radon based algorithm (ebsd pixel data used)
+%  Fourier        - Fourier based algorithm (ebsd pixel data used)
 %  Shape          - Characteristic grain shape based algorithm (grain data used)
 %  Hist           - Circular histogram based algorithm (grain data used)
 
@@ -33,34 +33,36 @@ hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','fourier','radon'}
 cSize = get_option(varargin,'minClusterSize',100);
 rIdx = get_option(varargin,'reliability',0.5);
 pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
-cmap = get_option(varargin,'colormap',viridis);
+cmap = get_option(varargin,'colormap',jet);
 plotTraces = check_option(varargin,'plotTraces');
 
 %% Define the parent grain(s) and parent ebsd data
-is_transformed_EBSD = ~isnan(job.ebsd.variantId);
+isTransformed_EBSD = ~isnan(job.ebsd.variantId);
 %Get parent grain and EBSD data (only the reconstructed one!)
 pGrains = job.parentGrains(job.parentGrains.id == pGrainId);
-pEBSD = job.ebsd(is_transformed_EBSD);
+pEBSD = job.ebsd(isTransformed_EBSD);
 
 %% Define the child grain(s) and child ebsd data
 if length(pGrainId) == 1
-   cGrains = job.grainsPrior(job.mergeId == pGrains.id);
-   cEBSD = job.ebsdPrior(cGrains);
+    cGrains = job.grainsPrior(job.mergeId == pGrains.id);
+    cEBSD = job.ebsdPrior(cGrains);
 else
-    cGrains = job.transformedGrains; 
-    cEBSD = job.ebsdPrior(is_transformed_EBSD);
+    cGrains = job.transformedGrains;
+    cEBSD = job.ebsdPrior(isTransformed_EBSD);
 end
+
 
 %% Calculate the traces of the child grains
 switch hpMethod
     case {'radon','fourier'}
         %EBSD
-        ind = [pEBSD.grainId,job.ebsd(is_transformed_EBSD).variantId];
+        ind = [pEBSD.grainId,job.ebsd(isTransformed_EBSD).variantId];
         traces = vector3d.nan(max(ind(:,1)),length(job.p2c.variants));
         relIndex = nan(max(ind(:,1)),length(job.p2c.variants));
         clusterSize = nan(max(ind(:,1)),length(job.p2c.variants));
         isVar = ismember(1:length(job.p2c.variants),unique(ind(:,2)));
         [traces(:,isVar), relIndex(:,isVar), clusterSize(:,isVar)] = calcTraces(cEBSD,ind,hpMethod,'minClusterSize',cSize);
+    
     case {'calliper', 'shape','hist'}
         %Grains
         if length(pGrainId) == 1
@@ -86,26 +88,33 @@ else
     relIndex = relIndex(pGrainId,:);
     clusterSize = clusterSize(pGrainId,:);
 end
-% % traces = traces(~isnan(traces));
 hasTrace = ~isnan(traces) & relIndex >= rIdx;
+
 %% Plot the computed traces and the corresponding grains/EBSD data for each variant
 if plotTraces
     switch hpMethod
-        case {'calliper', 'shape','hist'}  
-            figure;
-            plot(cGrains,cGrains.variantId);
+        case {'calliper', 'shape','hist'}
+            figure();
+            [~,mP] = plot(cGrains,cGrains.variantId);
             colormap(cmap);
-            hold on
+            hold all
             plot(pGrains.boundary);
-            for ii = 1:length(job.p2c.variants)      
-                isTrace = ~isnan(traces(:,ii))  & relIndex(:,ii) >= rIdx ;  
+            for ii = 1:length(job.p2c.variants)
+                isTrace = ~isnan(traces(:,ii))  & relIndex(:,ii) >= rIdx ;
                 pIds = pGrainId(isTrace);
                 cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
-                [~,ind_traces]=ismember(job.mergeId(cIds),pGrainId);       
-                quiver(cGrains(ismember(cGrains.id,cIds)),traces(ind_traces,ii),'color','r'); 
+                [~,ind_traces] = ismember(job.mergeId(cIds),pGrainId);
+                quiver(cGrains(ismember(cGrains.id,cIds)),traces(ind_traces,ii),'color','w');
             end
-            colorbar;  
-            set(gcf,'name',"Fitted traces");
+            colorbar;
+            hold off
+            set(gcf,'name','Fitted traces');
+            if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+
+            if check_option(varargin,'noFrame')
+                mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+            end
+
         case {'radon','fourier'}
             % Define the window settings for a set of docked figures
             % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
@@ -113,27 +122,38 @@ if plotTraces
             desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
             % % Define a unique group name for the dock using the function name
             % % and the system timestamp
-            dockGroupName = ['Fitted traces ',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+            dockGroupName = ['fittedTraces_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
             desktop.setGroupDocked(dockGroupName,0);
             bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
-            
+
             for ii = 1:length(job.p2c.variants)
+                drawnow;
                 figH = gobjects(1);
                 figH = figure('WindowStyle','docked');
                 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
                 drawnow;
-                
-                isTrace = ~isnan(traces(:,ii));  
+
+                isTrace = ~isnan(traces(:,ii));
                 pIds = pGrainId(isTrace);
-                cIds = cEBSD(ismember(ind(:,1),pIds) & job.ebsd(is_transformed_EBSD).variantId == ii).id;
-                [~,ind_traces]=ismember(pIds,pGrainId);
+                cIds = cEBSD(ismember(ind(:,1),pIds) & job.ebsd(isTransformed_EBSD).variantId == ii).id;
+                [~,ind_traces] = ismember(pIds,pGrainId);
                 plot(cEBSD(ismember(cEBSD.id,cIds)),'grayscale');
-                hold on
-                plot(pGrains.boundary)
+                hold all
+                [~,mP] = plot(pGrains.boundary);
                 quiver(pGrains(ismember(pGrains.id,unique(pIds))),traces(unique(ind_traces),ii),'color','r');
+                hold off
                 set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');
+                if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+
+                if check_option(varargin,'noFrame')
+                    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+                end
+                drawnow;
             end
-    end  
+            warning on
+            warning(bakWarn);
+            pause(1); % reduce rendering errors
+    end
 end
 
 %% Get the parent orientations
@@ -158,17 +178,25 @@ traceImPlane = cross(oriPVariant .* habitPlane,zvector);
 
 if length(pGrainId) > 1
     %% Calculate the angular deviation between the traces and the fitted habit plane
-    deviation = 90 - angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree;
+    deviationAll = 90 - angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree;
+    deviationAna = 90 - angle(habitPlane,tracesParent(hasTrace),'noSymmetry')./degree;
     % Mean deviation
-    meanDeviation = mean(deviation);
+    meanDeviationAll = mean(deviationAll);
+    meanDeviationAna = mean(deviationAna);
     % Std deviation
-    stdDeviation = std(deviation);
+    stdDeviationAll = std(deviationAll);
+    stdDeviationAna = std(deviationAna);
     % Quantiles
-    quantiles = quantile(deviation,[0.25 0.5 0.75]);
+    quantileAll = quantile(deviationAll,[0.25 0.5 0.75]);
+    quantileAna = quantile(deviationAna,[0.25 0.5 0.75]);
     % Return the statistics of fitting
     statistics = containers.Map(...
-        {'relIndex','clusterSize','Deviation','meanDeviation','stdDeviation','Quantiles'},...
-        {relIndex,clusterSize,deviation,meanDeviation,stdDeviation,quantiles},...
+        {'relIndex','clusterSize',...
+        'DeviationAll','meanDeviationAll','stdDeviationAll','QuantilesAll',...
+        'DeviationAna','meanDeviationAna','stdDeviationAna','QuantilesAna'},...
+        {relIndex,clusterSize,...
+        deviationAll,meanDeviationAll,stdDeviationAll,quantileAll,...
+        deviationAna,meanDeviationAna,stdDeviationAna,quantileAna},...
         'UniformValues',false);
 else
     statistics = NaN;
@@ -204,22 +232,29 @@ end
 %% Plot the traces associated with the determined habit plane
 
 if plotTraces
-    figure();
     switch hpMethod
-       case {'calliper', 'shape','hist'}
-            plot(cGrains,cGrains.variantId);
+        case {'calliper', 'shape','hist'}
+            figure();
+            [~,mP] = plot(cGrains,cGrains.variantId);
             colormap(cmap);
-            hold on
+            hold all
             plot(pGrains.boundary);
-            for ii = 1:length(job.p2c.variants)      
-                isTrace = ~isnan(traceImPlane(:,ii));  
+            for ii = 1:length(job.p2c.variants)
+                isTrace = ~isnan(traceImPlane(:,ii));
                 pIds = pGrainId(isTrace);
                 cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
-                [~,ind_traces]=ismember(job.mergeId(cIds),pGrainId);             
-                quiver(cGrains(ismember(cGrains.id,cIds)),traceImPlane(ind_traces,ii),'color','r'); 
+                [~,ind_traces]=ismember(job.mergeId(cIds),pGrainId);
+                quiver(cGrains(ismember(cGrains.id,cIds)),traceImPlane(ind_traces,ii),'color','w');
             end
+            hold off
             colorbar;
-            set(gcf,'name',"Habit plane traces");
+            set(gcf,'name','Habit plane traces');
+            if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+
+            if check_option(varargin,'noFrame')
+                mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+            end
+
         case {'radon','fourier'}
             % Define the window settings for a set of docked figures
             % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
@@ -227,30 +262,38 @@ if plotTraces
             desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
             % % Define a unique group name for the dock using the function name
             % % and the system timestamp
-            dockGroupName = ['Habit plane traces ',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+            dockGroupName = ['habitPlaneTraces_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
             desktop.setGroupDocked(dockGroupName,0);
             bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 
-            for ii = 1:length(job.p2c.variants)      
-                %drawnow;
+            for ii = 1:length(job.p2c.variants)
+                drawnow;
                 figH = gobjects(1);
                 figH = figure('WindowStyle','docked');
                 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
                 drawnow;
-                
-                plot(cEBSD(job.ebsd(is_transformed_EBSD).variantId==ii),'grayscale');
-                hold on
-                plot(pGrains.boundary);
-                
+
+                plot(cEBSD(job.ebsd(isTransformed_EBSD).variantId==ii),'grayscale');
+                hold all
+                [~,mP] = plot(pGrains.boundary);
+
                 isTrace = ~isnan(traceImPlane(:,ii));
                 pIds = pGrainId(isTrace);
-                [~,ind_traces]=ismember(pIds,pGrainId);
+                [~,ind_traces] = ismember(pIds,pGrainId);
                 quiver(pGrains(ismember(pGrains.id,unique(pIds))),traceImPlane(unique(ind_traces),ii),'color','r');
+                hold off
                 set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');
+                if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+
+                if check_option(varargin,'noFrame')
+                    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+                end
                 drawnow;
-            end          
+            end
             warning on
-      end
+            warning(bakWarn);
+            pause(1); % reduce rendering errors
+    end
 end
 
 
@@ -267,15 +310,19 @@ if length(pGrainId) > 1
     aTrace = sum(sum(hasTrace));
     screenPrint('SubStep',sprintf(['Number of analysed traces = ',...
         num2str(aTrace)]));
-    rTrace = round(aTrace/nTrace,4);    
+    rTrace = round(aTrace/nTrace,4);
     screenPrint('SubStep',sprintf(['Ratio of possible vs. analysed traces = 1 : ',...
         num2str(rTrace)]));
     screenPrint('SubStep',sprintf(['Number of analysed parent grains = ',...
         num2str(length(oriParent))]));
-    screenPrint('SubStep',sprintf(['Mean deviation = ',...
-        num2str(meanDeviation),'° ± ',num2str(stdDeviation),'°']));
-    screenPrint('SubStep',sprintf(['Quantiles [25, 50, 75 percent] = [',...
-        num2str(quantiles(1)),'°, ',num2str(quantiles(2)),'°, ',num2str(quantiles(3)),'°]']));
+    screenPrint('SubStep',sprintf(['Mean deviation (all) = ',...
+        num2str(meanDeviationAll),'° ± ',num2str(stdDeviationAll),'°']));
+        screenPrint('SubStep',sprintf(['Mean deviation (analysed) = ',...
+        num2str(meanDeviationAna),'° ± ',num2str(stdDeviationAna),'°']));
+    screenPrint('SubStep',sprintf(['Quantiles (all) [25, 50, 75 percent] = [',...
+        num2str(quantileAll(1)),'°, ',num2str(quantileAll(2)),'°, ',num2str(quantileAll(3)),'°]']));
+        screenPrint('SubStep',sprintf(['Quantiles (analysed) [25, 50, 75 percent] = [',...
+        num2str(quantileAna(1)),'°, ',num2str(quantileAna(2)),'°, ',num2str(quantileAna(3)),'°]']));
 end
 end
 
@@ -308,13 +355,13 @@ if any(strcmpi(mil.dispStyle,{'hkl','hkil'}))
         mill = {'h','k','l'};
     end
     s = '(';
-    for i = 1:length(mill)
+    for ii = 1:length(mill)
         if check_option(varargin,'round')
-            s = [s,num2str(round(mil.(mill{i}),0))];
+            s = [s,num2str(round(mil.(mill{ii}),0))];
         else
-            s = [s,num2str(mil.(mill{i}),'%0.4f')];
+            s = [s,num2str(mil.(mill{ii}),'%0.4f')];
         end
-        if i<length(mill)
+        if ii<length(mill)
             s = [s,','];
         end
     end
@@ -326,13 +373,13 @@ elseif any(strcmpi(mil.dispStyle,{'uvw','UVTW'}))
         mill = {'u','v','w'};
     end
     s = '[';
-    for i = 1:length(mill)
+    for ii = 1:length(mill)
         if check_option(varargin,'round')
-            s = [s,num2str(round(mil.(mill{i}),0))];
+            s = [s,num2str(round(mil.(mill{ii}),0))];
         else
-            s = [s,num2str(mil.(mill{i}),'%0.4f')];
+            s = [s,num2str(mil.(mill{ii}),'%0.4f')];
         end
-        if i<length(mill)
+        if ii<length(mill)
             s = [s,','];
         end
     end
