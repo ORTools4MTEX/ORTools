@@ -45,6 +45,7 @@ cSize = get_option(varargin,'minClusterSize',100);
 rIdx = get_option(varargin,'reliability',0.5);
 pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
 cmap = get_option(varargin,'colormap',jet);
+cmap = colormap(discreteColormap(cmap,length(job.p2c.variants)));
 plotTraces = check_option(varargin,'plotTraces');
 
 %% Define the parent grain(s) and parent ebsd data
@@ -148,10 +149,10 @@ if plotTraces
                 pIds = pGrainId(isTrace);
                 cIds = cEBSD(ismember(ind(:,1),pIds) & job.ebsd(isTransformed_EBSD).variantId == ii).id;
                 [~,ind_traces] = ismember(pIds,pGrainId);
-                plot(cEBSD(ismember(cEBSD.id,cIds)),'grayscale');
+                plot(cEBSD(ismember(cEBSD.id,cIds)),repmat(cmap(ii,:),[length(cIds) 1]));%'grayscale');
                 hold all
                 [~,mP] = plot(pGrains.boundary);
-                quiver(pGrains(ismember(pGrains.id,unique(pIds))),traces(unique(ind_traces),ii),'color','r');
+                quiver(pGrains(ismember(pGrains.id,unique(pIds))),traces(unique(ind_traces),ii),'color','k');
                 hold off
                 set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');
                 if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
@@ -286,14 +287,14 @@ if plotTraces
                 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
                 drawnow;
 
-                plot(cEBSD(job.ebsd(isTransformed_EBSD).variantId==ii),'grayscale');
+                plot(cEBSD(job.ebsd(isTransformed_EBSD).variantId==ii),repmat(cmap(ii,:),[length(cEBSD(job.ebsd(isTransformed_EBSD).variantId==ii)) 1]));%'grayscale');
                 hold all
                 [~,mP] = plot(pGrains.boundary);
 
                 isTrace = ~isnan(traceImPlane(:,ii));
                 pIds = pGrainId(isTrace);
                 [~,ind_traces] = ismember(pIds,pGrainId);
-                quiver(pGrains(ismember(pGrains.id,unique(pIds))),traceImPlane(unique(ind_traces),ii),'color','r');
+                quiver(pGrains(ismember(pGrains.id,unique(pIds))),traceImPlane(unique(ind_traces),ii),'color','k');
                 hold off
                 set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');
                 if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
@@ -398,4 +399,27 @@ elseif any(strcmpi(mil.dispStyle,{'uvw','UVTW'}))
     end
     s = [s,']'];
 end
+end
+
+
+%% Sub-divide a default colormap palette into a user specified number of 
+% discrete colors to improve on the visual distinction between bins/levels.
+function outcmap = discreteColormap(incmap,nbins)
+
+% check for input bin size
+if length(incmap) < nbins
+    error('Maximum number of bins exceeded.');
+    return;
+end
+
+% generate a linearly spaced [n x 1] vector of row indices based on:
+% an interval = 1:maximum number of rows as the input colormap
+% the spacing between the points = (length(incmap)-1)/(nbins-1)
+out = [linspace(1,length(incmap),nbins)]';
+
+% convert the row indices between 2:end-1 to integers
+out(2:end-1,1) = round(out(2:end-1,1));
+
+% re-assign the row indices to the colormap
+outcmap = incmap(out,:);
 end
