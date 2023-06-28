@@ -102,6 +102,7 @@ switch hpMethod
         [traces(:,isVar), relIndex(:,isVar), clusterSize(:,isVar)] = calcTraces(cGrains,ind,hpMethod,'minClusterSize',cSize);
 end
 traces.antipodal = true;
+
 %% Remove entries that are NaN
 if length(pGrainId) == 1
     traces = traces(pGrainId,:);
@@ -286,7 +287,7 @@ if plotTraces
                 mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
             end
             %Angular deviation between fitted and HP traces
-            dalpha = angle(traces,traceImPlane)/degree;
+            dalpha = angle(traces,traceImPlane)./degree;
             figure();
             for ii = 1:length(job.p2c.variants)
                 isTrace = ~isnan(traces(:,ii));
@@ -300,7 +301,7 @@ if plotTraces
             colormap(jet);
             hold off
             colorbar;
-            set(gcf,'name','Habit plane traces');
+            set(gcf,'name','Misfit between trace and fitted habit plane');
             if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
 
             if check_option(varargin,'noFrame')

@@ -17,8 +17,15 @@ function f_area = plotMap_bain(job, varargin)
 %  colormap - colormap variable
 %  grains   - plot grain data instead of EBSD data
 
-
-cmap = get_option(varargin,'colormap',haline);
+set(0,'DefaultFigureVisible','off');
+cmap = get_option(varargin,'colormap',magma);
+allfigh = findall(0,'type','figure');
+if length(allfigh) > 1
+    close(figure(length(allfigh)));
+else
+    close(figure(1));
+end
+set(0,'DefaultFigureVisible','on');
 
 %% Define the text output format as Latex
 setInterp2Latex
@@ -27,7 +34,8 @@ p2c_V = job.p2c.variants;
 p2c_V = p2c_V(:);
 maxColors = max(job.transformedGrains.bainId);
 
-f = figure;
+f = figure();
+hold all
 if check_option(varargin,'grains')
     plot(job.transformedGrains,job.transformedGrains.bainId);
 else
@@ -43,7 +51,7 @@ else
 end
 
 
-hold on
+hold all
 parentGrains = smooth(job.parentGrains,10);
 plot(parentGrains.boundary,varargin{:})
 hold off
