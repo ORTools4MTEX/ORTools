@@ -65,13 +65,13 @@ end
 
 %% Define a discretised colormap equal to the number of child variants
 set(0,'DefaultFigureVisible','off');
-cmap = colormap(discreteColormap(cmap,length(job.p2c.variants)));
-allfigh = findall(0,'type','figure');
-if length(allfigh) > 1
-    close(figure(length(allfigh)));
-else
-    close(figure(1));
-end
+cmap = discreteColormap(cmap,length(job.p2c.variants));
+% allfigh = findall(0,'type','figure');
+% if length(allfigh) > 1
+%     close(figure(length(allfigh)));
+% else
+%     close(figure(1));
+% end
 set(0,'DefaultFigureVisible','on');
 
 
@@ -127,7 +127,8 @@ if plotTraces
                 pIds = pGrainId(isTrace);
                 cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
                 [~,ind_traces] = ismember(job.mergeId(cIds),pGrainId);
-                quiver(cGrains(ismember(cGrains.id,cIds)),traces(ind_traces,ii),'color','w');
+                q = quiver(cGrains(ismember(cGrains.id,cIds)),traces(ind_traces,ii),'color','w');
+                q.ShowArrowHead = 'off'; q.Marker = 'none';
             end
             colorbar;
             hold off
@@ -163,7 +164,8 @@ if plotTraces
                 plot(cEBSD(ismember(cEBSD.id,cIds)),repmat(cmap(ii,:),[length(cIds) 1]));%'grayscale');
                 hold all
                 [~,mP] = plot(pGrains.boundary);
-                quiver(pGrains(ismember(pGrains.id,unique(pIds))),traces(unique(ind_traces),ii),'color','k');
+                q = quiver(pGrains(ismember(pGrains.id,unique(pIds))),traces(unique(ind_traces),ii),'color','k');
+                q.ShowArrowHead = 'off'; q.Marker = 'none';
                 hold off
                 set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');
                 if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
@@ -269,7 +271,8 @@ if plotTraces
                 pIds = pGrainId(isTrace);
                 cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
                 [~,ind_traces]=ismember(job.mergeId(cIds),pGrainId);
-                quiver(cGrains(ismember(cGrains.id,cIds)),traceImPlane(ind_traces,ii),'color','w');
+                q = quiver(cGrains(ismember(cGrains.id,cIds)),traceImPlane(ind_traces,ii),'color','w');
+                q.ShowArrowHead = 'off'; q.Marker = 'none';
             end
             hold off
             colorbar;
@@ -305,7 +308,8 @@ if plotTraces
                 isTrace = ~isnan(traceImPlane(:,ii));
                 pIds = pGrainId(isTrace);
                 [~,ind_traces] = ismember(pIds,pGrainId);
-                quiver(pGrains(ismember(pGrains.id,unique(pIds))),traceImPlane(unique(ind_traces),ii),'color','k');
+                q = quiver(pGrains(ismember(pGrains.id,unique(pIds))),traceImPlane(unique(ind_traces),ii),'color','k');
+                q.ShowArrowHead = 'off'; q.Marker = 'none';
                 hold off
                 set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');
                 if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
