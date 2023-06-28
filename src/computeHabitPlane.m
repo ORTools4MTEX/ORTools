@@ -29,7 +29,7 @@ function [habitPlane,statistics] = computeHabitPlane(job,varargin)
 %                   used to compute the habit plane (varies from 0 to 1, 
 %                   default = 0.5)
 %  colormap       - Defines the colormap to display the variants (default 
-%                   =  jet)
+%                   =  haline)
 %  noScalebar     - Remove scalebar from maps
 %  noFrame        - Remove frame around maps
 %  plotTraces     - Logical used to plot the trace & habit plane output
@@ -44,7 +44,8 @@ hpMethod = lower(get_flag(varargin,{'calliper','shape','hist','fourier','radon'}
 cSize = get_option(varargin,'minClusterSize',100);
 rIdx = get_option(varargin,'reliability',0.5);
 pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
-cmap = get_option(varargin,'colormap',jet);
+cmap = get_option(varargin,'colormap',haline);
+linecolor = get_option(varargin,'linecolor','r');
 plotTraces = check_option(varargin,'plotTraces');
 
 
@@ -127,7 +128,7 @@ if plotTraces
                 pIds = pGrainId(isTrace);
                 cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
                 [~,ind_traces] = ismember(job.mergeId(cIds),pGrainId);
-                q = quiver(cGrains(ismember(cGrains.id,cIds)),traces(ind_traces,ii),'color','w');
+                q = quiver(cGrains(ismember(cGrains.id,cIds)),traces(ind_traces,ii),'color',linecolor);
                 q.ShowArrowHead = 'off'; q.Marker = 'none';
             end
             colorbar;
@@ -164,7 +165,7 @@ if plotTraces
                 plot(cEBSD(ismember(cEBSD.id,cIds)),repmat(cmap(ii,:),[length(cIds) 1]));%'grayscale');
                 hold all
                 [~,mP] = plot(pGrains.boundary);
-                q = quiver(pGrains(ismember(pGrains.id,unique(pIds))),traces(unique(ind_traces),ii),'color','k');
+                q = quiver(pGrains(ismember(pGrains.id,unique(pIds))),traces(unique(ind_traces),ii),'color',linecolor);
                 q.ShowArrowHead = 'off'; q.Marker = 'none';
                 hold off
                 set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');
@@ -271,7 +272,7 @@ if plotTraces
                 pIds = pGrainId(isTrace);
                 cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
                 [~,ind_traces]=ismember(job.mergeId(cIds),pGrainId);
-                q = quiver(cGrains(ismember(cGrains.id,cIds)),traceImPlane(ind_traces,ii),'color','w');
+                q = quiver(cGrains(ismember(cGrains.id,cIds)),traceImPlane(ind_traces,ii),'color',linecolor);
                 q.ShowArrowHead = 'off'; q.Marker = 'none';
             end
             hold off
@@ -308,7 +309,7 @@ if plotTraces
                 isTrace = ~isnan(traceImPlane(:,ii));
                 pIds = pGrainId(isTrace);
                 [~,ind_traces] = ismember(pIds,pGrainId);
-                q = quiver(pGrains(ismember(pGrains.id,unique(pIds))),traceImPlane(unique(ind_traces),ii),'color','k');
+                q = quiver(pGrains(ismember(pGrains.id,unique(pIds))),traceImPlane(unique(ind_traces),ii),'color',linecolor);
                 q.ShowArrowHead = 'off'; q.Marker = 'none';
                 hold off
                 set(figH,'Name',strcat(['Variant ',num2str(ii)]),'NumberTitle','on');

@@ -106,7 +106,7 @@ plotMap_variants(job,'linewidth',3);
 screenPrint('SegmentStart','Compute the habit plane');
 [hPlane1,statistics1] =  computeHabitPlane(job,'Radon','minClusterSize',50,'plotTraces');
 [hPlane2,statistics2] =  computeHabitPlane(job,'shape','minClusterSize',50,'reliability',0.5,'plotTraces');
-[hPlane3,statistics3] =  computeHabitPlane(job,'Hist','minClusterSize',50,'reliability',0.25,'plotTraces');
+[hPlane3,statistics3] =  computeHabitPlane(job,'Hist','minClusterSize',50,'reliability',0.25,'plotTraces','colormap',jet,'linecolor','w');
 [~,ind_maxGrain] = max(job.grains.area);
 [hPlane4,~] =  computeHabitPlane(job,'calliper','minClusterSize',25,...
     'parentGrainId',ind_maxGrain,...
