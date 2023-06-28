@@ -311,7 +311,7 @@ This function computes the habit plane based on the determined traces from 2D eb
   -  plotTraces     - Logical used to plot the trace & habit plane output
 
 <p align="center">
-  <img src="./doc/images/computehabitPlane.png" alt="Traces of fitted habit plane on variant map" width="400"/>
+  <img src="./doc/images/computehabitPlane.png" alt="Traces of fitted habit plane on variant map" width="600"/>
 </p>
 
 ---
