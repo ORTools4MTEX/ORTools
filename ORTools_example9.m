@@ -102,6 +102,10 @@ hold off;
 job.calcVariants;
 % and plot the variant map
 plotMap_variants(job,'linewidth',3);
+% and plot the packet map
+plotMap_packets(job,'linewidth',3);
+% and plot the Bain group map
+plotMap_bain(job,'linewidth',3);
 %% Compute the habit plane
 screenPrint('SegmentStart','Compute the habit plane');
 % Check the research paper for the theoretical background of the methods

@@ -285,6 +285,28 @@ if plotTraces
             if check_option(varargin,'noFrame')
                 mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
             end
+            %Angular deviation between fitted and HP traces
+            dalpha = angle(traces,traceImPlane)/degree;
+            figure();
+            for ii = 1:length(job.p2c.variants)
+                isTrace = ~isnan(traces(:,ii));
+                pIds = pGrainId(isTrace);
+                cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
+                [~,ind_traces]=ismember(job.mergeId(cIds),pGrainId);
+                plot(cGrains(ismember(cGrains.id,cIds)),dalpha(ind_traces,ii));
+                hold on
+            end
+            plot(pGrains.boundary,'linewidth',3);
+            colormap(jet);
+            hold off
+            colorbar;
+            set(gcf,'name','Habit plane traces');
+            if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
+
+            if check_option(varargin,'noFrame')
+                mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+            end
+
 
         case {'radon','fourier'}
             % Define the window settings for a set of docked figures
@@ -327,7 +349,8 @@ if plotTraces
             pause(1); % reduce rendering errors
     end
     
-   figure();
+
+   
    
 end
 

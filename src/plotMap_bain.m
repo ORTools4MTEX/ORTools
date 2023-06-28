@@ -18,7 +18,7 @@ function f_area = plotMap_bain(job, varargin)
 %  grains   - plot grain data instead of EBSD data
 
 
-cmap = get_option(varargin,'colormap',viridis);
+cmap = get_option(varargin,'colormap',haline);
 
 %% Define the text output format as Latex
 setInterp2Latex

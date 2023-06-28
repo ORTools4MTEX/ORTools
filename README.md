@@ -82,7 +82,7 @@ This will also help you follow the comments, which provide instructions on the v
 ---
 
 ### [Example 9: 06 JUN 2023](./ORTools_example9.m)
-#### Update to Example 1: Parent grain reconstruction using the similarity graph approach in lath martensite
+#### Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination
 This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane) function provides a direct way of calculating the habit plane compared to conventional MTEX. 
 
 The details related to the habit plane calculation are described in the following paper:
@@ -304,7 +304,8 @@ This function computes the habit plane based on the determined traces from 2D eb
   -  Hist           - Circular histogram based algorithm (grain data used)
   -  minClusterSize - Minimum number of pixels required for trace determination (default = 100)
   -  reliability    - Minimum value of accuracy in determined traces used to compute the habit plane (varies from 0 to 1, default = 0.5)
-  -  colormap       - Defines the colormap to display the variants (default =  jet)
+  -  colormap       - Defines the colormap to display the variants (default =  haline)
+  -  linecolor      - Defines the linecolor of the plotted traces (default =  red)
   -  noScalebar     - Remove scalebar from maps
   -  noFrame        - Remove frame around maps
   -  plotTraces     - Logical used to plot the trace & habit plane output
@@ -320,6 +321,10 @@ This function computes the crystallographic packet IDs of child grains.
   - job             - @parentGrainReconstructor
 - Output
   - packet_grains   - @grains2d 
+
+<p align="center">
+  <img src="./doc/images/computeHabitPlane.png" alt="Traces of fitted habit plane on variant map" width="400"/>
+</p>
 
 ---
 
@@ -342,15 +347,15 @@ This function computes twins in parent grains by local refinement.
 ---
 
 ### [computeVariantGrains](./src/computeVariantGrains.m)
-This function refines the child grains in the *job* object based on their variant IDs. It returns the refined child grains and assigns ebsd map data to the new child grain Ids.
+This function refines the child grains in the *job* object based on their variant IDs. It returns a grain object containing the refined child grains alongside all other grains and an EBSD object with updated grain Ids.
 
 - Syntax
   - [variant_grains,cEBSD] = computeVariantGrains(job,varargin)
 - Input
   - job              - @parentGrainReconstructor
 - Output
-  - variant_grains   - @grains2d 
-  - ebsdC            - @EBSD
+  - grains           - @grains2d 
+  - ebsd             - @EBSD
 - Options
   - parentGrainId    - parent grain Id using the argument 'parentGrainId'
   
