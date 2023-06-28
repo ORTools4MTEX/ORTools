@@ -168,6 +168,8 @@ tracesParent = inv(oriPVariant) .* traces;
 
 %% Determine the habit plane (orthogonal fit)
 habitPlane = perp(tracesParent(hasTrace),'robust');
+% [habitPlane,idRobust] = perp(tracesParent(hasTrace),'robust'); % TO-DO
+% hasTrace = hasTrace(idRobust);
 
 %% Change Miller object to type = crystal plane
 habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
