@@ -69,7 +69,7 @@ set(0,'DefaultFigureVisible','off');
 cmap = discreteColormap(cmap,length(job.p2c.variants));
 % allfigh = findall(0,'type','figure');
 % if length(allfigh) > 1
-%     close(figure(length(allfigh)));
+%     close(figure(length(allfigh)+1));
 % else
 %     close(figure(1));
 % end

@@ -21,7 +21,7 @@ set(0,'DefaultFigureVisible','off');
 cmap = get_option(varargin,'colormap',magma);
 allfigh = findall(0,'type','figure');
 if length(allfigh) > 1
-    close(figure(length(allfigh)));
+    close(figure(length(allfigh)+1));
 else
     close(figure(1));
 end
