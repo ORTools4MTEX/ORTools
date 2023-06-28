@@ -310,6 +310,10 @@ This function computes the habit plane based on the determined traces from 2D eb
   -  noFrame        - Remove frame around maps
   -  plotTraces     - Logical used to plot the trace & habit plane output
 
+<p align="center">
+  <img src="./doc/images/computehabitPlane.png" alt="Traces of fitted habit plane on variant map" width="400"/>
+</p>
+
 ---
 
 ### [computePacketGrains](./src/computePacketGrains.m)
@@ -320,12 +324,8 @@ This function computes the crystallographic packet IDs of child grains.
 - Input
   - job             - @parentGrainReconstructor
 - Output
-  - packet_grains   - @grains2d 
-
-<p align="center">
-  <img src="./doc/images/computeHabitPlane.png" alt="Traces of fitted habit plane on variant map" width="400"/>
-</p>
-
+  - packet_grains   - @grains2d
+  - 
 ---
 
 ### [computeParentTwins](./src/computeParentTwins.m)
