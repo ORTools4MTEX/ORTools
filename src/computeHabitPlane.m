@@ -45,8 +45,17 @@ cSize = get_option(varargin,'minClusterSize',100);
 rIdx = get_option(varargin,'reliability',0.5);
 pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
 cmap = get_option(varargin,'colormap',jet);
-cmap = colormap(discreteColormap(cmap,length(job.p2c.variants)));
 plotTraces = check_option(varargin,'plotTraces');
+
+set(0,'DefaultFigureVisible','off');
+cmap = colormap(discreteColormap(cmap,length(job.p2c.variants)));
+allfigh = findall(0,'type','figure');
+if length(allfigh) > 1
+    close(figure(length(allfigh)));
+else
+    close(figure(1));
+end
+set(0,'DefaultFigureVisible','on');
 
 %% Define the parent grain(s) and parent ebsd data
 isTransformed_EBSD = ~isnan(job.ebsd.variantId);
