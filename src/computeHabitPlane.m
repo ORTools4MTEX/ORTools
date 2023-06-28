@@ -47,15 +47,6 @@ pGrainId = get_option(varargin,'parentGrainId',job.parentGrains.id);
 cmap = get_option(varargin,'colormap',jet);
 plotTraces = check_option(varargin,'plotTraces');
 
-set(0,'DefaultFigureVisible','off');
-cmap = colormap(discreteColormap(cmap,length(job.p2c.variants)));
-allfigh = findall(0,'type','figure');
-if length(allfigh) > 1
-    close(figure(length(allfigh)));
-else
-    close(figure(1));
-end
-set(0,'DefaultFigureVisible','on');
 
 %% Define the parent grain(s) and parent ebsd data
 isTransformed_EBSD = ~isnan(job.ebsd.variantId);
@@ -71,6 +62,17 @@ else
     cGrains = job.transformedGrains;
     cEBSD = job.ebsdPrior(isTransformed_EBSD);
 end
+
+%% Define a discretised colormap equal to the number of child variants
+set(0,'DefaultFigureVisible','off');
+cmap = colormap(discreteColormap(cmap,length(job.p2c.variants)));
+allfigh = findall(0,'type','figure');
+if length(allfigh) > 1
+    close(figure(length(allfigh)));
+else
+    close(figure(1));
+end
+set(0,'DefaultFigureVisible','on');
 
 
 %% Calculate the traces of the child grains
