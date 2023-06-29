@@ -357,7 +357,7 @@ if plotTraces
 end
 
 
-if length(pGrainId) > 1
+
     %% Output habit plane text
     screenPrint('Step','Detailed information on the computed habit plane:');
     screenPrint('SubStep',sprintf(['Habit plane (as-computed) = ',...
@@ -373,17 +373,18 @@ if length(pGrainId) > 1
     rTrace = round(aTrace/nTrace,4);
     screenPrint('SubStep',sprintf(['Ratio of possible vs. analysed traces = 1 : ',...
         num2str(rTrace)]));
-    screenPrint('SubStep',sprintf(['Number of analysed parent grains = ',...
-        num2str(length(oriParent))]));
-    screenPrint('SubStep',sprintf(['Mean deviation (all) = ',...
-        num2str(meanDeviationAll),'° ± ',num2str(stdDeviationAll),'°']));
+    if length(pGrainId) > 1
+        screenPrint('SubStep',sprintf(['Number of analysed parent grains = ',...
+            num2str(length(oriParent))]));
+        screenPrint('SubStep',sprintf(['Mean deviation (all) = ',...
+            num2str(meanDeviationAll),'° ± ',num2str(stdDeviationAll),'°']));
         screenPrint('SubStep',sprintf(['Mean deviation (analysed) = ',...
-        num2str(meanDeviationAna),'° ± ',num2str(stdDeviationAna),'°']));
-    screenPrint('SubStep',sprintf(['Quantiles (all) [25, 50, 75 percent] = [',...
-        num2str(quantileAll(1)),'°, ',num2str(quantileAll(2)),'°, ',num2str(quantileAll(3)),'°]']));
+            num2str(meanDeviationAna),'° ± ',num2str(stdDeviationAna),'°']));
+        screenPrint('SubStep',sprintf(['Quantiles (all) [25, 50, 75 percent] = [',...
+            num2str(quantileAll(1)),'°, ',num2str(quantileAll(2)),'°, ',num2str(quantileAll(3)),'°]']));
         screenPrint('SubStep',sprintf(['Quantiles (analysed) [25, 50, 75 percent] = [',...
-        num2str(quantileAna(1)),'°, ',num2str(quantileAna(2)),'°, ',num2str(quantileAna(3)),'°]']));
-end
+            num2str(quantileAna(1)),'°, ',num2str(quantileAna(2)),'°, ',num2str(quantileAna(3)),'°]']));
+    end
 end
 
 %% Set Display Style of Miller objects
