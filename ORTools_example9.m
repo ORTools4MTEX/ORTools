@@ -114,7 +114,7 @@ screenPrint('SegmentStart','Compute the habit plane');
 
 % Let's try the radon-based approach (on pixelised EBSD data) ...
 [hPlane1,statistics1] =  computeHabitPlane(job,'Radon','minClusterSize',50,'plotTraces');
-% ...And the shape-based approach (on reconstructed grain data)
+% ...Or the shape-based approach (on reconstructed grain data)
 [hPlane2,statistics2] =  computeHabitPlane(job,'Shape','minClusterSize',50,'reliability',0.5,'plotTraces');
 % ...Or the histogram approach (on reconstructed grain data) using a 
 % different colormap and trace color
