@@ -113,15 +113,15 @@ screenPrint('SegmentStart','Compute the habit plane');
 % https://github.com/ORTools4MTEX/ORTools/blob/develop/doc/Nyyss%C3%B6nen_Gazder_Hielscher_Niessen_2023.pdf
 
 % Let's try the radon approach (on pixelised EBSD data) ...
-[hPlane1,statistics1] =  computeHabitPlane(job,'Radon','minClusterSize',50,'plotTraces');
+[habitPlane1,traces1,stats1] =  computeHabitPlane(job,'Radon','minClusterSize',50,'plotTraces');
 % ...Or the shape approach (on reconstructed grain data)
-[hPlane2,statistics2] =  computeHabitPlane(job,'Shape','minClusterSize',50,'reliability',0.5,'plotTraces');
+[habitPlane2,traces2,stats2] =  computeHabitPlane(job,'Shape','minClusterSize',50,'reliability',0.5,'plotTraces');
 % ...Or the histogram approach (on reconstructed grain data) using a 
 % different colormap and trace color
-[hPlane3,statistics3] =  computeHabitPlane(job,'Hist','minClusterSize',50,'reliability',0.25,'plotTraces','colormap',jet,'linecolor','w');
+[habitPlane3,traces3,stats3] =  computeHabitPlane(job,'Hist','minClusterSize',50,'reliability',0.25,'plotTraces','colormap',jet,'linecolor','w');
 % ...Or the calliper approach (on reconstructed grain data) for a single
 % parent grain
 [~,ind_maxGrain] = max(job.grains.area);
-[hPlane4,~] =  computeHabitPlane(job,'calliper','minClusterSize',20,...
+[habitPlane4,~,~] =  computeHabitPlane(job,'calliper','minClusterSize',20,...
     'parentGrainId',ind_maxGrain,...
     'plotTraces','noFrame','noScalebar');
