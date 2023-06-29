@@ -36,7 +36,7 @@ function [habitPlane,statistics] = computeHabitPlane(job,varargin)
 
 
 if all(isnan(job.variantId))
-    job.calcVariants  % Compute variants
+    job.calcVariants;  % Compute variants
 end
 job.calcParentEBSD; % Apparently needs to be repeated
 
@@ -235,7 +235,7 @@ end
 
 % Plot traces and fitted habit planes in spherical projection
 figure();
-h{1} = scatter(tracesParent(~hasTrace),'MarkerSize',6,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','none','MarkerFaceAlpha',0.5);
+h{1} = scatter(tracesParent(~hasTrace),'MarkerSize',6,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','k','MarkerFaceAlpha',0.5);
 hold all;
 h{2} = scatter(tracesParent(hasTrace),relIndex(hasTrace),'MarkerSize',6,'MarkerEdgeColor','k');
 hold all
@@ -248,7 +248,8 @@ hold off;
 drawnow;
 legend([h{:}], {'Discarded parent traces','Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'east');
 set(gcf,'name','Spherical projection of determined traces and fitted habit plane');
-clear h
+clear h;
+
 % Plot ODF
 if length(pGrainId) > 1
     figure();
