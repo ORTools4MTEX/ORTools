@@ -205,7 +205,7 @@ habitPlane = setDisplayStyle(habitPlane,'plane'); % ORTools default
 %% Recompute traces from fitted habit plane
 traceImPlane = cross(oriPVariant .* habitPlane,zvector);
 
-if length(pGrainId) > 1
+% if length(pGrainId) > 1
     %% Calculate the angular deviation between the traces and the fitted habit plane
     deviationAll = 90 - angle(habitPlane,tracesParent(~isnan(tracesParent)),'noSymmetry')./degree;
     deviationAna = 90 - angle(habitPlane,tracesParent(hasTrace),'noSymmetry')./degree;
@@ -227,9 +227,9 @@ if length(pGrainId) > 1
         deviationAll,meanDeviationAll,stdDeviationAll,quantileAll,...
         deviationAna,meanDeviationAna,stdDeviationAna,quantileAna},...
         'UniformValues',false);
-else
-    statistics = NaN;
-end
+% else
+%     statistics = NaN;
+% end
 
 %% Plot and return the habit plane
 
@@ -373,7 +373,7 @@ end
     rTrace = round(aTrace/nTrace,4);
     screenPrint('SubStep',sprintf(['Ratio of possible vs. analysed traces = 1 : ',...
         num2str(rTrace)]));
-    if length(pGrainId) > 1
+%     if length(pGrainId) > 1
         screenPrint('SubStep',sprintf(['Number of analysed parent grains = ',...
             num2str(length(oriParent))]));
         screenPrint('SubStep',sprintf(['Mean deviation (all) = ',...
@@ -384,7 +384,7 @@ end
             num2str(quantileAll(1)),'°, ',num2str(quantileAll(2)),'°, ',num2str(quantileAll(3)),'°]']));
         screenPrint('SubStep',sprintf(['Quantiles (analysed) [25, 50, 75 percent] = [',...
             num2str(quantileAna(1)),'°, ',num2str(quantileAna(2)),'°, ',num2str(quantileAna(3)),'°]']));
-    end
+%     end
 end
 
 %% Set Display Style of Miller objects
