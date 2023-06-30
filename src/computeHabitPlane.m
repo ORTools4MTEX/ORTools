@@ -507,7 +507,7 @@ if isa(inMiller,'Miller')
         end
     end
 end
-delta = angle(inMiller,outMiller)
+delta = angle(inMiller,outMiller);
 end
 
 
