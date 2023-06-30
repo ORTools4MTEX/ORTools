@@ -18,7 +18,7 @@ function ipfKey = plotMap_IPF_p2c(job, varargin)
 %  child     - plot child phase map only
 
 
-vector = getClass(varargin,'vector3d',vector3d.X);
+vector = getClass(varargin,'vector3d',vector3d.Z);
 ipfKey1 = [];
 ipfKey2 = [];
 

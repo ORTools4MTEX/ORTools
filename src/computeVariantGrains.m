@@ -78,7 +78,7 @@ clusterIds_pIdL = reshape(clusterIds_pId,l_ebsd,1);
 
 % Calculate grains based on grains based on clusterIds
 [newGrains, newEBSD(isIndexed).grainId]= newEBSD(isIndexed).calcGrains('variants',[clusterIds_vL(isIndexed_L),clusterIds_pIdL(isIndexed_L)]);
-newGrains.prop.variantId(newGrains.prop.variantId==0) = nan;
+
 %% Compute the quality of fit 
 % Get all child variants
 childVariants  = variants(job.p2c,oriP);
@@ -95,6 +95,17 @@ d = dot(childVariants,repmat(cEBSD.orientations(:),1,size(childVariants,2)));
 
 %% Save the QOF in ebsd and grain structure
 newEBSD.prop.fit = reshape(fit,sz_ebsd);
+
+%% Write prop data into grains
+props = [props,'fit'];
+isTransformed_grains = ~(newGrains.prop.variantId==0);
+isTransforemd_ebsd = ~isnan(newEBSD.prop.variantId);
+newGrains.prop.variantId(~isTransformed_grains) = nan;
+[~,ind] = unique(newEBSD(isTransforemd_ebsd).prop.grainId);
+for prop = props
+    p = newEBSD(isTransforemd_ebsd).prop.(prop);
+    newGrains(~isnan(newGrains.prop.variantId)).prop.(prop) = p(ind);
+end
 
 %% Retransform EBSD data to list-shape
 newEBSD = EBSD(newEBSD);

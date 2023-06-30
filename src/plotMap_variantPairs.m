@@ -30,13 +30,15 @@ if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
         error('Argument ''parentGrainId''must be numeric.');
         return;
     end
-    [variantGrains,ebsdC] = computeVariantGrains(job,'parentGrainId',pGrainId);
+    [grains,ebsd] = computeVariantGrains(job,'parentGrainId',pGrainId);
     pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
 else
     warning('Argument ''parentGrainId'' not specified. Equivalent variant pairs will be calculated for the EBSD map.');
-    [variantGrains,ebsdC] = computeVariantGrains(job);
+    [grains,ebsd] = computeVariantGrains(job);
 end
 
+variantGrains = grains(job.csChild);
+ebsdC = ebsd(ebsd(job.csChild));
 
 %% Determine the variant pairs
 % Derive variant types 1 to 6 from variants 1 to 24
@@ -87,25 +89,25 @@ bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 
 %% Plot a map of variant pairs
 % Plot the boundaries
-colors = {'r','g','b','k'};
-
+colors = {[1 0 0],[0 1 0],[0 0 1],[1 1 0]};
 drawnow;
 figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
 drawnow;
-% plot(ebsdC,data);
-% setColorRange([mean(data)-2*std(data),mean(data)+2*std(data)])
-% mtexColorMap black2white
-% hold all
-xlabelString = categorical({'V1-V2','V1-V3(V5)','V1-V6','V1-V4'});
+plot(ebsd,'grayscale');
+hold on
+xlabelString = {'V1-V2','V1-V3(V5)','V1-V6','V1-V4'};
 for ii = 1:size(cond,1)
-    [~,mP] = plot(variantPairs_boundary{ii},'linecolor',colors{ii},'DisplayName',char(xlabelString(ii)),varargin{:});
+    [hL(ii),mP] = plot(variantPairs_boundary{ii},'linecolor',colors{ii},'DisplayName',xlabelString{ii},varargin{:});
+    hL(ii).FaceColor = colors{ii};
     hold all;
 end
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     plot(pGrain.boundary,varargin{:},'linecolor',[0.45 0.45 0.45],varargin{:});
 end
+[hL(ii+1),mP] = plot(job.grains.boundary,varargin{:});
+hL(ii+1).FaceColor = 'k';
 hold off
 legend
 set(figH,'Name','Map: Equivalent variant pair Boundaries','NumberTitle','on');
@@ -126,6 +128,8 @@ figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
 drawnow;
+
+xlabelString = categorical(xlabelString);
 h = bar(xlabelString,variantPairs_boundaryFraction);
 h.FaceColor =[162 20 47]./255;
 set(gca,'FontSize',14);

@@ -36,7 +36,7 @@ else
     pGrains = pGrains(isParent);
     cEBSD = job.ebsdPrior(job.csChild);
     cEBSD = cEBSD(isParent);
-    [~,packIds] = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
+    [~,packIds,~] = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
     plot(cEBSD,packIds);
     f_area = [histcounts(packIds,maxPackets)/length(packIds)]';
     disp(table([1:maxPackets]',f_area,'VariableNames',{'Packets','AreaFrac'}))
