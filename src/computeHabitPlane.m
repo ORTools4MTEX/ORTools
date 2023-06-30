@@ -433,10 +433,12 @@ if any(strcmpi(m.dispStyle,{'hkl','hkil'}))
     elseif strcmpi(m.dispStyle,'hkl')
         mLabel = {'h','k','l'};
     end
+    if check_option(varargin,'round')
+        [m,~] = intMiller(m);
+    end  
     s = '(';
     for ii = 1:length(mLabel)
         if check_option(varargin,'round')
-            [m,~] = intMiller(m);
             s = [s,num2str(m.(mLabel{ii}))];
         else
             s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
@@ -452,10 +454,12 @@ elseif any(strcmpi(m.dispStyle,{'uvw','UVTW'}))
     elseif strcmpi(m.dispStyle,'uvw')
         mLabel = {'u','v','w'};
     end
+    if check_option(varargin,'round')
+        [m,~] = intMiller(m);
+    end
     s = '[';
     for ii = 1:length(mLabel)
         if check_option(varargin,'round')
-            [m,~] = intMiller(m);
             s = [s,num2str(m.(mLabel{ii}))];
         else
             s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
@@ -468,18 +472,17 @@ elseif any(strcmpi(m.dispStyle,{'uvw','UVTW'}))
 end
 end
 
-
 function [outMiller,delta] = intMiller(inMiller)
 if isa(inMiller,'Miller')
     if any(strcmpi(inMiller.CS.lattice,{'hexagonal','trigonal'})) == 1
-        if inMiller.dispStyle == 'hkil'
+        if all(inMiller.dispStyle == 'hkil') %inMiller.dispStyle == 'hkil'
             m = [inMiller.h inMiller.k inMiller.i inMiller.l];
             m = m./findMin(m);
             m = round(m.*1E4)./1E4;
             m = round(m,0);
             outMiller = Miller(m(1),m(2),m(3),m(4),inMiller.CS,'plane');
 
-        elseif inMiller.dispStyle == 'UVTW'
+        elseif all(inMiller.dispStyle == 'UVTW') %inMiller.dispStyle == 'UVTW'
             n = [inMiller.U inMiller.V inMiller.T inMiller.W];
             n = n./findMin(n);
             n = round(n.*1E4)./1E4;
@@ -488,14 +491,14 @@ if isa(inMiller,'Miller')
         end
 
     else % for all other CS
-        if inMiller.dispStyle == 'hkl'
+        if all(inMiller.dispStyle == 'hkl') %inMiller.dispStyle == 'hkl'
             m = [inMiller.h inMiller.k inMiller.l];
             m = m./findMin(m);
             m = round(m.*1E4)./1E4;
             m = round(m,0);
             outMiller = Miller(m(1),m(2),m(3),inMiller.CS,'plane');
 
-        elseif inMiller.dispStyle == 'uvw'
+        elseif all(inMiller.dispStyle == 'uvw') %inMiller.dispStyle == 'uvw'
             n = [inMiller.u inMiller.v inMiller.w];
             n = n./findMin(n);
             n = round(n.*1E4)./1E4;
@@ -504,7 +507,7 @@ if isa(inMiller,'Miller')
         end
     end
 end
-delta = angle(inMiller,outMiller);
+delta = angle(inMiller,outMiller)
 end
 
 
