@@ -425,7 +425,7 @@ if isa(m,'Miller')
 end
 end
 
-%% Screenprint Crystal Planes
+%% Screenprint Crystal Planes or Directions
 function s = sprintMiller(m,varargin)
 if any(strcmpi(m.dispStyle,{'hkl','hkil'}))
     if strcmpi(m.dispStyle,'hkil')
@@ -474,7 +474,7 @@ end
 
 function [outMiller,delta] = intMiller(inMiller)
 if isa(inMiller,'Miller')
-    if any(strcmpi(inMiller.CS.lattice,{'hexagonal','trigonal'})) == 1
+    if any(strcmpi(inMiller.CS.lattice,{'hexagonal','trigonal'}))
         if all(inMiller.dispStyle == 'hkil') %inMiller.dispStyle == 'hkil'
             m = [inMiller.h inMiller.k inMiller.i inMiller.l];
             m = m./findMin(m);
@@ -510,15 +510,11 @@ end
 delta = angle(inMiller,outMiller);
 end
 
-
 function minA = findMin(a)
 % a(a < 0.3333) = 0;
 a(a == 0) = inf;
 minA = min(abs(a),[],2);
 end
-
-
-
 
 %% Sub-divide a default colormap palette into a user specified number of
 % discrete colors to improve on the visual distinction between bins/levels.
