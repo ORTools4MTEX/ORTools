@@ -426,45 +426,96 @@ end
 end
 
 %% Screenprint Crystal Planes
-function s = sprintMiller(mil,varargin)
-if any(strcmpi(mil.dispStyle,{'hkl','hkil'}))
-    if strcmpi(mil.dispStyle,'hkil')
-        mill = {'h','k','i','l'};
-    elseif strcmpi(mil.dispStyle,'hkl')
-        mill = {'h','k','l'};
+function s = sprintMiller(m,varargin)
+if any(strcmpi(m.dispStyle,{'hkl','hkil'}))
+    if strcmpi(m.dispStyle,'hkil')
+        mLabel = {'h','k','i','l'};
+    elseif strcmpi(m.dispStyle,'hkl')
+        mLabel = {'h','k','l'};
     end
     s = '(';
-    for ii = 1:length(mill)
+    for ii = 1:length(mLabel)
         if check_option(varargin,'round')
-            s = [s,num2str(round(mil.(mill{ii}),0))];
+            [m,~] = intMiller(m);
+            s = [s,num2str(m.(mLabel{ii}),0)];
         else
-            s = [s,num2str(mil.(mill{ii}),'%0.4f')];
+            s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
         end
-        if ii<length(mill)
+        if ii<length(mLabel)
             s = [s,','];
         end
     end
     s = [s,')'];
-elseif any(strcmpi(mil.dispStyle,{'uvw','UVTW'}))
-    if strcmpi(mil.dispStyle,'UVTW')
-        mill = {'U','V','T','W'};
-    elseif strcmpi(mil.dispStyle,'uvw')
-        mill = {'u','v','w'};
+elseif any(strcmpi(m.dispStyle,{'uvw','UVTW'}))
+    if strcmpi(m.dispStyle,'UVTW')
+        mLabel = {'U','V','T','W'};
+    elseif strcmpi(m.dispStyle,'uvw')
+        mLabel = {'u','v','w'};
     end
     s = '[';
-    for ii = 1:length(mill)
+    for ii = 1:length(mLabel)
         if check_option(varargin,'round')
-            s = [s,num2str(round(mil.(mill{ii}),0))];
+            [m,~] = intMiller(m);
+            s = [s,num2str(m.(mLabel{ii}),0)];
         else
-            s = [s,num2str(mil.(mill{ii}),'%0.4f')];
+            s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
         end
-        if ii<length(mill)
+        if ii<length(mLabel)
             s = [s,','];
         end
     end
     s = [s,']'];
 end
 end
+
+
+function [outMiller,delta] = intMiller(inMiller)
+if isa(inMiller,'Miller')
+    if any(strcmpi(inMiller.CS.lattice,{'hexagonal','trigonal'})) == 1
+        if inMiller.dispStyle == 'hkil'
+            m = [inMiller.h inMiller.k inMiller.i inMiller.l];
+
+            m = m./findMin(m);
+            m = round(m.*1E4)./1E4;
+            m = round(m,0);
+            outMiller = Miller(m(1),m(2),m(3),m(4),inMiller.CS,'plane');
+
+        elseif inMiller.dispStyle == 'UVTW'
+            n = [inMiller.U inMiller.V inMiller.T inMiller.W];
+            n = n./findMin(n);
+            n = round(n.*1E4)./1E4;
+            n = round(n,0);
+            outMiller = Miller(n(1),n(2),n(3),n(4),inMiller.CS,'direction');
+        end
+
+    else % for all other CS
+        if inMiller.dispStyle == 'hkl'
+            m = [inMiller.h inMiller.k inMiller.l];
+            m = m./findMin(m);
+            m = round(m.*1E4)./1E4;
+            m = round(m,0);
+            outMiller = Miller(m(1),m(2),m(3),inMiller.CS,'plane');
+
+        elseif inMiller.dispStyle == 'uvw'
+            n = [inMiller.u inMiller.v inMiller.w];
+            n = n./findMin(n);
+            n = round(n.*1E4)./1E4;
+            n = round(n,0);
+            outMiller = Miller(n(1),n(2),n(3),inMiller.CS,'direction');
+        end
+    end
+end
+delta = angle(inMiller,outMiller);
+end
+
+
+function minA = findMin(a)
+a(a < 0.3333) = 0;
+a(a == 0) = inf;
+minA = min(abs(a),[],2);
+end
+
+
 
 
 %% Sub-divide a default colormap palette into a user specified number of
