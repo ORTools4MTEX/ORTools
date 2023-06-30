@@ -198,12 +198,12 @@ traces.parent = inv(oriPVariant) .* traces.child;
 %% Determine the habit plane (orthogonal fit)
 isTrace = ~isnan(traces.child) & stats.reliability >= rIdx;
 habitPlane.parent = perp(traces.parent(isTrace),'robust');
-% [habitPlane.parent,idRobust] = perp(traces.parent(hasTrace),'robust'); % TO-DO
-% hasTrace = hasTrace(idRobust);
+% [habitPlane.parent,idRobust] = perp(traces.parent(isTrace),'robust'); % TO-DO
+% isTrace = isTrace(idRobust);
 
 %% Change Miller object to type = crystal plane
 habitPlane.parent = setDisplayStyle(habitPlane.parent,'plane'); % ORTools default
-% habitPlane.parent.dispStyle = "hkl"; %Mtex default
+% habitPlane.parent.dispStyle = "hkl"; % Mtex default
 
 %% Recompute traces from fitted habit plane
 traces.imagePlane = cross(oriPVariant .* habitPlane.parent,zvector);
