@@ -148,7 +148,7 @@ if any(strcmpi(m.dispStyle,{'hkl','hkil'}))
     for ii = 1:length(mLabel)
         if check_option(varargin,'round')
             [m,~] = intMiller(m);
-            s = [s,num2str(m.(mLabel{ii}),0)];
+            s = [s,num2str(m.(mLabel{ii}))];
         else
             s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
         end
@@ -167,7 +167,7 @@ elseif any(strcmpi(m.dispStyle,{'uvw','UVTW'}))
     for ii = 1:length(mLabel)
         if check_option(varargin,'round')
             [m,~] = intMiller(m);
-            s = [s,num2str(m.(mLabel{ii}),0)];
+            s = [s,num2str(m.(mLabel{ii}))];
         else
             s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
         end
@@ -185,7 +185,6 @@ if isa(inMiller,'Miller')
     if any(strcmpi(inMiller.CS.lattice,{'hexagonal','trigonal'})) == 1
         if inMiller.dispStyle == 'hkil'
             m = [inMiller.h inMiller.k inMiller.i inMiller.l];
-
             m = m./findMin(m);
             m = round(m.*1E4)./1E4;
             m = round(m,0);

@@ -437,7 +437,7 @@ if any(strcmpi(m.dispStyle,{'hkl','hkil'}))
     for ii = 1:length(mLabel)
         if check_option(varargin,'round')
             [m,~] = intMiller(m);
-            s = [s,num2str(m.(mLabel{ii}),0)];
+            s = [s,num2str(m.(mLabel{ii}))];
         else
             s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
         end
@@ -456,7 +456,7 @@ elseif any(strcmpi(m.dispStyle,{'uvw','UVTW'}))
     for ii = 1:length(mLabel)
         if check_option(varargin,'round')
             [m,~] = intMiller(m);
-            s = [s,num2str(m.(mLabel{ii}),0)];
+            s = [s,num2str(m.(mLabel{ii}))];
         else
             s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
         end
