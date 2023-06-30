@@ -309,7 +309,7 @@ if plotTraces
                 plot(cGrains(ismember(cGrains.id,cIds)),dalpha(idxTraces,ii));
                 hold on
             end
-            plot(pGrains.boundary,'linewidth',3);
+            plot(pGrains.boundary,'linewidth',2);
             colormap(jet);
             hold off
             colorbar;
