@@ -474,7 +474,6 @@ if isa(inMiller,'Miller')
     if any(strcmpi(inMiller.CS.lattice,{'hexagonal','trigonal'})) == 1
         if inMiller.dispStyle == 'hkil'
             m = [inMiller.h inMiller.k inMiller.i inMiller.l];
-
             m = m./findMin(m);
             m = round(m.*1E4)./1E4;
             m = round(m,0);
@@ -510,7 +509,7 @@ end
 
 
 function minA = findMin(a)
-a(a < 0.3333) = 0;
+% a(a < 0.3333) = 0;
 a(a == 0) = inf;
 minA = min(abs(a),[],2);
 end

@@ -221,7 +221,7 @@ end
 
 
 function minA = findMin(a)
-a(a < 0.3333) = 0;
+% a(a < 0.3333) = 0;
 a(a == 0) = inf;
 minA = min(abs(a),[],2);
 end
