@@ -20,15 +20,15 @@ function [habitPlane,traces,stats] = computeHabitPlane(job,varargin)
 %  Radon          - Radon based algorithm (ebsd pixel data used)
 %  Fourier        - Fourier based algorithm (ebsd pixel data used)
 %  Calliper       - Shortest calliper based algorithm (grain data used)
-%  Shape          - Characteristic grain shape based algorithm (grain data 
+%  Shape          - Characteristic grain shape based algorithm (grain data
 %                   used)
 %  Hist           - Circular histogram based algorithm (grain data used)
-%  minClusterSize - Minimum number of pixels required for trace 
+%  minClusterSize - Minimum number of pixels required for trace
 %                   determination (default = 100)
 %  reliability    - Minimum value of accuracy in determined traces
-%                   used to compute the habit plane (varies from 0 to 1, 
+%                   used to compute the habit plane (varies from 0 to 1,
 %                   default = 0.5)
-%  colormap       - Defines the colormap to display the variants (default 
+%  colormap       - Defines the colormap to display the variants (default
 %                   =  haline)
 %  noScalebar     - Remove scalebar from maps
 %  noFrame        - Remove frame around maps
@@ -76,32 +76,33 @@ cmap = discreteColormap(cmap,length(job.p2c.variants));
 set(0,'DefaultFigureVisible','on');
 
 
-%% Calculate the traces of the child grains
+%% Calculate the traces of the child grains/EBSD data
 switch hpMethod
     case {'radon','fourier'}
-        %EBSD
-        ind = [pEBSD.grainId,job.ebsd(isTransformed_EBSD).variantId];
-        traces.child = vector3d.nan(max(ind(:,1)),length(job.p2c.variants));
-        stats.reliability = nan(max(ind(:,1)),length(job.p2c.variants));
-        stats.clusterSize = nan(max(ind(:,1)),length(job.p2c.variants));
-        isVar = ismember(1:length(job.p2c.variants),unique(ind(:,2)));
-        [traces.child(:,isVar), stats.reliability(:,isVar), stats.clusterSize(:,isVar)] = calcTraces(cEBSD,ind,hpMethod,'minClusterSize',cSize);
-    
+        % EBSD
+        idx = [pEBSD.grainId,job.ebsd(isTransformed_EBSD).variantId];
+        traces.child = vector3d.nan(max(idx(:,1)),length(job.p2c.variants));
+        stats.reliability = nan(max(idx(:,1)),length(job.p2c.variants));
+        stats.clusterSize = nan(max(idx(:,1)),length(job.p2c.variants));
+        isVariant = ismember(1:length(job.p2c.variants),unique(idx(:,2)));
+        [traces.child(:,isVariant), stats.reliability(:,isVariant), stats.clusterSize(:,isVariant)] = calcTraces(cEBSD,idx,hpMethod,'minClusterSize',cSize);
+
     case {'calliper', 'shape','hist'}
-        %Grains
+        % Grains
         if length(pGrainId) == 1
-            ind = [job.mergeId(job.mergeId == pGrains.id), job.variantId(job.mergeId == pGrains.id)];
+            idx = [job.mergeId(job.mergeId == pGrains.id), job.variantId(job.mergeId == pGrains.id)];
         else
-            ind = [job.mergeId(job.isTransformed), job.variantId(job.isTransformed)];
+            idx = [job.mergeId(job.isTransformed), job.variantId(job.isTransformed)];
         end
-        traces.child = vector3d.nan(max(ind(:,1)),length(job.p2c.variants));
-        stats.reliability = nan(max(ind(:,1)),length(job.p2c.variants));
-        stats.clusterSize = nan(max(ind(:,1)),length(job.p2c.variants));
-        %ind = ind(job.isTransformed,:);
-        isVar = ismember(1:length(job.p2c.variants),unique(ind(:,2)));
-        [traces.child(:,isVar), stats.reliability(:,isVar), stats.clusterSize(:,isVar)] = calcTraces(cGrains,ind,hpMethod,'minClusterSize',cSize);
+        traces.child = vector3d.nan(max(idx(:,1)),length(job.p2c.variants));
+        stats.reliability = nan(max(idx(:,1)),length(job.p2c.variants));
+        stats.clusterSize = nan(max(idx(:,1)),length(job.p2c.variants));
+        % idx = ind(job.isTransformed,:);
+        isVariant = ismember(1:length(job.p2c.variants),unique(idx(:,2)));
+        [traces.child(:,isVariant), stats.reliability(:,isVariant), stats.clusterSize(:,isVariant)] = calcTraces(cGrains,idx,hpMethod,'minClusterSize',cSize);
 end
 traces.child.antipodal = true;
+
 
 %% Remove entries that are NaN
 if length(pGrainId) == 1
@@ -113,7 +114,7 @@ else
     stats.reliability = stats.reliability(pGrainId,:);
     stats.clusterSize = stats.clusterSize(pGrainId,:);
 end
-hasTrace = ~isnan(traces.child) & stats.reliability >= rIdx;
+
 
 %% Plot the computed traces and the corresponding grains/EBSD data for each variant
 if plotTraces
@@ -127,7 +128,7 @@ if plotTraces
             for ii = 1:length(job.p2c.variants)
                 isTrace = ~isnan(traces.child(:,ii))  & stats.reliability(:,ii) >= rIdx ;
                 pIds = pGrainId(isTrace);
-                cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
+                cIds = cGrains(ismember(idx(:,1),pIds) & cGrains.variantId == ii).id;
                 [~,idxTraces] = ismember(job.mergeId(cIds),pGrainId);
                 q = quiver(cGrains(ismember(cGrains.id,cIds)),traces.child(idxTraces,ii),'color',linecolor);
                 q.ShowArrowHead = 'off'; q.Marker = 'none';
@@ -159,11 +160,11 @@ if plotTraces
                 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
                 drawnow;
 
-                isTrace = ~isnan(traces.child(:,ii));
+                isTrace = ~isnan(traces.child(:,ii))  & stats.reliability(:,ii) >= rIdx ;
                 pIds = pGrainId(isTrace);
-                cIds = cEBSD(ismember(ind(:,1),pIds) & job.ebsd(isTransformed_EBSD).variantId == ii).id;
+                cIds = cEBSD(ismember(idx(:,1),pIds) & job.ebsd(isTransformed_EBSD).variantId == ii).id;
                 [~,idxTraces] = ismember(pIds,pGrainId);
-                plot(cEBSD(ismember(cEBSD.id,cIds)),repmat(cmap(ii,:),[length(cIds) 1]));%'grayscale');
+                plot(cEBSD(ismember(cEBSD.id,cIds)),repmat(cmap(ii,:),[length(cIds) 1]));
                 hold all
                 [~,mP] = plot(pGrains.boundary);
                 q = quiver(pGrains(ismember(pGrains.id,unique(pIds))),traces.child(unique(idxTraces),ii),'color',linecolor);
@@ -183,6 +184,7 @@ if plotTraces
     end
 end
 
+
 %% Get the parent orientations
 oriParent = pGrains.meanOrientation;
 
@@ -194,7 +196,8 @@ oriPVariant = oriParent.project2FundamentalRegion .* ...
 traces.parent = inv(oriPVariant) .* traces.child;
 
 %% Determine the habit plane (orthogonal fit)
-habitPlane.parent = perp(traces.parent(hasTrace),'robust');
+isTrace = ~isnan(traces.child) & stats.reliability >= rIdx;
+habitPlane.parent = perp(traces.parent(isTrace),'robust');
 % [habitPlane.parent,idRobust] = perp(traces.parent(hasTrace),'robust'); % TO-DO
 % hasTrace = hasTrace(idRobust);
 
@@ -206,18 +209,18 @@ habitPlane.parent = setDisplayStyle(habitPlane.parent,'plane'); % ORTools defaul
 traces.imagePlane = cross(oriPVariant .* habitPlane.parent,zvector);
 
 % if length(pGrainId) > 1
-    %% Calculate the angular deviation between the traces and the fitted habit plane
-    stats.deviation.all = 90 - angle(habitPlane.parent,traces.parent(~isnan(traces.parent)),'noSymmetry')./degree;
-    stats.deviation.analysed = 90 - angle(habitPlane.parent,traces.parent(hasTrace),'noSymmetry')./degree;
-    % Mean deviation
-    stats.meanDeviation.all = mean(stats.deviation.all);
-    stats.meanDeviation.analysed = mean(stats.deviation.analysed);
-    % Std deviation
-    stats.stdDeviation.all  = std(stats.deviation.all);
-    stats.stdDeviation.analysed = std(stats.deviation.analysed);
-    % Quantiles
-    stats.quantile.all = quantile(stats.deviation.all,[0.25 0.5 0.75]);
-    stats.quantile.analysed = quantile(stats.deviation.analysed,[0.25 0.5 0.75]);
+%% Calculate the angular deviation between the traces and the fitted habit plane
+stats.deviation.all = 90 - angle(habitPlane.parent,traces.parent(~isnan(traces.parent)),'noSymmetry')./degree;
+stats.deviation.analysed = 90 - angle(habitPlane.parent,traces.parent(isTrace),'noSymmetry')./degree;
+% Mean deviation
+stats.meanDeviation.all = mean(stats.deviation.all);
+stats.meanDeviation.analysed = mean(stats.deviation.analysed);
+% Std deviation
+stats.stdDeviation.all  = std(stats.deviation.all);
+stats.stdDeviation.analysed = std(stats.deviation.analysed);
+% Quantiles
+stats.quantile.all = quantile(stats.deviation.all,[0.25 0.5 0.75]);
+stats.quantile.analysed = quantile(stats.deviation.analysed,[0.25 0.5 0.75]);
 %     % Return the statistics of fitting
 %     statistics = containers.Map(...
 %         {'relIndex','clusterSize',...
@@ -231,13 +234,15 @@ traces.imagePlane = cross(oriPVariant .* habitPlane.parent,zvector);
 %     statistics = NaN;
 % end
 
+
 %% Plot and return the habit plane
 
 % Plot traces and fitted habit planes in spherical projection
 figure();
-h{1} = scatter(traces.parent(~hasTrace),'MarkerSize',6,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','k','MarkerFaceAlpha',0.5);
+drawnow;
+h{1} = scatter(traces.parent(~isTrace),'MarkerSize',6,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','k','MarkerFaceAlpha',0.5);
 hold all;
-h{2} = scatter(traces.parent(hasTrace),stats.reliability(hasTrace),'MarkerSize',6,'MarkerEdgeColor','k');
+h{2} = scatter(traces.parent(isTrace),stats.reliability(isTrace),'MarkerSize',6,'MarkerEdgeColor','k');
 hold all
 h{3} = plot(habitPlane.parent,'plane','antipodal','linecolor','r','linewidth',2);
 h{4} = plot(habitPlane.parent,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane.parent)});
@@ -253,20 +258,23 @@ clear h;
 % Plot ODF
 if length(pGrainId) > 1
     figure();
-    tpd = calcDensity(traces.parent(hasTrace),'noSymmetry','halfwidth',2.5*degree);
-    contourf(tpd)
+    drawnow;
+    tpd = calcDensity(traces.parent(isTrace),'noSymmetry','halfwidth',2.5*degree);
+    contourf(tpd);
     mtexColorMap white2black
     mtexColorbar
-    circle(habitPlane.parent,'color','red','linewidth',2)
-    set(gcf,'name','ODF of fitted traces and habit plane');
+    circle(habitPlane.parent,'color','red','linewidth',2);
+    drawnow;
+    set(gcf,'name','ODF of the fitted traces and the habit plane');
 end
 
-%% Plot the traces associated with the determined habit plane
 
+%% Plot the traces associated with the determined habit plane
 if plotTraces
     switch hpMethod
         case {'calliper', 'shape','hist'}
             figure();
+            drawnow;
             [~,mP] = plot(cGrains,cGrains.variantId);
             colormap(cmap);
             hold all
@@ -274,26 +282,29 @@ if plotTraces
             for ii = 1:length(job.p2c.variants)
                 isTrace = ~isnan(traces.imagePlane(:,ii));
                 pIds = pGrainId(isTrace);
-                cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
+                cIds = cGrains(ismember(idx(:,1),pIds) & cGrains.variantId == ii).id;
                 [~,idxTraces]=ismember(job.mergeId(cIds),pGrainId);
                 q = quiver(cGrains(ismember(cGrains.id,cIds)),traces.imagePlane(idxTraces,ii),'color',linecolor);
                 q.ShowArrowHead = 'off'; q.Marker = 'none';
             end
             hold off
             colorbar;
+            drawnow;
             set(gcf,'name','Habit plane traces');
             if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
 
             if check_option(varargin,'noFrame')
                 mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
             end
-            %Angular deviation between fitted and HP traces
+
+            % Angular misfit between the trace and fitted habit plane
             dalpha = angle(traces.child,traces.imagePlane)./degree;
             figure();
+            drawnow;
             for ii = 1:length(job.p2c.variants)
                 isTrace = ~isnan(traces.child(:,ii));
                 pIds = pGrainId(isTrace);
-                cIds = cGrains(ismember(ind(:,1),pIds) & cGrains.variantId == ii).id;
+                cIds = cGrains(ismember(idx(:,1),pIds) & cGrains.variantId == ii).id;
                 [~,idxTraces]=ismember(job.mergeId(cIds),pGrainId);
                 plot(cGrains(ismember(cGrains.id,cIds)),dalpha(idxTraces,ii));
                 hold on
@@ -302,7 +313,8 @@ if plotTraces
             colormap(jet);
             hold off
             colorbar;
-            set(gcf,'name','Misfit between trace and fitted habit plane');
+            drawnow;
+            set(gcf,'name','Angular misfit between the trace and fitted habit plane');
             if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
 
             if check_option(varargin,'noFrame')
@@ -349,11 +361,11 @@ if plotTraces
             warning on
             warning(bakWarn);
             pause(1); % reduce rendering errors
-    end 
+    end
 end
 
-% if length(pGrainId) > 1
-%% Output habit plane text
+
+%% Output habit plane text in the command window
 screenPrint('Step','Detailed information on the computed habit plane:');
 screenPrint('SubStep',sprintf(['Parent habit plane (as-computed) = ',...
     sprintMiller(habitPlane.parent)]));
@@ -370,7 +382,7 @@ screenPrint('SubStep',sprintf(['Number of analysed parent grains = ',...
 nTrace = sum(sum(~isnan(traces.child)));
 screenPrint('SubStep',sprintf(['Number of possible traces = ',...
     num2str(nTrace)]));
-aTrace = sum(sum(hasTrace));
+aTrace = sum(sum(isTrace));
 screenPrint('SubStep',sprintf(['Number of analysed traces = ',...
     num2str(aTrace)]));
 rTrace = round(aTrace/nTrace,4);
@@ -384,10 +396,11 @@ screenPrint('SubStep',sprintf(['Quantiles (all traces) [25, 50, 75 percent] = ['
     num2str(stats.quantile.all(1)),'°, ',num2str(stats.quantile.all(2)),'°, ',num2str(stats.quantile.all(3)),'°]']));
 screenPrint('SubStep',sprintf(['Quantiles (analysed traces) [25, 50, 75 percent] = [',...
     num2str(stats.quantile.analysed(1)),'°, ',num2str(stats.quantile.analysed(2)),'°, ',num2str(stats.quantile.analysed(3)),'°]']));
-% end
 end
 
 
+
+%% ANCILLARY FUNCTIONS
 
 %% Set Display Style of Miller objects
 function m = setDisplayStyle(millerObj,mode)
@@ -451,7 +464,7 @@ end
 end
 
 
-%% Sub-divide a default colormap palette into a user specified number of 
+%% Sub-divide a default colormap palette into a user specified number of
 % discrete colors to improve on the visual distinction between bins/levels.
 function outcmap = discreteColormap(incmap,nbins)
 
