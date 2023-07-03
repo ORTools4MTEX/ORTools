@@ -81,7 +81,7 @@ This will also help you follow the comments, which provide instructions on the v
 
 ---
 
-### [Example 9: 06 JUN 2023](./ORTools_example9.m)
+### [Example 09: 06 JUN 2023](./ORTools_example09.m)
 #### Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination
 This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane) function provides a direct way of calculating the habit plane compared to conventional MTEX. 
 
@@ -91,7 +91,7 @@ The details related to the habit plane calculation are described in the followin
 
 ---
 
-### [Example 8: 29 MAR 2023](./ORTools_example8.m)
+### [Example 08: 29 MAR 2023](./ORTools_example08.m)
 #### Update to Example 2: Parent grain reconstruction using the variant graph approach in Ti alloys
 This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) to demonstrate the reconstruction of parent beta grains from child alpha grains in a alpha-beta Ti alloy. The script provides a faster and less involved way of reconstructing this microstructure compared to the triple-point based approach from [Example 2](./ORTools_example2.m). 
 
@@ -101,7 +101,7 @@ The details related to the variant graph approach are described in the following
 
 ---
 
-### [Example 7: 23 MAR 2022](./ORTools_example7.m)
+### [Example 07: 23 MAR 2022](./ORTools_example07.m)
 #### Update to Example 1: Parent grain reconstruction using the new variant graph approach and advanced variant analysis in lath martensitic steel
 This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstruction.html) to demonstrate the reconstruction of parent austenite grains from child lath martensite using the new **variant graph approach**. Compared to the original [Example 1](./ORTools_example1.m), this updated version also features equivalent variant pair analysis and the measurement of lath block widths. 
 
@@ -115,7 +115,7 @@ The details related to the variant graph approach are described in the following
 
 ---
 
-### [Example 6: 12 MAY 2021](./ORTools_example6.m)
+### [Example 06: 12 MAY 2021](./ORTools_example06.m)
 #### Two-stage parent grain reconstruction in a TWIP-TRIP steel
 This example is of a 10% cold-rolled twinning and transformation induced plasticity (TWIP-TRIP) steel microstructure with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. ORTools and the MTEX parent grain reconstruction functionalities are used to reconstruct both parent microstructures in a single workflow. Towards the end, it is demonstrated that variant analysis can be conducted on both transformations. 
 
@@ -127,7 +127,7 @@ This example is of a 10% cold-rolled twinning and transformation induced plastic
 
 ---
 
-### [Example 5: 04 MAR 2021](./ORTools_example5.m)
+### [Example 05: 04 MAR 2021](./ORTools_example05.m)
 #### Partial parent grain reconstruction to clean TWIP-TRIP steel EBSD data
 This example is of a 20% cold-rolled twinning and transformation induced plasticity (TWIP-TRIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function, it is discovered that two possible ORs could be in operation for the γ to α' microstructure. The first OR is not a real OR but rather, an "apparent" OR corresponding to pixels that were misindexed as α' during map acquisition even though they notionally belong to γ. The parent phase reconstruction features in MTEX and the "apparent" OR are used to revert these misindexed points to γ. The grain calculation and the OR peak fitter is re-run to show that the "apparent" OR was eliminated. 
 
@@ -139,7 +139,7 @@ This example is of a 20% cold-rolled twinning and transformation induced plastic
 
 ---
 
-### [Example 4: 04 MAR 2021](./ORTools_example4.m)
+### [Example 04: 04 MAR 2021](./ORTools_example04.m)
 #### Predicting the β to α transformation texture in a titanium alloy
 In this script, the reconstruction of the prior parent β microstructure from a child α microstructure is repeated as shown in [example 2](https://github.com/ORTools4MTEX/ORTools#example-2). Examination of the variant distribution shows that strongly preferential variant selection did not occur. Therefore, the transition texture of α can be accurately predicted from the reconstructed β using the [plotPODF_transform](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#plotPODF_transform) function. The result shows that the predicted α transition texture is in good agreement with the experimental α texture.
 
@@ -149,7 +149,7 @@ In this script, the reconstruction of the prior parent β microstructure from a 
 
 ---
 
-### [Example 3: 04 MAR 2021](./ORTools_example3.m)
+### [Example 03: 04 MAR 2021](./ORTools_example03.m)
 #### Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
 In [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) the α-β Ti microstructure showed two ORs in the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function. In this example, both ORs are investigated to find out which one of them dominated the phase transition. To evaluate the best match, the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figures and on boundary maps are plotted.
 
@@ -159,7 +159,7 @@ In [example 2](https://github.com/ORTools4MTEX/ORTools#example-2) the α-β Ti m
 
 ---
 
-### [Example 2: 03 MAR 2021](./ORTools_example2.m)
+### [Example 02: 03 MAR 2021](./ORTools_example02.m)
 #### Parent grain reconstruction and variant analysis in titanium alloys
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official [MTEX example](https://mtex-toolbox.github.io/TiBetaReconstruction.html) for phase transitions in titanium alloys. Here the [OR peak fitter](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#peakFitORs) function is used to determine the OR from alpha-beta boundaries even though they only make up < 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.
 
@@ -169,7 +169,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ---
 
-### [Example 1: 03 MAR 2021](./ORTools_example1.m)
+### [Example 01: 03 MAR 2021](./ORTools_example01.m)
 #### Parent grain reconstruction and variant analysis in lath martensitic steel
 This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains using the **grain graph approach** in the official [MTEX example](https://mtex-toolbox.github.io/GrainGraphBasedReconstruction.html) for martensite transformation in steels. The functionality of **ORTools** in providing pre-written and additional plotting functions to create publication-ready plots is demonstrated.
 
@@ -185,6 +185,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ### C
 - [computeBainGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains)
 - [computeGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrains)
+- [computeGrainPairs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs)
 - [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane)
 - [computePacketGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computePacketGrains)
 - [computeParentTwins](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeParentTwins)
@@ -281,6 +282,32 @@ This function is a GUI to compute grains from ebsd map data and optionally filte
 <p align="center">
   <img src="./doc/images/computeGrains.png" alt="UI of computeGrains" width="400"/>
 </p>
+
+---
+
+### [computeGrainPairs](./src/computeGrainPairs.m)
+This function computes the absolute or normalised frequency and boundary segment lengths of grain pairs. 
+The grain pair ids can be defined for variants, packets, bain groups, or any other equivalent type as chosen by the user.
+
+- Syntax:
+  - [out] = computeGrainPairs(pairGrains)
+
+- Input:
+  - pairGrains   - @grain2d = child grain pairs as computed by the "computeVariantGrains.m" function
+
+- Output:
+  - out          - @struc   = a strcture variable containing the absolute or normalised frequency and boundary segment lengths of grain pairs. 
+
+- Options:
+  - variant    - Uses the variant Ids of the child grains.
+  - packet     - Uses the packet Ids of the child grains.
+  - bain       - Uses the Bain Ids of the child grains.
+  - other      - Uses a user-specified list of Ids of the child grains.
+  - equivalent - A cell defining different groups of equivalent ids.
+  - include    - Includes similar neighbouring variant, packet, bain or other id pairs. For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
+  - exclude    - Excludes similar neighbouring variant, packet, bain or other-id type pairs. (default)
+  - absolute   - Returns the absolute frequency and boundary segment values of neighbouring variant, packet, bain or other-id type pairs.
+  - normalise  - Returns the normalised frequency and boundary segment values of neighbouring variant, packet, bain or other-id type pairs. (default)
 
 ---
 
