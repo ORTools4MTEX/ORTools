@@ -22,9 +22,9 @@ function out = computeGrainPairs(pairGrains,varargin)
 %  packet     - Uses the packet Ids of the child grains.
 %  bain       - Uses the Bain Ids of the child grains.
 %  other      - Uses a user-specified list of Ids of the child grains.
-%  equivalent - A cell defining different groups of equivalent ids.
+%  equivalent - A cell defining different groups of equivalent id pairs.
 %  include    - Includes similar neighbouring variant, packet, bain or 
-%               other id pairs. For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
+%               other-id type pairs. For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
 %  exclude    - Excludes similar neighbouring variant, packet, bain or 
 %               other-id type pairs. (default)
 %  absolute   - Returns the absolute frequency and boundary segment values
