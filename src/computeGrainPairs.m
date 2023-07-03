@@ -38,7 +38,7 @@ function out = computeGrainPairs(pairGrains,varargin)
 pairType = lower(get_flag(varargin,{'variant','packet','bain','other'},'variant'));
 eqIds = get_option(varargin,'equivalent',{});
 calcType = lower(get_flag(varargin,{'exclude','include'},'exclude'));
-outputType = lower(get_flag(varargin,{'normalise','absolute'},'normalise'));
+outputType = lower(get_flag(varargin,{'normalise','normalize','absolute'},'normalise'));
 
 
 %% Determine the pairs
