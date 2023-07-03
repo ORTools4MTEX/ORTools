@@ -22,6 +22,7 @@ startup_mtex;
 setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
 setMTEXpref('FontSize',14);   
+setInterp2Tex;
 
 % Default directories - Do not modify
 Ini.dataPath = [strrep(pwd,'\','/'),'/data/'];

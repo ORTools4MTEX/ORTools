@@ -13,6 +13,7 @@ startup_mtex;
 setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
 setMTEXpref('FontSize',14);
+setInterp2Tex;
 
 % Default directories - Do not modify
 Ini.dataPath = [strrep(pwd,'\','/'),'/data/'];
@@ -110,7 +111,6 @@ plotMap_bain(job,'linewidth',2,'colormap',magma);
 % For analyzing variant pairing, we need the variants on the EBSD level
 % to be reconstructed as grains
 %% Variant pairing (block boundary) analysis
-[~,maxGrainId] = max(job.grains.area);
 [variantGrains,ebsdC] = computeVariantGrains(job);
 
 %% Compute the variant pairs

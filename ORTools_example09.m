@@ -13,6 +13,7 @@ startup_mtex;
 setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outOfPlane');
 setMTEXpref('FontSize',14);   
+setInterp2Tex;
 
 % Default directories - Do not modify
 Ini.dataPath = [strrep(pwd,'\','/'),'/data/'];
@@ -112,6 +113,7 @@ screenPrint('SegmentStart','Compute the habit plane');
 % Check the research paper for the theoretical background of the methods
 % https://github.com/ORTools4MTEX/ORTools/blob/develop/doc/Nyyss%C3%B6nen_Gazder_Hielscher_Niessen_2023.pdf
 
+return
 % Let's try the radon approach (on pixelised EBSD data) ...
 [habitPlane1,traces1,stats1] =  computeHabitPlane(job,'Radon','minClusterSize',50,'plotTraces');
 % ...Or the shape approach (on reconstructed grain data)
