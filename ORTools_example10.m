@@ -1,7 +1,7 @@
 % *********************************************************************
 %                        ORTools - Example 10
 % *********************************************************************
-% Child grain pair dtermination from a lath martensite EBSD map
+% Child grain pair analysis for a lath martensite EBSD map
 % *********************************************************************
 home; close all; clear variables;
 currentFolder;
