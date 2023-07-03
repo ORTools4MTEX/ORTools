@@ -58,10 +58,10 @@ switch pairType
     case {'bain'}
         pairIds = pairGrains(pairGrains.id2ind(pairGrainIds)).bainId;
     case {'other'}
-        if isempty(eqIds)
-            error('Define equivalent id groups in a cell array.');
-            return;
-        end
+%         if isempty(eqIds)
+%             error('Define equivalent id groups in a cell array.');
+%             return;
+%         end
         pairIds = pairGrains(pairGrains.id2ind(pairGrainIds)).otherId;
 %     otherwise
 %         fieldNames = fieldnames(pairGrains.prop);
@@ -162,47 +162,58 @@ switch calcType
         segLength =  segLength - diag(diag(segLength));
 end
 
+
 switch pairType
     case {'other'}
-        % find the linear indices with value 1
-        ind = find(counts);
-        % find the subscripts of the linear indices
-        [r,c] = ind2sub(size(counts),ind);
-        % define all unique pair combinations
-        mat = [r c];
-        mat = sortrows(mat,[1 2]);
-        
-        cond = false(length(mat),length(eqIds));
-        for ii = 1:length(eqIds)
-            for jj = 1:size(eqIds{ii},1)
-                cond(:,ii) = cond(:,ii) | (any(ismember(mat,eqIds{ii}(jj,1)),2) & any(ismember(mat,eqIds{ii}(jj,2)),2));
+        if ~isempty(eqIds) % for case = other & equivalent id groups provided 
+            % find the linear indices with value 1
+            ind = find(counts);
+            % find the subscripts of the linear indices
+            [r,c] = ind2sub(size(counts),ind);
+            % define a matrix of all unique pair combinations
+            mat = [r c];
+            mat = sortrows(mat,[1 2]);
+
+            cond = false(length(mat),length(eqIds));
+            for ii = 1:length(eqIds)
+                for jj = 1:size(eqIds{ii},1)
+                    cond(:,ii) = cond(:,ii) | (any(ismember(mat,eqIds{ii}(jj,1)),2) & any(ismember(mat,eqIds{ii}(jj,2)),2));
+                end
+            end
+
+            for ii = 1:size(cond,2)
+                rc = mat(cond(:,ii),:);
+                lind = sub2ind(size(counts),rc(:,1),rc(:,2));
+                eqCounts(ii) = sum(counts(lind));
+                eqSegLength(ii) = sum(segLength(lind));
+            end
+
+            anyrc = mat(any(cond,2),:);
+            anylind = sub2ind(size(counts),anyrc(:,1),anyrc(:,2));
+            anyfc = sum(counts(anylind));
+            anyfsl = sum(segLength(anylind));
+            switch outputType
+                case {'normalise','normalize'}
+                    out.freq = eqCounts./anyfc;
+                    out.segLength = eqSegLength./anyfsl;
+                    %         figure; bar(1:4,out.freq(1,:));
+                    %         figure; bar(1:4,out.segLength(1,:));
+                case {'absolute'}
+                    out.freq = eqCounts;
+                    out.segLength = eqSegLength;
+            end
+        else % for case = other & equivalent id groups not provided
+            switch outputType
+                case {'normalise','normalize'}
+                    out.freq = counts./sum(sum(counts));
+                    out.segLength = segLength./sum(sum(segLength));
+                case {'absolute'}
+                    out.freq = counts;
+                    out.segLength = segLength;
             end
         end
 
-        for ii = 1:size(cond,2)
-            rc = mat(cond(:,ii),:);
-            lind = sub2ind(size(counts),rc(:,1),rc(:,2));
-            eqCounts(ii) = sum(counts(lind));
-            eqSegLength(ii) = sum(segLength(lind));
-        end
-        
-        anyrc = mat(any(cond,2),:);
-        anylind = sub2ind(size(counts),anyrc(:,1),anyrc(:,2));
-        anyfc = sum(counts(anylind));
-        anyfsl = sum(segLength(anylind));
-        switch outputType
-            case {'normalise','normalize'}
-                out.freq = eqCounts./anyfc;
-                out.segLength = eqSegLength./anyfsl;
-                %         figure; bar(1:4,out.freq(1,:));
-                %         figure; bar(1:4,out.segLength(1,:));
-            case {'absolute'}
-                out.freq = eqCounts;
-                out.segLength = eqSegLength;
-        end
-
-
-    otherwise
+    otherwise % for all other cases
         switch outputType
             case {'normalise','normalize'}
                 out.freq = counts./sum(sum(counts));

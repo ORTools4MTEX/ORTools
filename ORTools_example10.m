@@ -145,10 +145,12 @@ eqIds = {[1 2; 3 4; 5 6],...
     [1 4; 2 5; 3 6]};
 
 %% Compute the equivalent variant pairs
-out5 = computeGrainPairs(variantGrains,'other','equivalent',eqIds);
-% The output of out5 is:
-% out5.freq = [0.1503    0.2495    0.1211    0.4790]
-% out5.segLength = [0.1473    0.2452    0.1192    0.4883]
+out5 = computeGrainPairs(variantGrains,'other');
+%% ... or alternatively, compute the equivalent variant pair groups
+out6 = computeGrainPairs(variantGrains,'other','equivalent',eqIds);
+% The output of out6 is:
+% out6.freq = [0.1503    0.2495    0.1211    0.4790]
+% out6.segLength = [0.1473    0.2452    0.1192    0.4883]
 
 % Compare the above segment length values with the variant pair boundary 
 % fraction histogram from ORTools's pre-built function for equivalent 
