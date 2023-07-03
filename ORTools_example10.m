@@ -152,7 +152,6 @@ out6 = computeGrainPairs(variantGrains,'other','equivalent',eqIds)
 % out6 = struct with fields:
 %          freq: [0.1503 0.2495 0.1211 0.4790]
 %     segLength: [0.1473 0.2452 0.1192 0.4883]
-
 % Compare the above segment length values with the variant pair boundary 
 % fraction histogram from ORTools's pre-built function for equivalent 
 % variant pairs.
