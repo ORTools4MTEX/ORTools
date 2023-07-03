@@ -138,19 +138,20 @@ variantGrains.prop.otherId = variantGrains.variantId - (variantGrains.packetId-1
 % IMPORTANT: Regardless of the formula used to compute equivalent ids, the 
 % variable name on the LHS defining an "otherId" must not be changed.
 
-% Define the four groups of equivalent variant pairs
+%% Compute the equivalent variant pairs
+out5 = computeGrainPairs(variantGrains,'other');
+
+%% Define the four groups of equivalent variant pairs
 eqIds = {[1 2; 3 4; 5 6],...
     [1 3; 1 5; 2 4; 2 6; 3 5; 4 6],...
     [1 6; 2 3; 4 5],...
     [1 4; 2 5; 3 6]};
-
-%% Compute the equivalent variant pairs
-out5 = computeGrainPairs(variantGrains,'other');
-%% ... or alternatively, compute the equivalent variant pair groups
-out6 = computeGrainPairs(variantGrains,'other','equivalent',eqIds);
-% The output of out6 is:
-% out6.freq = [0.1503    0.2495    0.1211    0.4790]
-% out6.segLength = [0.1473    0.2452    0.1192    0.4883]
+%% ... and alternatively, compute the equivalent variant pair groups
+out6 = computeGrainPairs(variantGrains,'other','equivalent',eqIds)
+% The output of the variable 'out6' in the command window is:
+% out6 = struct with fields:
+%          freq: [0.1503 0.2495 0.1211 0.4790]
+%     segLength: [0.1473 0.2452 0.1192 0.4883]
 
 % Compare the above segment length values with the variant pair boundary 
 % fraction histogram from ORTools's pre-built function for equivalent 

@@ -58,16 +58,7 @@ switch pairType
     case {'bain'}
         pairIds = pairGrains(pairGrains.id2ind(pairGrainIds)).bainId;
     case {'other'}
-%         if isempty(eqIds)
-%             error('Define equivalent id groups in a cell array.');
-%             return;
-%         end
         pairIds = pairGrains(pairGrains.id2ind(pairGrainIds)).otherId;
-%     otherwise
-%         fieldNames = fieldnames(pairGrains.prop);
-%         idx = find(~contains(fieldNames,{'meanRotation','GOS','variantId','parentId','packetId','bainId','fit'}))
-%         idx = find(contains(fieldNames,{'other'}))
-%         pairIds = pairGrains(pairGrains.id2ind(pairGrainIds)).prop.(fieldNames{idx});
 end
 [pairIds,idx] =  sortrows(pairIds,[1 2]);
 pairGBs = pairGBs(idx);
@@ -78,11 +69,9 @@ maxId = max(max(pairIds));
 % %---------------------------------
 %% Define a matrix whose rows & columns signify variant pair combinations
 % For example, row 1, column 2 = variant pair V1-V2
-% pairMatrix = ones(24,24); ones(6,6); % since a total of 24 variants variants are possible
 pairMatrix = ones(maxId,maxId);
 % Re-define unique (value = 1) and equivalent (value = 0) pair combinations
-% as follows:
-% (eg.- V1-V2 (unique pair) == V2-V1 (equivalent pair))
+% as follows: V1-V2 (= unique pair) == V2-V1 (= equivalent pair)
 pairMatrix =  logical(triu(pairMatrix));
 
 
@@ -165,7 +154,7 @@ end
 
 switch pairType
     case {'other'}
-        if ~isempty(eqIds) % for case = other & equivalent id groups provided 
+        if ~isempty(eqIds) % for case = 'other' & equivalent id groups provided 
             % find the linear indices with value 1
             ind = find(counts);
             % find the subscripts of the linear indices
@@ -188,21 +177,15 @@ switch pairType
                 eqSegLength(ii) = sum(segLength(lind));
             end
 
-            anyrc = mat(any(cond,2),:);
-            anylind = sub2ind(size(counts),anyrc(:,1),anyrc(:,2));
-            anyfc = sum(counts(anylind));
-            anyfsl = sum(segLength(anylind));
             switch outputType
                 case {'normalise','normalize'}
-                    out.freq = eqCounts./anyfc;
-                    out.segLength = eqSegLength./anyfsl;
-                    %         figure; bar(1:4,out.freq(1,:));
-                    %         figure; bar(1:4,out.segLength(1,:));
+                    out.freq = eqCounts./sum(sum(eqCounts));
+                    out.segLength = eqSegLength./sum(sum(eqSegLength));
                 case {'absolute'}
                     out.freq = eqCounts;
                     out.segLength = eqSegLength;
             end
-        else % for case = other & equivalent id groups not provided
+        else % for case = 'other' & equivalent id groups not provided
             switch outputType
                 case {'normalise','normalize'}
                     out.freq = counts./sum(sum(counts));
