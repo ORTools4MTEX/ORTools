@@ -1,12 +1,12 @@
 % *********************************************************************
-%                        ORTools - Example 9
+%                        ORTools - Example 10
 % *********************************************************************
-% Habit plane determination from a lath martensite EBSD map
+% Child grain pair dtermination from a lath martensite EBSD map
 % *********************************************************************
 home; close all; clear variables;
 currentFolder;
 set(0,'DefaultFigureWindowStyle','normal');
-screenPrint('StartUp','ORTools - Example 9');
+screenPrint('StartUp','ORTools - Example 10');
 %% Initialize MTEX
 % Startup and set some settings
 startup_mtex;
