@@ -152,8 +152,8 @@ plotMap_variants(job,'grains','linewidth',3); %Grain data
 plotMap_variants(job,'linewidth',3); %EBSD data
 
 % We see that each child grain contains several variants on EBSD level
-% For analyzing the variant pairing, we need the variants on EBSD level
-% to be reconstructed to grains
+% For analyzing variant pairing, we need the variants on the EBSD level
+% to be reconstructed as grains
 %% Variant pairing (block boundary) analysis
 [~,maxGrainId] = max(job.grains.area);
 [variantGrains,ebsdC] = computeVariantGrains(job);
