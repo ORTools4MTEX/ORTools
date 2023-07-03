@@ -144,7 +144,7 @@ segLengthMatrix0 = triu(temp_segLengthMatrix0.',1);
 counts  = countsMatrix0 + countsMatrix1;
 segLength  = segLengthMatrix0 + segLengthMatrix1;
 % Discount similar variant pairs V1-V1, V2-V2 etc. along the matrix
-% principal diagonal (this is fedault unless specified otherwise)
+% principal diagonal (this behaviour is default unless specified otherwise)
 switch calcType
     case {'exclude'}
         counts = counts - diag(diag(counts));
