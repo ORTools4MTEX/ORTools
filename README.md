@@ -81,6 +81,12 @@ This will also help you follow the comments, which provide instructions on the v
 
 ---
 
+### [Example 10: 03 JUL 2023](./ORTools_example10.m)
+#### Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and child grain id analysis
+This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeGrainPairs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs) function provides a direct way of calculating the normalised or abolsute frequency and boudnary segment lengths of neighbouring variant, packet, bain or other-id type pairs.
+
+---
+
 ### [Example 09: 06 JUN 2023](./ORTools_example09.m)
 #### Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination
 This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane) function provides a direct way of calculating the habit plane compared to conventional MTEX. 
