@@ -3,7 +3,7 @@ function out = computeGrainPairs(pairGrains,varargin)
 % This function computes the absolute or normalised frequency and boundary
 % segment lengths of grain pairs. The grain pair ids can be defined by the 
 % user for variants, crystallographic packets, Bain groups, any other-id 
-% type or for groups of equivalent pairs.
+% type or for groups of equivalent id pairs.
 %
 %% Syntax:
 % [out] = computeGrainPairs(pairGrains)
@@ -19,11 +19,11 @@ function out = computeGrainPairs(pairGrains,varargin)
 %                            equivalent pairs.
 %
 %% Options:
-%  variant    - Uses the variant Ids of the child grains.
-%  packet     - Uses the packet Ids of the child grains.
-%  bain       - Uses the Bain Ids of the child grains.
-%  other      - Uses a user-specified list of Ids of the child grains.
-%  equivalent - A cell defining different groups of equivalent id pairs.
+%  variant    - Uses the variant Ids of child grain pairs.
+%  packet     - Uses the packet Ids of child grain pairs.
+%  bain       - Uses the Bain Ids of child grain pairs.
+%  other      - Uses a pecified list of Ids of child grain pairs.
+%  equivalent - A cell defining groups of equivalent id pairs.
 %  include    - Includes similar neighbouring variant, packet, bain or 
 %               other-id type pairs. For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
 %  exclude    - Excludes similar neighbouring variant, packet, bain or 
