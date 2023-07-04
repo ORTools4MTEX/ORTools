@@ -111,7 +111,7 @@ plotMap_bain(job,'linewidth',2,'colormap',magma);
 
 %% Child grain pair analysis
 screenPrint('SegmentStart','Child grain pair analysis');
-% To begin analyzing child grain pairs, we need the variants (and packets, 
+% To begin analyzing child grain pairs, we need the variants (and packets,
 % and Brain groups) on the EBSD level to be reconstructed as grains
 [variantGrains,ebsdC] = computeVariantGrains(job);
 
@@ -130,23 +130,25 @@ out3 = computeGrainPairs(variantGrains,'packet','include');
 screenPrint('Step','Bain group id child grain pair analysis');
 out4 = computeGrainPairs(variantGrains,'bain');
 
-%% Compute the equivalent id child grain pairs
-screenPrint('Step','Equivalent (or other) group id child grain pair analysis');
-% Calculate equivalent variant Ids of martensitic variants (block 
-% boundaries) in steel microstructures as per the analysis in the 
+%% Compute the equivalent variant id child grain pairs
+screenPrint('Step','Equivalent (or other) variant id child grain pair analysis');
+% Calculate equivalent variant Ids of martensitic variants (block
+% boundaries) in steel microstructures as per the analysis in the
 % following reference:
+%
 % S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to
 % identify martensite and bainite, Mater. Today Proc., Volume 2,
 % Supplement 3, 2015, Pages S913-S916.
 % (https://doi.org/10.1016/j.matpr.2015.07.430)
+%
 variantGrains.prop.otherId = variantGrains.variantId - (variantGrains.packetId-1) * 24/4;
-% IMPORTANT: Regardless of the formula used to compute equivalent ids, the 
+% IMPORTANT: Regardless of the formula used to compute equivalent ids, the
 % variable name on the LHS defining an "otherId" must not be changed.
 out5 = computeGrainPairs(variantGrains,'other');
 
-%% Compute groups of equivalent id child grain pairs
-screenPrint('Step','Groups of equivalent id child grain pair analysis');
-% Define the four groups of equivalent variant pairs
+%% Compute groups of equivalent variant id child grain pairs
+screenPrint('Step','Groups of equivalent variant id child grain pair analysis');
+% Define the four groups of equivalent variant id pairs
 eqIds = {[1 2; 3 4; 5 6],...
     [1 3; 1 5; 2 4; 2 6; 3 5; 4 6],...
     [1 6; 2 3; 4 5],...
@@ -157,19 +159,69 @@ out6 = computeGrainPairs(variantGrains,'other','equivalent',eqIds)
 % out6 = struct with fields:
 %          freq: [0.1503 0.2495 0.1211 0.4790]
 %     segLength: [0.1473 0.2452 0.1192 0.4883]
-% Compare the above segment length values with the variant pair boundary 
-% fraction histogram from ORTools's pre-built function for equivalent 
+% Compare the above segment length values with the variant pair boundary
+% fraction histogram from ORTools's pre-built function for equivalent
 % variant pairs.
 variantBoundaries_map = plotMap_variantPairs(job,'linewidth',1.5);
 %  -> Figure 9: variant pair boundary fraction histogram
 %   4×2 table
-% 
-%     eqVariants     Freq  
+%
+%     eqVariants     Freq
 %     __________    _______
-% 
+%
 %     V1-V2         0.14733
 %     V1-V3(V5)     0.24516
 %     V1-V6         0.11921
 %     V1-V4          0.4883
 % Notice that they are both exactly the same.
 
+%% Compute groups of variant id child grain pairs
+screenPrint('Step','Groups of variant id child grain pair analysis');
+% Calculate groups of variant Ids as per the analysis in the
+% following references:
+%
+% N. Takayama, G. Miyamoto, T. Furuhara, Effects of transformation 
+% temperature on variant pairing of bainitic ferrite in low carbon steel,
+% Acta Materialia, Volume 60, Issue 5, 2012, Pages 2387-2396.
+% (https://doi.org/10.1016/j.actamat.2011.12.018)
+%
+% H. Beladi, G.S. Rohrer, A.D. Rollett, V. Tari, P.D. Hodgson, The 
+% distribution of intervariant crystallographic planes in a lath 
+% martensite using five macroscopic parameters, Acta Materialia, 
+% Volume 63, 2014, Pages 86-98.
+% (https://doi.org/10.1016/j.actamat.2013.10.010)
+%
+% Define the groups of variant pairs
+vIds = {[1 2],...
+    [1 3; 1 5],...
+    [1 4],...
+    [1 6],...
+    [1 7],...
+    [1 8],...
+    [1 9; 1 19],...
+    [1 10; 1 14],...
+    [1 11; 1 13],...
+    [1 12; 1 20],...
+    [1 15; 1 23],...
+    [1 16],...
+    [1 17],...
+    [1 18; 1 22],...
+    [1 21],...
+    [1 24]};
+% ... and compute the groups of equivalent id child grain pairs
+out7 = computeGrainPairs(variantGrains,'variant','equivalent',vIds);
+
+figH = figure;
+h = bar(out7.freq);
+h.FaceColor =[162 20 47]./255;
+set(gca,'FontSize',14);
+xticks([1:16]);
+xlabelString = {'V2','V3,V5','V4','V6',...
+    'V7','V8','V9,V19','V10,V14',...
+    'V11,V13','V12,V20','V15,V23','V16',...
+    'V17','V18,V22','V21','V24'};
+xticklabels(xlabelString);
+xlabel('\bf Variant paired with V1');
+ylabel('\bf Relative frequency [$\bf f$(g)]');
+set(figH,'Name','Histogram: Groups of child grain variant pairs','NumberTitle','on');
+drawnow;
