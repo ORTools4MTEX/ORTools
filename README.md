@@ -83,7 +83,7 @@ This will also help you follow the comments, which provide instructions on the v
 
 ### [Example 10: 03 JUL 2023](./ORTools_example10.m)
 #### Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and child grain id analysis
-This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeGrainPairs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs) function provides a direct way of calculating the absolute or normalised frequency and boundary segment lengths of grain pairs. The grain pair ids can be defined by the user for variants, crystallographic packets, Bain groups, any other-id type or for equivalent pairs groups.
+This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeGrainPairs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs) function provides a direct way of calculating the absolute or normalised frequency and boundary segment lengths of grain pairs. The grain pair ids can be defined by the user for variants, crystallographic packets, Bain groups, any other-id type or for groups of equivalent pairs.
 
 ---
 
