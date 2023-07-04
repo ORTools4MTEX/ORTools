@@ -13,9 +13,10 @@ function out = computeGrainPairs(pairGrains,varargin)
 %                            "computeVariantGrains.m" function
 %
 %% Output:
-%  out          - @struc   = a strcture variable containing the absolute 
+%  out          - @struc   = a structure variable containing the absolute 
 %                            or normalised frequency and boundary segment 
-%                            lengths of grain pairs. 
+%                            lengths of grain pairs or groups of 
+%                            equivalent pairs.
 %
 %% Options:
 %  variant    - Uses the variant Ids of the child grains.
