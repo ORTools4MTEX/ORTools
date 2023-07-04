@@ -108,12 +108,12 @@ plotMap_packets(job,'linewidth',2);
 % and plot the Bain group map
 plotMap_bain(job,'linewidth',2,'colormap',magma);
 
+
 %% Compute the habit plane
 screenPrint('SegmentStart','Compute the habit plane');
 % Check the research paper for the theoretical background of the methods
 % https://github.com/ORTools4MTEX/ORTools/blob/develop/doc/Nyyss%C3%B6nen_Gazder_Hielscher_Niessen_2023.pdf
 
-return
 % Let's try the radon approach (on pixelised EBSD data) ...
 [habitPlane1,traces1,stats1] =  computeHabitPlane(job,'Radon','minClusterSize',50,'plotTraces');
 % ...Or the shape approach (on reconstructed grain data)

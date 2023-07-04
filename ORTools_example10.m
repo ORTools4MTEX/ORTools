@@ -108,24 +108,30 @@ plotMap_packets(job,'linewidth',2);
 % and plot the Bain group map
 plotMap_bain(job,'linewidth',2,'colormap',magma);
 
-% For analyzing variant pairing, we need the variants on the EBSD level
-% to be reconstructed as grains
-%% Variant pairing (block boundary) analysis
+
+%% Child grain pair analysis
+screenPrint('SegmentStart','Child grain pair analysis');
+% To begin analyzing child grain pairs, we need the variants (and packets, 
+% and Brain groups) on the EBSD level to be reconstructed as grains
 [variantGrains,ebsdC] = computeVariantGrains(job);
 
-%% Compute the variant pairs
+%% Compute the variant id child grain pairs
+screenPrint('Step','Variant id child grain pair analysis');
 out1 = computeGrainPairs(variantGrains,'variants');
 % include similar neighbouring variant pairs for example, V1-V1; V2-V2
 out2 = computeGrainPairs(variantGrains,'include');
 
-%% Compute the crystallographic packet pairs
+%% Compute the crystallographic packet id child grain pairs
 % include similar neighbouring packet pairs for example, CP1-CP1; CP2-CP2
+screenPrint('Step','Crystallographic packet id child grain pair analysis');
 out3 = computeGrainPairs(variantGrains,'packet','include');
 
-%% Compute the bain pairs
+%% Compute the Bain group id child grain pairs
+screenPrint('Step','Bain group id child grain pair analysis');
 out4 = computeGrainPairs(variantGrains,'bain');
 
-%% Determine equivalent pairs
+%% Compute the equivalent id child grain pairs
+screenPrint('Step','Equivalent (or other) group id child grain pair analysis');
 % Calculate equivalent variant Ids of martensitic variants (block 
 % boundaries) in steel microstructures as per the analysis in the 
 % following reference:
@@ -133,20 +139,19 @@ out4 = computeGrainPairs(variantGrains,'bain');
 % identify martensite and bainite, Mater. Today Proc., Volume 2,
 % Supplement 3, 2015, Pages S913-S916.
 % (https://doi.org/10.1016/j.matpr.2015.07.430)
-
 variantGrains.prop.otherId = variantGrains.variantId - (variantGrains.packetId-1) * 24/4;
 % IMPORTANT: Regardless of the formula used to compute equivalent ids, the 
 % variable name on the LHS defining an "otherId" must not be changed.
-
-%% Compute the equivalent variant pairs
 out5 = computeGrainPairs(variantGrains,'other');
 
-%% Define the four groups of equivalent variant pairs
+%% Compute groups of equivalent id child grain pairs
+screenPrint('Step','Groups of equivalent id child grain pair analysis');
+% Define the four groups of equivalent variant pairs
 eqIds = {[1 2; 3 4; 5 6],...
     [1 3; 1 5; 2 4; 2 6; 3 5; 4 6],...
     [1 6; 2 3; 4 5],...
     [1 4; 2 5; 3 6]};
-%% ... and alternatively, compute the equivalent variant pair groups
+% ... and compute the groups of equivalent id child grain pairs
 out6 = computeGrainPairs(variantGrains,'other','equivalent',eqIds)
 % The output of the variable 'out6' in the command window is:
 % out6 = struct with fields:
