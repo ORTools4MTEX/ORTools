@@ -1,9 +1,9 @@
 function out = computeGrainPairs(pairGrains,varargin)
 %% Function description:
 % This function computes the absolute or normalised frequency and boundary
-% segment lengths of grain pairs. The grain pair ids can be defined for 
-% variants, packets, bain groups, or any other equivalent type as chosen 
-% by the user.
+% segment lengths of grain pairs. The grain pair ids can be defined by the 
+% user for variants, crystallographic packets, Bain groups, any other-id 
+% type or for equivalent pairs groups.
 %
 %% Syntax:
 % [out] = computeGrainPairs(pairGrains)
