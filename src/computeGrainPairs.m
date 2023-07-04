@@ -3,7 +3,7 @@ function out = computeGrainPairs(pairGrains,varargin)
 % This function computes the absolute or normalised frequency and boundary
 % segment lengths of grain pairs. The grain pair ids can be defined by the 
 % user for variants, crystallographic packets, Bain groups, any other-id 
-% type or for groups of equivalent id pairs.
+% type or for groups of id or equivalent id pairs.
 %
 %% Syntax:
 % [out] = computeGrainPairs(pairGrains)
@@ -23,21 +23,23 @@ function out = computeGrainPairs(pairGrains,varargin)
 %  packet     - Uses the packet Ids of child grain pairs.
 %  bain       - Uses the Bain Ids of child grain pairs.
 %  other      - Uses a pecified list of Ids of child grain pairs.
-%  equivalent - A cell defining groups of equivalent id pairs.
-%  include    - Includes similar neighbouring variant, packet, bain or 
-%               other-id type pairs. For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
-%  exclude    - Excludes similar neighbouring variant, packet, bain or 
-%               other-id type pairs. (default)
+%  group      - A cell defining groups of id or equivalent id pairs.
+%  include    - Includes similar neighbouring variant, packet, bain, 
+%               other-id type, groups of id or equivalent id pairs.
+%               For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
+%  exclude    - Excludes similar neighbouring variant, packet, bain, 
+%               other-id type, groups of id or equivalent id pairs. 
+%               (default)
 %  absolute   - Returns the absolute frequency and boundary segment values
-%               of neighbouring variant, packet, bain or other-id type 
-%               pairs.
+%               of neighbouring variant, packet, bain, other-id type or 
+%               groups of id or equivalent id pairs.
 %  normalise  - Returns the normalised frequency and boundary segment 
-%               values of neighbouring variant, packet, bain or other-id 
-%               type pairs. (default)
+%               values of neighbouring variant, packet, bain, other-id 
+%               type groups of id or equivalent id pairs. (default)
 
 
 pairType = lower(get_flag(varargin,{'variant','packet','bain','other'},'variant'));
-eqIds = get_option(varargin,'equivalent',{});
+groupIds = get_option(varargin,'group',{});
 calcType = lower(get_flag(varargin,{'exclude','include'},'exclude'));
 outputType = lower(get_flag(varargin,{'normalise','normalize','absolute'},'normalise'));
 
@@ -152,7 +154,7 @@ switch calcType
         segLength =  segLength - diag(diag(segLength));
 end
 
-if ~isempty(eqIds) % equivalent id groups provided
+if ~isempty(groupIds) % equivalent id groups provided
     % find the linear indices with value 1
     ind = find(counts);
     % find the subscripts of the linear indices
@@ -161,10 +163,10 @@ if ~isempty(eqIds) % equivalent id groups provided
     mat = [r c];
     mat = sortrows(mat,[1 2]);
 
-    cond = false(length(mat),length(eqIds));
-    for ii = 1:length(eqIds)
-        for jj = 1:size(eqIds{ii},1)
-            cond(:,ii) = cond(:,ii) | (any(ismember(mat,eqIds{ii}(jj,1)),2) & any(ismember(mat,eqIds{ii}(jj,2)),2));
+    cond = false(length(mat),length(groupIds));
+    for ii = 1:length(groupIds)
+        for jj = 1:size(groupIds{ii},1)
+            cond(:,ii) = cond(:,ii) | (any(ismember(mat,groupIds{ii}(jj,1)),2) & any(ismember(mat,groupIds{ii}(jj,2)),2));
         end
     end
 

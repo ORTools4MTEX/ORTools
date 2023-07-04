@@ -83,7 +83,7 @@ This will also help you follow the comments, which provide instructions on the v
 
 ### [Example 10: 03 JUL 2023](./ORTools_example10.m)
 #### Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and child grain id analysis
-This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeGrainPairs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs) function provides a direct way of calculating the absolute or normalised frequency and boundary segment lengths of grain pairs. The grain pair ids can be defined by the user for variants, crystallographic packets, Bain groups, any other-id type or for groups of equivalent id pairs.
+This script follows the same dataset as that used in the official [MTEX example]( https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeGrainPairs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs) function provides a direct way of calculating the absolute or normalised frequency and boundary segment lengths of grain pairs. The grain pair ids can be defined by the user for variants, crystallographic packets, Bain groups, any other-id type or for groups of id or equivalent id pairs.
 
 ---
 
@@ -293,7 +293,7 @@ This function is a GUI to compute grains from ebsd map data and optionally filte
 
 ### [computeGrainPairs](./src/computeGrainPairs.m)
 This function computes the absolute or normalised frequency and boundary segment lengths of grain pairs. 
-The grain pair ids can be defined for variants, packets, bain groups, or any other equivalent type as chosen by the user.
+The grain pair ids can be defined by the user for variants, crystallographic packets, Bain groups, any other-id type or for groups of id or equivalent id pairs.
 
 - Syntax:
   - [out] = computeGrainPairs(pairGrains)
@@ -305,15 +305,15 @@ The grain pair ids can be defined for variants, packets, bain groups, or any oth
   - out          - @struc   = a strcture variable containing the absolute or normalised frequency and boundary segment lengths of grain pairs. 
 
 - Options:
-  - variant    - Uses the variant Ids of the child grains.
-  - packet     - Uses the packet Ids of the child grains.
-  - bain       - Uses the Bain Ids of the child grains.
-  - other      - Uses a user-specified list of Ids of the child grains.
-  - equivalent - A cell defining different groups of equivalent id pairs.
-  - include    - Includes similar neighbouring variant, packet, bain or other-id type pairs. For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
-  - exclude    - Excludes similar neighbouring variant, packet, bain or other-id type pairs. (default)
-  - absolute   - Returns the absolute frequency and boundary segment values of neighbouring variant, packet, bain or other-id type pairs.
-  - normalise  - Returns the normalised frequency and boundary segment values of neighbouring variant, packet, bain or other-id type pairs. (default)
+  - variant    - Uses the variant Ids of the child grain pairs.
+  - packet     - Uses the packet Ids of the child grain pairs.
+  - bain       - Uses the bain Ids of the child grain pairs.
+  - other      - Uses a user-specified list of Ids of the child grain pairs.
+  - group      - A cell defining different groups of id or equivalent id pairs.
+  - include    - Includes similar neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
+  - exclude    - Excludes similar neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. (default)
+  - absolute   - Returns the absolute frequency and boundary segment values of neighbouring variant, packet, bain, other-id type, or groups of id or equivalent id pairs.
+  - normalise  - Returns the normalised frequency and boundary segment values of neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. (default)
 
 ---
 
