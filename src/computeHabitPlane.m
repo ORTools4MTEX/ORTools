@@ -228,18 +228,22 @@ stats.quantile.analysed = quantile(stats.deviation.analysed,[0.25 0.5 0.75]);
 % Plot traces and fitted habit planes in spherical projection as scattered points
 figure();
 drawnow;
-h{1} = scatter(traces.parent(~isTrace),'MarkerSize',6,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','k','MarkerFaceAlpha',0.5);
+plotHKL(job.csParent,'projection','edist','grid_res',15*degree,'BackGroundColor','w');
 hold all;
-h{2} = scatter(traces.parent(isTrace),stats.reliability(isTrace),'MarkerSize',6,'MarkerEdgeColor','k');
+h{1} = scatter(traces.parent(~isTrace),'Marker','s','MarkerSize',6,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','k','MarkerFaceAlpha',0.5);
+hold all;
+h{2} = scatter(traces.parent(isTrace),stats.reliability(isTrace),'Marker','s','MarkerSize',6,'MarkerEdgeColor','k');
 hold all;
 h{3} = plot(habitPlane.parent,'plane','antipodal','linecolor','r','linewidth',2);
-h{4} = plot(habitPlane.parent,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane.parent)});
-mtexColorMap jet
-colorbar;
-caxis([0,1])
+plotHKL(job.csParent,'projection','edist','grid_res',15*degree);
+h{4} = plot(habitPlane.parent,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',12,'LineWidth',1,'label',{sprintMiller(habitPlane.parent)});
 hold off;
 drawnow;
-legend([h{:}], {'Discarded parent traces','Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'east');
+mtexColorMap jet
+colorbar;
+caxis([0,1]);
+drawnow;
+legend([h{:}], {'Discarded parent traces','Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'southeast');
 set(gcf,'name','Spherical projection of scattered points of the determined traces and fitted habit plane');
 clear h;
 
@@ -247,17 +251,19 @@ clear h;
 if length(pGrainId) > 1
     figure();
     drawnow;
+    plotHKL(job.csParent,'projection','edist','grid_res',15*degree,'BackGroundColor','w');
+    hold all;
     h{1} = plot(traces.parent(isTrace),'noSymmetry','contourf');
     hold all;
     h{2} = plot(habitPlane.parent,'plane','antipodal','linecolor','r','linewidth',2);
-    h{3} = plot(habitPlane.parent,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane.parent)});
+    plotHKL(job.csParent,'projection','edist','grid_res',15*degree);
+    h{3} = plot(habitPlane.parent,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',12,'LineWidth',1,'label',{sprintMiller(habitPlane.parent)});
     hold off;
     drawnow;
     mtexColorMap white2black
     mtexColorbar
-    circle(habitPlane.parent,'color','red','linewidth',2);
     drawnow;
-    legend([h{:}], {'Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'east');
+    legend([h{:}], {'Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'southeast');
     set(gcf,'name','Spherical projection of contours of the fitted traces and the habit plane');
 end
 
