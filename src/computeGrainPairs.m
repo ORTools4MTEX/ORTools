@@ -6,27 +6,27 @@ function out = computeGrainPairs(pairGrains,varargin)
 % type or for groups of id or equivalent id pairs.
 %
 %% Syntax:
-% [out] = computeGrainPairs(pairGrains)
+% [out] = computeGrainPairs(grains)
 %
 %% Input:
-%  pairGrains   - @grain2d = child grain pairs as computed by the
-%                            "computeVariantGrains.m" function
+%  pairGrains - @grain2d = child grain pairs as computed by the 
+%                          "computeVariantGrains.m" function
 %
 %% Output:
-%  out          - @struc   = a structure variable containing the absolute 
-%                            or normalised frequency and boundary segment 
-%                            lengths of grain pairs or groups of 
-%                            equivalent pairs.
+%  out        - @struc   = a structure variable containing the absolute or 
+%                          normalised frequency and boundary segment 
+%                          lengths ofgrain pairs or groups of equivalent 
+%                          pairs.
 %
 %% Options:
-%  variant    - Uses the variant Ids of child grain pairs.
-%  packet     - Uses the packet Ids of child grain pairs.
-%  bain       - Uses the Bain Ids of child grain pairs.
-%  other      - Uses a pecified list of Ids of child grain pairs.
+%  variant    - Uses the variant ids of child grain pairs.
+%  packet     - Uses the packet ids of child grain pairs.
+%  bain       - Uses the Bain ids of child grain pairs.
+%  other      - Uses a pre-specified list of ids of child grain pairs.
 %  group      - A cell defining groups of id or equivalent id pairs.
 %  include    - Includes similar neighbouring variant, packet, bain, 
 %               other-id type, groups of id or equivalent id pairs.
-%               For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
+%               For e.g. - V1-V1, or CP2-CP2, or B3-B3 etc. 
 %  exclude    - Excludes similar neighbouring variant, packet, bain, 
 %               other-id type, groups of id or equivalent id pairs. 
 %               (default)

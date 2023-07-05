@@ -111,9 +111,9 @@ plotMap_bain(job,'linewidth',2,'colormap',magma);
 
 %% Child grain pair analysis
 screenPrint('SegmentStart','Child grain pair analysis');
-% To begin analyzing child grain pairs, we need the variants (and packets,
-% and Brain groups) on the EBSD level to be reconstructed as grains
-[variantGrains,ebsdC] = computeVariantGrains(job);
+% To begin analyzing child grain pairs, we first need the variants (and 
+% packets,and Brain groups) on the EBSD level to be reconstructed as grains
+[variantGrains,~] = computeVariantGrains(job);
 
 %% Compute the variant id child grain pairs
 screenPrint('Step','Variant id child grain pair analysis');
@@ -142,8 +142,9 @@ screenPrint('Step','Equivalent (or other) variant id child grain pair analysis')
 % (https://doi.org/10.1016/j.matpr.2015.07.430)
 %
 variantGrains.prop.otherId = variantGrains.variantId - (variantGrains.packetId-1) * 24/4;
-% IMPORTANT: Regardless of the formula used to compute equivalent ids, the
-% variable name on the LHS defining an "otherId" must not be changed.
+% IMPORTANT: Regardless of the formula used to compute other (or any
+% equivalent) ids, the variable name on the LHS defined as
+% "variantGrains.prop.otherId" must not be changed.
 out5 = computeGrainPairs(variantGrains,'other');
 
 %% Compute groups of equivalent variant id child grain pairs

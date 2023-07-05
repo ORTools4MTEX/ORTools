@@ -296,7 +296,7 @@ This function computes the absolute or normalised frequency and boundary segment
 The grain pair ids can be defined by the user for variants, crystallographic packets, Bain groups, any other-id type or for groups of id or equivalent id pairs.
 
 - Syntax:
-  - [out] = computeGrainPairs(pairGrains)
+  - [out] = computeGrainPairs(grains)
 
 - Input:
   - pairGrains   - @grain2d = child grain pairs as computed by the [computeVariantGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantGrains) function
@@ -305,12 +305,12 @@ The grain pair ids can be defined by the user for variants, crystallographic pac
   - out          - @struc   = a strcture variable containing the absolute or normalised frequency and boundary segment lengths of grain pairs. 
 
 - Options:
-  - variant    - Uses the variant Ids of the child grain pairs.
-  - packet     - Uses the packet Ids of the child grain pairs.
-  - bain       - Uses the bain Ids of the child grain pairs.
-  - other      - Uses a user-specified list of Ids of the child grain pairs.
+  - variant    - Uses the variant ids of child grain pairs.
+  - packet     - Uses the packet ids of child grain pairs.
+  - bain       - Uses the bain ids of child grain pairs.
+  - other      - Uses a pre-specified list of ids of child grain pairs.
   - group      - A cell defining different groups of id or equivalent id pairs.
-  - include    - Includes similar neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. For e.g. - V1-V1, CP2-CP2, B3-B3 etc. 
+  - include    - Includes similar neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. For e.g. - V1-V1, or CP2-CP2, or B3-B3 etc.  
   - exclude    - Excludes similar neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. (default)
   - absolute   - Returns the absolute frequency and boundary segment values of neighbouring variant, packet, bain, other-id type, or groups of id or equivalent id pairs.
   - normalise  - Returns the normalised frequency and boundary segment values of neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. (default)
