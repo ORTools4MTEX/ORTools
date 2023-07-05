@@ -208,7 +208,7 @@ habitPlane.parent = setDisplayStyle(habitPlane.parent,'plane'); % ORTools defaul
 %% Recompute traces from fitted habit plane
 traces.imagePlane = cross(oriPVariant .* habitPlane.parent,zvector);
 
-% if length(pGrainId) > 1
+
 %% Calculate the angular deviation between the traces and the fitted habit plane
 stats.deviation.all = 90 - angle(habitPlane.parent,traces.parent(~isnan(traces.parent)),'noSymmetry')./degree;
 stats.deviation.analysed = 90 - angle(habitPlane.parent,traces.parent(isTrace),'noSymmetry')./degree;
@@ -221,29 +221,17 @@ stats.stdDeviation.analysed = std(stats.deviation.analysed);
 % Quantiles
 stats.quantile.all = quantile(stats.deviation.all,[0.25 0.5 0.75]);
 stats.quantile.analysed = quantile(stats.deviation.analysed,[0.25 0.5 0.75]);
-%     % Return the statistics of fitting
-%     statistics = containers.Map(...
-%         {'relIndex','clusterSize',...
-%         'DeviationAll','meanDeviationAll','stdDeviationAll','QuantilesAll',...
-%         'DeviationAna','meanDeviationAna','stdDeviationAna','QuantilesAna'},...
-%         {relIndex,clusterSize,...
-%         deviationAll,meanDeviationAll,stdDeviationAll,quantileAll,...
-%         deviationAna,meanDeviationAna,stdDeviationAna,quantileAna},...
-%         'UniformValues',false);
-% else
-%     statistics = NaN;
-% end
 
 
 %% Plot and return the habit plane
 
-% Plot traces and fitted habit planes in spherical projection
+% Plot traces and fitted habit planes in spherical projection as scattered points
 figure();
 drawnow;
 h{1} = scatter(traces.parent(~isTrace),'MarkerSize',6,'MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor','k','MarkerFaceAlpha',0.5);
 hold all;
 h{2} = scatter(traces.parent(isTrace),stats.reliability(isTrace),'MarkerSize',6,'MarkerEdgeColor','k');
-hold all
+hold all;
 h{3} = plot(habitPlane.parent,'plane','antipodal','linecolor','r','linewidth',2);
 h{4} = plot(habitPlane.parent,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane.parent)});
 mtexColorMap jet
@@ -252,20 +240,25 @@ caxis([0,1])
 hold off;
 drawnow;
 legend([h{:}], {'Discarded parent traces','Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'east');
-set(gcf,'name','Spherical projection of determined traces and fitted habit plane');
+set(gcf,'name','Spherical projection of scattered points of the determined traces and fitted habit plane');
 clear h;
 
-% Plot ODF
+% Plot traces and fitted habit planes in spherical projection as contours
 if length(pGrainId) > 1
     figure();
     drawnow;
-    tpd = calcDensity(traces.parent(isTrace),'noSymmetry','halfwidth',2.5*degree);
-    contourf(tpd);
+    h{1} = plot(traces.parent(isTrace),'noSymmetry','contourf');
+    hold all;
+    h{2} = plot(habitPlane.parent,'plane','antipodal','linecolor','r','linewidth',2);
+    h{3} = plot(habitPlane.parent,'antipodal','Marker','s','MarkerColor','r','MarkerEdgeColor','k','MarkerSize',10,'LineWidth',1,'label',{sprintMiller(habitPlane.parent)});
+    hold off;
+    drawnow;
     mtexColorMap white2black
     mtexColorbar
     circle(habitPlane.parent,'color','red','linewidth',2);
     drawnow;
-    set(gcf,'name','ODF of the fitted traces and the habit plane');
+    legend([h{:}], {'Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'east');
+    set(gcf,'name','Spherical projection of contours of the fitted traces and the habit plane');
 end
 
 
@@ -379,7 +372,7 @@ screenPrint('SubStep',sprintf(['Child habit plane (rounded-off) = ',...
     sprintMiller(job.p2c*habitPlane.parent,'round')]));
 screenPrint('SubStep',sprintf(['Number of analysed parent grains = ',...
     num2str(length(oriParent))]));
-isTrace = ~isnan(traces.child); 
+isTrace = ~isnan(traces.child);
 nTrace = sum(sum(isTrace));
 screenPrint('SubStep',sprintf(['Number of possible traces = ',...
     num2str(nTrace)]));
@@ -435,7 +428,7 @@ if any(strcmpi(m.dispStyle,{'hkl','hkil'}))
     end
     if check_option(varargin,'round')
         [m,~] = intMiller(m);
-    end  
+    end
     s = '(';
     for ii = 1:length(mLabel)
         if check_option(varargin,'round')
