@@ -68,6 +68,8 @@ figure; plot(job.grains,job.votes.prob(:,1))
 mtexColorbar
 % ... and calculate the parent orientations
 job.calcParentFromVote('minProb',0.5)
+% Display information about the OR
+ORinfo(job.p2c);
 % Plot the reconstructed parent microstructure
 figure;
 plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2);
