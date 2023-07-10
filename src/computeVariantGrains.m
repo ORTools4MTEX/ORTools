@@ -30,7 +30,7 @@ else
 %     remainingEBSD = job.ebsdPrior(job.grainsPrior(~job.isTransformed)).gridify;
 
     transfLogic = job.isTransformed;
-    cEBSD = job.ebsdPrior(job.grainsPrior(job.isTransformed)).gridify;    
+    cEBSD = job.ebsdPrior(job.grainsPrior(transfLogic)).gridify;    
     transfLogic(transfLogic == 1) = inf;
     transfLogic(transfLogic == 0) = 1;
     transfLogic(transfLogic == inf) = 0;
