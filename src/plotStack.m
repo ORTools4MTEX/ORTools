@@ -334,6 +334,32 @@ set(figH,'Name','PDF: Mean parent grain orientation','NumberTitle','on');
 drawnow;
 
 
+%% Plot the child IPF PDF
+drawnow;
+figH = gobjects(1);
+figH = figure('WindowStyle','docked');
+set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
+drawnow;
+if check_option(varargin,'grains')
+    cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
+    plotPDF(cGrains.meanOrientation,...
+        cbsChild,...
+        hChild,...
+        'equal','antipodal','points','all',...
+        'MarkerSize',5,'MarkerEdgeColor','k');
+
+else
+    cbsChild = ipfKeyChild.orientation2color(cEBSD.orientations);
+    plotPDF(cEBSD.orientations,...
+        cbsChild,...
+        hChild,...
+        'equal','antipodal','points','all',...
+        'MarkerSize',3,'MarkerEdgeColor','k');
+end
+set(figH,'Name','PDF: Child grain(s) IPF_x','NumberTitle','on');
+drawnow;
+
+
 %% Plot the child variants PDF
 drawnow;
 figH = gobjects(1);
