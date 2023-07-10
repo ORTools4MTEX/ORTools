@@ -22,19 +22,16 @@ parentGrainId = get_option(varargin,'parentGrainId',[]);
 if parentGrainId
     pGrain = job.parentGrains(job.parentGrains.id == parentGrainId);
     pEBSD = job.ebsd(pGrain);
-    pEBSD = pEBSD(job.csParent).gridify;
     cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
+    pEBSD = pEBSD(job.csParent).gridify;
     cEBSD = cEBSD(job.csChild).gridify;
 else
 %     cEBSD = job.ebsdPrior(job.grainsPrior(job.isTransformed)).gridify;
 %     remainingEBSD = job.ebsdPrior(job.grainsPrior(~job.isTransformed)).gridify;
-
-    transfLogic = job.isTransformed;
-    cEBSD = job.ebsdPrior(job.grainsPrior(transfLogic)).gridify;    
-    transfLogic(transfLogic == 1) = inf;
-    transfLogic(transfLogic == 0) = 1;
-    transfLogic(transfLogic == inf) = 0;
-    remainingEBSD = job.ebsdPrior(job.grainsPrior(transfLogic)).gridify;
+    isTransf = job.isTransformed;
+    notTransf = ~job.isTransformed;
+    cEBSD = job.ebsdPrior(job.grainsPrior(isTransf)).gridify;    
+    remainingEBSD = job.ebsdPrior(job.grainsPrior(notTransf)).gridify;
 end
 
 %Getting auxiliary variables in place
