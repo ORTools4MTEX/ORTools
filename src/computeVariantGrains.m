@@ -26,8 +26,15 @@ if parentGrainId
     cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
     cEBSD = cEBSD(job.csChild).gridify;
 else
-    cEBSD = job.ebsdPrior(job.grainsPrior(job.isTransformed)).gridify;
-    remainingEBSD = job.ebsdPrior(job.grainsPrior(~job.isTransformed)).gridify;
+%     cEBSD = job.ebsdPrior(job.grainsPrior(job.isTransformed)).gridify;
+%     remainingEBSD = job.ebsdPrior(job.grainsPrior(~job.isTransformed)).gridify;
+
+    transfLogic = job.isTransformed;
+    cEBSD = job.ebsdPrior(job.grainsPrior(job.isTransformed)).gridify;    
+    transfLogic(transfLogic == 1) = inf;
+    transfLogic(transfLogic == 0) = 1;
+    transfLogic(transfLogic == inf) = 0;
+    remainingEBSD = job.ebsdPrior(job.grainsPrior(transfLogic)).gridify;
 end
 
 %Getting auxiliary variables in place
