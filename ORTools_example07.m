@@ -157,12 +157,12 @@ plotMap_variants(job,'linewidth',3); %EBSD data
 % to be reconstructed as grains
 %% Variant pairing (block boundary) analysis
 [~,maxGrainId] = max(job.grains.area);
-[variantGrains,ebsdC] = computeVariantGrains(job);
+[newGrains,newEBSD] = computeVariantGrains(job);
 %Compare variant indexing for old and new grains
 figure; %Old grains
 plot(grains,grains.meanOrientation);
 figure; %New grains
-plot(variantGrains,variantGrains.meanOrientation);
+plot(newGrains,newGrains.meanOrientation);
 % We see that all the variant detail of the variantIds in the EBSD map are
 % absent at the grain level. This allows us to analyze the boundaries
 % between variants.

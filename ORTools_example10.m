@@ -113,22 +113,22 @@ plotMap_bain(job,'linewidth',2,'colormap',magma);
 screenPrint('SegmentStart','Child grain pair analysis');
 % To begin analyzing child grain pairs, we first need the variants (and 
 % packets,and Brain groups) on the EBSD level to be reconstructed as grains
-[variantGrains,~] = computeVariantGrains(job);
+[newGrains,~] = computeVariantGrains(job);
 
 %% Compute the variant id child grain pairs
 screenPrint('Step','Variant id child grain pair analysis');
-out1 = computeGrainPairs(variantGrains,'variants');
+out1 = computeGrainPairs(newGrains,'variants');
 % include similar neighbouring variant pairs for example, V1-V1; V2-V2
-out2 = computeGrainPairs(variantGrains,'include');
+out2 = computeGrainPairs(newGrains,'include');
 
 %% Compute the crystallographic packet id child grain pairs
 % include similar neighbouring packet pairs for example, CP1-CP1; CP2-CP2
 screenPrint('Step','Crystallographic packet id child grain pair analysis');
-out3 = computeGrainPairs(variantGrains,'packet','include');
+out3 = computeGrainPairs(newGrains,'packet','include');
 
 %% Compute the Bain group id child grain pairs
 screenPrint('Step','Bain group id child grain pair analysis');
-out4 = computeGrainPairs(variantGrains,'bain');
+out4 = computeGrainPairs(newGrains,'bain');
 
 %% Compute the equivalent variant id child grain pairs
 screenPrint('Step','Equivalent (or other) variant id child grain pair analysis');
@@ -141,11 +141,11 @@ screenPrint('Step','Equivalent (or other) variant id child grain pair analysis')
 % Supplement 3, 2015, Pages S913-S916.
 % (https://doi.org/10.1016/j.matpr.2015.07.430)
 %
-variantGrains.prop.otherId = variantGrains.variantId - (variantGrains.packetId-1) * 24/4;
+newGrains.prop.otherId = newGrains.variantId - (newGrains.packetId-1) * 24/4;
 % IMPORTANT: Regardless of the formula used to compute other (or any
 % equivalent) ids, the variable name on the LHS defined as
 % "variantGrains.prop.otherId" must not be changed.
-out5 = computeGrainPairs(variantGrains,'other');
+out5 = computeGrainPairs(newGrains,'other');
 
 %% Compute groups of equivalent variant id child grain pairs
 screenPrint('Step','Groups of equivalent variant id child grain pair analysis');
@@ -155,7 +155,7 @@ eqIds = {[1 2; 3 4; 5 6],...
     [1 6; 2 3; 4 5],...
     [1 4; 2 5; 3 6]};
 % ... and compute the groups of equivalent id child grain pairs
-out6 = computeGrainPairs(variantGrains,'other','group',eqIds)
+out6 = computeGrainPairs(newGrains,'other','group',eqIds)
 % The output of the variable 'out6' in the command window is:
 % out6 = struct with fields:
 %          freq: [0.1503 0.2495 0.1211 0.4790]
@@ -210,7 +210,7 @@ vGroupIds = {[1 2],...
     [1 21],...
     [1 24]};
 % ... and compute the groups of equivalent id child grain pairs
-out7 = computeGrainPairs(variantGrains,'variant','group',vGroupIds);
+out7 = computeGrainPairs(newGrains,'variant','group',vGroupIds);
 
 figH = figure;
 h = bar(out7.freq);
