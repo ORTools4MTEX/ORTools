@@ -1,8 +1,10 @@
 function [newGrains,newEBSD] = computeVariantGrains(job,varargin)
 %% Function description:
-% This function refines the child grains in the "job" object based on 
-% their variant IDs while keeping the grains of the remaining phases untouched. 
-% The ebsd dataset is returned with updated grainIds associated with the refinde grains
+% This function refines the child grains in the "job" object based on
+% their variant IDs while keeping the grains of the remaining phases 
+% untouched.
+% The ebsd dataset is returned with updated grainIds associated with the 
+% refined grains.
 
 %% Syntax:
 %  [newGrains,newEBSD] = computeVariantGrains(job,varargin)
@@ -11,35 +13,20 @@ function [newGrains,newEBSD] = computeVariantGrains(job,varargin)
 %  job  - @parentGrainReconstructor
 %
 %% Output:
-%  newGrains   - @grains2d 
+%  newGrains   - @grains2d
 %  newEBSD     - @EBSD
-%
-%% Options:
-%  parentGrainId     - parent grain Id using the argument 'parentGrainId'
 
-%Isolating grain and ebsd data
-parentGrainId = get_option(varargin,'parentGrainId',[]);
-if parentGrainId
-    pGrain = job.parentGrains(job.parentGrains.id == parentGrainId);
-    pEBSD = job.ebsd(pGrain);
-    cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
-    pEBSD = pEBSD(job.csParent).gridify;
-    cEBSD = cEBSD(job.csChild).gridify;
-else
-%     cEBSD = job.ebsdPrior(job.grainsPrior(job.isTransformed)).gridify;
-%     remainingEBSD = job.ebsdPrior(job.grainsPrior(~job.isTransformed)).gridify;
-    isTransf = job.isTransformed;
-    notTransf = ~job.isTransformed;
-    cEBSD = job.ebsdPrior(job.grainsPrior(isTransf)).gridify;    
-    remainingEBSD = job.ebsdPrior(job.grainsPrior(notTransf)).gridify;
-end
+isTransf = job.isTransformed;
+notTransf = ~job.isTransformed;
+cEBSD = job.ebsdPrior(job.grainsPrior(isTransf)).gridify;
+remainingEBSD = job.ebsdPrior(job.grainsPrior(notTransf)).gridify('extent',cEBSD.extent);
 
 %Getting auxiliary variables in place
 l_ebsd = length(cEBSD);
 sz_ebsd = size(cEBSD);
 is_cEBSD = ~isnan(cEBSD);
 is_cEBSD_L = reshape(is_cEBSD,l_ebsd,1);
-isIndexed = job.ebsdPrior.gridify.isIndexed;
+isIndexed = job.ebsdPrior.gridify('extent',cEBSD.extent).isIndexed;
 isIndexed_L = reshape(isIndexed,l_ebsd,1);
 %% Get reconstructed mean parent orientations for each child grain
 oriP = orientation.nan(job.csParent,[l_ebsd,1]);
@@ -55,7 +42,7 @@ end
 %Compute properties
 [r.variantId(is_cEBSD),r.packetId(is_cEBSD),r.bainId(is_cEBSD)] = calcVariantId( ...
     oriP(is_cEBSD),cEBSD(~isnan(cEBSD)).orientations,job.p2c,'variantMap', job.variantMap);
-%Get the Ids of parent grains 
+%Get the Ids of parent grains
 parentIds = nan(l_ebsd,1);
 parentIds(is_cEBSD) = job.grains(job.mergeId(cEBSD(is_cEBSD).grainId)).id;
 parentIds = reshape(parentIds,sz_ebsd);
@@ -83,7 +70,7 @@ clusterIds_pIdL = reshape(clusterIds_pId,l_ebsd,1);
 % Calculate grains based on grains based on clusterIds
 [newGrains, newEBSD(isIndexed).grainId]= newEBSD(isIndexed).calcGrains('variants',[clusterIds_vL(isIndexed_L),clusterIds_pIdL(isIndexed_L)]);
 
-%% Compute the quality of fit 
+%% Compute the quality of fit
 % Get all child variants
 childVariants  = variants(job.p2c,oriP);
 
