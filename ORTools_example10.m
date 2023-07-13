@@ -144,7 +144,7 @@ screenPrint('Step','Equivalent (or other) variant id child grain pair analysis')
 newGrains.prop.otherId = newGrains.variantId - (newGrains.packetId-1) * 24/4;
 % IMPORTANT: Regardless of the formula used to compute other (or any
 % equivalent) ids, the variable name on the LHS defined as
-% "variantGrains.prop.otherId" must not be changed.
+% "newGrains.prop.otherId" must not be changed.
 out5 = computeGrainPairs(newGrains,'other');
 
 %% Compute groups of equivalent variant id child grain pairs
