@@ -70,7 +70,7 @@ job.calcParent2Child;
 % and the misorientation of the OR)
 NW = orientation.NishiyamaWassermann(job.csParent,job.csChild);
 plotHist_OR_misfit(job,[KS,NW],'legend',{'K-S OR','N-W OR'});
-% Plot information about the OR
+% Display information about the OR
 ORinfo(job.p2c);
 %    - There are 24 martensitic variants
 %    - And a ~2.1° disorientation exists from the Nishiyama-Wassermann OR
