@@ -129,3 +129,12 @@ screenPrint('SegmentStart','Compute the habit plane');
 [habitPlane4,~,~] =  computeHabitPlane(job,'calliper','minClusterSize',20,...
     'parentGrainId',ind_maxGrain,...
     'plotTraces','noFrame','noScalebar');
+
+figure;
+plot(habitPlane1.parent.project2FundamentalRegion,'fundamentalRegion','DisplayName','Radon','markerfacecolor','none','linewidth',2)
+hold on
+plot(habitPlane2.parent.project2FundamentalRegion,'fundamentalRegion','DisplayName','Shape','markerfacecolor','none','linewidth',2)
+plot(habitPlane3.parent.project2FundamentalRegion,'fundamentalRegion','DisplayName','Hist','markerfacecolor','none','linewidth',2)
+plot(habitPlane4.parent.project2FundamentalRegion,'fundamentalRegion','DisplayName','Calliper - Single Grain','markerfacecolor','none','linewidth',2)
+plot(Miller(1,1,1,job.csParent,'hkl').project2FundamentalRegion,'fundamentalRegion','DisplayName','(1 1 1)','markerfacecolor','none','linewidth',2)
+legend('Location','West')

@@ -1,5 +1,7 @@
 # UPDATES
-The latest release **[ORTools v2.1.0](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.1.0)** should be employed together with **[MTEX v5.10](https://mtex-toolbox.github.io/download.html)** or later.
+- The latest **[ORTools v2.2.0](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.2.0)** stable release should be employed together with the **[MTEX v5.10](https://mtex-toolbox.github.io/download.html)** stable release.
+- Alternatively, if you wish to use developer software, the latest versions of the **[ORTools](https://github.com/ORTools4MTEX/ORTools)** and **[MTEX](https://github.com/mtex-toolbox/mtex/tree/develop)** nightly builds should be employed together.
+
 
 ---
 
