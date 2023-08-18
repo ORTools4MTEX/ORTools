@@ -34,7 +34,7 @@ ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
-  'removeQuadruplePoints');
+  'removeQuadruplePoints','unitCell');
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
 % Rename "Ti (BETA) to "Beta"and "Ti (alpha)" to "Alpha"
