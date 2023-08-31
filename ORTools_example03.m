@@ -4,6 +4,7 @@
 % *********************************************************************
 % Using the parent-child misorientation peak fitting GUI to investigate 
 % multiple ORs in an alpha-beta titanium alloy 
+% https://www.youtube.com/watch?v=8e9PhhFCWYc
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
@@ -61,14 +62,13 @@ plotMap_gB_c2c(job,'linewidth',1.5);
 % Use the peak fitter in the pop-up menu
 %     - We see that there are two misorientation peaks
 %           - Set the threshold to include them both in the fitting
-%     - Compute ORs by "Maximum f(g)"
 %     - Choose to export "All ORs" - defineOR returns a cell array job{:}
 job = defineORs(job);
 % The command window shows us that two OR's are at work:
 %  - OR1: (110)_beta||(1000)_alpha [1-11]_beta||[-12-10]_alpha 
 %  - OR2: (11-1)_beta||(-1-100)_alpha [0-1-1]_beta||[000-3]_alpha 
 
-dori = angle(job{1}.p2c,job{2}.p2c)/degree
+dori = angle(job{1}.p2c,job{2}.p2c)/degree % IF YOU GET AN ERROR HERE MAKE SURE TO FIT TWO PEAKS IN THE OR PEAK FITTER
 %       - We have a disorientation angle of 30° between the ORs 
 
 %% Plot the inverse pole figure

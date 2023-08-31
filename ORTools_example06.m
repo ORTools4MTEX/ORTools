@@ -3,6 +3,7 @@
 %                        ORTools - Example 6
 % *********************************************************************
 % Two-stage parent grain reconstruction in a TWIP-TRIP steel
+% https://www.youtube.com/watch?v=K2rO3Mx4A8s
 % *********************************************************************
 % Dr. Azdiar Gazder, 2021, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2021, contactatfniessendotcom
@@ -74,8 +75,7 @@ plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2,'parent');
 job1.mergeSimilar('threshold',7.5*degree);
 parentIPFkey = plotMap_IPF_p2c(job1,vector3d.Z,'linewidth',2,'parent');
 figure; plot(parentIPFkey);
-return
-% ************** %
+
 %% Define and check the OR GAMMA - EPSILON
 % Choose "Gamma" as a parent and "Epsilon" as a child phase
 job2 = setParentGrainReconstructor(job1.ebsd,job1.grains,Ini.cifPath);

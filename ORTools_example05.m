@@ -3,6 +3,7 @@
 %                        ORTools - Example 5
 % *********************************************************************
 % Using the OR peak fitter to deconvolute multiple ORs in a TRIP-TWIP (TRWIP) alloy
+% https://www.youtube.com/watch?v=Hj5kVscjljU&t=323s
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
@@ -47,7 +48,7 @@ ebsd = renamePhases(ebsd,Ini.phaseNames);
 ebsd = recolorPhases(ebsd);
 %% Define the transformation system
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
-% Choose "Gamma" as a parent and "Alpha" as a child phase
+% Choose "Gamma" as a parent and "AlphaP" as a child phase
 job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 %% Plot initial maps
 % Plotting the phase map 
@@ -73,7 +74,6 @@ plotMap_gB_c2c(job,'linewidth',1.5);
 % Use the peak fitter in the pop-up menu
 %     - We see that there are two misorientation peaks
 %           - Set the threshold to include them both in the fitting
-%     - Compute ORs by "Maximum f(g)"
 %     - Choose to export "All ORs" - defineOR returns a cell array job{:}
 job = defineORs(job);
 % The command window shows us that two ORs are at work:
@@ -146,7 +146,7 @@ screenPrint('SegmentStart','Recomputing, filtering and smoothing grains');
   'removeQuadruplePoints');
 %% Making a "new" job containing the new EBSD data and grains
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
-% Choose "Gamma" as a parent and "Alpha" as a child phase
+% Choose "Gamma" as a parent and "Epsilon" as a child phase
 job = setParentGrainReconstructor(ebsdCleaned,grains,Ini.cifPath);
 %% Use the OR peak fitter again to check the histogram
 job = defineORs(job);

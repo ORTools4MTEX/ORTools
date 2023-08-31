@@ -19,22 +19,7 @@ screenPrint('Step','Computing ORs from peak-fitted data');
 %--- Define the angular misorientation range to display in the misorientation axis distribution
 ss = specimenSymmetry('triclinic');
 numORs = length(misoRange.min);
-
-methodTypes = {'Maximum f(g)','Cancel'};
-
-try
-    methodSelected = questdlg('Choose the method to compute the OR(s):', ...
-        'Method selection', methodTypes{:},methodTypes{1});
-catch
-end
-% This command prevents function execution in cases when
-% the user presses the "Cancel" or "Close" buttons
-if isempty(methodSelected)
-    message = sprintf('Script terminated: Execution aborted by user');
-    uiwait(warndlg(message));
-    return
-end
-screenPrint('Step',['All OR(s) determined using ', methodSelected,' of the mdf']);
+screenPrint('Step',['All OR(s) determined using Maximum f(g) of the mdf']);
 
 %% Begin OR computation
 for jj = 1:numORs

@@ -3,9 +3,11 @@
 %             ORTools - Example 7
 % *********************************************************************
 % Reconstructing the prior austenite microstructure from lath martensite
-% with the variant graph approach and analyzing variant pairing
+% with the variant graph approach and analyzing variant pairing and block
+% width
 % The MTEX description for reconstruction is given here:
 % https://mtex-toolbox.github.io/MaParentGrainReconstruction.html
+% https://www.youtube.com/watch?v=E9IFyFUQNl4&t=166s
 % *********************************************************************
 % Dr. Azdiar Gazder, 2022, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2022, contactatfniessendotcom

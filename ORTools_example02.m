@@ -6,6 +6,7 @@
 % alpha in titanium alloys.
 % The MTEX description for reconstruction is given here:
 % https://mtex-toolbox.github.io/TiBetaReconstruction.html
+% https://www.youtube.com/watch?v=e6R0dApUc8Q&t=921s
 % *********************************************************************
 % Dr. Azdiar Gazder, 2020, azdiaratuowdotedudotau
 % Dr. Frank Niessen, 2020, contactatfniessendotcom
@@ -52,7 +53,6 @@ screenPrint('SegmentStart','Finding the orientation relationship(s)');
 job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 % Use the peak fitter in the pop-up menu
 %     - Adjust the threshold to include only the largest peak
-%     - Compute the OR by "Maximum f(g)"
 job = defineORs(job);
 % Check the disorientation and compare it with the Burgers OR
 plotHist_OR_misfit(job,orientation.Burgers(job.csParent,job.csChild),...
