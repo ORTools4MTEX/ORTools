@@ -68,7 +68,7 @@ clusterIds_vL = reshape(clusterIds_v,l_ebsd,1);
 clusterIds_pIdL = reshape(clusterIds_pId,l_ebsd,1);
 
 % Calculate grains based on grains based on clusterIds
-[newGrains, newEBSD(isIndexed).grainId]= newEBSD(isIndexed).calcGrains('variants',[clusterIds_vL(isIndexed_L),clusterIds_pIdL(isIndexed_L)],'unitCell');
+[newGrains, newEBSD(isIndexed).grainId]= newEBSD(isIndexed).calcGrains('variants',[clusterIds_vL(isIndexed_L),clusterIds_pIdL(isIndexed_L)]);
 
 %% Compute the quality of fit
 % Get all child variants

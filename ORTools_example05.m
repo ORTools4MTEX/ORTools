@@ -37,7 +37,7 @@ ebsd = ebsd('indexed');
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 3° threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
-  'removeQuadruplePoints','unitCell');
+  'removeQuadruplePoints');
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
 %Rename "Iron fcc" to "Gamma", "Iron bcc (old)" to "AlphaP" and 
@@ -143,7 +143,7 @@ ebsdCleaned = job{1}.calcParentEBSD;
 %% Recomputing the grains from the new EBSD dataset
 screenPrint('SegmentStart','Recomputing, filtering and smoothing grains');
 [grains,ebsd.grainId] = calcGrains(ebsdCleaned,'threshold',3*degree,...
-  'removeQuadruplePoints','unitCell');
+  'removeQuadruplePoints');
 %% Making a "new" job containing the new EBSD data and grains
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
 % Choose "Gamma" as a parent and "Alpha" as a child phase
