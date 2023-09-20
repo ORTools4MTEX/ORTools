@@ -11,15 +11,19 @@ function [newGrains,newEBSD] = computeVariantGrains(job,varargin)
 %
 %% Input:
 %  job  - @parentGrainReconstructor
-%
+%  pGrainId     - parent grain Id using the argument 'parentGrainId'
 %% Output:
 %  newGrains   - @grains2d
 %  newEBSD     - @EBSD
-
-isTransf = job.isTransformed;
-notTransf = ~job.isTransformed;
-cEBSD = job.ebsdPrior(job.grainsPrior(isTransf)).gridify;
-remainingEBSD = job.ebsdPrior(job.grainsPrior(notTransf)).gridify('extent',cEBSD.extent);
+pGrainId = get_option(varargin,'parentGrainId',[]);
+if pGrainId
+    isTransf = job.isTransformed & job.mergeId == pGrainId;
+else
+    isTransf = job.isTransformed;
+end
+notTransf = ~isTransf;
+cEBSD = job.ebsdPrior(job.grainsPrior(isTransf)).gridify('extent',job.ebsdPrior.extent);
+remainingEBSD = job.ebsdPrior(job.grainsPrior(notTransf)).gridify('extent',job.ebsdPrior.extent);
 
 %Getting auxiliary variables in place
 l_ebsd = length(cEBSD);
@@ -91,6 +95,8 @@ newEBSD.prop.fit = reshape(fit,sz_ebsd);
 props = [props,'fit'];
 isTransformed_grains = ~(newGrains.prop.variantId==0);
 isTransforemd_ebsd = ~isnan(newEBSD.prop.variantId);
+newGrains.prop.packetId(~isTransformed_grains) = nan;
+newGrains.prop.bainId(~isTransformed_grains) = nan;
 newGrains.prop.variantId(~isTransformed_grains) = nan;
 [~,ind] = unique(newEBSD(isTransforemd_ebsd).prop.grainId);
 for prop = props

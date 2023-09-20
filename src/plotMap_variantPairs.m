@@ -23,13 +23,8 @@ function variantPairs_boundary = plotMap_variantPairs(job,varargin)
 %  noScalebar  - Remove scalebar from maps
 %  noFrame     - Remove frame around maps
 
-
-if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
-    pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
-    if ~isnumeric(pGrainId)
-        error('Argument ''parentGrainId''must be numeric.');
-        return;
-    end
+pGrainId = get_option(varargin,'parentGrainId',[]);
+if pGrainId
     [grains,ebsd] = computeVariantGrains(job,'parentGrainId',pGrainId);
     pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
 else
