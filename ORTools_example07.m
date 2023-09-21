@@ -170,7 +170,9 @@ plot(newGrains,newGrains.meanOrientation);
 % between variants.
 variantBoundaries_map = plotMap_variantPairs(job,'linewidth',1.5);
 % We can also analyze and plot the same for individual prior austenite grains.
-variantBoundaries_PAG = plotMap_variantPairs(job,'parentGrainId',maxGrainId,'linewidth',2);
+% We also return the grain object as "PAG" with the variant data stored in
+% PAG.prop
+[variantBoundaries_PAG, PAG] = plotMap_variantPairs(job,'parentGrainId',maxGrainId,'linewidth',2);
 % In theory, one could use the reindexed grains to redo the parent grain
 % reconstruction based on these grains. This does however not lead to a
 % significantly better reconstruction in the present dataset.

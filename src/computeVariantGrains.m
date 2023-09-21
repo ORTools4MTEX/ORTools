@@ -92,15 +92,14 @@ d = dot(childVariants,repmat(cEBSD.orientations(:),1,size(childVariants,2)));
 newEBSD.prop.fit = reshape(fit,sz_ebsd);
 
 %% Write prop data into grains
-props = [props,'fit'];
+props = [props(2:end),'fit'];
 isTransformed_grains = ~(newGrains.prop.variantId==0);
 isTransforemd_ebsd = ~isnan(newEBSD.prop.variantId);
-newGrains.prop.packetId(~isTransformed_grains) = nan;
-newGrains.prop.bainId(~isTransformed_grains) = nan;
 newGrains.prop.variantId(~isTransformed_grains) = nan;
 [~,ind] = unique(newEBSD(isTransforemd_ebsd).prop.grainId);
 for prop = props
     p = newEBSD(isTransforemd_ebsd).prop.(prop);
+    newGrains.prop.(prop) = nan(size(newGrains.prop.variantId));
     newGrains(~isnan(newGrains.prop.variantId)).prop.(prop) = p(ind);
 end
 

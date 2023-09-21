@@ -1,4 +1,4 @@
-function variantPairs_boundary = plotMap_variantPairs(job,varargin)
+function [variantPairs_boundary, variantGrains] = plotMap_variantPairs(job,varargin)
 %% Function description:
 % This function plots an ebsd map of the equivalent pairs of martensitic 
 % variants (block boundaries) in steel microstructures as per the 
@@ -33,6 +33,7 @@ else
 end
 
 variantGrains = grains(job.csChild);
+variantGrains = variantGrains(~isnan(variantGrains.prop.variantId));
 ebsdC = ebsd(ebsd(job.csChild));
 
 %% Determine the variant pairs
