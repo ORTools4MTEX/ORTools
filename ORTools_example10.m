@@ -117,18 +117,18 @@ screenPrint('SegmentStart','Child grain pair analysis');
 
 %% Compute the variant id child grain pairs
 screenPrint('Step','Variant id child grain pair analysis');
-out1 = computeGrainPairs(newGrains,'variants');
+out1 = computeGrainPairs(newGrains,'variants','plot');
 % include similar neighbouring variant pairs for example, V1-V1; V2-V2
-out2 = computeGrainPairs(newGrains,'include');
+out2 = computeGrainPairs(newGrains,'include', 'plot');
 
 %% Compute the crystallographic packet id child grain pairs
 % include similar neighbouring packet pairs for example, CP1-CP1; CP2-CP2
 screenPrint('Step','Crystallographic packet id child grain pair analysis');
-out3 = computeGrainPairs(newGrains,'packet','include');
+out3 = computeGrainPairs(newGrains,'packet','include','plot');
 
 %% Compute the Bain group id child grain pairs
 screenPrint('Step','Bain group id child grain pair analysis');
-out4 = computeGrainPairs(newGrains,'bain');
+out4 = computeGrainPairs(newGrains,'bain','plot');
 
 %% Compute the equivalent variant id child grain pairs
 screenPrint('Step','Equivalent (or other) variant id child grain pair analysis');
@@ -145,7 +145,7 @@ newGrains.prop.otherId = newGrains.variantId - (newGrains.packetId-1) * 24/4;
 % IMPORTANT: Regardless of the formula used to compute other (or any
 % equivalent) ids, the variable name on the LHS defined as
 % "newGrains.prop.otherId" must not be changed.
-out5 = computeGrainPairs(newGrains,'other');
+out5 = computeGrainPairs(newGrains,'other','plot');
 
 %% Compute groups of equivalent variant id child grain pairs
 screenPrint('Step','Groups of equivalent variant id child grain pair analysis');
@@ -155,7 +155,7 @@ eqIds = {[1 2; 3 4; 5 6],...
     [1 6; 2 3; 4 5],...
     [1 4; 2 5; 3 6]};
 % ... and compute the groups of equivalent id child grain pairs
-out6 = computeGrainPairs(newGrains,'other','group',eqIds)
+out6 = computeGrainPairs(newGrains,'other','group',eqIds, 'plot');
 % The output of the variable 'out6' in the command window is:
 % out6 = struct with fields:
 %          freq: [0.1503 0.2495 0.1211 0.4790]
@@ -210,8 +210,9 @@ vGroupIds = {[1 2],...
     [1 21],...
     [1 24]};
 % ... and compute the groups of equivalent id child grain pairs
-out7 = computeGrainPairs(newGrains,'variant','group',vGroupIds);
+out7 = computeGrainPairs(newGrains,'variant','group',vGroupIds,'plot');
 
+%% For individual plotting you can use this code
 figH = figure;
 h = bar(out7.freq);
 h.FaceColor =[162 20 47]./255;

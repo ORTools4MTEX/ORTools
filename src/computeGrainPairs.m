@@ -195,6 +195,57 @@ else % equivalent id groups not provided
             out.segLength = segLength;
     end
 end
-% %---------------------------------
+
+
+%% Plot the results
+if find_option(varargin,'plot')
+    figH = figure;
+    if find_option(varargin,'group')
+        labels = {};
+        for ii=1:length(groupIds)
+            tmp = groupIds{ii}.';
+            labels{ii} = formatLabel(tmp);  
+        end      
+
+        h = bar(out.freq);
+        h.FaceColor =[162 20 47]./255;
+        set(gca,'FontSize',14);
+        xticks(1:length(labels));
+        xticklabels(labels);
+        xtickangle(90);
+        xlabel('\bf Variant pairs');
+        ylabel('\bf Relative frequency [$\bf f$(g)]','interpreter','latex');
+        drawnow;
+    elseif all(size(out.freq)>1)
+        imagesc(out.freq);
+        c = colorbar;
+        colormap(hot)
+        c.Label.String = '\bf Relative frequency [$\bf f$(g)]';
+        c.Label.Interpreter = 'latex';
+        xticks(1:size(out.freq,1));
+        yticks(1:size(out.freq,2));
+        xlabel('Id');
+        ylabel('Id');
+        xtickangle(0);
+    else
+        warning("Skipping plotting");
+    end
+end
+end
+
+function label = formatLabel(input)
+sublabels = cellstr(strcat('V', num2str(input(:))));
+%Remove whitespace
+sublabels = cellfun(@(x) strrep(x, ' ', ''), sublabels, 'UniformOutput', false);
+reshapedSublabels = reshape(sublabels, 2, []).';
+for i = 1: size(reshapedSublabels, 1)
+    label(i, :) = {strjoin(reshapedSublabels(i, :), '-')};
+end
+if length(label) == 1
+    label = label{1};
+else
+    label= strjoin(label, ' / ');
+end
+
 
 end
