@@ -119,7 +119,7 @@ newGrains = newGrains(job.csChild);
 screenPrint('Step','Variant id child grain pair analysis');
 out1 = computeGrainPairs(newGrains,'variants','plot');
 % include similar neighbouring variant pairs for example, V1-V1; V2-V2
-out2 = computeGrainPairs(newGrains,'include', 'plot');
+out2 = computeGrainPairs(newGrains,'include', 'plot', 'colormap',viridis);
 
 %% Compute the crystallographic packet id child grain pairs
 % include similar neighbouring packet pairs for example, CP1-CP1; CP2-CP2
