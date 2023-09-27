@@ -114,7 +114,7 @@ screenPrint('SegmentStart','Child grain pair analysis');
 % To begin analyzing child grain pairs, we first need the variants (and 
 % packets,and Brain groups) on the EBSD level to be reconstructed as grains
 [newGrains,~] = computeVariantGrains(job);
-
+newGrains = newGrains(job.csChild);
 %% Compute the variant id child grain pairs
 screenPrint('Step','Variant id child grain pair analysis');
 out1 = computeGrainPairs(newGrains,'variants','plot');

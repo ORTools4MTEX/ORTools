@@ -207,7 +207,7 @@ if all(size(out.freq)>1)
 end
 %% Plot the results
 if find_option(varargin,'plot')
-    figH = figure;
+    figH = figure('color','w');
     if find_option(varargin,'group')
         labels = {};
         for ii=1:length(groupIds)
