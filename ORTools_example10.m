@@ -223,6 +223,7 @@ xlabelString = {'V2','V3,V5','V4','V6',...
     'V11,V13','V12,V20','V15,V23','V16',...
     'V17','V18,V22','V21','V24'};
 xticklabels(xlabelString);
+xtickangle(90);
 xlabel('\bf Variant paired with V1');
 ylabel('\bf Relative frequency [$\bf f$(g)]');
 set(figH,'Name','Histogram: Groups of child grain variant pairs','NumberTitle','on');

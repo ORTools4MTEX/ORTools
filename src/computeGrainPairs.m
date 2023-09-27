@@ -40,6 +40,7 @@ function out = computeGrainPairs(pairGrains,varargin)
 
 pairType = lower(get_flag(varargin,{'variant','packet','bain','other'},'variant'));
 groupIds = get_option(varargin,'group',{});
+cmap = get_option(varargin,'colormap',inferno);
 calcType = lower(get_flag(varargin,{'exclude','include'},'exclude'));
 outputType = lower(get_flag(varargin,{'normalise','normalize','absolute'},'normalise'));
 
@@ -76,8 +77,6 @@ pairMatrix = ones(maxId,maxId);
 % Re-define unique (value = 1) and equivalent (value = 0) pair combinations
 % as follows: V1-V2 (= unique pair) == V2-V1 (= equivalent pair)
 pairMatrix =  logical(triu(pairMatrix));
-
-
 
 % %---------------------------------
 %% Calculate the counts & boundary segment lengths of all unique pair
@@ -196,7 +195,16 @@ else % equivalent id groups not provided
     end
 end
 
-
+% Set not considered values to NaN
+if all(size(out.freq)>1)
+    out.freq(~pairMatrix) = nan;
+    out.segLength(~pairMatrix) = nan;
+    if ~find_option(varargin,'include')
+        dia = boolean(diag(ones(size(out.freq,1),1)));
+        out.freq(dia) = nan;
+        out.segLength(dia) = nan;
+    end
+end
 %% Plot the results
 if find_option(varargin,'plot')
     figH = figure;
@@ -217,9 +225,17 @@ if find_option(varargin,'plot')
         ylabel('\bf Relative frequency [$\bf f$(g)]','interpreter','latex');
         drawnow;
     elseif all(size(out.freq)>1)
-        imagesc(out.freq);
+        
+        [nr,nc] = size(out.freq);
+        s = pcolor([(1:nr+1)-0.5],[(1:nc+1)-0.5],[out.freq nan(nr,1); nan(1,nc+1)]);
+        shading flat;
+        s.EdgeColor = [1 1 1];
+        s.LineWidth = 1;
+        set(gca,'Color','none') 
+        daspect([1 1 1])
+        %imagesc(out.freq);
         c = colorbar;
-        colormap(hot)
+        colormap(cmap)
         c.Label.String = '\bf Relative frequency [$\bf f$(g)]';
         c.Label.Interpreter = 'latex';
         xticks(1:size(out.freq,1));
