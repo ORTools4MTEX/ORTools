@@ -118,12 +118,12 @@ screenPrint('SegmentStart','Child grain pair analysis');
 % To begin analyzing child grain pairs, we first need the variants (and 
 % packets,and Brain groups) on the EBSD level to be reconstructed as grains
 [newGrains,~] = computeVariantGrains(job);
-
+newGrains = newGrains(job.csChild);
 %% Compute the variant id child grain pairs
 screenPrint('Step','Variant id child grain pair analysis');
 out1 = computeGrainPairs(newGrains,'variants','plot');
 % include similar neighbouring variant pairs for example, V1-V1; V2-V2
-out2 = computeGrainPairs(newGrains,'include', 'plot');
+out2 = computeGrainPairs(newGrains,'include', 'plot', 'colormap',viridis);
 
 %% Compute the crystallographic packet id child grain pairs
 % include similar neighbouring packet pairs for example, CP1-CP1; CP2-CP2
@@ -227,6 +227,7 @@ xlabelString = {'V2','V3,V5','V4','V6',...
     'V11,V13','V12,V20','V15,V23','V16',...
     'V17','V18,V22','V21','V24'};
 xticklabels(xlabelString);
+xtickangle(90);
 xlabel('\bf Variant paired with V1');
 ylabel('\bf Relative frequency [$\bf f$(g)]');
 set(figH,'Name','Histogram: Groups of child grain variant pairs','NumberTitle','on');
