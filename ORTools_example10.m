@@ -43,6 +43,10 @@ phaseNames = {'Gamma','AlphaP'};
 ebsd = renamePhases(ebsd,phaseNames);
 % Choose your favourite colors
 ebsd = recolorPhases(ebsd);
+% Phase map
+plotMap_phases(job,'linewidth',1);
+% Parent and child IPF maps
+plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1);
 %% Define and refine parent-to-child orientation relationship
 screenPrint('SegmentStart','Define and refine parent-to-child OR');
 % Define 'Gamma" as the parent and 'AlphaP' as the child phase
@@ -81,7 +85,7 @@ job.calcGBVotes('p2c','reconsiderAll')
 % assign parent orientations according to the votes
 job.calcParentFromVote
 % plot the result
-plot(job.parentGrains,job.parentGrains.meanOrientation)
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 %% Clean reconstructed grains
 % Now clean the grains by:
 % - merging grains with similar orientation

@@ -43,6 +43,10 @@ phaseNames = {'Gamma','AlphaP'};
 ebsd = renamePhases(ebsd,phaseNames);
 % Choose your favourite colors
 ebsd = recolorPhases(ebsd);
+% Phase map
+plotMap_phases(job,'linewidth',1);
+% Parent and child IPF maps
+plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1);
 %% Define and refine parent-to-child orientation relationship
 screenPrint('SegmentStart','Define and refine parent-to-child OR');
 % Define 'Gamma" as the parent and 'AlphaP' as the child phase
@@ -83,7 +87,7 @@ job.calcGBVotes('p2c','reconsiderAll')
 % assign parent orientations according to the votes
 job.calcParentFromVote
 % plot the result
-plot(job.parentGrains,job.parentGrains.meanOrientation)
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 %% Clean reconstructed grains
 % Now clean the grains by: 
 % - merging grains with similar orientation
@@ -96,7 +100,7 @@ plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 %% Get parent EBSD data
 figure;
 parentEBSD = job.ebsd;
-plot(parentEBSD('Gamma'),parentEBSD('Gamma').orientations);
+plot(parentEBSD(job.csParent),parentEBSD(job.csParent).orientations);
 hold on;
 plot(job.grains.boundary,'linewidth',2);
 hold off;
@@ -126,9 +130,7 @@ screenPrint('SegmentStart','Compute the habit plane');
 % ...Or the calliper approach (on reconstructed grain data) for a single
 % parent grain
 [~,ind_maxGrain] = max(job.grains.area);
-[habitPlane4,~,~] =  computeHabitPlane(job,'calliper','minClusterSize',20,...
-    'parentGrainId',ind_maxGrain,...
-    'plotTraces','noFrame','noScalebar');
+[habitPlane4,~,~] =  computeHabitPlane(job,'calliper','minClusterSize',20,'parentGrainId',ind_maxGrain,'plotTraces','noFrame','noScalebar');
 
 figure;
 plot(habitPlane1.parent.project2FundamentalRegion,'fundamentalRegion','DisplayName','Radon','markerfacecolor','none','linewidth',2)
