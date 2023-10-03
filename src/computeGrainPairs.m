@@ -200,7 +200,7 @@ if all(size(out.freq)>1)
     out.freq(~pairMatrix) = nan;
     out.segLength(~pairMatrix) = nan;
     if ~find_option(varargin,'include')
-        dia = boolean(diag(ones(size(out.freq,1),1)));
+        dia = logical(diag(ones(size(out.freq,1),1)));
         out.freq(dia) = nan;
         out.segLength(dia) = nan;
     end
@@ -233,7 +233,6 @@ if find_option(varargin,'plot')
         s.LineWidth = 1;
         set(gca,'Color','none') 
         daspect([1 1 1])
-        %imagesc(out.freq);
         c = colorbar;
         colormap(cmap)
         c.Label.String = '\bf Relative frequency [$\bf f$(g)]';
@@ -243,6 +242,10 @@ if find_option(varargin,'plot')
         xlabel('Id');
         ylabel('Id');
         xtickangle(0);
+        xlim_curr =xlim;
+        xlim([xlim_curr(1)-xlim_curr(2)/50,xlim_curr(2)+xlim_curr(2)/50]);
+        ylim_curr =ylim;
+        ylim([ylim_curr(1)-ylim_curr(2)/50,ylim_curr(2)+ylim_curr(2)/50]);
     else
         warning("Skipping plotting");
     end

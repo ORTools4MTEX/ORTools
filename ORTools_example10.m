@@ -43,10 +43,6 @@ phaseNames = {'Gamma','AlphaP'};
 ebsd = renamePhases(ebsd,phaseNames);
 % Choose your favourite colors
 ebsd = recolorPhases(ebsd);
-% Phase map
-plotMap_phases(job,'linewidth',1);
-% Parent and child IPF maps
-plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1);
 %% Define and refine parent-to-child orientation relationship
 screenPrint('SegmentStart','Define and refine parent-to-child OR');
 % Define 'Gamma" as the parent and 'AlphaP' as the child phase
@@ -60,6 +56,10 @@ job.calcParent2Child;
 %% Plotting (with ORTools functions)
 % ... Check out examples 1 and 7 for different plotting options (skipped
 % here)
+% Phase map
+plotMap_phases(job,'linewidth',1);
+% Parent and child IPF maps
+plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1);
 
 %% Reconstruct parent microstructure
 %   - Reconstruct the microstructure with the variant graph based approach
