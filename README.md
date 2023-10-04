@@ -101,9 +101,6 @@ The details related to the habit plane calculation are described in the followin
 
 [*Example 9 - Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination*](https://youtu.be/lM_NhQQY5LY)
 
-
-
-https://youtu.be/lM_NhQQY5LY
 ---
 
 ### [Example 08: 29 MAR 2023](./ORTools_example08.m)
