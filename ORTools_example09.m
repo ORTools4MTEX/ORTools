@@ -63,10 +63,8 @@ plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1);
 
 %% Reconstruct parent microstructure
 %   - Reconstruct the microstructure with the variant graph based approach
-job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree,'mergeSimilar')
-job.clusterVariantGraph
 job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree)
-job.clusterVariantGraph('includeSimilar')
+job.clusterVariantGraph
 % ... plot the votes (high values show high certainty)
 figure; plot(job.grains,job.votes.prob(:,1))
 mtexColorbar
