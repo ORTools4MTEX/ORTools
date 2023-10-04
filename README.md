@@ -97,10 +97,13 @@ The details related to the habit plane calculation are described in the followin
 
 [**T. Nyyssönen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane determination from reconstructed parent phase orientation maps, Acta Materialia: 119035, 2023. (https://doi.org/10.1016/j.actamat.2023.119035)**]( https://www.researchgate.net/publication/371310735_Habit_plane_determination_from_reconstructed_parent_phase_orientation_maps)
 
-[![ORTools - Example 9](http://img.youtube.com/vi/bxWR2ecJqoPtu8dj/0.jpg)](https://youtu.be/lM_NhQQY5LY?si=bxWR2ecJqoPtu8dj "Video Title")
+[![ORTools - Example 9](http://img.youtube.com/vi/lM_NhQQY5LY/0.jpg)](http://www.youtube.com/watch?v=lM_NhQQY5LY "Video Title")
 
-[*Example 9 - Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination*](https://youtu.be/lM_NhQQY5LY?si=bxWR2ecJqoPtu8dj)
+[*Example 9 - Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination*](https://youtu.be/lM_NhQQY5LY)
 
+
+
+https://youtu.be/lM_NhQQY5LY
 ---
 
 ### [Example 08: 29 MAR 2023](./ORTools_example08.m)
