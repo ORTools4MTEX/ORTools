@@ -1,6 +1,6 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)  ![GitHub watchers](https://img.shields.io/github/watchers/ORTools4MTEX/ORTools)  ![GitHub followers](https://img.shields.io/github/followers/ORTools4MTEX)  
 
-![GitHub all releases](https://img.shields.io/github/downloads/ORTools4MTEX/ORTools/total)  ![GitHub forks](https://img.shields.io/github/forks/ORTools4MTEX/ORTools)
+![GitHub all releases](https://img.shields.io/github/downloads/ORTools4MTEX/ORTools/total)  ![GitHub forks](https://img.shields.io/github/forks/ORTools4MTEX/ORTools)  ![GitHub Repo stars](https://img.shields.io/github/stars/ORTools4MTEX/ORTools)
 
 ![GitHub Discussions](https://img.shields.io/github/discussions/ORTools4MTEX/ORTools)  ![GitHub issues](https://img.shields.io/github/issues/ORTools4MTEX/ORTools)
 
