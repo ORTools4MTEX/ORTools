@@ -1,7 +1,6 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4898682.svg)](https://doi.org/10.5281/zenodo.4898682)
 
-![matlab compatible](https://img.shields.io/badge/matlab-compatible-lightgrey.svg)
-
+![matlab compatible](https://img.shields.io/badge/matlab-compatible-lightgrey.svg)  
 ![GitHub top language](https://img.shields.io/github/languages/top/ORTOOLS4MTEX/ORTools)
 
 ![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)  ![GitHub watchers](https://img.shields.io/github/watchers/ORTools4MTEX/ORTools)  ![GitHub followers](https://img.shields.io/github/followers/ORTools4MTEX)  
