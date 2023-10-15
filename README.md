@@ -1,17 +1,12 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4898682.svg)](https://doi.org/10.5281/zenodo.4898682)
-
-![matlab compatible](https://img.shields.io/badge/matlab-compatible-lightgrey.svg)  
-![GitHub top language](https://img.shields.io/github/languages/top/ORTOOLS4MTEX/ORTools)
-
-![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)  ![GitHub watchers](https://img.shields.io/github/watchers/ORTools4MTEX/ORTools)  ![GitHub followers](https://img.shields.io/github/followers/ORTools4MTEX)  
-
-![GitHub all releases](https://img.shields.io/github/downloads/ORTools4MTEX/ORTools/total)  ![GitHub forks](https://img.shields.io/github/forks/ORTools4MTEX/ORTools)  ![GitHub Repo stars](https://img.shields.io/github/stars/ORTools4MTEX/ORTools)
+# UPDATES
 
 ![GitHub Discussions](https://img.shields.io/github/discussions/ORTools4MTEX/ORTools)  ![GitHub issues](https://img.shields.io/github/issues/ORTools4MTEX/ORTools)
 
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ORTOOLS4MTEX/ORTools/develop)  ![GitHub repo size](https://img.shields.io/github/repo-size/ORTOOLS4MTEX/ORTools)
+
+![GitHub all releases](https://img.shields.io/github/downloads/ORTools4MTEX/ORTools/total)  ![GitHub forks](https://img.shields.io/github/forks/ORTools4MTEX/ORTools)  ![GitHub Repo stars](https://img.shields.io/github/stars/ORTools4MTEX/ORTools)
 
 
-# UPDATES
 - The latest **[ORTools v2.3.0](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.3.0)** stable release should be employed together with the **[MTEX v5.10](https://mtex-toolbox.github.io/download.html)** stable release.
 - Alternatively, if you wish to use developer software, the latest versions of the **[ORTools](https://github.com/ORTools4MTEX/ORTools)** and **[MTEX](https://github.com/mtex-toolbox/mtex/tree/develop)** nightly builds should be employed together.
 
@@ -38,6 +33,8 @@
 ---
 
 ## Introduction to ORTools
+![matlab compatible](https://img.shields.io/badge/matlab-compatible-lightgrey.svg)  ![GitHub top language](https://img.shields.io/github/languages/top/ORTOOLS4MTEX/ORTools)
+
 **Orientation relationship tools** (**ORTools**) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. 
 
 The **ORTools** function library is written in [**MATLAB**](https://mathworks.com/products/matlab.html) and is used as an add-on to the basic phase transformation functionalities within the MATLAB-based crystallographic toolbox [**MTEX**](https://mtex-toolbox.github.io). Due to their specific nature, the scripts contained in the **ORTools** library have not been included in MTEX. You may want to watch this [talk by Frank Niessen](https://youtu.be/B0faPjtOdmA) at the 2021 MTEX Workshop for an introduction to the phase transformation features in MTEX and **ORTools**. 
@@ -52,17 +49,21 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
 
 ---
 
-## Authors
+## Authors / Contributors
+![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)  ![GitHub watchers](https://img.shields.io/github/watchers/ORTools4MTEX/ORTools)  ![GitHub followers](https://img.shields.io/github/followers/ORTools4MTEX)  
+
 **ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
 
 ---
 
-## Contributors
+## Collaborators
 [**Dr Tuomo Nyyssönen**](https://www.researchgate.net/profile/Tuomo-Nyyssoenen) - Lath martensite block width calculator
 
 ---
 
 ## How to cite ORTools
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4898682.svg)](https://doi.org/10.5281/zenodo.4898682)
+
 If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite this open-access paper as your reference:
 
 [**F. Niessen, T. Nyyssönen, A.A. Gazder, R. Hielscher, Parent grain reconstruction from partially and fully transformed microstructures in MTEX, Journal of Applied Crystallography: 55(1), pp. 180-194, 2022. (https://doi.org/10.1107/S1600576721011560)**](https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf)
