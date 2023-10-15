@@ -50,7 +50,7 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
 ---
 
 ## Authors / Contributors
-![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)  ![GitHub watchers](https://img.shields.io/github/watchers/ORTools4MTEX/ORTools)  ![GitHub followers](https://img.shields.io/github/followers/ORTools4MTEX)  
+![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)
 
 **ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
 
@@ -71,6 +71,8 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 ---
 
 ## How to use ORTools
+  ![GitHub watchers](https://img.shields.io/github/watchers/ORTools4MTEX/ORTools)  ![GitHub followers](https://img.shields.io/github/followers/ORTools4MTEX)  
+
 - The ORTools library only works **after** the prior installation of [MATLAB](https://se.mathworks.com/help/install/install-products.html). Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html). ORTools is tested for compatibility from MATLAB 2016b onwards. With each [release](https://github.com/ORTools4MTEX/ORTools/releases) of ORTools, please check exactly which version of MTEX it is compatible with. 
 - Click on the weblinks to download either one of the following two combinations:
   - <ins>Latest STABLE releases of:</ins> 
