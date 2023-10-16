@@ -65,6 +65,7 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 ---
 
 ## How to use ORTools
+[![Github All Releases](https://img.shields.io/github/downloads/ORTOOLS4MTEX/ORTools/total.svg)]()
 
 ![GitHub all releases](https://img.shields.io/github/downloads/ORTools4MTEX/ORTools/total)  ![GitHub forks](https://img.shields.io/github/forks/ORTools4MTEX/ORTools)  ![GitHub Repo stars](https://img.shields.io/github/stars/ORTools4MTEX/ORTools)  ![GitHub watchers](https://img.shields.io/github/watchers/ORTools4MTEX/ORTools)  ![GitHub followers](https://img.shields.io/github/followers/ORTools4MTEX)  
 
