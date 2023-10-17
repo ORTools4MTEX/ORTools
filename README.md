@@ -51,7 +51,7 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
 ---
 
 ## Collaborators
-![Static Badge](https://img.shields.io/badge/Collaborators-Welcome!-brightgreen)
+![Static Badge](https://img.shields.io/badge/Collaborators-Welcome!-8A2BE2)
 
 [**Dr Tuomo Nyyssönen**](https://www.researchgate.net/profile/Tuomo-Nyyssoenen) - Lath martensite block width calculator
 
