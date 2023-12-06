@@ -114,28 +114,39 @@ plotMap_bain(job,'linewidth',2,'colormap',magma);
 %% ***** CHILD GRAIN PAIR ANALYSIS ***** 
 % The following sections detail the various options available to users on 
 % how to invoke and use the computeGrainPairs function
+screenPrint('SegmentStart','Child grain pair analysis');
+% To begin analysing child grain pairs, we first need the variants (and 
+% packets,and Bain groups) on the EBSD level to be reconstructed as grains
+
+% CASE 1: Return child grain pair analysis results for the entire map
+[newGrains,~] = computeVariantGrains(job);
+
+% % CASE 2: Return child grain pair analysis results for a single parent grain
+% [newGrains,~] = computeVariantGrains(job,'parentGrainId',276); 
+% % When using Case 2, please un-remark line 269 as well
+
+newGrains = newGrains(job.csChild);
+
+
+
+
 
 
 %% OPTION 1: Id based child grain pair analysis
-screenPrint('SegmentStart','Child grain pair analysis');
-% To begin analyzing child grain pairs, we first need the variants (and 
-% packets,and Brain groups) on the EBSD level to be reconstructed as grains
-[newGrains,~] = computeVariantGrains(job);
-newGrains = newGrains(job.csChild);
 % Compute the variant id child grain pairs
 screenPrint('Step','Variant id child grain pair analysis');
-out1 = computeGrainPairs(newGrains,'variants','plot');
+out11 = computeGrainPairs(newGrains,'variants','plot');
 % include similar neighbouring variant pairs for example, V1-V1; V2-V2
-out2 = computeGrainPairs(newGrains,'include', 'plot', 'colormap',viridis);
+out12 = computeGrainPairs(newGrains,'include', 'plot', 'colormap',viridis);
 
 % Compute the crystallographic packet id child grain pairs
 % include similar neighbouring packet pairs for example, CP1-CP1; CP2-CP2
 screenPrint('Step','Crystallographic packet id child grain pair analysis');
-out3 = computeGrainPairs(newGrains,'packet','include','plot');
+out13 = computeGrainPairs(newGrains,'packet','include','plot');
 
 % Compute the Bain group id child grain pairs
 screenPrint('Step','Bain group id child grain pair analysis');
-out4 = computeGrainPairs(newGrains,'bain','plot');
+out14 = computeGrainPairs(newGrains,'bain','plot');
 %%
 
 
@@ -177,11 +188,11 @@ vGroupIds = {[1 2],...
     [1 21],...
     [1 24]};
 % ... and compute the groups of equivalent id child grain pairs
-out7 = computeGrainPairs(newGrains,'variant','group',vGroupIds,'plot');
+out21 = computeGrainPairs(newGrains,'variant','group',vGroupIds,'plot');
 
 % For individual plotting you can use this code
 figH = figure;
-h = bar(out7.freq);
+h = bar(out21.freq);
 h.FaceColor = [162 20 47]./255;
 set(gca,'FontSize',14);
 xticks(1:16);
@@ -198,7 +209,7 @@ drawnow;
 
 % For individual plotting you can use this code
 mapArea = prod(ebsd.gridify.size.*[ebsd.gridify.dx,ebsd.gridify.dy]);
-boundaryFraction = out7.segLength./mapArea;
+boundaryFraction = out21.segLength./mapArea;
 figH = figure;
 h = bar(boundaryFraction);
 h.FaceColor = [162 20 47]./255;
@@ -236,7 +247,7 @@ newGrains.prop.otherId = newGrains.variantId - (newGrains.packetId-1) * 24/4;
 % IMPORTANT: Regardless of the formula used to compute other (or any
 % equivalent) ids, the variable name on the LHS defined as
 % "newGrains.prop.otherId" must not be changed.
-out5 = computeGrainPairs(newGrains,'other','plot');
+out31 = computeGrainPairs(newGrains,'other','plot');
 
 % Compute groups of equivalent variant id child grain pairs
 screenPrint('Step','Groups of equivalent variant id child grain pair analysis');
@@ -246,24 +257,25 @@ eqIds = {[1 2; 3 4; 5 6],...
     [1 6; 2 3; 4 5],...
     [1 4; 2 5; 3 6]};
 % ... and compute the groups of equivalent id child grain pairs
-out6 = computeGrainPairs(newGrains,'other','group',eqIds, 'plot');
-% The output of the variable 'out6' in the command window is:
-% out6 = struct with fields:
-%          freq: [0.1503 0.2495 0.1211 0.4790]
-%     segLength: [0.1473 0.2452 0.1192 0.4883]
+out32 = computeGrainPairs(newGrains,'other','group',eqIds, 'plot');
+% The output of the variable 'out32' in the command window is:
+% out32 = struct with fields:
+%          freq: [0.1522,0.2473,0.1195,0.4810]
+%     segLength: [0.1494,0.2427,0.1177,0.4902]
 % Compare the above segment length values with the variant pair boundary
 % fraction histogram from ORTools's pre-built function for equivalent
 % variant pairs.
 variantBoundaries_map = plotMap_variantPairs(job,'linewidth',1.5);
-%  -> Figure 9: variant pair boundary fraction histogram
+% variantBoundaries_map = plotMap_variantPairs(job,'parentGrainId',276,'linewidth',1.5);
+%  -> Figure 20: variant pair boundary fraction histogram
 %   4×2 table
 %
-%     eqVariants     Freq
+%     eqVariants     Freq  
 %     __________    _______
-%
-%     V1-V2         0.14733
-%     V1-V3(V5)     0.24516
-%     V1-V6         0.11921
-%     V1-V4          0.4883
+% 
+%     V1-V2         0.14941
+%     V1-V3(V5)     0.24271
+%     V1-V6         0.11768
+%     V1-V4          0.4902
 % Notice that they are both exactly the same.
 %%
