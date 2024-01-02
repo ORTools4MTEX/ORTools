@@ -104,7 +104,7 @@ if ~check_option(varargin,'silent')
     screenPrint('SubStep',sprintf(['Disor. of parallel rot. axes relationship from OR = ',...
         num2str(OR.misfit.axis./degree),'°']));
 
-    screenPrint('Step','Parallel planes & directions and fit of unique variants in p2c notation (rounded-off)');
+    screenPrint('Step','Parallel planes & directions and fit of unique variants in p2c notation  (rounded-off)')
     displayResult(OR.variants.p2cMisorientation);
 
     screenPrint('Step','Parallel planes & directions and fit of unique variants in c2c notation (rounded-off)');
