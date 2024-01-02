@@ -56,10 +56,10 @@ OR.misfit.direction = min(angle(OR.misorientation*OR.direction.parent.symmetrise
 OR.misfit.axis = min(angle(OR.misorientation*OR.rotationAxis.parent.symmetrise,OR.rotationAxis.child));
 
 %% Variants
-OR.variants.orientation = OR.misorientation.variants;
-OR.variants.misorientation = OR.misorientation.variants.*inv(OR.misorientation.variants(1));
-OR.variants.angle = angle(OR.variants.misorientation);
-OR.variants.axis = axis(OR.variants.misorientation,OR.CS.child);
+OR.variants.p2cMisorientation = OR.misorientation.variants;
+OR.variants.c2cMisorientation = OR.misorientation.variants.*inv(OR.misorientation.variants(1));
+OR.variants.angle = angle(OR.variants.c2cMisorientation);
+OR.variants.axis = axis(OR.variants.c2cMisorientation,OR.CS.child);
 OR.variants.axis = setDisplayStyle(OR.variants.axis,'direction');
 
 %% Screen output
@@ -104,8 +104,14 @@ if ~check_option(varargin,'silent')
     screenPrint('SubStep',sprintf(['Disor. of parallel rot. axes relationship from OR = ',...
         num2str(OR.misfit.axis./degree),'°']));
 
-    screenPrint('Step','Angle & rot. axes of unique variants');
-    for ii = 1:length(OR.variants.orientation)
+    screenPrint('Step','Parallel planes & directions and fit of unique variants in p2c notation');
+    displayResult(OR.variants.p2cMisorientation);
+
+    screenPrint('Step','Parallel planes & directions and fit of unique variants in c2c notation');
+    displayResult(OR.variants.c2cMisorientation);
+    
+    screenPrint('Step','Misorientation angles & rotation axes of unique variants in c2c notation');
+    for ii = 1:length(OR.variants.p2cMisorientation)
         screenPrint('SubStep',sprintf([num2str(ii),': ',...
             num2str(OR.variants.angle(ii)./degree,'%2.2f'),...
             '° / ',sprintMiller(OR.variants.axis(ii))]));
@@ -235,4 +241,55 @@ function minA = findMin(a)
 % a(a < 0.3333) = 0;
 a(a == 0) = inf;
 minA = min(abs(a),[],2);
+end
+
+
+function displayResult(mori)
+err = zeros(1,length(mori)); 
+
+for ii = 1:length(mori)
+    % Calculate the closest rational parallel planes and directions
+    [K1(ii),...
+        K2(ii),...
+        eta1(ii),...
+        eta2(ii)] = round2Miller(mori(ii));%,'maxIndex',15);
+
+    % Return the mori based on the calculated closest rational parallel
+    % planes and directions
+    calcMori = orientation.map(K1(ii),...
+        K2(ii),...
+        eta1(ii),...
+        eta2(ii));
+    
+    % Calculate the error between the input and calculated moris
+    err(ii) = angle(mori(ii),calcMori);
+
+    % Display the output
+    n1(ii) = char(K1(ii),'cell');
+    n2(ii) = char(K2(ii),'cell');
+    d1(ii) = char(eta1(ii),'cell');
+    d2(ii) = char(eta2(ii),'cell');
+end
+disp([fillStr('parallel plane(s)',10+6,'left'),...
+    repmat(' ',1,10),...
+    fillStr('parallel direction(s)',10+10,'left'),...
+    repmat(' ',1,8),...
+    'fit(s)']);
+
+for kk = 1:length(mori)
+    disp([fillString(n1{kk},10,'left') ' || ' fillString(n2{kk},10,'right') '   ' ...
+        fillString(d1{kk},10,'left') ' || ' fillString(d2{kk},10,'right') '   ' ...
+        '  ',xnum2str(err(kk)./degree,'precision',0.1),mtexdegchar']);
+end
+end
+
+function str = fillString(str,len,varargin)
+if check_option(varargin,'left')
+    str = [str,repmat(' ',1,len-length(str))];
+elseif check_option(varargin,'right')
+    str = [repmat(' ',1,len-length(str)),str];
+elseif check_option(varargin,'center')
+    str = [repmat(' ',1,floor((len-length(str)))/2),str,repmat(' ',1,floor((len-length(str)))/2)];
+end
+
 end
