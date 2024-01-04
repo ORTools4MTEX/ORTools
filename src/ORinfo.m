@@ -56,10 +56,10 @@ OR.misfit.direction = min(angle(OR.misorientation*OR.direction.parent.symmetrise
 OR.misfit.axis = min(angle(OR.misorientation*OR.rotationAxis.parent.symmetrise,OR.rotationAxis.child));
 
 %% Variants
-OR.variants.p2cMisorientation = OR.misorientation.variants;
-OR.variants.c2cMisorientation = OR.misorientation.variants.*inv(OR.misorientation.variants(1));
-OR.variants.angle = angle(OR.variants.c2cMisorientation);
-OR.variants.axis = axis(OR.variants.c2cMisorientation,OR.CS.child);
+OR.variants.misorientation.p2c = OR.misorientation.variants;
+OR.variants.misorientation.c2c = OR.misorientation.variants.*inv(OR.misorientation.variants(1));
+OR.variants.angle = angle(OR.variants.misorientation.c2c);
+OR.variants.axis = axis(OR.variants.misorientation.c2c,OR.CS.child);
 OR.variants.axis = setDisplayStyle(OR.variants.axis,'direction');
 
 %% Screen output
@@ -104,14 +104,16 @@ if ~check_option(varargin,'silent')
     screenPrint('SubStep',sprintf(['Disor. of parallel rot. axes relationship from OR = ',...
         num2str(OR.misfit.axis./degree),'°']));
 
-    screenPrint('Step','Parallel planes & directions and fit of unique variants in p2c notation  (rounded-off)')
-    displayResult(OR.variants.p2cMisorientation);
+    screenPrint('Step','Parallel planes & directions and fit of unique variants in p2c notation (rounded-off)');
+    disp('** misfit = Angular deviation between OR misorientation and fitted planes & directions');
+    displayResult(OR.variants.misorientation.p2c);
 
     screenPrint('Step','Parallel planes & directions and fit of unique variants in c2c notation (rounded-off)');
-    displayResult(OR.variants.c2cMisorientation);
+    disp('** misfit = Angular deviation between OR misorientation and fitted planes & directions');
+    displayResult(OR.variants.misorientation.c2c);
     
     screenPrint('Step','Misorientation angles & rotation axes of unique variants in c2c notation');
-    for ii = 1:length(OR.variants.p2cMisorientation)
+    for ii = 1:length(OR.variants.misorientation.p2c)
         screenPrint('SubStep',sprintf([num2str(ii),': ',...
             num2str(OR.variants.angle(ii)./degree,'%2.2f'),...
             '° / ',sprintMiller(OR.variants.axis(ii))]));
@@ -274,7 +276,7 @@ disp([fillString('parallel plane(s)',10+3+10,'right'),...
     repmat(' ',1,10),...
     fillString('parallel direction(s)',10+3+10,'left'),...
     repmat(' ',1,6),...
-    'fit(s)']);
+    'misfit(s)']);
 
 for kk = 1:length(mori)
     screenPrint('SubStep',[fillString(n1{kk},10,'left') ' || ' fillString(n2{kk},10,'right') '   ' ...
