@@ -105,11 +105,11 @@ if ~check_option(varargin,'silent')
         num2str(OR.misfit.axis./degree),'°']));
 
     screenPrint('Step','Parallel planes & directions and fit of unique variants in p2c notation (rounded-off)');
-    disp('** misfit = Angular deviation between OR misorientation and fitted planes & directions');
+    disp('** misfit = Angular deviation between p2c misorientation and fitted planes & directions');
     displayResult(OR.variants.misorientation.p2c);
 
     screenPrint('Step','Parallel planes & directions and fit of unique variants in c2c notation (rounded-off)');
-    disp('** misfit = Angular deviation between OR misorientation and fitted planes & directions');
+    disp('** misfit = Angular deviation between c2c misorientation and fitted planes & directions');
     displayResult(OR.variants.misorientation.c2c);
     
     screenPrint('Step','Misorientation angles & rotation axes of unique variants in c2c notation');
