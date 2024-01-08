@@ -1,33 +1,3 @@
-## title {.tabset .tabset-fade}
-content above tabbed region.
-
-### tab Social-Media
-
-tab content Social-Media
-
-### tab Contact
-
-tab content  Contact
-
-### tab Revisions
-
-tab content  Revisions
-
-### tab Articles
-
-tab content  Articles
-
-### tab Skills
-
-tab content  Skills
-
-### tab Insights
-
-tab content  Insights
-
-content below tabbed region
----
-
 # UPDATES
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ORTOOLS4MTEX/ORTools/develop)  ![GitHub repo size](https://img.shields.io/github/repo-size/ORTOOLS4MTEX/ORTools)  ![GitHub Discussions](https://img.shields.io/github/discussions/ORTools4MTEX/ORTools)  ![GitHub issues](https://img.shields.io/github/issues/ORTools4MTEX/ORTools)
 
