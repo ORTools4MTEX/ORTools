@@ -44,7 +44,7 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
 
 ---
 
-## Authors (Contributors)
+## Authors
 ![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)
 
 **ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
