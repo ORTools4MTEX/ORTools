@@ -4,22 +4,26 @@
 - The latest **[ORTools v2.3.0](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.3.0)** stable release should be employed together with the **[MTEX v5.10](https://mtex-toolbox.github.io/download.html)** stable release.
 - Alternatively, if you wish to use developer software, the latest versions of the **[ORTools](https://github.com/ORTools4MTEX/ORTools)** and **[MTEX](https://github.com/mtex-toolbox/mtex/tree/develop)** nightly builds should be employed together.
 
-
 ---
 
-<div align = center>
+<div align = left>
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 
 ---
-<div align = left>
   
 [![buttonIcon1]][Link1]
 
-[![buttonIcon2]][Link2]        [![buttonIcon3]][Link3]
+[![buttonIcon2]][Link2]
 
-[![buttonIcon4]][Link4]        [![buttonIcon5]][Link5]
+[![buttonIcon3]][Link3]
 
-[![buttonIcon6]][Link6]        [![buttonIcon7]][Link7]
+[![buttonIcon4]][Link4]
+
+[![buttonIcon5]][Link5]
+
+[![buttonIcon6]][Link6]
+
+[![buttonIcon7]][Link7]
 
 ---
 
