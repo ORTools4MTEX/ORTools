@@ -7,12 +7,12 @@
 
 ---
 
-<p align="left">
+<div align = center>
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
-</p>
 
 ---
-
+<div align = center>
+  
 | [**• Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools) |
 | :--- |
 
