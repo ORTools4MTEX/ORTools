@@ -7,6 +7,7 @@
 ---
 
 <div align = left>
+  
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 
 ---
