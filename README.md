@@ -13,17 +13,13 @@
 ---
 <div align = left>
   
-| [**• Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools) |
-| :--- |
+[![buttonIcon1]][Link1]
 
-| [**• Authors**](https://github.com/ORTools4MTEX/ORTools#authors) | [**• Contributors**](https://github.com/ORTools4MTEX/ORTools#contributors) |
-| :--- | :--- |
+[![buttonIcon2]][Link2]        [![buttonIcon3]][Link3]
 
-| [**• How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools) | [**• How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools) |
-| :--- | :--- |
+[![buttonIcon4]][Link4]        [![buttonIcon5]][Link5]
 
-| [**• ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts) | [**• ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference) |
-| :--- | :--- |
+[![buttonIcon6]][Link6]        [![buttonIcon7]][Link7]
 
 ---
 
@@ -997,6 +993,33 @@ This function changes all MATLAB text interpreters from 'tex' to 'latex in all s
   - setInterp2Latex
   
 ---
+
+
+
+
+
+
+
+
+<!----------------------------------------------------------------------------->
+[link1]: https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools
+[link2]: https://github.com/ORTools4MTEX/ORTools#authors-and-contributors
+[link3]: https://github.com/ORTools4MTEX/ORTools#collaborators
+[link4]: https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools
+[link5]: https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools
+[link6]: https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts
+[link7]: https://github.com/ORTools4MTEX/ORTools#ortools-function-reference
+
+<!---------------------------------[ Buttons ]--------------------------------->
+[buttonIcon1]:  https://img.shields.io/badge/Introduction_to_ORTools-37a779?style=for-the-badge
+[buttonIcon2]:  https://img.shields.io/badge/Authors_and_Contributors-37a779?style=for-the-badge
+[buttonIcon3]:  https://img.shields.io/badge/Collaborators-37a779?style=for-the-badge
+[buttonIcon4]:  https://img.shields.io/badge/How_to_cite_ORTools-37a779?style=for-the-badge
+[buttonIcon5]:  https://img.shields.io/badge/How_to_use_ORTools-37a779?style=for-the-badge
+[buttonIcon6]:  https://img.shields.io/badge/ORTools_example_scripts-37a779?style=for-the-badge
+[buttonIcon7]:  https://img.shields.io/badge/ORTools_function_reference-37a779?style=for-the-badge
+
+
 
 ### [setInterp2Tex](./src/setInterp2Tex.m)
 This function changes all MATLAB text interpreters from 'latex' to 'tex in all subsequent figures, plots, and graphs.
