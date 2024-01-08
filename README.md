@@ -11,20 +11,16 @@
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 
 ---
-
-
-  
+ 
 [![buttonIcon1]][Link1]
 
-[![buttonIcon2]][Link2]  &emsp;  &emsp;  &emsp; [![buttonIcon3]][Link3]
+[![buttonIcon2]][Link2] &emsp;  &ensp;  [![buttonIcon3]][Link3]
 
-[![buttonIcon4]][Link4]  &emsp;  &emsp;  &emsp; [![buttonIcon5]][Link5]
+[![buttonIcon4]][Link4] &emsp;  &emsp;  &emsp;  &emsp; [![buttonIcon5]][Link5]
 
-[![buttonIcon6]][Link6]  &emsp;  &emsp;  &emsp; [![buttonIcon7]][Link7]
+[![buttonIcon6]][Link6] &emsp;  &emsp;  &ensp; [![buttonIcon7]][Link7]
 
 ---
-
-<div align = left>
 
 ## Introduction to ORTools
 ![matlab compatible](https://img.shields.io/badge/matlab-compatible-lightgrey.svg)  ![GitHub top language](https://img.shields.io/github/languages/top/ORTOOLS4MTEX/ORTools)
