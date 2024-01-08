@@ -11,7 +11,7 @@
   <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
 
 ---
-<div align = center>
+<div align = left>
   
 | [**• Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools) |
 | :--- |
