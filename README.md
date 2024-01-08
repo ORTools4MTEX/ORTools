@@ -1,4 +1,4 @@
-> [!IMPORTANT]
+> [!UPDATES]
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ORTOOLS4MTEX/ORTools/develop)  ![GitHub repo size](https://img.shields.io/github/repo-size/ORTOOLS4MTEX/ORTools)  ![GitHub Discussions](https://img.shields.io/github/discussions/ORTools4MTEX/ORTools)  ![GitHub issues](https://img.shields.io/github/issues/ORTools4MTEX/ORTools)
 
 - The latest **[ORTools v2.3.0](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.3.0)** stable release should be employed together with the **[MTEX v5.10](https://mtex-toolbox.github.io/download.html)** stable release.
