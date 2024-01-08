@@ -102,6 +102,9 @@ This script follows the same dataset as that used in the official [MTEX example]
 ---
 
 ### [Example 09: 06 JUN 2023](./ORTools_example09.m)
+
+<details>
+  <summary>Click to expand</summary>
 #### Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination
 This script follows the same dataset as that used in the official [MTEX example](https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html) to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The [computeHabitPlane](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane) function provides a direct way of calculating the habit plane compared to conventional MTEX. 
 
@@ -113,6 +116,7 @@ The details related to the habit plane calculation are described in the followin
 
 [*Example 9 - Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination*](https://youtu.be/lM_NhQQY5LY)
 
+</details>
 ---
 
 ### [Example 08: 29 MAR 2023](./ORTools_example08.m)
