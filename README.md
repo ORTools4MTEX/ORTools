@@ -11,7 +11,8 @@
 
 ---
 
-<div align = center>  
+<div align = center>
+  
 [![buttonIcon1]][Link1]
 
 [![buttonIcon2]][Link2]  &emsp;  &emsp;  &emsp; [![buttonIcon3]][Link3]
