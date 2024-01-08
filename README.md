@@ -24,6 +24,7 @@
 ---
 
 <div align = left>
+
 ## Introduction to ORTools
 ![matlab compatible](https://img.shields.io/badge/matlab-compatible-lightgrey.svg)  ![GitHub top language](https://img.shields.io/github/languages/top/ORTOOLS4MTEX/ORTools)
 
