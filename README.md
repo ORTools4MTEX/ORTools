@@ -25,7 +25,6 @@
 | [**• ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts) | [**• ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference) |
 | :--- | :--- |
 ---
----
 ## title {.tabset .tabset-fade}
 content above tabbed region.
 
