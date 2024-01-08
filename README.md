@@ -1,30 +1,3 @@
-# UPDATES
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ORTOOLS4MTEX/ORTools/develop)  ![GitHub repo size](https://img.shields.io/github/repo-size/ORTOOLS4MTEX/ORTools)  ![GitHub Discussions](https://img.shields.io/github/discussions/ORTools4MTEX/ORTools)  ![GitHub issues](https://img.shields.io/github/issues/ORTools4MTEX/ORTools)
-
-- The latest **[ORTools v2.3.0](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.3.0)** stable release should be employed together with the **[MTEX v5.10](https://mtex-toolbox.github.io/download.html)** stable release.
-- Alternatively, if you wish to use developer software, the latest versions of the **[ORTools](https://github.com/ORTools4MTEX/ORTools)** and **[MTEX](https://github.com/mtex-toolbox/mtex/tree/develop)** nightly builds should be employed together.
-
-
----
-
-<p align="left">
-  <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
-</p>
-
----
-
-| [**• Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools) |
-| :--- |
-
-| [**• Authors**](https://github.com/ORTools4MTEX/ORTools#authors) | [**• Contributors**](https://github.com/ORTools4MTEX/ORTools#contributors) |
-| :--- | :--- |
-
-| [**• How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools) | [**• How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools) |
-| :--- | :--- |
-
-| [**• ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts) | [**• ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference) |
-| :--- | :--- |
----
 ## title {.tabset .tabset-fade}
 content above tabbed region.
 
@@ -54,6 +27,36 @@ tab content  Insights
 
 content below tabbed region
 ---
+
+# UPDATES
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ORTOOLS4MTEX/ORTools/develop)  ![GitHub repo size](https://img.shields.io/github/repo-size/ORTOOLS4MTEX/ORTools)  ![GitHub Discussions](https://img.shields.io/github/discussions/ORTools4MTEX/ORTools)  ![GitHub issues](https://img.shields.io/github/issues/ORTools4MTEX/ORTools)
+
+- The latest **[ORTools v2.3.0](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.3.0)** stable release should be employed together with the **[MTEX v5.10](https://mtex-toolbox.github.io/download.html)** stable release.
+- Alternatively, if you wish to use developer software, the latest versions of the **[ORTools](https://github.com/ORTools4MTEX/ORTools)** and **[MTEX](https://github.com/mtex-toolbox/mtex/tree/develop)** nightly builds should be employed together.
+
+
+---
+
+<p align="left">
+  <img src="./doc/images/ORTools.png" alt="ORTools" width="300"/>
+</p>
+
+---
+
+| [**• Introduction to ORTools**](https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools) |
+| :--- |
+
+| [**• Authors**](https://github.com/ORTools4MTEX/ORTools#authors) | [**• Contributors**](https://github.com/ORTools4MTEX/ORTools#contributors) |
+| :--- | :--- |
+
+| [**• How to cite ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools) | [**• How to use ORTools**](https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools) |
+| :--- | :--- |
+
+| [**• ORTools example scripts**](https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts) | [**• ORTools function reference**](https://github.com/ORTools4MTEX/ORTools#ortools-function-reference) |
+| :--- | :--- |
+
+---
+
 ## Introduction to ORTools
 ![matlab compatible](https://img.shields.io/badge/matlab-compatible-lightgrey.svg)  ![GitHub top language](https://img.shields.io/github/languages/top/ORTOOLS4MTEX/ORTools)
 
