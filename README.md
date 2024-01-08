@@ -18,7 +18,7 @@
 
 [![buttonIcon4]][Link4] &emsp;  &emsp;  &emsp;  &emsp; [![buttonIcon5]][Link5]
 
-[![buttonIcon6]][Link6] &emsp;  &emsp;  &ensp; [![buttonIcon7]][Link7]
+[![buttonIcon6]][Link6] &emsp;  &emsp;  &nbsp; [![buttonIcon7]][Link7]
 
 ---
 
