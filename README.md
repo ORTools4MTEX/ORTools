@@ -294,6 +294,28 @@ This function is a GUI to compute grains from ebsd map data and optionally filte
 
 <li><details><summary><a>computeGrainPairs</a></summary>
 
+This function computes the absolute or normalised frequency and boundary segment lengths of grain pairs. 
+The grain pair ids can be defined by the user for variants, crystallographic packets, Bain groups, any other-id type or for groups of id or equivalent id pairs.
+
+- Syntax:
+  - [out] = computeGrainPairs(grains)
+
+- Input:
+  - pairGrains   - @grain2d = child grain pairs as computed by the [computeVariantGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantGrains) function
+
+- Output:
+  - out          - @struc   = a strcture variable containing the absolute or normalised frequency and boundary segment lengths of grain pairs. 
+
+- Options:
+  - variant    - Uses the variant ids of child grain pairs.
+  - packet     - Uses the packet ids of child grain pairs.
+  - bain       - Uses the bain ids of child grain pairs.
+  - other      - Uses a pre-specified list of ids of child grain pairs.
+  - group      - A cell defining different groups of id or equivalent id pairs.
+  - include    - Includes similar neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. For e.g. - V1-V1, or CP2-CP2, or B3-B3 etc.  
+  - exclude    - Excludes similar neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. (default)
+  - absolute   - Returns the absolute frequency and boundary segment values of neighbouring variant, packet, bain, other-id type, or groups of id or equivalent id pairs.
+  - normalise  - Returns the normalised frequency and boundary segment values of neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. (default)
 
 </li>
 
@@ -301,6 +323,34 @@ This function is a GUI to compute grains from ebsd map data and optionally filte
 
 <li><details><summary><a>computeHabitPlane</a></summary>
 
+This function computes the habit plane based on the determined traces from 2D ebsd map data as per the following reference:
+
+[**T. Nyyssönen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane determination from reconstructed parent phase orientation maps. (https://doi.org/10.48550/arXiv.2303.07750)**](https://doi.org/10.48550/arXiv.2303.07750)
+
+- Syntax
+  - [hPlane,statistics] = computeHabitPlane(job)
+- Input
+  -  job            - @parentGrainReconstructor
+- Output
+  -  hPlane         - @Miller     = Habit plane
+  -  statistics     - @Container  = Statistics of fitting
+- Options
+  -  Radon          - Radon based algorithm (ebsd pixel data used)
+  -  Fourier        - Fourier based algorithm (ebsd pixel data used)
+  -  Calliper       - Shortest calliper based algorithm (grain data used)
+  -  Shape          - Characteristic grain shape based algorithm (grain data used)
+  -  Hist           - Circular histogram based algorithm (grain data used)
+  -  minClusterSize - Minimum number of pixels required for trace determination (default = 100)
+  -  reliability    - Minimum value of accuracy in determined traces used to compute the habit plane (varies from 0 to 1, default = 0.5)
+  -  colormap       - Defines the colormap to display the variants (default =  haline)
+  -  linecolor      - Defines the linecolor of the plotted traces (default =  red)
+  -  noScalebar     - Remove scalebar from maps
+  -  noFrame        - Remove frame around maps
+  -  plotTraces     - Logical used to plot the trace & habit plane output
+
+<p align="center">
+  <img src="./doc/images/computehabitPlane.png" alt="Traces of fitted habit plane on variant map" width="600"/>
+</p>
 
 </li>
 
@@ -308,17 +358,53 @@ This function is a GUI to compute grains from ebsd map data and optionally filte
 
 <li><details><summary><a>computePacketGrains</a></summary>
 
+This function computes the crystallographic packet IDs of child grains.
+
+- Syntax
+  - [packet_grains] = computePacketGrains(job)
+- Input
+  - job             - @parentGrainReconstructor
+- Output
+  - packet_grains   - @grains2d
+
 </li>
 
 ---
 
 <li><details><summary><a>computeParentTwins</a></summary>
 
+This function computes twins in parent grains by local refinement.
+
+- Syntax
+  -  computeParentTwins(job,pGrainId)
+- Input
+  -  job          - @parentGrainreconstructor
+  -  pGrainId     - parent grain Id 
+  -  direction    - @vector3d
+- Options
+  -  grains       - plot grain data instead of EBSD data
+
+<p align="center">
+  <img src="./doc/images/computeParentTwins.png" alt="GUI of computeParentTwins" width="400"/>
+</p>
+
 </li>
 
 ---
 
 <li><details><summary><a>computeVariantGrains</a></summary>
+
+This function refines the child grains in the *job* object based on their variant IDs. It returns a grain object containing the refined child grains alongside all other grains and an EBSD object with updated grain Ids.
+
+- Syntax
+  - [variant_grains,cEBSD] = computeVariantGrains(job,varargin)
+- Input
+  - job              - @parentGrainReconstructor
+- Output
+  - grains           - @grains2d 
+  - ebsd             - @EBSD
+- Options
+  - parentGrainId    - parent grain Id using the argument 'parentGrainId'
 
 </li>
 
