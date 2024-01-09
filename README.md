@@ -256,6 +256,82 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ## ORTools alphabetical function index
 
 ### C
+<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains">computeBainGrains</a></summary>
+
+This function computes the Bain group IDs of child grains.
+
+- Syntax
+  - [bain_grains] = computeBainGrains(job)
+- Input
+  - job           - @parentGrainReconstructor
+- Output
+  - bain_grains   - @grains2d 
+
+</li>
+
+---
+
+<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrains">computeGrains</a></summary>
+
+This function is a GUI to compute grains from ebsd map data and optionally filters them.
+
+- Syntax
+  - [ebsd,grains,gB] = computeGrains(ebsd)
+- Input
+  - ebsd  - @EBSD
+- Output
+  - ebsd     - @EBSD
+  - grains   - @grains2d 
+  - gB       - @grainBoundary
+
+<p align="center">
+  <img src="./doc/images/computeGrains.png" alt="UI of computeGrains" width="400"/>
+</p>
+
+</li>
+
+---
+
+<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs">computeGrainPairs</a></summary>
+
+
+</li>
+
+---
+
+<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane">computeHabitPlane</a></summary>
+
+
+</li>
+
+---
+
+<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computePacketGrains">computePacketGrains</a></summary>
+
+</li>
+
+---
+
+<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeParentTwins">computeParentTwins</a></summary>
+
+</li>
+
+---
+
+<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantGrains">computeVariantGrains</a></summary>
+
+</li>
+
+---
+
+</ul> <!-- End -->
+</details>
+
+----
+
+
+
+### C
 - [computeBainGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains)
 - [computeGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrains)
 - [computeGrainPairs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs)
