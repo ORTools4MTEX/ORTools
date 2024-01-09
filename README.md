@@ -255,7 +255,8 @@ This script follows the same dataset and steps that are used to demonstrate the 
 
 ## ORTools alphabetical function index
 
-### C
+<details><summary><b>C</b></summary><ul>
+  
 <li><details><summary><a>computeBainGrains</a></summary>
 
 This function computes the Bain group IDs of child grains.
@@ -415,7 +416,53 @@ This function refines the child grains in the *job* object based on their varian
 
 ----
 
+<details><summary><b>D</b></summary><ul>
+</ul> <!-- End -->
+</details>
 
+----
+
+<details><summary><b>F</b></summary><ul>
+</ul> <!-- End -->
+</details>
+
+----
+
+<details><summary><b>G</b></summary><ul>
+</ul> <!-- End -->
+</details>
+
+----
+
+<details><summary><b>O</b></summary><ul>
+</ul> <!-- End -->
+</details>
+
+----
+
+<details><summary><b>P</b></summary><ul>
+</ul> <!-- End -->
+</details>
+
+----
+
+<details><summary><b>R</b></summary><ul>
+</ul> <!-- End -->
+</details>
+
+----
+
+<details><summary><b>S</b></summary><ul>
+</ul> <!-- End -->
+</details>
+
+----
+
+<details><summary><b>T</b></summary><ul>
+</ul> <!-- End -->
+</details>
+
+----
 
 ### C
 - [computeBainGrains](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains)
