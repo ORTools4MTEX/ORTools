@@ -256,7 +256,7 @@ This script follows the same dataset and steps that are used to demonstrate the 
 ## ORTools alphabetical function index
 
 ### C
-<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeBainGrains">computeBainGrains</a></summary>
+<li><details><summary><a>computeBainGrains</a></summary>
 
 This function computes the Bain group IDs of child grains.
 
@@ -271,7 +271,7 @@ This function computes the Bain group IDs of child grains.
 
 ---
 
-<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrains">computeGrains</a></summary>
+<li><details><summary><a>computeGrains</a></summary>
 
 This function is a GUI to compute grains from ebsd map data and optionally filters them.
 
@@ -292,33 +292,33 @@ This function is a GUI to compute grains from ebsd map data and optionally filte
 
 ---
 
-<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs">computeGrainPairs</a></summary>
+<li><details><summary><a>computeGrainPairs</a></summary>
 
 
 </li>
 
 ---
 
-<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeHabitPlane">computeHabitPlane</a></summary>
+<li><details><summary><a>computeHabitPlane</a></summary>
 
 
 </li>
 
 ---
 
-<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computePacketGrains">computePacketGrains</a></summary>
+<li><details><summary><a>computePacketGrains</a></summary>
 
 </li>
 
 ---
 
-<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeParentTwins">computeParentTwins</a></summary>
+<li><details><summary><a>computeParentTwins</a></summary>
 
 </li>
 
 ---
 
-<li><details><summary><a href="//github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantGrains">computeVariantGrains</a></summary>
+<li><details><summary><a>computeVariantGrains</a></summary>
 
 </li>
 
