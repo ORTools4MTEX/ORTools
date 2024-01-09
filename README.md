@@ -1215,4 +1215,4 @@ This function tiles all figures evenly across the computer screen/monitor.
 [buttonIcon4]:  https://img.shields.io/badge/How_to_cite_ORTools-37a779?style=for-the-badge
 [buttonIcon5]:  https://img.shields.io/badge/How_to_use_ORTools-37a779?style=for-the-badge
 [buttonIcon6]:  https://img.shields.io/badge/ORTools_example_scripts-37a779?style=for-the-badge
-[buttonIcon7]:  https://img.shields.io/badge/ORTools_function_index-37a779?style=for-the-badge
+[buttonIcon7]:  https://img.shields.io/badge/ORTools_alphabetical_function_index-37a779?style=for-the-badge
