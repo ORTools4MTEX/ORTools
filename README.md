@@ -31,12 +31,12 @@
 
 <!---------------------------------[ Links ]--------------------------------->
 [link1]: #introduction-to-ortools
-[link2]: https://github.com/ORTools4MTEX/ORTools#authors-and-contributors
-[link3]: https://github.com/ORTools4MTEX/ORTools#collaborators
-[link4]: https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools
-[link5]: https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools
-[link6]: https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts
-[link7]: https://github.com/ORTools4MTEX/ORTools#ortools-alphabetical-function-index
+[link2]: #authors-and-contributors
+[link3]: #collaborators
+[link4]: #how-to-cite-ortools
+[link5]: #how-to-use-ortools
+[link6]: #ortools-example-scripts
+[link7]: #ortools-alphabetical-function-index
 
 ---
 
