@@ -30,7 +30,7 @@
 [buttonIcon7]:  https://img.shields.io/badge/ORTools_alphabetical_function_index-37a779?style=for-the-badge
 
 <!---------------------------------[ Links ]--------------------------------->
-[link1](#introduction-to-ortools)
+[link1]: #introduction-to-ortools
 [link2]: https://github.com/ORTools4MTEX/ORTools#authors-and-contributors
 [link3]: https://github.com/ORTools4MTEX/ORTools#collaborators
 [link4]: https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools
