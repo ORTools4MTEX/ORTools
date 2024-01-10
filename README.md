@@ -1210,7 +1210,7 @@ This function tiles all figures evenly across the computer screen/monitor.
 
 <!---------------------------------[ Buttons ]--------------------------------->
 [buttonIcon1]:  https://img.shields.io/badge/Introduction_to_ORTools-37a779?style=for-the-badge
-[buttonIcon2]:  https://img.shields.io/badge/Authors_and_Contributors-37a779?style=for-the-badge
+[buttonIcon2]:  https://img.shields.io/badge/Authors_and_contributors-37a779?style=for-the-badge
 [buttonIcon3]:  https://img.shields.io/badge/Collaborators-37a779?style=for-the-badge
 [buttonIcon4]:  https://img.shields.io/badge/How_to_cite_ORTools-37a779?style=for-the-badge
 [buttonIcon5]:  https://img.shields.io/badge/How_to_use_ORTools-37a779?style=for-the-badge
