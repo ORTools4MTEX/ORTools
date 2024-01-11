@@ -20,6 +20,24 @@
 
 [![buttonIcon6]][Link6] &emsp;  &emsp;  &nbsp; [![buttonIcon7]][Link7]
 
+<!---------------------------------[ Buttons ]--------------------------------->
+[buttonIcon1]:  https://img.shields.io/badge/Introduction_to_ORTools-37a779?style=for-the-badge
+[buttonIcon2]:  https://img.shields.io/badge/Authors_and_contributors-37a779?style=for-the-badge
+[buttonIcon3]:  https://img.shields.io/badge/Collaborators-37a779?style=for-the-badge
+[buttonIcon4]:  https://img.shields.io/badge/How_to_cite_ORTools-37a779?style=for-the-badge
+[buttonIcon5]:  https://img.shields.io/badge/How_to_use_ORTools-37a779?style=for-the-badge
+[buttonIcon6]:  https://img.shields.io/badge/ORTools_example_scripts-37a779?style=for-the-badge
+[buttonIcon7]:  https://img.shields.io/badge/ORTools_alphabetical_function_index-37a779?style=for-the-badge
+
+<!---------------------------------[ Links ]--------------------------------->
+[link1]: #introduction-to-ortools
+[link2]: #authors-and-contributors
+[link3]: #collaborators
+[link4]: #how-to-cite-ortools
+[link5]: #how-to-use-ortools
+[link6]: #ortools-example-scripts
+[link7]: #ortools-alphabetical-function-index
+
 ---
 
 ## Introduction to ORTools
@@ -39,7 +57,7 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
 
 ---
 
-## Authors and Contributors
+## Authors and contributors
 ![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)
 
 **ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
@@ -1193,26 +1211,3 @@ This function tiles all figures evenly across the computer screen/monitor.
 
 ----
 
-
-
-
-
-
-
-<!----------------------------------------------------------------------------->
-[link1]: https://github.com/ORTools4MTEX/ORTools#introduction-to-ortools
-[link2]: https://github.com/ORTools4MTEX/ORTools#authors-and-contributors
-[link3]: https://github.com/ORTools4MTEX/ORTools#collaborators
-[link4]: https://github.com/ORTools4MTEX/ORTools#how-to-cite-ortools
-[link5]: https://github.com/ORTools4MTEX/ORTools#how-to-use-ortools
-[link6]: https://github.com/ORTools4MTEX/ORTools#ortools-example-scripts
-[link7]: https://github.com/ORTools4MTEX/ORTools#ortools-alphabetical-function-index
-
-<!---------------------------------[ Buttons ]--------------------------------->
-[buttonIcon1]:  https://img.shields.io/badge/Introduction_to_ORTools-37a779?style=for-the-badge
-[buttonIcon2]:  https://img.shields.io/badge/Authors_and_Contributors-37a779?style=for-the-badge
-[buttonIcon3]:  https://img.shields.io/badge/Collaborators-37a779?style=for-the-badge
-[buttonIcon4]:  https://img.shields.io/badge/How_to_cite_ORTools-37a779?style=for-the-badge
-[buttonIcon5]:  https://img.shields.io/badge/How_to_use_ORTools-37a779?style=for-the-badge
-[buttonIcon6]:  https://img.shields.io/badge/ORTools_example_scripts-37a779?style=for-the-badge
-[buttonIcon7]:  https://img.shields.io/badge/ORTools_alphabetical_function_index-37a779?style=for-the-badge
