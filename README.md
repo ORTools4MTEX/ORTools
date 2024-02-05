@@ -83,7 +83,9 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 ## How to use ORTools
 ![GitHub forks](https://img.shields.io/github/forks/ORTools4MTEX/ORTools)  ![GitHub Repo stars](https://img.shields.io/github/stars/ORTools4MTEX/ORTools)  ![GitHub watchers](https://img.shields.io/github/watchers/ORTools4MTEX/ORTools)  ![GitHub followers](https://img.shields.io/github/followers/ORTools4MTEX)  
 
-- The ORTools library only works **after** the prior installation of [MATLAB](https://se.mathworks.com/help/install/install-products.html). Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html). ORTools is tested for compatibility from MATLAB 2016b onwards. With each [release](https://github.com/ORTools4MTEX/ORTools/releases) of ORTools, please check exactly which version of MTEX it is compatible with. 
+- The ORTools library only works **after** the prior installation of [MATLAB](https://se.mathworks.com/help/install/install-products.html) and [**MTEX**](https://mtex-toolbox.github.io/).   
+   - Follow the instructions for installing [MATLAB](https://se.mathworks.com/help/install/install-products.html). ORTools is tested for compatibility from MATLAB 2016b onwards. 
+   - With each [release](https://github.com/ORTools4MTEX/ORTools/releases) of ORTools, please check exactly which version of MTEX it is compatible with. 
 - Click on the weblinks to download either one of the following two combinations:
   - <ins>Latest STABLE releases of:</ins> 
     - [**MTEX**](https://mtex-toolbox.github.io/download.html) and [**ORTools**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v2.3.0).
