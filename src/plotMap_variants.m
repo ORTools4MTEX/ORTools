@@ -62,7 +62,7 @@ delete(ax2.Children);
 colormap(ax1,'gray')
 
 if check_option(varargin,'grains')
-    plt1 = plot(job.transformedGrains,job.transformedGrains.variantId,'parent',ax2);
+    plt2 = plot(job.transformedGrains,job.transformedGrains.variantId,'parent',ax2);
 else
     pGrains = job.grains(job.mergeId(job.ebsdPrior(job.csChild).grainId));
     isParent = pGrains.phaseId == job.parentPhaseId;
