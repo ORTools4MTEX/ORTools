@@ -21,7 +21,7 @@ function ipfKey = plotMap_IPF_p2c(job, varargin)
 vector = getClass(varargin,'vector3d',vector3d.Z);
 ipfKey1 = [];
 ipfKey2 = [];
-
+ebsd = job.ebsd;
 
 %% Check what to plot
 onlyChild = false;
@@ -39,8 +39,8 @@ setInterp2Latex
 
 %% Define the window settings for a set of docked figures
 %Check if docked figure is needed
-if (isempty(job.ebsd(job.csParent)) || onlyChild) || ...
-   (isempty(job.ebsd(job.csChild)) || onlyParent)
+if (isempty(ebsd(job.csParent)) || onlyChild) || ...
+   (isempty(ebsd(job.csChild)) || onlyParent)
     plot2tab = false;
 else
     plot2tab = true;
@@ -58,52 +58,52 @@ if plot2tab
 end
 
 %% Parent map
-if ~isempty(job.ebsd(job.csParent)) && ~onlyChild
+if ~isempty(ebsd(job.csParent)) && ~onlyChild
     if plot2tab
         drawnow;
-		figH = gobjects(1);
+        figH = gobjects(1);
         figH = figure('WindowStyle','docked');
         set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
         drawnow;
     else 
         figH = figure;
     end
-    ipfKey1 = ipfHSVKey(job.ebsd(job.csParent));
+    ipfKey1 = ipfHSVKey(ebsd(job.csParent));
     ipfKey1.inversePoleFigureDirection = vector;
-    colors = ipfKey1.orientation2color(job.ebsd(job.csParent).orientations);
-    plot(job.ebsd(job.csParent),colors);
+    colors = ipfKey1.orientation2color(ebsd(job.csParent).orientations);
+    plot(ebsd(job.csParent),colors);
     hold all
     plot(job.grains.boundary,varargin{:});
     hold off
     guiTitle = ['Parent IPF <',vector.char,'> map = ',job.csParent.mineral];
     set(figH,'Name',guiTitle,'NumberTitle','on');
     drawnow;
-elseif isempty(job.ebsd(job.csParent))
+elseif isempty(ebsd(job.csParent))
     warning('Parent IPFx map empty');
 end
 
 % Child map
-if ~isempty(job.ebsd(job.csChild)) && ~onlyParent
+if ~isempty(ebsd(job.csChild)) && ~onlyParent
     if plot2tab
         drawnow;
-		figH = gobjects(1);
+        figH = gobjects(1);
         figH = figure('WindowStyle','docked');
         set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
         drawnow;
     else 
         figH = figure;
     end
-    ipfKey2 = ipfHSVKey(job.ebsd(job.csChild));
+    ipfKey2 = ipfHSVKey(ebsd(job.csChild));
     ipfKey2.inversePoleFigureDirection = vector;
-    colors = ipfKey2.orientation2color(job.ebsd(job.csChild).orientations);
-    plot(job.ebsd(job.csChild),colors);
+    colors = ipfKey2.orientation2color(ebsd(job.csChild).orientations);
+    plot(ebsd(job.csChild),colors);
     hold all
     plot(job.grains.boundary,varargin{:});
     hold off
     guiTitle = ['Child IPF <',vector.char,'> map = ',job.csChild.mineral];
     set(figH,'Name',guiTitle,'NumberTitle','on');
     drawnow;
-elseif isempty(job.ebsd(job.csChild))
+elseif isempty(ebsd(job.csChild))
     warning('Child IPFx map empty');
 end
 
@@ -113,12 +113,12 @@ if plot2tab
     warning on
     allfigh = findall(0,'type','figure');
     if length(allfigh) > 1 &&...
-            (~isempty(job.ebsd(job.csParent)) && ~onlyChild) &&...
-            (~isempty(job.ebsd(job.csChild)) && ~onlyParent)
+            (~isempty(ebsd(job.csParent)) && ~onlyChild) &&...
+            (~isempty(ebsd(job.csChild)) && ~onlyParent)
         figure(length(allfigh)-1);
     elseif length(allfigh) > 1 &&...
-            (~isempty(job.ebsd(job.csParent)) && ~onlyChild) ||...
-            (~isempty(job.ebsd(job.csChild)) && ~onlyParent)
+            (~isempty(ebsd(job.csParent)) && ~onlyChild) ||...
+            (~isempty(ebsd(job.csChild)) && ~onlyParent)
         figure(length(allfigh));
     else
         figure(1);
