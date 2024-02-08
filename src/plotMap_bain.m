@@ -14,8 +14,10 @@ function f_area = plotMap_bain(job, varargin)
 %  f_area: Area fraction of each Bain group in the EBSD map
 %
 %% Options:
-%  colormap - colormap variable
-%  grains   - plot grain data instead of EBSD data
+%  colormap     - Colormap variable (default: rdylgn)
+%  grains       - Plot grain data instead of EBSD data
+%  bc           - Plot as semintransparent overlay on bandcontrast (bc) or image quality (iq) data
+%  facealpha    - Set transparency for bandcontrast overlay plot (default: 0.6)
 
 % set(0,'DefaultFigureVisible','off');
 % allfigh = findall(0,'type','figure');

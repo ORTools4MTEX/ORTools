@@ -105,6 +105,8 @@ hold off;
 job.calcVariants;
 % and plot the variant map
 plotMap_variants(job,'linewidth',2);
+plotMap_variants(job,'grains','bc','linewidth',2); %Alternatively plot the grain data on top of the band contrast
+
 % and plot the packet map
 plotMap_packets(job,'linewidth',2);
 % and plot the Bain group map

@@ -153,6 +153,8 @@ job.calcVariants;
 % ... and plot them
 plotMap_variants(job,'grains','linewidth',3); %Grain data
 plotMap_variants(job,'linewidth',3); %EBSD data
+plotMap_variants(job,'bc','linewidth',3); %Plot as overlay on BC data
+
 
 % We see that each child grain contains several variants on EBSD level
 % For analyzing variant pairing, we need the variants on the EBSD level

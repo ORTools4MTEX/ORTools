@@ -15,8 +15,10 @@ function f_area = plotMap_packets(job, varargin)
 %  entire EBSD map
 %
 %% Options:
-%  colormap - colormap variable
-%  grains   - plot grain data instead of EBSD data
+%  colormap     - Colormap variable (default: viridis)
+%  grains       - Plot grain data instead of EBSD data
+%  bc           - Plot as semintransparent overlay on bandcontrast (bc) or image quality (iq) data
+%  facealpha    - Set transparency for bandcontrast overlay plot (default: 0.6)
 
 %% Define the text output format as Latex
 setInterp2Latex

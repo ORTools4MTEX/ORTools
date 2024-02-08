@@ -14,8 +14,10 @@ function f_area = plotMap_variants(job, varargin)
 %  entire EBSD map
 %
 %% Options:
-%  colormap - colormap variable
-%  grains   - plot grain data instead of EBSD data
+%  colormap     - Colormap variable (default: jet)
+%  grains       - Plot grain data instead of EBSD data
+%  bc           - Plot as semintransparent overlay on bandcontrast (bc) or image quality (iq) data
+%  facealpha    - Set transparency for bandcontrast overlay plot (default: 0.6)
 
 cmap = get_option(varargin,'colormap',jet);
 facealpha = get_option(varargin,'facealpha',0.6);
