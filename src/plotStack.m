@@ -70,7 +70,6 @@ ipfKeyChild = ipfHSVKey(job.csChild);
 ipfKeyChild.inversePoleFigureDirection = vector;
 % Define the child PDF
 hChild = Miller(0,0,1,job.csChild,'hkl');
-hParent = Miller(0,0,1,job.csParent,'hkl');
 
 %% Define the maximum number of variants and packets for the p2c OR
 maxVariants = length(job.p2c.variants);
