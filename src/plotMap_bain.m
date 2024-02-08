@@ -104,7 +104,7 @@ hold off
 colorbar(ax2,'location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
     'YTick', [1:1:nr_bain],'YTickLabel',string(num2str([1:1:nr_bain]')), 'YLim', [0.5 nr_bain+0.5],...
     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-clim(ax2,[0.5 nr_bain + 0.5]);
+caxis(ax2,[0.5 nr_bain + 0.5]);
 set(f,'Name','Bain group Id map','NumberTitle','on');
 drawnow;
 end

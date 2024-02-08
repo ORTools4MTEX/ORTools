@@ -97,7 +97,7 @@ hold off
 colorbar(ax2,'location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
     'YTick', [1:1:nr_variants],'YTickLabel',string(num2str([1:1:nr_variants]')), 'YLim', [0.5 nr_variants+0.5],...
     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-clim(ax2,[0.5 nr_variants + 0.5]);
+caxis(ax2,[0.5 nr_variants + 0.5]);
 set(f,'Name','Variant Id map','NumberTitle','on');
 drawnow;
 end
