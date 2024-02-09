@@ -1,4 +1,4 @@
-function f_area = plotMap_bain(job, varargin)
+function f_area = plotMap_bain2(job, varargin)
 %% Function description:
 % This function plots an ebsd map by colorising child grains according to 
 % their Bain group ID. It also outputs the area fraction of each Bain 
@@ -19,22 +19,14 @@ function f_area = plotMap_bain(job, varargin)
 %  bc           - Plot as semintransparent overlay on bandcontrast (bc) or image quality (iq) data
 %  facealpha    - Set transparency for bandcontrast overlay plot (default: 0.6)
 
-% set(0,'DefaultFigureVisible','off');
-% allfigh = findall(0,'type','figure');
-% if length(allfigh) > 1
-%     close(figure(length(allfigh)+1));
-% else
-%     close(figure(1));
-% end
-% set(0,'DefaultFigureVisible','on');
-
-%% Define the text output format as Latex
+% Define the text output format as Latex
 setInterp2Latex
 cmap = get_option(varargin,'colormap',rdylgn);
-facealpha = get_option(varargin,'facealpha',0.6);
+facealpha = get_option(varargin,'facealpha',0.67);
 
 % Scale colormap
 nr_bain = max(job.transformedGrains.bainId);
+nrShades = 25; %Nr of shades for band contrast
 if nr_bain < 8
     n1 = round((0:(nr_bain-1)) ./ (nr_bain-1) .* ...
         (size(cmap,1) - 1)) + 1;
@@ -45,29 +37,26 @@ else
     cmap = cmap(n2:n1:end, :); 
 end
 
+%% Define the text output format as Latex
 f = figure();
 if check_option(varargin,'bc')
     if isfield(job.ebsdPrior.prop,'bc')
-        prop = rescale(filloutliers(job.ebsdPrior.prop.bc,"clip",'quartiles'));
+        prop = nrShades*rescale(filloutliers(job.ebsdPrior.prop.bc,"clip",'quartiles'))-nrShades;
     elseif isfield(job.ebsdPrior.prop,'iq')
-        prop = rescale(filloutliers(job.ebsdPrior.prop.iq,"clip",'quartiles'));
+        prop = nrShades*rescale(filloutliers(job.ebsdPrior.prop.iq,"clip",'quartiles'))-nrShades;
     else
         warning('BC was not plotted, as data is missing.');
     end
 
     % Create main axis and then copy it.  
-    plt1 = plot(job.ebsdPrior,prop);
+    plot(job.ebsdPrior,prop);
 else
-    plt1 = plot(job.ebsdPrior,nan(size(job.ebsdPrior)));
-    
+    plot(job.ebsdPrior,nan(size(job.ebsdPrior)));  
 end
-ax1 = plt1.Parent; 
-ax2 = copyobj(ax1,f);
-delete(ax2.Children);
-colormap(ax1,'gray')
+hold on
 
 if check_option(varargin,'grains')
-     plt2 = plot(job.transformedGrains,job.transformedGrains.bainId,'parent',ax2);
+     plt2 = plot(job.transformedGrains,job.transformedGrains.bainId);
 else
     pGrains = job.grains(job.mergeId(job.ebsdPrior(job.csChild).grainId));
     isParent = pGrains.phaseId == job.parentPhaseId;
@@ -84,14 +73,8 @@ end
 if check_option(varargin,'bc')
     set(plt2,'facealpha',facealpha);
 end
-colormap(ax2,cmap)
 
-% Link the axis properties and turn off axis #2.
-ax2.UserData = linkprop([ax1,ax2],...
-    {'Position','InnerPosition','DataAspectRatio','xtick','ytick', ...
-    'ydir','xdir','xlim','ylim'});
-ax2.Visible = 'off';
-ax2.Color = 'none';
+colormap([gray(nrShades);cmap]);
 
 % Plot parent grain boundaries
 hold on
@@ -100,11 +83,12 @@ plot(parentGrains.boundary,varargin{:})
 hold off
 
 % Define the maximum number of color levels and plot the colorbar
-
-colorbar(ax2,'location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
+figM = gcm;
+colorbar(figM);
+set(figM.cBarAxis,'location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
     'YTick', [1:1:nr_bain],'YTickLabel',string(num2str([1:1:nr_bain]')), 'YLim', [0.5 nr_bain+0.5],...
     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-caxis(ax2,[0.5 nr_bain + 0.5]);
+caxis([-nrShades+0.5 nr_bain + 0.5]);
 set(f,'Name','Bain group Id map','NumberTitle','on');
 drawnow;
 end

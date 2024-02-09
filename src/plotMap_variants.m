@@ -1,4 +1,4 @@
-function f_area = plotMap_variants(job, varargin)
+function f_area = plotMap_variants2(job, varargin)
 %% Function description:
 % This function plots an ebsd map by colorising child grains according to
 % their variant IDs. It also outputs the area fraction of each variant.
@@ -24,6 +24,7 @@ facealpha = get_option(varargin,'facealpha',0.67);
 
 %% Scale colormap
 nr_variants = length(job.p2c.variants);
+nrShades = 25; %Nr of shades for band contrast
 if nr_variants < 8
     n1 = round((0:(nr_variants-1)) ./ (nr_variants-1) .* ...
         (size(cmap,1) - 1)) + 1;
@@ -41,30 +42,24 @@ p2c_V = job.p2c.variants;
 p2c_V = p2c_V(:);
 
 f1 = figure();
+
 if check_option(varargin,'bc')
     if isfield(job.ebsdPrior.prop,'bc')
-        prop = rescale(filloutliers(job.ebsdPrior.prop.bc,"clip",'quartiles'));
+        prop = nrShades*rescale(filloutliers(job.ebsdPrior.prop.bc,"clip",'quartiles'))-nrShades;
     elseif isfield(job.ebsdPrior.prop,'iq')
-        prop = rescale(filloutliers(job.ebsdPrior.prop.iq,"clip",'quartiles'));
+        prop = nrShades*rescale(filloutliers(job.ebsdPrior.prop.iq,"clip",'quartiles'))-nrShades;
     else
         warning('BC was not plotted, as data is missing.');
     end
 
     % Create main axis and then copy it.
-    plt1 = plot(job.ebsdPrior,prop);
+    plot(job.ebsdPrior,prop);
 else
-    plt1 = plot(job.ebsdPrior,nan(size(job.ebsdPrior)));
-
+    plot(job.ebsdPrior,nan(size(job.ebsdPrior)));
 end
-% ax1 = plt1.Parent;
-% ax2 = copyobj(ax1,f);
-% delete(ax2.Children);
-% colormap(ax1,'gray');
-colormap(gray); % apply the colormap to the base
+hold on
 
-f2 = figure();
 if check_option(varargin,'grains')
-%     plt2 = plot(job.transformedGrains,job.transformedGrains.variantId,'parent',ax2);
     plt2 = plot(job.transformedGrains,job.transformedGrains.variantId);
 else
     pGrains = job.grains(job.mergeId(job.ebsdPrior(job.csChild).grainId));
@@ -73,7 +68,6 @@ else
     cEBSD = job.ebsdPrior(job.csChild);
     cEBSD = cEBSD(isParent);
     varIds = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
-%     plt2 = plot(cEBSD,varIds,'parent',ax2);
     plt2 = plot(cEBSD,varIds);
     f_area = [histcounts(varIds,length(p2c_V))/length(varIds)]';
     disp(table([1:length(p2c_V)]',f_area,'VariableNames',{'Variants','AreaFrac'}))
@@ -82,14 +76,8 @@ end
 if check_option(varargin,'bc')
     set(plt2,'facealpha',facealpha);
 end
-% colormap(ax2,cmap)
 
-% % Link the axis properties and turn off axis #2.
-% ax2.UserData = linkprop([ax1,ax2],...
-%     {'Position','InnerPosition','DataAspectRatio','xtick','ytick', ...
-%     'ydir','xdir','xlim','ylim'});
-% ax2.Visible = 'off';
-% ax2.Color = 'none';
+colormap([gray(nrShades);cmap]);
 
 % Plot parent grain boundaries
 hold on
@@ -98,18 +86,13 @@ parentGrains = smooth(job.parentGrains,10);
 plot(parentGrains.boundary,varargin{:})
 hold off
 
-ax1 = findobj(f1, 'type', 'axes');
-ax2 = findobj(f2, 'type', 'axes');
-ch2 = get(ax2, 'children'); % direct children only without finding the hidden ones
-copyobj(ch2, ax1); % shift them from ax2 to ax1
-close(f2); % delete the second figure
-colormap(cmap); % apply the colormap to the overlay
-
 % Define the maximum number of color levels and plot the colorbar
-colorbar(ax1,'location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
+figM = gcm;
+colorbar(figM);
+set(figM.cBarAxis,'location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
     'YTick', [1:1:nr_variants],'YTickLabel',string(num2str([1:1:nr_variants]')), 'YLim', [0.5 nr_variants+0.5],...
     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-caxis(ax1,[0.5 nr_variants + 0.5]);
+caxis([-nrShades+0.5 nr_variants + 0.5]);
 set(f1,'Name','Variant Id map','NumberTitle','on');
 drawnow;
 end
