@@ -1,4 +1,4 @@
-function f_area = plotMap_variants2(job, varargin)
+function f_area = plotMap_variants(job, varargin)
 %% Function description:
 % This function plots an ebsd map by colorising child grains according to
 % their variant IDs. It also outputs the area fraction of each variant.

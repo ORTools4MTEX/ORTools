@@ -1,4 +1,4 @@
-function f_area = plotMap_bain2(job, varargin)
+function f_area = plotMap_bain(job, varargin)
 %% Function description:
 % This function plots an ebsd map by colorising child grains according to 
 % their Bain group ID. It also outputs the area fraction of each Bain 
