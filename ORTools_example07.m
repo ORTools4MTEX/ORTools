@@ -151,9 +151,9 @@ plotPDF_variants(job);
 % Then calculate the variant IDs of all alpha grains ...
 job.calcVariants;
 % ... and plot them
-plotMap_variants(job,'grains','linewidth',3); %Grain data
-plotMap_variants(job,'linewidth',3); %EBSD data
-plotMap_variants(job,'bc','linewidth',3); %Plot as overlay on BC data
+plotMap_variants(job,'grains','linewidth',2); %Grain data
+plotMap_variants(job,'linewidth',2); %EBSD data
+plotMap_variants(job,'grains','bc','linewidth',2); %Plot as overlay on BC data
 
 
 % We see that each child grain contains several variants on EBSD level
