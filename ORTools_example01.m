@@ -97,7 +97,7 @@ plotMap_gB_misfit(job,'linewidth',2, 'maxColor',5);
 %    boundaries are identified by their large misfit with the OR
 
 % Plot a map of the OR boundary probability 
-plotMap_gB_prob(job,'linewidth',2);
+plotMap_gB_prob(job,'threshold',2.5*degree,'tolerance',2.5*degree,'linewidth',2);
 %   - the same can be visualized by calculating the probability that a
 %     boundary belongs to the OR
 

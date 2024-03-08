@@ -77,7 +77,7 @@ if ~isempty(gB)
     end
     colormap(cmap);
     caxis([0 maxColor]);
-    colorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
+    mtexColorbar('location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
         'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
     set(f,'Name','p2c and c2c boundary disorientation map','NumberTitle','on');
     drawnow;

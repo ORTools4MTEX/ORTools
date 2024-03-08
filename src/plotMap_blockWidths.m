@@ -1,4 +1,4 @@
-function plotMap_blockWidths(job,varargin)
+function dBlock = plotMap_blockWidths(job,varargin)
 %% Function description:
 % This function calculates and plots an ebsd map of the representative 
 % value for martensite block widths by projecting all boundary points to 

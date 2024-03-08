@@ -440,7 +440,7 @@ if any(strcmpi(m.dispStyle,{'hkl','hkil'}))
         if check_option(varargin,'round')
             s = [s,num2str(m.(mLabel{ii}))];
         else
-            s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
+            s = [s,num2str(m.(mLabel{ii}),'%0.2f')];
         end
         if ii<length(mLabel)
             s = [s,','];
@@ -461,7 +461,7 @@ elseif any(strcmpi(m.dispStyle,{'uvw','UVTW'}))
         if check_option(varargin,'round')
             s = [s,num2str(m.(mLabel{ii}))];
         else
-            s = [s,num2str(m.(mLabel{ii}),'%0.4f')];
+            s = [s,num2str(m.(mLabel{ii}),'%0.2f')];
         end
         if ii<length(mLabel)
             s = [s,','];

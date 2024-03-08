@@ -111,15 +111,15 @@ plotMap_gB_prob(job,'linewidth',2);
 %   - Reconstruct the microstructure with the variant graph based approach
 job.calcVariantGraph('threshold',4*degree,'tolerance',3.5*degree);
 %job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree,'mergeSimilar')
-job.clusterVariantGraph('includeSimilar');
+job.clusterVariantGraph;
 % ... plot the votes (high values show high certainty)
 figure; plot(job.grains,job.votes.prob(:,1))
 mtexColorbar
 % ... and calculate the parent orientations
 job.calcParentFromVote('minProb',0.5)
 % Plot the reconstructed parent microstructure
-figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2);
+plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'parent');
+
 
 %% Remove badly reconstructed clusters
 % In order to reconstruct the remaining parent grains, we can calculate the
@@ -140,8 +140,7 @@ job.mergeSimilar('threshold',7.5*degree);
 % - merging small inclusions
 job.mergeInclusions('maxSize',150);
 % This is the cleaned reconstructed parent microstructure
-figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
+plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2,'parent');
 
 %% Variant analysis
 % Now that both the alpha and the associated prior gamma orientations are

@@ -1,4 +1,4 @@
-function saveImage(fileDir,fileName)
+function saveImage(fileDir,fileName,varargin)
 %% Function description:
 % This function saves all open figures as images.
 %
@@ -40,6 +40,11 @@ else % Figure windows are open
     % This function auto-checks for an existing file name.
     % It prevents the over-writing of existing image files by adding
     % incremental numbers as suffixes to the saved file name.
+    
+    %Create folder in case it does not exist
+    if ~exist(fileDir, 'dir')
+        mkdir(fileDir);
+    end
 
     if fileIdx >=1 && fileIdx <= 4
         % Continue execution as the user inputted or selected a file name
@@ -68,7 +73,7 @@ else % Figure windows are open
             % Case sensitive re-check for the correct image format
             if any(strcmp(imgType,{'-dbmp','-djpeg','-dpng','-dtiff'}))
                 % Save images
-                print([fileDir,figFileName],imgType,'-r0');
+                print([fileDir,figFileName],imgType,varargin{:});
                 disp(['Image saved as: ',figFileName]);
             else
                 warning('Choose *.bmp, *.jpeg, *.png or *.tiff image types only');
