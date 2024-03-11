@@ -25,16 +25,17 @@ function [variantPairs_boundary, variantGrains] = plotMap_variantPairs(job,varar
 
 pGrainId = get_option(varargin,'parentGrainId',[]);
 if pGrainId
-    [grains,ebsd] = computeVariantGrains(job,'parentGrainId',pGrainId);
+    [grainsTemp,ebsdTemp] = computeVariantGrains(job,'parentGrainId',pGrainId);
     pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
 else
     warning('Argument ''parentGrainId'' not specified. Equivalent variant pairs will be calculated for the EBSD map.');
-    [grains,ebsd] = computeVariantGrains(job);
+    [grainsTemp,ebsdTemp] = computeVariantGrains(job);
 end
 
-variantGrains = grains(job.csChild);
+variantGrains = grainsTemp(job.csChild);
 variantGrains = variantGrains(~isnan(variantGrains.prop.variantId));
-ebsdC = ebsd(ebsd(job.csChild));
+ebsdC = ebsdTemp(job.csChild);
+
 
 %% Determine the variant pairs
 % Derive variant types 1 to 6 from variants 1 to 24
@@ -91,7 +92,7 @@ figH = gobjects(1);
 figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
 drawnow;
-plot(ebsd,'grayscale');
+plot(ebsdTemp,'grayscale');
 hold on
 xlabelString = {'V1-V2','V1-V3(V5)','V1-V6','V1-V4'};
 for ii = 1:size(cond,1)
@@ -142,7 +143,8 @@ table(xlabelString,variantPairs_boundaryFraction,'VariableNames',{'eqVariants','
 
 
 %% Determine the block boundary density
-mapArea = prod(ebsdC.gridify.size.*[ebsdC.gridify.dx,ebsdC.gridify.dy]);
+mapArea = prod(job.ebsdPrior.gridify.size.*[job.ebsdPrior.gridify.dx,job.ebsdPrior.gridify.dy]);
+% mapArea = prod(ebsdC.gridify.size.*[ebsdC.gridify.dx,ebsdC.gridify.dy]);
 for ii = 1:size(cond,1)
     variantPairs_boundaryFraction(ii) = sum(variantPairs_boundary{ii}.segLength)/mapArea;
 end

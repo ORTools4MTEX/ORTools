@@ -161,11 +161,11 @@ plotMap_variants(job,'grains','bc','linewidth',2); %Plot as overlay on BC data
 %% Variant pairing (block boundary) analysis
 [~,maxGrainId] = max(job.grains.area);
 [newGrains,newEBSD] = computeVariantGrains(job);
-%Compare variant indexing for old and new grains
-figure; %Old grains
-plot(grains,grains.meanOrientation);
-figure; %New grains
-plot(newGrains,newGrains.meanOrientation);
+% Compare variant indexing for old and new grains
+figure; % Old child grains
+plot(grains(job.csChild),grains(job.csChild).meanOrientation);
+figure; % New child grains
+plot(newGrains(job.csChild),newGrains(job.csChild).meanOrientation);
 % We see that all the variant detail of the variantIds in the EBSD map are
 % absent at the grain level. This allows us to analyze the boundaries
 % between variants.
