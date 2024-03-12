@@ -126,7 +126,6 @@ screenPrint('SegmentStart','Child grain pair analysis');
 % % CASE 2: Return child grain pair analysis results for a single parent grain
 % [newGrains,~] = computeVariantGrains(job,'parentGrainId',276); 
 % % When using Case 2, please un-remark line 269 as well
-
 newGrains = newGrains(job.csChild);
 
 

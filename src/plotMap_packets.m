@@ -20,44 +20,42 @@ function f_area = plotMap_packets(job, varargin)
 %  bc           - Plot as semintransparent overlay on bandcontrast (bc) or image quality (iq) data
 %  facealpha    - Set transparency for bandcontrast overlay plot (default: 0.6)
 
-%% Define the text output format as Latex
+% Define varargin
 setInterp2Latex
 cmap = get_option(varargin,'colormap',viridis);
 facealpha = get_option(varargin,'facealpha',0.67);
 
 % Scale colormap
 nr_packets = max(job.transformedGrains.packetId);
-nrShades = 25; %Nr of shades for band contrast
-
+nr_shades = 25; % number of shades for band contrast
 if nr_packets < 8
     n1 = round((0:(nr_packets-1)) ./ (nr_packets-1) .* ...
         (size(cmap,1) - 1)) + 1;
     cmap = cmap(n1, :);
 else
     n1 = floor(size(cmap, 1) / nr_packets); % interval between colormap indices
-    n2 = length(cmap) - nr_packets*n1 + 1;   % starting index, i.e. mod(cm,n) does not always equal 0
+    n2 = length(cmap) - nr_packets*n1 + 1;  % starting index, i.e. mod(cm,n) does not always equal 0
     cmap = cmap(n2:n1:end, :); 
 end
 
-% Start plotting
+%% Define the text output format as Latex
+setInterp2Latex
 
-f = figure();
+%% Start plotting
+f = figure(); %newMtexFigure;
 if check_option(varargin,'bc')
     if isfield(job.ebsdPrior.prop,'bc')
-        prop = nrShades*rescale(filloutliers(job.ebsdPrior.prop.bc,"clip",'quartiles'))-nrShades;
+        prop = nr_shades*rescale(filloutliers(job.ebsdPrior.prop.bc,"clip",'quartiles'))-nr_shades;
     elseif isfield(job.ebsdPrior.prop,'iq')
-        prop = nrShades*rescale(filloutliers(job.ebsdPrior.prop.iq,"clip",'quartiles'))-nrShades;
+        prop = nr_shades*rescale(filloutliers(job.ebsdPrior.prop.iq,"clip",'quartiles'))-nr_shades;
     else
-        warning('BC was not plotted, as data is missing.');
+        warning('BC or IQ was not plotted as data is missing.');
     end
+    plt1 = plot(job.ebsdPrior,prop);
 
-    % Create main axis and then copy it.  
-    plot(job.ebsdPrior,prop);
 else
-    plot(job.ebsdPrior,nan(size(job.ebsdPrior)));
-    
+    plt1 = plot(job.ebsdPrior,nan(size(job.ebsdPrior))); 
 end
-
 hold on
 
 if check_option(varargin,'grains')
@@ -69,7 +67,7 @@ else
     cEBSD = job.ebsdPrior(job.csChild);
     cEBSD = cEBSD(isParent);
     [~,packIds,~] = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
-    plt2 = plot(cEBSD,packIds,'parent',ax2);
+    plt2 = plot(cEBSD,packIds);
     f_area = [histcounts(packIds,nr_packets)/length(packIds)]';
     disp(table([1:nr_packets]',f_area,'VariableNames',{'Packets','AreaFrac'}))
 end
@@ -78,7 +76,7 @@ if check_option(varargin,'bc')
     set(plt2,'facealpha',facealpha);
 end
 
-colormap([gray(nrShades);cmap]);
+colormap([gray(nr_shades);cmap]);
 
 % Plot parent grain boundaries
 hold on
@@ -92,7 +90,8 @@ colorbar(figM);
 set(figM.cBarAxis,'location','eastOutSide','LineWidth',1.25,'TickLength', 0.01,...
     'YTick', [1:1:nr_packets],'YTickLabel',string(num2str([1:1:nr_packets]')), 'YLim', [0.5 nr_packets+0.5],...
     'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-caxis([-nrShades+0.5 nr_packets + 0.5]);
+caxis([-nr_shades+0.5 nr_packets + 0.5]);
 set(f,'Name','Packet Id map','NumberTitle','on');
 drawnow;
+
 end
