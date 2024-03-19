@@ -1,13 +1,16 @@
-
+*.ang
 *.asv
-*.mat
+
 *.cpr
 *.crc
 *.ctf
+
 *.mat
+
 *.Tex
 *.tex
-data/output/**
-TEST/**
 
-*.ang
+data/output/**
+test/**
+
+
