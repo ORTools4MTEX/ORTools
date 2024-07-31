@@ -1,8 +1,9 @@
 function [variantPairs_boundary, variantGrains] = plotMap_KSvariantPairs(job,varargin)
 %% Function description:
 % This function plots an ebsd map of the equivalent pairs of martensitic 
-% variants (block boundaries) in steel microstructures as per the 
-% analysis in the following reference:
+% variants (block boundaries) within individual crystallographic packets 
+% in lath martensite microstructures as per the analysis in the following 
+% reference:
 % S. Morito, A.H. Pham, T. Hayashi, T. Ohba, Block boundary analyses to
 % identify martensite and bainite, Mater. Today Proc., Volume 2,
 % Supplement 3, 2015, Pages S913-S916.
@@ -20,6 +21,7 @@ function [variantPairs_boundary, variantGrains] = plotMap_KSvariantPairs(job,var
 %                         variant pair boundaries
 %
 %% Options:
+% include      - Includes KS variant pairs between crystallogrpahic packets
 %  noScalebar  - Remove scalebar from maps
 %  noFrame     - Remove frame around maps
 
