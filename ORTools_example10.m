@@ -266,8 +266,8 @@ out32 = computeGrainPairs(newGrains,'other','group',eqIds, 'plot');
 % Compare the above segment length values with the variant pair boundary
 % fraction histogram from ORTools's pre-built function for equivalent
 % variant pairs.
-variantBoundaries_map = plotMap_variantPairs(job,'linewidth',1.5);
-% variantBoundaries_map = plotMap_variantPairs(job,'parentGrainId',276,'linewidth',1.5);
+variantBoundaries_map = plotMap_KSvariantPairs(job,'linewidth',1.5);
+% variantBoundaries_map = plotMap_KSvariantPairs(job,'parentGrainId',276,'linewidth',1.5);
 %  -> Figure 20: variant pair boundary fraction histogram
 %   4×2 table
 %

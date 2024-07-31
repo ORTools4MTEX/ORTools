@@ -5,6 +5,8 @@
 *.crc
 *.ctf
 
+*.h5oina
+
 *.mat
 
 *.Tex

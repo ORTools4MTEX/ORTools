@@ -1,4 +1,4 @@
-function [variantPairs_boundary, variantGrains] = plotMap_variantPairs(job,varargin)
+function [variantPairs_boundary, variantGrains] = plotMap_KSvariantPairs(job,varargin)
 %% Function description:
 % This function plots an ebsd map of the equivalent pairs of martensitic 
 % variants (block boundaries) in steel microstructures as per the 
@@ -9,7 +9,7 @@ function [variantPairs_boundary, variantGrains] = plotMap_variantPairs(job,varar
 % (https://doi.org/10.1016/j.matpr.2015.07.430)
 %
 %% Syntax:
-% variantPairs_boundary = plotMap_variantPairs(job,varargin)
+% variantPairs_boundary = plotMap_KSvariantPairs(job,varargin)
 %
 %% Input:
 %  job          - @parentGrainreconstructor
@@ -22,6 +22,12 @@ function [variantPairs_boundary, variantGrains] = plotMap_variantPairs(job,varar
 %% Options:
 %  noScalebar  - Remove scalebar from maps
 %  noFrame     - Remove frame around maps
+
+warning('The ''plotMap_KSvariantPairs'' function is recommended for: (i) lath martensite, AND (ii) the Kurdjumov-Sachs OR.');
+
+% Check if the user has specified the inclusion of variant pairs across 
+% different crystallographic packets
+includeFlag = check_option(varargin,'include');
 
 pGrainId = get_option(varargin,'parentGrainId',[]);
 if pGrainId
@@ -48,7 +54,7 @@ variantBoundaryIds = variantBoundary.grainId;
 variantBoundaryIds(any(~c,2),:) = [];
 variantBoundary(any(~c,2)) = [];
 
-%Identify any special boundaries, here V1-V2 : V1:V6
+% Identify any special boundaries, here V1-V2 : V1:V6
 varTypes = variantGrains(variantGrains.id2ind(variantBoundaryIds)).variantType;
 cond(1,:) = any(ismember(varTypes,1),2) & any(ismember(varTypes,2),2) | ...
     any(ismember(varTypes,3),2) & any(ismember(varTypes,4),2) | ...
@@ -67,8 +73,19 @@ cond(4,:) = any(ismember(varTypes,1),2) & any(ismember(varTypes,4),2) | ...
     any(ismember(varTypes,3),2) & any(ismember(varTypes,6),2);     %V1-V4
 
 for ii = 1:size(cond,1)
-    variantPairs_boundary{ii} = variantBoundary(cond(ii,:));
+    if includeFlag % include variant pairs across crystallographic packets
+        variantPairs_boundary{ii} = variantBoundary(cond(ii,:));
+    else
+        temp_variantPairs_boundary = variantBoundary(cond(ii,:));
+        % find the packetId of the variant pairs
+        vP_pId = variantGrains(temp_variantPairs_boundary.grainId).prop.packetId;
+        % find variant pairs with the same packetId
+        likePacketId = all(vP_pId == vP_pId(:,1), 2);
+        % only keep variant pairs with the same packetId
+        variantPairs_boundary{ii} = temp_variantPairs_boundary(likePacketId);
+    end
 end
+
 
 %% Define the text output format as Latex
 setInterp2Latex
@@ -79,7 +96,7 @@ warning off
 desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
 % % Define a unique group name for the dock using the function name
 % % and the system timestamp
-dockGroupName = ['plotMap_variantPairs_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
+dockGroupName = ['plotMap_KSvariantPairs_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
 desktop.setGroupDocked(dockGroupName,0);
 bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 
@@ -93,18 +110,20 @@ figH = figure('WindowStyle','docked');
 set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
 drawnow;
 plot(ebsdTemp,'grayscale');
-hold on
+hold all;
+[hL(1),mP] = plot(variantGrains.boundary,varargin{:});
+hL(1).FaceColor = 'k';
 xlabelString = {'V1-V2','V1-V3(V5)','V1-V6','V1-V4'};
 for ii = 1:size(cond,1)
-    [hL(ii),mP] = plot(variantPairs_boundary{ii},'linecolor',colors{ii},'DisplayName',xlabelString{ii},varargin{:});
-    hL(ii).FaceColor = colors{ii};
+    [hL(end+1),mP] = plot(variantPairs_boundary{ii},'linecolor',colors{ii},'DisplayName',xlabelString{ii},varargin{:});
+    hL(end).FaceColor = colors{ii};
     hold all;
 end
 if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
     plot(pGrain.boundary,varargin{:},'linecolor',[0.45 0.45 0.45],varargin{:});
 end
-[hL(ii+1),mP] = plot(job.grains.boundary,varargin{:});
-hL(ii+1).FaceColor = 'k';
+[hL(end+1),mP] = plot(job.grains.boundary,varargin{:});
+hL(end).FaceColor = 'k';
 hold off
 legend
 set(figH,'Name','Map: Equivalent variant pair Boundaries','NumberTitle','on');

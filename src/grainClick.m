@@ -116,7 +116,7 @@ setappdata(mP.ax,'grains',[pGrains]);
             computeParentTwins(job,unique(pGrain_select.id),varargin{:});
 
         elseif ~isempty(varargin) && (any(strcmpi(varargin,'variantPair')) || any(strcmpi(varargin,'variantPairs')))
-            plotMap_variantPairs(job,'parentGrainId',unique(pGrain_select.id),varargin{:});
+            plotMap_KSvariantPairs(job,'parentGrainId',unique(pGrain_select.id),varargin{:});
 
         elseif ~isempty(varargin) && (any(strcmpi(varargin,'blockWidth')) || any(strcmpi(varargin,'blockWidths')))
             plotMap_blockWidths(job,'parentGrainId',unique(pGrain_select.id),varargin{:});

@@ -169,11 +169,11 @@ plot(newGrains(job.csChild),newGrains(job.csChild).meanOrientation);
 % We see that all the variant detail of the variantIds in the EBSD map are
 % absent at the grain level. This allows us to analyze the boundaries
 % between variants.
-variantBoundaries_map = plotMap_variantPairs(job,'linewidth',1.5);
+variantBoundaries_map = plotMap_KSvariantPairs(job,'linewidth',1.5);
 % We can also analyze and plot the same for individual prior austenite grains.
 % We also return the grain object as "PAG" with the variant data stored in
 % PAG.prop
-[variantBoundaries_PAG, PAG] = plotMap_variantPairs(job,'parentGrainId',maxGrainId,'linewidth',2);
+[variantBoundaries_PAG, PAG] = plotMap_KSvariantPairs(job,'parentGrainId',maxGrainId,'linewidth',2);
 % In theory, one could use the reindexed grains to redo the parent grain
 % reconstruction based on these grains. This does however not lead to a
 % significantly better reconstruction in the present dataset.

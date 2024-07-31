@@ -60,7 +60,7 @@ end
 % Assign dummy variant and parentIds to non-transformed EBSD data
 % to guide variant-based grain reconstruction
 remainingEBSD.prop.variantId = remainingEBSD.grainId + max(r.variantId) + 1;
-remainingEBSD.prop.parentId= remainingEBSD.grainId + max(cEBSD.prop.parentId) + 1;
+remainingEBSD.prop.parentId = remainingEBSD.grainId + max(cEBSD.prop.parentId) + 1;
 
 
 % Merge EBSD datasets to newEBSD
