@@ -21,12 +21,17 @@ function [variantPairs_boundary, variantGrains] = plotMap_KSvariantPairs(job,var
 %                         variant pair boundaries
 %
 %% Options:
-% include      - Includes equivalent variant pairs between 
+%  include     - Includes equivalent variant pairs between 
 %                crystallographic packets
 %  noScalebar  - Remove scalebar from maps
 %  noFrame     - Remove frame around maps
 
-warning('The ''plotMap_KSvariantPairs'' function is recommended for: (i) lath martensite, AND (ii) the Kurdjumov-Sachs OR.');
+warnText = sprintf(['\n-----------------------------------------------------------\n',...
+    'The ''plotMap_KSvariantPairs'' function is recommended for:\n',...
+    '    (1) lath martensite microstructures, AND\n',...
+    '    (2) the Kurdjumov-Sachs OR.\n',...
+    '-----------------------------------------------------------\n']);
+warning(warnText);
 
 % Check if the user has specified the inclusion of variant pairs across 
 % different crystallographic packets
