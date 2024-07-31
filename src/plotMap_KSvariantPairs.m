@@ -21,7 +21,8 @@ function [variantPairs_boundary, variantGrains] = plotMap_KSvariantPairs(job,var
 %                         variant pair boundaries
 %
 %% Options:
-% include      - Includes KS variant pairs between crystallogrpahic packets
+% include      - Includes equivalent variant pairs between 
+%                crystallographic packets
 %  noScalebar  - Remove scalebar from maps
 %  noFrame     - Remove frame around maps
 
