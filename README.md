@@ -892,7 +892,7 @@ This function plots an ebsd map of the equivalent pairs of martensitic variants 
   - noFrame      - Remove frame around maps
 
 <p align="center">
-  <img src="./doc/images/plotMap_variantPairs.png" alt="plotMap_variantPairs" width="500"/>
+  <img src="./doc/images/plotMap_KSvariantPairs.png" alt="plotMap_KSvariantPairs" width="500"/>
 </p>
 
 </li>
