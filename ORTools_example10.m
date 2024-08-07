@@ -124,8 +124,10 @@ screenPrint('SegmentStart','Child grain pair analysis');
 [newGrains,~] = computeVariantGrains(job);
 
 % % CASE 2: Return child grain pair analysis results for a single parent grain
-% [newGrains,~] = computeVariantGrains(job,'parentGrainId',276); 
 % % When using Case 2, please un-remark line 269 as well
+% [newGrains,~] = computeVariantGrains(job,'parentGrainId',276); 
+
+% Ensure the new grains only include child grains
 newGrains = newGrains(job.csChild);
 
 
@@ -191,7 +193,7 @@ vGroupIds = {[1 2],...
 % ... and compute the groups of equivalent id child grain pairs
 out21 = computeGrainPairs(newGrains,'variant','group',vGroupIds,'plot');
 
-% For individual plotting you can use this code
+% For plotting individual outputs, use this block of script
 figH = figure;
 h = bar(out21.freq);
 h.FaceColor = [162 20 47]./255;
@@ -208,7 +210,7 @@ ylabel('\bf Relative frequency [$\bf f$(g)]');
 set(figH,'Name','Histogram: Groups of child grain variant pairs','NumberTitle','on');
 drawnow;
 
-% For individual plotting you can use this code
+% For plotting individual outputs, use this block of script
 mapArea = prod(ebsd.gridify.size.*[ebsd.gridify.dx,ebsd.gridify.dy]);
 boundaryFraction = out21.segLength./mapArea;
 figH = figure;
