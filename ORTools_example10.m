@@ -120,12 +120,14 @@ screenPrint('SegmentStart','Child grain pair analysis');
 % To begin analysing child grain pairs, we first need the variants (and 
 % packets,and Bain groups) on the EBSD level to be reconstructed as grains
 
+% CHOOSE CASE 1 or CASE 2
 % CASE 1: Return child grain pair analysis results for the entire map
 [newGrains,~] = computeVariantGrains(job);
 
 % % CASE 2: Return child grain pair analysis results for a single parent grain
 % % When using Case 2, please un-remark line 269 as well
 % [newGrains,~] = computeVariantGrains(job,'parentGrainId',276); 
+%
 
 % Ensure the new grains only include child grains
 newGrains = newGrains(job.csChild);
