@@ -5,6 +5,8 @@ theme:
   favicon: images/ORTools_white.png
 extra_css:
   - stylesheets/extra.css
+extra_javascript:
+  - javascripts/external_links.js
 nav:
   - Introduction: index.md
   - Examples: examples.md
