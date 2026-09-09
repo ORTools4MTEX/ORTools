@@ -40,7 +40,7 @@ ebsd = mtexdata(mtexDataset);
 %% Compute grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 1.5° threshold
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
+[grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
     'removeQuadruplePoints');
 %% Rename and recolor phases
 screenPrint('SegmentStart','Renaming and recoloring phases');

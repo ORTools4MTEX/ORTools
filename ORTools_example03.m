@@ -34,7 +34,7 @@ screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDatase
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
+[grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
   'removeQuadruplePoints');
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');

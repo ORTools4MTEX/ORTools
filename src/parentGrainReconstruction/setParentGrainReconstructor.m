@@ -27,7 +27,7 @@ if ind_parent == phaseIDs
     [FileName,inPath] = uigetfile([inPath,'*.cif'],'Import parent phase: Open *.cif file');
     CS.parent = loadCIF([inPath,FileName]);
 else 
-    CS.parent = ebsd.CSList{ind_parent+1};
+    CS.parent = ebsd.CSList(ind_parent+1);
 end
 screenPrint('SubStep',sprintf('''%s''',CS.parent.mineral));
 %% Define the child phase (minerals)
@@ -40,7 +40,7 @@ if ind_child == phaseIDs
     [FileName,inPath] = uigetfile([inPath,'/*.cif'],'Import child phase: Open *.cif file');
     CS.child = loadCIF([inPath,FileName]);
 else
-    CS.child = ebsd.CSList{ind_child+1};
+    CS.child = ebsd.CSList(ind_child+1);
 end
 screenPrint('SubStep',sprintf('''%s''',CS.child.mineral));
 %% Define parentGrainReconstructor job

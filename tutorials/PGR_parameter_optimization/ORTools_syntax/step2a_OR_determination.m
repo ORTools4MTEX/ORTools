@@ -30,11 +30,11 @@ ebsd = EBSD.load(fname1,CS,'interface','ctf',...
 
 %% Child Grain Reconstruction
 % grain reconstruction
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle', min_angle);
+[grains,ebsd] = calcGrains(ebsd('indexed'), 'angle', min_angle);
 % remove small grains
 ebsd(grains(grains.grainSize < 3)) = [];
 % reidentify grains with small grains removed:
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',min_angle);
+[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',min_angle);
 grains = smooth(grains,5);
 
 %% Set up Reconstructor and plot fit of different rational ORs and optimized OR

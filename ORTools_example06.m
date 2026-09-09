@@ -33,7 +33,7 @@ ebsd = ebsd('indexed');
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 3° threshold
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
+[grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
   'removeQuadruplePoints');
 grains = grains.smooth(3);
 %% Rename and recolor phases 
