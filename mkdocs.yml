@@ -1,4 +1,6 @@
 site_name: ORTools
+repo_url: https://github.com/ORTools4MTEX/ORTools
+repo_name: ORTools4MTEX/ORTools
 theme:
   name: material
   logo: images/ORTools_white.png
