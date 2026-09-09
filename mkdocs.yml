@@ -6,6 +6,6 @@ theme:
 extra_css:
   - stylesheets/extra.css
 nav:
-  - Home: index.md
+  - Introduction: index.md
   - Examples: examples.md
   - Function Index: function_index.md

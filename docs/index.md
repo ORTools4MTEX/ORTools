@@ -1,4 +1,13 @@
-## Introduction to ORTools
+<h1 style="display: flex; align-items: center; gap: 0.4em; flex-wrap: nowrap; margin-bottom: 0.6em; border-bottom: none;">
+  <a href="https://ortools4mtex.github.io/ORTools/" style="text-decoration: none; display: flex; align-items: baseline; gap: 0;">
+    <span style="color: #d32f2f; font-weight: 900; font-style: normal;">OR</span><span style="color: #555; font-style: italic; font-weight: 400;">Tools</span>
+  </a>
+  <span style="font-weight: 400; color: #555; font-style: normal;">— a companion toolbox for</span>
+  <a href="https://mtex-toolbox.github.io/index" style="display: flex; align-items: center;">
+    <img src="https://mtex-toolbox.github.io/images/icons/MTEX_100x67px.png" alt="MTEX" style="height: 1.1em; width: auto; vertical-align: middle; display: inline-block;">
+  </a>
+</h1>
+
 ![matlab compatible](https://img.shields.io/badge/matlab-compatible-lightgrey.svg)  ![GitHub top language](https://img.shields.io/github/languages/top/ORTOOLS4MTEX/ORTools)
 
 **Orientation relationship tools** (**ORTools**) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial/full martensitic transformation or OR-related phase transition. 
@@ -12,23 +21,6 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
 <iframe width="560" height="315" src="https://www.youtube.com/embed/inkR6LBzFeQ" title="ORTools - Short video introduction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 [*A short introduction to ORTools*](https://youtu.be/inkR6LBzFeQ)
-
-## Authors and contributors
-![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)
-
-**ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
-
-## Collaborators
-![Static Badge](https://img.shields.io/badge/Collaborators-Welcome!-8A2BE2)
-
-[**Dr Tuomo Nyyssönen**](https://www.researchgate.net/profile/Tuomo-Nyyssoenen) - Lath martensite block width calculator
-
-## How to cite ORTools
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4898682.svg)](https://doi.org/10.5281/zenodo.4898682)
-
-If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite this open-access paper as your reference:
-
-[**F. Niessen, T. Nyyssönen, A.A. Gazder, R. Hielscher, Parent grain reconstruction from partially and fully transformed microstructures in MTEX, Journal of Applied Crystallography: 55(1), pp. 180-194, 2022. (https://doi.org/10.1107/S1600576721011560)**](https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf)
 
 ## How to use ORTools
 ![GitHub forks](https://img.shields.io/github/forks/ORTools4MTEX/ORTools)  ![GitHub Repo stars](https://img.shields.io/github/stars/ORTools4MTEX/ORTools)  ![GitHub watchers](https://img.shields.io/github/watchers/ORTools4MTEX/ORTools)  ![GitHub followers](https://img.shields.io/github/followers/ORTools4MTEX)  
@@ -50,4 +42,21 @@ If you have applied the OR discovery, OR and variant analyses, parent grain reco
 <iframe width="560" height="315" src="https://www.youtube.com/embed/SsiDFqqqZU4" title="ORTools - How to install MTEX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 [*How to install MTEX*](https://youtu.be/SsiDFqqqZU4)
+
+## How to cite ORTools
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4898682.svg)](https://doi.org/10.5281/zenodo.4898682)
+
+If you have applied the OR discovery, OR and variant analyses, parent grain reconstruction, and correlated plotting features of MTEX and **ORTools** to your research, please cite this open-access paper as your reference:
+
+[**F. Niessen, T. Nyyssönen, A.A. Gazder, R. Hielscher, Parent grain reconstruction from partially and fully transformed microstructures in MTEX, Journal of Applied Crystallography: 55(1), pp. 180-194, 2022. (https://doi.org/10.1107/S1600576721011560)**](https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf)
+
+## Authors and contributors
+![GitHub contributors](https://img.shields.io/github/contributors/ORTools4MTEX/ORTools)
+
+**ORTools** has been created by [**Dr Azdiar Gazder**](https://www.researchgate.net/profile/Azdiar-Gazder) and [**Dr Frank Niessen**](https://www.researchgate.net/profile/Frank-Niessen-4). 
+
+## Collaborators
+![Static Badge](https://img.shields.io/badge/Collaborators-Welcome!-8A2BE2)
+
+[**Dr Tuomo Nyyssönen**](https://www.researchgate.net/profile/Tuomo-Nyyssoenen) - Lath martensite block width calculator
 
