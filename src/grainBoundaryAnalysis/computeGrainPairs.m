@@ -23,7 +23,12 @@ function out = computeGrainPairs(pairGrains,varargin)
 %  packet     - Uses the packet ids of child grain pairs.
 %  bain       - Uses the Bain ids of child grain pairs.
 %  other      - Uses a pre-specified list of ids of child grain pairs.
-%  group      - A cell defining groups of id or equivalent id pairs.
+%  group      - A cell defining groups of id or equivalent id pairs. Use
+%               the "computeVariantPairGroups.m" function to derive the
+%               complete set of groups automatically.
+%  labels     - A cell of x-axis labels, one per group, used when plotting
+%               groups of id or equivalent id pairs. Labels are composed
+%               from the id pairs themselves if not specified.
 %  include    - Includes similar neighbouring variant, packet, bain, 
 %               other-id type, groups of id or equivalent id pairs.
 %               For e.g. - V1-V1, or CP2-CP2, or B3-B3 etc. 
@@ -40,6 +45,7 @@ function out = computeGrainPairs(pairGrains,varargin)
 
 pairType = lower(get_flag(varargin,{'variant','packet','bain','other'},'variant'));
 groupIds = get_option(varargin,'group',{});
+groupLabels = get_option(varargin,'labels',{});
 cmap = get_option(varargin,'colormap',inferno);
 calcType = lower(get_flag(varargin,{'exclude','include'},'exclude'));
 outputType = lower(get_flag(varargin,{'normalise','normalize','absolute'},'normalise'));
@@ -162,11 +168,24 @@ if ~isempty(groupIds) % equivalent id groups provided
     mat = [r c];
     mat = sortrows(mat,[1 2]);
 
-    cond = false(length(mat),length(groupIds));
+    % Match the observed pairs against the id pairs listed in each group.
+    % Both are sorted along their rows so that the match is insensitive to
+    % the order in which a group lists the two ids of a pair.
+    sortedMat = sort(mat,2);
+    cond = false(size(sortedMat,1),length(groupIds));
     for ii = 1:length(groupIds)
-        for jj = 1:size(groupIds{ii},1)
-            cond(:,ii) = cond(:,ii) | (any(ismember(mat,groupIds{ii}(jj,1)),2) & any(ismember(mat,groupIds{ii}(jj,2)),2));
-        end
+        cond(:,ii) = ismember(sortedMat,sort(groupIds{ii},2),'rows');
+    end
+
+    % Warn about pairs that are present in the data but not covered by any
+    % group, since these are silently discarded from the output
+    isUngrouped = ~any(cond,2);
+    if any(isUngrouped)
+        lind = sub2ind(size(counts),mat(isUngrouped,1),mat(isUngrouped,2));
+        discardedFraction = sum(counts(lind))/sum(counts(:));
+        warning(['computeGrainPairs: %d of %d observed id pairs are not covered by ',...
+            'the specified groups. These account for %.1f%% of all pairs and are ',...
+            'excluded from the output.'],nnz(isUngrouped),size(mat,1),100*discardedFraction);
     end
 
     for ii = 1:size(cond,2)
@@ -209,11 +228,18 @@ end
 if find_option(varargin,'plot')
     figH = figure('color','w');
     if find_option(varargin,'group')
-        labels = {};
-        for ii=1:length(groupIds)
-            tmp = groupIds{ii}.';
-            labels{ii} = formatLabel(tmp);  
-        end      
+        if ~isempty(groupLabels)
+            assert(length(groupLabels) == length(groupIds),...
+                ['computeGrainPairs: %d labels were specified for %d groups. ',...
+                'The ''labels'' option requires one label per group.'],...
+                length(groupLabels),length(groupIds));
+            labels = groupLabels;
+        else
+            labels = cell(1,length(groupIds));
+            for ii=1:length(groupIds)
+                labels{ii} = formatLabel(groupIds{ii});
+            end
+        end
 
         h = bar(out.freq);
         h.FaceColor =[162 20 47]./255;
@@ -252,19 +278,18 @@ if find_option(varargin,'plot')
 end
 end
 
-function label = formatLabel(input)
-sublabels = cellstr(strcat('V', num2str(input(:))));
-%Remove whitespace
-sublabels = cellfun(@(x) strrep(x, ' ', ''), sublabels, 'UniformOutput', false);
-reshapedSublabels = reshape(sublabels, 2, []).';
-for i = 1: size(reshapedSublabels, 1)
-    label(i, :) = {strjoin(reshapedSublabels(i, :), '-')};
+function label = formatLabel(pairIds)
+%% Compose an x-axis label from an n x 2 array of id pairs
+% Groups derived with "computeVariantPairGroups.m" hold up to 24 pairs each,
+% so only the first few pairs are spelled out and the rest are counted.
+maxPairs = 3;
+nShown = min(size(pairIds,1),maxPairs);
+sublabels = cell(1,nShown);
+for ii = 1:nShown
+    sublabels{ii} = sprintf('V%d-V%d',pairIds(ii,1),pairIds(ii,2));
 end
-if length(label) == 1
-    label = label{1};
-else
-    label= strjoin(label, ' / ');
+label = strjoin(sublabels,' / ');
+if size(pairIds,1) > nShown
+    label = sprintf('%s (+%d)',label,size(pairIds,1)-nShown);
 end
-
-
 end

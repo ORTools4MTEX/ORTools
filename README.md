@@ -332,7 +332,8 @@ The grain pair ids can be defined by the user for variants, crystallographic pac
   - packet     - Uses the packet ids of child grain pairs.
   - bain       - Uses the bain ids of child grain pairs.
   - other      - Uses a pre-specified list of ids of child grain pairs.
-  - group      - A cell defining different groups of id or equivalent id pairs.
+  - group      - A cell defining different groups of id or equivalent id pairs. Use the [computeVariantPairGroups](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeVariantPairGroups) function to derive the complete set of groups automatically.
+  - labels     - A cell of x-axis labels, one per group, used when plotting groups of id or equivalent id pairs. Labels are composed from the id pairs themselves if not specified.
   - include    - Includes similar neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. For e.g. - V1-V1, or CP2-CP2, or B3-B3 etc.  
   - exclude    - Excludes similar neighbouring variant, packet, bain, other-id type, groups of id or equivalent id pairs. (default)
   - absolute   - Returns the absolute frequency and boundary segment values of neighbouring variant, packet, bain, other-id type, or groups of id or equivalent id pairs.
@@ -426,6 +427,30 @@ This function refines the child grains in the *job* object based on their varian
   - ebsd             - @EBSD
 - Options
   - parentGrainId    - parent grain Id using the argument 'parentGrainId'
+
+</li>
+
+---
+
+<li><details><summary><a>computeVariantPairGroups</a></summary>
+
+This function automatically derives the complete list of crystallographic variant pair groups for an orientation relationship.
+Two variant pairs belong to the same group when their misorientations are symmetrically equivalent.
+For example, for the Kurdjumov-Sachs OR with 24 variants, all nchoosek(24,2) = 276 variant pairs are sorted into 16 groups, each of which is labelled by its V1-Vx representative(s).
+The output is intended to be passed straight to the *group* option of the [computeGrainPairs](https://github.com/ORTools4MTEX/ORTools/blob/master/README.md#computeGrainPairs) function.
+Doing so counts every variant pair boundary in the map, whereas a manually defined grouping that only lists pairs containing V1 (for e.g. `{[1 2],[1 3; 1 5],...}`) discards the ~92% of boundaries in which V1 is not literally one of the two variants.
+
+- Syntax
+  - [groupIds,groupLabels] = computeVariantPairGroups(job)
+  - [groupIds,groupLabels] = computeVariantPairGroups(p2c,'variantMap',vMap)
+- Input
+  - job            - @parentGrainReconstructor, or the parent-to-child @orientation relationship (p2c) directly.
+- Output
+  - groupIds       - @cell = a cell array of groups. Each cell holds an n x 2 array of variant id pairs whose misorientations are symmetrically equivalent.
+  - groupLabels    - @cell = a cell array of labels, one per group, named after the V1-Vx representative(s) of the group (for e.g. 'V1-V2', 'V1-V3(V5)').
+- Options
+  - threshold      - The angular tolerance used to decide whether two misorientations are equivalent. (default = 0.5*degree)
+  - variantMap     - The variant map to apply. Only used when the first input is a p2c @orientation; a @parentGrainReconstructor supplies its own *job.variantMap*.
 
 </li>
 
