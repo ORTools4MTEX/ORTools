@@ -104,6 +104,9 @@ pfName_In = [Ini.texturePath,'inputTexture.mat']; % the name of the *.mat file m
 % ** NOTE: the variable names "inputODF" and "outputODF" must not be 
 % edited. **
 inputODF = odf_parent; 
+% Make sure the destination folder exists. It is not guaranteed to be
+% present in a fresh clone, since git does not track empty directories.
+ensureFolder(pfName_In);
 save(pfName_In,"inputODF");
 
 %% ... which is used to calculate the transformation texture.
