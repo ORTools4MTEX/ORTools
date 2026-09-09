@@ -13,11 +13,7 @@ The ORTools library requires prior installation of [MATLAB](https://mathworks.co
 2. Add the **ORTools** root directory and all of its sub-directories to your MATLAB path.
 
 ## Documentation
-<div align="center">
-  <a href="https://ortools4mtex.github.io/ORTools/">
-    <img src="https://img.shields.io/badge/Click%20Here%20for%20Full%20Documentation,%20Tutorials,%20and%20Examples-000000?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Documentation">
-  </a>
-</div>
+📚 **[Explore the official ORTools Documentation, Tutorials, and Examples](https://ortools4mtex.github.io/ORTools/)**
 
 ## How to Cite
 If you apply ORTools in your research, please cite:
