@@ -67,7 +67,7 @@ remainingEBSD.prop.parentId = remainingEBSD.grainId + max(cEBSD.prop.parentId) +
 newEBSD = [cEBSD; remainingEBSD];
 
 % Calculate grains based on grains based on clusterIds
-[newGrains, newEBSD.grainId]= newEBSD.calcGrains('variants',[newEBSD.prop.variantId,newEBSD.prop.parentId]);
+[newGrains, newEBSD]= newEBSD.calcGrains('variants',[newEBSD.prop.variantId,newEBSD.prop.parentId]);
 
 % Undo fake variant and parent Ids
 newEBSD.prop.variantId(newEBSD.prop.variantId > max(r.variantId)) = nan;
