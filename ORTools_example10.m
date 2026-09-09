@@ -197,7 +197,8 @@ set(figH,'Name','Histogram: Groups of child grain variant pairs','NumberTitle','
 drawnow;
 
 % For plotting individual outputs, use this block of script
-mapArea = prod(ebsd.gridify.size.*[ebsd.gridify.dx,ebsd.gridify.dy]);
+ebsdGrid = ebsd.gridify;
+mapArea = prod(ebsdGrid.size) * norm(ebsdGrid.d1) * norm(ebsdGrid.d2);
 boundaryFraction = out21.segLength./mapArea;
 figH = figure;
 h = bar(boundaryFraction);
