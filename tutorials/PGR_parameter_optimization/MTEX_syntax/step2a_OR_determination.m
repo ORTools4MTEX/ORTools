@@ -44,11 +44,11 @@ plot(ebsd('Iron bcc (old)'),colors)
 [grains,ebsd] = calcGrains(ebsd('indexed'), 'angle', min_angle);
 
 % remove small grains
-ebsd(grains(grains.grainSize < 3)) = [];
+ebsd(grains(grains.numPixel < 3)) = [];
 
 % reidentify grains with small grains removed:
 [grains,ebsd] = calcGrains(ebsd('indexed'),'angle',min_angle);
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 
 % plot the data and the grain boundaries
 figure;

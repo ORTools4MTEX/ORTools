@@ -35,7 +35,7 @@ screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 3° threshold
 [grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
   'removeQuadruplePoints');
-grains = grains.smooth(3);
+grains = grains.smoothBoundary(3);
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
 %Rename "Iron fcc" to "Gamma", "Iron bcc (old)" to "AlphaP" and 

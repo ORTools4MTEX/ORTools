@@ -35,9 +35,9 @@ ebsd = EBSD.load(fname1,CS,'interface','ctf',...
 %% Child Grain Reconstruction
 dx = sqrt(sum((max(ebsd.unitCell)-min(ebsd.unitCell)).^2));
 [grains,ebsd] = calcGrains(ebsd('indexed'), 'angle', min_angle,'boundary','tight','maxDist',dx,'unitCell');
-ebsd(grains(grains.grainSize < 3)) = [];
+ebsd(grains(grains.numPixel < 3)) = [];
 [grains,ebsd] = calcGrains(ebsd('indexed'),'angle', min_angle,'boundary','tight','maxDist',dx,'unitCell');
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 
 %% Set up Reconstructor
 
