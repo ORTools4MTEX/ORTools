@@ -1,0 +1,1083 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../function_index/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/ORTools_white.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Examples - ORTools</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ortools-example-scripts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ORTools" class="md-header__button md-logo" aria-label="ORTools" data-md-component="logo">
+      
+  <img src="../images/ORTools_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ORTools
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Examples
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ORTools" class="md-nav__button md-logo" aria-label="ORTools" data-md-component="logo">
+      
+  <img src="../images/ORTools_white.png" alt="logo">
+
+    </a>
+    ORTools
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ortools-example-scripts_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ORTools example scripts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ORTools example scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-10-03-jul-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 10: 03 JUL 2023
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 10: 03 JUL 2023">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-to-example-1-parent-grain-reconstruction-using-the-variant-graph-approach-in-lath-martensite-and-child-grain-id-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and child grain id analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-09-06-jun-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 09: 06 JUN 2023
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 09: 06 JUN 2023">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-to-example-1-parent-grain-reconstruction-using-the-variant-graph-approach-in-lath-martensite-and-habit-plane-determination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-08-29-mar-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 08: 29 MAR 2023
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 08: 29 MAR 2023">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-to-example-2-parent-grain-reconstruction-using-the-variant-graph-approach-in-ti-alloys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update to Example 2: Parent grain reconstruction using the variant graph approach in Ti alloys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-07-23-mar-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 07: 23 MAR 2022
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 07: 23 MAR 2022">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-to-example-1-parent-grain-reconstruction-using-the-new-variant-graph-approach-and-advanced-variant-analysis-in-lath-martensitic-steel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update to Example 1: Parent grain reconstruction using the new variant graph approach and advanced variant analysis in lath martensitic steel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-06-12-may-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 06: 12 MAY 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 06: 12 MAY 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-stage-parent-grain-reconstruction-in-a-twip-trip-steel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-stage parent grain reconstruction in a TWIP-TRIP steel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-05-04-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 05: 04 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 05: 04 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#partial-parent-grain-reconstruction-to-clean-twip-trip-steel-ebsd-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Partial parent grain reconstruction to clean TWIP-TRIP steel EBSD data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-04-04-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 04: 04 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 04: 04 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#predicting-the-to-transformation-texture-in-a-titanium-alloy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predicting the β to α transformation texture in a titanium alloy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-03-04-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 03: 04 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 03: 04 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-the-or-peak-fitter-to-deconvolute-multiple-ors-in-titanium-alloys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-02-03-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 02: 03 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 02: 03 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parent-grain-reconstruction-and-variant-analysis-in-titanium-alloys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parent grain reconstruction and variant analysis in titanium alloys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-01-03-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 01: 03 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 01: 03 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parent-grain-reconstruction-and-variant-analysis-in-lath-martensitic-steel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parent grain reconstruction and variant analysis in lath martensitic steel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../function_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Function Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ortools-example-scripts_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ORTools example scripts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ORTools example scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-10-03-jul-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 10: 03 JUL 2023
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 10: 03 JUL 2023">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-to-example-1-parent-grain-reconstruction-using-the-variant-graph-approach-in-lath-martensite-and-child-grain-id-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and child grain id analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-09-06-jun-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 09: 06 JUN 2023
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 09: 06 JUN 2023">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-to-example-1-parent-grain-reconstruction-using-the-variant-graph-approach-in-lath-martensite-and-habit-plane-determination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-08-29-mar-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 08: 29 MAR 2023
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 08: 29 MAR 2023">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-to-example-2-parent-grain-reconstruction-using-the-variant-graph-approach-in-ti-alloys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update to Example 2: Parent grain reconstruction using the variant graph approach in Ti alloys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-07-23-mar-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 07: 23 MAR 2022
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 07: 23 MAR 2022">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-to-example-1-parent-grain-reconstruction-using-the-new-variant-graph-approach-and-advanced-variant-analysis-in-lath-martensitic-steel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update to Example 1: Parent grain reconstruction using the new variant graph approach and advanced variant analysis in lath martensitic steel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-06-12-may-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 06: 12 MAY 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 06: 12 MAY 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-stage-parent-grain-reconstruction-in-a-twip-trip-steel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-stage parent grain reconstruction in a TWIP-TRIP steel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-05-04-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 05: 04 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 05: 04 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#partial-parent-grain-reconstruction-to-clean-twip-trip-steel-ebsd-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Partial parent grain reconstruction to clean TWIP-TRIP steel EBSD data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-04-04-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 04: 04 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 04: 04 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#predicting-the-to-transformation-texture-in-a-titanium-alloy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predicting the β to α transformation texture in a titanium alloy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-03-04-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 03: 04 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 03: 04 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-the-or-peak-fitter-to-deconvolute-multiple-ors-in-titanium-alloys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the OR peak fitter to deconvolute multiple ORs in titanium alloys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-02-03-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 02: 03 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 02: 03 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parent-grain-reconstruction-and-variant-analysis-in-titanium-alloys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parent grain reconstruction and variant analysis in titanium alloys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-01-03-mar-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 01: 03 MAR 2021
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example 01: 03 MAR 2021">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parent-grain-reconstruction-and-variant-analysis-in-lath-martensitic-steel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parent grain reconstruction and variant analysis in lath martensitic steel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ortools-example-scripts">ORTools example scripts</h1>
+<h2 id="ortools-example-scripts_1">ORTools example scripts</h2>
+<p>The world of martensitic transformation or phase transition analysis can be difficult to navigate. To help make the analysis accessible, transparent, and easy to comprehend, the <strong>ORTools</strong> library consists of plug-and-play functions. Example scripts are provided to help demonstrate these functions <em>in action</em>.</p>
+<p>It is possible to run the example scripts from start to end, but we encourage you to run the example scripts <a href="https://mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html">in sections</a> to understand the correlation between the scripts and the generated results. 
+This will also help you follow the comments, which provide instructions on the various choices to make in the interactive parts of the program and/or help explain the obtained plots and results. In this way, you will learn the syntax applied throughout the scripts as well as the meaning behind the presented results.</p>
+<h3 id="example-10-03-jul-2023"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example10.m">Example 10: 03 JUL 2023</a></h3>
+<h4 id="update-to-example-1-parent-grain-reconstruction-using-the-variant-graph-approach-in-lath-martensite-and-child-grain-id-analysis">Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and child grain id analysis</h4>
+<p>This script follows the same dataset as that used in the official <a href="https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html">MTEX example</a> to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The <a href="../function_index/#computeGrainPairs">computeGrainPairs</a> function provides a direct way of calculating the absolute or normalised frequency and boundary segment lengths of grain pairs. The grain pair ids can be defined by the user for variants, crystallographic packets, Bain groups, any other-id type or for groups of id or equivalent id pairs.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZOmOw1q0lXg" title="ORTools - Example 10" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/ZOmOw1q0lXg"><em>Example 10 - Parent grain reconstruction using the variant graph approach in lath martensite and child grain id analysis</em></a></p>
+<h3 id="example-09-06-jun-2023"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example09.m">Example 09: 06 JUN 2023</a></h3>
+<h4 id="update-to-example-1-parent-grain-reconstruction-using-the-variant-graph-approach-in-lath-martensite-and-habit-plane-determination">Update to Example 1: Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination</h4>
+<p>This script follows the same dataset as that used in the official <a href="https://mtex-toolbox.github.io/MaParentGrainReconstructionAdvanced.html">MTEX example</a> to demonstrate the reconstruction of parent gamma grains from child alpha grains in a lath martensite microstructure. The <a href="../function_index/#computeHabitPlane">computeHabitPlane</a> function provides a direct way of calculating the habit plane compared to conventional MTEX. </p>
+<p>The details related to the habit plane calculation are described in the following paper:</p>
+<p><a href="https://www.researchgate.net/publication/371310735_Habit_plane_determination_from_reconstructed_parent_phase_orientation_maps"><strong>T. Nyyssönen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane determination from reconstructed parent phase orientation maps, Acta Materialia: 119035, 2023. (https://doi.org/10.1016/j.actamat.2023.119035)</strong></a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lM_NhQQY5LY" title="ORTools - Example 9" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/lM_NhQQY5LY"><em>Example 9 - Parent grain reconstruction using the variant graph approach in lath martensite and habit plane determination</em></a></p>
+<h3 id="example-08-29-mar-2023"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example08.m">Example 08: 29 MAR 2023</a></h3>
+<h4 id="update-to-example-2-parent-grain-reconstruction-using-the-variant-graph-approach-in-ti-alloys">Update to Example 2: Parent grain reconstruction using the variant graph approach in Ti alloys</h4>
+<p>This script follows the same dataset as that used in the official <a href="https://mtex-toolbox.github.io/TiBetaReconstruction.html">MTEX example</a> to demonstrate the reconstruction of parent beta grains from child alpha grains in a alpha-beta Ti alloy. The script provides a faster and less involved way of reconstructing this microstructure compared to the triple-point based approach from <a href="./ORTools_example2.m">Example 2</a>. </p>
+<p>The details related to the variant graph approach are described in the following paper:</p>
+<p><a href="https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction"><strong>R. Hielscher, T. Nyyssönen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia: 22, 101399, 2022. (https://doi.org/10.1016/j.mtla.2022.101399)</strong></a></p>
+<h3 id="example-07-23-mar-2022"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example07.m">Example 07: 23 MAR 2022</a></h3>
+<h4 id="update-to-example-1-parent-grain-reconstruction-using-the-new-variant-graph-approach-and-advanced-variant-analysis-in-lath-martensitic-steel">Update to Example 1: Parent grain reconstruction using the new variant graph approach and advanced variant analysis in lath martensitic steel</h4>
+<p>This script follows the same dataset as that used in the official <a href="https://mtex-toolbox.github.io/MaParentGrainReconstruction.html">MTEX example</a> to demonstrate the reconstruction of parent austenite grains from child lath martensite using the new <strong>variant graph approach</strong>. Compared to the original <a href="./ORTools_example1.m">Example 1</a>, this updated version also features equivalent variant pair analysis and the measurement of lath block widths. </p>
+<p>The details related to the variant graph approach are described in the following paper:</p>
+<p><a href="https://www.researchgate.net/publication/357646342_The_variant_graph_approach_to_improved_parent_grain_reconstruction"><strong>R. Hielscher, T. Nyyssönen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia: 22, 101399, 2022. (https://doi.org/10.1016/j.mtla.2022.101399)</strong></a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/E9IFyFUQNl4" title="ORTools - Example 7" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/E9IFyFUQNl4"><em>Example 7 - Variant graph approach &amp; advanced variant analysis in lath martensitic steel</em></a></p>
+<h3 id="example-06-12-may-2021"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example06.m">Example 06: 12 MAY 2021</a></h3>
+<h4 id="two-stage-parent-grain-reconstruction-in-a-twip-trip-steel">Two-stage parent grain reconstruction in a TWIP-TRIP steel</h4>
+<p>This example is of a 10% cold-rolled twinning and transformation induced plasticity (TWIP-TRIP) steel microstructure with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. ORTools and the MTEX parent grain reconstruction functionalities are used to reconstruct both parent microstructures in a single workflow. Towards the end, it is demonstrated that variant analysis can be conducted on both transformations. </p>
+<p><strong>EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024</strong></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/K2rO3Mx4A8s" title="ORTools - Example 6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/K2rO3Mx4A8s"><em>Example 6 - Two-stage parent grain reconstruction in a TWIP-TRIP steel</em></a></p>
+<h3 id="example-05-04-mar-2021"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example05.m">Example 05: 04 MAR 2021</a></h3>
+<h4 id="partial-parent-grain-reconstruction-to-clean-twip-trip-steel-ebsd-data">Partial parent grain reconstruction to clean TWIP-TRIP steel EBSD data</h4>
+<p>This example is of a 20% cold-rolled twinning and transformation induced plasticity (TWIP-TRIP) steel microstructure presenting with a two-step martensitic transformation in which ε martensite formed from γ austenite, and α' martensite formed from ε martensite. Using the <a href="../function_index/#peakFitORs">OR peak fitter</a> function, it is discovered that two possible ORs could be in operation for the γ to α' microstructure. The first OR is not a real OR but rather, an "apparent" OR corresponding to pixels that were misindexed as α' during map acquisition even though they notionally belong to γ. The parent phase reconstruction features in MTEX and the "apparent" OR are used to revert these misindexed points to γ. The grain calculation and the OR peak fitter is re-run to show that the "apparent" OR was eliminated. </p>
+<p><strong>EBSD map courtesy: Pramanik et al. https://doi.org/10.1016/j.msea.2018.06.024</strong></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Hj5kVscjljU" title="ORTools - Example 5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/Hj5kVscjljU"><em>Example 5 - Partial parent grain reconstruction to clean TRIP-TWIP steel EBSD map data</em></a></p>
+<h3 id="example-04-04-mar-2021"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example04.m">Example 04: 04 MAR 2021</a></h3>
+<h4 id="predicting-the-to-transformation-texture-in-a-titanium-alloy">Predicting the β to α transformation texture in a titanium alloy</h4>
+<p>In this script, the reconstruction of the prior parent β microstructure from a child α microstructure is repeated as shown in <a href="./">example 2</a>. Examination of the variant distribution shows that strongly preferential variant selection did not occur. Therefore, the transition texture of α can be accurately predicted from the reconstructed β using the <a href="../function_index/#plotPODF_transform">plotPODF_transform</a> function. The result shows that the predicted α transition texture is in good agreement with the experimental α texture.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Yx2jKII3HUc" title="ORTools - Example 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/Yx2jKII3HUc"><em>Example 4 - Transformation texture prediction in titanium alloys</em></a></p>
+<h3 id="example-03-04-mar-2021"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example03.m">Example 03: 04 MAR 2021</a></h3>
+<h4 id="using-the-or-peak-fitter-to-deconvolute-multiple-ors-in-titanium-alloys">Using the OR peak fitter to deconvolute multiple ORs in titanium alloys</h4>
+<p>In <a href="./">example 2</a> the α-β Ti microstructure showed two ORs in the <a href="../function_index/#peakFitORs">OR peak fitter</a> function. In this example, both ORs are investigated to find out which one of them dominated the phase transition. To evaluate the best match, the disorientation between grain boundary misorientations and the OR misorientations in inverse pole figures and on boundary maps are plotted.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8e9PhhFCWYc" title="ORTools - Example 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/8e9PhhFCWYc"><em>Example 3 - Separation of multiple ORs in titanium alloys</em></a></p>
+<h3 id="example-02-03-mar-2021"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example02.m">Example 02: 03 MAR 2021</a></h3>
+<h4 id="parent-grain-reconstruction-and-variant-analysis-in-titanium-alloys">Parent grain reconstruction and variant analysis in titanium alloys</h4>
+<p>This script follows the same dataset and steps that are used to demonstrate the reconstruction of β grains from an α microstructure in the official <a href="https://mtex-toolbox.github.io/TiBetaReconstruction.html">MTEX example</a> for phase transitions in titanium alloys. Here the <a href="../function_index/#peakFitORs">OR peak fitter</a> function is used to determine the OR from alpha-beta boundaries even though they only make up &lt; 1% of all boundaries in the dataset. Advanced plotting functions are employed to produce publication-ready plots.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/e6R0dApUc8Q" title="ORTools - Example 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/e6R0dApUc8Q"><em>Example 2 - Parent grain reconstruction in titanium alloys</em></a></p>
+<h3 id="example-01-03-mar-2021"><a href="https://github.com/ORTools4MTEX/ORTools/blob/master/ORTools_example01.m">Example 01: 03 MAR 2021</a></h3>
+<h4 id="parent-grain-reconstruction-and-variant-analysis-in-lath-martensitic-steel">Parent grain reconstruction and variant analysis in lath martensitic steel</h4>
+<p>This script follows the same dataset and steps that are used to demonstrate the reconstruction of austenitic parent grains from martensite grains using the <strong>grain graph approach</strong> in the official <a href="https://mtex-toolbox.github.io/GrainGraphBasedReconstruction.html">MTEX example</a> for martensite transformation in steels. The functionality of <strong>ORTools</strong> in providing pre-written and additional plotting functions to create publication-ready plots is demonstrated.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AcR-nXg5QKo" title="ORTools - Example 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/AcR-nXg5QKo"><em>Example 1 - Parent grain reconstruction in steel</em></a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
