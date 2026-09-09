@@ -1,0 +1,11 @@
+site_name: ORTools
+theme:
+  name: material
+  logo: images/ORTools_white.png
+  favicon: images/ORTools_white.png
+extra_css:
+  - stylesheets/extra.css
+nav:
+  - Home: index.md
+  - Examples: examples.md
+  - Function Index: function_index.md
