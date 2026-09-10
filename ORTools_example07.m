@@ -75,7 +75,7 @@ plotHist_OR_misfit(job,[KS,NW],'legend',{'K-S OR','N-W OR'});
 % Display information about the OR
 ORinfo(job.p2c);
 %    - There are 24 martensitic variants
-%    - And a ~2.1° disorientation exists from the Nishiyama-Wassermann OR
+%    - And the fitted OR lies close to the Nishiyama-Wassermann OR
 
 %% Plotting (with ORTools functions)
 screenPrint('SegmentStart','Plotting some ORTools maps');
@@ -93,7 +93,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2);
 
 % Child-child grain boundary misorientation map
 plotMap_gB_c2c(job,'linewidth',2);
-%    - Misorientation angles of ~15-50° are not present within prior
+%    - Intermediate misorientation angles are not present within prior
 %    austenite grains and thus delinitate prior austenite grain
 %    boundaries
 
