@@ -65,6 +65,11 @@ else
     cEBSD = job.ebsdPrior(job.csChild);
     cEBSD = cEBSD(isParent);
     varIds = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
+    % MTEX 7 accepts the 'variantMap' option of calcVariantId but ignores it,
+    % so re-express the returned ids in the order given by the map
+    if ~isempty(job.variantMap)
+        [~,varIds] = ismember(varIds,job.variantMap);
+    end
     plt2 = plot(cEBSD,varIds);
     p2c_V = job.p2c.variants;
     p2c_V = p2c_V(:);

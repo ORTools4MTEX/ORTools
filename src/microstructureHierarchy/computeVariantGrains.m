@@ -47,6 +47,14 @@ end
 [r.variantId,r.packetId,r.bainId] = calcVariantId( ...
     oriP,cEBSD.orientations,job.p2c,'variantMap', job.variantMap);
 
+% MTEX 7 accepts the 'variantMap' option of calcVariantId but ignores it, so
+% the returned variantId is in MTEX's raw variant order while packetId and
+% bainId follow the physical grouping. Applying the map here restores the
+% convention the rest of ORTools assumes, namely that the variants of a
+% crystallographic packet form a contiguous block of six. Without it the
+% expression "variantId - (packetId-1)*24/4" no longer yields a type in 1..6.
+r.variantId = applyVariantMap(r.variantId,job.variantMap);
+
 % Get the Ids of parent grains
 r.parentId = job.grains(job.mergeId(cEBSD.grainId)).id;
 
@@ -104,4 +112,16 @@ newGrains.prop.bainId = nan(size(newGrains));
 newGrains(isTransf).prop.packetId = packetId;
 newGrains(isTransf).prop.bainId = bainId;
 
+end
+
+
+function variantId = applyVariantMap(variantId,variantMap)
+%% Re-express raw variant ids in the order given by the variant map
+% Returns the ids unchanged when no map is set.
+if isempty(variantMap); return; end
+isKnown = ~isnan(variantId);
+[~,mapped] = ismember(variantId(isKnown),variantMap);
+assert(all(mapped > 0), ...
+    'computeVariantGrains: a variant id is missing from the variant map.');
+variantId(isKnown) = mapped;
 end
