@@ -50,7 +50,7 @@ job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 % Give an initial guess for the OR: Kurdjumov-Sachs ...
 job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
 % ... and refine it based on the fit with boundary misorientations
-job.calcParent2Child;
+job.calcParent2Child("local");
 % ... Check out examples 1 and 7 for more analysis features regarding the
 % fitted OR
 %% Plotting (with ORTools functions)
