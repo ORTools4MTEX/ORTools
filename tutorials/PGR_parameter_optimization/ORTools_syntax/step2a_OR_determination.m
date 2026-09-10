@@ -43,7 +43,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'child');
 % Give an initial guess for the OR: Kurdjumov-Sachs ...
 job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
 % ... and refine it based on the fit with boundary misorientations
-job.calcParent2Child;
+job.calcParent2Child("local");
 % Let us check the disorientation and compare it with K-S and N-W
 % (The disorientation is the misfit between the grain misorientations
 % and the misorientation of the OR)

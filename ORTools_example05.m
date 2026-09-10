@@ -123,7 +123,7 @@ screenPrint('SegmentStart','Merging misindexed alphaP with gamma');
 % % Check details on OR1
 ORinfo(job{1}.p2c);
 % % Select OR1 and refine it based on the fit with boundary misorientations
-job{1}.calcParent2Child;
+job{1}.calcParent2Child("local");
 % % OR1 has only 1 variant, calcGBVotes finds the fit of that theoretical
 % % variant with the parent-child boundary misorientations
 job{1}.calcGBVotes('p2c','numFit',1); % was 'noC2C' in MTex v5.6.0

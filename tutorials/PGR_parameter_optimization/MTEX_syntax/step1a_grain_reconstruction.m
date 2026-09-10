@@ -72,7 +72,7 @@ figure;
 histogram(job.calcGBFit./degree,'BinMethod','sqrt')
 xlabel('disorientation angle')
 
-job.calcParent2Child
+job.calcParent2Child("local")
 
 hold on
 histogram(job.calcGBFit./degree,'BinMethod','sqrt')

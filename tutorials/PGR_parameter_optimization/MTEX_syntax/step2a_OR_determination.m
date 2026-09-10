@@ -84,7 +84,7 @@ hold on
 histogram(job.calcGBFit./degree,'BinMethod','sqrt')
 hold off
 %Fitted
-job.calcParent2Child
+job.calcParent2Child("local")
 hold on
 histogram(job.calcGBFit./degree,'BinMethod','sqrt')
 hold off

@@ -67,7 +67,7 @@ job = parentGrainReconstructor(ebsd,grains);
 figure;
 for ii = 1:length(quantiles)
     job.p2c = orientation.KurdjumovSachs(job.csParent,job.csChild);
-    job.calcParent2Child('quantile',quantiles(ii));
+    job.calcParent2Child("local",'quantile',quantiles(ii));
     p2cs(ii) = job.p2c;
     hold on
     histogram(job.calcGBFit./degree,'BinMethod','sqrt')

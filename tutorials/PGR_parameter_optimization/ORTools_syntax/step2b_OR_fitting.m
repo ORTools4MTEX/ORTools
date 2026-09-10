@@ -47,7 +47,7 @@ job = setParentGrainReconstructor(ebsd,grains);
 
 for ii = 1:length(quantiles)
     job.p2c = orientation.KurdjumovSachs(job.csParent,job.csChild);
-    job.calcParent2Child('quantile',quantiles(ii));
+    job.calcParent2Child("local",'quantile',quantiles(ii));
     p2cs(ii) = job.p2c;
 end
 quant = quantiles(1:end-1);

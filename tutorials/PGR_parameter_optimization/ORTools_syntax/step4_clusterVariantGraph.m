@@ -57,7 +57,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'child');
 % initial guess for the parent to child orientation relationship
 job.p2c = orientation.KurdjumovSachs(job.csParent,job.csChild);
 % Optimize OR
-job.calcParent2Child;
+job.calcParent2Child("local");
 
 %% Check reconstructed microstructure for different clustering parameters
 job.calcVariantGraph('threshold',threshold*degree,'tolerance',tol*degree)

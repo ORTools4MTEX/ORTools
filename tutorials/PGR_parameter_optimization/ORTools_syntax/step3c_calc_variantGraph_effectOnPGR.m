@@ -47,7 +47,7 @@ job = setParentGrainReconstructor(ebsd,grains);
 % initial guess for the parent to child orientation relationship
 job.p2c = orientation.KurdjumovSachs(job.csParent,job.csChild);
 % Optimize OR
-job.calcParent2Child;
+job.calcParent2Child("local");
 
 %% Check reconstructed microstructure for different prob. functions
 for ii = 1:length(tol)

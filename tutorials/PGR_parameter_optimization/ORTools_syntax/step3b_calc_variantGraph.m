@@ -47,7 +47,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'child');
 % initial guess for the parent to child orientation relationship
 job.p2c = orientation.KurdjumovSachs(job.csParent,job.csChild);
 % Optimize OR
-job.calcParent2Child;
+job.calcParent2Child("local");
 
 %% Check probabilities on boundaries
 for ii = 1:length(tol)

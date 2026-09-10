@@ -66,7 +66,7 @@ job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 KS = orientation.KurdjumovSachs(job.csParent,job.csChild);
 job.p2c = KS;
 % ... and refine it based on the fit with boundary misorientations
-job.calcParent2Child;
+job.calcParent2Child("local");
 % Let us check the disorientation and compare it with K-S and N-W
 % (The disorientation is the misfit between the grain misorientations
 % and the misorientation of the OR)

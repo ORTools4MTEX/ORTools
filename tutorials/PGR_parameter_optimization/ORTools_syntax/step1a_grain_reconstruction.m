@@ -52,7 +52,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'child');
 KS = orientation.KurdjumovSachs(job.csParent,job.csChild);
 NW = orientation.NishiyamaWassermann(job.csParent,job.csChild);
 job.p2c = KS;
-job.calcParent2Child;
+job.calcParent2Child("local");
 ORinfo(job.p2c);
 
 %Plot the disorientation between OR and GB misorientations
