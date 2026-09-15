@@ -1,0 +1,38 @@
+/* Custom Primary Color: #479784 */
+:root {
+  --md-primary-fg-color:        #479784;
+  --md-primary-fg-color--light: #5ba392;
+  --md-primary-fg-color--dark:  #367868;
+}
+
+/* Hide the site name text in the header */
+.md-header__title .md-header__topic:first-child {
+  display: none !important;
+}
+
+/* Increase the size of the logo in the header */
+.md-header__button.md-logo img, .md-header__button.md-logo svg {
+  height: 2.8rem !important; /* Made slightly bigger */
+  width: auto !important;
+}
+
+/* Tighten up vertical spacing across the document */
+.md-typeset h2 {
+  margin-top: 1.2em !important;
+  margin-bottom: 0.4em !important;
+}
+
+.md-typeset h3 {
+  margin-top: 1.0em !important;
+  margin-bottom: 0.4em !important;
+}
+
+.md-typeset p {
+  margin-top: 0.4em !important;
+  margin-bottom: 0.6em !important;
+}
+
+/* Specifically target paragraphs that only contain images (like badges) */
+.md-typeset p:has(img:only-child) {
+  margin-bottom: 0.1em !important;
+}
