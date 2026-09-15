@@ -29,7 +29,7 @@ This function is a GUI to compute grains from ebsd map data and optionally filte
   - gB       - @grainBoundary
 
 <p align="center">
-  <img src="./images/computeGrains.png" alt="UI of computeGrains" width="400"/>
+  <img src="../images/computeGrains.png" alt="UI of computeGrains" width="400"/>
 </p>
 
 ### <a id="computeGrainPairs"></a>computeGrainPairs
@@ -86,7 +86,7 @@ This function computes the habit plane based on the determined traces from 2D eb
   -  plotTraces     - Logical used to plot the trace & habit plane output
 
 <p align="center">
-  <img src="./images/computehabitPlane.png" alt="Traces of fitted habit plane on variant map" width="600"/>
+  <img src="../images/computehabitPlane.png" alt="Traces of fitted habit plane on variant map" width="600"/>
 </p>
 
 ### <a id="computePacketGrains"></a>computePacketGrains
@@ -114,7 +114,7 @@ This function computes twins in parent grains by local refinement.
   -  grains       - plot grain data instead of EBSD data
 
 <p align="center">
-  <img src="./images/computeParentTwins.png" alt="GUI of computeParentTwins" width="400"/>
+  <img src="../images/computeParentTwins.png" alt="GUI of computeParentTwins" width="400"/>
 </p>
 
 ### <a id="computeVariantGrains"></a>computeVariantGrains
@@ -202,7 +202,7 @@ This function produces a figure of an interactive ebsd map. It enables users to 
   - noFrame      - Remove frame around maps
 
 <p align="center">
-  <img src="./images/grainClick.png" alt="Plots from grainClick" width="500"/>
+  <img src="../images/grainClick.png" alt="Plots from grainClick" width="500"/>
 </p>
 
 ### <a id="guiOR"></a>guiOR
@@ -217,7 +217,7 @@ This function is a GUI to to define an orientation relationship (OR) with parall
   - p2c  - parent to child misorientation
 
 <p align="center">
-  <img src="./images/guiOR.png" alt="UI of guiOR" width="600"/>
+  <img src="../images/guiOR.png" alt="UI of guiOR" width="600"/>
 </p>
 
 ## O
@@ -249,7 +249,7 @@ The function extracts orientation relationship (OR) information contained in the
   - silent    - suppress command window output
 
 <p align="center">
-  <img src="./images/ORinfo.png" alt="Command window output example from ORinfo" width="500"/>
+  <img src="../images/ORinfo.png" alt="Command window output example from ORinfo" width="500"/>
 </p>
 
 ## P
@@ -268,7 +268,7 @@ The function is called by [defineORs](function_index.md#defineORs).
   - p2c         - parent to child misorientation
 
 <p align="center">
-  <img src="./images/peakFitORs.png" alt="Interactive fitting window on which peakFitORs is applied." width="500"/>
+  <img src="../images/peakFitORs.png" alt="Interactive fitting window on which peakFitORs is applied." width="500"/>
 </p>
 
 ### <a id="plotHist_OR_misfit"></a>plotHist_OR_misfit
@@ -286,7 +286,7 @@ This function plots the disorientation, (or misfit), between parent-child and ch
   - legend  - cell array of strings with legend names of ORs to evaluate
 
 <p align="center">
-  <img src="./images/plotHist_OR_misfit.png" alt="Plot example from plotHist_OR_misfit" width="500"/>
+  <img src="../images/plotHist_OR_misfit.png" alt="Plot example from plotHist_OR_misfit" width="500"/>
 </p>
 
 ### <a id="plotIPDF_gB_misfit"></a>plotIPDF_gB_misfit
@@ -303,7 +303,7 @@ This function plots the misfit, or disorientation, between parent-child and chil
   - maxColor  - maximum color on color range [degree]
 
 <p align="center">
-  <img src="./images/plotIPDF_gB_misfit.png" alt="Plot example from plotIPDF_gB_misfit" width="1000"/>
+  <img src="../images/plotIPDF_gB_misfit.png" alt="Plot example from plotIPDF_gB_misfit" width="1000"/>
 </p>
 
 ### <a id="plotIPDF_gB_prob"></a>plotIPDF_gB_prob
@@ -318,7 +318,7 @@ This function calculates and plots the probability distribution, between 0 and 1
   - colormap  - colormap variable  
 
 <p align="center">
-  <img src="./images/plotIPDF_gB_prob.png" alt="Plot example from plotIPDF_gB_prob" width="1000"/>
+  <img src="../images/plotIPDF_gB_prob.png" alt="Plot example from plotIPDF_gB_prob" width="1000"/>
 </p>
 
 ### <a id="plotMap_bain"></a>plotMap_bain
@@ -336,7 +336,7 @@ This function plots an ebsd map by colorising child grains according to their Ba
   -  grains       - plot grain data instead of EBSD data
 
 <p align="center">
-  <img src="./images/plotMap_bain.png" alt="Plot example from plotMap_bain" width="500"/>
+  <img src="../images/plotMap_bain.png" alt="Plot example from plotMap_bain" width="500"/>
 </p>
 
 ### <a id="plotMap_blockWidths"></a>plotMap_blockWidths
@@ -357,7 +357,7 @@ Contributed by *Dr. Tuomo Nyyssönen*
   - noFrame      - Remove frame around maps
 
 <p align="center">
-  <img src="./images/plotMap_blockWidths.png" alt="Plot example from plotMap_blockWidths" width="500"/>
+  <img src="../images/plotMap_blockWidths.png" alt="Plot example from plotMap_blockWidths" width="500"/>
 </p>
 
 ### <a id="plotMap_clusters"></a>plotMap_clusters
@@ -372,7 +372,7 @@ This function plots an ebsd map of child grain clusters that are likely to belon
   - direction  - @vector3d - IPF direction
 
 <p align="center">
-  <img src="./images/plotMap_clusters.png" alt="Plot example from plotMap_clusters" width="500"/>
+  <img src="../images/plotMap_clusters.png" alt="Plot example from plotMap_clusters" width="500"/>
 </p>
 
 ### <a id="plotMap_gB_c2c"></a>plotMap_gB_c2c
@@ -387,7 +387,7 @@ This function plots an ebsd map by colorising child-child boundary misorientatio
   - colormap  - colormap variable 
 
 <p align="center">
-  <img src="./images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
+  <img src="../images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
 </p>
 
 ### <a id="plotMap_gB_misfit"></a>plotMap_gB_misfit
@@ -402,7 +402,7 @@ This function plots an ebsd map by colorising the misfit, or disorientation, bet
   - colormap  - colormap variable 
 
 <p align="center">
-  <img src="./images/plotMap_gB_misfit.png" alt="Plot example from plotMap_gB_misfit" width="500"/>
+  <img src="../images/plotMap_gB_misfit.png" alt="Plot example from plotMap_gB_misfit" width="500"/>
 </p>
 
 ### <a id="plotMap_gB_p2c"></a>plotMap_gB_p2c
@@ -417,7 +417,7 @@ This function plots an ebsd map by colorising child-child boundary misorientatio
   - colormap  - colormap variable 
  
 <p align="center">
-  <img src="./images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
+  <img src="../images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
 </p>
 
 ### <a id="plotMap_gB_prob"></a>plotMap_gB_prob
@@ -435,7 +435,7 @@ For more details, [please click here.](https://mtex-toolbox.github.io/parentGrai
   - colormap  - colormap variable 
  
 <p align="center">
-  <img src="./images/plotMap_gB_prob.png" alt="Plot example from plotMap_gB_prob" width="500"/>
+  <img src="../images/plotMap_gB_prob.png" alt="Plot example from plotMap_gB_prob" width="500"/>
 </p>
 
 ### <a id="plotMap_IPF_p2c"></a>plotMap_IPF_p2c
@@ -455,7 +455,7 @@ This function plots inverse pole figure maps of the parent and child phases and 
   - child     - plot only map of child phase 
 
 <p align="center">
-  <img src="./images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="800"/>
+  <img src="../images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="800"/>
 </p>
 
 ### <a id="plotMap_packets"></a>plotMap_packets
@@ -471,7 +471,7 @@ This function plots an ebsd map by colorising child grains according to their cr
   - grains   - Plot grain data instead of EBSD data 
 
 <p align="center">
-  <img src="./images/plotMap_packets.png" alt="plotMap_packets" width="500"/>
+  <img src="../images/plotMap_packets.png" alt="plotMap_packets" width="500"/>
 </p>
 
 ### <a id="plotMap_phases"></a>plotMap_phases
@@ -484,7 +484,7 @@ This function plots an ebsd map of the grain phases in the *job* variable as wel
   - job  - @parentGrainReconstructor
 
 <p align="center">
-  <img src="./images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
+  <img src="../images/plotMap_phases.png" alt="Plot example from plotMap_phases" width="500"/>
 </p>
 
 ### <a id="plotMap_KSvariantPairs"></a>plotMap_KSvariantPairs
@@ -506,7 +506,7 @@ This function plots an ebsd map of the equivalent pairs of martensitic variants 
   - noFrame      - Remove frame around maps
 
 <p align="center">
-  <img src="./images/plotMap_KSvariantPairs.png" alt="plotMap_KSvariantPairs" width="500"/>
+  <img src="../images/plotMap_KSvariantPairs.png" alt="plotMap_KSvariantPairs" width="500"/>
 </p>
 
 ### <a id="plotMap_variants"></a>plotMap_variants
@@ -524,7 +524,7 @@ The function plots the map of child grains colored according to their variant ID
   - grains   - Plot grain data instead of EBSD data 
 
 <p align="center">
-  <img src="./images/plotMap_variants.png" alt="plotMap_variants" width="500"/>
+  <img src="../images/plotMap_variants.png" alt="plotMap_variants" width="500"/>
 </p>
 
 ### <a id="plotPDF_bain"></a>plotPDF_bain
@@ -543,7 +543,7 @@ This function plots a pole figure of the child Bain group IDs associated with an
   -  colormap     - colormap variable
 
 <p align="center">
-  <img src="./images/plotPDF_bain.png" alt="Plot example from plotPDF_bain" width="300"/>
+  <img src="../images/plotPDF_bain.png" alt="Plot example from plotPDF_bain" width="300"/>
 </p>
 
 ### <a id="plotPDF_packets"></a>plotPDF_packets
@@ -563,7 +563,7 @@ This function plots a pole figure of the child crystallographic packet IDs assoc
   - markersize - markersize 
 
 <p align="center">
-  <img src="./images/plotPDF_packets.png" alt="Plot example from plotPDF_packets" width="300"/>
+  <img src="../images/plotPDF_packets.png" alt="Plot example from plotPDF_packets" width="300"/>
 </p>
 
 ### <a id="plotPDF_variants"></a>plotPDF_variants
@@ -584,7 +584,7 @@ It is an alternative to MTEX's default [plotVariantPF](https://mtex-toolbox.gith
   - markersize - markersize 
 
 <p align="center">
-  <img src="./images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="300"/>
+  <img src="../images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="300"/>
 </p>
 
 ### <a id="plotPODF_transform"></a>plotPODF_transform
@@ -612,7 +612,7 @@ Input files can be created using:
   - export       - (optional path) & name of the output transformed *.mat file
 
 <p align="center">
-  <img src="./images/plotPODF_transformation.png" alt="Plot example from plotPODF_transform" width="1000"/>
+  <img src="../images/plotPODF_transformation.png" alt="Plot example from plotPODF_transform" width="1000"/>
 </p>
 
 ### <a id="plotStack"></a>plotStack
@@ -633,7 +633,7 @@ This function plots a series of maps, figures, graphs, and tables for detailed c
   - noFrame      - Remove frame around maps
 
 <p align="center">
-  <img src="./images/plotStack.png" alt="Plot example from plotStack" width="1000"/>
+  <img src="../images/plotStack.png" alt="Plot example from plotStack" width="1000"/>
 </p>
 
 ## R
@@ -667,7 +667,7 @@ This function is a GUI to interactively recolor phases in the *ebsd* or *grains*
   - grains  - @grains2d
   
 <p align="center">
-  <img src="./images/recolorPhases.png" alt="GUI of recolorPhases" width="200"/>
+  <img src="../images/recolorPhases.png" alt="GUI of recolorPhases" width="200"/>
 </p>
 
 ### <a id="renamePhases"></a>renamePhases
