@@ -32,14 +32,14 @@ ebsd = EBSD.load(fname1,CS,'interface','ctf',...
 
 %% Child Grain Reconstruction
 % grain reconstruction
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle', min_angle);
+[grains,ebsd] = calcGrains(ebsd('indexed'), 'angle', min_angle);
 
 % remove small grains
-ebsd(grains(grains.grainSize < 3)) = [];
+ebsd(grains(grains.numPixel < 3)) = [];
 
 % reidentify grains with small grains removed:
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',min_angle);
-grains = smooth(grains,5);
+[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',min_angle);
+grains = smoothBoundary(grains,5);
 
 %% Set up Reconstructor and fit ORs
 % set up the job
@@ -47,7 +47,7 @@ job = setParentGrainReconstructor(ebsd,grains);
 
 for ii = 1:length(quantiles)
     job.p2c = orientation.KurdjumovSachs(job.csParent,job.csChild);
-    job.calcParent2Child('quantile',quantiles(ii));
+    job.calcParent2Child("local",'quantile',quantiles(ii));
     p2cs(ii) = job.p2c;
 end
 quant = quantiles(1:end-1);

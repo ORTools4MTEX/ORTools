@@ -30,12 +30,12 @@ ebsd = EBSD.load(fname1,CS,'interface','ctf',...
 
 %% Child Grain Reconstruction
 % grain reconstruction
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle', min_angle);
+[grains,ebsd] = calcGrains(ebsd('indexed'), 'angle', min_angle);
 % remove small grains
-ebsd(grains(grains.grainSize < 3)) = [];
+ebsd(grains(grains.numPixel < 3)) = [];
 % reidentify grains with small grains removed:
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',min_angle);
-grains = smooth(grains,5);
+[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',min_angle);
+grains = smoothBoundary(grains,5);
 
 %% Set up Reconstructor and plot fit of different rational ORs and optimized OR
 job = setParentGrainReconstructor(ebsd,grains);
@@ -43,7 +43,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'child');
 % Give an initial guess for the OR: Kurdjumov-Sachs ...
 job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
 % ... and refine it based on the fit with boundary misorientations
-job.calcParent2Child;
+job.calcParent2Child("local");
 % Let us check the disorientation and compare it with K-S and N-W
 % (The disorientation is the misfit between the grain misorientations
 % and the misorientation of the OR)

@@ -170,8 +170,8 @@ table(xlabelString,variantPairs_boundaryFraction,'VariableNames',{'eqVariants','
 
 
 %% Determine the block boundary density
-mapArea = prod(job.ebsdPrior.gridify.size.*[job.ebsdPrior.gridify.dx,job.ebsdPrior.gridify.dy]);
-% mapArea = prod(ebsdC.gridify.size.*[ebsdC.gridify.dx,ebsdC.gridify.dy]);
+ebsdGrid = job.ebsdPrior.gridify;
+mapArea = prod(ebsdGrid.size) * norm(ebsdGrid.d1) * norm(ebsdGrid.d2);
 for ii = 1:size(cond,1)
     variantPairs_boundaryFraction(ii) = sum(variantPairs_boundary{ii}.segLength)/mapArea;
 end

@@ -204,6 +204,11 @@ if check_option(varargin,'grains')
 else
     [vId,pId,bId] = calcVariantId(pGrain.meanOrientation,cEBSD.orientations,job.p2c, ...
         'variantMap', job.variantMap);
+    % MTEX 7 accepts the 'variantMap' option of calcVariantId but ignores it, so
+    % re-express the returned ids in the order given by the map
+    if ~isempty(job.variantMap)
+        [~,vId] = ismember(vId,job.variantMap);
+    end
     plot(cEBSD,vId);
 end
 

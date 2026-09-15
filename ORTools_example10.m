@@ -29,13 +29,13 @@ ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 3� threshold
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
+[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
 % EBSD data in small grains are removed
-ebsd(grains(grains.grainSize < 3)) = [];
+ebsd(grains(grains.numPixel < 3)) = [];
 % Recalculate the grains from the remaining data ...
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
+[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
 % ... and smooth the grain boundaries
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 %% Rename and recolor phases
 screenPrint('SegmentStart','Renaming and recoloring phases');
 phaseNames = {'Gamma','AlphaP'};
@@ -50,7 +50,7 @@ job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
 % Give an initial guess for the OR: Kurdjumov-Sachs ...
 job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
 % ... and refine it based on the fit with boundary misorientations
-job.calcParent2Child;
+job.calcParent2Child("local");
 % ... Check out examples 1 and 7 for more analysis features regarding the
 % fitted OR
 %% Plotting (with ORTools functions)
@@ -197,7 +197,8 @@ set(figH,'Name','Histogram: Groups of child grain variant pairs','NumberTitle','
 drawnow;
 
 % For plotting individual outputs, use this block of script
-mapArea = prod(ebsd.gridify.size.*[ebsd.gridify.dx,ebsd.gridify.dy]);
+ebsdGrid = ebsd.gridify;
+mapArea = prod(ebsdGrid.size) * norm(ebsdGrid.d1) * norm(ebsdGrid.d2);
 boundaryFraction = out21.segLength./mapArea;
 figH = figure;
 h = bar(boundaryFraction);
@@ -243,10 +244,8 @@ eqIds = {[1 2; 3 4; 5 6],...
     [1 4; 2 5; 3 6]};
 % ... and compute the groups of equivalent id child grain pairs
 out32 = computeGrainPairs(newGrains,'other','group',eqIds, 'plot');
-% The output of the variable 'out32' in the command window is:
-% out32 = struct with fields:
-%          freq: [0.1522,0.2473,0.1195,0.4810]
-%     segLength: [0.1494,0.2427,0.1177,0.4902]
+% The variable 'out32' returns the frequency and the segment length of
+% each of the four groups.
 % Compare the above segment length values with the variant pair boundary
 % fraction histogram from ORTools's pre-built function for equivalent
 % variant pairs.
@@ -254,13 +253,5 @@ variantBoundaries_map = plotMap_KSvariantPairs(job,'linewidth',1.5);
 % variantBoundaries_map = plotMap_KSvariantPairs(job,'parentGrainId',276,'linewidth',1.5);
 %  -> Figure 20: variant pair boundary fraction histogram
 %   4�2 table
-%
-%     eqVariants     Freq
-%     __________    _______
-%
-%     V1-V2         0.14941
-%     V1-V3(V5)     0.24271
-%     V1-V6         0.11768
-%     V1-V4          0.4902
-% Notice that they are both exactly the same.
+
 %%
