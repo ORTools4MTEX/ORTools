@@ -1,0 +1,15 @@
+site_name: ORTools
+repo_url: https://github.com/ORTools4MTEX/ORTools
+repo_name: ORTools4MTEX/ORTools
+theme:
+  name: material
+  logo: images/ORTools_white.png
+  favicon: images/ORTools_white.png
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  - javascripts/external_links.js
+nav:
+  - Introduction: index.md
+  - Examples: examples.md
+  - Function Index: function_index.md
