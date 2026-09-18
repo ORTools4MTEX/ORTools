@@ -38,7 +38,7 @@ ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 1.5° threshold
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
+[grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
     'removeQuadruplePoints');
 %% Rename and recolor phases
 screenPrint('SegmentStart','Renaming and recoloring phases');
@@ -67,7 +67,7 @@ screenPrint('SegmentStart','Plotting some ORTools maps');
 
 % Phase map
 plotMap_phases(job,'linewidth',1);
-%       - The microstructure consists of 99.75 % alpha
+%       - The microstructure consists almost entirely of alpha
 
 % Parent and child IPF maps
 plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child');
@@ -75,7 +75,7 @@ plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child');
 
 % Child-child grain boundary misorientation map
 plotMap_gB_c2c(job,'linewidth',1);
-%       - Alpha of same prior beta grain seem to have ~58° misorientation
+%       - Alpha of same prior beta grain share a characteristic misorientation
 
 % Plot a map of the OR boundary disorientation, or misfit
 plotMap_gB_misfit(job,'linewidth',1.5, 'maxColor', 10);

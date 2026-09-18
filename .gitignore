@@ -1,18 +1,45 @@
+# ---------------------------------------------------------------------------
+# EBSD and analysis data
+# ---------------------------------------------------------------------------
+# Raw and intermediate datasets are large and are not versioned.
 *.ang
-*.asv
-
 *.cpr
 *.crc
 *.ctf
-
 *.h5oina
-
 *.mat
 
 *.Tex
 *.tex
 
-data/output/**
-test/**
+# ---------------------------------------------------------------------------
+# MATLAB
+# ---------------------------------------------------------------------------
+*.asv
+*.m~
+*.autosave
+*.mex*
+slprj/
+codegen/
+*.mltbx
+*.mlappinstall
 
+# ---------------------------------------------------------------------------
+# Editors
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.sublime-workspace
 
+# ---------------------------------------------------------------------------
+# Operating systems
+# ---------------------------------------------------------------------------
+# The macOS entries matter here: this repository is routinely worked on from a
+# Mac over an SMB share, which scatters .DS_Store and ._* AppleDouble files.
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini

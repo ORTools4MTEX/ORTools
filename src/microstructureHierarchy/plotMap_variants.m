@@ -65,6 +65,11 @@ else
     cEBSD = job.ebsdPrior(job.csChild);
     cEBSD = cEBSD(isParent);
     varIds = calcVariantId(pGrains.meanOrientation,cEBSD.orientations,job.p2c,'variantMap',job.variantMap,varargin{:});
+    % MTEX 7 accepts the 'variantMap' option of calcVariantId but ignores it,
+    % so re-express the returned ids in the order given by the map
+    if ~isempty(job.variantMap)
+        [~,varIds] = ismember(varIds,job.variantMap);
+    end
     plt2 = plot(cEBSD,varIds);
     p2c_V = job.p2c.variants;
     p2c_V = p2c_V(:);
@@ -80,7 +85,7 @@ colormap([gray(nr_shades);cmap]);
 
 % Plot parent grain boundaries
 hold on
-parentGrains = smooth(job.parentGrains,10);
+parentGrains = smoothBoundary(job.parentGrains,10);
 plot(parentGrains.boundary,varargin{:})
 hold off
 

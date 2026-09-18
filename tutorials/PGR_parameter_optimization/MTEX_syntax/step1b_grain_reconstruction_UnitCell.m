@@ -46,10 +46,10 @@ plot(ebsd('Iron bcc (old)'),colors)
 %% Child Grain Reconstruction
 % grain reconstruction
 dx = sqrt(sum((max(ebsd.unitCell)-min(ebsd.unitCell)).^2));
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle', min_angle,'boundary','tight','maxDist',dx,'unitCell');
-ebsd(grains(grains.grainSize < 3)) = [];
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle', min_angle,'boundary','tight','maxDist',dx,'unitCell');
-grains = smooth(grains,5);
+[grains,ebsd] = calcGrains(ebsd('indexed'), 'angle', min_angle,'boundary','tight','maxDist',dx,'unitCell');
+ebsd(grains(grains.numPixel < 3)) = [];
+[grains,ebsd] = calcGrains(ebsd('indexed'),'angle', min_angle,'boundary','tight','maxDist',dx,'unitCell');
+grains = smoothBoundary(grains,5);
 
 % plot the data and the grain boundaries
 figure;
@@ -71,7 +71,7 @@ figure;
 histogram(job.calcGBFit./degree,'BinMethod','sqrt')
 xlabel('disorientation angle')
 
-job.calcParent2Child
+job.calcParent2Child("local")
 
 hold on
 histogram(job.calcGBFit./degree,'BinMethod','sqrt')

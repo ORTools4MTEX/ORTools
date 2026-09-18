@@ -36,7 +36,7 @@ for ii = 2:numPhases
             warning('Phase recoloring aborted by user: Keeping previous colors');
             return
         else % Recolor phase
-            obj.CSList{ii}.color = cRGB;
+            obj.CSList(ii).color = cRGB;
             clear cRGB
         end
         

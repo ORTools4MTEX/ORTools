@@ -37,7 +37,7 @@ ebsd = ebsd('indexed');
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 3° threshold
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
+[grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
   'removeQuadruplePoints');
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
@@ -123,7 +123,7 @@ screenPrint('SegmentStart','Merging misindexed alphaP with gamma');
 % % Check details on OR1
 ORinfo(job{1}.p2c);
 % % Select OR1 and refine it based on the fit with boundary misorientations
-job{1}.calcParent2Child;
+job{1}.calcParent2Child("local");
 % % OR1 has only 1 variant, calcGBVotes finds the fit of that theoretical
 % % variant with the parent-child boundary misorientations
 job{1}.calcGBVotes('p2c','numFit',1); % was 'noC2C' in MTex v5.6.0
@@ -142,7 +142,7 @@ ebsdCleaned = job{1}.calcParentEBSD;
 
 %% Recomputing the grains from the new EBSD dataset
 screenPrint('SegmentStart','Recomputing, filtering and smoothing grains');
-[grains,ebsd.grainId] = calcGrains(ebsdCleaned,'threshold',3*degree,...
+[grains,ebsd] = calcGrains(ebsdCleaned,'threshold',3*degree,...
   'removeQuadruplePoints');
 %% Making a "new" job containing the new EBSD data and grains
 screenPrint('SegmentStart','Finding the orientation relationship(s)');
