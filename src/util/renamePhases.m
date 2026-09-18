@@ -33,7 +33,7 @@ else
             [ind,~] = listdlg('PromptString',['Rename phase corresponding to ''',phaseNames(ii,:),''':'],...
                 'SelectionMode','single','ListString',phaseStrings,...
                 'ListSize',[300 150]);
-            ebsd.CSList(ii).mineral = phaseStrings{ind};
+            ebsd.CSList{ii}.mineral = phaseStrings{ind};
             fprintf([' renamed to ''',phaseStrings{ind},'''\n']);
         end
     catch
