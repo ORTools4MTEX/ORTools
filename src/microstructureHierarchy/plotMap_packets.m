@@ -80,7 +80,7 @@ colormap([gray(nr_shades);cmap]);
 
 % Plot parent grain boundaries
 hold on
-parentGrains = smooth(job.parentGrains,10);
+parentGrains = smoothBoundary(job.parentGrains,10);
 plot(parentGrains.boundary,varargin{:})
 hold off
 

@@ -237,22 +237,31 @@ if length(grains) ~= length(v)
     error('number of input must be identical')
 end
 
-V = grains.V;
+% "grains.poly" indexes the full vertex list. In MTEX 7 "grains.V" no longer is
+% that list - it returns allV(unique([poly{:}])), compacted and renumbered for
+% the grains at hand - so the polygon indices overrun it for any subset. Take
+% the coordinates of the full list instead; "grains.x"/"grains.y" are
+% "grains.allV.x"/".y". "grains.centroid" is a @vector3d in MTEX 7.
+Vx = grains.x;
+Vy = grains.y;
 poly = grains.poly;
 ce = grains.centroid;
 
 for ii = 1:length(grains)
-    % Get vertices
-    Vg = V(poly{ii},:);
+    % Get vertices, as indices into the full vertex list
+    idx = poly{ii};
+    if iscell(idx), idx = [idx{:}]; end
+    idx = idx(:);
     
     % Center vertices
-    Vg = [Vg(:,1)-ce(ii,1) Vg(:,2)-ce(ii,2)];
+    Vgx = Vx(idx) - ce(ii).x;
+    Vgy = Vy(idx) - ce(ii).y;
     
     a = v(ii).y/v(ii).x;
     b = -1;
-    c = Vg(:,2) - Vg(:,1)*a;
+    c = Vgy - Vgx*a;
     
-    p{ii} = (a*Vg(:,2) - b*Vg(:,1))./sqrt(a^2+b^2);
+    p{ii} = (a*Vgy - b*Vgx)./sqrt(a^2+b^2);
     px{ii} = (-a*c)/(a^2+b^2);
     py{ii} = (-b*c)/(a^2+b^2);
 end

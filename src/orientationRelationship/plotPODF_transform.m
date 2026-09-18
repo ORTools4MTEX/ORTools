@@ -279,6 +279,7 @@ pfName_Out = [pfName_In(1:idxSlash_In(end)) pfName_Out];
 end
 
 outputODF = odfC;
+ensureFolder(pfName_Out);
 save(pfName_Out,"outputODF");
 %---
 
