@@ -38,17 +38,13 @@ ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 3° threshold
-% [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
-[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
 % EBSD data in small grains are removed
-% ebsd(grains(grains.grainSize < 3)) = [];
-ebsd(grains(grains.numPixel < 3)) = [];
+ebsd(grains(grains.grainSize < 3)) = [];
 % Recalculate the grains from the remaining data ...
-% [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
-[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
 % ... and smooth the grain boundaries
-% grains = smooth(grains,5);
-grains = smoothBoundary(grains,5);
+grains = smooth(grains,5);
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
 phaseNames = {'Gamma','AlphaP'};
@@ -81,27 +77,27 @@ screenPrint('SegmentStart','Plotting some ORTools maps');
 % and its relation to the microstructure
 
 % Phase map
-plotMap_phases(job,'linewidth',1);
+plotMap_phases(job,'linewidth',2);
 %    - There is no retained austenite (gamma)
 
 % Parent and child IPF maps
-plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1);
+plotMap_IPF_p2c(job,vector3d.Z,'linewidth',2);
 %    - It is clear that martensite has formed from multiple prior 
 %    - austenite grains and that some surface scratches led to bad indexing
 
 % Child-child grain boundary misorientation map
-plotMap_gB_c2c(job,'linewidth',1);
+plotMap_gB_c2c(job,'linewidth',2);
 %    - Misorientation angles of ~15-50° are not present within prior
 %    austenite grains and thus delinitate prior austenite grain
 %    boundaries
 
 % Plot a map of the OR boundary disorientation, or misfit
-plotMap_gB_misfit(job,'linewidth',1, 'maxColor',5);
+plotMap_gB_misfit(job,'linewidth',2, 'maxColor',5);
 %    - By setting a threshold at 5 degrees, the prior austenite grain
 %    boundaries are identified by their large misfit with the OR
 
 % Plot a map of the OR boundary probability 
-plotMap_gB_prob(job,'threshold',2.5*degree,'tolerance',2.5*degree,'linewidth',1);
+plotMap_gB_prob(job,'threshold',2.5*degree,'tolerance',2.5*degree,'linewidth',2);
 %   - the same can be visualized by calculating the probability that a
 %     boundary belongs to the OR
 
@@ -110,13 +106,13 @@ plotMap_gB_prob(job,'threshold',2.5*degree,'tolerance',2.5*degree,'linewidth',1)
 job.calcGraph('threshold',2.5*degree,'tolerance',2.5*degree);
 job.clusterGraph('inflationPower',1.6)
 % Plot the clusters ...
-plotMap_clusters(job,'linewidth',1);
+plotMap_clusters(job,'linewidth',2);
 % ... and calculate the parent orientations
 job.calcParentFromGraph
 
 % Plot the reconstructed parent microstructure
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1);
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2);
 %% Remove badly reconstructed clusters
 % While the first reconstruction looks good, plotting the fit of each 
 % reconstructed alphaP grain with the overall parernt orientation of the
@@ -130,7 +126,7 @@ mtexColorbar;
 job.revert(job.grains.fit > 5*degree | job.grains.clusterSize < 15)
 % Plot the remaining grains
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1)
+plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
 %% Fill in unreconstructed regions with voting algorithm
 % Use the already confidently reconstructed gamma grains to vote for the
 % gamma orientation of the yet-to-be reconstructed alpha grains
@@ -162,14 +158,14 @@ plotPDF_variants(job);
 % Then calculate the variant IDs of all alpha grains ...
 job.calcVariants;
 % ... and plot them
-plotMap_variants(job,'linewidth',2);
-%plotMap_variants(job,'grains','linewidth',2);  %Plot grain data instead
+plotMap_variants(job,'linewidth',1);
+%plotMap_variants(job,'grains','linewidth',3);  %Plot grain data instead
 % The same can be done for the packets
-plotMap_packets(job,'linewidth',2);
-%plotMap_packets(job,'grains','linewidth',2);   %Plot grain data instead
+plotMap_packets(job,'linewidth',3);
+%plotMap_packets(job,'grains','linewidth',3);   %Plot grain data instead
 
 %% Plot reconstructed parent EBSD orientations and the IPF key
-parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'parent');
+parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',3,'parent');
 figure; plot(parentIPFkey);
 %% Save images
 saveImage(Ini.imagePath);
