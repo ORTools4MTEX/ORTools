@@ -38,13 +38,13 @@ ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
 % Grains are calculated with a 3° threshold
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
-% EBSD data in small grains are removed
-ebsd(grains(grains.grainSize < 3)) = [];
+[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
+% Remove small "grains" < 3 pixels from the EBSD map data
+ebsd(grains(grains.numPixel < 3)) = [];
 % Recalculate the grains from the remaining data ...
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
+[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
 % ... and smooth the grain boundaries
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 %% Rename and recolor phases 
 screenPrint('SegmentStart','Renaming and recoloring phases');
 phaseNames = {'Gamma','AlphaP'};
