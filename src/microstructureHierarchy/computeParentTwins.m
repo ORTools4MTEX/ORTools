@@ -38,8 +38,11 @@ twgB = job.parentGrains.boundary.selectByGrainId(twIds);
 
 for ii = 1:size(twIds,1)
    for gNr = 1:2 %Loop grain pair
+       % Mean orientation of this grain of the pair
+       % (MTEX 7 returns indexed grains as a vector, so index each grain individually)
+       twOri = job.parentGrains(job.parentGrains.id2ind(twIds(ii,gNr))).meanOrientation;
        % Get parent variant IDs and Fit
-       [pVarIds(:,gNr),fit(:,ii,gNr)] = calcParent(twEBSDc.orientations,twGrains.meanOrientation(ii,gNr),job.p2c,'id');
+       [pVarIds(:,gNr),fit(:,ii,gNr)] = calcParent(twEBSDc.orientations,twOri,job.p2c,'id');
 
        % Get local parent orientations
        pOris(:,ii,gNr) = variants(job.p2c, twEBSDc.orientations, pVarIds(:,gNr));

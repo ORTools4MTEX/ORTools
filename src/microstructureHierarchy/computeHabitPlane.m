@@ -243,7 +243,7 @@ mtexColorMap jet
 colorbar;
 caxis([0,1]);
 drawnow;
-legend([h{:}], {'Discarded parent traces','Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'southeast');
+legend(firstValidHandles(h), {'Discarded parent traces','Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'southeast');
 set(gcf,'name','Spherical projection of scattered points of the determined traces and fitted habit plane');
 clear h;
 
@@ -263,7 +263,7 @@ if length(pGrainId) > 1
     mtexColorMap white2black
     mtexColorbar
     drawnow;
-    legend([h{:}], {'Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'southeast');
+    legend(firstValidHandles(h), {'Analysed parent traces','Habit plane','Habit plane normal'}, 'location', 'southeast');
     set(gcf,'name','Spherical projection of contours of the fitted traces and the habit plane');
 end
 
@@ -531,4 +531,21 @@ out = [linspace(1,length(incmap),nbins)]';
 out(2:end-1,1) = round(out(2:end-1,1));
 % re-assign the row indices to the colormap
 outcmap = incmap(out,:);
+end
+
+
+function hLegend = firstValidHandles(h)
+%% Return the first valid graphics handle held by each entry of a cell array
+% Some MTEX 7 plot calls return more than one handle, and the first of them
+% can be an empty GraphicsPlaceholder - "plot(...,'plane','antipodal',...)"
+% returns two. Concatenating the cell contents with [h{:}] then produces more
+% entries than there are legend labels, with a placeholder among them, and
+% "legend" rejects the whole list with "Invalid argument".
+hLegend = gobjects(1,numel(h));
+for ii = 1:numel(h)
+    candidates = h{ii}(isgraphics(h{ii}));
+    assert(~isempty(candidates), ...
+        'computeHabitPlane: plot handle %d holds no valid graphics object.',ii);
+    hLegend(ii) = candidates(1);
+end
 end

@@ -54,14 +54,14 @@ plot(ebsd('Iron bcc (old)'),colors)
 
 %% Child Grain Reconstruction
 % grain reconstruction
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle', min_angle);
+[grains,ebsd] = calcGrains(ebsd('indexed'), 'angle', min_angle);
 
 % remove small grains
-ebsd(grains(grains.grainSize < 3)) = [];
+ebsd(grains(grains.numPixel < 3)) = [];
 
 % reidentify grains with small grains removed:
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',min_angle);
-grains = smooth(grains,5);
+[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',min_angle);
+grains = smoothBoundary(grains,5);
 
 % plot the data and the grain boundaries
 figure;
@@ -76,7 +76,7 @@ job = parentGrainReconstructor(ebsd,grains);
 % initial guess for the parent to child orientation relationship
 job.p2c = orientation.KurdjumovSachs(job.csParent,job.csChild);
 % Optimize OR
-job.calcParent2Child;
+job.calcParent2Child("local");
 
 %% Check reconstructed microstructure for different clustering parameters
 ipfKey = ipfColorKey(ebsd('Iron fcc'));
