@@ -16,6 +16,11 @@ function make_doc_images(outDir)
     %% Input:
     %  outDir   - folder the images are written to (default: docs/images)
     %
+    %% Output files:
+    %  <outDir>/<name>.png          - image used by the documentation
+    %  docs-review/<name>_<n>.png   - every figure a function opened, for
+    %                                 choosing which ones form the image
+    %
     %% Requirements:
     %  MTEX on the MATLAB path (run startup_mtex first), plus the Signal
     %  Processing, Image Processing and Statistics toolboxes
@@ -30,7 +35,10 @@ function make_doc_images(outDir)
     addpath(root);
     currentFolder;
 
-    ensureFolder(fullfile(outDir, 'x'));
+    dirs.images = outDir;
+    dirs.review = fullfile(root, 'docs-review');
+    ensureFolder(fullfile(dirs.images, 'x'));
+    ensureFolder(fullfile(dirs.review, 'x'));
     ensureFolder(fullfile(snippetDir, 'x'));
 
     set(groot, 'DefaultFigureVisible', 'off');
@@ -57,16 +65,16 @@ function make_doc_images(outDir)
     job.p2c = KS;
     job.calcParent2Child('local');
 
-    failed = snap(failed, outDir, 'plotHist_OR_misfit', ...
+    failed = snap(failed, dirs, 'plotHist_OR_misfit', ...
                   @() plotHist_OR_misfit(job, [KS, NW], 'legend', {'K-S OR', 'N-W OR'}));
     failed = saveText(failed, snippetDir, 'ORinfo', @() ORinfo(job.p2c));
-    failed = snap(failed, outDir, 'plotMap_IPF_p2c', ...
+    failed = snap(failed, dirs, 'plotMap_IPF_p2c', ...
                   @() plotMap_IPF_p2c(job, vector3d.Z, 'linewidth', 2));
-    failed = snap(failed, outDir, 'plotMap_gB_c2c', ...
+    failed = snap(failed, dirs, 'plotMap_gB_c2c', ...
                   @() plotMap_gB_c2c(job, 'linewidth', 2));
-    failed = snap(failed, outDir, 'plotMap_gB_misfit', ...
+    failed = snap(failed, dirs, 'plotMap_gB_misfit', ...
                   @() plotMap_gB_misfit(job, 'linewidth', 2, 'maxColor', 5));
-    failed = snap(failed, outDir, 'plotMap_gB_prob', ...
+    failed = snap(failed, dirs, 'plotMap_gB_prob', ...
                   @() plotMap_gB_prob(job, 'threshold', 2.5 * degree, 'tolerance', 2.5 * degree, 'linewidth', 2));
 
     % Clusters of the grain graph (as in Example 1), on a separate job
@@ -74,7 +82,7 @@ function make_doc_images(outDir)
     jobGraph.p2c = job.p2c;
     jobGraph.calcGraph('threshold', 2.5 * degree, 'tolerance', 2.5 * degree);
     jobGraph.clusterGraph('inflationPower', 1.6);
-    failed = snap(failed, outDir, 'plotMap_clusters', ...
+    failed = snap(failed, dirs, 'plotMap_clusters', ...
                   @() plotMap_clusters(jobGraph, 'linewidth', 2));
 
     % Reconstruction with the variant graph approach (as in Example 7)
@@ -91,24 +99,24 @@ function make_doc_images(outDir)
     [~, maxParentIdx] = max(job.parentGrains.area);
     maxParentId = job.parentGrains.id(maxParentIdx);
 
-    failed = snap(failed, outDir, 'plotPDF_variants', @() plotPDF_variants(job));
-    failed = snap(failed, outDir, 'plotPDF_packets', @() plotPDF_packets(job));
-    failed = snap(failed, outDir, 'plotPDF_bain', @() plotPDF_bain(job));
-    failed = snap(failed, outDir, 'plotMap_variants', ...
+    failed = snap(failed, dirs, 'plotPDF_variants', @() plotPDF_variants(job));
+    failed = snap(failed, dirs, 'plotPDF_packets', @() plotPDF_packets(job));
+    failed = snap(failed, dirs, 'plotPDF_bain', @() plotPDF_bain(job));
+    failed = snap(failed, dirs, 'plotMap_variants', ...
                   @() plotMap_variants(job, 'linewidth', 1));
-    failed = snap(failed, outDir, 'plotMap_packets', ...
+    failed = snap(failed, dirs, 'plotMap_packets', ...
                   @() plotMap_packets(job, 'linewidth', 3));
-    failed = snap(failed, outDir, 'plotMap_bain', ...
+    failed = snap(failed, dirs, 'plotMap_bain', ...
                   @() plotMap_bain(job, 'linewidth', 2, 'colormap', magma));
-    failed = snap(failed, outDir, 'plotMap_KSvariantPairs', ...
+    failed = snap(failed, dirs, 'plotMap_KSvariantPairs', ...
                   @() plotMap_KSvariantPairs(job, 'parentGrainId', maxGrainId, 'linewidth', 2));
-    failed = snap(failed, outDir, 'plotMap_blockWidths', ...
+    failed = snap(failed, dirs, 'plotMap_blockWidths', ...
                   @() plotMap_blockWidths(job, 'parentGrainId', maxGrainId, 'linewidth', 1.5));
-    failed = snap(failed, outDir, 'plotStack', ...
+    failed = snap(failed, dirs, 'plotStack', ...
                   @() plotStack(job, 'parentGrainId', maxGrainId, 'linewidth', 1.5));
-    failed = snap(failed, outDir, 'computehabitPlane', ...
+    failed = snap(failed, dirs, 'computehabitPlane', ...
                   @() computeHabitPlane(job, 'Radon', 'minClusterSize', 50, 'plotTraces'));
-    failed = snap(failed, outDir, 'computeParentTwins', ...
+    failed = snap(failed, dirs, 'computeParentTwins', ...
                   @() computeParentTwins(job, maxParentId));
 
     %% Alpha-beta titanium (MTEX dataset 'alphaBetaTitanium')
@@ -120,8 +128,8 @@ function make_doc_images(outDir)
     job = defineJob(ebsd, grains, 'Beta', 'Alpha');
     job.p2c = orientation.Burgers(job.csParent, job.csChild);
 
-    failed = snap(failed, outDir, 'plotIPDF_gB_misfit', @() plotIPDF_gB_misfit(job));
-    failed = snap(failed, outDir, 'plotIPDF_gB_prob', @() plotIPDF_gB_prob(job));
+    failed = snap(failed, dirs, 'plotIPDF_gB_misfit', @() plotIPDF_gB_misfit(job), 1:3);
+    failed = snap(failed, dirs, 'plotIPDF_gB_prob', @() plotIPDF_gB_prob(job), 1:3);
     % Reconstruction (as in Example 4) for the texture transformation
     job.calcTPVotes('minFit', 2.5 * degree, 'maxFit', 5 * degree);
     job.calcParentFromVote('minProb', 0.7);
@@ -138,8 +146,8 @@ function make_doc_images(outDir)
     pfNameIn = fullfile(tempdir, 'ORTools_inputTexture.mat');
     pfNameOut = fullfile(tempdir, 'ORTools_outputTexture.mat');
     save(pfNameIn, 'inputODF');
-    failed = snap(failed, outDir, 'plotPODF_transformation', ...
-                  @() plotPODF_transform(job, hParent, hChild, 'import', pfNameIn, 'export', pfNameOut));
+    failed = snap(failed, dirs, 'plotPODF_transformation', ...
+                  @() plotPODF_transform(job, hParent, hChild, 'import', pfNameIn, 'export', pfNameOut), 1:4);
 
     %% TRWIP steel (data/input/ebsd/TRWIPsteel.ctf)
     screenPrint('SegmentStart', 'TRWIP steel');
@@ -151,8 +159,8 @@ function make_doc_images(outDir)
     ebsd = renameByMineral(ebsd, {'fcc', 'Gamma'; 'bcc', 'AlphaP'; 'epsilon', 'Epsilon'});
     job = defineJob(ebsd, grains, 'Gamma', 'AlphaP');
 
-    failed = snap(failed, outDir, 'plotMap_phases', @() plotMap_phases(job, 'linewidth', 2));
-    failed = snap(failed, outDir, 'plotMap_gB_p2c', @() plotMap_gB_p2c(job, 'linewidth', 1.5));
+    failed = snap(failed, dirs, 'plotMap_phases', @() plotMap_phases(job, 'linewidth', 2));
+    failed = snap(failed, dirs, 'plotMap_gB_p2c', @() plotMap_gB_p2c(job, 'linewidth', 1.5));
 
     %% Report
     if isempty(failed)
@@ -162,10 +170,14 @@ function make_doc_images(outDir)
     end
 end
 
-function failed = snap(failed, outDir, name, plotFun)
+function failed = snap(failed, dirs, name, plotFun, panels)
     %% Run a plotting function and save the figure(s) it opens as PNG
-    % The first figure is saved as <name>.png, any further ones as
-    % <name>_2.png, <name>_3.png, ...
+    % Every figure is saved to the review folder as <name>_<n>.png. The
+    % documentation image <name>.png is made of the figures listed in
+    % "panels" (default: the first one), placed side by side.
+    if nargin < 5
+        panels = 1;
+    end
     close all;
     try
         plotFun();
@@ -177,18 +189,38 @@ function failed = snap(failed, outDir, name, plotFun)
         [~, order] = sort(arrayfun(@figureOrder, figs));
         figs = figs(order);
         for ii = 1:numel(figs)
-            fileName = name;
-            if ii > 1
-                fileName = sprintf('%s_%d', name, ii);
-            end
-            exportgraphics(figs(ii), fullfile(outDir, [fileName, '.png']), 'Resolution', 150);
+            exportgraphics(figs(ii), reviewFile(dirs, name, ii), 'Resolution', 150);
         end
-        screenPrint('Step', sprintf('Saved %s (%d figure(s))', name, numel(figs)));
+        panels = panels(panels <= numel(figs));
+        imgs = arrayfun(@(ii) imread(reviewFile(dirs, name, ii)), panels, 'UniformOutput', false);
+        imwrite(sideBySide(imgs), fullfile(dirs.images, [name, '.png']));
+        screenPrint('Step', sprintf('Saved %s (figure(s) %s of %d)', name, mat2str(panels), numel(figs)));
     catch err
         failed{end + 1} = sprintf('%s: %s', name, err.message);
         screenPrint('Step', sprintf('FAILED %s: %s', name, err.message));
     end
     close all;
+end
+
+function fileName = reviewFile(dirs, name, ii)
+    %% File name of the ii-th figure of a function in the review folder
+    fileName = fullfile(dirs.review, sprintf('%s_%d.png', name, ii));
+end
+
+function img = sideBySide(imgs)
+    %% Place RGB images next to each other, centred vertically on white
+    height = max(cellfun(@(im) size(im, 1), imgs));
+    for ii = 1:numel(imgs)
+        im = imgs{ii};
+        if size(im, 3) == 1
+            im = repmat(im, 1, 1, 3);
+        end
+        padding = height - size(im, 1);
+        top = floor(padding / 2);
+        white = @(rows) 255 * ones(rows, size(im, 2), 3, 'like', im);
+        imgs{ii} = [white(top); im; white(padding - top)];
+    end
+    img = [imgs{:}];
 end
 
 function n = figureOrder(fig)
