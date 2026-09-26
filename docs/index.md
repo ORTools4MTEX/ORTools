@@ -32,7 +32,7 @@ To help maintain the **ORTools** library, please report any bugs you encounter i
   - <ins>Latest STABLE releases of:</ins> 
     - [**MTEX v7.1**](https://mtex-toolbox.github.io/download.html) and [**ORTools v3.0.1**](https://github.com/ORTools4MTEX/ORTools/releases/tag/v3.0.1).
   - <ins>DEVELOPER versions of:</ins>
-    - [**MTEX**](https://github.com/mtex-toolbox/mtex/blob/develop/) and [**ORTools**](https://github.com/ORTools4MTEX/ORTools/archive/develop.zip).
+    - [**MTEX**](https://github.com/mtex-toolbox/mtex/blob/develop/) and [**ORTools**](https://github.com/ORTools4MTEX/ORTools/archive/main.zip).
 - For instructions on installing MTEX and ORTools within MATLAB, please refer to the video given below.
 - The peak fitting functionality within the function [defineORs](function_index.md#defineORs) requires the prior installation of the [MATLAB Signal Processing Toolbox](https://au.mathworks.com/products/signal.html).
 - Open MATLAB and run one of the example files. Please refer to the [Example 1](https://youtu.be/AcR-nXg5QKo) instruction video to learn how to run the examples. Alternatively, if you do not wish to run the example files and want to use the function library instead, please ensure that the **ORTools** root directory and all of its sub-directories are added to the MATLAB path. 

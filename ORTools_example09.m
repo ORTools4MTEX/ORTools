@@ -28,7 +28,7 @@ screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDatase
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 3° threshold
+% Grains are calculated with a 3Â° threshold
 [grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
 % EBSD data in small grains are removed
 ebsd(grains(grains.numPixel < 3)) = [];
@@ -116,7 +116,7 @@ plotMap_bain(job,'linewidth',2,'colormap',magma);
 %% Compute the habit plane
 screenPrint('SegmentStart','Compute the habit plane');
 % Check the research paper for the theoretical background of the methods
-% https://github.com/ORTools4MTEX/ORTools/blob/develop/doc/Nyyss%C3%B6nen_Gazder_Hielscher_Niessen_2023.pdf
+% https://github.com/ORTools4MTEX/ORTools/blob/main/doc/Nyyss%C3%B6nen_Gazder_Hielscher_Niessen_2023.pdf
 
 % Let's try the Radon approach (on pixelised EBSD data) ...
 [habitPlane1,traces1,stats1] =  computeHabitPlane(job,'Radon','minClusterSize',50,'plotTraces');
