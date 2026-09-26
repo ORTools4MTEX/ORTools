@@ -9,12 +9,13 @@ requests, [open an issue](https://github.com/ORTools4MTEX/ORTools/issues).
 - `main` is the only long-lived branch. Create a branch from `main` for each change and open a pull
   request against `main`.
 - Keep each pull request focused on one change.
-- A pull request is merged once the CI checks (`pre-commit` and `docs`) pass and it has been reviewed.
+- A pull request is merged once the `docs` check passes and it has been reviewed.
 
 ## Code formatting
 
 MATLAB code is formatted automatically with [MISS_HIT](https://misshit.org), run through
-[pre-commit](https://pre-commit.com). Set it up once per clone:
+[pre-commit](https://pre-commit.com) when you commit. CI does not run these checks, so please set
+the hooks up once per clone:
 
 ```
 pip install pre-commit
