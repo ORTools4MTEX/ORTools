@@ -21,6 +21,12 @@ Notable changes to ORTools are listed here. The format follows
 - Documentation dependencies are pinned in `docs/requirements.txt`.
 
 ### Fixed
+- `plotMap_KSvariantPairs` with `parentGrainId` shows only the chosen parent grain instead of the
+  whole map in grey.
+- `plotMap_blockWidths` draws the mean of the projected points as lines again and no longer marks
+  every grain centre (MTEX 7 defaults).
+- `plotPDF_variants`, `plotPDF_packets` and `plotPDF_bain` use one colour per Id in the colorbar,
+  as the corresponding maps do.
 - Broken links to examples 1 and 2 in the documentation.
 - `plotCrystal_OR` help text named the wrong function and input.
 

@@ -41,6 +41,8 @@ function [variantPairs_boundary, variantGrains] = plotMap_KSvariantPairs(job, va
     if pGrainId
         [grainsTemp, ebsdTemp] = computeVariantGrains(job, 'parentGrainId', pGrainId);
         pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
+        % Only show the map data of the chosen parent grain
+        ebsdTemp = ebsdTemp(ismember(ebsdTemp.id, job.ebsd(pGrain).id));
     else
         warning('Argument ''parentGrainId'' not specified. Equivalent variant pairs will be calculated for the EBSD map.');
         [grainsTemp, ebsdTemp] = computeVariantGrains(job);
