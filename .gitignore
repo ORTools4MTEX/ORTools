@@ -48,3 +48,6 @@ codegen/
 Thumbs.db
 ehthumbs.db
 desktop.ini
+
+# MkDocs build output
+site/
