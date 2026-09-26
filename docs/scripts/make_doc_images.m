@@ -221,10 +221,10 @@ function ebsd = renameByMineral(ebsd, renames)
     %% Rename phases whose mineral name contains a given pattern
     % renames - {pattern, newName; ...}, matched case-insensitively
     % (the same renaming as renamePhases, without the selection dialog)
-    for ii = 2:numel(ebsd.CSList)
+    for ii = 2:numel(ebsd.mineralList)
         for jj = 1:size(renames, 1)
-            if contains(lower(ebsd.CSList{ii}.mineral), lower(renames{jj, 1}))
-                ebsd.CSList{ii}.mineral = renames{jj, 2};
+            if contains(lower(ebsd.mineralList{ii}), lower(renames{jj, 1}))
+                ebsd.CSList(ii).mineral = renames{jj, 2};
                 break
             end
         end
@@ -242,9 +242,9 @@ end
 
 function cs = findPhase(ebsd, name)
     %% Crystal symmetry of the phase with the given mineral name
-    for ii = 2:numel(ebsd.CSList)
-        if strcmp(ebsd.CSList{ii}.mineral, name)
-            cs = ebsd.CSList{ii};
+    for ii = 2:numel(ebsd.mineralList)
+        if strcmp(ebsd.mineralList{ii}, name)
+            cs = ebsd.CSList(ii);
             return
         end
     end
