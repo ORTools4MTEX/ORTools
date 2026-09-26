@@ -47,6 +47,14 @@ jobs:
           mkdir -p "$MTEX_DIR/data/EBSD"
           echo "MTEX_DIR=$MTEX_DIR" >> "$GITHUB_ENV"
 
+      # Some ORTools functions dock their figures, which MATLAB only allows
+      # with a display, so provide a virtual one
+      - name: Start virtual display
+        run: |
+          sudo apt-get install -y -qq xvfb > /dev/null
+          Xvfb :99 -screen 0 1920x1200x24 &
+          echo "DISPLAY=:99" >> "$GITHUB_ENV"
+
       - name: Generate documentation images
         uses: matlab-actions/run-command@v2
         with:

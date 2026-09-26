@@ -5,8 +5,9 @@ function make_doc_images(outDir)
     % (and on the TRWIP steel dataset in data/input/ebsd) without any user
     % interaction and saves one PNG per function to docs/images.
     %
-    % The screenshots of GUIs (computeGrains, guiOR, grainClick and
-    % recolorPhases) cannot be generated and are kept in the repository.
+    % The screenshots of GUIs (computeGrains, guiOR, grainClick,
+    % recolorPhases and the interactive peak fitting window shown for
+    % peakFitORs) cannot be generated and are kept in the repository.
     %
     %% Syntax:
     %  make_doc_images
@@ -121,11 +122,6 @@ function make_doc_images(outDir)
 
     failed = snap(failed, outDir, 'plotIPDF_gB_misfit', @() plotIPDF_gB_misfit(job));
     failed = snap(failed, outDir, 'plotIPDF_gB_prob', @() plotIPDF_gB_prob(job));
-    % Fit the parent-child misorientation peak around the Burgers OR
-    misoRange.min = angle(job.p2c) / degree - 2.5;
-    misoRange.max = angle(job.p2c) / degree + 2.5;
-    failed = snap(failed, outDir, 'peakFitORs', @() peakFitORs(job, misoRange));
-
     % Reconstruction (as in Example 4) for the texture transformation
     job.calcTPVotes('minFit', 2.5 * degree, 'maxFit', 5 * degree);
     job.calcParentFromVote('minProb', 0.7);

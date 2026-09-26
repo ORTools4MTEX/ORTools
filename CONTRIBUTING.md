@@ -60,7 +60,7 @@ make_doc_images
 ```
 
 When documenting a new plotting function, add a call for it to `make_doc_images.m`. Screenshots of
-GUIs cannot be generated; they are the only images kept in `docs/images`.
+GUIs and interactive windows cannot be generated; they are the only images kept in `docs/images`.
 
 ## Code of conduct
 

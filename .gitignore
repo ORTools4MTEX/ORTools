@@ -60,5 +60,6 @@ docs/images/*
 !docs/images/computeGrains.png
 !docs/images/grainClick.png
 !docs/images/guiOR.png
+!docs/images/peakFitORs.png
 !docs/images/recolorPhases.png
 docs/snippets/
