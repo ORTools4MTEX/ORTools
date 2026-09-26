@@ -1,0 +1,35 @@
+# Install once with:  pip install pre-commit && pre-commit install
+# Run on everything:  pre-commit run --all-files
+exclude: ^library/
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+        exclude: ^data/
+      - id: end-of-file-fixer
+        exclude: ^data/
+      - id: mixed-line-ending
+        args: [--fix=lf]
+        exclude: ^data/
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=5000]
+
+  - repo: local
+    hooks:
+      - id: mh_style
+        name: MATLAB formatting (mh_style --fix)
+        entry: mh_style --fix
+        language: python
+        additional_dependencies: [miss_hit==0.9.44]
+        files: \.m$
+      - id: mh_lint
+        name: MATLAB lint (mh_lint)
+        entry: mh_lint
+        language: python
+        additional_dependencies: [miss_hit==0.9.44]
+        files: \.m$
