@@ -8,7 +8,7 @@
   </a>
 </h1>
 
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ORTOOLS4MTEX/ORTools/develop) ![GitHub repo size](https://img.shields.io/github/repo-size/ORTOOLS4MTEX/ORTools) ![GitHub Discussions](https://img.shields.io/github/discussions/ORTools4MTEX/ORTools) ![GitHub issues](https://img.shields.io/github/issues/ORTools4MTEX/ORTools)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ORTOOLS4MTEX/ORTools/main) ![GitHub repo size](https://img.shields.io/github/repo-size/ORTOOLS4MTEX/ORTools) ![GitHub Discussions](https://img.shields.io/github/discussions/ORTools4MTEX/ORTools) ![GitHub issues](https://img.shields.io/github/issues/ORTools4MTEX/ORTools)
 
 - The latest **[ORTools v3.0.1](https://github.com/ORTools4MTEX/ORTools/releases/tag/v3.0.1)** stable release should be employed together with the **[MTEX v7.1](https://mtex-toolbox.github.io/download.html)** stable release.
 - Alternatively, the developer version of **[ORTools](https://github.com/ORTools4MTEX/ORTools)** should be employed together with the **[MTEX v7.1](https://mtex-toolbox.github.io/download.html)** stable release.

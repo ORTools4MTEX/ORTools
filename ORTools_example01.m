@@ -37,7 +37,7 @@ screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDatase
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 3° threshold
+% Grains are calculated with a 3Â° threshold
 [grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
 % Remove small "grains" < 3 pixels from the EBSD map data
 ebsd(grains(grains.numPixel < 3)) = [];

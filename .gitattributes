@@ -1,0 +1,23 @@
+# Normalise line endings to LF in the repository
+* text=auto eol=lf
+
+# MATLAB
+*.m    text diff=matlab
+*.mat  binary
+*.fig  binary
+*.mlx  binary
+*.mlapp binary
+
+# EBSD data: keep byte-exact
+*.ctf  -text
+*.cpr  binary
+*.crc  binary
+*.ang  -text
+*.h5oina binary
+
+# Documents and images
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary

@@ -74,7 +74,7 @@ dori = angle(job{1}.p2c,job{2}.p2c)/degree % IF YOU GET AN ERROR HERE MAKE SURE 
 %% Plot the inverse pole figure
 % Plot inverse pole figures for parent-child and child-child boundary
 % disorientations
-% We color the boundaries up to 5° disorientation to emphasize the effects
+% We color the boundaries up to 5Â° disorientation to emphasize the effects
 plotIPDF_gB_misfit(job{1},'maxColor',5);
 %       - OR 1 belongs to a distinct alpha-beta boundary miso axis
 %       - Few of the alpha-alpha boundary misorientations match the OR
@@ -87,7 +87,7 @@ plotIPDF_gB_misfit(job{2},'maxColor',5);
 
 %% Analyze the microstructure by plotting maps
 % Plot parent-child and child-child OR boundary disorientation map
-% We color the boundaries up to 5° disorientation to emphasize the effects
+% We color the boundaries up to 5Â° disorientation to emphasize the effects
 plotMap_gB_misfit(job{1},'linewidth',1.5,'maxColor',5);
 %       - Many regions have a large disorientation from OR 1
 %       - Locally OR 1 seems to work well 

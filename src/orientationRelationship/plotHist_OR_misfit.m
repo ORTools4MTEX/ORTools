@@ -154,11 +154,11 @@ legend
 % ylabel('Relative frequency ({\itf}(g))','FontSize',14);
 ylabel('\bf Relative frequency [$\bf f$(g)]');
 if strcmpi(pairType,'p2c')==1
-    %     xlabel('Parent-child grain disorientation [°]','FontSize',14);
+    %     xlabel('Parent-child grain disorientation [Â°]','FontSize',14);
     xlabel('\bf Parent-child grain disorientation [$\bf ^\circ$]','FontSize',14);
     set(figH,'Name','Parent-child grain disorientation histogram','NumberTitle','on');
 elseif strcmpi(pairType,'c2c')==1
-    %     xlabel('Child-child grain disorientation [°]','FontSize',14);
+    %     xlabel('Child-child grain disorientation [Â°]','FontSize',14);
     xlabel('\bf Child-child grain disorientation [$\bf ^\circ$]','FontSize',14);
     set(figH,'Name','Child-child grain disorientation histogram','NumberTitle','on');
 end
