@@ -42,7 +42,10 @@ jobs:
           curl -sSfL -o "$RUNNER_TEMP/mtex.zip" \
             "https://github.com/mtex-toolbox/mtex/releases/download/mtex-${MTEX_VERSION}/mtex-${MTEX_VERSION}.zip"
           unzip -q "$RUNNER_TEMP/mtex.zip" -d "$RUNNER_TEMP/mtex"
-          echo "MTEX_DIR=$(dirname "$(find "$RUNNER_TEMP/mtex" -name startup_mtex.m | head -1)")" >> "$GITHUB_ENV"
+          MTEX_DIR=$(dirname "$(find "$RUNNER_TEMP/mtex" -name startup_mtex.m | head -1)")
+          # mtexdata downloads the example datasets into this folder
+          mkdir -p "$MTEX_DIR/data/EBSD"
+          echo "MTEX_DIR=$MTEX_DIR" >> "$GITHUB_ENV"
 
       - name: Generate documentation images
         uses: matlab-actions/run-command@v2

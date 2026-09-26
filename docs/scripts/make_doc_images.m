@@ -24,12 +24,13 @@ function make_doc_images(outDir)
         outDir = fullfile(root, 'docs', 'images');
     end
     snippetDir = fullfile(root, 'docs', 'snippets');
-    ensureFolder(fullfile(outDir, 'x'));
-    ensureFolder(fullfile(snippetDir, 'x'));
 
     % Put ORTools on the path
     addpath(root);
     currentFolder;
+
+    ensureFolder(fullfile(outDir, 'x'));
+    ensureFolder(fullfile(snippetDir, 'x'));
 
     set(groot, 'DefaultFigureVisible', 'off');
     set(groot, 'DefaultFigureWindowStyle', 'normal');
