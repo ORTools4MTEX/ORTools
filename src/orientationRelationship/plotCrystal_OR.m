@@ -2,10 +2,10 @@ function plotCrystal_OR(job, oriP, varargin)
     % plot crystal orientations of the parent orientation and child variants
     %
     % Syntax
-    %  f = crystalOR(job,oriP)
+    %  plotCrystal_OR(job,oriP)
     %
     % Input
-    %  ori     - @orientation
+    %  oriP    - @orientation of the parent
     %  job     - @parentGrainreconstructor
     %
     % Options

@@ -166,6 +166,17 @@ This auxiliary function defines an orientation relationship (OR) for a parent-ch
 - Output
   - job  - @parentGrainReconstructor
 
+## E
+
+### <a id="ensureFolder"></a>ensureFolder
+
+This function creates the folder that *filePath* is written to, if that folder does not exist yet. Git does not track empty directories, so the subfolders of *data/output* are not guaranteed to be present in a freshly cloned repository.
+
+- Syntax
+  - ensureFolder(filePath)
+- Input
+  - filePath  - full path of a file that is about to be written, or the path of the folder itself
+
 ## F
 
 ### <a id="fibreMaker"></a>fibreMaker
@@ -270,6 +281,18 @@ The function is called by [defineORs](function_index.md#defineORs).
 <p align="center">
   <img src="../images/peakFitORs.png" alt="Interactive fitting window on which peakFitORs is applied." width="500"/>
 </p>
+
+### <a id="plotCrystal_OR"></a>plotCrystal_OR
+
+This function plots the crystal orientation of a parent orientation and its child variants.
+
+- Syntax
+  - plotCrystal_OR(job,oriP)
+- Input
+  - job       - @parentGrainReconstructor
+  - oriP      - @orientation of the parent
+- Options
+  - variantId - list with specific variant Ids to plot
 
 ### <a id="plotHist_OR_misfit"></a>plotHist_OR_misfit
 
