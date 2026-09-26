@@ -64,3 +64,6 @@ docs/images/*
 !docs/images/recolorPhases.png
 docs/snippets/
 docs-review/
+
+# Python
+__pycache__/
