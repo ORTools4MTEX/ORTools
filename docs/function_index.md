@@ -3,7 +3,7 @@
 ## ORTools alphabetical function index
 
 ## C
-  
+
 ### <a id="computeBainGrains"></a>computeBainGrains
 
 This function computes the Bain group IDs of child grains.
@@ -13,7 +13,7 @@ This function computes the Bain group IDs of child grains.
 - Input
   - job           - @parentGrainReconstructor
 - Output
-  - bain_grains   - @grains2d 
+  - bain_grains   - @grains2d
 
 ### <a id="computeGrains"></a>computeGrains
 
@@ -25,7 +25,7 @@ This function is a GUI to compute grains from ebsd map data and optionally filte
   - ebsd  - @EBSD
 - Output
   - ebsd     - @EBSD
-  - grains   - @grains2d 
+  - grains   - @grains2d
   - gB       - @grainBoundary
 
 <p align="center">
@@ -34,7 +34,7 @@ This function is a GUI to compute grains from ebsd map data and optionally filte
 
 ### <a id="computeGrainPairs"></a>computeGrainPairs
 
-This function computes the absolute or normalised frequency and boundary segment lengths of grain pairs. 
+This function computes the absolute or normalised frequency and boundary segment lengths of grain pairs.
 The grain pair ids can be defined by the user for variants, crystallographic packets, Bain groups, any other-id type or for groups of id or equivalent id pairs.
 
 - Syntax:
@@ -44,7 +44,7 @@ The grain pair ids can be defined by the user for variants, crystallographic pac
   - pairGrains   - @grain2d = child grain pairs as computed by the [computeVariantGrains](function_index.md#computeVariantGrains) function
 
 - Output:
-  - out          - @struc   = a strcture variable containing the absolute or normalised frequency and boundary segment lengths of grain pairs. 
+  - out          - @struc   = a strcture variable containing the absolute or normalised frequency and boundary segment lengths of grain pairs.
 
 - Options:
   - variant    - Uses the variant ids of child grain pairs.
@@ -108,7 +108,7 @@ This function computes twins in parent grains by local refinement.
   -  computeParentTwins(job,pGrainId)
 - Input
   -  job          - @parentGrainreconstructor
-  -  pGrainId     - parent grain Id 
+  -  pGrainId     - parent grain Id
   -  direction    - @vector3d
 - Options
   -  grains       - plot grain data instead of EBSD data
@@ -126,7 +126,7 @@ This function refines the child grains in the *job* object based on their varian
 - Input
   - job              - @parentGrainReconstructor
 - Output
-  - grains           - @grains2d 
+  - grains           - @grains2d
   - ebsd             - @EBSD
 - Options
   - parentGrainId    - parent grain Id using the argument 'parentGrainId'
@@ -156,7 +156,7 @@ Doing so counts every variant pair boundary in the map, whereas a manually defin
 ### <a id="defineORs"></a>defineORs
 
 This auxiliary function defines an orientation relationship (OR) for a parent-child phase combination given in the *job* object as:
-- Parallel planes and directions in a GUI, or 
+- Parallel planes and directions in a GUI, or
 - Peakfitting of the parent-child boundary misorientation angle distribution.
 
 - Syntax
@@ -166,12 +166,23 @@ This auxiliary function defines an orientation relationship (OR) for a parent-ch
 - Output
   - job  - @parentGrainReconstructor
 
+## E
+
+### <a id="ensureFolder"></a>ensureFolder
+
+This function creates the folder that *filePath* is written to, if that folder does not exist yet. Git does not track empty directories, so the subfolders of *data/output* are not guaranteed to be present in a freshly cloned repository.
+
+- Syntax
+  - ensureFolder(filePath)
+- Input
+  - filePath  - full path of a file that is about to be written, or the path of the folder itself
+
 ## F
 
 ### <a id="fibreMaker"></a>fibreMaker
 
 This function creates an ideal crystallographic fibre with a user specified half-width and exports the data as:
-- a lossless Mtex *.txt* file for MTEX v5.9.0 and onwards), or 
+- a lossless Mtex *.txt* file for MTEX v5.9.0 and onwards), or
 - a lossy discretised Mtex *.txt* file for MTEX up to v5.8.2) for later use.
 
 - Syntax
@@ -194,10 +205,10 @@ This function produces a figure of an interactive ebsd map. It enables users to 
   - grainClick(job)
 - Input
   - job          - @parentGrainReconstructor
-  - direction    - @vector3d 
+  - direction    - @vector3d
 - Options
   - parentTwins  - Refine grains to detect parent twins
-  - grains       - Plot grain data instead of EBSD data 
+  - grains       - Plot grain data instead of EBSD data
   - noScalebar   - Remove scalebar from maps
   - noFrame      - Remove frame around maps
 
@@ -232,7 +243,7 @@ This function creates an ideal crystallographic orientation from a unimodal ODF 
   - ori              - @orientation
   -  sampleSymmetry  - @specimenSymmetry
 - Options
-  - halfwidth        - halfwidth for the odf calculation 
+  - halfwidth        - halfwidth for the odf calculation
   - export           - (optional path and) name of the file
 
 ### <a id="ORInfo"></a>ORInfo
@@ -270,6 +281,18 @@ The function is called by [defineORs](function_index.md#defineORs).
 <p align="center">
   <img src="../images/peakFitORs.png" alt="Interactive fitting window on which peakFitORs is applied." width="500"/>
 </p>
+
+### <a id="plotCrystal_OR"></a>plotCrystal_OR
+
+This function plots the crystal orientation of a parent orientation and its child variants.
+
+- Syntax
+  - plotCrystal_OR(job,oriP)
+- Input
+  - job       - @parentGrainReconstructor
+  - oriP      - @orientation of the parent
+- Options
+  - variantId - list with specific variant Ids to plot
 
 ### <a id="plotHist_OR_misfit"></a>plotHist_OR_misfit
 
@@ -384,7 +407,7 @@ This function plots an ebsd map by colorising child-child boundary misorientatio
 - Input
   - job  - @parentGrainReconstructor
 - Options
-  - colormap  - colormap variable 
+  - colormap  - colormap variable
 
 <p align="center">
   <img src="../images/plotMap_gB_c2c.png" alt="Plot example from plotMap_gB_c2c" width="500"/>
@@ -399,7 +422,7 @@ This function plots an ebsd map by colorising the misfit, or disorientation, bet
 - Input
   - job       - @parentGrainReconstructor
 - Options
-  - colormap  - colormap variable 
+  - colormap  - colormap variable
 
 <p align="center">
   <img src="../images/plotMap_gB_misfit.png" alt="Plot example from plotMap_gB_misfit" width="500"/>
@@ -414,15 +437,15 @@ This function plots an ebsd map by colorising child-child boundary misorientatio
 - Input
   - job       - @parentGrainReconstructor
 - Options
-  - colormap  - colormap variable 
- 
+  - colormap  - colormap variable
+
 <p align="center">
   <img src="../images/plotMap_gB_p2c.png" alt="Plot example from plotMap_gB_p2c" width="500"/>
 </p>
 
 ### <a id="plotMap_gB_prob"></a>plotMap_gB_prob
 
-This function calculates and plots an ebsd map of the probability distribution, between 0 and 1, that a boundary belongs to an orientation relationship (OR). 
+This function calculates and plots an ebsd map of the probability distribution, between 0 and 1, that a boundary belongs to an orientation relationship (OR).
 For more details, [please click here.](https://mtex-toolbox.github.io/parentGrainReconstructor.calcGraph.html)
 
 - Syntax
@@ -430,10 +453,10 @@ For more details, [please click here.](https://mtex-toolbox.github.io/parentGrai
 - Input
   - job       - @parentGrainReconstructor
 - Options
-  - threshold - the misfit at which the probability is exactly 50 percent ... 
+  - threshold - the misfit at which the probability is exactly 50 percent ...
   - tolerance - ... and the standard deviation in a cumulative Gaussian distribution
-  - colormap  - colormap variable 
- 
+  - colormap  - colormap variable
+
 <p align="center">
   <img src="../images/plotMap_gB_prob.png" alt="Plot example from plotMap_gB_prob" width="500"/>
 </p>
@@ -447,12 +470,12 @@ This function plots inverse pole figure maps of the parent and child phases and 
   -  plotMap_IPF_p2c(job, direction)
 - Input
   - job       - @parentGrainReconstructor
-  - direction - @vector3d 
+  - direction - @vector3d
 - Output
-  - ipfKey    - @ipfHSVKey 
+  - ipfKey    - @ipfHSVKey
 - Options
   - parent    - plot only map of parent phase
-  - child     - plot only map of child phase 
+  - child     - plot only map of child phase
 
 <p align="center">
   <img src="../images/plotMap_IPF_p2c.png" alt="Plot example from plotMap_IPF_p2c" width="800"/>
@@ -468,7 +491,7 @@ This function plots an ebsd map by colorising child grains according to their cr
   - job      - @parentGrainReconstructor
 - Options
   - colormap - colormap variable
-  - grains   - Plot grain data instead of EBSD data 
+  - grains   - Plot grain data instead of EBSD data
 
 <p align="center">
   <img src="../images/plotMap_packets.png" alt="plotMap_packets" width="500"/>
@@ -521,7 +544,7 @@ The function plots the map of child grains colored according to their variant ID
   - job  - @parentGrainReconstructor
 - Options
   - colormap - colormap variable
-  - grains   - Plot grain data instead of EBSD data 
+  - grains   - Plot grain data instead of EBSD data
 
 <p align="center">
   <img src="../images/plotMap_variants.png" alt="plotMap_variants" width="500"/>
@@ -559,8 +582,8 @@ This function plots a pole figure of the child crystallographic packet IDs assoc
   - oriParent - @orientation
   - pdf       - @Miller
 - Options
-  - colormap   - colormap variable 
-  - markersize - markersize 
+  - colormap   - colormap variable
+  - markersize - markersize
 
 <p align="center">
   <img src="../images/plotPDF_packets.png" alt="Plot example from plotPDF_packets" width="300"/>
@@ -568,7 +591,7 @@ This function plots a pole figure of the child crystallographic packet IDs assoc
 
 ### <a id="plotPDF_variants"></a>plotPDF_variants
 
-This function plots a pole figure of the child variant IDs associated with an OR *job.p2c*. 
+This function plots a pole figure of the child variant IDs associated with an OR *job.p2c*.
 It is an alternative to MTEX's default [plotVariantPF](https://mtex-toolbox.github.io/parentGrainReconstructor.plotVariantPF.html).
 
 - Syntax
@@ -580,8 +603,8 @@ It is an alternative to MTEX's default [plotVariantPF](https://mtex-toolbox.gith
   - oriParent - @orientation
   - pdf       - @Miller
 - Options
-  - colormap   - colormap variable 
-  - markersize - markersize 
+  - colormap   - colormap variable
+  - markersize - markersize
 
 <p align="center">
   <img src="../images/plotPDF_variants.png" alt="Plot example from plotPDF_variants" width="300"/>
@@ -591,7 +614,7 @@ It is an alternative to MTEX's default [plotVariantPF](https://mtex-toolbox.gith
 
 The function calculates and plots the transformation texture, with or without imposing variant selection, based on a parent texture file.
 Input files can be created using:
- - ebsd map data [as shown in example 4](examples.md), 
+ - ebsd map data [as shown in example 4](examples.md),
  - [fibreMaker](function_index.md#fibreMaker), or
  - [orientationMaker](function_index.md#orientationMaker).
 
@@ -617,8 +640,8 @@ Input files can be created using:
 
 ### <a id="plotStack"></a>plotStack
 
-This function plots a series of maps, figures, graphs, and tables for detailed child variant analysis within a single parent grain as follows: 
-- By manually supplying a *parentGrainId*, or 
+This function plots a series of maps, figures, graphs, and tables for detailed child variant analysis within a single parent grain as follows:
+- By manually supplying a *parentGrainId*, or
 - Using the [grainClick](function_index.md#grainClick) function and interactively choosing a grain of interest.
 
 - Syntax
@@ -626,9 +649,9 @@ This function plots a series of maps, figures, graphs, and tables for detailed c
 - Input
   - job          - @parentGrainreconstructor
   - pGrainId     - parent grain Id
-  - direction    - @vector3d 
+  - direction    - @vector3d
 - Options
-  - grains       - Plot grain data instead of EBSD data 
+  - grains       - Plot grain data instead of EBSD data
   - noScalebar   - Remove scalebar from maps
   - noFrame      - Remove frame around maps
 
@@ -665,14 +688,14 @@ This function is a GUI to interactively recolor phases in the *ebsd* or *grains*
 - Output
   - ebsd    - @EBSD
   - grains  - @grains2d
-  
+
 <p align="center">
   <img src="../images/recolorPhases.png" alt="GUI of recolorPhases" width="200"/>
 </p>
 
 ### <a id="renamePhases"></a>renamePhases
 
-This function is a GUI to interactively rename phases. 
+This function is a GUI to interactively rename phases.
 It opens a list of phase names (pre-defined in *phaseStrings*) and renames each phase in the *ebsd* variable according to a user's selection.
 
 - Syntax
@@ -732,7 +755,7 @@ This function is a GUI to define a job of class [parentGrainReconstructor](https
 - Input
   - ebsd     - @EBSD
   - grains   - @grain2d
-  - inPath   - string giving path to * .cif file folder 
+  - inPath   - string giving path to * .cif file folder
 - Output
   - job      - @parentGrainReconstructor
 
@@ -744,4 +767,3 @@ This function tiles all figures evenly across the computer screen/monitor.
 
 - Syntax
   - fileFigs
-

@@ -1,55 +1,54 @@
-function [ebsd,grains,gB] = computeGrains(ebsd,varargin)
-%% Function description:
-% This function is a GUI to compute grains from ebsd map data and 
-% optionally filters them.
-%
-%% Syntax:
-%  [ebsd,grains,gB] = computeGrains(ebsd)
-%
-%% Input:
-%  ebsd  - @EBSD
-%
-%% Output:
-%  ebsd     - @EBSD
-%  grains   - @grains2d 
-%  gB       - @grainBoundary
+function [ebsd, grains, gB] = computeGrains(ebsd, varargin)
+    %% Function description:
+    % This function is a GUI to compute grains from ebsd map data and
+    % optionally filters them.
+    %
+    %% Syntax:
+    %  [ebsd,grains,gB] = computeGrains(ebsd)
+    %
+    %% Input:
+    %  ebsd  - @EBSD
+    %
+    %% Output:
+    %  ebsd     - @EBSD
+    %  grains   - @grains2d
+    %  gB       - @grainBoundary
 
-
-%% Get min GB angle and min grain size
-[criticalAngle,minGrainSize] = setGrainParameters;
-%% Compute the grains
-fprintf(' -> Computing grains with >%.0f° misorientation\n',criticalAngle/degree);
-[grains,ebsd] = calcGrains(ebsd,'angle',criticalAngle,'unitcell');
-%% Delete small grains (if any)
-if ~isnan(minGrainSize)
-    fprintf(' -> Deleting EBSD data of grains with <%.0f pxs\n',minGrainSize);
-    % Assign ebsd data of filtered grains to phase 'noIndexed'
-    ebsd(grains(grains.numPixel < minGrainSize)).phase = 0;
-    % Set the orientation of ebsd data of filtered grains to 0
-    ebsd(grains(grains.numPixel < minGrainSize)).rotations = rotation('Euler',0,0,0);
-    % Set the error of ebsd data of filtered grains to 3
-    ebsd(grains(grains.numPixel < minGrainSize)).prop.error = 3;
-    % Set the number of bands of ebsd data of filtered grains to 0
-    ebsd(grains(grains.numPixel < minGrainSize)).prop.bands = 0;
-    % Set the mean angular deviation of ebsd data of filtered grains to 0
-    ebsd(grains(grains.numPixel < minGrainSize)).prop.mad = 0;
-    % Recompute grains after the small grains have been removed
-    fprintf(' -> Recomputing grains with >%.0f° misorientation\n',criticalAngle/degree);
-    [grains,ebsd] = calcGrains(ebsd,'angle',criticalAngle);
+    %% Get min GB angle and min grain size
+    [criticalAngle, minGrainSize] = setGrainParameters;
+    %% Compute the grains
+    fprintf(' -> Computing grains with >%.0f° misorientation\n', criticalAngle / degree);
+    [grains, ebsd] = calcGrains(ebsd, 'angle', criticalAngle, 'unitcell');
+    %% Delete small grains (if any)
+    if ~isnan(minGrainSize)
+        fprintf(' -> Deleting EBSD data of grains with <%.0f pxs\n', minGrainSize);
+        % Assign ebsd data of filtered grains to phase 'noIndexed'
+        ebsd(grains(grains.numPixel < minGrainSize)).phase = 0;
+        % Set the orientation of ebsd data of filtered grains to 0
+        ebsd(grains(grains.numPixel < minGrainSize)).rotations = rotation('Euler', 0, 0, 0);
+        % Set the error of ebsd data of filtered grains to 3
+        ebsd(grains(grains.numPixel < minGrainSize)).prop.error = 3;
+        % Set the number of bands of ebsd data of filtered grains to 0
+        ebsd(grains(grains.numPixel < minGrainSize)).prop.bands = 0;
+        % Set the mean angular deviation of ebsd data of filtered grains to 0
+        ebsd(grains(grains.numPixel < minGrainSize)).prop.mad = 0;
+        % Recompute grains after the small grains have been removed
+        fprintf(' -> Recomputing grains with >%.0f° misorientation\n', criticalAngle / degree);
+        [grains, ebsd] = calcGrains(ebsd, 'angle', criticalAngle);
+    end
+    %% Compute grain boundaries
+    fprintf(' -> Computing all grain boundaries\n');
+    gB = grains.boundary;
 end
-%% Compute grain boundaries
-fprintf(' -> Computing all grain boundaries\n');
-gB = grains.boundary;
-end
 
-function [crit_gBAngle,minGS] = setGrainParameters
-    prompt = {'Critical grain boundary angle [in °]:',...
-        'Min. grain size [in pixels]: (keep empty if no grains require removal)'};
+function [crit_gBAngle, minGS] = setGrainParameters
+    prompt = {'Critical grain boundary angle [in °]:', ...
+              'Min. grain size [in pixels]: (keep empty if no grains require removal)'};
     windowTitle = 'Compute grains';
     dims = [1 75; 1 75];
-    predefinedInput = {'3',''};
+    predefinedInput = {'3', ''};
     try
-        userInput = inputdlg(prompt,windowTitle,dims,predefinedInput);
+        userInput = inputdlg(prompt, windowTitle, dims, predefinedInput);
         if  sum(isnan(str2double(userInput{1}))) > 0 || sum(isnan(str2double(userInput{2}))) > 0 && ~isempty(userInput{2})
             message = sprintf('Script terminated: Non-numeric input');
             uiwait(warndlg(message));
@@ -75,9 +74,7 @@ function [crit_gBAngle,minGS] = setGrainParameters
         end
     end
     % Critical boundary angle [in radians]
-    crit_gBAngle = str2double(userInput{1})*degree;
+    crit_gBAngle = str2double(userInput{1}) * degree;
     % Minimum grain size [in pixels]
     minGS = str2double(userInput{2});
 end
-
-

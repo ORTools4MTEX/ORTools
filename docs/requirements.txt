@@ -1,0 +1,4 @@
+# Pinned so docs builds are reproducible. MkDocs 2.0 is not compatible with
+# Material for MkDocs, so stay on 1.x until the theme supports it.
+mkdocs==1.6.1
+mkdocs-material==9.7.7

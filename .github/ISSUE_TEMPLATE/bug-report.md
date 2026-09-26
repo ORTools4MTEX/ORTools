@@ -39,7 +39,7 @@ Please insert the errors in-between the lines bounded by  the backticks ( **``..
 If applicable, add screenshots to help explain the problem.
 
 **MTEX version:**
- - Version [e.g. 22]
+ - Version [e.g. 7.1]
 
 **Any other additional comments**
 Add any other comments about the problem here.

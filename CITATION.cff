@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you apply ORTools in your research, please cite the article below."
+title: ORTools
+type: software
+abstract: >-
+  A function library for OR discovery, OR analysis and the plotting of
+  publication-ready figures of martensitic transformations or OR-related
+  phase transitions in MTEX.
+authors:
+  - given-names: Frank
+    family-names: Niessen
+  - given-names: Azdiar A.
+    family-names: Gazder
+version: 3.0.1
+date-released: "2026-09-25"
+license: MIT
+repository-code: "https://github.com/ORTools4MTEX/ORTools"
+url: "https://ortools4mtex.github.io/ORTools/"
+preferred-citation:
+  type: article
+  title: "Parent grain reconstruction from partially and fully transformed microstructures in MTEX"
+  authors:
+    - given-names: Frank
+      family-names: Niessen
+    - given-names: Tuomo
+      family-names: Nyyssönen
+    - given-names: Azdiar A.
+      family-names: Gazder
+    - given-names: Ralf
+      family-names: Hielscher
+  journal: Journal of Applied Crystallography
+  volume: 55
+  issue: 1
+  start: 180
+  end: 194
+  year: 2022
+  doi: 10.1107/S1600576721011560
