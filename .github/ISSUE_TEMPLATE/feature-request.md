@@ -16,7 +16,7 @@ A clear and concise description of the problem needing a new function or demo sc
 **Description of the ebsd map**
 A clear and concise description of the ebsd map data and its type.
 
-**Script to reproduce the bug**
+**Script showing the use case (if any)**
 Please insert the code in-between the lines bounded by the backticks ( **``...**):
 ```matlab
 % insert the script from this line onward
@@ -27,22 +27,14 @@ Please insert the code in-between the lines bounded by the backticks ( **``...**
 **Current behavior**
 A clear and concise description of what is happening.
 
-**Expected behavior**
-A clear and concise description of what is expected to happen.
-
-**Error message(s) (if any)**
-Please insert the errors in-between the lines bounded by  the backticks ( **``...**):
-```matlab
-% insert the error message from this line onward
-...
-...
-```
+**Desired behavior**
+A clear and concise description of what the new function or demo script should do.
 
 **Screenshot(s) (if any)**
 If applicable, add screenshots to help explain the problem.
 
 **MTEX version:**
- - Version [e.g. 22]
+ - Version [e.g. 7.1]
 
 **Any other additional comments**
 Add any other comments about the problem here.
