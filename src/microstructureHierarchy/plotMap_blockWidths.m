@@ -6,11 +6,11 @@ function dBlock = plotMap_blockWidths(job,varargin)
 % following reference:
 % [S.Morito, H.Yoshida, T.Maki,X.Huang, Effect of block size on the
 % strength of lath martensite in low carbon steels, Mater. Sci. Eng.: A,
-% Volumes 438–440, 2006, Pages 237-240. 
+% Volumes 438â€“440, 2006, Pages 237-240. 
 % (https://doi.org/10.1016/j.msea.2005.12.048)
 %
 % CONTRIBUTED BY:
-% Dr Tuomo Nyyssönen
+% Dr Tuomo NyyssÃ¶nen
 %
 %% Syntax:
 %  plotMap_blockWidths(job,varargin)
