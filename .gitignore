@@ -8,6 +8,11 @@
 *.ctf
 *.h5oina
 *.mat
+# ...except the example datasets shipped with the repository
+!data/input/**
+
+# Results written by the example scripts
+data/output/
 
 *.Tex
 *.tex
