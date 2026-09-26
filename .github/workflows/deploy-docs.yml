@@ -80,6 +80,12 @@ jobs:
       - name: Build site
         run: mkdocs build --strict
 
+      - name: Compare with the published images
+        if: github.event_name == 'pull_request'
+        run: |
+          pip install pillow
+          python docs/scripts/compare_with_site.py
+
       - name: Upload generated images for review
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
