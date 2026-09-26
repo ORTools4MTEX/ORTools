@@ -68,10 +68,6 @@ function make_doc_images(outDir)
     failed = snap(failed, dirs, 'plotHist_OR_misfit', ...
                   @() plotHist_OR_misfit(job, [KS, NW], 'legend', {'K-S OR', 'N-W OR'}));
     failed = saveText(failed, snippetDir, 'ORinfo', @() ORinfo(job.p2c));
-    failed = snap(failed, dirs, 'plotMap_IPF_p2c', ...
-                  @() plotMap_IPF_p2c(job, vector3d.Z, 'linewidth', 2));
-    failed = snap(failed, dirs, 'plotMap_gB_c2c', ...
-                  @() plotMap_gB_c2c(job, 'linewidth', 2));
     failed = snap(failed, dirs, 'plotMap_gB_misfit', ...
                   @() plotMap_gB_misfit(job, 'linewidth', 2, 'maxColor', 5));
     failed = snap(failed, dirs, 'plotMap_gB_prob', ...
@@ -113,11 +109,22 @@ function make_doc_images(outDir)
     failed = snap(failed, dirs, 'plotMap_blockWidths', ...
                   @() plotMap_blockWidths(job, 'parentGrainId', maxGrainId, 'linewidth', 1.5));
     failed = snap(failed, dirs, 'plotStack', ...
-                  @() plotStack(job, 'parentGrainId', maxGrainId, 'linewidth', 1.5));
+                  @() plotStack(job, 'parentGrainId', maxGrainId, 'linewidth', 1.5), 'grid5');
     failed = snap(failed, dirs, 'computehabitPlane', ...
-                  @() computeHabitPlane(job, 'Radon', 'minClusterSize', 50, 'plotTraces'));
+                  @() computeHabitPlane(job, 'Shape', 'minClusterSize', 50, 'reliability', 0.5, 'plotTraces'));
     failed = snap(failed, dirs, 'computeParentTwins', ...
                   @() computeParentTwins(job, maxParentId));
+
+    % Texture transformation of the reconstructed parent texture
+    hParent = [Miller(1, 1, 1, job.csParent), Miller(2, 0, 0, job.csParent), Miller(2, 2, 0, job.csParent)];
+    hChild = [Miller(1, 1, 0, job.csChild), Miller(2, 0, 0, job.csChild), Miller(2, 1, 1, job.csChild)];
+    inputODF = calcDensity(job.parentEBSD.orientations); %#ok<NASGU>
+    pfNameIn = fullfile(tempdir, 'ORTools_inputTexture.mat');
+    pfNameOut = fullfile(tempdir, 'ORTools_outputTexture.mat');
+    save(pfNameIn, 'inputODF');
+    % Figures: 1 parent PFs, 2 parent ODF, 3 child PFs, 4 child ODF
+    failed = snap(failed, dirs, 'plotPODF_transformation', ...
+                  @() plotPODF_transform(job, hParent, hChild, 'import', pfNameIn, 'export', pfNameOut), [1 3; 2 4]);
 
     %% Alpha-beta titanium (MTEX dataset 'alphaBetaTitanium')
     screenPrint('SegmentStart', 'Alpha-beta titanium');
@@ -128,26 +135,8 @@ function make_doc_images(outDir)
     job = defineJob(ebsd, grains, 'Beta', 'Alpha');
     job.p2c = orientation.Burgers(job.csParent, job.csChild);
 
-    failed = snap(failed, dirs, 'plotIPDF_gB_misfit', @() plotIPDF_gB_misfit(job), 1:3);
+    failed = snap(failed, dirs, 'plotIPDF_gB_misfit', @() plotIPDF_gB_misfit(job, 'colormapP', jet), 1:3);
     failed = snap(failed, dirs, 'plotIPDF_gB_prob', @() plotIPDF_gB_prob(job), 1:3);
-    % Reconstruction (as in Example 4) for the texture transformation
-    job.calcTPVotes('minFit', 2.5 * degree, 'maxFit', 5 * degree);
-    job.calcParentFromVote('minProb', 0.7);
-    for k = 1:3
-        job.calcGBVotes('p2c', 'threshold', k * 2.5 * degree);
-        job.calcParentFromVote;
-    end
-    job.mergeSimilar('threshold', 5 * degree);
-    job.mergeInclusions('maxSize', 5);
-    job.calcVariants;
-    hParent = [Miller(1, 1, 0, job.csParent), Miller(2, 0, 0, job.csParent)];
-    hChild = [Miller(0, 0, 0, 2, job.csChild), Miller(1, 1, -2, 0, job.csChild)];
-    inputODF = calcDensity(job.parentEBSD.orientations); %#ok<NASGU>
-    pfNameIn = fullfile(tempdir, 'ORTools_inputTexture.mat');
-    pfNameOut = fullfile(tempdir, 'ORTools_outputTexture.mat');
-    save(pfNameIn, 'inputODF');
-    failed = snap(failed, dirs, 'plotPODF_transformation', ...
-                  @() plotPODF_transform(job, hParent, hChild, 'import', pfNameIn, 'export', pfNameOut), 1:4);
 
     %% TRWIP steel (data/input/ebsd/TRWIPsteel.ctf)
     screenPrint('SegmentStart', 'TRWIP steel');
@@ -160,6 +149,10 @@ function make_doc_images(outDir)
     job = defineJob(ebsd, grains, 'Gamma', 'AlphaP');
 
     failed = snap(failed, dirs, 'plotMap_phases', @() plotMap_phases(job, 'linewidth', 2));
+    failed = snap(failed, dirs, 'plotMap_IPF_p2c', ...
+                  @() plotMap_IPF_p2c(job, vector3d.Z, 'linewidth', 2));
+    failed = snap(failed, dirs, 'plotMap_gB_c2c', ...
+                  @() plotMap_gB_c2c(job, 'linewidth', 2));
     failed = snap(failed, dirs, 'plotMap_gB_p2c', @() plotMap_gB_p2c(job, 'linewidth', 1.5));
 
     %% Report
@@ -173,8 +166,10 @@ end
 function failed = snap(failed, dirs, name, plotFun, panels)
     %% Run a plotting function and save the figure(s) it opens as PNG
     % Every figure is saved to the review folder as <name>_<n>.png. The
-    % documentation image <name>.png is made of the figures listed in
-    % "panels" (default: the first one), placed side by side.
+    % documentation image <name>.png is made of the figures in "panels":
+    %  n            - figure number(s), placed side by side (default: 1)
+    %  [1 3; 2 4]   - a grid, one matrix row per image row (0 = empty)
+    %  'gridN'      - all figures, N per row
     if nargin < 5
         panels = 1;
     end
@@ -191,9 +186,19 @@ function failed = snap(failed, dirs, name, plotFun, panels)
         for ii = 1:numel(figs)
             exportgraphics(figs(ii), reviewFile(dirs, name, ii), 'Resolution', 150);
         end
-        panels = panels(panels <= numel(figs));
-        imgs = arrayfun(@(ii) imread(reviewFile(dirs, name, ii)), panels, 'UniformOutput', false);
-        imwrite(sideBySide(imgs), fullfile(dirs.images, [name, '.png']));
+        if ischar(panels)
+            nCols = str2double(panels(5:end));
+            panels = 1:numel(figs);
+            panels(end + 1:nCols * ceil(numel(figs) / nCols)) = 0;
+            panels = reshape(panels, nCols, []).';
+        end
+        panels(panels > numel(figs)) = 0;
+        rows = cell(size(panels, 1), 1);
+        for rr = 1:size(panels, 1)
+            imgs = arrayfun(@(ii) readPanel(dirs, name, ii), panels(rr, :), 'UniformOutput', false);
+            rows{rr} = sideBySide(imgs);
+        end
+        imwrite(stacked(rows), fullfile(dirs.images, [name, '.png']));
         screenPrint('Step', sprintf('Saved %s (figure(s) %s of %d)', name, mat2str(panels), numel(figs)));
     catch err
         failed{end + 1} = sprintf('%s: %s', name, err.message);
@@ -207,8 +212,30 @@ function fileName = reviewFile(dirs, name, ii)
     fileName = fullfile(dirs.review, sprintf('%s_%d.png', name, ii));
 end
 
+function img = readPanel(dirs, name, ii)
+    %% Image of the ii-th figure of a function (empty for 0)
+    img = uint8([]);
+    if ii > 0
+        img = imread(reviewFile(dirs, name, ii));
+    end
+end
+
+function img = stacked(rows)
+    %% Place images below each other, centred horizontally on white
+    width = max(cellfun(@(im) size(im, 2), rows));
+    for ii = 1:numel(rows)
+        im = rows{ii};
+        padding = width - size(im, 2);
+        left = floor(padding / 2);
+        white = @(cols) 255 * ones(size(im, 1), cols, 3, 'like', im);
+        rows{ii} = [white(left), im, white(padding - left)];
+    end
+    img = vertcat(rows{:});
+end
+
 function img = sideBySide(imgs)
     %% Place RGB images next to each other, centred vertically on white
+    imgs = imgs(~cellfun(@isempty, imgs));
     height = max(cellfun(@(im) size(im, 1), imgs));
     for ii = 1:numel(imgs)
         im = imgs{ii};
