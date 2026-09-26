@@ -28,7 +28,7 @@ jobs:
           python-version: 3.x
 
       - name: Cache dependencies
-        run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+        run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
 
       - uses: actions/cache@v4
         with:

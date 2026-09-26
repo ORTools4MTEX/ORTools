@@ -1,768 +1,741 @@
-function plotStack(job,varargin)
-%% Function description:
-% This function plots a series of maps, figures, graphs, and tables for
-% detailed child variant analysis within a single parent grain as follows:
-% - By manually supplying a *parentGrainId*, or
-% - Using the [grainClick] function and interactively choosing a grain of
-% interest.
-%
-%% Syntax:
-%  plotStack(job)
-%
-%% Input:
-%  job          - @parentGrainreconstructor
-%  pGrainId     - parent grain Id using the argument 'parentGrainId'
-%  direction    - @vector3d
-%
-%% Options:
-%  grains       - plot grain data instead of EBSD data
-%  noScalebar   - Remove scalebar from maps
-%  noFrame      - Remove frame around maps
+function plotStack(job, varargin)
+    %% Function description:
+    % This function plots a series of maps, figures, graphs, and tables for
+    % detailed child variant analysis within a single parent grain as follows:
+    % - By manually supplying a *parentGrainId*, or
+    % - Using the [grainClick] function and interactively choosing a grain of
+    % interest.
+    %
+    %% Syntax:
+    %  plotStack(job)
+    %
+    %% Input:
+    %  job          - @parentGrainreconstructor
+    %  pGrainId     - parent grain Id using the argument 'parentGrainId'
+    %  direction    - @vector3d
+    %
+    %% Options:
+    %  grains       - plot grain data instead of EBSD data
+    %  noScalebar   - Remove scalebar from maps
+    %  noFrame      - Remove frame around maps
 
-
-if ~isempty(varargin) && any(strcmpi(varargin,'parentGrainId'))
-    pGrainId = varargin{find(strcmpi('parentGrainId',varargin)==1)+1};
-    if ~isnumeric(pGrainId)
-        error('Argument ''parentGrainId'' must be numeric.');
+    if ~isempty(varargin) && any(strcmpi(varargin, 'parentGrainId'))
+        pGrainId = varargin{find(strcmpi('parentGrainId', varargin) == 1) + 1};
+        if ~isnumeric(pGrainId)
+            error('Argument ''parentGrainId'' must be numeric.');
+            return;
+        end
+    else
+        error('Argument ''parentGrainId'' not specified.');
         return;
     end
-else
-    error('Argument ''parentGrainId'' not specified.');
-    return;
-end
 
-%% check if the plotStack function was called from grainClick or not
-if ~any(strcmpi(varargin,'grainClick2plotStack')) % if not...
-    % ...close all other open figures
-    allfigh = findall(0,'type','figure');
-    % allfigh = findall(groot,'type','figure');
-    for ii = 1:numel(allfigh)
-        try
-            close(ii); % delete figures
-            % clf(allfigh(ii)); % clear figures
-        catch
-            % do nothing
+    %% check if the plotStack function was called from grainClick or not
+    if ~any(strcmpi(varargin, 'grainClick2plotStack')) % if not...
+        % ...close all other open figures
+        allfigh = findall(0, 'type', 'figure');
+        % allfigh = findall(groot,'type','figure');
+        for ii = 1:numel(allfigh)
+            try
+                close(ii); % delete figures
+                % clf(allfigh(ii)); % clear figures
+            catch
+                % do nothing
+            end
         end
     end
-end
 
+    %% Define the primary vector of interest
+    vector = getClass(varargin, 'vector3d', vector3d.X);
 
-%% Define the primary vector of interest
-vector = getClass(varargin,'vector3d',vector3d.X);
+    %% Define the parent grain
+    pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
+    pEBSD = job.ebsd(pGrain);
+    pEBSD = pEBSD(job.csParent);
+    % Define the parent grain IPF notation
+    ipfKeyParent = ipfHSVKey(job.csParent);
+    ipfKeyParent.inversePoleFigureDirection = vector;
+    % Define the parent PDF
+    hParent = Miller(0, 0, 1, job.csParent, 'hkl');
 
-%% Define the parent grain
-pGrain = job.parentGrains(job.parentGrains.id == pGrainId);
-pEBSD = job.ebsd(pGrain);
-pEBSD = pEBSD(job.csParent);
-% Define the parent grain IPF notation
-ipfKeyParent = ipfHSVKey(job.csParent);
-ipfKeyParent.inversePoleFigureDirection = vector;
-% Define the parent PDF
-hParent = Miller(0,0,1,job.csParent,'hkl');
+    %% Define the child grain(s)
+    clusterGrains = job.grainsPrior(job.mergeId == pGrainId);
+    cGrains = clusterGrains(job.csChild);
+    cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
+    cEBSD = cEBSD(job.csChild);
+    % Define the child grain(s) IPF notation
+    ipfKeyChild = ipfHSVKey(job.csChild);
+    ipfKeyChild.inversePoleFigureDirection = vector;
+    % Define the child PDF
+    hChild = Miller(0, 0, 1, job.csChild, 'hkl');
 
-%% Define the child grain(s)
-clusterGrains = job.grainsPrior(job.mergeId == pGrainId);
-cGrains = clusterGrains(job.csChild);
-cEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(pEBSD.id));
-cEBSD = cEBSD(job.csChild);
-% Define the child grain(s) IPF notation
-ipfKeyChild = ipfHSVKey(job.csChild);
-ipfKeyChild.inversePoleFigureDirection = vector;
-% Define the child PDF
-hChild = Miller(0,0,1,job.csChild,'hkl');
+    %% Define the maximum number of variants and packets for the p2c OR
+    maxVariants = length(job.p2c.variants);
+    maxPackets = max(job.packetId);
+    maxBain = max(job.bainId);
 
-%% Define the maximum number of variants and packets for the p2c OR
-maxVariants = length(job.p2c.variants);
-maxPackets = max(job.packetId);
-maxBain = max(job.bainId);
+    %% Define the text output format as Latex
+    setInterp2Latex
 
-%% Define the text output format as Latex
-setInterp2Latex
+    %% Define the window settings for a set of docked figures
+    % % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
+    warning off
+    desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
+    % % Define a unique group name for the dock using the function name
+    % % and the system timestamp
+    dockGroupName = ['plotStack_', char(datetime('now', 'Format', 'yyyyMMdd_HHmmSS'))];
+    desktop.setGroupDocked(dockGroupName, 0);
+    bakWarn = warning('off', 'MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
 
-%% Define the window settings for a set of docked figures
-% % Ref: https://au.mathworks.com/matlabcentral/answers/157355-grouping-figures-separately-into-windows-and-tabs
-warning off
-desktop = com.mathworks.mde.desk.MLDesktop.getInstance;
-% % Define a unique group name for the dock using the function name
-% % and the system timestamp
-dockGroupName = ['plotStack_',char(datetime('now','Format','yyyyMMdd_HHmmSS'))];
-desktop.setGroupDocked(dockGroupName,0);
-bakWarn = warning('off','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
-
-
-
-%% Plot the parent phase map
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    plot(pGrain);
-else
-    plot(pEBSD);
-end
-hold all
-[~,mP] = plot(pGrain.boundary,...
-    'lineWidth',1,'lineColor',[0 0 0]);
-hold off
-set(figH,'Name','Map: Parent phase + GBs','NumberTitle','on');
-if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
-
-if check_option(varargin,'noFrame')
-    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
-end
-drawnow;
-
-
-%% Plot the child phase map
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    plot(cGrains);
-else
-    plot(cEBSD);
-end
-hold all
-plot(pGrain.boundary,...
-    'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
-[~,mP] = plot(cGrains.boundary,...
-    'lineWidth',1,'lineColor',[0 0 0]);
-
-hold off
-set(figH,'Name','Map: Child phase + GBs','NumberTitle','on');
-if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
-if check_option(varargin,'noFrame')
-    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
-end
-drawnow;
-
-
-%% Plot the parent IPF map
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    cbsParent = ipfKeyParent.orientation2color(pGrain.meanOrientation);
-    plot(pGrain,cbsParent);
-else
-    cbsParent = ipfKeyParent.orientation2color(pEBSD.orientations);
-    plot(pEBSD,cbsParent);
-end
-hold all
-[~,mP] = plot(pGrain.boundary,...
-    'lineWidth',1,'lineColor',[0 0 0]);
-hold off
-set(figH,'Name','Map: Parent grain IPF_x + GBs','NumberTitle','on');
-if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
-if check_option(varargin,'noFrame')
-    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
-end
-drawnow;
-
-
-%% Plot the child IPF map
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
-    plot(cGrains,cbsChild);
-else
-    cbsChild = ipfKeyChild.orientation2color(cEBSD.orientations);
-    plot(cEBSD,cbsChild);
-end
-hold all
-plot(pGrain.boundary,...
-    'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
-[~,mP] = plot(cGrains.boundary,...
-    'lineWidth',1,'lineColor',[0 0 0]);
-hold off
-set(figH,'Name','Map: Child grain IPF_x + GBs','NumberTitle','on');
-if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
-if check_option(varargin,'noFrame')
-    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
-end
-drawnow;
-
-
-%% Plot the child variants map
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    plot(cGrains(~isnan(cGrains.variantId)),cGrains.variantId(~isnan(cGrains.variantId)));
-else
-    [vId,pId,bId] = calcVariantId(pGrain.meanOrientation,cEBSD.orientations,job.p2c, ...
-        'variantMap', job.variantMap);
-    % MTEX 7 accepts the 'variantMap' option of calcVariantId but ignores it, so
-    % re-express the returned ids in the order given by the map
-    if ~isempty(job.variantMap)
-        [~,vId] = ismember(vId,job.variantMap);
+    %% Plot the parent phase map
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        plot(pGrain);
+    else
+        plot(pEBSD);
     end
-    plot(cEBSD,vId);
+    hold all
+    [~, mP] = plot(pGrain.boundary, ...
+                   'lineWidth', 1, 'lineColor', [0 0 0]);
+    hold off
+    set(figH, 'Name', 'Map: Parent phase + GBs', 'NumberTitle', 'on');
+    if check_option(varargin, 'noScalebar'), mP.micronBar.visible = 'off'; end
+
+    if check_option(varargin, 'noFrame')
+        mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+    end
+    drawnow;
+
+    %% Plot the child phase map
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        plot(cGrains);
+    else
+        plot(cEBSD);
+    end
+    hold all
+    plot(pGrain.boundary, ...
+         'lineWidth', 1, 'lineColor', [0.5 0.5 0.5]);
+    [~, mP] = plot(cGrains.boundary, ...
+                   'lineWidth', 1, 'lineColor', [0 0 0]);
+
+    hold off
+    set(figH, 'Name', 'Map: Child phase + GBs', 'NumberTitle', 'on');
+    if check_option(varargin, 'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin, 'noFrame')
+        mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+    end
+    drawnow;
+
+    %% Plot the parent IPF map
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        cbsParent = ipfKeyParent.orientation2color(pGrain.meanOrientation);
+        plot(pGrain, cbsParent);
+    else
+        cbsParent = ipfKeyParent.orientation2color(pEBSD.orientations);
+        plot(pEBSD, cbsParent);
+    end
+    hold all
+    [~, mP] = plot(pGrain.boundary, ...
+                   'lineWidth', 1, 'lineColor', [0 0 0]);
+    hold off
+    set(figH, 'Name', 'Map: Parent grain IPF_x + GBs', 'NumberTitle', 'on');
+    if check_option(varargin, 'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin, 'noFrame')
+        mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+    end
+    drawnow;
+
+    %% Plot the child IPF map
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
+        plot(cGrains, cbsChild);
+    else
+        cbsChild = ipfKeyChild.orientation2color(cEBSD.orientations);
+        plot(cEBSD, cbsChild);
+    end
+    hold all
+    plot(pGrain.boundary, ...
+         'lineWidth', 1, 'lineColor', [0.5 0.5 0.5]);
+    [~, mP] = plot(cGrains.boundary, ...
+                   'lineWidth', 1, 'lineColor', [0 0 0]);
+    hold off
+    set(figH, 'Name', 'Map: Child grain IPF_x + GBs', 'NumberTitle', 'on');
+    if check_option(varargin, 'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin, 'noFrame')
+        mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+    end
+    drawnow;
+
+    %% Plot the child variants map
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        plot(cGrains(~isnan(cGrains.variantId)), cGrains.variantId(~isnan(cGrains.variantId)));
+    else
+        [vId, pId, bId] = calcVariantId(pGrain.meanOrientation, cEBSD.orientations, job.p2c, ...
+                                        'variantMap', job.variantMap);
+        % MTEX 7 accepts the 'variantMap' option of calcVariantId but ignores it, so
+        % re-express the returned ids in the order given by the map
+        if ~isempty(job.variantMap)
+            [~, vId] = ismember(vId, job.variantMap);
+        end
+        plot(cEBSD, vId);
+    end
+
+    hold all
+    plot(pGrain.boundary, ...
+         'lineWidth', 1, 'lineColor', [0.5 0.5 0.5]);
+    [~, mP] = plot(cGrains.boundary, ...
+                   'lineWidth', 1, 'lineColor', [0 0 0]);
+    hold off
+    % Define the maximum number of color levels and plot the colorbar
+    colormap(jet(maxVariants));
+    caxis([1 maxVariants]);
+    colorbar('location', 'eastOutSide', 'lineWidth', 1.25, 'tickLength', 0.01, ...
+             'YTick', [1:1:maxVariants], ...
+             'YTickLabel', num2str([1:1:maxVariants]'), 'YLim', [1 maxVariants], ...
+             'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
+    set(figH, 'Name', 'Map: Child grain(s) variant Id(s) + GBs', 'NumberTitle', 'on');
+    if check_option(varargin, 'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin, 'noFrame')
+        mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+    end
+    drawnow;
+
+    %% Plot the child crystallographic packets map
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if isnan(maxPackets)
+        maxPackets = max(pId);
+    end
+    if check_option(varargin, 'grains')
+        plot(cGrains(~isnan(cGrains.packetId)), cGrains.packetId(~isnan(cGrains.packetId)));
+    else
+        plot(cEBSD, pId);
+    end
+    hold all
+    plot(pGrain.boundary, ...
+         'lineWidth', 1, 'lineColor', [0.5 0.5 0.5]);
+    [~, mP] = plot(cGrains.boundary, ...
+                   'lineWidth', 1, 'lineColor', [0 0 0]);
+    hold off
+    % Define the maximum number of color levels and plot the colorbar
+    colormap(viridis);
+    caxis([1 maxPackets]);
+    colorbar('location', 'eastOutSide', 'lineWidth', 1.25, 'tickLength', 0.01, ...
+             'YTick', [1:1:maxPackets], ...
+             'YTickLabel', num2str([1:1:maxPackets]'), 'YLim', [1 maxPackets], ...
+             'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
+    set(figH, 'Name', 'Map: Child grain(s) crystallographic packet Id(s) + GBs', 'NumberTitle', 'on');
+    if check_option(varargin, 'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin, 'noFrame')
+        mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+    end
+    drawnow;
+
+    %% Plot the child Bain group map
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if isnan(maxBain)
+        maxBain = max(bId);
+    end
+    if check_option(varargin, 'grains')
+        plot(cGrains(~isnan(cGrains.bainId)), cGrains.bainId(~isnan(cGrains.bainId)));
+    else
+        plot(cEBSD, bId);
+    end
+    hold all
+    plot(pGrain.boundary, ...
+         'lineWidth', 1, 'lineColor', [0.5 0.5 0.5]);
+    [~, mP] = plot(cGrains.boundary, ...
+                   'lineWidth', 1, 'lineColor', [0 0 0]);
+    hold off
+    % Define the maximum number of color levels and plot the colorbar
+    colormap(flipud(hot));
+    caxis([1 maxBain]);
+    colorbar('location', 'eastOutSide', 'lineWidth', 1.25, 'tickLength', 0.01, ...
+             'YTick', [1:1:maxBain], ...
+             'YTickLabel', num2str([1:1:maxBain]'), 'YLim', [1 maxBain], ...
+             'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
+    set(figH, 'Name', 'Map: Child grain(s) Bain group Id(s) + GBs', 'NumberTitle', 'on');
+    if check_option(varargin, 'noScalebar'), mP.micronBar.visible = 'off'; end
+    if check_option(varargin, 'noFrame')
+        mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
+    end
+    drawnow;
+
+    %% Plot the parent orientation PDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        plotPDF(pGrain.meanOrientation, ...
+                hParent, ...
+                'equal', 'antipodal', ...
+                'MarkerSize', 10, 'MarkerFaceColor', [1 1 1], ...
+                'lineWidth', 1, 'MarkerEdgeColor', job.csParent.color);
+    else
+        plotPDF(pEBSD.orientations, ...
+                hParent, ...
+                'equal', 'antipodal', ...
+                'MarkerSize', 10, 'MarkerFaceColor', [1 1 1], ...
+                'lineWidth', 1, 'MarkerEdgeColor', job.csParent.color);
+    end
+    hold off
+    set(figH, 'Name', 'PDF: Parent grain orientation', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the mean parent orientation PDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    plotPDF(pGrain.meanOrientation, hParent, 'markersize', 12, 'markerfacecolor', 'k');
+    set(figH, 'Name', 'PDF: Mean parent grain orientation', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the child IPF PDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
+        plotPDF(cGrains.meanOrientation, ...
+                cbsChild, ...
+                hChild, ...
+                'equal', 'antipodal', 'points', 'all', ...
+                'MarkerSize', 5, 'MarkerEdgeColor', 'k');
+
+    else
+        cbsChild = ipfKeyChild.orientation2color(cEBSD.orientations);
+        plotPDF(cEBSD.orientations, ...
+                cbsChild, ...
+                hChild, ...
+                'equal', 'antipodal', 'points', 'all', ...
+                'MarkerSize', 3, 'MarkerEdgeColor', 'k');
+    end
+    set(figH, 'Name', 'PDF: Child grain(s) IPF_x', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the child variants PDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        plotPDF(cGrains.meanOrientation, ...
+                cGrains.variantId, ...
+                hChild, ...
+                'equal', 'antipodal', 'points', 'all', ...
+                'MarkerSize', 5, 'MarkerEdgeColor', 'k');
+    else
+        plotPDF(cEBSD.orientations, ...
+                vId, ...
+                hChild, ...
+                'equal', 'antipodal', 'points', 'all', ...
+                'MarkerSize', 3, 'MarkerEdgeColor', 'k');
+    end
+    % Define the maximum number of color levels and plot the colorbar
+    colormap(jet(maxVariants));
+    caxis([1 maxVariants]);
+    colorbar('location', 'eastOutSide', 'lineWidth', 1.25, 'tickLength', 0.01, ...
+             'YTick', [1:1:maxVariants], ...
+             'YTickLabel', num2str([1:1:maxVariants]'), 'YLim', [1 maxVariants], ...
+             'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
+    set(figH, 'Name', 'PDF: Child grain(s) variant Id(s)', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the ideal child variants PDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    plotPDF_variants(job, pGrain.meanOrientation, hChild);
+    set(figH, 'Name', 'PDF: Child grain(s) IDEAL variant Id(s)', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the child crystallographic packets PDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        plotPDF(cGrains.meanOrientation, ...
+                cGrains.packetId, ...
+                hChild, ...
+                'equal', 'antipodal', 'points', 'all', ...
+                'MarkerSize', 5, 'MarkerEdgeColor', 'k');
+    else
+        plotPDF(cEBSD.orientations, ...
+                pId, ...
+                hChild, ...
+                'equal', 'antipodal', 'points', 'all', ...
+                'MarkerSize', 3, 'MarkerEdgeColor', 'k');
+    end
+    % Define the maximum number of color levels and plot the colorbar
+    colormap(viridis);
+    caxis([1 maxPackets]);
+    colorbar('location', 'eastOutSide', 'lineWidth', 1.25, 'tickLength', 0.01, ...
+             'YTick', [1:1:maxPackets], ...
+             'YTickLabel', num2str([1:1:maxPackets]'), 'YLim', [1 maxPackets], ...
+             'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
+    set(figH, 'Name', 'PDF: Child grain(s) crystallographic packet Id(s)', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the ideal child crystallographic packets PDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    plotPDF_packets(job, pGrain.meanOrientation, hChild);
+    set(figH, 'Name', 'PDF: Child grain(s) IDEAL crystallographic packet Id(s)', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the child Bain group PDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    if check_option(varargin, 'grains')
+        plotPDF(cGrains.meanOrientation, ...
+                cGrains.bainId, ...
+                hChild, ...
+                'equal', 'antipodal', 'points', 'all', ...
+                'MarkerSize', 5, 'MarkerEdgeColor', 'k');
+    else
+        plotPDF(cEBSD.orientations, ...
+                bId, ...
+                hChild, ...
+                'equal', 'antipodal', 'points', 'all', ...
+                'MarkerSize', 3, 'MarkerEdgeColor', 'k');
+    end
+    % Define the maximum number of color levels and plot the colorbar
+    colormap(flipud(hot));
+    caxis([1 maxBain]);
+    colorbar('location', 'eastOutSide', 'lineWidth', 1.25, 'tickLength', 0.01, ...
+             'YTick', [1:1:maxBain], ...
+             'YTickLabel', num2str([1:1:maxBain]'), 'YLim', [1 maxBain], ...
+             'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
+    set(figH, 'Name', 'PDF: Child grain(s) Bain group Id(s)', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the ideal child Bain group PDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    plotPDF_bain(job, pGrain.meanOrientation, hChild);
+    set(figH, 'Name', 'PDF: Child grain(s) IDEAL Bain group Id(s)', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the child variant IPDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    plot(ipfKeyChild)
+    hold all
+    if check_option(varargin, 'grains')
+        plotIPDF(cGrains.meanOrientation, ...
+                 cGrains.variantId, ...
+                 ipfKeyChild.inversePoleFigureDirection, ...
+                 hChild, 'MarkerSize', 5, 'MarkerEdgeColor', 'k');
+    else
+        plotIPDF(cEBSD.orientations, ...
+                 vId, ...
+                 ipfKeyChild.inversePoleFigureDirection, ...
+                 hChild, 'MarkerSize', 3, 'MarkerEdgeColor', 'k');
+    end
+    hold off
+    % Define the maximum number of color levels and plot the colorbar
+    colormap(jet(maxVariants));
+    caxis([1 maxVariants]);
+    colorbar('location', 'eastOutSide', 'lineWidth', 1.25, 'tickLength', 0.01, ...
+             'YTick', [1:1:maxVariants], ...
+             'YTickLabel', num2str([1:1:maxVariants]'), 'YLim', [1 maxVariants], ...
+             'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
+    set(figH, 'Name', 'IPDF: Child grain(s) variant Id(s)', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the child crystallographic packets IPDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    plot(ipfKeyChild)
+    hold all
+    if check_option(varargin, 'grains')
+        plotIPDF(cGrains.meanOrientation, ...
+                 cGrains.packetId, ...
+                 ipfKeyChild.inversePoleFigureDirection, ...
+                 hChild, 'MarkerSize', 5, 'MarkerEdgeColor', 'k');
+    else
+        plotIPDF(cEBSD.orientations, ...
+                 pId, ...
+                 ipfKeyChild.inversePoleFigureDirection, ...
+                 hChild, 'MarkerSize', 3, 'MarkerEdgeColor', 'k');
+    end
+    hold off
+    % Define the maximum number of color levels and plot the colorbar
+    colormap(viridis);
+    caxis([1 maxPackets]);
+    colorbar('location', 'eastOutSide', 'lineWidth', 1.25, 'tickLength', 0.01, ...
+             'YTick', [1:1:maxPackets], ...
+             'YTickLabel', num2str([1:1:maxPackets]'), 'YLim', [1 maxPackets], ...
+             'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
+    set(figH, 'Name', 'IPDF: Child grain(s) crystallographic packet Id(s)', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the child Bain group IPDF
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    plot(ipfKeyChild)
+    hold all
+    if check_option(varargin, 'grains')
+        plotIPDF(cGrains.meanOrientation, ...
+                 cGrains.bainId, ...
+                 ipfKeyChild.inversePoleFigureDirection, ...
+                 hChild, 'MarkerSize', 5, 'MarkerEdgeColor', 'k');
+    else
+        plotIPDF(cEBSD.orientations, ...
+                 bId, ...
+                 ipfKeyChild.inversePoleFigureDirection, ...
+                 hChild, 'MarkerSize', 3, 'MarkerEdgeColor', 'k');
+    end
+    hold off
+    % Define the maximum number of color levels and plot the colorbar
+    colormap(flipud(hot));
+    caxis([1 maxBain]);
+    colorbar('location', 'eastOutSide', 'lineWidth', 1.25, 'tickLength', 0.01, ...
+             'YTick', [1:1:maxBain], ...
+             'YTickLabel', num2str([1:1:maxBain]'), 'YLim', [1 maxBain], ...
+             'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
+    set(figH, 'Name', 'IPDF: Child grain(s) Bain group Id(s)', 'NumberTitle', 'on');
+    drawnow;
+
+    %% Plot the weighted area variants Id frequency histogram
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    class_range = 1:1:maxVariants;
+    if check_option(varargin, 'grains')
+        [~, abs_counts] = histwc(cGrains.variantId, cGrains.area, maxVariants);
+    else
+        abs_counts = histc(vId, class_range);
+    end
+    norm_counts = abs_counts ./ sum(abs_counts);
+    h = bar(class_range, norm_counts, 'hist');
+    h.FaceColor = [162 20 47] ./ 255;
+    set(gca, 'FontSize', 14);
+    set(gca, 'xlim', [class_range(1) - 0.5 class_range(end) + 0.5]);
+    set(gca, 'XTick', class_range);
+    xlabel('\bf Variant Id', 'FontSize', 14);
+    % xlabel('Variant Id','FontSize',14,'FontWeight','bold');
+    if size(class_range, 2) > 1; class_range = class_range'; end
+    if size(abs_counts, 2) > 1; abs_counts = abs_counts'; end
+    if size(norm_counts, 2) > 1; norm_counts = norm_counts'; end
+    if check_option(varargin, 'grains')
+        ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]', 'FontSize', 14);
+        %     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
+        set(figH, 'Name', 'Histogram: Weighted area variant Ids', 'NumberTitle', 'on');
+        % % Output histogram data in a table
+        screenPrint('Step', ['Figure ', num2str(figH.Number), ': variantId weighted area histogram']);
+        %     table(class_range,abs_counts,'VariableNames',{'variantId','wtAreaCounts'})
+        table(class_range, norm_counts, 'VariableNames', {'variantId', 'wtAreaFreq'})
+    else
+        ylabel('\bf Relative frequency [$\bf f$(g)]', 'FontSize', 14);
+        %     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+        set(figH, 'Name', 'Histogram: Relative frequency variant Ids', 'NumberTitle', 'on');
+        % % Output histogram data in a table
+        screenPrint('Step', ['Figure ', num2str(figH.Number), ': variantId histogram']);
+        %     table(class_range,abs_counts,'VariableNames',{'variantId','Counts'})
+        table(class_range, norm_counts, 'VariableNames', {'variantId', 'Freq'})
+    end
+    drawnow;
+
+    %% Plot the weighted area crystallographic packets Id frequency histogram
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    class_range = 1:1:maxPackets;
+    if check_option(varargin, 'grains')
+        [~, abs_counts] = histwc(cGrains.packetId, cGrains.area, maxPackets);
+    else
+        abs_counts = histc(pId, class_range);
+    end
+    norm_counts = abs_counts ./ sum(abs_counts);
+    h = bar(class_range, norm_counts, 'hist');
+    h.FaceColor = [162 20 47] ./ 255;
+    set(gca, 'FontSize', 14);
+    set(gca, 'xlim', [class_range(1) - 0.5 class_range(end) + 0.5]);
+    set(gca, 'XTick', class_range);
+    xlabel('\bf Crystallographic packet Id', 'FontSize', 14);
+    % xlabel('Crystallographic packet Id','FontSize',14,'FontWeight','bold');
+    if size(class_range, 2) > 1; class_range = class_range'; end
+    if size(abs_counts, 2) > 1; abs_counts = abs_counts'; end
+    if size(norm_counts, 2) > 1; norm_counts = norm_counts'; end
+    if check_option(varargin, 'grains')
+        ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]', 'FontSize', 14);
+        %     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
+        set(figH, 'Name', 'Histogram: Weighted area crystallographic packet Ids', 'NumberTitle', 'on');
+        % % Output histogram data in a table
+        screenPrint('Step', ['Figure ', num2str(figH.Number), ': packetId weighted area histogram']);
+        %     table(class_range,abs_counts,'VariableNames',{'packetId','wtAreaCounts'})
+        table(class_range, norm_counts, 'VariableNames', {'packetId', 'wtAreaFreq'})
+    else
+        ylabel('\bf Relative frequency [$\bf f$(g)]', 'FontSize', 14);
+        %     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+        set(figH, 'Name', 'Histogram: Relative frequency crystallographic packet Ids', 'NumberTitle', 'on');
+        % % Output histogram data in a table
+        screenPrint('Step', ['Figure ', num2str(figH.Number), ': packetId histogram']);
+        %     table(class_range,abs_counts,'VariableNames',{'packetId','Counts'})
+        table(class_range, norm_counts, 'VariableNames', {'packetId', 'Freq'})
+    end
+    drawnow;
+
+    %% Plot the weighted area Bain group Id frequency histogram
+    drawnow;
+    figH = gobjects(1);
+    figH = figure('WindowStyle', 'docked');
+    set(get(handle(figH), 'javaframe'), 'GroupName', dockGroupName);
+    drawnow;
+    class_range = 1:1:maxBain;
+    if check_option(varargin, 'grains')
+        [~, abs_counts] = histwc(cGrains.bainId, cGrains.area, maxBain);
+    else
+        abs_counts = histc(bId, class_range);
+    end
+    norm_counts = abs_counts ./ sum(abs_counts);
+    h = bar(class_range, norm_counts, 'hist');
+    h.FaceColor = [162 20 47] ./ 255;
+    set(gca, 'FontSize', 14);
+    set(gca, 'xlim', [class_range(1) - 0.5 class_range(end) + 0.5]);
+    set(gca, 'XTick', class_range);
+    xlabel('\bf Bain group Id', 'FontSize', 14);
+    % xlabel('Bain group Id','FontSize',14,'FontWeight','bold');
+    if size(class_range, 2) > 1; class_range = class_range'; end
+    if size(abs_counts, 2) > 1; abs_counts = abs_counts'; end
+    if size(norm_counts, 2) > 1; norm_counts = norm_counts'; end
+    if check_option(varargin, 'grains')
+        ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]', 'FontSize', 14);
+        %     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
+        set(figH, 'Name', 'Histogram: Weighted area Bain group Ids', 'NumberTitle', 'on');
+        % % Output histogram data in a table
+        screenPrint('Step', ['Figure ', num2str(figH.Number), ': bainId weighted area histogram']);
+        %     table(class_range,abs_counts,'VariableNames',{'bainId','wtAreaCounts'})
+        table(class_range, norm_counts, 'VariableNames', {'bainId', 'wtAreaFreq'})
+    else
+        ylabel('\bf Relative frequency [$\bf f$(g)]', 'FontSize', 14);
+        %     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
+        set(figH, 'Name', 'Histogram: Relative frequency Bain group Ids', 'NumberTitle', 'on');
+        % % Output histogram data in a table
+        screenPrint('Step', ['Figure ', num2str(figH.Number), ': bainId histogram']);
+        %     table(class_range,abs_counts,'VariableNames',{'bainId','Counts'})
+        table(class_range, norm_counts, 'VariableNames', {'bainId', 'Freq'})
+    end
+    drawnow;
+
+    %% Place first tabbed figure on top and return
+    warning on
+    % allfigh = findall(0,'type','figure');
+    % if length(allfigh) > 1
+    %     figure(length(allfigh)-15);
+    % else
+    %     figure(1);
+    % end
+    % recheck if the plotStack function was called from grainClick or not
+    if ~any(strcmpi(varargin, 'grainClick2plotStack')) % if not...
+        figure(1);
+    else
+        figure(2);
+    end
+    warning(bakWarn);
+    pause(1); % reduce rendering errors
+    return
 end
-
-hold all
-plot(pGrain.boundary,...
-    'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
-[~,mP] = plot(cGrains.boundary,...
-    'lineWidth',1,'lineColor',[0 0 0]);
-hold off
-% Define the maximum number of color levels and plot the colorbar
-colormap(jet(maxVariants));
-caxis([1 maxVariants]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [1:1:maxVariants],...
-    'YTickLabel',num2str([1:1:maxVariants]'), 'YLim', [1 maxVariants],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','Map: Child grain(s) variant Id(s) + GBs','NumberTitle','on');
-if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
-if check_option(varargin,'noFrame')
-    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
-end
-drawnow;
-
-
-%% Plot the child crystallographic packets map
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if isnan(maxPackets)
-    maxPackets = max(pId);
-end
-if check_option(varargin,'grains')
-    plot(cGrains(~isnan(cGrains.packetId)),cGrains.packetId(~isnan(cGrains.packetId)));
-else
-    plot(cEBSD,pId);
-end
-hold all
-plot(pGrain.boundary,...
-    'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
-[~,mP] = plot(cGrains.boundary,...
-    'lineWidth',1,'lineColor',[0 0 0]);
-hold off
-% Define the maximum number of color levels and plot the colorbar
-colormap(viridis);
-caxis([1 maxPackets]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [1:1:maxPackets],...
-    'YTickLabel',num2str([1:1:maxPackets]'), 'YLim', [1 maxPackets],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','Map: Child grain(s) crystallographic packet Id(s) + GBs','NumberTitle','on');
-if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
-if check_option(varargin,'noFrame')
-    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
-end
-drawnow;
-
-
-%% Plot the child Bain group map
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if isnan(maxBain)
-    maxBain = max(bId);
-end
-if check_option(varargin,'grains')
-    plot(cGrains(~isnan(cGrains.bainId)),cGrains.bainId(~isnan(cGrains.bainId)));
-else
-    plot(cEBSD,bId);
-end
-hold all
-plot(pGrain.boundary,...
-    'lineWidth',1,'lineColor',[0.5 0.5 0.5]);
-[~,mP] = plot(cGrains.boundary,...
-    'lineWidth',1,'lineColor',[0 0 0]);
-hold off
-% Define the maximum number of color levels and plot the colorbar
-colormap(flipud(hot));
-caxis([1 maxBain]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [1:1:maxBain],...
-    'YTickLabel',num2str([1:1:maxBain]'), 'YLim', [1 maxBain],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','Map: Child grain(s) Bain group Id(s) + GBs','NumberTitle','on');
-if check_option(varargin,'noScalebar'), mP.micronBar.visible = 'off'; end
-if check_option(varargin,'noFrame')
-    mP.ax.Box = 'off'; mP.ax.YAxis.Visible = 'off'; mP.ax.XAxis.Visible = 'off';
-end
-drawnow;
-
-
-%% Plot the parent orientation PDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    plotPDF(pGrain.meanOrientation,...
-        hParent,...
-        'equal','antipodal',...
-        'MarkerSize',10,'MarkerFaceColor',[1 1 1],...
-        'lineWidth',1,'MarkerEdgeColor',job.csParent.color);
-else
-    plotPDF(pEBSD.orientations,...
-        hParent,...
-        'equal','antipodal',...
-        'MarkerSize',10,'MarkerFaceColor',[1 1 1],...
-        'lineWidth',1,'MarkerEdgeColor',job.csParent.color);
-end
-hold off
-set(figH,'Name','PDF: Parent grain orientation','NumberTitle','on');
-drawnow;
-
-
-%% Plot the mean parent orientation PDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-plotPDF(pGrain.meanOrientation,hParent,'markersize',12,'markerfacecolor' ,'k');
-set(figH,'Name','PDF: Mean parent grain orientation','NumberTitle','on');
-drawnow;
-
-
-%% Plot the child IPF PDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    cbsChild = ipfKeyChild.orientation2color(cGrains.meanOrientation);
-    plotPDF(cGrains.meanOrientation,...
-        cbsChild,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',5,'MarkerEdgeColor','k');
-
-else
-    cbsChild = ipfKeyChild.orientation2color(cEBSD.orientations);
-    plotPDF(cEBSD.orientations,...
-        cbsChild,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',3,'MarkerEdgeColor','k');
-end
-set(figH,'Name','PDF: Child grain(s) IPF_x','NumberTitle','on');
-drawnow;
-
-
-%% Plot the child variants PDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    plotPDF(cGrains.meanOrientation,...
-        cGrains.variantId,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',5,'MarkerEdgeColor','k');
-else
-    plotPDF(cEBSD.orientations,...
-        vId,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',3,'MarkerEdgeColor','k');
-end
-% Define the maximum number of color levels and plot the colorbar
-colormap(jet(maxVariants));
-caxis([1 maxVariants]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [1:1:maxVariants],...
-    'YTickLabel',num2str([1:1:maxVariants]'), 'YLim', [1 maxVariants],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','PDF: Child grain(s) variant Id(s)','NumberTitle','on');
-drawnow;
-
-
-%% Plot the ideal child variants PDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-plotPDF_variants(job,pGrain.meanOrientation,hChild);
-set(figH,'Name','PDF: Child grain(s) IDEAL variant Id(s)','NumberTitle','on');
-drawnow;
-
-
-%% Plot the child crystallographic packets PDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    plotPDF(cGrains.meanOrientation,...
-        cGrains.packetId,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',5,'MarkerEdgeColor','k');
-else
-    plotPDF(cEBSD.orientations,...
-        pId,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',3,'MarkerEdgeColor','k');
-end
-% Define the maximum number of color levels and plot the colorbar
-colormap(viridis);
-caxis([1 maxPackets]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [1:1:maxPackets],...
-    'YTickLabel',num2str([1:1:maxPackets]'), 'YLim', [1 maxPackets],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','PDF: Child grain(s) crystallographic packet Id(s)','NumberTitle','on');
-drawnow;
-
-
-%% Plot the ideal child crystallographic packets PDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-plotPDF_packets(job,pGrain.meanOrientation,hChild);
-set(figH,'Name','PDF: Child grain(s) IDEAL crystallographic packet Id(s)','NumberTitle','on');
-drawnow;
-
-
-%% Plot the child Bain group PDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-if check_option(varargin,'grains')
-    plotPDF(cGrains.meanOrientation,...
-        cGrains.bainId,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',5,'MarkerEdgeColor','k');
-else
-    plotPDF(cEBSD.orientations,...
-        bId,...
-        hChild,...
-        'equal','antipodal','points','all',...
-        'MarkerSize',3,'MarkerEdgeColor','k');
-end
-% Define the maximum number of color levels and plot the colorbar
-colormap(flipud(hot));
-caxis([1 maxBain]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [1:1:maxBain],...
-    'YTickLabel',num2str([1:1:maxBain]'), 'YLim', [1 maxBain],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','PDF: Child grain(s) Bain group Id(s)','NumberTitle','on');
-drawnow;
-
-
-%% Plot the ideal child Bain group PDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-plotPDF_bain(job,pGrain.meanOrientation,hChild);
-set(figH,'Name','PDF: Child grain(s) IDEAL Bain group Id(s)','NumberTitle','on');
-drawnow;
-
-
-%% Plot the child variant IPDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-plot(ipfKeyChild)
-hold all
-if check_option(varargin,'grains')
-    plotIPDF(cGrains.meanOrientation,...
-        cGrains.variantId,...
-        ipfKeyChild.inversePoleFigureDirection,...
-        hChild,'MarkerSize',5,'MarkerEdgeColor','k');
-else
-    plotIPDF(cEBSD.orientations,...
-        vId,...
-        ipfKeyChild.inversePoleFigureDirection,...
-        hChild,'MarkerSize',3,'MarkerEdgeColor','k');
-end
-hold off
-% Define the maximum number of color levels and plot the colorbar
-colormap(jet(maxVariants));
-caxis([1 maxVariants]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [1:1:maxVariants],...
-    'YTickLabel',num2str([1:1:maxVariants]'), 'YLim', [1 maxVariants],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','IPDF: Child grain(s) variant Id(s)','NumberTitle','on');
-drawnow;
-
-
-%% Plot the child crystallographic packets IPDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-plot(ipfKeyChild)
-hold all
-if check_option(varargin,'grains')
-    plotIPDF(cGrains.meanOrientation,...
-        cGrains.packetId,...
-        ipfKeyChild.inversePoleFigureDirection,...
-        hChild,'MarkerSize',5,'MarkerEdgeColor','k');
-else
-    plotIPDF(cEBSD.orientations,...
-        pId,...
-        ipfKeyChild.inversePoleFigureDirection,...
-        hChild,'MarkerSize',3,'MarkerEdgeColor','k');
-end
-hold off
-% Define the maximum number of color levels and plot the colorbar
-colormap(viridis);
-caxis([1 maxPackets]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [1:1:maxPackets],...
-    'YTickLabel',num2str([1:1:maxPackets]'), 'YLim', [1 maxPackets],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','IPDF: Child grain(s) crystallographic packet Id(s)','NumberTitle','on');
-drawnow;
-
-
-%% Plot the child Bain group IPDF
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-plot(ipfKeyChild)
-hold all
-if check_option(varargin,'grains')
-    plotIPDF(cGrains.meanOrientation,...
-        cGrains.bainId,...
-        ipfKeyChild.inversePoleFigureDirection,...
-        hChild,'MarkerSize',5,'MarkerEdgeColor','k');
-else
-    plotIPDF(cEBSD.orientations,...
-        bId,...
-        ipfKeyChild.inversePoleFigureDirection,...
-        hChild,'MarkerSize',3,'MarkerEdgeColor','k');
-end
-hold off
-% Define the maximum number of color levels and plot the colorbar
-colormap(flipud(hot));
-caxis([1 maxBain]);
-colorbar('location','eastOutSide','lineWidth',1.25,'tickLength', 0.01,...
-    'YTick', [1:1:maxBain],...
-    'YTickLabel',num2str([1:1:maxBain]'), 'YLim', [1 maxBain],...
-    'TickLabelInterpreter','latex','FontName','Helvetica','FontSize',14,'FontWeight','bold');
-set(figH,'Name','IPDF: Child grain(s) Bain group Id(s)','NumberTitle','on');
-drawnow;
-
-
-%% Plot the weighted area variants Id frequency histogram
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-class_range = 1:1:maxVariants;
-if check_option(varargin,'grains')
-    [~,abs_counts] = histwc(cGrains.variantId,cGrains.area,maxVariants);
-else
-    abs_counts = histc(vId,class_range);
-end
-norm_counts = abs_counts./sum(abs_counts);
-h = bar(class_range,norm_counts,'hist');
-h.FaceColor =[162 20 47]./255;
-set(gca,'FontSize',14);
-set(gca,'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
-set(gca,'XTick',class_range);
-xlabel('\bf Variant Id','FontSize',14);
-% xlabel('Variant Id','FontSize',14,'FontWeight','bold');
-if size(class_range,2)>1; class_range = class_range'; end
-if size(abs_counts,2)>1; abs_counts = abs_counts'; end
-if size(norm_counts,2)>1; norm_counts = norm_counts'; end
-if check_option(varargin,'grains')
-    ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]','FontSize',14);
-    %     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
-    set(figH,'Name','Histogram: Weighted area variant Ids','NumberTitle','on');
-    % % Output histogram data in a table
-    screenPrint('Step',['Figure ',num2str(figH.Number),': variantId weighted area histogram']);
-    %     table(class_range,abs_counts,'VariableNames',{'variantId','wtAreaCounts'})
-    table(class_range,norm_counts,'VariableNames',{'variantId','wtAreaFreq'})
-else
-    ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
-    %     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
-    set(figH,'Name','Histogram: Relative frequency variant Ids','NumberTitle','on');
-    % % Output histogram data in a table
-    screenPrint('Step',['Figure ',num2str(figH.Number),': variantId histogram']);
-    %     table(class_range,abs_counts,'VariableNames',{'variantId','Counts'})
-    table(class_range,norm_counts,'VariableNames',{'variantId','Freq'})
-end
-drawnow;
-
-
-%% Plot the weighted area crystallographic packets Id frequency histogram
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-class_range = 1:1:maxPackets;
-if check_option(varargin,'grains')
-    [~,abs_counts] = histwc(cGrains.packetId,cGrains.area,maxPackets);
-else
-    abs_counts = histc(pId,class_range);
-end
-norm_counts = abs_counts./sum(abs_counts);
-h = bar(class_range,norm_counts,'hist');
-h.FaceColor =[162 20 47]./255;
-set(gca,'FontSize',14);
-set(gca,'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
-set(gca,'XTick',class_range);
-xlabel('\bf Crystallographic packet Id','FontSize',14);
-% xlabel('Crystallographic packet Id','FontSize',14,'FontWeight','bold');
-if size(class_range,2)>1; class_range = class_range'; end
-if size(abs_counts,2)>1; abs_counts = abs_counts'; end
-if size(norm_counts,2)>1; norm_counts = norm_counts'; end
-if check_option(varargin,'grains')
-    ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]','FontSize',14);
-    %     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
-    set(figH,'Name','Histogram: Weighted area crystallographic packet Ids','NumberTitle','on');
-    % % Output histogram data in a table
-    screenPrint('Step',['Figure ',num2str(figH.Number),': packetId weighted area histogram']);
-    %     table(class_range,abs_counts,'VariableNames',{'packetId','wtAreaCounts'})
-    table(class_range,norm_counts,'VariableNames',{'packetId','wtAreaFreq'})
-else
-    ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
-    %     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
-    set(figH,'Name','Histogram: Relative frequency crystallographic packet Ids','NumberTitle','on');
-    % % Output histogram data in a table
-    screenPrint('Step',['Figure ',num2str(figH.Number),': packetId histogram']);
-    %     table(class_range,abs_counts,'VariableNames',{'packetId','Counts'})
-    table(class_range,norm_counts,'VariableNames',{'packetId','Freq'})
-end
-drawnow;
-
-
-%% Plot the weighted area Bain group Id frequency histogram
-drawnow;
-figH = gobjects(1);
-figH = figure('WindowStyle','docked');
-set(get(handle(figH),'javaframe'),'GroupName',dockGroupName);
-drawnow;
-class_range = 1:1:maxBain;
-if check_option(varargin,'grains')
-    [~,abs_counts] = histwc(cGrains.bainId,cGrains.area,maxBain);
-else
-    abs_counts = histc(bId,class_range);
-end
-norm_counts = abs_counts./sum(abs_counts);
-h = bar(class_range,norm_counts,'hist');
-h.FaceColor =[162 20 47]./255;
-set(gca,'FontSize',14);
-set(gca,'xlim',[class_range(1)-0.5 class_range(end)+0.5]);
-set(gca,'XTick',class_range);
-xlabel('\bf Bain group Id','FontSize',14);
-% xlabel('Bain group Id','FontSize',14,'FontWeight','bold');
-if size(class_range,2)>1; class_range = class_range'; end
-if size(abs_counts,2)>1; abs_counts = abs_counts'; end
-if size(norm_counts,2)>1; norm_counts = norm_counts'; end
-if check_option(varargin,'grains')
-    ylabel('\bf Weighted area relative frequency [$\bf f_w$(g)]','FontSize',14);
-    %     ylabel('Weighted area relative frequency ({\itf_w}(g))','FontSize',14,'FontWeight','bold');
-    set(figH,'Name','Histogram: Weighted area Bain group Ids','NumberTitle','on');
-    % % Output histogram data in a table
-    screenPrint('Step',['Figure ',num2str(figH.Number),': bainId weighted area histogram']);
-    %     table(class_range,abs_counts,'VariableNames',{'bainId','wtAreaCounts'})
-    table(class_range,norm_counts,'VariableNames',{'bainId','wtAreaFreq'})
-else
-    ylabel('\bf Relative frequency [$\bf f$(g)]','FontSize',14);
-    %     ylabel('Relative frequency ({\itf}(g))','FontSize',14,'FontWeight','bold');
-    set(figH,'Name','Histogram: Relative frequency Bain group Ids','NumberTitle','on');
-    % % Output histogram data in a table
-    screenPrint('Step',['Figure ',num2str(figH.Number),': bainId histogram']);
-    %     table(class_range,abs_counts,'VariableNames',{'bainId','Counts'})
-    table(class_range,norm_counts,'VariableNames',{'bainId','Freq'})
-end
-drawnow;
-
-
-%% Place first tabbed figure on top and return
-warning on
-% allfigh = findall(0,'type','figure');
-% if length(allfigh) > 1
-%     figure(length(allfigh)-15);
-% else
-%     figure(1);
-% end
-% recheck if the plotStack function was called from grainClick or not
-if ~any(strcmpi(varargin,'grainClick2plotStack')) % if not...
-    figure(1);
-else
-    figure(2);
-end
-warning(bakWarn);
-pause(1); % reduce rendering errors
-return
-end
-
 
 %% Compute weighted histogram
-function [vinterval,histw] = histwc(val,wt,nbins)
-% HISTWC  Weighted histogram count given number of bins
-%
-% This function generates a vector of cumulative weights for data
-% histogram. Equal number of bins will be considered using minimum and
-% maximum values of the data. Weights will be summed in the given bin.
-%
-% Usage: [vinterval,histw] = histwc(val, wt, nbins)
-%
-% Arguments:
-%       val    - values as a vector
-%       wt     - weights as a vector
-%       nbins  - number of bins
-%
-% Returns:
-%       histw     - weighted histogram
-%       vinterval - intervals used
-%
-%
-%
-% See also: HISTC, HISTWCV
-% Author: mehmet.suzen
-% BSD License
-% July 2013
-minV  = 1; %min(val)
-maxV  = nbins; %max(val)
-delta = (maxV-minV)/nbins;
-vinterval = linspace(minV, maxV, nbins)-delta/2.0;
-histw = zeros(nbins, 1);
-for ii=1:length(val)
-    idx = find(vinterval < val(ii),1,'last');
-    if ~isempty(idx)
-        histw(idx) = histw(idx) + wt(ii);
+function [vinterval, histw] = histwc(val, wt, nbins)
+    % HISTWC  Weighted histogram count given number of bins
+    %
+    % This function generates a vector of cumulative weights for data
+    % histogram. Equal number of bins will be considered using minimum and
+    % maximum values of the data. Weights will be summed in the given bin.
+    %
+    % Usage: [vinterval,histw] = histwc(val, wt, nbins)
+    %
+    % Arguments:
+    %       val    - values as a vector
+    %       wt     - weights as a vector
+    %       nbins  - number of bins
+    %
+    % Returns:
+    %       histw     - weighted histogram
+    %       vinterval - intervals used
+    %
+    %
+    %
+    % See also: HISTC, HISTWCV
+    % Author: mehmet.suzen
+    % BSD License
+    % July 2013
+    minV  = 1; % min(val)
+    maxV  = nbins; % max(val)
+    delta = (maxV - minV) / nbins;
+    vinterval = linspace(minV, maxV, nbins) - delta / 2.0;
+    histw = zeros(nbins, 1);
+    for ii = 1:length(val)
+        idx = find(vinterval < val(ii), 1, 'last');
+        if ~isempty(idx)
+            histw(idx) = histw(idx) + wt(ii);
+        end
     end
-end
 end

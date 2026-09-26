@@ -1,127 +1,124 @@
-function [newGrains,newEBSD] = computeVariantGrains(job,varargin)
-%% Function description:
-% This function refines the child grains in the "job" object based on
-% their variant IDs while keeping the grains of the remaining phases 
-% untouched.
-% The ebsd dataset is returned with updated grainIds associated with the 
-% refined grains.
+function [newGrains, newEBSD] = computeVariantGrains(job, varargin)
+    %% Function description:
+    % This function refines the child grains in the "job" object based on
+    % their variant IDs while keeping the grains of the remaining phases
+    % untouched.
+    % The ebsd dataset is returned with updated grainIds associated with the
+    % refined grains.
 
-%% Syntax:
-%  [newGrains,newEBSD] = computeVariantGrains(job,varargin)
-%
-%% Input:
-%  job  - @parentGrainReconstructor
-%  pGrainId     - parent grain Id using the argument 'parentGrainId'
-%% Output:
-%  newGrains   - @grains2d
-%  newEBSD     - @EBSD
+    %% Syntax:
+    %  [newGrains,newEBSD] = computeVariantGrains(job,varargin)
+    %
+    %% Input:
+    %  job  - @parentGrainReconstructor
+    %  pGrainId     - parent grain Id using the argument 'parentGrainId'
+    %% Output:
+    %  newGrains   - @grains2d
+    %  newEBSD     - @EBSD
 
+    pGrainId = get_option(varargin, 'parentGrainId', []);
+    if pGrainId
+        isTransf = job.isTransformed & job.mergeId == pGrainId;
+    else
+        isTransf = job.isTransformed;
+    end
 
-pGrainId = get_option(varargin,'parentGrainId',[]);
-if pGrainId
-    isTransf = job.isTransformed & job.mergeId == pGrainId;
-else
-    isTransf = job.isTransformed;
-end
+    cEBSD = job.ebsdPrior(job.grainsPrior(isTransf));
+    transfIdx = cEBSD.id2ind(cEBSD.id);
+    remainingEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(setdiff(job.ebsdPrior.id, cEBSD.id)));
 
-cEBSD = job.ebsdPrior(job.grainsPrior(isTransf));
-transfIdx = cEBSD.id2ind(cEBSD.id);
-remainingEBSD = job.ebsdPrior(job.ebsdPrior.id2ind(setdiff(job.ebsdPrior.id, cEBSD.id)));
+    % Assign ancillary variables
+    length_cEBSD = length(cEBSD);
 
-% Assign ancillary variables
-length_cEBSD = length(cEBSD);
+    %% Get reconstructed mean parent orientations for each child grain
+    oriP = job.grains(job.mergeId(cEBSD.grainId)).meanOrientation;
 
-%% Get reconstructed mean parent orientations for each child grain
-oriP = job.grains(job.mergeId(cEBSD.grainId)).meanOrientation;
+    %% Calculate variant, packet and bain Ids for transformed child EBSD data
+    % Define properties
+    props = ["variantId", "packetId", "bainId", "parentId"];
 
-%% Calculate variant, packet and bain Ids for transformed child EBSD data
-% Define properties
-props = ["variantId","packetId","bainId","parentId"];
+    % Declare properties
+    for prop = props
+        r.(prop) = nan(length_cEBSD, 1);
+    end
 
-% Declare properties
-for prop = props
-    r.(prop) = nan(length_cEBSD,1);
-end
+    % Compute properties
+    [r.variantId, r.packetId, r.bainId] = calcVariantId( ...
+                                                        oriP, cEBSD.orientations, job.p2c, 'variantMap', job.variantMap);
 
-% Compute properties
-[r.variantId,r.packetId,r.bainId] = calcVariantId( ...
-    oriP,cEBSD.orientations,job.p2c,'variantMap', job.variantMap);
+    % MTEX 7 accepts the 'variantMap' option of calcVariantId but ignores it, so
+    % the returned variantId is in MTEX's raw variant order while packetId and
+    % bainId follow the physical grouping. Applying the map here restores the
+    % convention the rest of ORTools assumes, namely that the variants of a
+    % crystallographic packet form a contiguous block of six. Without it the
+    % expression "variantId - (packetId-1)*24/4" no longer yields a type in 1..6.
+    r.variantId = applyVariantMap(r.variantId, job.variantMap);
 
-% MTEX 7 accepts the 'variantMap' option of calcVariantId but ignores it, so
-% the returned variantId is in MTEX's raw variant order while packetId and
-% bainId follow the physical grouping. Applying the map here restores the
-% convention the rest of ORTools assumes, namely that the variants of a
-% crystallographic packet form a contiguous block of six. Without it the
-% expression "variantId - (packetId-1)*24/4" no longer yields a type in 1..6.
-r.variantId = applyVariantMap(r.variantId,job.variantMap);
+    % Get the Ids of parent grains
+    r.parentId = job.grains(job.mergeId(cEBSD.grainId)).id;
 
-% Get the Ids of parent grains
-r.parentId = job.grains(job.mergeId(cEBSD.grainId)).id;
+    %% Compute new child ebsd and grains based on variant and parent identity
+    % Assign properties to child EBSD data and all remaining EBSD data
+    for prop = props
+        cEBSD.prop.(prop) = r.(prop);
+        remainingEBSD.prop.(prop) = nan(size(remainingEBSD));
+    end
 
-%% Compute new child ebsd and grains based on variant and parent identity
-% Assign properties to child EBSD data and all remaining EBSD data
-for prop = props
-    cEBSD.prop.(prop) = r.(prop);
-    remainingEBSD.prop.(prop) = nan(size(remainingEBSD));
-end
+    % Assign dummy variant and parentIds to non-transformed EBSD data
+    % to guide variant-based grain reconstruction
+    remainingEBSD.prop.variantId = remainingEBSD.grainId + max(r.variantId) + 1;
+    remainingEBSD.prop.parentId = remainingEBSD.grainId + max(cEBSD.prop.parentId) + 1;
 
-% Assign dummy variant and parentIds to non-transformed EBSD data
-% to guide variant-based grain reconstruction
-remainingEBSD.prop.variantId = remainingEBSD.grainId + max(r.variantId) + 1;
-remainingEBSD.prop.parentId = remainingEBSD.grainId + max(cEBSD.prop.parentId) + 1;
+    % Merge EBSD datasets to newEBSD
+    newEBSD = [cEBSD; remainingEBSD];
 
+    % Calculate grains based on grains based on clusterIds
+    [newGrains, newEBSD] = newEBSD.calcGrains('variants', [newEBSD.prop.variantId, newEBSD.prop.parentId]);
 
-% Merge EBSD datasets to newEBSD
-newEBSD = [cEBSD; remainingEBSD];
+    % Undo fake variant and parent Ids
+    newEBSD.prop.variantId(newEBSD.prop.variantId > max(r.variantId)) = nan;
+    newEBSD.prop.parentId(newEBSD.prop.parentId > max(cEBSD.prop.parentId)) = nan;
+    newGrains.prop.variantId(newGrains.prop.variantId > max(r.variantId)) = nan;
+    newGrains.prop.variantId(newGrains.prop.variantId == 0) = nan;
 
-% Calculate grains based on grains based on clusterIds
-[newGrains, newEBSD]= newEBSD.calcGrains('variants',[newEBSD.prop.variantId,newEBSD.prop.parentId]);
+    newGrains.prop.parentId(newGrains.prop.parentId > max(cEBSD.prop.parentId)) = nan;
 
-% Undo fake variant and parent Ids
-newEBSD.prop.variantId(newEBSD.prop.variantId > max(r.variantId)) = nan;
-newEBSD.prop.parentId(newEBSD.prop.parentId > max(cEBSD.prop.parentId)) = nan;
-newGrains.prop.variantId(newGrains.prop.variantId > max(r.variantId)) = nan;
-newGrains.prop.variantId(newGrains.prop.variantId == 0) = nan;
+    %% Compute the quality-of-fit (QOF)
+    % Get all child variants
+    childVariants  = variants(job.p2c, oriP);
+    if length(oriP) == 1
+        childVariants = repmat(childVariants, length_cEBSD, 1);
+    end
 
-newGrains.prop.parentId(newGrains.prop.parentId > max(cEBSD.prop.parentId)) = nan;
+    %% Compute distance to all possible variants
+    d = dot(childVariants, repmat(cEBSD.orientations(:), 1, size(childVariants, 2)));
 
-%% Compute the quality-of-fit (QOF)
-% Get all child variants
-childVariants  = variants(job.p2c,oriP);
-if length(oriP) == 1
-    childVariants = repmat(childVariants,length_cEBSD,1);
-end
+    %% Take the best QOF
+    [fit, ~] = max(d, [], 2);
+    newEBSD.prop.fit = nan(size(newEBSD));
+    newEBSD(transfIdx).prop.fit = fit;
 
-%% Compute distance to all possible variants
-d = dot(childVariants,repmat(cEBSD.orientations(:),1,size(childVariants,2)));
+    %% Save properties in grain object
+    isTransf = ~isnan(newGrains.prop.variantId);
+    oriP = job.grains(newGrains(isTransf).prop.parentId).meanOrientation;
 
-%% Take the best QOF
-[fit,~] = max(d,[],2);
-newEBSD.prop.fit = nan(size(newEBSD));
-newEBSD(transfIdx).prop.fit = fit;
+    [~, packetId, bainId] = calcVariantId(oriP, ...
+                                          newGrains(isTransf).meanOrientation, job.p2c, 'variantMap', job.variantMap);
 
-%% Save properties in grain object
-isTransf = ~isnan(newGrains.prop.variantId);
-oriP = job.grains(newGrains(isTransf).prop.parentId).meanOrientation;
-
-[~,packetId,bainId] = calcVariantId(oriP,...
-    newGrains(isTransf).meanOrientation,job.p2c,'variantMap', job.variantMap);
-
-newGrains.prop.packetId = nan(size(newGrains));
-newGrains.prop.bainId = nan(size(newGrains));
-newGrains(isTransf).prop.packetId = packetId;
-newGrains(isTransf).prop.bainId = bainId;
+    newGrains.prop.packetId = nan(size(newGrains));
+    newGrains.prop.bainId = nan(size(newGrains));
+    newGrains(isTransf).prop.packetId = packetId;
+    newGrains(isTransf).prop.bainId = bainId;
 
 end
 
-
-function variantId = applyVariantMap(variantId,variantMap)
-%% Re-express raw variant ids in the order given by the variant map
-% Returns the ids unchanged when no map is set.
-if isempty(variantMap); return; end
-isKnown = ~isnan(variantId);
-[~,mapped] = ismember(variantId(isKnown),variantMap);
-assert(all(mapped > 0), ...
-    'computeVariantGrains: a variant id is missing from the variant map.');
-variantId(isKnown) = mapped;
+function variantId = applyVariantMap(variantId, variantMap)
+    %% Re-express raw variant ids in the order given by the variant map
+    % Returns the ids unchanged when no map is set.
+    if isempty(variantMap); return; end
+    isKnown = ~isnan(variantId);
+    [~, mapped] = ismember(variantId(isKnown), variantMap);
+    assert(all(mapped > 0), ...
+           'computeVariantGrains: a variant id is missing from the variant map.');
+    variantId(isKnown) = mapped;
 end

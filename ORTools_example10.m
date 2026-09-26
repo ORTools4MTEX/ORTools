@@ -5,48 +5,48 @@
 % *********************************************************************
 home; close all; clear variables;
 currentFolder;
-set(0,'DefaultFigureWindowStyle','normal');
-screenPrint('StartUp','ORTools - Example 10');
+set(0, 'DefaultFigureWindowStyle', 'normal');
+screenPrint('StartUp', 'ORTools - Example 10');
 %% Initialize MTEX
 % Startup and set some settings
 startup_mtex;
-setMTEXpref('xAxisDirection','east');
-setMTEXpref('zAxisDirection','outOfPlane');
-setMTEXpref('FontSize',14);
+setMTEXpref('xAxisDirection', 'east');
+setMTEXpref('zAxisDirection', 'outOfPlane');
+setMTEXpref('FontSize', 14);
 setInterp2Tex;
 
 % Default directories - Do not modify
-Ini.dataPath = [strrep(pwd,'\','/'),'/data/'];
-Ini.cifPath = [Ini.dataPath,'input/cif/'];
-Ini.ebsdPath = [Ini.dataPath,'input/ebsd/'];
-Ini.texturePath = [Ini.dataPath,'output/texture/'];
-Ini.imagePath = [Ini.dataPath,'output/images/'];
+Ini.dataPath = [strrep(pwd, '\', '/'), '/data/'];
+Ini.cifPath = [Ini.dataPath, 'input/cif/'];
+Ini.ebsdPath = [Ini.dataPath, 'input/ebsd/'];
+Ini.texturePath = [Ini.dataPath, 'output/texture/'];
+Ini.imagePath = [Ini.dataPath, 'output/images/'];
 %% Load data
 % Load an MTEX dataset into 'ebsd'
 mtexDataset = 'martensite';
-screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));
+screenPrint('SegmentStart', sprintf('Loading MTEX example data ''%s''', mtexDataset));
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
-screenPrint('SegmentStart','Computing, filtering and smoothing grains');
+screenPrint('SegmentStart', 'Computing, filtering and smoothing grains');
 % Grains are calculated with a 3� threshold
-[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
+[grains, ebsd] = calcGrains(ebsd('indexed'), 'angle', 3 * degree);
 % EBSD data in small grains are removed
 ebsd(grains(grains.numPixel < 3)) = [];
 % Recalculate the grains from the remaining data ...
-[grains,ebsd] = calcGrains(ebsd('indexed'),'angle',3*degree);
+[grains, ebsd] = calcGrains(ebsd('indexed'), 'angle', 3 * degree);
 % ... and smooth the grain boundaries
-grains = smoothBoundary(grains,5);
+grains = smoothBoundary(grains, 5);
 %% Rename and recolor phases
-screenPrint('SegmentStart','Renaming and recoloring phases');
-phaseNames = {'Gamma','AlphaP'};
+screenPrint('SegmentStart', 'Renaming and recoloring phases');
+phaseNames = {'Gamma', 'AlphaP'};
 % Rename 'Iron bcc (old)'to 'AlphaP' and 'Iron fcc' to 'Gamma'
-ebsd = renamePhases(ebsd,phaseNames);
+ebsd = renamePhases(ebsd, phaseNames);
 % Choose your favourite colors
 ebsd = recolorPhases(ebsd);
 %% Define and refine parent-to-child orientation relationship
-screenPrint('SegmentStart','Define and refine parent-to-child OR');
+screenPrint('SegmentStart', 'Define and refine parent-to-child OR');
 % Define 'Gamma" as the parent and 'AlphaP' as the child phase
-job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
+job = setParentGrainReconstructor(ebsd, grains, Ini.cifPath);
 % Give an initial guess for the OR: Kurdjumov-Sachs ...
 job.p2c = orientation.KurdjumovSachs(job.csParent, job.csChild);
 % ... and refine it based on the fit with boundary misorientations
@@ -57,72 +57,71 @@ job.calcParent2Child("local");
 % ... Check out examples 1 and 7 for different plotting options (skipped
 % here)
 % Phase map
-plotMap_phases(job,'linewidth',1);
+plotMap_phases(job, 'linewidth', 1);
 % Parent and child IPF maps
-plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1);
+plotMap_IPF_p2c(job, vector3d.Z, 'linewidth', 1);
 
 %% Reconstruct parent microstructure
 %   - Reconstruct the microstructure with the variant graph based approach
-job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree)
+job.calcVariantGraph('threshold', 2.5 * degree, 'tolerance', 2.5 * degree)
 job.clusterVariantGraph
 % ... plot the votes (high values show high certainty)
-figure; plot(job.grains,job.votes.prob(:,1))
+figure; plot(job.grains, job.votes.prob(:, 1))
 mtexColorbar
 % ... and calculate the parent orientations
-job.calcParentFromVote('minProb',0.5)
+job.calcParentFromVote('minProb', 0.5)
 % Plot the reconstructed parent microstructure
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2);
+plot(job.parentGrains, job.parentGrains.meanOrientation, 'linewidth', 2);
 %% Remove badly reconstructed clusters
 % In order to reconstruct the remaining parent grains, we can calculate the
 % votes for surrounding parent grains by the already reconstructed parent
 % grains
 
 % compute the votes
-job.calcGBVotes('p2c','reconsiderAll')
+job.calcGBVotes('p2c', 'reconsiderAll')
 % assign parent orientations according to the votes
 job.calcParentFromVote
 % plot the result
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
+plot(job.parentGrains, job.parentGrains.meanOrientation, 'linewidth', 2)
 %% Clean reconstructed grains
 % Now clean the grains by:
 % - merging grains with similar orientation
-job.mergeSimilar('threshold',7.5*degree);
+job.mergeSimilar('threshold', 7.5 * degree);
 % - merging small inclusions
-job.mergeInclusions('maxSize',150);
+job.mergeInclusions('maxSize', 150);
 % This is the cleaned reconstructed parent microstructure
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',2)
+plot(job.parentGrains, job.parentGrains.meanOrientation, 'linewidth', 2)
 %% Get parent EBSD data
 figure;
 parentEBSD = job.ebsd;
-plot(parentEBSD('Gamma'),parentEBSD('Gamma').orientations);
+plot(parentEBSD('Gamma'), parentEBSD('Gamma').orientations);
 hold on;
-plot(job.grains.boundary,'linewidth',2);
+plot(job.grains.boundary, 'linewidth', 2);
 hold off;
 %% Variant analysis
 % We can calculate variants and packets
 job.calcVariants;
 % and plot the variant map
-plotMap_variants(job,'linewidth',2);
-plotMap_variants(job,'grains','bc','linewidth',2); %Alternatively plot the grain data on top of the band contrast
+plotMap_variants(job, 'linewidth', 2);
+plotMap_variants(job, 'grains', 'bc', 'linewidth', 2); % Alternatively plot the grain data on top of the band contrast
 
 % and plot the packet map
-plotMap_packets(job,'linewidth',2);
+plotMap_packets(job, 'linewidth', 2);
 % and plot the Bain group map
-plotMap_bain(job,'linewidth',2,'colormap',magma);
-
+plotMap_bain(job, 'linewidth', 2, 'colormap', magma);
 
 %% ***** CHILD GRAIN PAIR ANALYSIS *****
 % The following sections detail the various options available to users on
 % how to invoke and use the computeGrainPairs function
-screenPrint('SegmentStart','Child grain pair analysis');
+screenPrint('SegmentStart', 'Child grain pair analysis');
 % To begin analysing child grain pairs, we first need the variants (and
 % packets,and Bain groups) on the EBSD level to be reconstructed as grains
 
 % Choose CASE 1 or CASE 2 here
 % CASE 1: Return child grain pair analysis results for the entire map
-[newGrains,~] = computeVariantGrains(job);
+[newGrains, ~] = computeVariantGrains(job);
 
 % % CASE 2: Return child grain pair analysis results for a single parent grain
 % % When using Case 2, please un-remark line 269 as well
@@ -132,35 +131,25 @@ screenPrint('SegmentStart','Child grain pair analysis');
 % Ensure the new grains only include child grains
 newGrains = newGrains(job.csChild);
 
-
-
-
-
-
 %% OPTION 1: Id based child grain pair analysis
 % Compute the variant id child grain pairs
-screenPrint('Step','Variant id child grain pair analysis');
-out11 = computeGrainPairs(newGrains,'variants','plot');
+screenPrint('Step', 'Variant id child grain pair analysis');
+out11 = computeGrainPairs(newGrains, 'variants', 'plot');
 % include similar neighbouring variant pairs for example, V1-V1; V2-V2
-out12 = computeGrainPairs(newGrains,'include', 'plot', 'colormap',viridis);
+out12 = computeGrainPairs(newGrains, 'include', 'plot', 'colormap', viridis);
 
 % Compute the crystallographic packet id child grain pairs
 % include similar neighbouring packet pairs for example, CP1-CP1; CP2-CP2
-screenPrint('Step','Crystallographic packet id child grain pair analysis');
-out13 = computeGrainPairs(newGrains,'packet','include','plot');
+screenPrint('Step', 'Crystallographic packet id child grain pair analysis');
+out13 = computeGrainPairs(newGrains, 'packet', 'include', 'plot');
 
 % Compute the Bain group id child grain pairs
-screenPrint('Step','Bain group id child grain pair analysis');
-out14 = computeGrainPairs(newGrains,'bain','plot');
+screenPrint('Step', 'Bain group id child grain pair analysis');
+out14 = computeGrainPairs(newGrains, 'bain', 'plot');
 %%
 
-
-
-
-
-
 %% OPTION 2:  Groups of variant id for child grain pair analysis
-screenPrint('Step','Groups of variant id child grain pair analysis');
+screenPrint('Step', 'Groups of variant id child grain pair analysis');
 % Calculate groups of variant Ids as per the analysis in the
 % following references:
 %
@@ -179,47 +168,42 @@ screenPrint('Step','Groups of variant id child grain pair analysis');
 % the variant map of the job. Every group collects the variant pairs whose
 % misorientations are symmetrically equivalent, so that all
 % nchoosek(24,2) = 276 variant pairs of the Kurdjumov-Sachs OR are counted.
-[vGroupIds,vGroupLabels] = computeVariantPairGroups(job);
+[vGroupIds, vGroupLabels] = computeVariantPairGroups(job);
 % ... and compute the groups of equivalent id child grain pairs
-out21 = computeGrainPairs(newGrains,'variant','group',vGroupIds,'labels',vGroupLabels,'plot');
+out21 = computeGrainPairs(newGrains, 'variant', 'group', vGroupIds, 'labels', vGroupLabels, 'plot');
 
 % For plotting individual outputs, use this block of script
 figH = figure;
 h = bar(out21.freq);
-h.FaceColor = [162 20 47]./255;
-set(gca,'FontSize',14);
+h.FaceColor = [162 20 47] ./ 255;
+set(gca, 'FontSize', 14);
 xticks(1:length(vGroupLabels));
 xticklabels(vGroupLabels);
 xtickangle(90);
 xlabel('\bf Variant pairs');
 ylabel('\bf Relative frequency [$\bf f$(g)]');
-set(figH,'Name','Histogram: Groups of child grain variant pairs','NumberTitle','on');
+set(figH, 'Name', 'Histogram: Groups of child grain variant pairs', 'NumberTitle', 'on');
 drawnow;
 
 % For plotting individual outputs, use this block of script
 ebsdGrid = ebsd.gridify;
 mapArea = prod(ebsdGrid.size) * norm(ebsdGrid.d1) * norm(ebsdGrid.d2);
-boundaryFraction = out21.segLength./mapArea;
+boundaryFraction = out21.segLength ./ mapArea;
 figH = figure;
 h = bar(boundaryFraction);
-h.FaceColor = [162 20 47]./255;
-set(gca,'FontSize',14);
+h.FaceColor = [162 20 47] ./ 255;
+set(gca, 'FontSize', 14);
 xticks(1:length(vGroupLabels));
 xticklabels(vGroupLabels);
 xtickangle(90);
 xlabel('\bf Variant pairs');
 ylabel('\bf Boundary length density [$\bf \mu m / \mu m^{2}$]')
-set(figH,'Name','Histogram: Groups of child grain variant pair boundary density','NumberTitle','on');
+set(figH, 'Name', 'Histogram: Groups of child grain variant pair boundary density', 'NumberTitle', 'on');
 drawnow;
 %%
 
-
-
-
-
-
 %% OPTION 3: Equivalent variant id child grain pair analysis
-screenPrint('Step','Equivalent (or other) variant id child grain pair analysis');
+screenPrint('Step', 'Equivalent (or other) variant id child grain pair analysis');
 % Calculate equivalent variant Ids of martensitic variants (block
 % boundaries) in steel microstructures as per the analysis in the
 % following reference:
@@ -229,27 +213,27 @@ screenPrint('Step','Equivalent (or other) variant id child grain pair analysis')
 % Supplement 3, 2015, Pages S913-S916.
 % (https://doi.org/10.1016/j.matpr.2015.07.430)
 %
-newGrains.prop.otherId = newGrains.variantId - (newGrains.packetId-1) * 24/4;
+newGrains.prop.otherId = newGrains.variantId - (newGrains.packetId - 1) * 24 / 4;
 % IMPORTANT: Regardless of the formula used to compute other (or any
 % equivalent) ids, the variable name on the LHS defined as
 % "newGrains.prop.otherId" must not be changed.
-out31 = computeGrainPairs(newGrains,'other','plot');
+out31 = computeGrainPairs(newGrains, 'other', 'plot');
 
 % Compute groups of equivalent variant id child grain pairs
-screenPrint('Step','Groups of equivalent variant id child grain pair analysis');
+screenPrint('Step', 'Groups of equivalent variant id child grain pair analysis');
 % Define the four groups of equivalent variant id pairs
-eqIds = {[1 2; 3 4; 5 6],...
-    [1 3; 1 5; 2 4; 2 6; 3 5; 4 6],...
-    [1 6; 2 3; 4 5],...
-    [1 4; 2 5; 3 6]};
+eqIds = {[1 2; 3 4; 5 6], ...
+         [1 3; 1 5; 2 4; 2 6; 3 5; 4 6], ...
+         [1 6; 2 3; 4 5], ...
+         [1 4; 2 5; 3 6]};
 % ... and compute the groups of equivalent id child grain pairs
-out32 = computeGrainPairs(newGrains,'other','group',eqIds, 'plot');
+out32 = computeGrainPairs(newGrains, 'other', 'group', eqIds, 'plot');
 % The variable 'out32' returns the frequency and the segment length of
 % each of the four groups.
 % Compare the above segment length values with the variant pair boundary
 % fraction histogram from ORTools's pre-built function for equivalent
 % variant pairs.
-variantBoundaries_map = plotMap_KSvariantPairs(job,'linewidth',1.5);
+variantBoundaries_map = plotMap_KSvariantPairs(job, 'linewidth', 1.5);
 % variantBoundaries_map = plotMap_KSvariantPairs(job,'parentGrainId',276,'linewidth',1.5);
 %  -> Figure 20: variant pair boundary fraction histogram
 %   4�2 table

@@ -1,0 +1,2 @@
+# Commits that only reformat code. GitHub skips these in blame views;
+# locally run:  git config blame.ignoreRevsFile .git-blame-ignore-revs

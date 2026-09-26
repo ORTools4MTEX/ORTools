@@ -1,4 +1,3 @@
-
 % *********************************************************************
 %                        ORTools - Example 2
 % *********************************************************************
@@ -14,75 +13,75 @@
 % *********************************************************************
 home; close all; clear variables;
 currentFolder;
-set(0,'DefaultFigureWindowStyle','normal');
-screenPrint('StartUp','ORTools - Example 2');
+set(0, 'DefaultFigureWindowStyle', 'normal');
+screenPrint('StartUp', 'ORTools - Example 2');
 %% Initialize MTEX
 % Startup and set some settings
 startup_mtex;
-setMTEXpref('xAxisDirection','east');
-setMTEXpref('zAxisDirection','outOfPlane');
-setMTEXpref('FontSize',14);
+setMTEXpref('xAxisDirection', 'east');
+setMTEXpref('zAxisDirection', 'outOfPlane');
+setMTEXpref('FontSize', 14);
 setInterp2Tex;
 
 % Default directories - Do not modify
-Ini.dataPath = [strrep(pwd,'\','/'),'/data/'];
-Ini.cifPath = [Ini.dataPath,'input/cif/'];
-Ini.ebsdPath = [Ini.dataPath,'input/ebsd/'];
-Ini.texturePath = [Ini.dataPath,'output/texture/'];
-Ini.imagePath = [Ini.dataPath,'output/images/'];
+Ini.dataPath = [strrep(pwd, '\', '/'), '/data/'];
+Ini.cifPath = [Ini.dataPath, 'input/cif/'];
+Ini.ebsdPath = [Ini.dataPath, 'input/ebsd/'];
+Ini.texturePath = [Ini.dataPath, 'output/texture/'];
+Ini.imagePath = [Ini.dataPath, 'output/images/'];
 %% Load data
 % Open the MTEX dataset on alpha and beta titanium
 mtexDataset = 'alphaBetaTitanium';
-screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDataset));
+screenPrint('SegmentStart', sprintf('Loading MTEX example data ''%s''', mtexDataset));
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
-screenPrint('SegmentStart','Computing, filtering and smoothing grains');
+screenPrint('SegmentStart', 'Computing, filtering and smoothing grains');
 % Grains are calculated with a 1.5° threshold
-[grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
-    'removeQuadruplePoints');
+[grains, ebsd] = calcGrains(ebsd('indexed'), 'threshold', 1.5 * degree, ...
+                            'removeQuadruplePoints');
 %% Rename and recolor phases
-screenPrint('SegmentStart','Renaming and recoloring phases');
-phaseNames = {'Alpha','Beta'};
+screenPrint('SegmentStart', 'Renaming and recoloring phases');
+phaseNames = {'Alpha', 'Beta'};
 % Rename "Ti (BETA) to "Beta"and "Ti (alpha)" to "Alpha"
-ebsd = renamePhases(ebsd,phaseNames);
+ebsd = renamePhases(ebsd, phaseNames);
 % Choose your favourite colors
 ebsd = recolorPhases(ebsd);
 %% Finding the orientation relationship
-screenPrint('SegmentStart','Finding the orientation relationship(s)');
+screenPrint('SegmentStart', 'Finding the orientation relationship(s)');
 % Choose Beta as a parent and Alpha as a child phase in the transition
-job = setParentGrainReconstructor(ebsd,grains,Ini.cifPath);
+job = setParentGrainReconstructor(ebsd, grains, Ini.cifPath);
 % Use the peak fitter in the pop-up menu
 %     - Adjust the threshold to include only the largest peak
 job = defineORs(job);
 % Check the disorientation and compare it with the Burgers OR
-plotHist_OR_misfit(job,orientation.Burgers(job.csParent,job.csChild),...
-                   'legend',{'Burgers OR'});
-xlim([0,10]);
+plotHist_OR_misfit(job, orientation.Burgers(job.csParent, job.csChild), ...
+                   'legend', {'Burgers OR'});
+xlim([0, 10]);
 %     - The misfit with Burgers OR and the experimental OR is almost
 %     identical
 %% Plotting (with ORTools functions)
-screenPrint('SegmentStart','Plotting some ORTools maps');
+screenPrint('SegmentStart', 'Plotting some ORTools maps');
 % Use some of the ORTools functions to visualize the determined OR
 % and its relation to the microstructure
 
 % Phase map
-plotMap_phases(job,'linewidth',1);
+plotMap_phases(job, 'linewidth', 1);
 %       - The microstructure consists almost entirely of alpha
 
 % Parent and child IPF maps
-plotMap_IPF_p2c(job,vector3d.Z,'linewidth',1,'child');
+plotMap_IPF_p2c(job, vector3d.Z, 'linewidth', 1, 'child');
 %       - We can visually recognize the prior beta grains
 
 % Child-child grain boundary misorientation map
-plotMap_gB_c2c(job,'linewidth',1);
+plotMap_gB_c2c(job, 'linewidth', 1);
 %       - Alpha of same prior beta grain share a characteristic misorientation
 
 % Plot a map of the OR boundary disorientation, or misfit
-plotMap_gB_misfit(job,'linewidth',1.5, 'maxColor', 10);
+plotMap_gB_misfit(job, 'linewidth', 1.5, 'maxColor', 10);
 %       - A threshold of 10° shows where the prior beta boundaries are
 
 % Plot parent-child and child-child OR boundary probability map
-plotMap_gB_prob(job,'linewidth',1.5);
+plotMap_gB_prob(job, 'linewidth', 1.5);
 %       - This is also manifested in the OR probability map
 
 % We can plot the OR and boundary misorientation axes and color the
@@ -98,36 +97,36 @@ plotIPDF_gB_prob(job);
 %% Compute parent orientations from triple junctions
 % We can use a voting algorithm which votes for a parent orientation at
 % triple points of child grains
-job.calcTPVotes('minFit',2.5*degree,'maxFit',5*degree);
+job.calcTPVotes('minFit', 2.5 * degree, 'maxFit', 5 * degree);
 % Check the votes for all grains
 figure
-plot(job.grains,job.votes.prob(:,1));
+plot(job.grains, job.votes.prob(:, 1));
 mtexColorbar
 % .... and calculate parent orientations for all grains with a > 70%
 % probability
-job.calcParentFromVote('minProb',0.7);
-%Plot the data
+job.calcParentFromVote('minProb', 0.7);
+% Plot the data
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5);
+plot(job.parentGrains, job.parentGrains.meanOrientation, 'linewidth', 1.5);
 %% Grow parent grains at grain boundaries by voting algorithm
 % We can then let the parent grains grow into the child grains by a voting
 % algorithm
 for k = 1:3
-    job.calcGBVotes('p2c','threshold',k*2.5*degree);
+    job.calcGBVotes('p2c', 'threshold', k * 2.5 * degree);
     job.calcParentFromVote
 end
 
 % This is the resulting reconstructed parent microstructure
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5);
+plot(job.parentGrains, job.parentGrains.meanOrientation, 'linewidth', 1.5);
 %% Clean reconstructed grains
 % We now merge grains with similar orientation
-job.mergeSimilar('threshold',5*degree);
+job.mergeSimilar('threshold', 5 * degree);
 % and merge small inclusions into larger grains
-job.mergeInclusions('maxSize',5);
+job.mergeInclusions('maxSize', 5);
 % and then plot the cleaned reconstructed parent microstructure
 figure;
-plot(job.parentGrains,job.parentGrains.meanOrientation,'linewidth',1.5)
+plot(job.parentGrains, job.parentGrains.meanOrientation, 'linewidth', 1.5)
 %% Variant analysis
 % Plot the variant pole figure
 figure;
@@ -135,14 +134,14 @@ plotPDF_variants(job);
 % We can calculate variants and packets
 job.calcVariants;
 % and plot the variant map
-plotMap_variants(job,'linewidth',3);
-%plotMap_variants(job,'grains','linewidth',3); %Plot grain data instead
+plotMap_variants(job, 'linewidth', 3);
+% plotMap_variants(job,'grains','linewidth',3); %Plot grain data instead
 %% Plot reconstructed parent EBSD orientations and the IPF key
-parentIPFkey = plotMap_IPF_p2c(job,vector3d.Z,'linewidth',3,'parent');
+parentIPFkey = plotMap_IPF_p2c(job, vector3d.Z, 'linewidth', 3, 'parent');
 figure; plot(parentIPFkey);
 %% Save images
 saveImage(Ini.imagePath);
 
 %% Check the beta grains interactively by clicking on them
-grainClick(job,'noScalebar','noFrame');
-%grainClick(job,'grains','noScalebar','noFrame'); %Plot grain data instead
+grainClick(job, 'noScalebar', 'noFrame');
+% grainClick(job,'grains','noScalebar','noFrame'); %Plot grain data instead
