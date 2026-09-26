@@ -282,12 +282,16 @@ function displayResult(mori)
 end
 
 function str = fillString(str, len, varargin)
+    % Pad to "len" visible characters. Combining marks (U+0300 to U+036F),
+    % such as the overline MTEX puts on negative Miller indices, take up no
+    % space on screen and are not counted.
+    nPad = max(len - sum(str < 768 | str > 879), 0);
     if check_option(varargin, 'left')
-        str = [str, repmat(' ', 1, len - length(str))];
+        str = [str, repmat(' ', 1, nPad)];
     elseif check_option(varargin, 'right')
-        str = [repmat(' ', 1, len - length(str)), str];
+        str = [repmat(' ', 1, nPad), str];
     elseif check_option(varargin, 'center')
-        str = [repmat(' ', 1, floor((len - length(str)) / 2)), str, repmat(' ', 1, floor((len - length(str)) / 2))];
+        str = [repmat(' ', 1, floor(nPad / 2)), str, repmat(' ', 1, floor(nPad / 2))];
     end
 
 end
