@@ -91,7 +91,7 @@ function make_doc_images(outDir)
     job.mergeInclusions('maxSize', 150);
     job.calcVariants;
 
-    [~, maxGrainId] = max(job.grains.area);
+    % Id (not index) of the largest reconstructed parent grain
     [~, maxParentIdx] = max(job.parentGrains.area);
     maxParentId = job.parentGrains.id(maxParentIdx);
 
@@ -105,11 +105,11 @@ function make_doc_images(outDir)
     failed = snap(failed, dirs, 'plotMap_bain', ...
                   @() plotMap_bain(job, 'linewidth', 2, 'colormap', magma));
     failed = snap(failed, dirs, 'plotMap_KSvariantPairs', ...
-                  @() plotMap_KSvariantPairs(job, 'parentGrainId', maxGrainId, 'linewidth', 2));
+                  @() plotMap_KSvariantPairs(job, 'parentGrainId', maxParentId, 'linewidth', 2));
     failed = snap(failed, dirs, 'plotMap_blockWidths', ...
-                  @() plotMap_blockWidths(job, 'parentGrainId', maxGrainId, 'linewidth', 1.5));
+                  @() plotMap_blockWidths(job, 'parentGrainId', maxParentId, 'linewidth', 1.5));
     failed = snap(failed, dirs, 'plotStack', ...
-                  @() plotStack(job, 'parentGrainId', maxGrainId, 'linewidth', 1.5), 'grid5');
+                  @() plotStack(job, 'parentGrainId', maxParentId, 'linewidth', 1.5), 'grid5');
     failed = snap(failed, dirs, 'computehabitPlane', ...
                   @() computeHabitPlane(job, 'Shape', 'minClusterSize', 50, 'reliability', 0.5, 'plotTraces'));
     failed = snap(failed, dirs, 'computeParentTwins', ...
@@ -149,8 +149,10 @@ function make_doc_images(outDir)
     job = defineJob(ebsd, grains, 'Gamma', 'AlphaP');
 
     failed = snap(failed, dirs, 'plotMap_phases', @() plotMap_phases(job, 'linewidth', 2));
+    % Epsilon martensite as parent of alpha' martensite
+    jobEpsilon = defineJob(ebsd, grains, 'Epsilon', 'AlphaP');
     failed = snap(failed, dirs, 'plotMap_IPF_p2c', ...
-                  @() plotMap_IPF_p2c(job, vector3d.Z, 'linewidth', 2));
+                  @() plotMap_IPF_p2c(jobEpsilon, vector3d.Z, 'linewidth', 2));
     failed = snap(failed, dirs, 'plotMap_gB_c2c', ...
                   @() plotMap_gB_c2c(job, 'linewidth', 2));
     failed = snap(failed, dirs, 'plotMap_gB_p2c', @() plotMap_gB_p2c(job, 'linewidth', 1.5));

@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - main
-  # Test changes to the image generation (images are uploaded as an
-  # artifact, nothing is deployed)
+  # Test changes to the image generation or to the plotting code (images
+  # and a comparison with the published site are uploaded as an artifact,
+  # nothing is deployed)
   pull_request:
     paths:
       - docs/scripts/**
+      - src/**
       - .github/workflows/deploy-docs.yml
   workflow_dispatch:
 
