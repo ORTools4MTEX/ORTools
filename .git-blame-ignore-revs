@@ -1,2 +1,5 @@
 # Commits that only reformat code. GitHub skips these in blame views;
 # locally run:  git config blame.ignoreRevsFile .git-blame-ignore-revs
+
+# Format code with mh_style and pre-commit hooks
+4e405eaeb2c7ccf77ace719e4c10c8889d0906a6
