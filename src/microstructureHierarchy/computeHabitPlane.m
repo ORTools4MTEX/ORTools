@@ -2,7 +2,7 @@ function [habitPlane,traces,stats] = computeHabitPlane(job,varargin)
 %% Function description:
 % This function computes the habit plane based on the determined traces
 % from 2D ebsd map data as per the following reference:
-% T. Nyyssönen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane
+% T. NyyssÃ¶nen, A.A. Gazder, R. Hielscher, F. Niessen, Habit plane
 % determination from reconstructed parent phase orientation maps
 % (https://doi.org/10.48550/arXiv.2303.07750)
 %
@@ -390,13 +390,13 @@ rTrace = round(aTrace/nTrace,4);
 screenPrint('SubStep',sprintf(['Ratio of possible vs. analysed traces = 1 : ',...
     num2str(rTrace)]));
 screenPrint('SubStep',sprintf(['Mean deviation (all traces) = ',...
-    num2str(stats.meanDeviation.all),'° ± ',num2str(stats.stdDeviation.all),'°']));
+    num2str(stats.meanDeviation.all),'Â° Â± ',num2str(stats.stdDeviation.all),'Â°']));
 screenPrint('SubStep',sprintf(['Mean deviation (analysed traces) = ',...
-    num2str(stats.meanDeviation.analysed),'° ± ',num2str(stats.stdDeviation.analysed),'°']));
+    num2str(stats.meanDeviation.analysed),'Â° Â± ',num2str(stats.stdDeviation.analysed),'Â°']));
 screenPrint('SubStep',sprintf(['Quantiles (all traces) [25, 50, 75 percent] = [',...
-    num2str(stats.quantile.all(1)),'°, ',num2str(stats.quantile.all(2)),'°, ',num2str(stats.quantile.all(3)),'°]']));
+    num2str(stats.quantile.all(1)),'Â°, ',num2str(stats.quantile.all(2)),'Â°, ',num2str(stats.quantile.all(3)),'Â°]']));
 screenPrint('SubStep',sprintf(['Quantiles (analysed traces) [25, 50, 75 percent] = [',...
-    num2str(stats.quantile.analysed(1)),'°, ',num2str(stats.quantile.analysed(2)),'°, ',num2str(stats.quantile.analysed(3)),'°]']));
+    num2str(stats.quantile.analysed(1)),'Â°, ',num2str(stats.quantile.analysed(2)),'Â°, ',num2str(stats.quantile.analysed(3)),'Â°]']));
 end
 
 

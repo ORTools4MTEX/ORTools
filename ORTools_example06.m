@@ -32,7 +32,7 @@ ebsd = loadEBSD_ctf([Ini.ebsdPath,'TRWIPsteel.ctf'],'convertSpatial2EulerReferen
 ebsd = ebsd('indexed');
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 3° threshold
+% Grains are calculated with a 3Â° threshold
 [grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',3*degree,...
   'removeQuadruplePoints');
 grains = grains.smoothBoundary(3);
@@ -61,7 +61,7 @@ plotHist_OR_misfit(job1,orientation.Burgers(job1.csParent,job1.csChild),...
                    'legend',{'Burgers OR'});
 %% Check the fit with the OR locally
 % Plot parent-child and child-child OR boundary disorientation map
-% We color the boundaries up to 5° disorientation to emphasize the effects
+% We color the boundaries up to 5Â° disorientation to emphasize the effects
 plotMap_gB_misfit(job1,'linewidth',1.5,'maxColor',5);
 
 % The fit is quite good most places
@@ -87,7 +87,7 @@ plotHist_OR_misfit(job2,...
                    'legend',{'S-N OR'});
 %% Check the fit with the OR locally
 % Plot parent-child and child-child OR boundary disorientation map
-% We color the boundaries up to 5° disorientation to emphasize the effects
+% We color the boundaries up to 5Â° disorientation to emphasize the effects
 plotMap_gB_misfit(job2,'linewidth',1.5,'maxColor',5);
 % The fit is quite good most places
 %% Reconstruct Gamma

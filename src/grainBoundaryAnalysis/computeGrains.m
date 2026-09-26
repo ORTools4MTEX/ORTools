@@ -18,7 +18,7 @@ function [ebsd,grains,gB] = computeGrains(ebsd,varargin)
 %% Get min GB angle and min grain size
 [criticalAngle,minGrainSize] = setGrainParameters;
 %% Compute the grains
-fprintf(' -> Computing grains with >%.0f° misorientation\n',criticalAngle/degree);
+fprintf(' -> Computing grains with >%.0fÂ° misorientation\n',criticalAngle/degree);
 [grains,ebsd] = calcGrains(ebsd,'angle',criticalAngle,'unitcell');
 %% Delete small grains (if any)
 if ~isnan(minGrainSize)
@@ -34,7 +34,7 @@ if ~isnan(minGrainSize)
     % Set the mean angular deviation of ebsd data of filtered grains to 0
     ebsd(grains(grains.numPixel < minGrainSize)).prop.mad = 0;
     % Recompute grains after the small grains have been removed
-    fprintf(' -> Recomputing grains with >%.0f° misorientation\n',criticalAngle/degree);
+    fprintf(' -> Recomputing grains with >%.0fÂ° misorientation\n',criticalAngle/degree);
     [grains,ebsd] = calcGrains(ebsd,'angle',criticalAngle);
 end
 %% Compute grain boundaries
@@ -43,7 +43,7 @@ gB = grains.boundary;
 end
 
 function [crit_gBAngle,minGS] = setGrainParameters
-    prompt = {'Critical grain boundary angle [in °]:',...
+    prompt = {'Critical grain boundary angle [in Â°]:',...
         'Min. grain size [in pixels]: (keep empty if no grains require removal)'};
     windowTitle = 'Compute grains';
     dims = [1 75; 1 75];

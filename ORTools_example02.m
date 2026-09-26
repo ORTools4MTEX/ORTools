@@ -37,7 +37,7 @@ screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDatase
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 1.5° threshold
+% Grains are calculated with a 1.5Â° threshold
 [grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
     'removeQuadruplePoints');
 %% Rename and recolor phases
@@ -79,7 +79,7 @@ plotMap_gB_c2c(job,'linewidth',1);
 
 % Plot a map of the OR boundary disorientation, or misfit
 plotMap_gB_misfit(job,'linewidth',1.5, 'maxColor', 10);
-%       - A threshold of 10° shows where the prior beta boundaries are
+%       - A threshold of 10Â° shows where the prior beta boundaries are
 
 % Plot parent-child and child-child OR boundary probability map
 plotMap_gB_prob(job,'linewidth',1.5);

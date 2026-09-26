@@ -17,7 +17,7 @@ if ~any([isempty(classRange),isempty(classInterval),isempty(counts)])
     set(gca, 'ylim',[0 max(y)+0.1]);
     grid on
     %% Annotate the graph axes and title
-%     xlabel('Parent-child boundary misorientation (°)','FontSize',14);
+%     xlabel('Parent-child boundary misorientation (Â°)','FontSize',14);
 %     ylabel('Relative frequency ({\itf}(g))', 'FontSize',14);
     xlabel('Parent-child boundary misorientation','FontSize',14);
     ylabel('Relative frequency (f(g))', 'FontSize',14);
@@ -101,7 +101,7 @@ if ~any([isempty(classRange),isempty(classInterval),isempty(counts)])
     hold off
     grid on
     %% Annotate the graph axes and title
-%     xlabel('Parent-child boundary misorientation (°)','FontSize',14);
+%     xlabel('Parent-child boundary misorientation (Â°)','FontSize',14);
 %     ylabel('Relative frequency ({\itf}(g))', 'FontSize',14);
     xlabel('Parent-child boundary misorientation','FontSize',14);
     ylabel('Relative frequency (f(g))', 'FontSize',14);

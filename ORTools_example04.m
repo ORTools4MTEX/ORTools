@@ -33,7 +33,7 @@ screenPrint('SegmentStart',sprintf('Loading MTEX example data ''%s''',mtexDatase
 ebsd = mtexdata(mtexDataset);
 %% Compute, filter and smooth grains
 screenPrint('SegmentStart','Computing, filtering and smoothing grains');
-% Grains are calculated with a 1.5° threshold
+% Grains are calculated with a 1.5Â° threshold
 [grains,ebsd] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
     'removeQuadruplePoints');
 %% Rename and recolor phases

@@ -24,7 +24,7 @@ screenPrint('Step',['All OR(s) determined using Maximum f(g) of the mdf']);
 %% Begin OR computation
 for jj = 1:numORs
     screenPrint('Step',sprintf(['Computing OR ',num2str(jj),':']));
-    screenPrint('SubStep',sprintf(['Peak between ',num2str(misoRange.min(jj)),'° & ',num2str(misoRange.max(jj)),'°']));
+    screenPrint('SubStep',sprintf(['Peak between ',num2str(misoRange.min(jj)),'Â° & ',num2str(misoRange.max(jj)),'Â°']));
     gB = job.grains.boundary(job.csParent.mineral,job.csChild.mineral);
     gBrange = gB(...
         gB.misorientation.angle >= misoRange.min(jj).*degree &...
