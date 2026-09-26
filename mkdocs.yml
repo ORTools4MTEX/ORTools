@@ -13,3 +13,11 @@ nav:
   - Introduction: index.md
   - Examples: examples.md
   - Function Index: function_index.md
+markdown_extensions:
+  # Command window output captured by docs/scripts/make_doc_images.m
+  - pymdownx.snippets:
+      base_path: [docs/snippets]
+exclude_docs: |
+  scripts/
+  snippets/
+  requirements.txt
