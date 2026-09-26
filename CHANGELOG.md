@@ -8,7 +8,7 @@ Notable changes to ORTools are listed here. The format follows
 ## [Unreleased]
 
 ### Added
-- CI on every pull request: pre-commit hooks and a strict documentation build.
+- CI on every pull request: a strict documentation build.
 - Automatic MATLAB code formatting with MISS_HIT through pre-commit.
 - `CITATION.cff`, `CONTRIBUTING.md`, a pull request template and this changelog.
 - Function index entries for `ensureFolder` and `plotCrystal_OR`.
