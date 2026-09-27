@@ -171,7 +171,8 @@ function failed = snap(failed, dirs, name, plotFun, panels)
     % documentation image <name>.png is made of the figures in "panels":
     %  n            - figure number(s), placed side by side (default: 1)
     %  [1 3; 2 4]   - a grid, one matrix row per image row (0 = empty)
-    %  'gridN'      - all figures, N per row
+    %  'gridN'      - all figures, N per row, each fitted into a cell of the
+    %                 same size
     if nargin < 5
         panels = 1;
     end
@@ -192,8 +193,10 @@ function failed = snap(failed, dirs, name, plotFun, panels)
             drawnow;
             exportgraphics(figs(ii), reviewFile(dirs, name, ii), 'Resolution', 150);
         end
+        cellSize = [];
         if ischar(panels)
             nCols = str2double(panels(5:end));
+            cellSize = [450 600];
             panels = 1:numel(figs);
             panels(end + 1:nCols * ceil(numel(figs) / nCols)) = 0;
             panels = reshape(panels, nCols, []).';
@@ -202,6 +205,9 @@ function failed = snap(failed, dirs, name, plotFun, panels)
         rows = cell(size(panels, 1), 1);
         for rr = 1:size(panels, 1)
             imgs = arrayfun(@(ii) readPanel(dirs, name, ii), panels(rr, :), 'UniformOutput', false);
+            if ~isempty(cellSize)
+                imgs = cellfun(@(im) fitCell(im, cellSize), imgs, 'UniformOutput', false);
+            end
             rows{rr} = sideBySide(imgs);
         end
         imwrite(stacked(rows), fullfile(dirs.images, [name, '.png']));
@@ -224,6 +230,19 @@ function img = readPanel(dirs, name, ii)
     if ii > 0
         img = imread(reviewFile(dirs, name, ii));
     end
+end
+
+function img = fitCell(im, cellSize)
+    %% Scale an image to fit a cell of [height width] and centre it on white
+    if isempty(im)
+        return
+    end
+    scale = min(cellSize ./ [size(im, 1), size(im, 2)]);
+    im = imresize(im, scale);
+    img = 255 * ones([cellSize, 3], 'like', im);
+    top = floor((cellSize(1) - size(im, 1)) / 2);
+    left = floor((cellSize(2) - size(im, 2)) / 2);
+    img(top + (1:size(im, 1)), left + (1:size(im, 2)), :) = im;
 end
 
 function img = stacked(rows)
