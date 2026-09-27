@@ -238,7 +238,7 @@ function img = fitCell(im, cellSize)
         return
     end
     scale = min(cellSize ./ [size(im, 1), size(im, 2)]);
-    im = imresize(im, scale);
+    im = imresize(im, min(cellSize, round(scale * [size(im, 1), size(im, 2)])));
     img = 255 * ones([cellSize, 3], 'like', im);
     top = floor((cellSize(1) - size(im, 1)) / 2);
     left = floor((cellSize(2) - size(im, 2)) / 2);
