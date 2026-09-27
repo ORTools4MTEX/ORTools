@@ -186,6 +186,10 @@ function failed = snap(failed, dirs, name, plotFun, panels)
         [~, order] = sort(arrayfun(@figureOrder, figs));
         figs = figs(order);
         for ii = 1:numel(figs)
+            % Docked figures that were never shown are not drawn, so bring
+            % each one to the front before exporting it
+            figure(figs(ii));
+            drawnow;
             exportgraphics(figs(ii), reviewFile(dirs, name, ii), 'Resolution', 150);
         end
         if ischar(panels)
