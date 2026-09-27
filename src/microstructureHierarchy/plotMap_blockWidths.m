@@ -91,10 +91,12 @@ function dBlock = plotMap_blockWidths(job, varargin)
         [~, mP] = plot(cGrains, dBlock, varargin{:});
         hold all
         % MTEX 7 marks the grain centres by default ('noMarker' switches that
-        % off); the mean of the projected points is an axis, drawn as a line
+        % off) and hides arrows lying in the map plane (liftAboveMap); the
+        % mean of the projected points is an axis, drawn as a line
         ha(1) = quiver(squeeze(cGrains), squeeze(cross(zz, zvector)), 'color', [1 0 0], 'noMarker');
         ha(2) = quiver(squeeze(cGrains), squeeze(zz), 'color', [0 1 0], 'noMarker');
         ha(3) = quiver(squeeze(cGrains), squeeze(new_A_vec), 'color', [0 0 1], 'noMarker', 'antipodal');
+        liftAboveMap(ha, squeeze(cGrains));
         legend(ha, '$111_a {\parallel} 011_m$ trace', '$111_a {\parallel} 011_m$ normal', 'Mean of projected points')
     else
         for ii = 1:length(cGrains)

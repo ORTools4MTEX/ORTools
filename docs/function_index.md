@@ -231,6 +231,20 @@ This function is a GUI to to define an orientation relationship (OR) with parall
   <img src="../images/guiOR.png" alt="UI of guiOR" width="600"/>
 </p>
 
+## L
+
+### <a id="liftAboveMap"></a>liftAboveMap
+
+This auxiliary function lifts arrows drawn with *quiver(grains,...)* slightly towards the viewer. MTEX 7 draws these arrows in 3D, so arrows lying in the plane of the map would otherwise be hidden by the map itself.
+
+- Syntax
+  - h = liftAboveMap(h,grains)
+- Input
+  - h       - handle(s) returned by quiver(grains,...)
+  - grains  - @grain2d passed to quiver
+- Output
+  - h       - the same handle(s)
+
 ## O
 
 ### <a id="orientationMaker"></a>orientationMaker

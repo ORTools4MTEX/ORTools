@@ -125,7 +125,8 @@ function [habitPlane, traces, stats] = computeHabitPlane(job, varargin)
                     pIds = pGrainId(isTrace);
                     cIds = cGrains(ismember(idx(:, 1), pIds) & cGrains.variantId == ii).id;
                     [~, idxTraces] = ismember(job.mergeId(cIds), pGrainId);
-                    q = quiver(cGrains(ismember(cGrains.id, cIds)), traces.child(idxTraces, ii), 'color', linecolor);
+                    q = quiver(cGrains(ismember(cGrains.id, cIds)), traces.child(idxTraces, ii), 'color', linecolor, 'noMarker');
+                    liftAboveMap(q, cGrains(ismember(cGrains.id, cIds)));
                     q.ShowArrowHead = 'off'; q.Marker = 'none';
                 end
                 colorbar;
@@ -162,7 +163,8 @@ function [habitPlane, traces, stats] = computeHabitPlane(job, varargin)
                     plot(cEBSD(ismember(cEBSD.id, cIds)), repmat(cmap(ii, :), [length(cIds) 1]));
                     hold all
                     [~, mP] = plot(pGrains.boundary);
-                    q = quiver(pGrains(ismember(pGrains.id, unique(pIds))), traces.child(unique(idxTraces), ii), 'color', linecolor);
+                    q = quiver(pGrains(ismember(pGrains.id, unique(pIds))), traces.child(unique(idxTraces), ii), 'color', linecolor, 'noMarker');
+                    liftAboveMap(q, pGrains(ismember(pGrains.id, unique(pIds))));
                     q.ShowArrowHead = 'off'; q.Marker = 'none';
                     hold off
                     set(figH, 'Name', strcat(['Variant ', num2str(ii)]), 'NumberTitle', 'on');
@@ -274,7 +276,8 @@ function [habitPlane, traces, stats] = computeHabitPlane(job, varargin)
                     pIds = pGrainId(isTrace);
                     cIds = cGrains(ismember(idx(:, 1), pIds) & cGrains.variantId == ii).id;
                     [~, idxTraces] = ismember(job.mergeId(cIds), pGrainId);
-                    q = quiver(cGrains(ismember(cGrains.id, cIds)), traces.imagePlane(idxTraces, ii), 'color', linecolor);
+                    q = quiver(cGrains(ismember(cGrains.id, cIds)), traces.imagePlane(idxTraces, ii), 'color', linecolor, 'noMarker');
+                    liftAboveMap(q, cGrains(ismember(cGrains.id, cIds)));
                     q.ShowArrowHead = 'off'; q.Marker = 'none';
                 end
                 hold off
@@ -336,7 +339,8 @@ function [habitPlane, traces, stats] = computeHabitPlane(job, varargin)
                     isTrace = ~isnan(traces.imagePlane(:, ii));
                     pIds = pGrainId(isTrace);
                     [~, idxTraces] = ismember(pIds, pGrainId);
-                    q = quiver(pGrains(ismember(pGrains.id, unique(pIds))), traces.imagePlane(unique(idxTraces), ii), 'color', linecolor);
+                    q = quiver(pGrains(ismember(pGrains.id, unique(pIds))), traces.imagePlane(unique(idxTraces), ii), 'color', linecolor, 'noMarker');
+                    liftAboveMap(q, pGrains(ismember(pGrains.id, unique(pIds))));
                     q.ShowArrowHead = 'off'; q.Marker = 'none';
                     hold off
                     set(figH, 'Name', strcat(['Variant ', num2str(ii)]), 'NumberTitle', 'on');

@@ -129,8 +129,11 @@ function [variantPairs_boundary, variantGrains] = plotMap_KSvariantPairs(job, va
     if ~isempty(varargin) && any(strcmpi(varargin, 'parentGrainId'))
         plot(pGrain.boundary, varargin{:}, 'linecolor', [0.45 0.45 0.45], varargin{:});
     end
-    [hL(end + 1), mP] = plot(job.grains.boundary, varargin{:});
-    hL(end).FaceColor = 'k';
+    % With a parent grain, only its own outline (above) is drawn
+    if isempty(pGrainId)
+        [hL(end + 1), mP] = plot(job.grains.boundary, varargin{:});
+        hL(end).FaceColor = 'k';
+    end
     hold off
     legend
     set(figH, 'Name', 'Map: Equivalent variant pair Boundaries', 'NumberTitle', 'on');
