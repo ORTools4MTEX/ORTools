@@ -44,11 +44,13 @@ function plotPDF_variants(job, varargin)
 
     % Define the maximum number of color levels and plot the colorbar
     maxColors = length(oriVariants);
+    % One colour per Id, as in the maps
+    cmap = cmap(round(linspace(1, size(cmap, 1), maxColors)), :);
     colormap(cmap);
-    caxis([1 maxColors]);
+    caxis([0.5 maxColors + 0.5]);
     colorbar('location', 'eastOutSide', 'LineWidth', 1.25, 'TickLength', 0.01, ...
              'YTick', [1:1:maxColors], ...
-             'YTickLabel', num2str([1:1:maxColors]'), 'YLim', [1 maxColors], ...
+             'YTickLabel', num2str([1:1:maxColors]'), 'YLim', [0.5 maxColors + 0.5], ...
              'TickLabelInterpreter', 'latex', 'FontName', 'Helvetica', 'FontSize', 14, 'FontWeight', 'bold');
     hold on
 
