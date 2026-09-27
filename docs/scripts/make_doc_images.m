@@ -234,7 +234,9 @@ end
 
 function img = fitCell(im, cellSize)
     %% Scale an image to fit a cell of [height width] and centre it on white
+    % (an empty image gives an empty white cell, which keeps the grid aligned)
     if isempty(im)
+        img = 255 * ones([cellSize, 3], 'uint8');
         return
     end
     scale = min(cellSize ./ [size(im, 1), size(im, 2)]);
