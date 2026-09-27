@@ -259,9 +259,11 @@ The function extracts orientation relationship (OR) information contained in the
 - Options
   - silent    - suppress command window output
 
-<p align="center">
-  <img src="../images/ORinfo.png" alt="Command window output example from ORinfo" width="500"/>
-</p>
+Example command window output:
+
+```text
+--8<-- "ORinfo.txt"
+```
 
 ## P
 
